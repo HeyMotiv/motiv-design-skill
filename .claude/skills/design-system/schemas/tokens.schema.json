@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "design-tokens-v1",
+  "title": "Design Token Schema",
+  "description": "Schema for AI-readable design tokens. All tokens include value, description, usage hints, and relationships.",
+
+  "definitions": {
+    "colorToken": {
+      "type": "object",
+      "required": ["value", "description"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Color value in hex (#RRGGBB), rgb(), rgba(), or hsl() format"
+        },
+        "description": {
+          "type": "string",
+          "description": "When and why to use this color"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of common use cases (e.g., 'button-primary-bg', 'link-text')"
+        },
+        "contrast": {
+          "type": "object",
+          "properties": {
+            "onColor": { "type": "string" },
+            "wcagAA": { "type": "boolean" },
+            "wcagAAA": { "type": "boolean" }
+          }
+        },
+        "states": {
+          "type": "object",
+          "properties": {
+            "hover": { "type": "string" },
+            "pressed": { "type": "string" },
+            "disabled": { "type": "string" }
+          }
+        },
+        "variants": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+
+    "typographyToken": {
+      "type": "object",
+      "required": ["fontSize", "lineHeight"],
+      "properties": {
+        "fontSize": {
+          "type": "string",
+          "description": "Font size with unit (e.g., '16px', '1rem')"
+        },
+        "lineHeight": {
+          "type": "string",
+          "description": "Line height with unit or unitless ratio"
+        },
+        "fontWeight": {
+          "type": ["string", "number"],
+          "description": "Font weight (e.g., 'bold', 600)"
+        },
+        "fontFamily": {
+          "type": "string",
+          "description": "Font family name"
+        },
+        "letterSpacing": {
+          "type": "string",
+          "description": "Letter spacing (e.g., '0.02em', '1px')"
+        },
+        "textTransform": {
+          "type": "string",
+          "enum": ["none", "uppercase", "lowercase", "capitalize"]
+        },
+        "description": {
+          "type": "string",
+          "description": "When to use this text style"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "spacingToken": {
+      "type": "object",
+      "required": ["value", "description"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Spacing value with unit (e.g., '16px', '1rem')"
+        },
+        "description": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "responsive": {
+          "type": "object",
+          "properties": {
+            "phone": { "type": "string" },
+            "tablet": { "type": "string" },
+            "desktop": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "radiusToken": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Border radius value (e.g., '8px', '50%')"
+        },
+        "description": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "shadowToken": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Named reference (e.g., 'low', 'medium')"
+        },
+        "css": {
+          "type": "string",
+          "description": "CSS box-shadow value"
+        },
+        "description": {
+          "type": "string"
+        },
+        "zIndex": {
+          "type": "number"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "motionToken": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "Animation duration (e.g., '200ms', '0.3s')"
+        },
+        "easing": {
+          "type": "string",
+          "description": "Easing function (e.g., 'ease-out', 'cubic-bezier(...)')"
+        },
+        "description": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "springToken": {
+      "type": "object",
+      "required": ["stiffness", "damping"],
+      "properties": {
+        "stiffness": {
+          "type": "number",
+          "description": "Spring stiffness (higher = faster)"
+        },
+        "damping": {
+          "type": "number",
+          "description": "Spring damping (higher = less bouncy)"
+        },
+        "mass": {
+          "type": "number",
+          "default": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "$type": {
+      "type": "string",
+      "enum": ["colors", "typography", "spacing", "radii", "shadows", "motion"]
+    },
+    "$description": {
+      "type": "string"
+    }
+  }
+}

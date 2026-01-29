@@ -1,0 +1,115 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "shadows",
+  "$description": "Shadow and elevation tokens for depth and layering. Shadows communicate hierarchy and interactivity.",
+
+  "elevation": {
+    "none": {
+      "value": "none",
+      "description": "No elevation. Flat on surface.",
+      "zIndex": 0,
+      "usage": ["inline-element", "flat-card"]
+    },
+    "low": {
+      "value": "REPLACE",
+      "description": "Low elevation. Subtle lift from surface.",
+      "zIndex": 1,
+      "usage": ["card", "button-resting", "input-focused"],
+      "css": "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+    },
+    "medium": {
+      "value": "REPLACE",
+      "description": "Medium elevation. Noticeable depth.",
+      "zIndex": 2,
+      "usage": ["dropdown", "popover", "floating-button"],
+      "css": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)"
+    },
+    "high": {
+      "value": "REPLACE",
+      "description": "High elevation. Prominent floating elements.",
+      "zIndex": 3,
+      "usage": ["modal", "dialog", "drawer"],
+      "css": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)"
+    },
+    "highest": {
+      "value": "REPLACE",
+      "description": "Highest elevation. Top-level overlays.",
+      "zIndex": 4,
+      "usage": ["tooltip", "notification", "toast"],
+      "css": "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+    }
+  },
+
+  "interactive": {
+    "hover": {
+      "value": "REPLACE",
+      "description": "Shadow for hover state. Slight lift.",
+      "css": "0 4px 8px -2px rgba(0, 0, 0, 0.1)"
+    },
+    "pressed": {
+      "value": "REPLACE",
+      "description": "Shadow for pressed state. Compressed feel.",
+      "css": "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+    },
+    "focus": {
+      "value": "REPLACE",
+      "description": "Focus ring shadow. For accessibility.",
+      "css": "0 0 0 3px rgba(59, 130, 246, 0.5)"
+    }
+  },
+
+  "colored": {
+    "primary": {
+      "value": "REPLACE",
+      "description": "Primary color glow. For primary buttons and active elements.",
+      "css": "0 4px 14px 0 rgba(37, 99, 235, 0.3)"
+    },
+    "error": {
+      "value": "REPLACE",
+      "description": "Error color glow. For error states.",
+      "css": "0 4px 14px 0 rgba(239, 68, 68, 0.3)"
+    },
+    "success": {
+      "value": "REPLACE",
+      "description": "Success color glow. For success states.",
+      "css": "0 4px 14px 0 rgba(34, 197, 94, 0.3)"
+    }
+  },
+
+  "inset": {
+    "subtle": {
+      "value": "REPLACE",
+      "description": "Subtle inset shadow. Pressed inputs, recessed areas.",
+      "css": "inset 0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+    },
+    "medium": {
+      "value": "REPLACE",
+      "description": "Medium inset shadow. Text inputs, wells.",
+      "css": "inset 0 2px 4px 0 rgba(0, 0, 0, 0.1)"
+    }
+  },
+
+  "zIndexScale": {
+    "base": 0,
+    "dropdown": 1000,
+    "sticky": 1100,
+    "overlay": 1200,
+    "modal": 1300,
+    "popover": 1400,
+    "tooltip": 1500,
+    "toast": 1600,
+    "description": "Z-index scale for layering. Use these values to ensure correct stacking order."
+  },
+
+  "guidelines": {
+    "direction": {
+      "description": "Shadows fall downward, as if light comes from above. Y-offset should be positive."
+    },
+    "color": {
+      "description": "Use neutral black shadows by default. Consider tinted shadows (using brand color with low opacity) for a warmer feel."
+    },
+    "darkMode": {
+      "description": "In dark mode, reduce shadow opacity or use lighter shadows. Consider using subtle borders instead of shadows."
+    }
+  }
+}

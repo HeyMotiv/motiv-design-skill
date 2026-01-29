@@ -1,0 +1,130 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "spacing",
+  "$description": "Spacing tokens based on a consistent scale. Use semantic names for predictable, maintainable layouts.",
+
+  "base": {
+    "value": "REPLACE",
+    "description": "Base unit for the spacing scale. All other values are multiples of this."
+  },
+
+  "scale": {
+    "none": {
+      "value": "0",
+      "description": "No spacing."
+    },
+    "xxs": {
+      "value": "REPLACE",
+      "description": "Extra extra small. Tight internal spacing, icon gaps.",
+      "usage": ["icon-text-gap", "badge-padding"]
+    },
+    "xs": {
+      "value": "REPLACE",
+      "description": "Extra small. Compact element spacing.",
+      "usage": ["chip-padding", "inline-element-gap"]
+    },
+    "sm": {
+      "value": "REPLACE",
+      "description": "Small. Standard internal padding, tight gaps.",
+      "usage": ["button-padding-vertical", "list-item-gap"]
+    },
+    "md": {
+      "value": "REPLACE",
+      "description": "Medium. Default spacing for most use cases.",
+      "usage": ["card-padding", "input-padding", "section-gap"]
+    },
+    "lg": {
+      "value": "REPLACE",
+      "description": "Large. Generous spacing, section separators.",
+      "usage": ["card-gap", "form-field-gap", "button-padding-horizontal"]
+    },
+    "xl": {
+      "value": "REPLACE",
+      "description": "Extra large. Major section breaks.",
+      "usage": ["section-margin", "modal-padding"]
+    },
+    "xxl": {
+      "value": "REPLACE",
+      "description": "Extra extra large. Page-level spacing.",
+      "usage": ["page-margin", "hero-padding"]
+    },
+    "xxxl": {
+      "value": "REPLACE",
+      "description": "Maximum spacing. Large screen layouts, major separations.",
+      "usage": ["desktop-section-gap", "feature-spacing"]
+    }
+  },
+
+  "semantic": {
+    "page": {
+      "horizontal": {
+        "value": "REPLACE",
+        "description": "Horizontal page margin.",
+        "responsive": {
+          "phone": "REPLACE",
+          "tablet": "REPLACE",
+          "desktop": "REPLACE"
+        }
+      },
+      "vertical": {
+        "value": "REPLACE",
+        "description": "Vertical page padding (content to edges)."
+      }
+    },
+    "section": {
+      "gap": {
+        "value": "REPLACE",
+        "description": "Gap between major sections."
+      }
+    },
+    "card": {
+      "padding": {
+        "value": "REPLACE",
+        "description": "Internal card padding."
+      },
+      "gap": {
+        "value": "REPLACE",
+        "description": "Gap between cards in a list/grid."
+      }
+    },
+    "list": {
+      "itemGap": {
+        "value": "REPLACE",
+        "description": "Vertical gap between list items."
+      },
+      "itemPadding": {
+        "value": "REPLACE",
+        "description": "Internal padding of list items."
+      }
+    },
+    "form": {
+      "fieldGap": {
+        "value": "REPLACE",
+        "description": "Vertical gap between form fields."
+      },
+      "labelGap": {
+        "value": "REPLACE",
+        "description": "Gap between label and input."
+      }
+    },
+    "inline": {
+      "gap": {
+        "value": "REPLACE",
+        "description": "Gap between inline elements (buttons, chips, tags)."
+      }
+    }
+  },
+
+  "insets": {
+    "safeArea": {
+      "top": "env(safe-area-inset-top)",
+      "bottom": "env(safe-area-inset-bottom)",
+      "left": "env(safe-area-inset-left)",
+      "right": "env(safe-area-inset-right)",
+      "description": "Safe area insets for notched devices."
+    },
+    "keyboard": {
+      "description": "Space to reserve when keyboard is visible. Platform-dependent."
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "motion",
+  "$description": "Motion and animation tokens. Defines timing, easing, and physics for consistent, purposeful animation.",
+
+  "principles": {
+    "purposeful": "Every animation should have a clear purpose: guide attention, show relationships, or provide feedback.",
+    "quick": "Animations should feel responsive. Avoid delays that make the UI feel sluggish.",
+    "natural": "Use easing and physics that mimic real-world motion. Avoid linear timing for UI elements."
+  },
+
+  "duration": {
+    "instant": {
+      "value": "0ms",
+      "description": "Instant change. No animation.",
+      "usage": ["color-change-on-theme-switch"]
+    },
+    "faster": {
+      "value": "100ms",
+      "description": "Very fast. Micro-interactions, color transitions.",
+      "usage": ["button-color-hover", "checkbox-check", "toggle-color"]
+    },
+    "fast": {
+      "value": "150ms",
+      "description": "Fast. Small UI changes, feedback.",
+      "usage": ["button-hover", "input-focus", "tab-indicator"]
+    },
+    "normal": {
+      "value": "250ms",
+      "description": "Normal. Standard UI transitions.",
+      "usage": ["dropdown-open", "accordion-expand", "fade-in"]
+    },
+    "slow": {
+      "value": "350ms",
+      "description": "Slow. Larger movements, emphasis.",
+      "usage": ["modal-enter", "drawer-slide", "page-transition"]
+    },
+    "slower": {
+      "value": "500ms",
+      "description": "Slower. Complex animations, elaborate transitions.",
+      "usage": ["skeleton-shimmer", "elaborate-reveal"]
+    }
+  },
+
+  "easing": {
+    "linear": {
+      "value": "linear",
+      "description": "Linear timing. Use sparingly—for progress indicators or looping animations.",
+      "css": "linear"
+    },
+    "easeOut": {
+      "value": "cubic-bezier(0, 0, 0.2, 1)",
+      "description": "Ease out. Starts fast, ends slow. Use for entering elements.",
+      "css": "cubic-bezier(0, 0, 0.2, 1)",
+      "usage": ["element-enter", "dropdown-open"]
+    },
+    "easeIn": {
+      "value": "cubic-bezier(0.4, 0, 1, 1)",
+      "description": "Ease in. Starts slow, ends fast. Use for exiting elements.",
+      "css": "cubic-bezier(0.4, 0, 1, 1)",
+      "usage": ["element-exit", "fade-out"]
+    },
+    "easeInOut": {
+      "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "description": "Ease in-out. Smooth start and end. Use for moving elements.",
+      "css": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "usage": ["position-change", "size-change"]
+    },
+    "emphasized": {
+      "value": "cubic-bezier(0.2, 0, 0, 1)",
+      "description": "Emphasized ease. Quick start with long settle. For attention-grabbing motion.",
+      "css": "cubic-bezier(0.2, 0, 0, 1)",
+      "usage": ["modal-enter", "important-notification"]
+    },
+    "bounce": {
+      "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "description": "Bounce/overshoot. Playful, attention-grabbing.",
+      "css": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      "usage": ["success-checkmark", "badge-pop", "playful-button"]
+    }
+  },
+
+  "springs": {
+    "responsive": {
+      "stiffness": 300,
+      "damping": 30,
+      "mass": 1,
+      "description": "Responsive spring. Snappy, direct-manipulation feel.",
+      "usage": ["drag-release", "swipe-to-action", "pull-to-refresh"]
+    },
+    "gentle": {
+      "stiffness": 150,
+      "damping": 20,
+      "mass": 1,
+      "description": "Gentle spring. Softer, more relaxed motion.",
+      "usage": ["modal-enter", "sheet-slide", "decorative-motion"]
+    },
+    "bouncy": {
+      "stiffness": 400,
+      "damping": 15,
+      "mass": 1,
+      "description": "Bouncy spring. Playful with overshoot.",
+      "usage": ["success-animation", "game-ui", "celebration"]
+    },
+    "stiff": {
+      "stiffness": 500,
+      "damping": 40,
+      "mass": 1,
+      "description": "Stiff spring. Quick with minimal oscillation.",
+      "usage": ["button-press", "toggle-switch"]
+    }
+  },
+
+  "gestures": {
+    "swipeToDismiss": {
+      "threshold": "40%",
+      "velocityThreshold": "500px/s",
+      "resistance": 0.5,
+      "description": "Swipe gesture to dismiss cards, notifications, or sheets.",
+      "snapBack": "springs.responsive"
+    },
+    "pullToRefresh": {
+      "triggerDistance": "80px",
+      "maxDistance": "120px",
+      "resistance": 0.4,
+      "description": "Pull down to refresh content.",
+      "indicator": "circular-progress"
+    },
+    "longPress": {
+      "duration": "500ms",
+      "feedback": "haptic-medium",
+      "description": "Long press for context menus or selection mode."
+    },
+    "doubleTap": {
+      "maxInterval": "300ms",
+      "description": "Double tap for quick actions (like, zoom)."
+    }
+  },
+
+  "pageTransitions": {
+    "push": {
+      "incoming": {
+        "transform": "translateX(100%) → translateX(0)",
+        "opacity": "1 → 1"
+      },
+      "outgoing": {
+        "transform": "translateX(0) → translateX(-30%)",
+        "opacity": "1 → 1"
+      },
+      "duration": "350ms",
+      "easing": "easeInOut",
+      "description": "Standard forward navigation."
+    },
+    "pop": {
+      "incoming": {
+        "transform": "translateX(-30%) → translateX(0)",
+        "opacity": "1 → 1"
+      },
+      "outgoing": {
+        "transform": "translateX(0) → translateX(100%)",
+        "opacity": "1 → 1"
+      },
+      "duration": "350ms",
+      "easing": "easeInOut",
+      "description": "Standard back navigation."
+    },
+    "modal": {
+      "incoming": {
+        "transform": "translateY(100%) → translateY(0)",
+        "opacity": "0 → 1"
+      },
+      "backdrop": {
+        "opacity": "0 → 0.5"
+      },
+      "duration": "300ms",
+      "easing": "emphasized",
+      "description": "Modal/sheet presentation."
+    },
+    "fade": {
+      "incoming": {
+        "opacity": "0 → 1"
+      },
+      "outgoing": {
+        "opacity": "1 → 0"
+      },
+      "duration": "250ms",
+      "easing": "easeInOut",
+      "description": "Simple fade for tab switches, content replacement."
+    }
+  },
+
+  "microInteractions": {
+    "buttonPress": {
+      "transform": "scale(0.97)",
+      "duration": "100ms",
+      "easing": "easeOut",
+      "description": "Button press feedback."
+    },
+    "checkboxCheck": {
+      "duration": "200ms",
+      "easing": "bounce",
+      "description": "Checkbox check animation with slight bounce."
+    },
+    "toggleSwitch": {
+      "duration": "200ms",
+      "spring": "stiff",
+      "description": "Toggle switch slide."
+    },
+    "inputFocus": {
+      "duration": "150ms",
+      "easing": "easeOut",
+      "description": "Input focus ring/border animation."
+    },
+    "ripple": {
+      "duration": "400ms",
+      "easing": "easeOut",
+      "platform": "android",
+      "description": "Material ripple effect (Android)."
+    }
+  },
+
+  "loading": {
+    "skeleton": {
+      "duration": "1500ms",
+      "easing": "linear",
+      "description": "Skeleton shimmer animation. Continuous loop."
+    },
+    "spinner": {
+      "duration": "1000ms",
+      "easing": "linear",
+      "description": "Circular spinner rotation. Continuous loop."
+    },
+    "progress": {
+      "duration": "250ms",
+      "easing": "easeOut",
+      "description": "Progress bar value change."
+    }
+  },
+
+  "reducedMotion": {
+    "description": "When user prefers reduced motion, replace animations with instant changes or simple fades.",
+    "query": "@media (prefers-reduced-motion: reduce)",
+    "behavior": {
+      "transforms": "remove",
+      "opacity": "keep with shorter duration",
+      "springs": "replace with ease-out"
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "typography",
+  "$description": "Typography tokens defining the type scale, weights, and text styles.",
+
+  "fontFamilies": {
+    "primary": {
+      "value": "REPLACE",
+      "description": "Primary font family for all UI text.",
+      "fallback": "system-ui, -apple-system, sans-serif",
+      "platforms": {
+        "ios": "SF Pro",
+        "android": "Roboto",
+        "web": "Inter"
+      }
+    },
+    "mono": {
+      "value": "REPLACE",
+      "description": "Monospace font for code, numbers in tables.",
+      "fallback": "ui-monospace, monospace",
+      "platforms": {
+        "ios": "SF Mono",
+        "android": "Roboto Mono",
+        "web": "JetBrains Mono"
+      }
+    }
+  },
+
+  "fontWeights": {
+    "regular": {
+      "value": 400,
+      "description": "Regular weight. Body text, descriptions."
+    },
+    "medium": {
+      "value": 500,
+      "description": "Medium weight. Emphasis, labels."
+    },
+    "semibold": {
+      "value": 600,
+      "description": "Semibold weight. Subheadings, buttons."
+    },
+    "bold": {
+      "value": 700,
+      "description": "Bold weight. Headings, strong emphasis."
+    }
+  },
+
+  "scale": {
+    "display-large": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "bold",
+      "letterSpacing": "-0.02em",
+      "description": "Largest display text. Hero sections, splash screens.",
+      "usage": ["hero-title", "onboarding-headline"]
+    },
+    "display-medium": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "bold",
+      "letterSpacing": "-0.01em",
+      "description": "Medium display text. Page titles on marketing screens.",
+      "usage": ["page-hero", "feature-title"]
+    },
+    "heading-1": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "bold",
+      "letterSpacing": "0",
+      "description": "Primary heading. Screen titles, section headers.",
+      "usage": ["screen-title", "modal-title", "section-header"]
+    },
+    "heading-2": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "semibold",
+      "letterSpacing": "0",
+      "description": "Secondary heading. Subsections, card titles.",
+      "usage": ["card-title", "subsection-header", "dialog-title"]
+    },
+    "heading-3": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "semibold",
+      "letterSpacing": "0",
+      "description": "Tertiary heading. List group titles, minor sections.",
+      "usage": ["list-header", "form-section-title"]
+    },
+    "body-large": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "regular",
+      "letterSpacing": "0",
+      "description": "Large body text. Intro paragraphs, featured content.",
+      "usage": ["intro-paragraph", "featured-description"]
+    },
+    "body": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "regular",
+      "letterSpacing": "0",
+      "description": "Standard body text. Paragraphs, descriptions, list items.",
+      "usage": ["paragraph", "list-item-text", "input-text"]
+    },
+    "body-small": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "regular",
+      "letterSpacing": "0",
+      "description": "Small body text. Secondary information.",
+      "usage": ["secondary-text", "metadata"]
+    },
+    "label": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "medium",
+      "letterSpacing": "0.01em",
+      "description": "Labels and UI elements. Buttons, tabs, form labels.",
+      "usage": ["button-text", "tab-label", "input-label", "chip-text"]
+    },
+    "caption": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "regular",
+      "letterSpacing": "0.02em",
+      "description": "Captions and helper text. Timestamps, hints, footnotes.",
+      "usage": ["helper-text", "timestamp", "footnote", "error-message"]
+    },
+    "overline": {
+      "fontSize": "REPLACE",
+      "lineHeight": "REPLACE",
+      "fontWeight": "semibold",
+      "letterSpacing": "0.08em",
+      "textTransform": "uppercase",
+      "description": "Overline text. Category labels, eyebrow text.",
+      "usage": ["category-label", "eyebrow", "section-label"]
+    }
+  },
+
+  "paragraphSpacing": {
+    "tight": {
+      "value": "0.5em",
+      "description": "Tight paragraph spacing for compact layouts."
+    },
+    "normal": {
+      "value": "1em",
+      "description": "Normal paragraph spacing for body content."
+    },
+    "loose": {
+      "value": "1.5em",
+      "description": "Loose paragraph spacing for readability-focused content."
+    }
+  },
+
+  "maxLineLength": {
+    "value": "65ch",
+    "description": "Maximum line length for optimal readability. Apply to body text containers."
+  }
+}

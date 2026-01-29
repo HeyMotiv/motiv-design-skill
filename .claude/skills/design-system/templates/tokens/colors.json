@@ -1,0 +1,181 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "colors",
+  "$description": "Color tokens extracted from design screenshots. All colors are semantic and include state variants.",
+
+  "brand": {
+    "primary": {
+      "value": "#REPLACE",
+      "description": "Primary brand color. Use for main CTAs, active states, and brand identification.",
+      "usage": ["button-primary-bg", "link-text", "active-tab-indicator", "checkbox-checked"],
+      "contrast": {
+        "onPrimary": "#FFFFFF",
+        "wcagAA": true,
+        "wcagAAA": false
+      },
+      "states": {
+        "hover": "#REPLACE",
+        "pressed": "#REPLACE",
+        "disabled": "#REPLACE"
+      },
+      "variants": {
+        "light": "#REPLACE",
+        "subtle": "#REPLACE"
+      }
+    },
+    "secondary": {
+      "value": "#REPLACE",
+      "description": "Secondary brand color. Use for supporting actions and accents.",
+      "usage": ["button-secondary-bg", "badge-bg", "highlight"],
+      "states": {
+        "hover": "#REPLACE",
+        "pressed": "#REPLACE"
+      }
+    }
+  },
+
+  "text": {
+    "primary": {
+      "value": "#REPLACE",
+      "description": "Primary text color. Use for headings, body text, and labels.",
+      "usage": ["heading-text", "body-text", "input-text", "button-text-secondary"]
+    },
+    "secondary": {
+      "value": "#REPLACE",
+      "description": "Secondary text color. Use for supporting text, captions, timestamps.",
+      "usage": ["caption-text", "helper-text", "timestamp", "placeholder"]
+    },
+    "tertiary": {
+      "value": "#REPLACE",
+      "description": "Tertiary text color. Use for disabled text, very subtle labels.",
+      "usage": ["disabled-text", "inactive-label"]
+    },
+    "inverse": {
+      "value": "#REPLACE",
+      "description": "Inverse text color. Use on dark backgrounds.",
+      "usage": ["button-primary-text", "dark-surface-text"]
+    },
+    "link": {
+      "value": "#REPLACE",
+      "description": "Link text color. Use for clickable text links.",
+      "usage": ["inline-link", "navigation-link"],
+      "states": {
+        "hover": "#REPLACE",
+        "visited": "#REPLACE"
+      }
+    }
+  },
+
+  "background": {
+    "primary": {
+      "value": "#REPLACE",
+      "description": "Primary background. Main app background color.",
+      "usage": ["screen-bg", "card-bg"]
+    },
+    "secondary": {
+      "value": "#REPLACE",
+      "description": "Secondary background. Subtle contrast from primary.",
+      "usage": ["section-bg", "input-bg", "hover-bg"]
+    },
+    "tertiary": {
+      "value": "#REPLACE",
+      "description": "Tertiary background. Higher contrast sections.",
+      "usage": ["sidebar-bg", "code-block-bg"]
+    },
+    "elevated": {
+      "value": "#REPLACE",
+      "description": "Elevated surface background. Cards, modals, dropdowns.",
+      "usage": ["modal-bg", "dropdown-bg", "floating-card-bg"]
+    },
+    "inverse": {
+      "value": "#REPLACE",
+      "description": "Inverse background. Dark surfaces.",
+      "usage": ["tooltip-bg", "snackbar-bg"]
+    }
+  },
+
+  "border": {
+    "default": {
+      "value": "#REPLACE",
+      "description": "Default border color. Standard dividers and outlines.",
+      "usage": ["card-border", "divider", "input-border"]
+    },
+    "subtle": {
+      "value": "#REPLACE",
+      "description": "Subtle border color. Very light separators.",
+      "usage": ["list-divider", "section-separator"]
+    },
+    "strong": {
+      "value": "#REPLACE",
+      "description": "Strong border color. Emphasized boundaries.",
+      "usage": ["input-focus-border", "selected-item-border"]
+    },
+    "focus": {
+      "value": "#REPLACE",
+      "description": "Focus ring color. Accessibility focus indicator.",
+      "usage": ["focus-ring"]
+    }
+  },
+
+  "semantic": {
+    "success": {
+      "value": "#REPLACE",
+      "description": "Success state color. Confirmations, completed states.",
+      "usage": ["success-icon", "success-text", "success-bg"],
+      "variants": {
+        "light": "#REPLACE",
+        "dark": "#REPLACE"
+      }
+    },
+    "warning": {
+      "value": "#REPLACE",
+      "description": "Warning state color. Caution, pending states.",
+      "usage": ["warning-icon", "warning-text", "warning-bg"],
+      "variants": {
+        "light": "#REPLACE",
+        "dark": "#REPLACE"
+      }
+    },
+    "error": {
+      "value": "#REPLACE",
+      "description": "Error state color. Errors, destructive actions.",
+      "usage": ["error-icon", "error-text", "error-border", "destructive-button-bg"],
+      "variants": {
+        "light": "#REPLACE",
+        "dark": "#REPLACE"
+      }
+    },
+    "info": {
+      "value": "#REPLACE",
+      "description": "Info state color. Informational messages.",
+      "usage": ["info-icon", "info-text", "info-bg"],
+      "variants": {
+        "light": "#REPLACE",
+        "dark": "#REPLACE"
+      }
+    }
+  },
+
+  "interaction": {
+    "overlay": {
+      "value": "rgba(0, 0, 0, 0.5)",
+      "description": "Modal/dialog backdrop overlay.",
+      "usage": ["modal-backdrop", "drawer-scrim"]
+    },
+    "hover": {
+      "value": "rgba(0, 0, 0, 0.04)",
+      "description": "Hover state overlay. Apply over any surface.",
+      "usage": ["list-item-hover", "button-hover-overlay"]
+    },
+    "pressed": {
+      "value": "rgba(0, 0, 0, 0.08)",
+      "description": "Pressed state overlay. Apply over any surface.",
+      "usage": ["list-item-pressed", "button-pressed-overlay"]
+    },
+    "selected": {
+      "value": "#REPLACE",
+      "description": "Selected item background.",
+      "usage": ["selected-list-item-bg", "chip-selected-bg"]
+    }
+  }
+}

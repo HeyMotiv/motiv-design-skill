@@ -1,0 +1,88 @@
+{
+  "$schema": "../schemas/tokens.schema.json",
+  "$type": "radii",
+  "$description": "Border radius tokens for consistent corner rounding across components.",
+
+  "scale": {
+    "none": {
+      "value": "0",
+      "description": "No rounding. Sharp corners.",
+      "usage": ["divider", "full-width-element"]
+    },
+    "xs": {
+      "value": "REPLACE",
+      "description": "Extra small radius. Subtle rounding.",
+      "usage": ["badge", "tag", "small-chip"]
+    },
+    "sm": {
+      "value": "REPLACE",
+      "description": "Small radius. Standard subtle rounding.",
+      "usage": ["input", "small-button", "tooltip"]
+    },
+    "md": {
+      "value": "REPLACE",
+      "description": "Medium radius. Default component rounding.",
+      "usage": ["button", "card", "dropdown"]
+    },
+    "lg": {
+      "value": "REPLACE",
+      "description": "Large radius. Prominent rounding.",
+      "usage": ["modal", "large-card", "image-container"]
+    },
+    "xl": {
+      "value": "REPLACE",
+      "description": "Extra large radius. Very rounded corners.",
+      "usage": ["floating-action-button", "pill-button"]
+    },
+    "full": {
+      "value": "9999px",
+      "description": "Full/circular rounding. Pills and circles.",
+      "usage": ["avatar", "pill-tag", "circular-button"]
+    }
+  },
+
+  "semantic": {
+    "button": {
+      "value": "REPLACE",
+      "description": "Standard button corner radius."
+    },
+    "buttonSmall": {
+      "value": "REPLACE",
+      "description": "Small button corner radius."
+    },
+    "buttonLarge": {
+      "value": "REPLACE",
+      "description": "Large button corner radius."
+    },
+    "input": {
+      "value": "REPLACE",
+      "description": "Input field corner radius."
+    },
+    "card": {
+      "value": "REPLACE",
+      "description": "Card corner radius."
+    },
+    "modal": {
+      "value": "REPLACE",
+      "description": "Modal/dialog corner radius."
+    },
+    "avatar": {
+      "value": "full",
+      "description": "Avatar corner radius (typically circular)."
+    },
+    "image": {
+      "value": "REPLACE",
+      "description": "Default image corner radius."
+    }
+  },
+
+  "guidelines": {
+    "nested": {
+      "description": "When nesting rounded elements, inner radius = outer radius - padding. This creates optically consistent curves.",
+      "formula": "innerRadius = outerRadius - containerPadding"
+    },
+    "consistency": {
+      "description": "Use consistent radius within component families. All buttons should use the same radius unless variant-specific."
+    }
+  }
+}
