@@ -1,0 +1,255 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "typography",
+  "$description": "Motiv typography system. Nunito for brand/display, Roboto for UI. Warm, readable, inviting.",
+
+  "fontFamilies": {
+    "display": {
+      "value": "Nunito, system-ui, sans-serif",
+      "description": "Display/brand font. Use for the Motiv logo, large headings, and celebratory moments.",
+      "weights": [400, 600, 700, 800],
+      "usage": ["logo", "display-heading", "celebration-title"]
+    },
+    "body": {
+      "value": "Roboto, system-ui, sans-serif",
+      "description": "Body/UI font. Use for all interface text, buttons, labels, and content.",
+      "weights": [400, 500, 700],
+      "usage": ["body-text", "headings", "buttons", "labels", "navigation"]
+    },
+    "mono": {
+      "value": "Roboto Mono, monospace",
+      "description": "Monospace font. Use for numbers, stats, and data displays.",
+      "weights": [400, 500],
+      "usage": ["stat-numbers", "countdown", "data-display"]
+    }
+  },
+
+  "fontWeights": {
+    "regular": {
+      "value": 400,
+      "description": "Regular weight. Body text, descriptions, secondary content."
+    },
+    "medium": {
+      "value": 500,
+      "description": "Medium weight. Labels, buttons, emphasized body text."
+    },
+    "semibold": {
+      "value": 600,
+      "description": "Semibold weight. Subheadings, important labels."
+    },
+    "bold": {
+      "value": 700,
+      "description": "Bold weight. Headings, CTAs, emphasis."
+    },
+    "extrabold": {
+      "value": 800,
+      "description": "Extra bold weight. Display text, logo, celebrations."
+    }
+  },
+
+  "scale": {
+    "display-large": {
+      "family": "display",
+      "size": "48px",
+      "lineHeight": "56px",
+      "weight": 800,
+      "letterSpacing": "-0.02em",
+      "description": "Large display text. Motiv logo, major celebrations.",
+      "usage": ["logo", "win-celebration"]
+    },
+    "display-medium": {
+      "family": "display",
+      "size": "36px",
+      "lineHeight": "44px",
+      "weight": 700,
+      "letterSpacing": "-0.01em",
+      "description": "Medium display text. Onboarding headlines, challenge titles.",
+      "usage": ["onboarding-headline", "challenge-title-large"]
+    },
+    "display-small": {
+      "family": "display",
+      "size": "28px",
+      "lineHeight": "36px",
+      "weight": 700,
+      "letterSpacing": "-0.01em",
+      "description": "Small display text. Section heroes, feature callouts.",
+      "usage": ["section-hero", "feature-headline"]
+    },
+    "heading-1": {
+      "family": "body",
+      "size": "24px",
+      "lineHeight": "32px",
+      "weight": 700,
+      "letterSpacing": "-0.01em",
+      "description": "Heading 1. Screen titles, major section headers.",
+      "usage": ["screen-title", "section-header"]
+    },
+    "heading-2": {
+      "family": "body",
+      "size": "20px",
+      "lineHeight": "28px",
+      "weight": 700,
+      "letterSpacing": "0",
+      "description": "Heading 2. Card titles, subsection headers.",
+      "usage": ["card-title", "subsection-header"]
+    },
+    "heading-3": {
+      "family": "body",
+      "size": "18px",
+      "lineHeight": "24px",
+      "weight": 600,
+      "letterSpacing": "0",
+      "description": "Heading 3. List headers, small card titles.",
+      "usage": ["list-header", "small-card-title"]
+    },
+    "body-large": {
+      "family": "body",
+      "size": "18px",
+      "lineHeight": "28px",
+      "weight": 400,
+      "letterSpacing": "0",
+      "description": "Large body text. Onboarding descriptions, important content.",
+      "usage": ["onboarding-body", "featured-description"]
+    },
+    "body": {
+      "family": "body",
+      "size": "16px",
+      "lineHeight": "24px",
+      "weight": 400,
+      "letterSpacing": "0",
+      "description": "Standard body text. Main content, descriptions.",
+      "usage": ["body-text", "card-description", "list-item-text"]
+    },
+    "body-small": {
+      "family": "body",
+      "size": "14px",
+      "lineHeight": "20px",
+      "weight": 400,
+      "letterSpacing": "0",
+      "description": "Small body text. Secondary content, dense layouts.",
+      "usage": ["secondary-text", "compact-list-item"]
+    },
+    "label": {
+      "family": "body",
+      "size": "14px",
+      "lineHeight": "20px",
+      "weight": 500,
+      "letterSpacing": "0.01em",
+      "description": "Label text. Form labels, button text, navigation items.",
+      "usage": ["form-label", "button-text", "nav-item"]
+    },
+    "label-small": {
+      "family": "body",
+      "size": "12px",
+      "lineHeight": "16px",
+      "weight": 500,
+      "letterSpacing": "0.02em",
+      "description": "Small label text. Badges, tags, micro-labels.",
+      "usage": ["badge-text", "tag-text", "input-hint"]
+    },
+    "caption": {
+      "family": "body",
+      "size": "12px",
+      "lineHeight": "16px",
+      "weight": 400,
+      "letterSpacing": "0.01em",
+      "description": "Caption text. Timestamps, helper text, metadata.",
+      "usage": ["timestamp", "helper-text", "metadata"]
+    },
+    "overline": {
+      "family": "body",
+      "size": "10px",
+      "lineHeight": "14px",
+      "weight": 600,
+      "letterSpacing": "0.1em",
+      "textTransform": "uppercase",
+      "description": "Overline text. Section labels, category markers.",
+      "usage": ["section-label", "category-overline"]
+    },
+    "stat-large": {
+      "family": "body",
+      "size": "40px",
+      "lineHeight": "48px",
+      "weight": 700,
+      "letterSpacing": "-0.02em",
+      "description": "Large stat number. Hero metrics, reward amounts.",
+      "usage": ["reward-amount", "hero-stat"]
+    },
+    "stat-medium": {
+      "family": "body",
+      "size": "28px",
+      "lineHeight": "36px",
+      "weight": 700,
+      "letterSpacing": "-0.01em",
+      "description": "Medium stat number. Dashboard metrics.",
+      "usage": ["dashboard-stat", "progress-number"]
+    },
+    "stat-small": {
+      "family": "body",
+      "size": "20px",
+      "lineHeight": "28px",
+      "weight": 600,
+      "letterSpacing": "0",
+      "description": "Small stat number. Inline metrics, compact stats.",
+      "usage": ["inline-stat", "compact-metric"]
+    }
+  },
+
+  "styles": {
+    "screenTitle": {
+      "extends": "heading-1",
+      "color": "text.primary",
+      "description": "Standard screen title style."
+    },
+    "onboardingHeadline": {
+      "extends": "display-medium",
+      "color": "text.primary",
+      "textAlign": "center",
+      "description": "Onboarding screen headlines."
+    },
+    "cardTitle": {
+      "extends": "heading-2",
+      "color": "text.primary",
+      "description": "Card title style."
+    },
+    "bodyText": {
+      "extends": "body",
+      "color": "text.primary",
+      "description": "Standard body text style."
+    },
+    "secondaryText": {
+      "extends": "body-small",
+      "color": "text.secondary",
+      "description": "Secondary/supporting text style."
+    },
+    "buttonPrimary": {
+      "extends": "label",
+      "color": "text.inverse",
+      "description": "Primary button text style."
+    },
+    "buttonSecondary": {
+      "extends": "label",
+      "color": "text.primary",
+      "description": "Secondary/outline button text style."
+    },
+    "celebrationTitle": {
+      "extends": "display-large",
+      "color": "celebration.text",
+      "description": "Celebration screen title (on dark background)."
+    },
+    "link": {
+      "extends": "body",
+      "color": "text.link",
+      "textDecoration": "underline",
+      "description": "Inline link style."
+    }
+  },
+
+  "accessibility": {
+    "minimumSize": "12px",
+    "minimumTouchLabelSize": "14px",
+    "minimumContrastBody": "4.5:1",
+    "minimumContrastLarge": "3:1",
+    "notes": "All text meets WCAG AA contrast requirements. Body text uses 16px minimum for comfortable reading."
+  }
+}

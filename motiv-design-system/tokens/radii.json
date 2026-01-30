@@ -1,0 +1,85 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "radii",
+  "$description": "Motiv border radius tokens. Soft, rounded corners create a friendly, approachable feel.",
+
+  "scale": {
+    "none": {
+      "value": "0px",
+      "description": "No rounding. Use for full-bleed elements."
+    },
+    "xs": {
+      "value": "4px",
+      "description": "Extra small radius. Subtle rounding for small elements.",
+      "usage": ["progress-bar", "badge-internal"]
+    },
+    "sm": {
+      "value": "8px",
+      "description": "Small radius. Tags, chips, small cards.",
+      "usage": ["category-badge", "tag", "thumbnail"]
+    },
+    "md": {
+      "value": "12px",
+      "description": "Medium radius. Standard cards, inputs, modals.",
+      "usage": ["card", "input", "dropdown", "selection-item"]
+    },
+    "lg": {
+      "value": "16px",
+      "description": "Large radius. Large cards, sheets, expanded sections.",
+      "usage": ["large-card", "bottom-sheet", "profile-card"]
+    },
+    "xl": {
+      "value": "24px",
+      "description": "Extra large radius. Hero cards, special containers.",
+      "usage": ["hero-card", "celebration-card"]
+    },
+    "full": {
+      "value": "9999px",
+      "description": "Full/pill radius. Buttons, avatars, pills.",
+      "usage": ["button", "avatar", "pill-badge", "toggle"]
+    }
+  },
+
+  "semantic": {
+    "button": {
+      "value": "9999px",
+      "description": "All buttons are pills.",
+      "token": "full"
+    },
+    "card": {
+      "value": "16px",
+      "description": "Standard card radius.",
+      "token": "lg"
+    },
+    "input": {
+      "value": "12px",
+      "description": "Input field radius.",
+      "token": "md"
+    },
+    "avatar": {
+      "value": "9999px",
+      "description": "Circular avatars.",
+      "token": "full"
+    },
+    "badge": {
+      "value": "9999px",
+      "description": "Category and status badges.",
+      "token": "full"
+    },
+    "sheet": {
+      "value": "16px",
+      "description": "Bottom sheet top corners.",
+      "token": "lg"
+    },
+    "progressBar": {
+      "value": "4px",
+      "description": "Progress bar caps.",
+      "token": "xs"
+    },
+    "image": {
+      "value": "8px",
+      "description": "Image/thumbnail radius.",
+      "token": "sm"
+    }
+  }
+}

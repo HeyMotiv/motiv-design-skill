@@ -1,0 +1,126 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "shadows",
+  "$description": "Motiv shadow/elevation tokens. Subtle, soft shadows that add depth without heaviness.",
+
+  "principles": {
+    "subtle": "Shadows should be soft and subtle, never harsh or dramatic.",
+    "purposeful": "Use elevation to indicate interactivity or hierarchy, not decoration.",
+    "consistent": "Same shadow values across similar elements for visual harmony."
+  },
+
+  "scale": {
+    "none": {
+      "value": "none",
+      "description": "No shadow.",
+      "usage": ["flat-elements", "inline-text"]
+    },
+    "xs": {
+      "value": "0 1px 2px rgba(0, 0, 0, 0.05)",
+      "description": "Extra small shadow. Barely visible lift.",
+      "usage": ["subtle-card", "input-focus"]
+    },
+    "sm": {
+      "value": "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)",
+      "description": "Small shadow. Default card elevation.",
+      "usage": ["card", "dropdown", "tooltip"]
+    },
+    "md": {
+      "value": "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+      "description": "Medium shadow. Elevated cards, popovers.",
+      "usage": ["elevated-card", "popover", "hover-card"]
+    },
+    "lg": {
+      "value": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)",
+      "description": "Large shadow. Modals, floating elements.",
+      "usage": ["modal", "floating-action-button"]
+    },
+    "xl": {
+      "value": "0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)",
+      "description": "Extra large shadow. Full-screen overlays, important modals.",
+      "usage": ["full-modal", "overlay"]
+    }
+  },
+
+  "semantic": {
+    "card": {
+      "value": "0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)",
+      "description": "Default card shadow.",
+      "token": "sm"
+    },
+    "cardHover": {
+      "value": "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+      "description": "Card shadow on hover (desktop).",
+      "token": "md"
+    },
+    "dropdown": {
+      "value": "0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+      "description": "Dropdown/popover shadow.",
+      "token": "md"
+    },
+    "modal": {
+      "value": "0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)",
+      "description": "Modal/dialog shadow.",
+      "token": "lg"
+    },
+    "sheet": {
+      "value": "0 -4px 6px rgba(0, 0, 0, 0.1)",
+      "description": "Bottom sheet shadow (inverted, top edge).",
+      "customValue": true
+    },
+    "button": {
+      "value": "none",
+      "description": "Buttons don't have shadows by default.",
+      "token": "none"
+    },
+    "input": {
+      "value": "none",
+      "description": "Inputs use border, not shadow.",
+      "token": "none"
+    },
+    "inputFocus": {
+      "value": "0 0 0 3px rgba(124, 58, 237, 0.2)",
+      "description": "Input focus ring (purple glow).",
+      "customValue": true
+    }
+  },
+
+  "elevation": {
+    "$description": "Semantic elevation levels for z-index stacking.",
+    "base": {
+      "zIndex": 0,
+      "shadow": "none",
+      "description": "Base level, no elevation."
+    },
+    "raised": {
+      "zIndex": 1,
+      "shadow": "sm",
+      "description": "Slightly raised. Cards, list items."
+    },
+    "dropdown": {
+      "zIndex": 10,
+      "shadow": "md",
+      "description": "Dropdowns, popovers, tooltips."
+    },
+    "sticky": {
+      "zIndex": 20,
+      "shadow": "sm",
+      "description": "Sticky headers, tab bars."
+    },
+    "modal": {
+      "zIndex": 30,
+      "shadow": "lg",
+      "description": "Modals, dialogs, bottom sheets."
+    },
+    "toast": {
+      "zIndex": 40,
+      "shadow": "lg",
+      "description": "Toasts, snackbars."
+    },
+    "overlay": {
+      "zIndex": 50,
+      "shadow": "xl",
+      "description": "Full-screen overlays."
+    }
+  }
+}

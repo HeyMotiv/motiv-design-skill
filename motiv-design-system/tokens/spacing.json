@@ -1,0 +1,175 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "spacing",
+  "$description": "Motiv spacing system. 4px base unit for granular control. Creates consistent rhythm throughout the app.",
+
+  "base": {
+    "value": "4px",
+    "description": "Base spacing unit. All spacing values are multiples of this."
+  },
+
+  "scale": {
+    "none": {
+      "value": "0px",
+      "description": "No spacing."
+    },
+    "xxs": {
+      "value": "4px",
+      "multiplier": 1,
+      "description": "Extra extra small. Icon-to-text gaps, tight internal padding.",
+      "usage": ["icon-text-gap", "badge-internal-padding"]
+    },
+    "xs": {
+      "value": "8px",
+      "multiplier": 2,
+      "description": "Extra small. Compact element spacing, small gaps.",
+      "usage": ["chip-gap", "inline-element-spacing", "list-item-internal"]
+    },
+    "sm": {
+      "value": "12px",
+      "multiplier": 3,
+      "description": "Small. Standard internal padding, tight section spacing.",
+      "usage": ["button-padding-vertical", "input-padding", "compact-card-padding"]
+    },
+    "md": {
+      "value": "16px",
+      "multiplier": 4,
+      "description": "Medium. Default padding and margins. Most common spacing.",
+      "usage": ["screen-padding", "card-padding", "section-gap", "list-item-padding"]
+    },
+    "lg": {
+      "value": "20px",
+      "multiplier": 5,
+      "description": "Large. Comfortable spacing for important elements.",
+      "usage": ["button-padding-horizontal", "card-gap", "form-field-gap"]
+    },
+    "xl": {
+      "value": "24px",
+      "multiplier": 6,
+      "description": "Extra large. Section separation, generous padding.",
+      "usage": ["section-padding", "modal-padding", "large-card-padding"]
+    },
+    "2xl": {
+      "value": "32px",
+      "multiplier": 8,
+      "description": "2X large. Major section breaks, screen-level spacing.",
+      "usage": ["screen-section-gap", "hero-padding"]
+    },
+    "3xl": {
+      "value": "48px",
+      "multiplier": 12,
+      "description": "3X large. Large screen gaps, generous whitespace.",
+      "usage": ["major-section-gap", "onboarding-spacing"]
+    },
+    "4xl": {
+      "value": "64px",
+      "multiplier": 16,
+      "description": "4X large. Maximum spacing, dramatic whitespace.",
+      "usage": ["hero-section-padding", "celebration-spacing"]
+    }
+  },
+
+  "semantic": {
+    "screenPaddingHorizontal": {
+      "value": "16px",
+      "token": "md",
+      "description": "Standard horizontal screen padding."
+    },
+    "screenPaddingTop": {
+      "value": "16px",
+      "token": "md",
+      "description": "Screen top padding (below nav bar)."
+    },
+    "screenPaddingBottom": {
+      "value": "32px",
+      "token": "2xl",
+      "description": "Screen bottom padding (above tab bar)."
+    },
+    "cardPadding": {
+      "value": "16px",
+      "token": "md",
+      "description": "Standard card internal padding."
+    },
+    "cardGap": {
+      "value": "12px",
+      "token": "sm",
+      "description": "Gap between cards in a list."
+    },
+    "sectionGap": {
+      "value": "24px",
+      "token": "xl",
+      "description": "Gap between major sections on a screen."
+    },
+    "listItemPadding": {
+      "value": "16px",
+      "token": "md",
+      "description": "List item internal padding."
+    },
+    "listItemGap": {
+      "value": "8px",
+      "token": "xs",
+      "description": "Gap between list items."
+    },
+    "buttonPaddingVertical": {
+      "value": "12px",
+      "token": "sm",
+      "description": "Button vertical padding."
+    },
+    "buttonPaddingHorizontal": {
+      "value": "24px",
+      "token": "xl",
+      "description": "Button horizontal padding."
+    },
+    "inputPadding": {
+      "value": "12px",
+      "token": "sm",
+      "description": "Input field internal padding."
+    },
+    "iconTextGap": {
+      "value": "8px",
+      "token": "xs",
+      "description": "Gap between icon and adjacent text."
+    },
+    "inlineGap": {
+      "value": "4px",
+      "token": "xxs",
+      "description": "Tight inline element spacing."
+    }
+  },
+
+  "layout": {
+    "maxContentWidth": {
+      "value": "560px",
+      "description": "Maximum content width on large screens."
+    },
+    "gridGutter": {
+      "value": "16px",
+      "description": "Grid gutter width."
+    },
+    "gridColumns": {
+      "phone": 4,
+      "tablet": 8,
+      "desktop": 12,
+      "description": "Grid column counts per breakpoint."
+    }
+  },
+
+  "safeAreas": {
+    "top": {
+      "value": "env(safe-area-inset-top, 0px)",
+      "description": "iOS safe area top (notch)."
+    },
+    "bottom": {
+      "value": "env(safe-area-inset-bottom, 0px)",
+      "description": "iOS safe area bottom (home indicator)."
+    },
+    "left": {
+      "value": "env(safe-area-inset-left, 0px)",
+      "description": "Safe area left (landscape)."
+    },
+    "right": {
+      "value": "env(safe-area-inset-right, 0px)",
+      "description": "Safe area right (landscape)."
+    }
+  }
+}

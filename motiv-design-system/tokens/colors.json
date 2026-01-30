@@ -1,0 +1,268 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "colors",
+  "$description": "Motiv app color tokens. Optimistic, light, inviting palette for busy moms showing up for themselves.",
+
+  "brand": {
+    "primary": {
+      "value": "#1A1A1A",
+      "description": "Primary brand color. Use for main CTAs, key actions, and emphasis. Black conveys confidence and boldness.",
+      "usage": ["button-primary-bg", "heading-emphasis", "icon-primary"],
+      "contrast": {
+        "onPrimary": "#FFFFFF",
+        "wcagAA": true,
+        "wcagAAA": true
+      },
+      "states": {
+        "hover": "#2D2D2D",
+        "pressed": "#000000",
+        "disabled": "#9CA3AF"
+      }
+    },
+    "secondary": {
+      "value": "#7C3AED",
+      "description": "Secondary brand color. Use for secondary actions, accents, and interactive highlights. Purple adds energy and optimism.",
+      "usage": ["button-secondary-bg", "link-text", "active-indicator", "progress-fill"],
+      "contrast": {
+        "onSecondary": "#FFFFFF",
+        "wcagAA": true
+      },
+      "states": {
+        "hover": "#6D28D9",
+        "pressed": "#5B21B6",
+        "disabled": "#C4B5FD"
+      },
+      "variants": {
+        "light": "#8B5CF6",
+        "subtle": "#F5F3FF"
+      }
+    }
+  },
+
+  "text": {
+    "primary": {
+      "value": "#1A1A1A",
+      "description": "Primary text color. Use for headings, body text, and important content.",
+      "usage": ["heading-text", "body-text", "label-text", "button-secondary-text"]
+    },
+    "secondary": {
+      "value": "#6B7280",
+      "description": "Secondary text color. Use for supporting text, captions, timestamps, and metadata.",
+      "usage": ["caption-text", "helper-text", "timestamp", "subtitle"]
+    },
+    "tertiary": {
+      "value": "#9CA3AF",
+      "description": "Tertiary text color. Use for placeholders, disabled text, and very subtle labels.",
+      "usage": ["placeholder-text", "disabled-text", "inactive-label"]
+    },
+    "inverse": {
+      "value": "#FFFFFF",
+      "description": "Inverse text color. Use on dark or colored backgrounds.",
+      "usage": ["button-primary-text", "dark-surface-text", "gradient-overlay-text"]
+    },
+    "link": {
+      "value": "#7C3AED",
+      "description": "Link text color. Use for interactive inline text.",
+      "usage": ["inline-link", "learn-more", "see-all"],
+      "states": {
+        "hover": "#6D28D9",
+        "visited": "#5B21B6"
+      }
+    }
+  },
+
+  "background": {
+    "primary": {
+      "value": "#FFFFFF",
+      "description": "Primary background. Main app and screen background.",
+      "usage": ["screen-bg", "card-bg", "modal-bg", "input-bg"]
+    },
+    "secondary": {
+      "value": "#F9FAFB",
+      "description": "Secondary background. Subtle contrast for sections and grouped content.",
+      "usage": ["section-bg", "list-bg", "expanded-section-bg"]
+    },
+    "tertiary": {
+      "value": "#F3F4F6",
+      "description": "Tertiary background. Higher contrast for chips, tags, and code blocks.",
+      "usage": ["chip-bg", "tag-bg", "stat-card-bg"]
+    },
+    "elevated": {
+      "value": "#FFFFFF",
+      "description": "Elevated surface. Floating cards and overlays (use with shadow).",
+      "usage": ["dropdown-bg", "popover-bg", "bottom-sheet-bg"]
+    }
+  },
+
+  "border": {
+    "default": {
+      "value": "#E5E7EB",
+      "description": "Default border color. Input borders, card outlines, dividers.",
+      "usage": ["input-border", "card-border", "divider"]
+    },
+    "subtle": {
+      "value": "#F3F4F6",
+      "description": "Subtle border color. Very light separators.",
+      "usage": ["list-separator", "section-divider"]
+    },
+    "strong": {
+      "value": "#D1D5DB",
+      "description": "Strong border color. Emphasized boundaries, focused inputs.",
+      "usage": ["input-focus-border", "selected-card-border"]
+    },
+    "focus": {
+      "value": "#C4B5FD",
+      "description": "Focus ring color. Accessibility focus indicator.",
+      "usage": ["focus-ring"]
+    }
+  },
+
+  "gradients": {
+    "$description": "Dynamic gradient backgrounds for onboarding and decorative screens. These move as organic blobs.",
+    "pink": {
+      "colors": ["#FDF2F8", "#FBCFE8", "#F9A8D4"],
+      "description": "Warm pink gradient. Welcoming, nurturing energy.",
+      "usage": ["onboarding-welcome", "celebration-bg"]
+    },
+    "mint": {
+      "colors": ["#ECFDF5", "#A7F3D0", "#6EE7B7"],
+      "description": "Fresh mint gradient. Growth, health, vitality.",
+      "usage": ["success-result", "achievement-bg"]
+    },
+    "lavender": {
+      "colors": ["#F5F3FF", "#DDD6FE", "#C4B5FD"],
+      "description": "Soft lavender gradient. Calm, encouraging.",
+      "usage": ["personality-result", "brand-reveal"]
+    },
+    "sunshine": {
+      "colors": ["#FEF9C3", "#FDE047", "#FACC15"],
+      "description": "Warm sunshine gradient. Optimism, energy, joy.",
+      "usage": ["positive-result", "motivation-bg"]
+    },
+    "peach": {
+      "colors": ["#FFF7ED", "#FED7AA", "#FDBA74"],
+      "description": "Soft peach gradient. Warmth, approachability.",
+      "usage": ["onboarding-transition", "gentle-celebration"]
+    },
+    "sky": {
+      "colors": ["#F0F9FF", "#BAE6FD", "#7DD3FC"],
+      "description": "Light sky gradient. Freshness, openness, possibility.",
+      "usage": ["new-start", "refresh-state"]
+    }
+  },
+
+  "semantic": {
+    "success": {
+      "value": "#22C55E",
+      "description": "Success state. Completed actions, achievements, positive feedback.",
+      "usage": ["success-icon", "completed-badge", "valid-input"],
+      "variants": {
+        "light": "#DCFCE7",
+        "dark": "#16A34A"
+      }
+    },
+    "warning": {
+      "value": "#F59E0B",
+      "description": "Warning state. Attention needed, pending items.",
+      "usage": ["warning-icon", "pending-badge", "attention-banner"],
+      "variants": {
+        "light": "#FEF3C7",
+        "dark": "#D97706"
+      }
+    },
+    "error": {
+      "value": "#EF4444",
+      "description": "Error state. Errors, missed goals, invalid input.",
+      "usage": ["error-icon", "error-text", "invalid-input", "missed-challenge"],
+      "variants": {
+        "light": "#FEE2E2",
+        "dark": "#DC2626"
+      }
+    },
+    "info": {
+      "value": "#3B82F6",
+      "description": "Info state. Tips, helpful information.",
+      "usage": ["info-icon", "tip-banner", "helper-text-emphasis"],
+      "variants": {
+        "light": "#DBEAFE",
+        "dark": "#2563EB"
+      }
+    }
+  },
+
+  "celebration": {
+    "$description": "Dark surfaces for special moments (wins, losses, challenge results).",
+    "background": {
+      "value": "#1E1B4B",
+      "description": "Dark celebration background. Rich, immersive for special moments.",
+      "usage": ["win-screen-bg", "loss-screen-bg", "challenge-complete-bg"]
+    },
+    "backgroundAlt": {
+      "value": "#312E81",
+      "description": "Lighter dark background for layering.",
+      "usage": ["card-on-dark", "elevated-on-dark"]
+    },
+    "text": {
+      "value": "#FFFFFF",
+      "description": "Text on celebration backgrounds.",
+      "usage": ["celebration-heading", "result-text"]
+    },
+    "textMuted": {
+      "value": "#A5B4FC",
+      "description": "Muted text on celebration backgrounds.",
+      "usage": ["celebration-caption", "secondary-result-text"]
+    }
+  },
+
+  "interaction": {
+    "overlay": {
+      "value": "rgba(0, 0, 0, 0.5)",
+      "description": "Modal backdrop overlay.",
+      "usage": ["modal-backdrop", "drawer-scrim"]
+    },
+    "hover": {
+      "value": "rgba(0, 0, 0, 0.04)",
+      "description": "Hover state overlay for interactive surfaces.",
+      "usage": ["list-item-hover", "card-hover"]
+    },
+    "pressed": {
+      "value": "rgba(0, 0, 0, 0.08)",
+      "description": "Pressed state overlay.",
+      "usage": ["list-item-pressed", "card-pressed"]
+    },
+    "selected": {
+      "value": "#F5F3FF",
+      "description": "Selected item background (purple tint).",
+      "usage": ["selected-chip", "selected-option", "active-nav-item"]
+    }
+  },
+
+  "categoryBadges": {
+    "$description": "Color-coded category badges for product recommendations and content types.",
+    "beautyConfidence": {
+      "background": "#FDF2F8",
+      "text": "#BE185D",
+      "description": "Beauty & Confidence category."
+    },
+    "nutritionRecovery": {
+      "background": "#ECFDF5",
+      "text": "#047857",
+      "description": "Nutrition & Recovery category."
+    },
+    "healthWellness": {
+      "background": "#FEF3C7",
+      "text": "#B45309",
+      "description": "Health & Wellness category."
+    },
+    "mindfulness": {
+      "background": "#F5F3FF",
+      "text": "#6D28D9",
+      "description": "Mindfulness category."
+    },
+    "fitness": {
+      "background": "#DBEAFE",
+      "text": "#1D4ED8",
+      "description": "Fitness category."
+    }
+  }
+}

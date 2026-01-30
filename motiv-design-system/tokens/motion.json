@@ -1,0 +1,293 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "motion",
+  "$description": "Motiv motion system. Smooth, fluid, and inviting. Supports organic blob animations for gradient backgrounds.",
+
+  "principles": {
+    "smooth": "Motion should feel polished and calm, never jarring or aggressive.",
+    "purposeful": "Every animation guides attention or provides feedback. No gratuitous motion.",
+    "inviting": "Motion should feel welcoming, like a gentle invitation rather than a demand."
+  },
+
+  "duration": {
+    "instant": {
+      "value": "0ms",
+      "description": "No animation. Immediate state change."
+    },
+    "fast": {
+      "value": "150ms",
+      "description": "Fast transitions. Micro-interactions, color changes.",
+      "usage": ["button-color-hover", "checkbox-check", "input-focus"]
+    },
+    "normal": {
+      "value": "250ms",
+      "description": "Standard transitions. Most UI state changes.",
+      "usage": ["dropdown-open", "tab-switch", "card-expand"]
+    },
+    "slow": {
+      "value": "350ms",
+      "description": "Slower transitions. Screen changes, modals, emphasis.",
+      "usage": ["modal-enter", "screen-transition", "drawer-slide"]
+    },
+    "slower": {
+      "value": "500ms",
+      "description": "Extended transitions. Complex animations, celebrations.",
+      "usage": ["celebration-reveal", "onboarding-transition"]
+    }
+  },
+
+  "easing": {
+    "easeOut": {
+      "value": "cubic-bezier(0.0, 0.0, 0.2, 1)",
+      "description": "Ease out. Quick start, smooth landing. Use for entering elements.",
+      "usage": ["element-enter", "dropdown-open", "modal-enter"]
+    },
+    "easeIn": {
+      "value": "cubic-bezier(0.4, 0.0, 1, 1)",
+      "description": "Ease in. Slow start, quick exit. Use for leaving elements.",
+      "usage": ["element-exit", "modal-close"]
+    },
+    "easeInOut": {
+      "value": "cubic-bezier(0.4, 0.0, 0.2, 1)",
+      "description": "Ease in-out. Smooth start and end. Use for moving/morphing.",
+      "usage": ["position-change", "size-change", "tab-indicator"]
+    },
+    "smooth": {
+      "value": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+      "description": "Smooth, natural curve. General purpose.",
+      "usage": ["general-transition", "hover-state"]
+    },
+    "gentle": {
+      "value": "cubic-bezier(0.4, 0.0, 0.6, 1)",
+      "description": "Gentle, relaxed curve. Calming animations.",
+      "usage": ["background-fade", "gentle-reveal"]
+    }
+  },
+
+  "springs": {
+    "responsive": {
+      "stiffness": 300,
+      "damping": 30,
+      "mass": 1,
+      "description": "Responsive spring. Snappy but smooth.",
+      "usage": ["button-press", "toggle-switch", "drag-release"]
+    },
+    "gentle": {
+      "stiffness": 150,
+      "damping": 20,
+      "mass": 1,
+      "description": "Gentle spring. Soft, relaxed motion.",
+      "usage": ["sheet-slide", "card-settle", "modal-enter"]
+    },
+    "soft": {
+      "stiffness": 100,
+      "damping": 15,
+      "mass": 1,
+      "description": "Very soft spring. Organic, flowing motion.",
+      "usage": ["gradient-blob", "decorative-motion"]
+    }
+  },
+
+  "gradientBlobs": {
+    "$description": "Organic blob motion for gradient backgrounds. Creates a calming, living feel.",
+    "animation": {
+      "type": "continuous",
+      "description": "Blobs move continuously in organic, unpredictable patterns."
+    },
+    "movement": {
+      "speed": "slow",
+      "duration": "20000ms",
+      "description": "Full cycle duration. Very slow, almost meditative."
+    },
+    "transform": {
+      "scale": {
+        "min": 0.8,
+        "max": 1.2,
+        "description": "Blobs gently pulse in size."
+      },
+      "position": {
+        "range": "15%",
+        "description": "Blobs drift within 15% of their origin."
+      },
+      "rotation": {
+        "range": "15deg",
+        "description": "Subtle rotation adds organic feel."
+      }
+    },
+    "blur": {
+      "value": "80px",
+      "description": "Heavy blur creates soft, diffused edges."
+    },
+    "blendMode": {
+      "value": "soft-light",
+      "description": "Blend mode for layered blobs."
+    },
+    "implementation": {
+      "css": {
+        "description": "CSS keyframes example for blob animation.",
+        "example": "@keyframes blob { 0%, 100% { transform: translate(0, 0) scale(1); } 25% { transform: translate(5%, -5%) scale(1.1); } 50% { transform: translate(-5%, 5%) scale(0.9); } 75% { transform: translate(5%, 5%) scale(1.05); } }"
+      },
+      "layers": {
+        "description": "Use 2-3 overlapping blobs with offset animation delays.",
+        "example": "blob1: delay 0s, blob2: delay -7s, blob3: delay -14s"
+      }
+    }
+  },
+
+  "pageTransitions": {
+    "push": {
+      "incoming": {
+        "transform": "translateX(100%) → translateX(0)",
+        "opacity": "1"
+      },
+      "outgoing": {
+        "transform": "translateX(0) → translateX(-30%)",
+        "opacity": "1"
+      },
+      "duration": "350ms",
+      "easing": "easeInOut",
+      "description": "Standard forward navigation (iOS style)."
+    },
+    "pop": {
+      "incoming": {
+        "transform": "translateX(-30%) → translateX(0)",
+        "opacity": "1"
+      },
+      "outgoing": {
+        "transform": "translateX(0) → translateX(100%)",
+        "opacity": "1"
+      },
+      "duration": "350ms",
+      "easing": "easeInOut",
+      "description": "Back navigation."
+    },
+    "modal": {
+      "incoming": {
+        "transform": "translateY(100%) → translateY(0)",
+        "opacity": "0 → 1"
+      },
+      "outgoing": {
+        "transform": "translateY(0) → translateY(100%)",
+        "opacity": "1 → 0"
+      },
+      "backdrop": {
+        "opacity": "0 → 0.5"
+      },
+      "duration": "350ms",
+      "easing": "easeOut",
+      "description": "Modal/sheet presentation."
+    },
+    "fade": {
+      "incoming": {
+        "opacity": "0 → 1"
+      },
+      "outgoing": {
+        "opacity": "1 → 0"
+      },
+      "duration": "250ms",
+      "easing": "easeInOut",
+      "description": "Simple fade for tab switches."
+    },
+    "celebration": {
+      "incoming": {
+        "transform": "scale(0.9) → scale(1)",
+        "opacity": "0 → 1"
+      },
+      "duration": "500ms",
+      "easing": "gentle",
+      "description": "Celebration screen entrance. Slightly more dramatic."
+    }
+  },
+
+  "microInteractions": {
+    "buttonPress": {
+      "transform": "scale(0.97)",
+      "duration": "150ms",
+      "easing": "easeOut",
+      "description": "Button press feedback. Subtle scale down."
+    },
+    "buttonRelease": {
+      "spring": "responsive",
+      "description": "Button release springs back."
+    },
+    "checkboxCheck": {
+      "duration": "200ms",
+      "easing": "easeOut",
+      "description": "Checkbox fills with smooth draw."
+    },
+    "toggleSwitch": {
+      "duration": "250ms",
+      "spring": "responsive",
+      "description": "Toggle switch slides smoothly."
+    },
+    "cardHover": {
+      "transform": "translateY(-2px)",
+      "shadow": "elevation.medium",
+      "duration": "200ms",
+      "easing": "easeOut",
+      "description": "Card lifts slightly on hover (desktop)."
+    },
+    "listItemPress": {
+      "background": "interaction.pressed",
+      "duration": "100ms",
+      "description": "List item highlight on press."
+    },
+    "expandCollapse": {
+      "duration": "300ms",
+      "easing": "easeInOut",
+      "description": "Accordion/expandable section animation."
+    },
+    "progressFill": {
+      "duration": "500ms",
+      "easing": "easeOut",
+      "description": "Progress bar fills smoothly."
+    }
+  },
+
+  "loading": {
+    "skeleton": {
+      "duration": "1500ms",
+      "easing": "linear",
+      "direction": "infinite",
+      "description": "Skeleton shimmer. Gentle pulse."
+    },
+    "spinner": {
+      "duration": "1000ms",
+      "easing": "linear",
+      "direction": "infinite",
+      "description": "Loading spinner rotation."
+    },
+    "pulse": {
+      "duration": "2000ms",
+      "easing": "easeInOut",
+      "direction": "infinite",
+      "description": "Gentle pulse for loading states."
+    }
+  },
+
+  "gestures": {
+    "swipeToDismiss": {
+      "threshold": "40%",
+      "velocityThreshold": "500px/s",
+      "resistance": 0.5,
+      "snapBack": "springs.gentle",
+      "description": "Swipe gesture to dismiss sheets/cards."
+    },
+    "pullToRefresh": {
+      "triggerDistance": "80px",
+      "maxDistance": "120px",
+      "resistance": 0.4,
+      "description": "Pull down to refresh."
+    }
+  },
+
+  "reducedMotion": {
+    "query": "@media (prefers-reduced-motion: reduce)",
+    "behavior": {
+      "duration": "Replace with 0ms or minimal (50ms)",
+      "transforms": "Remove or minimize",
+      "blobs": "Static gradient, no animation",
+      "description": "Respect user's reduced motion preference."
+    }
+  }
+}
