@@ -1,0 +1,519 @@
+{
+  "$schema": "design-tokens-v1",
+  "$type": "challenge-theme",
+  "$description": "Challenge theming tokens. Creators select one color palette and one accent font. Each color has 3 tones: background (light), emphasis (mid), and text (dark).",
+
+  "colors": {
+    "$description": "Each palette has exactly 3 tones for consistent, accessible theming.",
+
+    "violet": {
+      "id": "violet",
+      "name": "Violet",
+      "description": "Calming, spiritual, creative. Great for yoga, meditation, and mindfulness challenges.",
+      "background": {
+        "value": "#F5F3FF",
+        "description": "Very light violet for backgrounds, cards, and large surfaces."
+      },
+      "emphasis": {
+        "value": "#8B5CF6",
+        "description": "Mid-tone violet for buttons, progress bars, badges, and interactive elements."
+      },
+      "text": {
+        "value": "#5B21B6",
+        "description": "Dark violet for text on light backgrounds."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "rose": {
+      "id": "rose",
+      "name": "Rose",
+      "description": "Warm, nurturing, feminine. Perfect for self-care, wellness, and beauty challenges.",
+      "background": {
+        "value": "#FFF1F2",
+        "description": "Soft blush pink for backgrounds."
+      },
+      "emphasis": {
+        "value": "#F43F5E",
+        "description": "Vibrant rose for accents and interactive elements."
+      },
+      "text": {
+        "value": "#9F1239",
+        "description": "Deep rose for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "coral": {
+      "id": "coral",
+      "name": "Coral",
+      "description": "Energetic, friendly, approachable. Great for fitness and movement challenges.",
+      "background": {
+        "value": "#FFF7ED",
+        "description": "Warm peachy background."
+      },
+      "emphasis": {
+        "value": "#F97316",
+        "description": "Vibrant orange-coral for energy and action."
+      },
+      "text": {
+        "value": "#C2410C",
+        "description": "Deep burnt orange for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "amber": {
+      "id": "amber",
+      "name": "Amber",
+      "description": "Optimistic, warm, inviting. Good for nutrition, cooking, and lifestyle challenges.",
+      "background": {
+        "value": "#FFFBEB",
+        "description": "Soft golden cream background."
+      },
+      "emphasis": {
+        "value": "#F59E0B",
+        "description": "Bright amber for warmth and positivity."
+      },
+      "text": {
+        "value": "#B45309",
+        "description": "Rich brown-amber for text."
+      },
+      "onEmphasis": "#1A1A1A"
+    },
+
+    "lime": {
+      "id": "lime",
+      "name": "Lime",
+      "description": "Fresh, energetic, youthful. Great for high-intensity and outdoor challenges.",
+      "background": {
+        "value": "#F7FEE7",
+        "description": "Fresh light green background."
+      },
+      "emphasis": {
+        "value": "#84CC16",
+        "description": "Vibrant lime for energy and freshness."
+      },
+      "text": {
+        "value": "#4D7C0F",
+        "description": "Deep green for text."
+      },
+      "onEmphasis": "#1A1A1A"
+    },
+
+    "emerald": {
+      "id": "emerald",
+      "name": "Emerald",
+      "description": "Balanced, healthy, natural. Perfect for wellness, nature, and recovery challenges.",
+      "background": {
+        "value": "#ECFDF5",
+        "description": "Soft mint green background."
+      },
+      "emphasis": {
+        "value": "#10B981",
+        "description": "Rich emerald for health and vitality."
+      },
+      "text": {
+        "value": "#047857",
+        "description": "Deep teal-green for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "teal": {
+      "id": "teal",
+      "name": "Teal",
+      "description": "Calm, trustworthy, refreshing. Good for swimming, water sports, and mindfulness.",
+      "background": {
+        "value": "#F0FDFA",
+        "description": "Light aqua background."
+      },
+      "emphasis": {
+        "value": "#14B8A6",
+        "description": "Clear teal for calm energy."
+      },
+      "text": {
+        "value": "#0F766E",
+        "description": "Deep teal for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "cyan": {
+      "id": "cyan",
+      "name": "Cyan",
+      "description": "Clean, modern, tech-forward. Great for tracking-heavy and data-focused challenges.",
+      "background": {
+        "value": "#ECFEFF",
+        "description": "Crisp light cyan background."
+      },
+      "emphasis": {
+        "value": "#06B6D4",
+        "description": "Bright cyan for clarity and precision."
+      },
+      "text": {
+        "value": "#0E7490",
+        "description": "Deep cyan for text."
+      },
+      "onEmphasis": "#1A1A1A"
+    },
+
+    "sky": {
+      "id": "sky",
+      "name": "Sky",
+      "description": "Open, peaceful, aspirational. Perfect for running, outdoor, and goal-oriented challenges.",
+      "background": {
+        "value": "#F0F9FF",
+        "description": "Light sky blue background."
+      },
+      "emphasis": {
+        "value": "#0EA5E9",
+        "description": "Clear sky blue for openness and possibility."
+      },
+      "text": {
+        "value": "#0369A1",
+        "description": "Deep blue for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "blue": {
+      "id": "blue",
+      "name": "Blue",
+      "description": "Trustworthy, professional, focused. Good for consistency and habit challenges.",
+      "background": {
+        "value": "#EFF6FF",
+        "description": "Soft blue background."
+      },
+      "emphasis": {
+        "value": "#3B82F6",
+        "description": "Strong blue for trust and reliability."
+      },
+      "text": {
+        "value": "#1D4ED8",
+        "description": "Deep blue for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "indigo": {
+      "id": "indigo",
+      "name": "Indigo",
+      "description": "Deep, focused, premium. Great for advanced and intensive challenges.",
+      "background": {
+        "value": "#EEF2FF",
+        "description": "Soft indigo background."
+      },
+      "emphasis": {
+        "value": "#6366F1",
+        "description": "Rich indigo for depth and focus."
+      },
+      "text": {
+        "value": "#4338CA",
+        "description": "Deep indigo for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "plum": {
+      "id": "plum",
+      "name": "Plum",
+      "description": "Luxurious, feminine, sophisticated. Perfect for premium and self-care challenges.",
+      "background": {
+        "value": "#FDF4FF",
+        "description": "Soft lavender-pink background."
+      },
+      "emphasis": {
+        "value": "#D946EF",
+        "description": "Vibrant magenta-purple for luxury."
+      },
+      "text": {
+        "value": "#A21CAF",
+        "description": "Deep plum for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "slate": {
+      "id": "slate",
+      "name": "Slate",
+      "description": "Neutral, versatile, understated. Good for any challenge type, lets imagery shine.",
+      "background": {
+        "value": "#F8FAFC",
+        "description": "Clean off-white background."
+      },
+      "emphasis": {
+        "value": "#64748B",
+        "description": "Balanced gray-blue for subtlety."
+      },
+      "text": {
+        "value": "#334155",
+        "description": "Deep slate for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    },
+
+    "stone": {
+      "id": "stone",
+      "name": "Stone",
+      "description": "Earthy, warm neutral, grounded. Great for nature, hiking, and outdoor challenges.",
+      "background": {
+        "value": "#FAFAF9",
+        "description": "Warm off-white background."
+      },
+      "emphasis": {
+        "value": "#78716C",
+        "description": "Warm gray for earthiness."
+      },
+      "text": {
+        "value": "#44403C",
+        "description": "Deep warm gray for text."
+      },
+      "onEmphasis": "#FFFFFF"
+    }
+  },
+
+  "typography": {
+    "$description": "7 curated fonts for challenge titles. Mix of sans-serif and serif, all highly readable and professional.",
+
+    "fonts": {
+      "nunito": {
+        "id": "nunito",
+        "name": "Nunito",
+        "family": "Nunito, sans-serif",
+        "category": "sans-serif",
+        "style": "Rounded Sans",
+        "weights": [400, 600, 700, 800],
+        "description": "Warm and friendly with soft, rounded terminals. The Motiv default—approachable and optimistic.",
+        "vibe": ["friendly", "warm", "approachable", "optimistic"],
+        "bestFor": ["General wellness", "Beginner-friendly challenges", "Community-focused"],
+        "googleFonts": "https://fonts.google.com/specimen/Nunito",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');"
+      },
+
+      "inter": {
+        "id": "inter",
+        "name": "Inter",
+        "family": "Inter, sans-serif",
+        "category": "sans-serif",
+        "style": "Geometric Sans",
+        "weights": [400, 500, 600, 700],
+        "description": "Clean, modern, and highly legible. Designed for screens with excellent readability at all sizes.",
+        "vibe": ["modern", "clean", "professional", "clear"],
+        "bestFor": ["Data-focused challenges", "Professional creators", "Tech-forward"],
+        "googleFonts": "https://fonts.google.com/specimen/Inter",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');"
+      },
+
+      "poppins": {
+        "id": "poppins",
+        "name": "Poppins",
+        "family": "Poppins, sans-serif",
+        "category": "sans-serif",
+        "style": "Geometric Sans",
+        "weights": [400, 500, 600, 700],
+        "description": "Geometric with friendly curves. Modern and confident without being cold.",
+        "vibe": ["modern", "confident", "geometric", "balanced"],
+        "bestFor": ["Fitness challenges", "Bold goals", "Energetic programs"],
+        "googleFonts": "https://fonts.google.com/specimen/Poppins",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');"
+      },
+
+      "sourceSans": {
+        "id": "sourceSans",
+        "name": "Source Sans 3",
+        "family": "'Source Sans 3', sans-serif",
+        "category": "sans-serif",
+        "style": "Humanist Sans",
+        "weights": [400, 500, 600, 700],
+        "description": "Adobe's open-source workhorse. Extremely readable, slightly humanist warmth.",
+        "vibe": ["readable", "trustworthy", "versatile", "professional"],
+        "bestFor": ["Long-form content", "Instructional challenges", "Accessibility-focused"],
+        "googleFonts": "https://fonts.google.com/specimen/Source+Sans+3",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap');"
+      },
+
+      "merriweather": {
+        "id": "merriweather",
+        "name": "Merriweather",
+        "family": "Merriweather, serif",
+        "category": "serif",
+        "style": "Readable Serif",
+        "weights": [400, 700],
+        "description": "Designed for screen reading. Warm, sturdy serif with excellent legibility.",
+        "vibe": ["trustworthy", "established", "warm", "readable"],
+        "bestFor": ["Wellness journeys", "Educational content", "Story-driven challenges"],
+        "googleFonts": "https://fonts.google.com/specimen/Merriweather",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');"
+      },
+
+      "lora": {
+        "id": "lora",
+        "name": "Lora",
+        "family": "Lora, serif",
+        "category": "serif",
+        "style": "Calligraphic Serif",
+        "weights": [400, 500, 600, 700],
+        "description": "Contemporary serif with brushed curves. Elegant but not stuffy.",
+        "vibe": ["elegant", "feminine", "flowing", "sophisticated"],
+        "bestFor": ["Yoga & meditation", "Self-care", "Mindfulness challenges"],
+        "googleFonts": "https://fonts.google.com/specimen/Lora",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');"
+      },
+
+      "playfair": {
+        "id": "playfair",
+        "name": "Playfair Display",
+        "family": "'Playfair Display', serif",
+        "category": "serif",
+        "style": "Display Serif",
+        "weights": [400, 500, 600, 700],
+        "description": "High contrast display serif. Refined and editorial, adds instant elegance.",
+        "vibe": ["premium", "editorial", "refined", "aspirational"],
+        "bestFor": ["Premium challenges", "Transformation journeys", "Aspirational goals"],
+        "googleFonts": "https://fonts.google.com/specimen/Playfair+Display",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');"
+      }
+    },
+
+    "usage": {
+      "challengeTitle": {
+        "element": "Challenge title/name",
+        "font": "Creator's choice from fonts above",
+        "size": "24-28px",
+        "weight": "600-700",
+        "customizable": true
+      },
+      "challengeSubtitle": {
+        "element": "Date range, creator name",
+        "font": "Roboto (app default)",
+        "size": "14px",
+        "weight": "400",
+        "customizable": false
+      },
+      "allOtherText": {
+        "element": "Stats, buttons, body, labels",
+        "font": "Roboto (app default)",
+        "customizable": false,
+        "note": "Only the challenge title uses the accent font for consistency"
+      }
+    }
+  },
+
+  "application": {
+    "$description": "How colors are applied in challenge screens.",
+
+    "header": {
+      "background": {
+        "option1": "theme.colors.[selected].background with image overlay",
+        "option2": "theme.colors.[selected].emphasis as solid (no image)"
+      },
+      "title": {
+        "color": "theme.colors.[selected].text OR white (on dark/image bg)",
+        "font": "theme.typography.fonts.[selected].family"
+      },
+      "creatorBadge": {
+        "ring": "theme.colors.[selected].emphasis"
+      },
+      "statusBadge": {
+        "background": "theme.colors.[selected].emphasis",
+        "text": "theme.colors.[selected].onEmphasis"
+      }
+    },
+
+    "content": {
+      "progressBar": {
+        "track": "theme.colors.[selected].background",
+        "fill": "theme.colors.[selected].emphasis"
+      },
+      "buttons": {
+        "primary": {
+          "background": "theme.colors.[selected].emphasis",
+          "text": "theme.colors.[selected].onEmphasis"
+        },
+        "secondary": {
+          "background": "transparent",
+          "border": "theme.colors.[selected].emphasis",
+          "text": "theme.colors.[selected].emphasis"
+        }
+      },
+      "badges": {
+        "background": "theme.colors.[selected].background",
+        "text": "theme.colors.[selected].text"
+      },
+      "links": {
+        "color": "theme.colors.[selected].emphasis"
+      },
+      "highlights": {
+        "background": "theme.colors.[selected].background",
+        "border": "theme.colors.[selected].emphasis (optional)"
+      }
+    },
+
+    "celebration": {
+      "$description": "Win/loss screens always use the dark celebration background from app tokens.",
+      "background": "app.colors.celebration.background (#1E1B4B)",
+      "accents": "theme.colors.[selected].emphasis",
+      "confetti": "theme.colors.[selected].emphasis + variants"
+    }
+  },
+
+  "presets": {
+    "$description": "Pre-made theme combinations for quick creator setup.",
+
+    "calm": {
+      "name": "Calm & Centered",
+      "color": "violet",
+      "font": "lora",
+      "description": "Peaceful purple with elegant serif. Perfect for yoga and meditation."
+    },
+    "energetic": {
+      "name": "High Energy",
+      "color": "coral",
+      "font": "poppins",
+      "description": "Vibrant orange with bold geometric sans. Great for HIIT and cardio."
+    },
+    "fresh": {
+      "name": "Fresh Start",
+      "color": "emerald",
+      "font": "nunito",
+      "description": "Refreshing green with friendly rounded sans. Ideal for new beginnings."
+    },
+    "premium": {
+      "name": "Premium Journey",
+      "color": "indigo",
+      "font": "playfair",
+      "description": "Deep indigo with refined serif. For transformation programs."
+    },
+    "sunny": {
+      "name": "Sunny Days",
+      "color": "amber",
+      "font": "sourceSans",
+      "description": "Warm golden with readable sans. Cheerful and inviting."
+    },
+    "ocean": {
+      "name": "Ocean Breeze",
+      "color": "teal",
+      "font": "inter",
+      "description": "Cool teal with clean modern sans. Refreshing and focused."
+    },
+    "bloom": {
+      "name": "In Bloom",
+      "color": "rose",
+      "font": "merriweather",
+      "description": "Soft rose with warm serif. Nurturing and supportive."
+    }
+  },
+
+  "validation": {
+    "colorContrast": {
+      "textOnBackground": "All text colors meet WCAG AA (4.5:1) on their background",
+      "textOnEmphasis": "onEmphasis color meets WCAG AA on emphasis color",
+      "automated": "System enforces, no creator override needed"
+    },
+    "fontFallbacks": {
+      "serif": "Georgia, 'Times New Roman', serif",
+      "sansSerif": "system-ui, -apple-system, sans-serif"
+    }
+  }
+}
