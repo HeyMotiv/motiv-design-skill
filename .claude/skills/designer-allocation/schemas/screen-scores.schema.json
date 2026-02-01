@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Screen Scores",
+  "description": "Complexity and priority scores for screens in the design system",
+  "type": "object",
+  "properties": {
+    "designSystem": {
+      "type": "string",
+      "description": "Path to the design system"
+    },
+    "scoringWeights": {
+      "type": "object",
+      "properties": {
+        "firstImpression": { "type": "number", "default": 0.25 },
+        "conversionImpact": { "type": "number", "default": 0.20 },
+        "emotionalPeak": { "type": "number", "default": 0.15 },
+        "patternSetting": { "type": "number", "default": 0.15 },
+        "complexity": { "type": "number", "default": 0.15 },
+        "trustCritical": { "type": "number", "default": 0.10 }
+      }
+    },
+    "screens": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/screenScore"
+      }
+    }
+  },
+  "required": ["designSystem", "screens"],
+  "$defs": {
+    "screenScore": {
+      "type": "object",
+      "properties": {
+        "screenId": {
+          "type": "string",
+          "description": "ID from the flow map (e.g., 'AUTH-001')"
+        },
+        "screenName": {
+          "type": "string",
+          "description": "Human-readable name"
+        },
+        "section": {
+          "type": "string",
+          "description": "Flow section (e.g., 'Authentication', 'Creator Onboarding')"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["P0", "P1", "P2", "P3"]
+        },
+        "scores": {
+          "type": "object",
+          "properties": {
+            "firstImpression": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Is this one of the first screens a user sees?"
+            },
+            "conversionImpact": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Does this screen drive key actions?"
+            },
+            "emotionalPeak": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Is this a celebration/disappointment moment?"
+            },
+            "patternSetting": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Will this establish reusable patterns?"
+            },
+            "complexity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "How many states, components, edge cases?"
+            },
+            "trustCritical": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Involves money, data, or permissions?"
+            }
+          }
+        },
+        "totalScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weighted total score"
+        },
+        "classification": {
+          "type": "string",
+          "enum": ["human-critical", "human-preferred", "ai-suitable"],
+          "description": "Recommended assignment type"
+        },
+        "stateCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of states this screen needs"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "first-impression",
+              "conversion-screen",
+              "emotional-peak",
+              "pattern-setter",
+              "trust-critical",
+              "brand-expression",
+              "novel-interaction",
+              "high-component-density",
+              "repetitive",
+              "state-variant"
+            ]
+          },
+          "description": "Special characteristics that affect assignment"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional context for allocation"
+        }
+      },
+      "required": ["screenId", "screenName", "priority", "scores", "totalScore", "classification"]
+    }
+  }
+}

@@ -1,0 +1,360 @@
+{
+  "$schema": "../../schemas/inventory.schema.json",
+  "product": "FitTrack",
+  "description": "A fitness tracking app that helps users set goals, track workouts, and compete with friends.",
+  "platform": "ios",
+  "generated": "2024-01-15T10:30:00Z",
+  "updated": "2024-01-15T14:22:00Z",
+  "sections": [
+    {
+      "id": "onboarding",
+      "name": "Onboarding",
+      "emoji": "🚀",
+      "description": "First-time user experience and authentication",
+      "order": 1
+    },
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "emoji": "🏠",
+      "description": "Main home screen and overview stats",
+      "order": 2
+    },
+    {
+      "id": "workouts",
+      "name": "Workouts",
+      "emoji": "💪",
+      "description": "Workout browsing, detail, and active workout experience",
+      "order": 3
+    },
+    {
+      "id": "social",
+      "name": "Social",
+      "emoji": "👥",
+      "description": "Friends, challenges, and leaderboards",
+      "order": 4
+    },
+    {
+      "id": "settings",
+      "name": "Settings",
+      "emoji": "⚙️",
+      "description": "User preferences and account management",
+      "order": 5
+    }
+  ],
+  "screens": [
+    {
+      "id": "onb-welcome",
+      "name": "Welcome",
+      "section": "onboarding",
+      "priority": "P0",
+      "classification": {
+        "type": "human-critical",
+        "confidence": "high",
+        "score": 0.92,
+        "reasons": [
+          "First screen - establishes brand identity",
+          "Sets emotional tone for entire app",
+          "Hero animation requires custom design"
+        ]
+      },
+      "scores": {
+        "first_impression": 1.0,
+        "conversion_impact": 0.9,
+        "emotional_peak": 0.8,
+        "pattern_setting": 0.9,
+        "complexity": 0.5,
+        "trust_critical": 0.2
+      },
+      "connections": {
+        "from": [],
+        "to": ["onb-signup", "onb-login"]
+      },
+      "assignment": {
+        "owner": "Sarah",
+        "status": "complete",
+        "due": "week-1"
+      },
+      "states": ["default"],
+      "components": ["hero-animation", "value-prop-list", "button-primary", "button-secondary"],
+      "notes": "Completed - establishes all brand patterns"
+    },
+    {
+      "id": "onb-signup",
+      "name": "Signup",
+      "section": "onboarding",
+      "priority": "P0",
+      "classification": {
+        "type": "human-critical",
+        "confidence": "high",
+        "score": 0.85,
+        "reasons": [
+          "Primary conversion screen",
+          "Social auth integration needs careful design",
+          "Error states critical for UX"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.8,
+        "conversion_impact": 1.0,
+        "emotional_peak": 0.4,
+        "pattern_setting": 0.8,
+        "complexity": 0.7,
+        "trust_critical": 0.6
+      },
+      "connections": {
+        "from": ["onb-welcome"],
+        "to": ["onb-profile"]
+      },
+      "assignment": {
+        "owner": "Sarah",
+        "status": "in_progress",
+        "due": "week-1"
+      },
+      "states": ["default", "loading", "error"],
+      "components": ["input-email", "input-password", "button-primary", "social-auth-button", "divider"],
+      "notes": "In progress - form patterns will be reused"
+    },
+    {
+      "id": "onb-login",
+      "name": "Login",
+      "section": "onboarding",
+      "priority": "P1",
+      "classification": {
+        "type": "human-preferred",
+        "confidence": "medium",
+        "score": 0.62,
+        "reasons": [
+          "Secondary entry point",
+          "Biometric auth needs consideration",
+          "Follows signup patterns"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.6,
+        "conversion_impact": 0.7,
+        "emotional_peak": 0.2,
+        "pattern_setting": 0.4,
+        "complexity": 0.6,
+        "trust_critical": 0.5
+      },
+      "connections": {
+        "from": ["onb-welcome"],
+        "to": ["dash-home", "onb-forgot"]
+      },
+      "assignment": {
+        "owner": null,
+        "status": "not_started",
+        "due": null
+      },
+      "states": ["default", "loading", "error", "biometric"],
+      "components": ["input-email", "input-password", "button-primary", "checkbox", "biometric-prompt"],
+      "notes": "Unassigned - can follow signup patterns"
+    },
+    {
+      "id": "onb-forgot",
+      "name": "Forgot Password",
+      "section": "onboarding",
+      "priority": "P2",
+      "classification": {
+        "type": "ai-suitable",
+        "confidence": "high",
+        "score": 0.35,
+        "reasons": [
+          "Simple single-input form",
+          "Follows established form patterns",
+          "Low emotional impact"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.1,
+        "conversion_impact": 0.2,
+        "emotional_peak": 0.1,
+        "pattern_setting": 0.1,
+        "complexity": 0.3,
+        "trust_critical": 0.4
+      },
+      "connections": {
+        "from": ["onb-login"],
+        "to": []
+      },
+      "assignment": {
+        "owner": null,
+        "status": "not_started",
+        "due": null
+      },
+      "states": ["default", "sending", "sent", "error"],
+      "components": ["input-email", "button-primary", "success-message"],
+      "ai_generation": {
+        "pattern_source": "onb-signup",
+        "patterns_to_extract": ["form-layout", "input-styling", "button-placement", "error-display"],
+        "human_review_needed": []
+      },
+      "notes": "AI can generate after Signup is complete"
+    },
+    {
+      "id": "dash-home",
+      "name": "Home",
+      "section": "dashboard",
+      "priority": "P0",
+      "classification": {
+        "type": "human-critical",
+        "confidence": "high",
+        "score": 0.88,
+        "reasons": [
+          "Main dashboard - seen every session",
+          "Establishes card patterns for entire app",
+          "Complex data visualization"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.9,
+        "conversion_impact": 0.7,
+        "emotional_peak": 0.6,
+        "pattern_setting": 1.0,
+        "complexity": 0.8,
+        "trust_critical": 0.3
+      },
+      "connections": {
+        "from": ["onb-goals", "onb-login"],
+        "to": ["dash-stats", "work-list", "social-friends", "set-main"]
+      },
+      "assignment": {
+        "owner": "Sarah",
+        "status": "not_started",
+        "due": "week-1"
+      },
+      "states": ["default", "loading"],
+      "components": ["header", "stat-card", "workout-card", "quick-actions", "tab-bar"],
+      "notes": "CRITICAL: Blocks 5 AI screens. Must complete first."
+    },
+    {
+      "id": "work-active",
+      "name": "Active Workout",
+      "section": "workouts",
+      "priority": "P0",
+      "classification": {
+        "type": "human-critical",
+        "confidence": "high",
+        "score": 0.90,
+        "reasons": [
+          "Core product experience",
+          "Complex interaction patterns",
+          "Timer and exercise controls"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.7,
+        "conversion_impact": 0.9,
+        "emotional_peak": 0.8,
+        "pattern_setting": 0.9,
+        "complexity": 1.0,
+        "trust_critical": 0.3
+      },
+      "connections": {
+        "from": ["work-detail"],
+        "to": ["work-rest", "work-demo", "work-complete"]
+      },
+      "assignment": {
+        "owner": "Mike",
+        "status": "not_started",
+        "due": "week-2"
+      },
+      "states": ["exercising", "resting", "paused", "completing"],
+      "components": ["exercise-display", "timer", "rep-counter", "progress-bar", "controls"],
+      "notes": "Complex - needs motion design for transitions"
+    },
+    {
+      "id": "work-complete",
+      "name": "Workout Complete",
+      "section": "workouts",
+      "priority": "P0",
+      "classification": {
+        "type": "human-critical",
+        "confidence": "high",
+        "score": 0.82,
+        "reasons": [
+          "Emotional peak - celebration moment",
+          "Share functionality",
+          "Custom animation/confetti"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.5,
+        "conversion_impact": 0.6,
+        "emotional_peak": 1.0,
+        "pattern_setting": 0.7,
+        "complexity": 0.6,
+        "trust_critical": 0.1
+      },
+      "connections": {
+        "from": ["work-active"],
+        "to": ["dash-home", "social-friends"]
+      },
+      "assignment": {
+        "owner": "Sarah",
+        "status": "not_started",
+        "due": "week-2"
+      },
+      "states": ["default", "sharing"],
+      "components": ["celebration-animation", "stat-summary", "share-button", "button-primary"],
+      "notes": "Celebration moment - needs custom confetti animation"
+    },
+    {
+      "id": "work-list",
+      "name": "Workout List",
+      "section": "workouts",
+      "priority": "P1",
+      "classification": {
+        "type": "ai-suitable",
+        "confidence": "high",
+        "score": 0.42,
+        "reasons": [
+          "Standard list pattern",
+          "Follows Home card layout",
+          "Repetitive structure"
+        ]
+      },
+      "scores": {
+        "first_impression": 0.3,
+        "conversion_impact": 0.5,
+        "emotional_peak": 0.1,
+        "pattern_setting": 0.3,
+        "complexity": 0.5,
+        "trust_critical": 0.1
+      },
+      "connections": {
+        "from": ["dash-home"],
+        "to": ["work-detail"]
+      },
+      "assignment": {
+        "owner": null,
+        "status": "not_started",
+        "due": null
+      },
+      "states": ["default", "loading", "empty", "filtering"],
+      "components": ["search-bar", "filter-tabs", "workout-card", "list"],
+      "ai_generation": {
+        "pattern_source": "dash-home",
+        "patterns_to_extract": ["card-layout", "list-structure", "tab-navigation"],
+        "human_review_needed": ["filter-interaction"]
+      },
+      "notes": "AI can generate after Home is complete"
+    }
+  ],
+  "statistics": {
+    "total": 25,
+    "by_classification": {
+      "human_critical": 7,
+      "human_preferred": 5,
+      "ai_suitable": 13
+    },
+    "by_status": {
+      "not_started": 22,
+      "in_progress": 2,
+      "in_review": 0,
+      "complete": 1
+    },
+    "assigned": 12
+  }
+}

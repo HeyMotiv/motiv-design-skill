@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "screen.schema.json",
+  "title": "Screen",
+  "description": "Schema for individual screen definitions in a product map",
+  "type": "object",
+  "required": ["id", "name", "section", "classification"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the screen (e.g., 'onb-welcome', 'core-home')",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable screen name",
+      "minLength": 1
+    },
+    "section": {
+      "type": "string",
+      "description": "Section this screen belongs to (e.g., 'onboarding', 'core', 'settings')"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3"],
+      "description": "Priority level: P0 (critical), P1 (high), P2 (medium), P3 (low)"
+    },
+    "classification": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["human-critical", "human-preferred", "ai-suitable"],
+          "description": "AI suitability classification"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "Confidence level in the classification"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Weighted total score (0-1)"
+        },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Reasons for this classification"
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "description": "Individual factor scores (0-1)",
+      "properties": {
+        "first_impression": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Is this one of the first screens users see? (weight: 25%)"
+        },
+        "conversion_impact": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Does this drive key actions? (weight: 20%)"
+        },
+        "emotional_peak": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Is this a celebration/disappointment moment? (weight: 15%)"
+        },
+        "pattern_setting": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Will this establish reusable patterns? (weight: 15%)"
+        },
+        "complexity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "How many states/components/edge cases? (weight: 15%)"
+        },
+        "trust_critical": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Involves money, data, or permissions? (weight: 10%)"
+        }
+      }
+    },
+    "connections": {
+      "type": "object",
+      "description": "Screen flow connections",
+      "properties": {
+        "from": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Screen IDs that navigate TO this screen"
+        },
+        "to": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Screen IDs this screen navigates TO"
+        }
+      }
+    },
+    "assignment": {
+      "type": "object",
+      "description": "Work assignment information",
+      "properties": {
+        "owner": {
+          "type": ["string", "null"],
+          "description": "Designer assigned to this screen (null if unassigned)"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["not_started", "in_progress", "in_review", "complete"],
+          "description": "Current status"
+        },
+        "due": {
+          "type": ["string", "null"],
+          "description": "Due date or week (e.g., 'week-1', '2024-01-15')"
+        }
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["default", "loading", "empty", "error", "success", "offline", "skeleton", "disabled"]
+      },
+      "description": "States this screen needs"
+    },
+    "components": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Component IDs used in this screen"
+    },
+    "ai_generation": {
+      "type": "object",
+      "description": "AI generation details (for AI-suitable screens)",
+      "properties": {
+        "pattern_source": {
+          "type": ["string", "null"],
+          "description": "Screen ID that provides the pattern for AI generation"
+        },
+        "patterns_to_extract": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific patterns to extract from source"
+        },
+        "human_review_needed": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Aspects that need human review after AI generation"
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about this screen"
+    }
+  }
+}

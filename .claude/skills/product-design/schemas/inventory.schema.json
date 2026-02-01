@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "inventory.schema.json",
+  "title": "Screen Inventory",
+  "description": "Schema for the complete screen inventory of a product",
+  "type": "object",
+  "required": ["product", "screens"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "product": {
+      "type": "string",
+      "description": "Product/app name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief product description"
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["ios", "android", "web", "all"],
+      "description": "Primary platform"
+    },
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this inventory was generated"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this inventory was last updated"
+    },
+    "sections": {
+      "type": "array",
+      "description": "Ordered list of sections in the product",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Section identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Section display name"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "Emoji icon for this section"
+          },
+          "description": {
+            "type": "string",
+            "description": "What this section contains"
+          },
+          "order": {
+            "type": "integer",
+            "description": "Display order"
+          }
+        }
+      }
+    },
+    "screens": {
+      "type": "array",
+      "description": "All screens in the product",
+      "items": {
+        "$ref": "screen.schema.json"
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Computed statistics about the inventory",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of screens"
+        },
+        "by_classification": {
+          "type": "object",
+          "properties": {
+            "human_critical": { "type": "integer" },
+            "human_preferred": { "type": "integer" },
+            "ai_suitable": { "type": "integer" }
+          }
+        },
+        "by_status": {
+          "type": "object",
+          "properties": {
+            "not_started": { "type": "integer" },
+            "in_progress": { "type": "integer" },
+            "in_review": { "type": "integer" },
+            "complete": { "type": "integer" }
+          }
+        },
+        "assigned": {
+          "type": "integer",
+          "description": "Number of screens with an owner"
+        }
+      }
+    }
+  }
+}

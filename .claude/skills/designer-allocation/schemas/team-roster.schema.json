@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Team Roster",
+  "description": "Designer team roster for allocation planning",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string",
+      "description": "Name of the project/design system"
+    },
+    "targetTimeline": {
+      "type": "object",
+      "properties": {
+        "weeks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Optional start date"
+        }
+      },
+      "required": ["weeks"]
+    },
+    "aiWorkflow": {
+      "type": "string",
+      "enum": ["incremental", "batch", "parallel"],
+      "description": "How AI integrates: incremental (after each screen), batch (at end), parallel (alongside)"
+    },
+    "designers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/designer"
+      },
+      "minItems": 1
+    }
+  },
+  "required": ["projectName", "targetTimeline", "aiWorkflow", "designers"],
+  "$defs": {
+    "designer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (e.g., 'designer-a')"
+        },
+        "name": {
+          "type": "string",
+          "description": "Designer's name"
+        },
+        "seniority": {
+          "type": "string",
+          "enum": ["senior", "mid", "junior"],
+          "description": "Experience level"
+        },
+        "strengths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "visual-design",
+              "interaction-design",
+              "component-systems",
+              "illustration",
+              "prototyping",
+              "motion"
+            ]
+          },
+          "description": "Primary skill areas"
+        },
+        "hoursPerWeek": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Available hours per week for this project"
+        },
+        "growthAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Areas they want to develop"
+        }
+      },
+      "required": ["id", "name", "seniority", "strengths", "hoursPerWeek"]
+    }
+  }
+}
