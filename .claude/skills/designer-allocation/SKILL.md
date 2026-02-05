@@ -83,7 +83,7 @@ Parse the screen inventory and extract:
 | **Emotional Peak** | 15% | Is this a celebration, disappointment, or achievement moment? |
 | **Pattern-Setting** | 15% | Will this establish a reusable pattern for other screens? |
 | **Complexity** | 15% | How many states, components, and edge cases? |
-| **Trust-Critical** | 10% | Does this involve money, data, or permissions? |
+| **Trust-Critical** | 10% | Does this involve money, data, or permissions?
 
 Classify screens into:
 - **Human-Critical**: Score > 70% or has first-impression/conversion/emotional-peak flags

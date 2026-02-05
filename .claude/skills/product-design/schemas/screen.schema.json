@@ -165,6 +165,98 @@
     "notes": {
       "type": "string",
       "description": "Additional notes about this screen"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Functional purpose of this screen - what does it help the user accomplish?"
+    },
+    "emotional_intent": {
+      "type": "string",
+      "description": "How should the user feel on this screen? (e.g., 'confident and ready to act', 'understood and seen', 'excited about possibilities')"
+    },
+    "entry_context": {
+      "type": "object",
+      "description": "Context about where users come from and their mental state",
+      "properties": {
+        "from_screens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Screen IDs users typically arrive from"
+        },
+        "user_mindset": {
+          "type": "string",
+          "description": "User's likely mental state when arriving (e.g., 'curious but skeptical', 'eager to start', 'frustrated by previous error')"
+        },
+        "expectations": {
+          "type": "string",
+          "description": "What the user expects to find or do on this screen"
+        }
+      }
+    },
+    "success_state": {
+      "type": "object",
+      "description": "What success looks like for this screen",
+      "properties": {
+        "user_outcome": {
+          "type": "string",
+          "description": "What the user has accomplished when they leave this screen"
+        },
+        "business_outcome": {
+          "type": "string",
+          "description": "What business goal this screen serves"
+        },
+        "next_action": {
+          "type": "string",
+          "description": "The intended next action for the user"
+        }
+      }
+    },
+    "potential_components": {
+      "type": "array",
+      "description": "Components the designer might need to create for this screen (to spark creativity, not prescriptive)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Component name (e.g., 'Profile Card', 'Progress Indicator')"
+          },
+          "purpose": {
+            "type": "string",
+            "description": "What this component accomplishes"
+          },
+          "inspiration": {
+            "type": "string",
+            "description": "Creative direction or reference (e.g., 'Could feel like a mirror reflecting back', 'Celebration moment')"
+          }
+        }
+      }
+    },
+    "content_requirements": {
+      "type": "object",
+      "description": "Content that needs to exist on this screen",
+      "properties": {
+        "headlines": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key headlines or titles needed"
+        },
+        "body_copy": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Body text sections needed"
+        },
+        "ctas": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Call-to-action buttons/links needed"
+        },
+        "data_points": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Dynamic data that will be displayed (e.g., 'follower count', 'earnings estimate')"
+        }
+      }
     }
   }
 }

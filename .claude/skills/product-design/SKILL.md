@@ -1,7 +1,7 @@
 ---
 name: product-design
-description: Your design partner for product planning. Helps explore flow options, make decisions, iterate cheaply, and execute with AI-assisted screen generation. Supports the full double-diamond from exploration to execution.
-argument-hint: [optional: 'explore' or 'plan' or 'screenshots' or 'iterate' or 'extract' or 'status']
+description: Your design partner for product planning. Helps explore flow options, make decisions, iterate cheaply, and execute with AI-assisted screen generation. Supports the full double-diamond from discovery to final prototype.
+argument-hint: [optional: 'discover' or 'explore' or 'plan' or 'generate' or 'review-content' or 'status']
 ---
 
 # Product Design Skill
@@ -31,30 +31,35 @@ Hey! I'm here to help you design your product.
 
 **Quick primer — I can help you at any stage:**
 
+💡 **Discover** — Capture ideas from conversations, docs, or transcripts
 🔍 **Explore** — Generate different approaches before committing
-🎯 **Decide** — Compare options side-by-side
-🔄 **Iterate** — Refine your direction (changes are cheap!)
-🏗️ **Execute** — Map screens and classify what humans vs AI should build
+🎯 **Plan** — Map out screens with emotional intent and AI classification
+🎨 **Generate** — Build interactive HTML prototypes
+📝 **Review** — Content review and final polish
 
-I'll suggest when exploring or iterating might help as we go.
+I'll guide you through the right workflow based on where you are.
 
 ---
 
 **Where are you right now?**
 
-A) I have a problem to solve (let's explore approaches)
-B) I have a direction, need to map it out
-C) I have screens/designs already
-D) I'm adding to something that exists
+A) I have rough ideas to capture (conversation, notes, transcript)
+B) I have a problem to solve (let's explore approaches)
+C) I have a direction, need to map it out
+D) I have screens/designs already
+E) I have a product map, ready to generate prototype
+F) I'm adding to something that exists
 
-→ Reply: A, B, C, or D
+→ Reply: A, B, C, D, E, or F
 ```
 
 Then branch appropriately:
-- **A** → Explore Workflow
-- **B** → Concept-First Workflow (plan)
-- **C** → Visual-First Workflow (screenshots)
-- **D** → Feature Workflow (or detect existing map and offer options)
+- **A** → Discover Workflow (capture freeform input)
+- **B** → Explore Workflow (generate options)
+- **C** → Concept-First Workflow (plan)
+- **D** → Visual-First Workflow (screenshots)
+- **E** → Generate Workflow (build prototype)
+- **F** → Feature Workflow (or detect existing map and offer options)
 
 ---
 
@@ -109,6 +114,104 @@ You: "This is pretty straightforward — I don't think we need to explore
 multiple approaches here. Let me just map it out for you."
 
 [Proceeds directly without over-complicating]
+```
+
+---
+
+## Workflow: Discover (Capture Freeform Input)
+
+Use this when the user has rough ideas in conversations, documents, or transcripts that need to be structured.
+
+### Step 1: Receive Input
+
+```
+I'll help you capture and structure your product ideas.
+
+**Please share your input:**
+- Paste a transcript from a conversation
+- Share a document or notes
+- Or just start describing your ideas
+
+I'll extract the key elements and organize them for you.
+```
+
+### Step 2: Extract & Structure
+
+After receiving input, extract:
+
+**Product Vision:**
+- What is this product?
+- Who is it for?
+- What problem does it solve?
+- What does success look like?
+
+**User Types:**
+- Primary user and their goals
+- Secondary users (if any)
+
+**Provisional Flows:**
+- Key user journeys mentioned
+- Entry points and triggers
+- High-level steps
+
+**Emotional Journey:**
+- First impression feelings
+- Core experience feelings
+- Success moment feelings
+
+**Constraints & Requirements:**
+- Technical constraints mentioned
+- Business requirements
+- Non-negotiables
+
+### Step 3: Clarify Gaps
+
+```
+I've extracted the following from your input:
+
+**Product:** [name/description]
+**Users:** [user types]
+**Key Flows:** [list of flows]
+
+**I have some questions to fill in gaps:**
+
+Q: [Question about unclear area]
+→ Reply: [answer]
+
+Q: [Question about missing information]
+→ Reply: [answer]
+```
+
+### Step 4: Generate Discovery Document
+
+Create `DISCOVERY.md` using the template in `templates/DISCOVERY.md`.
+
+Include:
+- Product vision
+- User types with goals and pain points
+- Provisional flows with triggers and steps
+- Emotional journey map
+- Constraints and requirements
+- Open questions for later
+- Raw notes and key quotes
+
+### Step 5: Transition to Planning
+
+```
+✅ Discovery captured in DISCOVERY.md
+
+**Summary:**
+- Product: [name]
+- [X] user types identified
+- [Y] provisional flows mapped
+- [Z] open questions to resolve
+
+**Ready for next step?**
+A) Proceed to planning (`/product-design plan`)
+B) Explore different approaches first (`/product-design explore`)
+C) I need to add more information
+
+→ Reply: A, B, or C
 ```
 
 ---
@@ -333,18 +436,69 @@ Score each screen and classify:
 - **Human-Preferred** (🟡): Complex interactions, needs judgment
 - **AI-Suitable** (🟢): States, variations, repetitive screens
 
-### Step 5: Generate Output
+### Step 5: Enrich Screen Specs
+
+For each screen, automatically add:
+
+**Emotional Intent** (AI-generated based on screen type):
+- First screens → "Welcomed, curious, ready to engage"
+- Conversion screens → "Confident, clear on value, ready to commit"
+- Success screens → "Accomplished, validated, motivated to continue"
+- Error screens → "Understood, not blamed, clear on next steps"
+
+**Potential Components** (AI-suggested based on purpose):
+- Suggest 2-4 components that might be needed
+- Include creative inspiration notes
+- Mark as suggestions, not requirements
+
+**States** (AI-generated for each screen):
+- `default` — Always included
+- `loading` — For screens with async data
+- `empty` — For screens that display lists/collections
+- `error` — For screens with data dependencies
+- `success` — For action confirmation screens
+
+### Step 6: Generate Output
 
 Create in `[product-name]/` directory:
 
 ```
 [product-name]/
 ├── PRODUCT-MAP.md                    # Mermaid visual map
+├── EDGE-CASES.md                     # Edge case checklist
 ├── screens/
-│   └── inventory.json                # Screen data
+│   └── inventory.json                # Screen data with enriched specs
 ├── exploration/                      # If explored options
 │   └── [problem]-options.md
 └── decisions.md                      # Decision log
+```
+
+### Step 7: Review Gate 🔵
+
+```
+✅ Product map generated!
+
+**Summary:**
+- [X] screens mapped
+- [Y] human-critical screens identified
+- [Z] AI-suitable screens identified
+- States auto-generated for all screens
+
+**Please review:**
+1. PRODUCT-MAP.md — Does the flow look right?
+2. Screen specs — Do emotional intents resonate?
+3. AI classifications — Do they feel appropriate?
+4. EDGE-CASES.md — Any edge cases missing?
+
+**This is an important checkpoint.** Changes after this point will require
+updating the map and potentially re-generating screens.
+
+Q: How does it look?
+   A) Approved — ready to proceed
+   B) Need changes — [describe what needs adjusting]
+   C) Want to explore alternatives for [section]
+
+→ Reply: A, B, or C
 ```
 
 ---
@@ -474,6 +628,205 @@ This feature touches several parts of the app. Want me to sketch
 
 ---
 
+## Workflow: Generate (Build HTML Prototype)
+
+Use this when the product map is complete and design system exists. This generates an interactive HTML prototype of the entire app.
+
+### Prerequisites
+
+Before generating, verify:
+- [ ] PRODUCT-MAP.md exists with all screens defined
+- [ ] Design system exists (`design-system/` or `*-design-system/`)
+- [ ] Human-critical screens have been designed (or decision made to generate all)
+
+### Step 1: Inventory Check
+
+```
+I'll generate an interactive HTML prototype for your app.
+
+**Checking prerequisites...**
+
+✅ Product Map: Found [X] screens in PRODUCT-MAP.md
+✅ Design System: Found at [path]
+⚠️ Human-designed screens: [Y] of [Z] human-critical screens complete
+
+**Screen breakdown:**
+- 🔴 Human-critical: [count] ([complete] complete)
+- 🟡 Human-preferred: [count] ([complete] complete)
+- 🟢 AI-suitable: [count]
+
+Q: How do you want to proceed?
+   A) Generate all screens (AI will handle human-critical too)
+   B) Generate only AI-suitable screens (skip incomplete human-critical)
+   C) Let me complete the human screens first
+
+→ Reply: A, B, or C
+```
+
+### Step 2: Generate Screens
+
+For each screen, invoke the `frontend-design` skill with context:
+
+**Context provided to frontend-design:**
+```
+SCREEN: [screen-id]
+NAME: [screen-name]
+SECTION: [section-name]
+
+DESIGN SYSTEM:
+[Include tokens from design-system/tokens/]
+[Include component specs from design-system/components/]
+
+SCREEN SPEC:
+- Purpose: [from screen.purpose]
+- Emotional Intent: [from screen.emotional_intent]
+- Entry Context: [from screen.entry_context]
+- Components: [from screen.potential_components]
+- States: [from screen.states]
+
+SUCCESS STATE:
+- User Outcome: [from screen.success_state.user_outcome]
+- Next Action: [from screen.success_state.next_action]
+
+CONTENT REQUIREMENTS:
+[from screen.content_requirements]
+```
+
+### Step 3: Assemble Prototype
+
+Create prototype structure:
+
+```
+prototype/
+├── index.html              # Entry point with navigation
+├── screens/
+│   ├── [screen-id].html    # Individual screen files
+│   └── ...
+├── css/
+│   ├── tokens.css          # Design system as CSS variables
+│   ├── components.css      # Component styles
+│   └── main.css            # Global styles
+├── js/
+│   ├── navigation.js       # Screen transitions, back button
+│   └── states.js           # Toggle loading/empty/error states
+└── data/
+    └── stub-data.json      # Stubbed data for dynamic content
+```
+
+### Step 4: Final Review Gate 🔵
+
+```
+✅ Prototype generated!
+
+**Summary:**
+- [X] screens generated
+- [Y] states per screen (default, loading, empty, error)
+- Navigation: Working (OS back behavior)
+- Data: Stubbed
+
+**To review:**
+Open prototype/index.html in your browser
+
+**Quality checklist:**
+- [ ] Design system applied consistently
+- [ ] Emotional intent feels right per screen
+- [ ] Navigation flow matches product map
+- [ ] States look appropriate
+- [ ] Content placeholders are clear
+
+Q: How does it look?
+   A) Approved — proceed to content review
+   B) Issues found — [describe what needs fixing]
+   C) Need to iterate on specific screens
+
+→ Reply: A, B, or C
+```
+
+---
+
+## Workflow: Review-Content (Content Review & Polish)
+
+Use this after the prototype is generated to review and finalize all copy.
+
+### Step 1: Extract Content Inventory
+
+```
+I'll help you review all content in the prototype.
+
+**Extracting content from [X] screens...**
+
+Found:
+- [N] headlines
+- [M] body text sections
+- [P] CTAs / buttons
+- [Q] labels
+- [R] placeholder data points
+```
+
+### Step 2: Present Content by Section
+
+```
+## Content Review: Onboarding
+
+### Screen: Welcome (onb-welcome)
+
+| Element | Current Content | Status |
+|---------|----------------|--------|
+| Headline | "Welcome to [App]" | ⚠️ Placeholder |
+| Subhead | "Your tagline here" | ⚠️ Placeholder |
+| CTA Primary | "Get Started" | ✅ OK |
+| CTA Secondary | "Log In" | ✅ OK |
+
+**Suggestions:**
+- Headline could be more specific to value prop
+- Subhead needs brand voice
+
+→ Reply: Edit [element] to "[new text]" / Approve section / Skip
+```
+
+### Step 3: Flag Issues
+
+Automatically flag:
+- `⚠️ Placeholder` — Lorem ipsum or bracketed text
+- `⚠️ Variable length` — Content that might overflow
+- `⚠️ Brand voice` — Generic text that needs personality
+- `⚠️ Accessibility` — Labels missing, aria-labels needed
+
+### Step 4: Batch Update
+
+```
+**Content updates to apply:**
+
+1. onb-welcome / Headline: "Welcome to [App]" → "[New headline]"
+2. onb-welcome / Subhead: "Your tagline here" → "[New subhead]"
+3. core-home / Empty state: "No items" → "[Friendly empty message]"
+
+Apply all [X] changes?
+→ Reply: Y / N / Edit #[number]
+```
+
+### Step 5: Generate Content Inventory
+
+Create `CONTENT-INVENTORY.md`:
+
+```markdown
+# Content Inventory
+
+## Statistics
+- Total content elements: [N]
+- Reviewed: [X]
+- Approved: [Y]
+- Needs work: [Z]
+
+## By Screen
+[Table of all content with status]
+
+## Style Notes
+[Any patterns or voice guidelines discovered]
+```
+
+---
+
 ## Subcommands (Shortcuts)
 
 For users who know what they want:
@@ -481,11 +834,14 @@ For users who know what they want:
 | Command | Purpose |
 |---------|---------|
 | `/product-design` | Start with primer, ask where you are |
+| `/product-design discover` | Capture freeform input (conversations, docs, transcripts) |
 | `/product-design explore` | Jump to exploration (generate options) |
 | `/product-design plan` | Jump to concept-first (map from direction) |
 | `/product-design screenshots` | Jump to visual-first (extract from designs) |
 | `/product-design iterate` | Jump to iteration (refine current flow) |
 | `/product-design extract` | Pull design system from completed screens |
+| `/product-design generate` | Build interactive HTML prototype |
+| `/product-design review-content` | Review and finalize all copy |
 | `/product-design feature "..."` | Add feature to existing product |
 | `/product-design status` | Show progress overview |
 
