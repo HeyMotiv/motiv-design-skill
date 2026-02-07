@@ -473,6 +473,296 @@
             margin-top: 1rem;
         }
 
+        /* Artifact toggle */
+        .artifact-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-left: auto;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 0.25rem;
+            font-size: 0.75rem;
+        }
+
+        .artifact-toggle button {
+            background: transparent;
+            border: none;
+            color: var(--color-text-muted);
+            padding: 0.375rem 0.625rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            transition: all 0.15s;
+        }
+
+        .artifact-toggle button.active {
+            background: var(--color-surface-elevated);
+            color: var(--color-text);
+        }
+
+        .artifact-toggle button:hover:not(.active) {
+            color: var(--color-text);
+        }
+
+        /* Rendered artifact view */
+        .artifact-rendered {
+            padding: 1.5rem;
+        }
+
+        .artifact-raw {
+            display: none;
+        }
+
+        .artifact-example.show-raw .artifact-rendered {
+            display: none;
+        }
+
+        .artifact-example.show-raw .artifact-raw {
+            display: block;
+        }
+
+        /* Discovery doc rendered */
+        .discovery-rendered h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .discovery-rendered h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .discovery-rendered p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .discovery-rendered ul {
+            list-style: none;
+            margin-bottom: 0.75rem;
+        }
+
+        .discovery-rendered li {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .discovery-rendered li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* Screen definition rendered */
+        .screen-rendered {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .screen-rendered-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .screen-rendered-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .screen-rendered-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .screen-rendered-id {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin-left: auto;
+        }
+
+        .screen-rendered-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .screen-rendered-field {
+            background: var(--color-bg);
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .screen-rendered-field.full {
+            grid-column: span 2;
+        }
+
+        .screen-rendered-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .screen-rendered-value {
+            font-size: 0.875rem;
+            color: var(--color-text);
+        }
+
+        /* Color tokens rendered */
+        .token-rendered {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .token-card {
+            background: var(--color-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .token-swatch {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        .token-info h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .token-info code {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+        }
+
+        .token-info p {
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+
+        .token-states {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .token-state {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .token-state-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            border: 1px solid var(--color-border);
+        }
+
+        /* Deviation report rendered */
+        .deviation-rendered table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8125rem;
+            margin-bottom: 1rem;
+        }
+
+        .deviation-rendered th {
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+        }
+
+        .deviation-rendered td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+        }
+
+        .deviation-rendered td code {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        .impact-high {
+            color: #FCA5A5;
+        }
+
+        .impact-medium {
+            color: #FCD34D;
+        }
+
+        .deviation-actions {
+            background: var(--color-bg);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .deviation-actions h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .deviation-action {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            padding: 0.375rem 0;
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+        }
+
+        .deviation-action span:first-child {
+            flex-shrink: 0;
+        }
+
         /* Other artifacts list */
         .other-artifacts-list {
             display: flex;
@@ -855,14 +1145,36 @@
                 Here's what the generated artifacts actually look like, so you know what to expect.
             </p>
 
-            <div class="artifact-example">
+            <div class="artifact-example" id="artifact-discovery">
                 <div class="artifact-example-header">
                     <span>📋</span>
                     <h4>Discovery Document</h4>
-                    <code>DISCOVERY.md</code>
+                    <div class="artifact-toggle">
+                        <button class="active" onclick="showRendered('discovery')">Rendered</button>
+                        <button onclick="showRaw('discovery')">Raw</button>
+                    </div>
                 </div>
                 <div class="artifact-example-content">
-                    <pre>## Product Vision
+                    <div class="artifact-rendered discovery-rendered">
+                        <h2>Product Vision</h2>
+                        <h3>What is this?</h3>
+                        <p>A fitness challenge app that lets users create and join month-long challenges with friends.</p>
+                        <h3>Who is it for?</h3>
+                        <ul>
+                            <li>Primary: Challenge participants (ages 25-45)</li>
+                            <li>Secondary: Challenge creators (fitness influencers)</li>
+                        </ul>
+                        <h3>What problem does it solve?</h3>
+                        <p>Solo fitness goals lack accountability. Users start strong but lose motivation. Challenges with friends create social pressure to stay consistent.</p>
+                        <h3>What does success look like?</h3>
+                        <ul>
+                            <li>70% challenge completion rate</li>
+                            <li>Users create 2+ challenges after first</li>
+                            <li>Daily active users engage with friend activity</li>
+                        </ul>
+                    </div>
+                    <div class="artifact-raw">
+                        <pre>## Product Vision
 
 ### What is this?
 A fitness challenge app that lets users create and join
@@ -881,18 +1193,52 @@ pressure to stay consistent.
 - 70% challenge completion rate
 - Users create 2+ challenges after first
 - Daily active users engage with friend activity</pre>
+                    </div>
                     <p>The discovery doc captures the essential product context that guides all downstream decisions.</p>
                 </div>
             </div>
 
-            <div class="artifact-example">
+            <div class="artifact-example" id="artifact-screen">
                 <div class="artifact-example-header">
                     <span>🗂️</span>
                     <h4>Screen Definition</h4>
-                    <code>screens/inventory.json</code>
+                    <div class="artifact-toggle">
+                        <button class="active" onclick="showRendered('screen')">Rendered</button>
+                        <button onclick="showRaw('screen')">Raw</button>
+                    </div>
                 </div>
                 <div class="artifact-example-content">
-                    <pre>{
+                    <div class="artifact-rendered screen-rendered">
+                        <div class="screen-rendered-header">
+                            <span class="screen-rendered-badge">Human-Critical</span>
+                            <span class="screen-rendered-name">Dashboard</span>
+                            <code class="screen-rendered-id">core-dashboard</code>
+                        </div>
+                        <div class="screen-rendered-grid">
+                            <div class="screen-rendered-field full">
+                                <div class="screen-rendered-label">Purpose</div>
+                                <div class="screen-rendered-value">Central hub showing active challenges and progress</div>
+                            </div>
+                            <div class="screen-rendered-field">
+                                <div class="screen-rendered-label">Emotional Intent</div>
+                                <div class="screen-rendered-value">Motivated and in control</div>
+                            </div>
+                            <div class="screen-rendered-field">
+                                <div class="screen-rendered-label">Classification Score</div>
+                                <div class="screen-rendered-value">0.89 (high confidence)</div>
+                            </div>
+                            <div class="screen-rendered-field">
+                                <div class="screen-rendered-label">Entry From</div>
+                                <div class="screen-rendered-value">auth-login, onb-complete</div>
+                            </div>
+                            <div class="screen-rendered-field">
+                                <div class="screen-rendered-label">User Mindset</div>
+                                <div class="screen-rendered-value">Ready to engage with daily activities</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artifact-raw">
+                        <pre>{
   "id": "core-dashboard",
   "name": "Dashboard",
   "section": "core",
@@ -909,18 +1255,55 @@ pressure to stay consistent.
     "user_mindset": "Ready to engage with daily activities"
   }
 }</pre>
+                    </div>
                     <p>Each screen has structured data that guides both human designers and AI generation.</p>
                 </div>
             </div>
 
-            <div class="artifact-example">
+            <div class="artifact-example" id="artifact-colors">
                 <div class="artifact-example-header">
                     <span>🎨</span>
                     <h4>Color Tokens</h4>
-                    <code>tokens/colors.json</code>
+                    <div class="artifact-toggle">
+                        <button class="active" onclick="showRendered('colors')">Rendered</button>
+                        <button onclick="showRaw('colors')">Raw</button>
+                    </div>
                 </div>
                 <div class="artifact-example-content">
-                    <pre>{
+                    <div class="artifact-rendered token-rendered">
+                        <div class="token-card">
+                            <div class="token-swatch" style="background: #2563EB;"></div>
+                            <div class="token-info">
+                                <h4>primary</h4>
+                                <code>#2563EB</code>
+                                <p>Primary brand color for main actions</p>
+                                <div class="token-states">
+                                    <div class="token-state">
+                                        <div class="token-state-dot" style="background: #1D4ED8;"></div>
+                                        hover
+                                    </div>
+                                    <div class="token-state">
+                                        <div class="token-state-dot" style="background: #1E40AF;"></div>
+                                        pressed
+                                    </div>
+                                    <div class="token-state">
+                                        <div class="token-state-dot" style="background: #93C5FD;"></div>
+                                        disabled
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-swatch" style="background: #1F2937;"></div>
+                            <div class="token-info">
+                                <h4>surface-elevated</h4>
+                                <code>#1F2937</code>
+                                <p>Elevated surface for cards and modals</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artifact-raw">
+                        <pre>{
   "primary": {
     "value": "#2563EB",
     "description": "Primary brand color for main actions",
@@ -937,18 +1320,61 @@ pressure to stay consistent.
     "usage": ["card-bg", "modal-bg", "dropdown-bg"]
   }
 }</pre>
+                    </div>
                     <p>Tokens include not just values but semantic meaning, usage hints, and state variants.</p>
                 </div>
             </div>
 
-            <div class="artifact-example">
+            <div class="artifact-example" id="artifact-deviation">
                 <div class="artifact-example-header">
                     <span>⚠️</span>
                     <h4>Deviation Report</h4>
-                    <code>DEVIATION-REPORT.md</code>
+                    <div class="artifact-toggle">
+                        <button class="active" onclick="showRendered('deviation')">Rendered</button>
+                        <button onclick="showRaw('deviation')">Raw</button>
+                    </div>
                 </div>
                 <div class="artifact-example-content">
-                    <pre>## Spacing Deviations
+                    <div class="artifact-rendered deviation-rendered">
+                        <h3 style="margin-top: 0;">Spacing Deviations</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Expected</th>
+                                    <th>Actual</th>
+                                    <th>Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Settings/profile-card</code></td>
+                                    <td>24px</td>
+                                    <td>20px</td>
+                                    <td class="impact-medium">Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Forms/input-spacing</code></td>
+                                    <td>16px</td>
+                                    <td>12px</td>
+                                    <td class="impact-high">High</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="deviation-actions">
+                            <h4>Recommended Actions</h4>
+                            <div class="deviation-action">
+                                <span>✅</span>
+                                <span>Normalize profile-card to 24px (matches system)</span>
+                            </div>
+                            <div class="deviation-action">
+                                <span>⚠️</span>
+                                <span>Review input-spacing—12px may be intentional for dense forms</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artifact-raw">
+                        <pre>## Spacing Deviations
 
 | Location | Expected | Actual | Impact |
 |----------|----------|--------|--------|
@@ -962,6 +1388,7 @@ pressure to stay consistent.
 ## Color Near-Matches
 - #2462EB used in Challenge/stats (expected: #2563EB)
   → Likely color picker error, normalize to token</pre>
+                    </div>
                     <p>Deviation reports surface inconsistencies with clear recommended actions.</p>
                 </div>
             </div>
@@ -1099,6 +1526,22 @@ pressure to stay consistent.
             });
             // Toggle this item
             item.classList.toggle('expanded');
+        }
+
+        function showRendered(artifactId) {
+            const artifact = document.getElementById('artifact-' + artifactId);
+            artifact.classList.remove('show-raw');
+            const buttons = artifact.querySelectorAll('.artifact-toggle button');
+            buttons[0].classList.add('active');
+            buttons[1].classList.remove('active');
+        }
+
+        function showRaw(artifactId) {
+            const artifact = document.getElementById('artifact-' + artifactId);
+            artifact.classList.add('show-raw');
+            const buttons = artifact.querySelectorAll('.artifact-toggle button');
+            buttons[0].classList.remove('active');
+            buttons[1].classList.add('active');
         }
 
         // Simple scroll-triggered animations
