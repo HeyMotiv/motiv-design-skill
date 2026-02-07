@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0">
+    <title>Personality Results — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+
+            /* Gradients - 3 distinct colors: cream → lime → mint */
+            --gradient-top: #FAFFE7;
+            --gradient-mid: #E3FFBD;
+            --gradient-bottom: #DCFDE3;
+
+            /* Shadow color - saturated green */
+            --shadow-green: rgba(74, 222, 128, 0.45);
+            --shadow-green-soft: rgba(74, 222, 128, 0.2);
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+
+            /* Radii */
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===========================================
+           3-COLOR GRADIENT BACKGROUND
+           Pattern: Distinct color bands
+           Tokens: warm cream → mint → green
+           =========================================== */
+
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                var(--gradient-top) 0%,
+                var(--gradient-top) 20%,
+                var(--gradient-mid) 55%,
+                var(--gradient-bottom) 100%
+            );
+        }
+
+        /* ===========================================
+           CONTENT LAYOUT
+           =========================================== */
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-xl);
+            padding-top: 80px;
+        }
+
+        /* ===========================================
+           OVERLINE LABEL
+           Pattern: Section marker
+           Tokens: typography.overline
+           =========================================== */
+
+        .overline {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* ===========================================
+           DISPLAY HEADLINE
+           Pattern: Big reveal moment
+           Tokens: typography.display-medium, font.display
+           =========================================== */
+
+        .headline {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ===========================================
+           TRAIT CARD
+           Pattern: Main result card with green shadow
+           Tokens: green-tinted shadow
+           =========================================== */
+
+        .trait-card {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: 0 16px 48px var(--shadow-green),
+                        0 6px 16px var(--shadow-green-soft);
+            margin-bottom: var(--space-xl);
+        }
+
+        .trait-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #D1FAE5 0%, #86EFAC 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: var(--space-md);
+        }
+
+        .trait-name {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .trait-tagline {
+            font-size: 15px;
+            color: var(--color-brand-secondary);
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        .trait-description {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===========================================
+           TRAITS LIST
+           Pattern: Secondary attributes
+           =========================================== */
+
+        .traits-section {
+            margin-bottom: var(--space-2xl);
+        }
+
+        .traits-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .traits-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .trait-chip {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-full);
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            box-shadow: 0 4px 12px var(--shadow-green-soft);
+        }
+
+        /* ===========================================
+           CTA BUTTON
+           =========================================== */
+
+        .cta-section {
+            margin-top: auto;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="gradient-bg"></div>
+
+        <div class="content">
+            <p class="overline">Your Motivation Style</p>
+            <h1 class="headline">Why people listen to you</h1>
+
+            <div class="trait-card">
+                <div class="trait-icon">🎯</div>
+                <h2 class="trait-name">The Connector</h2>
+                <p class="trait-tagline">You bring people together</p>
+                <p class="trait-description">
+                    You have a natural ability to make others feel seen and supported.
+                    Your energy is contagious, and people trust you to show up—for them
+                    and for yourself.
+                </p>
+            </div>
+
+            <div class="traits-section">
+                <p class="traits-label">Your strengths</p>
+                <div class="traits-list">
+                    <span class="trait-chip">Community Builder</span>
+                    <span class="trait-chip">Accountability</span>
+                    <span class="trait-chip">Encourager</span>
+                    <span class="trait-chip">Consistent</span>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button class="btn-primary">
+                    Continue
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

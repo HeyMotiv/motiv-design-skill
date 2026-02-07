@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0">
+    <title>Notification Settings — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-brand-secondary-light: #8B5CF6;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+            --color-border-subtle: #F3F4F6;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-frame {
+            width: 390px;
+            min-height: 844px;
+            background: var(--color-bg-primary);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        /* ===========================================
+           NAVIGATION BAR
+           =========================================== */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            padding-top: 60px;
+            background: var(--color-bg-primary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .nav-back {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-back:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .nav-title {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 40px;
+        }
+
+        /* ===========================================
+           SETTINGS CONTENT
+           =========================================== */
+
+        .settings-content {
+            padding: var(--space-md);
+        }
+
+        .settings-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-xs) var(--space-md);
+            margin-bottom: var(--space-xs);
+        }
+
+        .section-description {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            padding: 0 var(--space-md);
+            margin-bottom: var(--space-sm);
+            line-height: 1.5;
+        }
+
+        .settings-group {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-default);
+            overflow: hidden;
+        }
+
+        /* ===========================================
+           TOGGLE ITEM
+           Pattern: Label + description + toggle
+           Tokens: spacing.md, typography
+           =========================================== */
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            gap: var(--space-sm);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-text {
+            flex: 1;
+        }
+
+        .toggle-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .toggle-sublabel {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+        }
+
+        /* ===========================================
+           TOGGLE SWITCH
+           Pattern: iOS-style toggle
+           Tokens: colors.brand.secondary
+           =========================================== */
+
+        .toggle-switch {
+            position: relative;
+            width: 51px;
+            height: 31px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-full);
+            transition: 0.2s ease;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 27px;
+            width: 27px;
+            left: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--color-brand-secondary);
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* ===========================================
+           INFO CARD
+           Pattern: Highlighted info box
+           Tokens: colors.brand.secondary.subtle
+           =========================================== */
+
+        .info-card {
+            background: #F5F3FF;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .info-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .info-text strong {
+            color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <nav class="nav-bar">
+            <button class="nav-back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <h1 class="nav-title">Notifications</h1>
+        </nav>
+
+        <div class="settings-content">
+            <!-- Challenge Updates -->
+            <div class="settings-section">
+                <div class="section-label">Challenge Updates</div>
+                <div class="section-description">
+                    Stay on top of your active challenges and never miss an important moment.
+                </div>
+                <div class="settings-group">
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Daily Reminders</div>
+                            <div class="toggle-sublabel">Get reminded to log your activity</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Progress Updates</div>
+                            <div class="toggle-sublabel">Weekly summaries of your progress</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Challenge Ending Soon</div>
+                            <div class="toggle-sublabel">Alerts when challenges are about to end</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community -->
+            <div class="settings-section">
+                <div class="section-label">Community</div>
+                <div class="settings-group">
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">High Fives</div>
+                            <div class="toggle-sublabel">When someone gives you a high five</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Comments</div>
+                            <div class="toggle-sublabel">When someone comments on your activity</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Creator Messages</div>
+                            <div class="toggle-sublabel">Messages from challenge creators</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketing -->
+            <div class="settings-section">
+                <div class="section-label">From Motiv</div>
+                <div class="settings-group">
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">New Challenges</div>
+                            <div class="toggle-sublabel">Recommended challenges based on your interests</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="toggle-item">
+                        <div class="toggle-text">
+                            <div class="toggle-label">Tips & Motivation</div>
+                            <div class="toggle-sublabel">Occasional tips to help you stay on track</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <span class="info-icon">💡</span>
+                <div class="info-text">
+                    <strong>Tip:</strong> Keep challenge updates on to stay motivated. People who enable reminders are 3x more likely to complete their challenges!
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

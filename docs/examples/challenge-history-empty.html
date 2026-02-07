@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0">
+    <title>Challenge History (Empty) — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+            --space-4xl: 64px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-frame {
+            width: 390px;
+            min-height: 844px;
+            background: var(--color-bg-primary);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===========================================
+           NAVIGATION BAR
+           =========================================== */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            padding-top: 60px;
+            background: var(--color-bg-primary);
+            border-bottom: 1px solid var(--color-bg-tertiary);
+        }
+
+        .nav-back {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-back:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .nav-title {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 40px;
+        }
+
+        /* ===========================================
+           EMPTY STATE
+           Pattern: Centered illustration + text + CTA
+           Tokens: spacing.3xl, typography.heading-2
+           =========================================== */
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-2xl);
+            text-align: center;
+        }
+
+        .empty-illustration {
+            width: 200px;
+            height: 200px;
+            margin-bottom: var(--space-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Abstract illustration using CSS */
+        .empty-illustration::before {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 50%, #DDD6FE 100%);
+            border-radius: 50%;
+        }
+
+        .empty-illustration::after {
+            content: '📋';
+            font-size: 64px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .empty-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .empty-description {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-2xl);
+            max-width: 280px;
+            line-height: 1.6;
+        }
+
+        /* ===========================================
+           PRIMARY BUTTON
+           Pattern: Pill button with arrow
+           Tokens: colors.brand.primary, spacing.sm/xl
+           =========================================== */
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            min-height: 48px;
+        }
+
+        .btn-primary:hover {
+            background: #2D2D2D;
+        }
+
+        .btn-primary:active {
+            background: #000000;
+            transform: scale(0.97);
+        }
+
+        .btn-primary .arrow {
+            transition: transform 0.15s ease;
+        }
+
+        .btn-primary:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* ===========================================
+           SECONDARY LINK
+           Pattern: Ghost button / text link
+           Tokens: colors.brand.secondary
+           =========================================== */
+
+        .link-secondary {
+            display: inline-block;
+            margin-top: var(--space-md);
+            color: var(--color-brand-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            transition: background 0.15s ease;
+        }
+
+        .link-secondary:hover {
+            background: #F5F3FF;
+        }
+
+        /* ===========================================
+           DECORATIVE ELEMENTS
+           =========================================== */
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .shape-1 {
+            width: 20px;
+            height: 20px;
+            background: #DDD6FE;
+            top: 20%;
+            left: 15%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 12px;
+            height: 12px;
+            background: #C4B5FD;
+            top: 30%;
+            right: 20%;
+            animation: float 5s ease-in-out infinite 1s;
+        }
+
+        .shape-3 {
+            width: 16px;
+            height: 16px;
+            background: #EDE9FE;
+            bottom: 35%;
+            left: 25%;
+            animation: float 7s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <nav class="nav-bar">
+            <button class="nav-back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <h1 class="nav-title">Challenge History</h1>
+        </nav>
+
+        <div class="empty-state">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+
+            <div class="empty-illustration"></div>
+
+            <h2 class="empty-title">No challenges yet</h2>
+            <p class="empty-description">
+                Your completed challenges will show up here. Ready to start your first one?
+            </p>
+
+            <button class="btn-primary">
+                Discover Challenges
+                <span class="arrow">→</span>
+            </button>
+
+            <a href="#" class="link-secondary">Learn how challenges work</a>
+        </div>
+    </div>
+</body>
+</html>

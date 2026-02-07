@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0">
+    <title>Settings — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           These are extracted from human-designed screens
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-border-default: #E5E7EB;
+            --color-border-subtle: #F3F4F6;
+            --color-semantic-error: #EF4444;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* ===========================================
+           BASE STYLES
+           =========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-frame {
+            width: 390px;
+            min-height: 844px;
+            background: var(--color-bg-primary);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        /* ===========================================
+           NAVIGATION BAR
+           Pattern: Standard iOS nav bar
+           Tokens: spacing.md, typography.heading-1
+           =========================================== */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            padding-top: 60px; /* Safe area */
+            background: var(--color-bg-primary);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .nav-back {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-back:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .nav-title {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 40px; /* Balance the back button */
+        }
+
+        /* ===========================================
+           SETTINGS LIST
+           Pattern: Grouped list with sections
+           Tokens: spacing.md, spacing.xl, colors.border
+           =========================================== */
+
+        .settings-content {
+            padding: var(--space-md);
+            padding-bottom: 100px;
+        }
+
+        .settings-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: var(--space-xs) var(--space-md);
+            margin-bottom: var(--space-xs);
+        }
+
+        .settings-group {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-default);
+            overflow: hidden;
+        }
+
+        /* ===========================================
+           SETTINGS ITEM
+           Pattern: List item with icon, text, chevron
+           Tokens: spacing.md, spacing.xs, typography.label
+           =========================================== */
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            gap: var(--space-sm);
+            cursor: pointer;
+            transition: background 0.15s ease;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-item:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .settings-item:active {
+            background: var(--color-border-subtle);
+        }
+
+        .settings-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+        }
+
+        .settings-text {
+            flex: 1;
+        }
+
+        .settings-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .settings-sublabel {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+        }
+
+        .settings-chevron {
+            color: var(--color-text-tertiary);
+            font-size: 18px;
+        }
+
+        .settings-value {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+        }
+
+        /* ===========================================
+           DESTRUCTIVE ITEM
+           Pattern: Red text for dangerous actions
+           Tokens: colors.semantic.error
+           =========================================== */
+
+        .settings-item.destructive .settings-label {
+            color: var(--color-semantic-error);
+        }
+
+        .settings-item.destructive .settings-icon {
+            background: #FEE2E2;
+        }
+
+        /* ===========================================
+           VERSION INFO
+           Pattern: Centered footer text
+           Tokens: typography.caption, colors.text.tertiary
+           =========================================== */
+
+        .version-info {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-md);
+            color: var(--color-text-tertiary);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <nav class="nav-bar">
+            <button class="nav-back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <h1 class="nav-title">Settings</h1>
+        </nav>
+
+        <div class="settings-content">
+            <!-- Account Section -->
+            <div class="settings-section">
+                <div class="section-label">Account</div>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-icon">👤</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Profile</div>
+                            <div class="settings-sublabel">Name, photo, handle</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">🔒</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Password & Security</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">✉️</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Email</div>
+                        </div>
+                        <span class="settings-value">ellie@example.com</span>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devices Section -->
+            <div class="settings-section">
+                <div class="section-label">Devices & Data</div>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-icon">⌚</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Connected Devices</div>
+                            <div class="settings-sublabel">Peloton, Apple Health</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">🔔</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Notifications</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments Section -->
+            <div class="settings-section">
+                <div class="section-label">Payments</div>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-icon">💳</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Payment Methods</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">🏦</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Payout Settings</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Section -->
+            <div class="settings-section">
+                <div class="section-label">Support</div>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="settings-icon">❓</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Help & FAQ</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">📄</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Terms of Service</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-icon">🔐</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Privacy Policy</div>
+                        </div>
+                        <span class="settings-chevron">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="settings-section">
+                <div class="settings-group">
+                    <div class="settings-item destructive">
+                        <div class="settings-icon">🚪</div>
+                        <div class="settings-text">
+                            <div class="settings-label">Log Out</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="version-info">
+                Motiv v1.2.3 (Build 456)<br>
+                Made with ❤️ for people showing up for themselves
+            </div>
+        </div>
+    </div>
+</body>
+</html>

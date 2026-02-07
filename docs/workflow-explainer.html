@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Design Workflow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-surface-elevated: #1a1a24;
+            --color-border: #2a2a3a;
+            --color-text: #e8e8f0;
+            --color-text-muted: #8888a0;
+            --color-accent: #0ea5e9;
+            --color-accent-dim: rgba(14, 165, 233, 0.15);
+            --color-accent-glow: rgba(14, 165, 233, 0.25);
+            --color-human: #f472b6;
+            --color-human-dim: rgba(244, 114, 182, 0.15);
+            --color-ai: #22d3ee;
+            --color-ai-dim: rgba(34, 211, 238, 0.15);
+            --color-success: #4ade80;
+            --color-warning: #fbbf24;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--color-accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            width: fit-content;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--color-human), var(--color-accent), var(--color-ai));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--color-accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-surface-elevated);
+            border-color: var(--color-text-muted);
+        }
+
+        /* Section styling */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-intro {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .problem-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ef4444, #f97316);
+        }
+
+        .problem-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .problem-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Why Not AI Section */
+        .insight-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+
+        .insight-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .insight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .insight-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+        }
+
+        .insight-card.ai {
+            border-color: var(--color-ai);
+        }
+
+        .insight-card.human {
+            border-color: var(--color-human);
+        }
+
+        .insight-card h4 {
+            font-size: 0.875rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .insight-card.ai h4 {
+            color: var(--color-ai);
+        }
+
+        .insight-card.human h4 {
+            color: var(--color-human);
+        }
+
+        .insight-card ul {
+            list-style: none;
+        }
+
+        .insight-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .insight-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-text-muted);
+        }
+
+        .callout {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(244, 114, 182, 0.1));
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .callout p {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+        }
+
+        .callout strong {
+            color: var(--color-text);
+        }
+
+        /* Goal Statement */
+        .goal-statement {
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-elevated) 100%);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .goal-statement p:first-child {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .goal-statement p:last-child {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Expandable Flow Sections */
+        .flow-section {
+            overflow: visible;
+        }
+
+        .flow-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .flow-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .flow-item.expanded {
+            border-color: var(--color-accent);
+        }
+
+        .flow-header {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .flow-header:hover {
+            background: var(--color-surface-elevated);
+        }
+
+        .flow-number {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .flow-number-badge {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .flow-item.human .flow-number-badge {
+            background: var(--color-human-dim);
+            color: var(--color-human);
+            border: 2px solid var(--color-human);
+        }
+
+        .flow-item.ai .flow-number-badge {
+            background: var(--color-ai-dim);
+            color: var(--color-ai);
+            border: 2px solid var(--color-ai);
+        }
+
+        .flow-item.review .flow-number-badge {
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+
+        .flow-type {
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .flow-item.human .flow-type { color: var(--color-human); }
+        .flow-item.ai .flow-type { color: var(--color-ai); }
+        .flow-item.review .flow-type { color: var(--color-accent); }
+
+        .flow-summary h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .flow-summary p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .flow-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--color-bg);
+            color: var(--color-text-muted);
+            transition: transform 0.3s;
+        }
+
+        .flow-item.expanded .flow-toggle {
+            transform: rotate(180deg);
+        }
+
+        .flow-details {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            padding-left: calc(80px + 3rem);
+        }
+
+        .flow-item.expanded .flow-details {
+            display: block;
+        }
+
+        .flow-detail-content {
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .flow-detail-content h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .flow-detail-content p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .flow-detail-content ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .flow-detail-content li {
+            padding: 0.375rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .flow-detail-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .flow-outputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .flow-output {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 100px;
+            color: var(--color-text-muted);
+        }
+
+        .flow-output.artifact {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* Phase Container Styles */
+        .phase-container {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-container.expanded {
+            border-color: var(--color-accent);
+        }
+
+        .phase-header {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .phase-header:hover {
+            background: var(--color-surface-elevated);
+        }
+
+        .phase-number {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+        }
+
+        .phase-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-steps {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .phase-step {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            padding: 0.25rem 0.625rem;
+            border-radius: 100px;
+            background: var(--color-bg);
+        }
+
+        .phase-step.human {
+            color: var(--color-human);
+            border: 1px solid var(--color-human-dim);
+        }
+
+        .phase-step.ai {
+            color: var(--color-ai);
+            border: 1px solid var(--color-ai-dim);
+        }
+
+        .phase-step.review {
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent-dim);
+        }
+
+        .phase-arrow {
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+        }
+
+        .phase-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--color-bg);
+            color: var(--color-text-muted);
+            transition: transform 0.3s;
+        }
+
+        .phase-container.expanded .phase-toggle {
+            transform: rotate(180deg);
+        }
+
+        .phase-details {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .phase-container.expanded .phase-details {
+            display: block;
+        }
+
+        .phase-substep {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .phase-substep:last-child {
+            border-bottom: none;
+        }
+
+        .substep-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .substep-badge {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .substep-badge.human {
+            background: var(--color-human-dim);
+            color: var(--color-human);
+        }
+
+        .substep-badge.ai {
+            background: var(--color-ai-dim);
+            color: var(--color-ai);
+        }
+
+        .substep-badge.review {
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+        }
+
+        .substep-header h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .substep-content p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .substep-content ul {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .substep-content li {
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .substep-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* Artifacts Section */
+        .artifacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .artifact-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .artifact-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-dim);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .artifact-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .artifact-card .artifact-file {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .artifact-card p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .artifact-why {
+            background: var(--color-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        .artifact-why h4 {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .artifact-why p {
+            font-size: 0.8125rem;
+            margin-bottom: 0;
+        }
+
+        /* Iteration Section */
+        .iteration-section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        /* Horizontal flow with return arc */
+        .loop-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .loop-flow-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .loop-flow-node {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 0.9375rem;
+        }
+
+        .loop-flow-node.design {
+            background: var(--color-human-dim);
+            border: 2px solid var(--color-human);
+            color: var(--color-human);
+        }
+
+        .loop-flow-node.generate {
+            background: var(--color-ai-dim);
+            border: 2px solid var(--color-ai);
+            color: var(--color-ai);
+        }
+
+        .loop-flow-node.review {
+            background: var(--color-accent-dim);
+            border: 2px solid var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .loop-flow-arrow {
+            color: var(--color-text-muted);
+            font-size: 1.125rem;
+            opacity: 0.6;
+        }
+
+        .loop-flow-repeat {
+            font-size: 1.5rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        /* Option 2: Inline pill badges */
+        .loop-inline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--color-bg);
+            border-radius: 12px;
+        }
+
+        .loop-inline-step {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .loop-inline-step.design {
+            background: var(--color-human-dim);
+            color: var(--color-human);
+        }
+
+        .loop-inline-step.generate {
+            background: var(--color-ai-dim);
+            color: var(--color-ai);
+        }
+
+        .loop-inline-step.review {
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+        }
+
+        .loop-inline-arrow {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .loop-inline-repeat {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 100px;
+            background: var(--color-surface-elevated);
+            border: 1px dashed var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+        }
+
+        .iteration-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .iteration-points {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .iteration-point {
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+        }
+
+        .iteration-point h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .iteration-point p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Conflict Resolution Section */
+        .conflict-section {
+            margin: 4rem 0;
+        }
+
+        .conflict-scenario {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conflict-scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .conflict-icon {
+            font-size: 1.5rem;
+        }
+
+        .conflict-scenario h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .conflict-scenario p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .conflict-resolution {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-success);
+        }
+
+        .conflict-resolution-icon {
+            color: var(--color-success);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .conflict-resolution p {
+            margin-bottom: 0;
+            font-size: 0.875rem;
+        }
+
+        /* Classification Section */
+        .classification-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .classification-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .classification-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .classification-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+        }
+
+        .classification-card.human-critical .classification-icon {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .classification-card.human-preferred .classification-icon {
+            background: rgba(234, 179, 8, 0.2);
+        }
+
+        .classification-card.ai-extended .classification-icon {
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .classification-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .classification-card p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .classification-examples {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-align: left;
+            background: var(--color-bg);
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        /* Designer Role Section */
+        .role-section {
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .role-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: start;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .role-comparison {
+                grid-template-columns: 1fr;
+            }
+            .role-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        .role-column h4 {
+            font-size: 0.875rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .role-column ul {
+            list-style: none;
+        }
+
+        .role-column li {
+            padding: 0.625rem 0;
+            border-bottom: 1px solid var(--color-border);
+            font-size: 0.9375rem;
+        }
+
+        .role-column li:last-child {
+            border-bottom: none;
+        }
+
+        .role-column.before li {
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+            text-decoration-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .role-column.after li {
+            color: var(--color-text);
+        }
+
+        .role-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--color-accent);
+            padding-top: 2rem;
+        }
+
+        /* Stats */
+        .stats-intro {
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-intro p {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .stats-caveat {
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-accent), var(--color-ai));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Getting Started */
+        .getting-started {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+
+        .command-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .command-item {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 1.5rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .command-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
+        .command-code {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-ai);
+            background: rgba(34, 211, 238, 0.1);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+
+        .command-desc {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+
+        /* Review Gate Highlight */
+        .review-gate-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-accent-dim);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .review-gate-note .icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .review-gate-note p {
+            font-size: 0.875rem;
+            margin: 0;
+            color: var(--color-text);
+        }
+
+        /* Examples Section */
+        .examples-section {
+            padding: 6rem 0;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-card {
+            background: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .example-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .example-preview {
+            position: relative;
+            background: #1a1a24;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .example-preview .iframe-wrapper {
+            width: 390px;
+            height: 844px;
+            transform: scale(0.35);
+            flex-shrink: 0;
+        }
+
+        .example-preview iframe {
+            width: 390px;
+            height: 844px;
+            border: none;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            pointer-events: none;
+        }
+
+        .example-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #22C55E;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .example-content {
+            padding: 1.5rem;
+        }
+
+        .example-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-description {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .example-tokens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .token-tag {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text-muted);
+        }
+
+        .example-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            color: var(--color-accent);
+            font-size: 0.875rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .example-link:hover {
+            text-decoration: underline;
+        }
+
+        .examples-note {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--color-surface-elevated);
+            border-radius: 12px;
+            border-left: 3px solid var(--color-ai);
+        }
+
+        .examples-note h4 {
+            color: var(--color-ai);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .examples-note p {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge animate-in">
+                <span class="dot"></span>
+                Design Workflow v1.0
+            </div>
+            <h1 class="animate-in animate-delay-1">
+                Human Creativity,<br>
+                <span>AI Efficiency</span>
+            </h1>
+            <p class="hero-subtitle animate-in animate-delay-2">
+                A workflow that focuses designer talent on the hardest problems while leveraging AI to handle repetitive work—creating interfaces that are both unique and consistent.
+            </p>
+            <div class="hero-cta animate-in animate-delay-3">
+                <a href="#flow" class="btn btn-primary">See the Workflow</a>
+                <a href="#why" class="btn btn-secondary">Why This Approach?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're Doing -->
+    <section id="goal">
+        <div class="container">
+            <span class="section-label">The Goal</span>
+            <h2>Higher Quality, Less Effort</h2>
+            <p class="section-intro">
+                Modern apps have 50-100+ screens. With traditional processes, quality degrades as you scale—later screens get less attention, consistency slips, edge cases get missed.
+            </p>
+            <div class="goal-statement">
+                <p><strong>What if you could deliver the same scope at higher quality in less time—by focusing designer energy where it matters most?</strong></p>
+                <p>That's what this workflow enables. Humans define the vision. AI propagates it everywhere with perfect consistency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Approach -->
+    <section id="why">
+        <div class="container">
+            <div class="insight-section">
+                <span class="section-label">The Approach</span>
+                <h2>Why Not Let AI Design Every Screen?</h2>
+                <p class="section-intro">
+                    Modern AI models aren't just trained on data—they're shaped by RLHF to optimize for perceived quality, which tends to converge on standard design patterns ideal for routine user experiences. Without deliberate creative direction, outputs lack the distinctive brand identity that makes products memorable.
+                </p>
+
+                <div class="insight-grid">
+                    <div class="insight-card human">
+                        <h4>Humans Excel At</h4>
+                        <ul>
+                            <li>Making unexpected creative choices that stand out</li>
+                            <li>Establishing emotional resonance and brand voice</li>
+                            <li>Creating a unique, ownable point of view</li>
+                        </ul>
+                    </div>
+                    <div class="insight-card ai">
+                        <h4>AI Excels At</h4>
+                        <ul>
+                            <li>Following established patterns with perfect consistency</li>
+                            <li>Propagating design decisions to dozens of screens</li>
+                            <li>Maintaining quality on screen #75 identical to screen #1</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <p>
+                        <strong>The insight:</strong> AI can make mediocre things quickly from scratch. It struggles to make something <em>above average</em> without creative direction.
+                        When humans design the key screens with a strong point of view, those decisions become the patterns AI can propagate.
+                        <strong>You're seeding the system with opinion.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <section id="problem">
+        <div class="container">
+            <span class="section-label">The Challenge</span>
+            <h2>Design at Scale is Hard</h2>
+            <p class="section-intro">
+                Modern apps need dozens—sometimes hundreds—of screens. Traditional approaches force difficult tradeoffs.
+            </p>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Quality Degrades at Scale</h3>
+                    <p>Screen #50 doesn't get the same attention as screen #5. Settings pages get less love than onboarding. The details slip.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Consistency Drifts</h3>
+                    <p>Multiple designers + time pressure = subtle inconsistencies. Spacing drifts, colors vary, patterns diverge across the app.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>AI Alone is Generic</h3>
+                    <p>Pure AI generation regresses to the mean. Safe colors, standard layouts, familiar patterns. Nothing memorable or ownable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screen Classification (moved to top of workflow) -->
+    <section id="classification">
+        <div class="container">
+            <span class="section-label">Screen Classification</span>
+            <h2>Focus Creativity Where It Matters</h2>
+            <p class="section-intro">
+                Designers create the keyframes—the screens that define how the product feels. AI fills in the gaps between them. We classify screens so you know where to focus your creative energy.
+            </p>
+
+            <div class="classification-grid">
+                <div class="classification-card human-critical">
+                    <div class="classification-icon">🔴</div>
+                    <h3>Human-Critical</h3>
+                    <p>First impressions, emotional peaks, and conversion moments. These define how the product <em>feels</em>.</p>
+                    <div class="classification-examples">
+                        • Onboarding welcome<br>
+                        • Core dashboard<br>
+                        • Success celebrations<br>
+                        • Paywall / upgrade
+                    </div>
+                </div>
+                <div class="classification-card human-preferred">
+                    <div class="classification-icon">🟡</div>
+                    <h3>Human-Preferred</h3>
+                    <p>Important but not critical. May establish patterns that AI will reuse elsewhere.</p>
+                    <div class="classification-examples">
+                        • Profile pages<br>
+                        • Detail views<br>
+                        • Form flows<br>
+                        • Navigation patterns
+                    </div>
+                </div>
+                <div class="classification-card ai-extended">
+                    <div class="classification-icon">🟢</div>
+                    <h3>AI-Extended</h3>
+                    <p>Screens that AI extends from your keyframes. Systematic, pattern-following, generated with perfect consistency.</p>
+                    <div class="classification-examples">
+                        • Settings screens<br>
+                        • List views<br>
+                        • Empty states<br>
+                        • Error messages
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-intro">
+                <p><strong>Example breakdown for a typical 75-screen app:</strong></p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">~20</div>
+                    <div class="stat-label">Screens designed by humans</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">~55</div>
+                    <div class="stat-label">Screens generated by AI</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0 hrs</div>
+                    <div class="stat-label">Manually maintaining the system</div>
+                </div>
+            </div>
+            <p class="stats-caveat">Actual split varies by product. Apps with more unique interactions need more human design; apps with more systematic screens (settings, lists, forms) can lean heavier on AI generation.</p>
+        </div>
+    </section>
+
+    <!-- The Flow (Expandable) -->
+    <section id="flow" class="flow-section">
+        <div class="container">
+            <span class="section-label">The Workflow</span>
+            <h2>From Understanding to Handoff</h2>
+            <p class="section-intro">
+                Three phases, each with clear deliverables. Click to expand and see details.
+            </p>
+
+            <!-- Phase 1: Discover & Plan -->
+            <div class="phase-container" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-number">1</div>
+                    <div class="phase-info">
+                        <h3>Discover & Plan</h3>
+                        <div class="phase-steps">
+                            <span class="phase-step human">Understand</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step ai">Map & Classify</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step review">Approve</span>
+                        </div>
+                    </div>
+                    <div class="phase-toggle">▼</div>
+                </div>
+                <div class="phase-details">
+                    <!-- Understand -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge human">Human + AI</span>
+                            <h4>Understand</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>Share raw inputs—meeting transcripts, Slack threads, product briefs. AI helps extract and structure the key elements.</p>
+                            <ul>
+                                <li>Product vision and success criteria get clarified</li>
+                                <li>User types and their goals are identified</li>
+                                <li>Core flows are mapped at a high level</li>
+                                <li>Constraints and non-negotiables are captured</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output artifact">DISCOVERY.md</span>
+                                <span class="flow-output">Product vision</span>
+                                <span class="flow-output">User types</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map & Classify -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge ai">AI</span>
+                            <h4>Map & Classify</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>AI generates a complete map of every screen the product needs. Each screen gets classified based on design impact.</p>
+                            <ul>
+                                <li>Every screen inventoried with purpose and emotional intent</li>
+                                <li>Classified: Human-Critical 🔴, Human-Preferred 🟡, AI-Extended 🟢</li>
+                                <li>Flow connections mapped (what leads to what)</li>
+                                <li>Required states identified (loading, empty, error)</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output artifact">PRODUCT-MAP.md</span>
+                                <span class="flow-output artifact">screens/inventory.json</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Approve -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge review">Review</span>
+                            <h4>Approve Plan</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>Review the map, adjust classifications as needed, assign designers to critical screens. These are recommendations, not rules.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Design & Iterate -->
+            <div class="phase-container" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-number">2</div>
+                    <div class="phase-info">
+                        <h3>Design & Iterate</h3>
+                        <div class="phase-steps">
+                            <span class="phase-step human">Design</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step ai">Extract</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step ai">Generate</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step review">Review</span>
+                        </div>
+                    </div>
+                    <div class="phase-toggle">▼</div>
+                </div>
+                <div class="phase-details">
+                    <!-- Design Key Screens -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge human">Human</span>
+                            <h4>Design Key Screens</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>Designers focus full creative energy on the screens that define the product's soul. Work in Figma or code—whatever feels right.</p>
+                            <ul>
+                                <li>Design 🔴 Human-Critical screens first (onboarding, core features, emotional peaks)</li>
+                                <li>Move to 🟡 Human-Preferred screens (important flows, pattern-setters)</li>
+                                <li>Establish visual language, component patterns, and emotional tone</li>
+                                <li>Make creative choices AI would never make</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output">Figma designs</span>
+                                <span class="flow-output">or HTML prototypes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extract Design System -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge ai">AI</span>
+                            <h4>Extract Design System</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>AI analyzes your screens and extracts everything into a formal system. This captures what you actually did—ensuring the system matches reality.</p>
+                            <ul>
+                                <li>Color tokens extracted with semantic names</li>
+                                <li>Typography scale codified</li>
+                                <li>Spacing system derived from actual usage</li>
+                                <li>Component patterns documented</li>
+                                <li>Motion specs proposed (you approve or adjust)</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output artifact">tokens/colors.json</span>
+                                <span class="flow-output artifact">tokens/typography.json</span>
+                                <span class="flow-output artifact">components/*.md</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Generate Screens -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge ai">AI</span>
+                            <h4>Generate Remaining Screens</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>Using the extracted design system, AI generates all 🟢 AI-Extended screens. These follow your patterns perfectly because they're derived from your actual designs.</p>
+                            <ul>
+                                <li>Settings screens generated with correct spacing and typography</li>
+                                <li>Detail views follow established component patterns</li>
+                                <li>All states handled (loading, empty, error)</li>
+                                <li>Every screen feels like part of the same family</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output artifact">prototype/screens/*.html</span>
+                                <span class="flow-output">All states implemented</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Design Review -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge review">Review</span>
+                            <h4>Review & Iterate</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>Review AI output, adjust tokens if needed, regenerate. Loop until satisfied.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3: Handoff -->
+            <div class="phase-container" onclick="togglePhase(this)">
+                <div class="phase-header">
+                    <div class="phase-number">3</div>
+                    <div class="phase-info">
+                        <h3>Handoff</h3>
+                        <div class="phase-steps">
+                            <span class="phase-step ai">Package Specs</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step ai">Export Tokens</span>
+                            <span class="phase-arrow">→</span>
+                            <span class="phase-step ai">Document</span>
+                        </div>
+                    </div>
+                    <div class="phase-toggle">▼</div>
+                </div>
+                <div class="phase-details">
+                    <!-- Engineer Handoff -->
+                    <div class="phase-substep">
+                        <div class="substep-header">
+                            <span class="substep-badge ai">AI</span>
+                            <h4>Engineer Handoff</h4>
+                        </div>
+                        <div class="substep-content">
+                            <p>AI packages everything engineers need to implement. No more "what's the padding here?" questions.</p>
+                            <ul>
+                                <li>Design tokens exported (CSS variables, JSON, Tailwind config)</li>
+                                <li>Component specs with all variants and states</li>
+                                <li>Accessibility requirements (GREEN-LINES)</li>
+                                <li>Implementation specs (RED-LINES)</li>
+                                <li>Motion timing and easing documented</li>
+                            </ul>
+                            <div class="flow-outputs">
+                                <span class="flow-output artifact">handoff/tokens.css</span>
+                                <span class="flow-output artifact">handoff/GREEN-LINES.md</span>
+                                <span class="flow-output artifact">handoff/RED-LINES.md</span>
+                                <span class="flow-output artifact">handoff/COMPONENTS.md</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Iteration Loop (moved after workflow) -->
+    <section id="iteration">
+        <div class="container">
+            <div class="iteration-section">
+                <span class="section-label">It's a Loop, Not a Line</span>
+                <h2>You Can Always Go Back</h2>
+                <p class="section-intro">
+                    This workflow isn't waterfall. At every stage, you can iterate, adjust, and refine. The artifacts update together.
+                </p>
+
+                <!-- Horizontal flow with repeat indicator -->
+                <div class="loop-flow">
+                    <div class="loop-flow-row">
+                        <div class="loop-flow-node design">✏️ Design key screens</div>
+                        <span class="loop-flow-arrow">→</span>
+                        <div class="loop-flow-node generate">⚡ AI fills in the rest</div>
+                        <span class="loop-flow-arrow">→</span>
+                        <div class="loop-flow-node review">👁️ Review</div>
+                        <span class="loop-flow-arrow">→</span>
+                        <span class="loop-flow-repeat">↻</span>
+                    </div>
+                </div>
+
+                <div class="iteration-points">
+                    <div class="iteration-point">
+                        <h4>Change a Token</h4>
+                        <p>Update the primary color in the design system → Regenerate affected screens → Review the changes. The whole app updates together.</p>
+                    </div>
+                    <div class="iteration-point">
+                        <h4>Add a Screen</h4>
+                        <p>Realize you need a new screen? Add it to the inventory → Classify it → Generate or design it. The map updates automatically.</p>
+                    </div>
+                    <div class="iteration-point">
+                        <h4>Rethink a Flow</h4>
+                        <p>User testing reveals a problem? Restructure the flow in the map → Affected screens are flagged → Regenerate or redesign as needed.</p>
+                    </div>
+                    <div class="iteration-point">
+                        <h4>Promote a Screen</h4>
+                        <p>An AI-generated screen needs more love? Move it to Human-Preferred, design it yourself, and the extracted patterns can improve future generations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Designer's Role -->
+    <section id="designer-role">
+        <div class="container">
+            <div class="role-section">
+                <span class="section-label">For Designers</span>
+                <h2>Your Role Evolves, Not Disappears</h2>
+                <p class="section-intro">
+                    This workflow amplifies what makes designers valuable—creative problem-solving—while offloading tedious consistency work.
+                </p>
+
+                <div class="role-comparison">
+                    <div class="role-column before">
+                        <h4>Before: Time Spent On</h4>
+                        <ul>
+                            <li>Designing 75 screens at varying quality</li>
+                            <li>Manually maintaining consistency</li>
+                            <li>Creating specs that get outdated</li>
+                            <li>Repeating patterns across screens</li>
+                            <li>Chasing down edge cases late</li>
+                        </ul>
+                    </div>
+                    <div class="role-arrow">→</div>
+                    <div class="role-column after">
+                        <h4>After: Time Spent On</h4>
+                        <ul>
+                            <li>Designing 20-25 key screens exceptionally well</li>
+                            <li>Establishing the product's unique voice</li>
+                            <li>Reviewing AI output for emotional coherence</li>
+                            <li>Iterating on creative direction</li>
+                            <li>Solving novel design problems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 2rem;">
+                    <p>
+                        <strong>The shift:</strong> You're not being replaced—you're being promoted.
+                        From production designer (make all the screens) to creative director (define the vision, guide the system).
+                        Your taste and judgment become the quality bar AI must meet.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section>
+        <div class="container">
+            <span class="section-label">Get Started</span>
+            <h2>The Commands</h2>
+            <p class="section-intro">
+                The workflow is powered by Claude Code skills. Here's what's available.
+            </p>
+
+            <div class="getting-started">
+                <div class="command-list">
+                    <div class="command-item">
+                        <code class="command-code">/product-design discover</code>
+                        <span class="command-desc">Capture freeform product ideas into structured requirements</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/product-design plan</code>
+                        <span class="command-desc">Map all screens and classify by human vs. AI suitability</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/design-system</code>
+                        <span class="command-desc">Extract design system from screenshots or HTML files</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/design-system test</code>
+                        <span class="command-desc">Generate test screens to validate the design system</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/design-system deviation-report</code>
+                        <span class="command-desc">Analyze multi-designer work for inconsistencies</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/product-design generate</code>
+                        <span class="command-desc">Build HTML prototypes using the design system</span>
+                    </div>
+                    <div class="command-item">
+                        <code class="command-code">/design-system handoff</code>
+                        <span class="command-desc">Package everything for engineering implementation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="examples-section">
+        <div class="container">
+            <span class="section-label">See It In Action</span>
+            <h2>AI-Generated Examples</h2>
+            <p class="section-intro">
+                These screens were generated entirely by AI using the Motiv design system.
+                Notice how the tokens (colors, spacing, typography) are applied consistently across different screen types.
+            </p>
+
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/settings-main.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Settings Screen</h3>
+                        <p class="example-description">
+                            A classic list-based settings screen. AI applied the grouped list pattern,
+                            icon styling, and semantic spacing from the design system.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">spacing.md</span>
+                            <span class="token-tag">radii.lg</span>
+                            <span class="token-tag">colors.border</span>
+                        </div>
+                        <a href="examples/settings-main.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/notification-settings.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Notification Settings</h3>
+                        <p class="example-description">
+                            Toggle-based settings with sections. AI used the brand purple for active states
+                            and applied consistent label + description patterns.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">colors.brand.secondary</span>
+                            <span class="token-tag">typography.label</span>
+                            <span class="token-tag">spacing.sm</span>
+                        </div>
+                        <a href="examples/notification-settings.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/challenge-history-empty.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Empty State</h3>
+                        <p class="example-description">
+                            Challenge history with no data. AI generated an encouraging empty state
+                            using the brand colors and button patterns from the system.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">colors.brand.primary</span>
+                            <span class="token-tag">typography.display</span>
+                            <span class="token-tag">radii.full</span>
+                        </div>
+                        <a href="examples/challenge-history-empty.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/onboarding-welcome.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Welcome Screen</h3>
+                        <p class="example-description">
+                            Onboarding entry point with animated gradient background.
+                            AI applied the pink gradient palette and testimonial card pattern.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">gradients.pink</span>
+                            <span class="token-tag">typography.display-large</span>
+                            <span class="token-tag">cards.profile</span>
+                        </div>
+                        <a href="examples/onboarding-welcome.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/personality-results.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Personality Results</h3>
+                        <p class="example-description">
+                            The big reveal moment after onboarding quiz.
+                            AI used mint gradient for growth/vitality and display typography for impact.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">gradients.mint</span>
+                            <span class="token-tag">typography.display-medium</span>
+                            <span class="token-tag">cards.stat</span>
+                        </div>
+                        <a href="examples/personality-results.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview">
+                        <span class="example-badge">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/challenge-win.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Challenge Win</h3>
+                        <p class="example-description">
+                            Celebration screen with dark immersive background and confetti.
+                            AI applied celebration colors, stat cards, and success states.
+                        </p>
+                        <div class="example-tokens">
+                            <span class="token-tag">colors.celebration</span>
+                            <span class="token-tag">typography.stat-large</span>
+                            <span class="token-tag">colors.success</span>
+                        </div>
+                        <a href="examples/challenge-win.html" target="_blank" class="example-link">
+                            Open full screen →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="examples-note">
+                <h4>How This Works</h4>
+                <p>
+                    These screens weren't designed individually. AI read the Motiv design system tokens
+                    (colors, typography, spacing, components) and generated screens that match the
+                    human-designed keyframes. The CSS comments in each file show exactly which tokens were used.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to Start CTA -->
+    <section id="next-steps" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="goal-statement" style="text-align: center; border-left: none; border-top: 4px solid var(--color-accent);">
+                <p style="margin-bottom: 1.5rem;"><strong>Ready to put this into practice?</strong></p>
+                <p style="margin-bottom: 2rem;">The detailed how-to guide walks through each step, explains multi-designer coordination, and answers common questions.</p>
+                <a href="workflow-howto.html" class="btn btn-primary">See the Detailed How-To Guide →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Built with Claude Code • <a href="https://claude.ai/code">claude.ai/code</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFlow(item) {
+            // Close other items
+            document.querySelectorAll('.flow-item.expanded').forEach(el => {
+                if (el !== item) el.classList.remove('expanded');
+            });
+            // Toggle this item
+            item.classList.toggle('expanded');
+        }
+
+        function togglePhase(item) {
+            // Toggle this phase (allow multiple to be open)
+            item.classList.toggle('expanded');
+        }
+
+        // Simple scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.problem-card, .classification-card, .flow-item, .phase-container, .stat-card, .command-item, .artifact-card, .conflict-scenario, .iteration-point, .example-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

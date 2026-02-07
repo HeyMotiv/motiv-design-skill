@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Assisted Design Workflow: How-To Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-surface-elevated: #1a1a24;
+            --color-border: #2a2a3a;
+            --color-text: #e8e8f0;
+            --color-text-muted: #8888a0;
+            --color-accent: #0ea5e9;
+            --color-accent-dim: rgba(14, 165, 233, 0.15);
+            --color-accent-glow: rgba(14, 165, 233, 0.25);
+            --color-human: #f472b6;
+            --color-human-dim: rgba(244, 114, 182, 0.15);
+            --color-ai: #22d3ee;
+            --color-ai-dim: rgba(34, 211, 238, 0.15);
+            --color-success: #4ade80;
+            --color-warning: #fbbf24;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .page-header {
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+
+        .page-header h1 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            background: linear-gradient(135deg, var(--color-human), var(--color-accent), var(--color-ai));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--color-text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+        }
+
+        /* Navigation */
+        .page-nav {
+            position: sticky;
+            top: 0;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            padding: 1rem 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .page-nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .page-nav a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+
+        .page-nav a:hover {
+            color: var(--color-text);
+        }
+
+        /* Section styling */
+        section {
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        section + section {
+            border-top: 1px solid var(--color-border);
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        h3:first-of-type {
+            margin-top: 1.5rem;
+        }
+
+        .section-intro {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Step walkthrough */
+        .step-walkthrough {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-walkthrough.human .step-number {
+            background: var(--color-human-dim);
+            color: var(--color-human);
+            border: 2px solid var(--color-human);
+        }
+
+        .step-walkthrough.ai .step-number {
+            background: var(--color-ai-dim);
+            color: var(--color-ai);
+            border: 2px solid var(--color-ai);
+        }
+
+        .step-walkthrough.review .step-number {
+            background: var(--color-accent-dim);
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+
+        .step-header h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .step-content ul {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .step-content li {
+            padding: 0.375rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .step-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .tip-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-accent);
+            margin-top: 1rem;
+        }
+
+        .tip-box .icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .tip-box p {
+            font-size: 0.875rem;
+            margin-bottom: 0;
+            color: var(--color-text);
+        }
+
+        /* Conflict Resolution */
+        .conflict-scenario {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conflict-scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .conflict-icon {
+            font-size: 1.5rem;
+        }
+
+        .conflict-scenario h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .conflict-scenario > p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 1rem;
+        }
+
+        .conflict-resolution {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-success);
+        }
+
+        .conflict-resolution-icon {
+            color: var(--color-success);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .conflict-resolution p {
+            margin-bottom: 0;
+            font-size: 0.875rem;
+        }
+
+        /* Multi-designer tips */
+        .tip-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--color-surface-elevated);
+        }
+
+        .faq-question h4 {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .faq-toggle {
+            color: var(--color-text-muted);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.expanded .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 1.5rem 1.25rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .faq-item.expanded .faq-answer {
+            display: block;
+        }
+
+        .faq-answer p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            padding-top: 1rem;
+        }
+
+        /* Callout */
+        .callout {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(244, 114, 182, 0.1));
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .callout p {
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .callout strong {
+            color: var(--color-text);
+        }
+
+        /* Example artifacts */
+        .artifact-example {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .artifact-example-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--color-surface-elevated);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .artifact-example-header span {
+            font-size: 1.25rem;
+        }
+
+        .artifact-example-header h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .artifact-example-header code {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            margin-left: auto;
+        }
+
+        .artifact-example-content {
+            padding: 1.5rem;
+        }
+
+        .artifact-example-content pre {
+            background: var(--color-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        .artifact-example-content p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            margin-top: 1rem;
+        }
+
+        /* Other artifacts list */
+        .other-artifacts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .other-artifact {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+        }
+
+        .other-artifact code {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-accent);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .other-artifact span {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--color-border);
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <a href="workflow-explainer.html" class="back-link">
+                <span>←</span> Back to Overview
+            </a>
+            <h1>The <span>Detailed</span> How-To Guide</h1>
+            <p>Step-by-step instructions, multi-designer coordination, conflict resolution, and answers to common questions.</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="page-nav">
+            <ul>
+                <li><a href="#walkthrough">Step-by-Step</a></li>
+                <li><a href="#multi-designer">Multi-Designer</a></li>
+                <li><a href="#conflicts">Conflicts</a></li>
+                <li><a href="#examples">Examples</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Step-by-Step Walkthrough -->
+    <section id="walkthrough">
+        <div class="container">
+            <span class="section-label">Step-by-Step</span>
+            <h2>Walking Through Each Phase</h2>
+            <p class="section-intro">
+                Detailed instructions for each step of the workflow, including what to prepare, what to expect, and what to do if things go wrong.
+            </p>
+
+            <div class="step-walkthrough human">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h4>Understand: Capture Product Vision</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>What you need:</strong> Any raw inputs you have—meeting transcripts, Slack threads, product briefs, wireframe sketches, competitor screenshots, voice notes.</p>
+                    <p><strong>Run:</strong> <code>/product-design discover</code></p>
+                    <p><strong>What to expect:</strong> AI will ask clarifying questions about the product. Answer conversationally. It will then generate a structured discovery document.</p>
+                    <ul>
+                        <li>Review the generated DISCOVERY.md for accuracy</li>
+                        <li>Add anything that was missed</li>
+                        <li>Flag open questions that need stakeholder input</li>
+                        <li>Share with stakeholders for alignment before proceeding</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">💡</span>
+                        <p><strong>Tip:</strong> The more raw material you provide, the better the discovery doc. Don't pre-filter—AI is good at extracting signal from noise.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough ai">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h4>Map & Classify: Build the Screen Inventory</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>What you need:</strong> The completed DISCOVERY.md from step 1.</p>
+                    <p><strong>Run:</strong> <code>/product-design plan</code></p>
+                    <p><strong>What to expect:</strong> AI analyzes your discovery doc and generates a complete map of every screen your product needs, with classifications.</p>
+                    <ul>
+                        <li>Review the PRODUCT-MAP.md for completeness</li>
+                        <li>Check that screen names make sense</li>
+                        <li>Verify flow connections are accurate</li>
+                        <li>Review classifications (you can override them)</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">⚠️</span>
+                        <p><strong>Common issue:</strong> AI sometimes misses edge-case screens (password reset, error states). Review EDGE-CASES.md carefully and add any that were missed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough review">
+                <div class="step-header">
+                    <div class="step-number">🔵</div>
+                    <h4>Approve Plan: Review and Assign</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>This is a checkpoint.</strong> Don't proceed until the map and classifications feel right.</p>
+                    <ul>
+                        <li>Move screens between classification levels if AI got them wrong</li>
+                        <li>Assign designers to Human-Critical screens first</li>
+                        <li>Discuss any screens where you disagree with the classification</li>
+                        <li>Add emotional intent notes if they feel off</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">🎯</span>
+                        <p><strong>Remember:</strong> Classifications are recommendations. If you feel strongly about designing an "AI-Extended" screen yourself, promote it. The goal is alignment, not rigid rules.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough human">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h4>Design Key Screens: The Keyframes</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>What you need:</strong> The approved plan with assignments.</p>
+                    <p><strong>Your task:</strong> Design the Human-Critical and Human-Preferred screens. This is where your creative vision lives.</p>
+                    <ul>
+                        <li>Start with 🔴 Human-Critical screens (these define the product's soul)</li>
+                        <li>Move to 🟡 Human-Preferred screens (these establish patterns)</li>
+                        <li>Work in Figma, Sketch, code—whatever you prefer</li>
+                        <li>Make bold creative choices that AI wouldn't make</li>
+                        <li>Think about what patterns you're establishing for AI to follow</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">✨</span>
+                        <p><strong>This is your creative moment.</strong> The patterns you establish here—spacing, color relationships, component styles, micro-interactions—will propagate to every AI-generated screen. Be intentional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough ai">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h4>Extract Design System: Codify Your Decisions</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>What you need:</strong> Screenshots or HTML exports of your designed screens.</p>
+                    <p><strong>Run:</strong> <code>/design-system</code></p>
+                    <p><strong>What to expect:</strong> AI analyzes your designs and extracts tokens, components, and patterns into a formal system.</p>
+                    <ul>
+                        <li>Review extracted colors and their semantic names</li>
+                        <li>Verify typography scale matches your intent</li>
+                        <li>Check spacing tokens for accuracy</li>
+                        <li>Review proposed motion specs (adjust if needed)</li>
+                        <li>Run <code>/design-system test</code> to see the system applied</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">🔍</span>
+                        <p><strong>Quality check:</strong> If the test screens don't feel right, your source screens might have inconsistencies. Fix the source, re-extract, and test again.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough ai">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h4>Fill in the Gaps: Generate AI-Extended Screens</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>What you need:</strong> The extracted design system.</p>
+                    <p><strong>Run:</strong> <code>/product-design generate</code></p>
+                    <p><strong>What to expect:</strong> AI generates all 🟢 AI-Extended screens using your design system. This is where the efficiency gain happens.</p>
+                    <ul>
+                        <li>Review generated screens in a browser</li>
+                        <li>Check that design system tokens were applied correctly</li>
+                        <li>Verify emotional intent comes through</li>
+                        <li>Request regeneration for screens that miss the mark</li>
+                    </ul>
+                    <div class="tip-box">
+                        <span class="icon">🔄</span>
+                        <p><strong>Iterative:</strong> You can regenerate individual screens with adjusted instructions. If many screens feel off, adjust the design system tokens and regenerate all.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-walkthrough review">
+                <div class="step-header">
+                    <div class="step-number">🔵</div>
+                    <h4>Design Review: Validate and Polish</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>This is the quality gate.</strong> Don't ship until you're satisfied.</p>
+                    <ul>
+                        <li>Review every screen, especially edge cases</li>
+                        <li>Check transitions between screens make sense</li>
+                        <li>Validate accessibility requirements are met</li>
+                        <li>Make manual tweaks where AI got it 90% right</li>
+                        <li>Promote screens to Human-Preferred if they need more work</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step-walkthrough ai">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h4>Handoff: Package for Engineering</h4>
+                </div>
+                <div class="step-content">
+                    <p><strong>Run:</strong> <code>/design-system handoff</code></p>
+                    <p><strong>What you get:</strong> Everything engineers need to implement—tokens as CSS/JSON, component specs, accessibility requirements, implementation notes.</p>
+                    <ul>
+                        <li>Review GREEN-LINES.md (accessibility requirements)</li>
+                        <li>Review RED-LINES.md (implementation specs)</li>
+                        <li>Share with engineering lead for questions</li>
+                        <li>Update as needed during implementation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multi-Designer Coordination -->
+    <section id="multi-designer">
+        <div class="container">
+            <span class="section-label">Multi-Designer Teams</span>
+            <h2>Coordinating Multiple Designers</h2>
+            <p class="section-intro">
+                When more than one designer is working on key screens, coordination becomes critical. Here's how to stay aligned.
+            </p>
+
+            <div class="tip-card">
+                <h4>1. Assign Ownership Clearly</h4>
+                <p>Each Human-Critical screen should have one owner. Don't split ownership of closely related screens (e.g., onboarding steps 1-3 should all be one person). Use the screen inventory to track assignments.</p>
+            </div>
+
+            <div class="tip-card">
+                <h4>2. Design Pattern-Setting Screens First</h4>
+                <p>Before everyone dives into their assigned screens, identify which screens will set patterns for others. Design those first as a team, agree on the patterns, then let individuals apply them.</p>
+            </div>
+
+            <div class="tip-card">
+                <h4>3. Extract Design System Early</h4>
+                <p>Once you have 3-5 pattern-setting screens designed, run the design system extraction. This gives everyone a shared foundation to work from. Update as more screens are completed.</p>
+            </div>
+
+            <div class="tip-card">
+                <h4>4. Run Deviation Reports Regularly</h4>
+                <p>Use <code>/design-system deviation-report</code> after each batch of designs. This catches drift before it compounds. Address deviations as a team—decide whether to normalize or update the system.</p>
+            </div>
+
+            <div class="tip-card">
+                <h4>5. Sync on Emotional Intent</h4>
+                <p>Different designers may interpret "confident and ready to act" differently. Sync on specific reference screens that exemplify the desired emotional tone. Use these as your north star.</p>
+            </div>
+
+            <div class="callout">
+                <p>
+                    <strong>The goal:</strong> Users shouldn't be able to tell which designer worked on which screen. The app should feel like it came from one unified creative vision. Deviation reports make this achievable at scale.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conflict Resolution -->
+    <section id="conflicts">
+        <div class="container">
+            <span class="section-label">When Things Diverge</span>
+            <h2>How Conflicts Get Resolved</h2>
+            <p class="section-intro">
+                When multiple designers contribute, inconsistencies are inevitable. The workflow has built-in mechanisms to catch and resolve them.
+            </p>
+
+            <div class="conflict-scenario">
+                <div class="conflict-scenario-header">
+                    <span class="conflict-icon">🎨</span>
+                    <h4>Scenario: Different Spacing Values</h4>
+                </div>
+                <p>Designer A uses 20px card padding. Designer B uses 24px. Both are valid choices, but the app looks inconsistent.</p>
+                <div class="conflict-resolution">
+                    <span class="conflict-resolution-icon">✅</span>
+                    <p><strong>Resolution:</strong> The deviation report catches this automatically. You decide: normalize to 24px (design system value), or update the system to allow both with semantic meaning (compact vs. comfortable).</p>
+                </div>
+            </div>
+
+            <div class="conflict-scenario">
+                <div class="conflict-scenario-header">
+                    <span class="conflict-icon">🔤</span>
+                    <h4>Scenario: Typography Drift</h4>
+                </div>
+                <p>Over time, designers start using 18px for card titles instead of 16px. It looks better on some screens, worse on others.</p>
+                <div class="conflict-resolution">
+                    <span class="conflict-resolution-icon">✅</span>
+                    <p><strong>Resolution:</strong> The deviation report shows all instances. You can normalize to the system value, or add a new semantic token (title-large: 18px) and update the system. All decisions are tracked.</p>
+                </div>
+            </div>
+
+            <div class="conflict-scenario">
+                <div class="conflict-scenario-header">
+                    <span class="conflict-icon">🌈</span>
+                    <h4>Scenario: Color Inconsistency</h4>
+                </div>
+                <p>Designer A samples a blue from the Figma file, getting #2563EB. Designer B eyedrops from a compressed screenshot, getting #3B82F6. Both think they're using "primary blue."</p>
+                <div class="conflict-resolution">
+                    <span class="conflict-resolution-icon">✅</span>
+                    <p><strong>Resolution:</strong> The deviation report flags colors that are close but not exact matches. You normalize to the design system token, ensuring everyone uses the same source of truth.</p>
+                </div>
+            </div>
+
+            <div class="conflict-scenario">
+                <div class="conflict-scenario-header">
+                    <span class="conflict-icon">🧩</span>
+                    <h4>Scenario: Different Component Variants</h4>
+                </div>
+                <p>Designer A creates a card with icon on the left. Designer B creates a similar card with icon on top. Both make sense for their screens.</p>
+                <div class="conflict-resolution">
+                    <span class="conflict-resolution-icon">✅</span>
+                    <p><strong>Resolution:</strong> This might be valid variation! Review together—if both make sense, add them as documented variants (card-horizontal, card-vertical). If one is clearly better, normalize.</p>
+                </div>
+            </div>
+
+            <div class="callout">
+                <p>
+                    <strong>The key:</strong> Conflicts are surfaced early and resolved systematically. Instead of discovering inconsistencies in code review (expensive to fix), they're caught during design (cheap to fix). The deviation report isn't punitive—it's a tool for alignment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Artifacts -->
+    <section id="examples">
+        <div class="container">
+            <span class="section-label">What They Look Like</span>
+            <h2>Example Artifacts</h2>
+            <p class="section-intro">
+                Here's what the generated artifacts actually look like, so you know what to expect.
+            </p>
+
+            <div class="artifact-example">
+                <div class="artifact-example-header">
+                    <span>📋</span>
+                    <h4>Discovery Document</h4>
+                    <code>DISCOVERY.md</code>
+                </div>
+                <div class="artifact-example-content">
+                    <pre>## Product Vision
+
+### What is this?
+A fitness challenge app that lets users create and join
+month-long challenges with friends.
+
+### Who is it for?
+- Primary: Challenge participants (ages 25-45)
+- Secondary: Challenge creators (fitness influencers)
+
+### What problem does it solve?
+Solo fitness goals lack accountability. Users start strong
+but lose motivation. Challenges with friends create social
+pressure to stay consistent.
+
+### What does success look like?
+- 70% challenge completion rate
+- Users create 2+ challenges after first
+- Daily active users engage with friend activity</pre>
+                    <p>The discovery doc captures the essential product context that guides all downstream decisions.</p>
+                </div>
+            </div>
+
+            <div class="artifact-example">
+                <div class="artifact-example-header">
+                    <span>🗂️</span>
+                    <h4>Screen Definition</h4>
+                    <code>screens/inventory.json</code>
+                </div>
+                <div class="artifact-example-content">
+                    <pre>{
+  "id": "core-dashboard",
+  "name": "Dashboard",
+  "section": "core",
+  "priority": "P0",
+  "classification": {
+    "type": "human-critical",
+    "confidence": "high",
+    "score": 0.89
+  },
+  "purpose": "Central hub showing active challenges and progress",
+  "emotional_intent": "Motivated and in control",
+  "entry_context": {
+    "from_screens": ["auth-login", "onb-complete"],
+    "user_mindset": "Ready to engage with daily activities"
+  }
+}</pre>
+                    <p>Each screen has structured data that guides both human designers and AI generation.</p>
+                </div>
+            </div>
+
+            <div class="artifact-example">
+                <div class="artifact-example-header">
+                    <span>🎨</span>
+                    <h4>Color Tokens</h4>
+                    <code>tokens/colors.json</code>
+                </div>
+                <div class="artifact-example-content">
+                    <pre>{
+  "primary": {
+    "value": "#2563EB",
+    "description": "Primary brand color for main actions",
+    "usage": ["button-primary-bg", "link-text"],
+    "states": {
+      "hover": "#1D4ED8",
+      "pressed": "#1E40AF",
+      "disabled": "#93C5FD"
+    }
+  },
+  "surface-elevated": {
+    "value": "#1F2937",
+    "description": "Elevated surface for cards and modals",
+    "usage": ["card-bg", "modal-bg", "dropdown-bg"]
+  }
+}</pre>
+                    <p>Tokens include not just values but semantic meaning, usage hints, and state variants.</p>
+                </div>
+            </div>
+
+            <div class="artifact-example">
+                <div class="artifact-example-header">
+                    <span>⚠️</span>
+                    <h4>Deviation Report</h4>
+                    <code>DEVIATION-REPORT.md</code>
+                </div>
+                <div class="artifact-example-content">
+                    <pre>## Spacing Deviations
+
+| Location | Expected | Actual | Impact |
+|----------|----------|--------|--------|
+| Settings/profile-card | 24px | 20px | Medium |
+| Forms/input-spacing | 16px | 12px | High |
+
+## Recommended Actions:
+1. ✅ Normalize profile-card to 24px (matches system)
+2. ⚠️ Review input-spacing—12px may be intentional for dense forms
+
+## Color Near-Matches
+- #2462EB used in Challenge/stats (expected: #2563EB)
+  → Likely color picker error, normalize to token</pre>
+                    <p>Deviation reports surface inconsistencies with clear recommended actions.</p>
+                </div>
+            </div>
+
+            <h3>Other Artifacts</h3>
+            <p class="section-intro" style="margin-bottom: 1rem;">The workflow also produces these supporting files:</p>
+
+            <div class="other-artifacts-list">
+                <div class="other-artifact">
+                    <code>PRODUCT-MAP.md</code>
+                    <span>Visual diagram of all screens and how they connect—the complete user journey.</span>
+                </div>
+                <div class="other-artifact">
+                    <code>components/*.md</code>
+                    <span>Component specs with anatomy, variants, states, and platform adaptations.</span>
+                </div>
+                <div class="other-artifact">
+                    <code>EDGE-CASES.md</code>
+                    <span>Checklist of offline states, permissions, errors, empty states, accessibility needs.</span>
+                </div>
+                <div class="other-artifact">
+                    <code>handoff/GREEN-LINES.md</code>
+                    <span>Accessibility requirements—what must be true for the design to be accessible.</span>
+                </div>
+                <div class="other-artifact">
+                    <code>handoff/RED-LINES.md</code>
+                    <span>Implementation specs—exact values, behaviors, and edge case handling.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <span class="section-label">Common Questions</span>
+            <h2>FAQ</h2>
+            <p class="section-intro">
+                Answers to questions that come up frequently.
+            </p>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>What if I want to design a screen that AI classified as AI-Extended?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Do it! The classifications are recommendations, not rules. If you feel strongly about a screen, move it to Human-Preferred and design it yourself. Trust your instincts—if you think it needs a human touch, it probably does. The system is here to serve you, not constrain you.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>How do I know if my designs are "pattern-setting" enough for AI to follow?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Run <code>/design-system test</code> after extracting. If the test screens feel like they came from the same app as your human-designed screens, you're good. If they feel generic or off, your pattern-setting screens might be too inconsistent or not distinctive enough. Add more variety to your keyframes and re-extract.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>Can I use Figma instead of HTML for my designs?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! Export your Figma frames as screenshots and use those for design system extraction. The AI analyzes the visual output, not the source format. Many teams find it faster to work in Figma for exploration, then export for extraction.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>What if AI generates something I don't like?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>You have options: (1) Request regeneration with more specific instructions, (2) Manually tweak the output, (3) Promote the screen to Human-Preferred and design it yourself, or (4) Adjust the design system tokens and regenerate. The workflow is iterative—nothing is permanent until you ship.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>How does this work with existing design systems?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>If you already have a design system, you can import it instead of extracting from screens. Use <code>/design-system import</code> with your existing tokens. The workflow will use your system as the source of truth for AI generation.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>Does this work for web apps or just mobile?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Both! The workflow is platform-agnostic. For web apps, you may have more breakpoints to consider, but the principles are the same. The design system extraction handles responsive patterns, and AI generation can produce screens at multiple viewport sizes.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>How long does the full workflow take?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>It depends on the scope, but the workflow is designed to front-load effort on the screens that matter most. Teams typically find they get to a reviewable full-app prototype faster than traditional approaches, with higher consistency across screens.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <h4>What happens when requirements change mid-project?</h4>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Update the discovery doc, re-run the plan step to update the screen inventory, and regenerate affected screens. Because AI-generated screens are derived from the design system, changes propagate automatically. Human-designed screens may need manual updates, but there are fewer of them.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><a href="workflow-explainer.html">← Back to Overview</a> • Built with Claude Code</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(item) {
+            // Close other items
+            document.querySelectorAll('.faq-item.expanded').forEach(el => {
+                if (el !== item) el.classList.remove('expanded');
+            });
+            // Toggle this item
+            item.classList.toggle('expanded');
+        }
+
+        // Simple scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step-walkthrough, .tip-card, .conflict-scenario, .artifact-example, .faq-item, .other-artifact').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

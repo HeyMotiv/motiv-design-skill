@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0">
+    <title>Welcome — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+
+            /* Lava lamp blob colors - light and optimistic */
+            --blob-pink: #FECDD3;
+            --blob-peach: #FEF3C7;
+            --blob-lavender: #E9D5FF;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+
+            /* Radii */
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: transparent;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #FFFDF7;
+        }
+
+        /* ===========================================
+           LAVA LAMP ANIMATED BACKGROUND
+           =========================================== */
+
+        .lava-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            background: linear-gradient(
+                180deg,
+                #FFFDF7 0%,
+                #FFFFFF 30%,
+                #FFFBFC 60%,
+                #FFF5F8 100%
+            );
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            mix-blend-mode: multiply;
+        }
+
+        .blob-pink {
+            width: 500px;
+            height: 500px;
+            background: var(--blob-pink);
+            top: -100px;
+            left: -100px;
+            animation: lava-pink 12s ease-in-out infinite;
+        }
+
+        @keyframes lava-pink {
+            0%, 100% {
+                transform: translate(-20%, -10%) scale(1) rotate(0deg);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            25% {
+                transform: translate(10%, 20%) scale(1.1) rotate(90deg);
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+            50% {
+                transform: translate(30%, 50%) scale(0.95) rotate(180deg);
+                border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%;
+            }
+            75% {
+                transform: translate(-10%, 30%) scale(1.05) rotate(270deg);
+                border-radius: 40% 30% 60% 50% / 60% 70% 30% 40%;
+            }
+        }
+
+        .blob-peach {
+            width: 450px;
+            height: 450px;
+            background: var(--blob-peach);
+            right: -150px;
+            top: 30%;
+            animation: lava-peach 10s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+
+        @keyframes lava-peach {
+            0%, 100% {
+                transform: translate(20%, 0%) scale(1) rotate(0deg);
+                border-radius: 40% 60% 60% 40% / 70% 30% 70% 30%;
+            }
+            33% {
+                transform: translate(-30%, 40%) scale(1.15) rotate(120deg);
+                border-radius: 60% 40% 30% 70% / 40% 60% 40% 60%;
+            }
+            66% {
+                transform: translate(0%, 80%) scale(0.9) rotate(240deg);
+                border-radius: 30% 70% 50% 50% / 60% 30% 60% 40%;
+            }
+        }
+
+        .blob-lavender {
+            width: 480px;
+            height: 480px;
+            background: var(--blob-lavender);
+            bottom: -100px;
+            left: -50px;
+            animation: lava-lavender 8s ease-in-out infinite;
+            animation-delay: -5s;
+        }
+
+        @keyframes lava-lavender {
+            0%, 100% {
+                transform: translate(0%, 0%) scale(1) rotate(0deg);
+                border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%;
+            }
+            25% {
+                transform: translate(60%, -20%) scale(1.1) rotate(90deg);
+                border-radius: 50% 50% 30% 70% / 50% 50% 50% 50%;
+            }
+            50% {
+                transform: translate(100%, 10%) scale(0.85) rotate(180deg);
+                border-radius: 30% 70% 70% 30% / 70% 30% 50% 60%;
+            }
+            75% {
+                transform: translate(40%, 20%) scale(1.05) rotate(270deg);
+                border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+            }
+        }
+
+        .blob-accent {
+            width: 300px;
+            height: 300px;
+            filter: blur(60px);
+            opacity: 0.35;
+        }
+
+        .blob-accent-1 {
+            background: #FECACA;
+            top: 20%;
+            left: 30%;
+            animation: accent-drift 15s ease-in-out infinite;
+        }
+
+        .blob-accent-2 {
+            background: #DDD6FE;
+            top: 50%;
+            right: -50px;
+            animation: accent-drift 13s ease-in-out infinite reverse;
+            animation-delay: -4s;
+        }
+
+        @keyframes accent-drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.2); }
+            50% { transform: translate(-30px, 50px) scale(0.8); }
+            75% { transform: translate(20px, 20px) scale(1.1); }
+        }
+
+        /* ===========================================
+           CONTENT LAYOUT
+           =========================================== */
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-xl);
+            padding-top: 70px;
+        }
+
+        /* ===========================================
+           LOGO & HEADLINE
+           =========================================== */
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-sm);
+            line-height: 1;
+        }
+
+        .headline {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+            margin-bottom: var(--space-lg);
+        }
+
+        .subheadline {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-2xl);
+        }
+
+        /* ===========================================
+           VALUE PROPS
+           =========================================== */
+
+        .value-props {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .value-prop {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+        }
+
+        .value-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .value-dot-1 { background: linear-gradient(135deg, #F9A8D4, #EC4899); }
+        .value-dot-2 { background: linear-gradient(135deg, #FDBA74, #F97316); }
+        .value-dot-3 { background: linear-gradient(135deg, #C4B5FD, #8B5CF6); }
+
+        .value-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .value-text p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        /* ===========================================
+           SOCIAL PROOF
+           =========================================== */
+
+        .social-proof {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .avatars {
+            display: flex;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-left: -8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar-1 { background: linear-gradient(135deg, #FBCFE8, #F9A8D4); }
+        .avatar-2 { background: linear-gradient(135deg, #DDD6FE, #C4B5FD); }
+        .avatar-3 { background: linear-gradient(135deg, #FED7AA, #FDBA74); }
+        .avatar-4 { background: linear-gradient(135deg, #A7F3D0, #6EE7B7); }
+
+        .social-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .social-text strong {
+            color: var(--color-text-primary);
+        }
+
+        /* ===========================================
+           CTA BUTTONS
+           =========================================== */
+
+        .cta-section {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            padding: 18px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="lava-bg">
+            <div class="blob blob-pink"></div>
+            <div class="blob blob-peach"></div>
+            <div class="blob blob-lavender"></div>
+            <div class="blob blob-accent blob-accent-1"></div>
+            <div class="blob blob-accent blob-accent-2"></div>
+        </div>
+
+        <div class="content">
+            <h1 class="logo">Motiv</h1>
+            <h2 class="headline">Put money on yourself.<br>Win it back.</h2>
+            <p class="subheadline">Join fitness challenges with real stakes. Show up, hit your goals, and earn your money back — plus a share of the pot from those who didn't.</p>
+
+            <div class="value-props">
+                <div class="value-prop">
+                    <div class="value-dot value-dot-1"></div>
+                    <div class="value-text">
+                        <h3>Choose your stakes</h3>
+                        <p>$10 to $50 — whatever motivates you</p>
+                    </div>
+                </div>
+                <div class="value-prop">
+                    <div class="value-dot value-dot-2"></div>
+                    <div class="value-text">
+                        <h3>Move your way</h3>
+                        <p>30 minutes, 5 days a week</p>
+                    </div>
+                </div>
+                <div class="value-prop">
+                    <div class="value-dot value-dot-3"></div>
+                    <div class="value-text">
+                        <h3>Split the pot</h3>
+                        <p>Completers earn back more than they put in</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-proof">
+                <div class="avatars">
+                    <div class="avatar avatar-1">👩</div>
+                    <div class="avatar avatar-2">👨</div>
+                    <div class="avatar avatar-3">👩</div>
+                    <div class="avatar avatar-4">👨</div>
+                </div>
+                <p class="social-text"><strong>12,847 people</strong> showed up this week</p>
+            </div>
+
+            <div class="cta-section">
+                <button class="btn-primary">
+                    Start my first challenge
+                    <span>→</span>
+                </button>
+                <button class="btn-ghost">I already have an account</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
