@@ -232,6 +232,14 @@
             background: linear-gradient(90deg, #ef4444, #f97316);
         }
 
+        .insight-section .pain-point-number {
+            color: var(--color-accent);
+        }
+
+        .insight-section .goal-pain-points {
+            margin-top: 2rem;
+        }
+
         .problem-card h3 {
             font-size: 1.125rem;
             font-weight: 600;
@@ -335,6 +343,48 @@
 
         .callout strong {
             color: var(--color-text);
+        }
+
+        /* Pain Points */
+        .goal-pain-points {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .pain-point {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--color-surface);
+            align-items: start;
+        }
+
+        .pain-point-number {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #ef4444;
+            opacity: 0.6;
+            padding-top: 0.125rem;
+        }
+
+        .pain-point-content h3 {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .pain-point-content p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
         }
 
         /* Goal Statement */
@@ -1013,30 +1063,46 @@
             border: 1px solid var(--color-border);
             border-radius: 12px;
             padding: 1.5rem;
-            text-align: center;
+            text-align: left;
         }
 
         .classification-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1rem;
+            width: 48px;
+            height: 48px;
+            margin: 0 0 1rem;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 1.25rem;
+        }
+
+        .color-dot {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .color-dot-inline {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 2px;
         }
 
         .classification-card.human-critical .classification-icon {
-            background: rgba(239, 68, 68, 0.2);
+            background: var(--color-human-dim);
         }
 
         .classification-card.human-preferred .classification-icon {
-            background: rgba(234, 179, 8, 0.2);
+            background: rgba(251, 191, 36, 0.2);
         }
 
         .classification-card.ai-extended .classification-icon {
-            background: rgba(34, 197, 94, 0.2);
+            background: var(--color-ai-dim);
         }
 
         .classification-card h3 {
@@ -1318,7 +1384,7 @@
 
         .example-card {
             background: transparent;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease;
         }
@@ -1336,6 +1402,109 @@
             align-items: center;
             height: 320px;
             overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Lightbox */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 90vh;
+        }
+
+        .lightbox-phone {
+            flex-shrink: 0;
+        }
+
+        .lightbox-phone iframe {
+            width: 390px;
+            height: 844px;
+            border: none;
+            border-radius: 40px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-info {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .lightbox-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .lightbox-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .lightbox-info p {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: var(--color-surface-elevated);
+        }
+
+        @media (max-width: 900px) {
+            .lightbox-content {
+                flex-direction: column;
+            }
+            .lightbox-phone iframe {
+                width: 300px;
+                height: 650px;
+            }
         }
 
         .example-preview .iframe-wrapper {
@@ -1462,14 +1631,53 @@
     <!-- What We're Doing -->
     <section id="goal">
         <div class="container">
-            <span class="section-label">The Goal</span>
-            <h2>Higher Quality, Less Effort</h2>
+            <span class="section-label">The Problem</span>
+            <h2>AI is changing what designers produce. The role needs to evolve with it.</h2>
             <p class="section-intro">
-                Modern apps have 50-100+ screens. With traditional processes, quality degrades as you scale—later screens get less attention, consistency slips, edge cases get missed.
+                Building products got easier. Designing the right experience—the flows, the priorities, the details that make it all work—didn't.
             </p>
-            <div class="goal-statement">
-                <p><strong>What if you could deliver the same scope at higher quality in less time—by focusing designer energy where it matters most?</strong></p>
-                <p>That's what this workflow enables. Humans define the vision. AI propagates it everywhere with perfect consistency.</p>
+
+            <div class="goal-pain-points">
+                <div class="pain-point">
+                    <div class="pain-point-number">01</div>
+                    <div class="pain-point-content">
+                        <h3>Designers are being asked whether they're still needed</h3>
+                        <p>But the question misses the point. The value of design was never just producing interfaces—it's the decisions behind them.</p>
+                    </div>
+                </div>
+                <div class="pain-point">
+                    <div class="pain-point-number">02</div>
+                    <div class="pain-point-content">
+                        <h3>AI can generate interfaces, but it can't decide what to build, what to cut, or how it all connects</h3>
+                        <p>Without someone making those calls, AI produces work that looks finished but isn't coherent. The parts don't add up to a product.</p>
+                    </div>
+                </div>
+                <div class="pain-point">
+                    <div class="pain-point-number">03</div>
+                    <div class="pain-point-content">
+                        <h3>The gap between "looks done" and "is done" is exactly where design skill lives</h3>
+                        <p>Hierarchy, flow, state handling, edge cases, emotional tone—these are the things that separate output from a product that works. That skill doesn't go away because the tools got faster.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Challenge -->
+    <section id="challenge">
+        <div class="container">
+            <span class="section-label">The Challenge</span>
+            <h2>Design and AI aren't competing approaches. They're incomplete ones.</h2>
+            <p class="section-intro">Design teams are caught between two constraints.</p>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Design alone: it takes too long or requires too large a team</h3>
+                    <p>A real product isn't a handful of hero moments — it's hundreds of states, flows, edge cases, and platform variations that all need to feel intentional. Doing that well either takes a long time or a large, tightly coordinated team. Both are expensive, and coordination problems erode the consistency that makes a product feel whole.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>AI alone: it's fast, but it can't break past generic</h3>
+                    <p>AI can produce layouts, apply patterns, and generate plausible interfaces quickly. But it doesn't make product decisions — it doesn't know which flow matters most, where to break a pattern for emphasis, how to handle a failure gracefully, or when something technically correct still feels wrong. That last 40% — the hierarchy, pacing, edge cases, and emotional coherence — is where the experience actually comes together.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1479,61 +1687,167 @@
         <div class="container">
             <div class="insight-section">
                 <span class="section-label">The Approach</span>
-                <h2>Why Not Let AI Design Every Screen?</h2>
+                <h2>A methodology where designers set the standard and AI carries it forward.</h2>
                 <p class="section-intro">
-                    Modern AI models aren't just trained on data—they're shaped by RLHF to optimize for perceived quality, which tends to converge on standard design patterns ideal for routine user experiences. Without deliberate creative direction, outputs lack the distinctive brand identity that makes products memorable.
+                    Designers do the work only they can do. AI handles the rest.
                 </p>
 
-                <div class="insight-grid">
-                    <div class="insight-card human">
-                        <h4>Humans Excel At</h4>
-                        <ul>
-                            <li>Making unexpected creative choices that stand out</li>
-                            <li>Establishing emotional resonance and brand voice</li>
-                            <li>Creating a unique, ownable point of view</li>
-                        </ul>
+                <div class="goal-pain-points">
+                    <div class="pain-point">
+                        <div class="pain-point-number">01</div>
+                        <div class="pain-point-content">
+                            <h3>Designers define the quality bar, craft the critical experiences, and build the system everything else inherits from</h3>
+                            <p>The decisions that set the tone, establish patterns, and handle the hardest interactions are made by designers—with full creative energy.</p>
+                        </div>
                     </div>
-                    <div class="insight-card ai">
-                        <h4>AI Excels At</h4>
-                        <ul>
-                            <li>Following established patterns with perfect consistency</li>
-                            <li>Propagating design decisions to dozens of screens</li>
-                            <li>Maintaining quality on screen #75 identical to screen #1</li>
-                        </ul>
+                    <div class="pain-point">
+                        <div class="pain-point-number">02</div>
+                        <div class="pain-point-content">
+                            <h3>AI extends that system across the full product—constrained by real standards, not freestyling</h3>
+                            <p>AI works from explicit tokens, component specs, and interaction patterns the designer created. It's not guessing—it's following the system.</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="callout">
-                    <p>
-                        <strong>The insight:</strong> AI can make mediocre things quickly from scratch. It struggles to make something <em>above average</em> without creative direction.
-                        When humans design the key screens with a strong point of view, those decisions become the patterns AI can propagate.
-                        <strong>You're seeding the system with opinion.</strong>
-                    </p>
+                    <div class="pain-point">
+                        <div class="pain-point-number">03</div>
+                        <div class="pain-point-content">
+                            <h3>The result is better work, delivered predictably, with design decisions running through all of it</h3>
+                            <p>Every part of the product—whether hand-crafted or generated—reflects the same standards because it all comes from the same source of truth.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Problem -->
-    <section id="problem">
+    <!-- Examples Section -->
+    <section class="examples-section">
         <div class="container">
-            <span class="section-label">The Challenge</span>
-            <h2>Design at Scale is Hard</h2>
+            <span class="section-label">See It In Action</span>
+            <h2>Designers set the standard. AI carries it forward.</h2>
             <p class="section-intro">
-                Modern apps need dozens—sometimes hundreds—of screens. Traditional approaches force difficult tradeoffs.
+                From a real project: designers crafted the key moments, then AI generated the rest of the product using the same system.
             </p>
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <h3>Quality Degrades at Scale</h3>
-                    <p>Screen #50 doesn't get the same attention as screen #5. Settings pages get less love than onboarding. The details slip.</p>
+
+            <!-- Human-designed row -->
+            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-human); margin-bottom: 1.5rem; margin-top: 2rem;">Designed by humans</h4>
+            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-human);">
+                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
+                        <img src="examples/human-onboarding.png" alt="Motiv onboarding welcome screen" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Onboarding Welcome</h3>
+                        <p class="example-description">Sets the emotional tone, gradient palette, and typography hierarchy for the entire product.</p>
+                    </div>
                 </div>
-                <div class="problem-card">
-                    <h3>Consistency Drifts</h3>
-                    <p>Multiple designers + time pressure = subtle inconsistencies. Spacing drifts, colors vary, patterns diverge across the app.</p>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-human);">
+                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
+                        <img src="examples/human-dashboard.png" alt="Motiv challenge dashboard" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Challenge Dashboard</h3>
+                        <p class="example-description">Establishes data display, card hierarchy, progress patterns, and the encouragement tone.</p>
+                    </div>
                 </div>
-                <div class="problem-card">
-                    <h3>AI Alone is Generic</h3>
-                    <p>Pure AI generation regresses to the mean. Safe colors, standard layouts, familiar patterns. Nothing memorable or ownable.</p>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-human);">
+                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
+                        <img src="examples/human-special.png" alt="Motiv onboarding celebration" style="height: 100%; width: auto; object-fit: contain;">
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Creator Celebration</h3>
+                        <p class="example-description">Defines the emotional high point — how the product makes creators feel valued and seen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human-directed, AI-produced row -->
+            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-warning); margin-bottom: 1.5rem; margin-top: 3rem;">Co-Design: AI first pass, human refined</h4>
+            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/onboarding-welcome.html', 'Welcome Screen', 'Designer defined the gradient palette and emotional tone. AI produced the screen.', 'Co-Design', '#fbbf24')">
+                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/onboarding-welcome.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Welcome Screen</h3>
+                        <p class="example-description">Designer defined the gradient palette and emotional tone. AI produced the screen.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/personality-results.html', 'Personality Results', 'Designer set the reveal moment and visual impact. AI executed with the right tokens.', 'Co-Design', '#fbbf24')">
+                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/personality-results.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Personality Results</h3>
+                        <p class="example-description">Designer set the reveal moment and visual impact. AI executed with the right tokens.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/challenge-win.html', 'Challenge Win', 'Designer chose the celebration approach. AI built it with the right colors and motion.', 'Co-Design', '#fbbf24')">
+                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/challenge-win.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Challenge Win</h3>
+                        <p class="example-description">Designer chose the celebration approach. AI built it with the right colors and motion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI-generated row -->
+            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ai); margin-bottom: 1.5rem; margin-top: 3rem;">Generated by AI from the system</h4>
+            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/settings-main.html', 'Settings', 'AI applied the list pattern, spacing, and icon styling from the system.', 'AI Generated', '#22D3EE')">
+                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/settings-main.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Settings</h3>
+                        <p class="example-description">AI applied the list pattern, spacing, and icon styling from the system.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/challenge-history-empty.html', 'Empty State', 'AI generated an encouraging empty state using the brand colors and patterns.', 'AI Generated', '#22D3EE')">
+                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/challenge-history-empty.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Empty State</h3>
+                        <p class="example-description">AI generated an encouraging empty state using the brand colors and patterns.</p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/notification-settings.html', 'Notification Settings', 'AI used the toggle patterns and section grouping from the designer\'s work.', 'AI Generated', '#22D3EE')">
+                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
+                        <div class="iframe-wrapper">
+                            <iframe src="examples/notification-settings.html" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="example-content">
+                        <h3 class="example-title">Notification Settings</h3>
+                        <p class="example-description">AI used the toggle patterns and section grouping from the designer's work.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1542,17 +1856,17 @@
     <!-- Screen Classification (moved to top of workflow) -->
     <section id="classification">
         <div class="container">
-            <span class="section-label">Screen Classification</span>
-            <h2>Focus Creativity Where It Matters</h2>
+            <span class="section-label">How It Works</span>
+            <h2>Not every part of a product needs the same level of design attention.</h2>
             <p class="section-intro">
-                Designers create the keyframes—the screens that define how the product feels. AI fills in the gaps between them. We classify screens so you know where to focus your creative energy.
+                Some moments define how the product feels — onboarding, core features, emotional peaks. Others just need to follow the rules well. The designer's job isn't to design everything. It's to identify where design energy has the most impact, focus there, and let AI carry the rest using the standards they set. We use a simple classification to make that split clear.
             </p>
 
             <div class="classification-grid">
                 <div class="classification-card human-critical">
-                    <div class="classification-icon">🔴</div>
+                    <div class="classification-icon"><span class="color-dot" style="background: var(--color-human);"></span></div>
                     <h3>Human-Critical</h3>
-                    <p>First impressions, emotional peaks, and conversion moments. These define how the product <em>feels</em>.</p>
+                    <p>First impressions, emotional peaks, and conversion moments that define how the product feels.</p>
                     <div class="classification-examples">
                         • Onboarding welcome<br>
                         • Core dashboard<br>
@@ -1561,9 +1875,9 @@
                     </div>
                 </div>
                 <div class="classification-card human-preferred">
-                    <div class="classification-icon">🟡</div>
-                    <h3>Human-Preferred</h3>
-                    <p>Important but not critical. May establish patterns that AI will reuse elsewhere.</p>
+                    <div class="classification-icon"><span class="color-dot" style="background: var(--color-warning);"></span></div>
+                    <h3>Co-Design</h3>
+                    <p>AI takes a first pass, then designers refine and tweak until it's right.</p>
                     <div class="classification-examples">
                         • Profile pages<br>
                         • Detail views<br>
@@ -1572,9 +1886,9 @@
                     </div>
                 </div>
                 <div class="classification-card ai-extended">
-                    <div class="classification-icon">🟢</div>
+                    <div class="classification-icon"><span class="color-dot" style="background: var(--color-ai);"></span></div>
                     <h3>AI-Extended</h3>
-                    <p>Screens that AI extends from your keyframes. Systematic, pattern-following, generated with perfect consistency.</p>
+                    <p>Systematic, pattern-following work that AI generates from the standards designers set.</p>
                     <div class="classification-examples">
                         • Settings screens<br>
                         • List views<br>
@@ -1585,20 +1899,20 @@
             </div>
 
             <div class="stats-intro">
-                <p><strong>Example breakdown for a typical 75-screen app:</strong></p>
+                <p><strong>Example breakdown for a typical product:</strong></p>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">~20</div>
-                    <div class="stat-label">Screens designed by humans</div>
+                    <div class="stat-value">~25%</div>
+                    <div class="stat-label">Designed by humans</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">~55</div>
-                    <div class="stat-label">Screens generated by AI</div>
+                    <div class="stat-value">~20%</div>
+                    <div class="stat-label">Co-designed: AI first pass, human refined</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">0 hrs</div>
-                    <div class="stat-label">Manually maintaining the system</div>
+                    <div class="stat-value">~55%</div>
+                    <div class="stat-label">Generated by AI from the system</div>
                 </div>
             </div>
             <p class="stats-caveat">Actual split varies by product. Apps with more unique interactions need more human design; apps with more systematic screens (settings, lists, forms) can lean heavier on AI generation.</p>
@@ -1663,7 +1977,7 @@
                             <p>AI generates a complete map of every screen the product needs. Each screen gets classified based on design impact.</p>
                             <ul>
                                 <li>Every screen inventoried with purpose and emotional intent</li>
-                                <li>Classified: Human-Critical 🔴, Human-Preferred 🟡, AI-Extended 🟢</li>
+                                <li>Classified: <span class="color-dot-inline" style="background: var(--color-human);"></span> Human-Critical, <span class="color-dot-inline" style="background: var(--color-warning);"></span> Co-Design, <span class="color-dot-inline" style="background: var(--color-ai);"></span> AI-Extended</li>
                                 <li>Flow connections mapped (what leads to what)</li>
                                 <li>Required states identified (loading, empty, error)</li>
                             </ul>
@@ -1715,8 +2029,8 @@
                         <div class="substep-content">
                             <p>Designers focus full creative energy on the screens that define the product's soul. Work in Figma or code—whatever feels right.</p>
                             <ul>
-                                <li>Design 🔴 Human-Critical screens first (onboarding, core features, emotional peaks)</li>
-                                <li>Move to 🟡 Human-Preferred screens (important flows, pattern-setters)</li>
+                                <li>Design <span class="color-dot-inline" style="background: var(--color-human);"></span> Human-Critical screens first (onboarding, core features, emotional peaks)</li>
+                                <li>Move to <span class="color-dot-inline" style="background: var(--color-warning);"></span> Co-Design screens (important flows, pattern-setters)</li>
                                 <li>Establish visual language, component patterns, and emotional tone</li>
                                 <li>Make creative choices AI would never make</li>
                             </ul>
@@ -1757,7 +2071,7 @@
                             <h4>Generate Remaining Screens</h4>
                         </div>
                         <div class="substep-content">
-                            <p>Using the extracted design system, AI generates all 🟢 AI-Extended screens. These follow your patterns perfectly because they're derived from your actual designs.</p>
+                            <p>Using the extracted design system, AI generates all <span class="color-dot-inline" style="background: var(--color-ai);"></span> AI-Extended screens. These follow your patterns perfectly because they're derived from your actual designs.</p>
                             <ul>
                                 <li>Settings screens generated with correct spacing and typography</li>
                                 <li>Detail views follow established component patterns</li>
@@ -1867,7 +2181,7 @@
                     </div>
                     <div class="iteration-point">
                         <h4>Promote a Screen</h4>
-                        <p>An AI-generated screen needs more love? Move it to Human-Preferred, design it yourself, and the extracted patterns can improve future generations.</p>
+                        <p>An AI-generated screen needs more love? Move it to Co-Design, design it yourself, and the extracted patterns can improve future generations.</p>
                     </div>
                 </div>
             </div>
@@ -1879,40 +2193,38 @@
         <div class="container">
             <div class="role-section">
                 <span class="section-label">For Designers</span>
-                <h2>Your Role Evolves, Not Disappears</h2>
+                <h2>What changes — and what doesn't</h2>
                 <p class="section-intro">
-                    This workflow amplifies what makes designers valuable—creative problem-solving—while offloading tedious consistency work.
+                    The core work is the same: understanding problems, making decisions, shaping how a product feels. What changes is where you spend your time.
                 </p>
 
                 <div class="role-comparison">
                     <div class="role-column before">
                         <h4>Before: Time Spent On</h4>
                         <ul>
-                            <li>Designing 75 screens at varying quality</li>
-                            <li>Manually maintaining consistency</li>
-                            <li>Creating specs that get outdated</li>
-                            <li>Repeating patterns across screens</li>
-                            <li>Chasing down edge cases late</li>
+                            <li>Producing every view at varying quality</li>
+                            <li>Manually maintaining consistency across the product</li>
+                            <li>Creating specs that get outdated immediately</li>
+                            <li>Repeating established patterns by hand</li>
+                            <li>Catching edge cases late in the process</li>
                         </ul>
                     </div>
                     <div class="role-arrow">→</div>
                     <div class="role-column after">
                         <h4>After: Time Spent On</h4>
                         <ul>
-                            <li>Designing 20-25 key screens exceptionally well</li>
-                            <li>Establishing the product's unique voice</li>
-                            <li>Reviewing AI output for emotional coherence</li>
-                            <li>Iterating on creative direction</li>
-                            <li>Solving novel design problems</li>
+                            <li>Making the critical decisions that shape the product</li>
+                            <li>Designing the key moments exceptionally well</li>
+                            <li>Defining the standards the whole system inherits</li>
+                            <li>Reviewing AI output and directing refinements</li>
+                            <li>Solving the problems that don't have patterns yet</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="callout" style="margin-top: 2rem;">
                     <p>
-                        <strong>The shift:</strong> You're not being replaced—you're being promoted.
-                        From production designer (make all the screens) to creative director (define the vision, guide the system).
-                        Your taste and judgment become the quality bar AI must meet.
+                        <strong>The shift:</strong> Designers work at a higher altitude — focusing on the decisions and standards that matter most, while AI carries that work across the full product. The skill is the same. The leverage is different.
                     </p>
                 </div>
             </div>
@@ -1963,172 +2275,6 @@
         </div>
     </section>
 
-    <!-- Examples Section -->
-    <section class="examples-section">
-        <div class="container">
-            <span class="section-label">See It In Action</span>
-            <h2>AI-Generated Examples</h2>
-            <p class="section-intro">
-                These screens were generated entirely by AI using the Motiv design system.
-                Notice how the tokens (colors, spacing, typography) are applied consistently across different screen types.
-            </p>
-
-            <div class="examples-grid">
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/settings-main.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Settings Screen</h3>
-                        <p class="example-description">
-                            A classic list-based settings screen. AI applied the grouped list pattern,
-                            icon styling, and semantic spacing from the design system.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">spacing.md</span>
-                            <span class="token-tag">radii.lg</span>
-                            <span class="token-tag">colors.border</span>
-                        </div>
-                        <a href="examples/settings-main.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/notification-settings.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Notification Settings</h3>
-                        <p class="example-description">
-                            Toggle-based settings with sections. AI used the brand purple for active states
-                            and applied consistent label + description patterns.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">colors.brand.secondary</span>
-                            <span class="token-tag">typography.label</span>
-                            <span class="token-tag">spacing.sm</span>
-                        </div>
-                        <a href="examples/notification-settings.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/challenge-history-empty.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Empty State</h3>
-                        <p class="example-description">
-                            Challenge history with no data. AI generated an encouraging empty state
-                            using the brand colors and button patterns from the system.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">colors.brand.primary</span>
-                            <span class="token-tag">typography.display</span>
-                            <span class="token-tag">radii.full</span>
-                        </div>
-                        <a href="examples/challenge-history-empty.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/onboarding-welcome.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Welcome Screen</h3>
-                        <p class="example-description">
-                            Onboarding entry point with animated gradient background.
-                            AI applied the pink gradient palette and testimonial card pattern.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">gradients.pink</span>
-                            <span class="token-tag">typography.display-large</span>
-                            <span class="token-tag">cards.profile</span>
-                        </div>
-                        <a href="examples/onboarding-welcome.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/personality-results.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Personality Results</h3>
-                        <p class="example-description">
-                            The big reveal moment after onboarding quiz.
-                            AI used mint gradient for growth/vitality and display typography for impact.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">gradients.mint</span>
-                            <span class="token-tag">typography.display-medium</span>
-                            <span class="token-tag">cards.stat</span>
-                        </div>
-                        <a href="examples/personality-results.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview">
-                        <span class="example-badge">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/challenge-win.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Challenge Win</h3>
-                        <p class="example-description">
-                            Celebration screen with dark immersive background and confetti.
-                            AI applied celebration colors, stat cards, and success states.
-                        </p>
-                        <div class="example-tokens">
-                            <span class="token-tag">colors.celebration</span>
-                            <span class="token-tag">typography.stat-large</span>
-                            <span class="token-tag">colors.success</span>
-                        </div>
-                        <a href="examples/challenge-win.html" target="_blank" class="example-link">
-                            Open full screen →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="examples-note">
-                <h4>How This Works</h4>
-                <p>
-                    These screens weren't designed individually. AI read the Motiv design system tokens
-                    (colors, typography, spacing, components) and generated screens that match the
-                    human-designed keyframes. The CSS comments in each file show exactly which tokens were used.
-                </p>
-            </div>
-        </div>
-    </section>
 
     <!-- Ready to Start CTA -->
     <section id="next-steps" style="padding: 4rem 0;">
@@ -2141,6 +2287,21 @@
         </div>
     </section>
 
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+            <div class="lightbox-phone">
+                <iframe id="lightbox-iframe" src="" loading="lazy"></iframe>
+            </div>
+            <div class="lightbox-info">
+                <span class="lightbox-badge" id="lightbox-badge"></span>
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <p>Built with Claude Code • <a href="https://claude.ai/code">claude.ai/code</a></p>
@@ -2148,6 +2309,37 @@
     </footer>
 
     <script>
+        function openLightbox(src, title, description, badgeText, badgeColor) {
+            const overlay = document.getElementById('lightbox');
+            document.getElementById('lightbox-iframe').src = src;
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-description').textContent = description;
+            const badge = document.getElementById('lightbox-badge');
+            badge.textContent = badgeText;
+            badge.style.background = badgeColor;
+            badge.style.color = badgeColor === '#fbbf24' || badgeColor === '#22D3EE' ? '#0a0a0f' : 'white';
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === document.getElementById('lightbox') || event.target.closest('.lightbox-close')) {
+                const overlay = document.getElementById('lightbox');
+                overlay.classList.remove('active');
+                document.getElementById('lightbox-iframe').src = '';
+                document.body.style.overflow = '';
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('lightbox');
+                overlay.classList.remove('active');
+                document.getElementById('lightbox-iframe').src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
         function toggleFlow(item) {
             // Close other items
             document.querySelectorAll('.flow-item.expanded').forEach(el => {
@@ -2177,7 +2369,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.problem-card, .classification-card, .flow-item, .phase-container, .stat-card, .command-item, .artifact-card, .conflict-scenario, .iteration-point, .example-card').forEach(el => {
+        document.querySelectorAll('.pain-point, .problem-card, .classification-card, .flow-item, .phase-container, .stat-card, .command-item, .artifact-card, .conflict-scenario, .iteration-point, .example-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
