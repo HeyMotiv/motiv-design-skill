@@ -1,58 +1,53 @@
 {
   "$schema": "design-tokens-v1",
   "$type": "colors",
-  "$description": "Motiv app color tokens. Optimistic, light, inviting palette for busy moms showing up for themselves.",
+  "$description": "Motiv app color tokens. Warm, calm, emotionally mature palette. Trust, steadiness, and follow-through — not competition. Skews warmer and calmer for a predominantly female (≈70%), 35–55 audience.",
 
   "brand": {
     "primary": {
-      "value": "#1A1A1A",
-      "description": "Primary brand color. Use for main CTAs, key actions, and emphasis. Black conveys confidence and boldness.",
-      "usage": ["button-primary-bg", "heading-emphasis", "icon-primary"],
+      "value": "#C97A6A",
+      "description": "Primary Clay (Warm Rose-Clay). Primary brand color, key highlights, emphasis moments. Warm, human, emotionally resonant — signals care, commitment, and humanity.",
+      "usage": ["button-primary-bg", "key-highlight", "emphasis-moment", "brand-accent"],
       "contrast": {
         "onPrimary": "#FFFFFF",
-        "wcagAA": true,
-        "wcagAAA": true
+        "wcagAA": true
       },
       "states": {
-        "hover": "#2D2D2D",
-        "pressed": "#000000",
-        "disabled": "#9CA3AF"
+        "hover": "#B86B5C",
+        "pressed": "#A65D4F",
+        "disabled": "#D9AFA5"
       }
     },
     "secondary": {
-      "value": "#7C3AED",
-      "description": "Secondary brand color. Use for secondary actions, accents, and interactive highlights. Purple adds energy and optimism.",
-      "usage": ["button-secondary-bg", "link-text", "active-indicator", "progress-fill"],
+      "value": "#6B4E71",
+      "description": "Confidence Accent (Muted Plum). Creator emphasis, moments of authority, select CTAs. Mature, confident, emotionally rich — adds depth without skewing playful or aggressive.",
+      "usage": ["creator-emphasis", "authority-moment", "select-cta", "secondary-accent"],
       "contrast": {
         "onSecondary": "#FFFFFF",
         "wcagAA": true
       },
       "states": {
-        "hover": "#6D28D9",
-        "pressed": "#5B21B6",
-        "disabled": "#C4B5FD"
-      },
-      "variants": {
-        "light": "#8B5CF6",
-        "subtle": "#F5F3FF"
+        "hover": "#5C4162",
+        "pressed": "#4D3553",
+        "disabled": "#A890AD"
       }
     }
   },
 
   "text": {
     "primary": {
-      "value": "#1A1A1A",
-      "description": "Primary text color. Use for headings, body text, and important content.",
+      "value": "#2B2E34",
+      "description": "Primary Ink (Deep Slate). Primary text, headers, grounding contrast. Softer than black, modern, confident, emotionally neutral.",
       "usage": ["heading-text", "body-text", "label-text", "button-secondary-text"]
     },
     "secondary": {
-      "value": "#6B7280",
-      "description": "Secondary text color. Use for supporting text, captions, timestamps, and metadata.",
+      "value": "#8FA6A0",
+      "description": "Sage Neutral. Supporting text, secondary UI. Calm, grounded, restorative.",
       "usage": ["caption-text", "helper-text", "timestamp", "subtitle"]
     },
     "tertiary": {
-      "value": "#9CA3AF",
-      "description": "Tertiary text color. Use for placeholders, disabled text, and very subtle labels.",
+      "value": "#B8C4C0",
+      "description": "Light sage. Placeholders, disabled text, very subtle labels.",
       "usage": ["placeholder-text", "disabled-text", "inactive-label"]
     },
     "inverse": {
@@ -61,12 +56,12 @@
       "usage": ["button-primary-text", "dark-surface-text", "gradient-overlay-text"]
     },
     "link": {
-      "value": "#7C3AED",
-      "description": "Link text color. Use for interactive inline text.",
+      "value": "#6B4E71",
+      "description": "Link text color. Uses Confidence Accent for interactive inline text.",
       "usage": ["inline-link", "learn-more", "see-all"],
       "states": {
-        "hover": "#6D28D9",
-        "visited": "#5B21B6"
+        "hover": "#5C4162",
+        "visited": "#4D3553"
       }
     }
   },
@@ -75,16 +70,16 @@
     "primary": {
       "value": "#FFFFFF",
       "description": "Primary background. Main app and screen background.",
-      "usage": ["screen-bg", "card-bg", "modal-bg", "input-bg"]
+      "usage": ["screen-bg", "modal-bg", "input-bg"]
     },
     "secondary": {
-      "value": "#F9FAFB",
-      "description": "Secondary background. Subtle contrast for sections and grouped content.",
-      "usage": ["section-bg", "list-bg", "expanded-section-bg"]
+      "value": "#F3E6E2",
+      "description": "Soft Blush (Light Clay). Backgrounds, cards, section fills. Creates warmth and approachability — makes concepts feel safe and non-threatening.",
+      "usage": ["card-bg", "section-bg", "list-bg", "expanded-section-bg"]
     },
     "tertiary": {
-      "value": "#F3F4F6",
-      "description": "Tertiary background. Higher contrast for chips, tags, and code blocks.",
+      "value": "#E7D9C9",
+      "description": "Warm Sand. Subtle structure, inactive areas. Organic and natural — avoids cold greys while providing hierarchy.",
       "usage": ["chip-bg", "tag-bg", "stat-card-bg"]
     },
     "elevated": {
@@ -96,23 +91,23 @@
 
   "border": {
     "default": {
-      "value": "#E5E7EB",
-      "description": "Default border color. Input borders, card outlines, dividers.",
+      "value": "#E7D9C9",
+      "description": "Warm Sand. Default border color — organic and natural hierarchy.",
       "usage": ["input-border", "card-border", "divider"]
     },
     "subtle": {
-      "value": "#F3F4F6",
-      "description": "Subtle border color. Very light separators.",
+      "value": "#F3E6E2",
+      "description": "Soft Blush. Very light separators.",
       "usage": ["list-separator", "section-divider"]
     },
     "strong": {
-      "value": "#D1D5DB",
-      "description": "Strong border color. Emphasized boundaries, focused inputs.",
+      "value": "#D4C4B5",
+      "description": "Warm Sand darker. Emphasized boundaries, focused inputs.",
       "usage": ["input-focus-border", "selected-card-border"]
     },
     "focus": {
-      "value": "#C4B5FD",
-      "description": "Focus ring color. Accessibility focus indicator.",
+      "value": "#C97A6A",
+      "description": "Primary Clay focus ring. Accessibility focus indicator.",
       "usage": ["focus-ring"]
     }
   },
@@ -171,12 +166,12 @@
       }
     },
     "error": {
-      "value": "#EF4444",
-      "description": "Error state. Errors, missed goals, invalid input.",
-      "usage": ["error-icon", "error-text", "invalid-input", "missed-challenge"],
+      "value": "#B8574E",
+      "description": "Boundary / Error. Disqualified holds, warnings, constraints. Firm but not alarming — communicates boundaries without shame or punishment.",
+      "usage": ["error-icon", "error-text", "invalid-input", "missed-challenge", "disqualified-hold"],
       "variants": {
-        "light": "#FEE2E2",
-        "dark": "#DC2626"
+        "light": "#F3E6E2",
+        "dark": "#9A4A42"
       }
     },
     "info": {
@@ -231,8 +226,8 @@
       "usage": ["list-item-pressed", "card-pressed"]
     },
     "selected": {
-      "value": "#F5F3FF",
-      "description": "Selected item background (purple tint).",
+      "value": "#F3E6E2",
+      "description": "Selected item background (warm blush tint).",
       "usage": ["selected-chip", "selected-option", "active-nav-item"]
     }
   },

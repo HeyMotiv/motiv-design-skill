@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=780, initial-scale=1.0">
     <title>Creator Onboarding Flow — Motiv (AI-Generated Example)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=Lora:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Lora:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root {
-            --color-brand-primary: #1A1A1A;
-            --color-brand-secondary: #7C3AED;
+            --color-brand-primary: #2B2E34;
+            --color-brand-secondary: #C97A6A;
             --color-text-primary: #1A1A1A;
             --color-text-secondary: #6B7280;
             --color-text-tertiary: #9CA3AF;
@@ -21,13 +21,13 @@
             --color-border-default: #E5E7EB;
             --color-interaction-selected: #F5F3FF;
 
-            --blob-lime: #F2FFA0;
-            --blob-mint: #B0FFDE;
+            --blob-lime: #EDF2CA;
+            --blob-mint: #D5EDE2;
             --blob-sage: #D9EAEA;
-            --blob-pink: #FF83C7;
-            --blob-gold: #FFE74C;
+            --blob-pink: #E8B4A8;
+            --blob-gold: #F0DBBD;
 
-            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-display: 'Source Serif 4', Georgia, serif;
             --font-body: 'Roboto', system-ui, sans-serif;
 
             --space-xxs: 4px;
@@ -167,7 +167,7 @@
             transition: background 0.8s ease;
         }
 
-        .lava-bg.green-chapter { background: #FAFFE7; }
+        .lava-bg.green-chapter { background: #F5F5E8; }
 
         .lava-layer {
             position: absolute;
@@ -185,16 +185,17 @@
             filter: blur(40px);
         }
 
-        /* ---- Warm blobs: purple → pink → gold (screens 0-4) ---- */
+        /* ---- Warm blobs: rose pair + honey pair (screens 0-4) ---- */
         /* All anchored bottom-right, animations sweep along edges */
 
+        /* Rose pair — pink-dominant */
         .blob-wa {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(230, 166, 255, 0.35) 0%,
-                rgba(255, 131, 199, 0.25) 40%,
-                rgba(255, 231, 76, 0.25) 100%
+                rgba(235, 160, 155, 0.40) 0%,
+                rgba(242, 180, 172, 0.28) 40%,
+                rgba(248, 210, 195, 0.15) 100%
             );
             bottom: -200px; right: -200px;
             animation: drift-a 14s ease-in-out infinite;
@@ -204,22 +205,23 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(230, 166, 255, 0.28) 0%,
-                rgba(255, 131, 199, 0.2) 40%,
-                rgba(255, 231, 76, 0.2) 100%
+                rgba(240, 168, 162, 0.34) 0%,
+                rgba(245, 188, 178, 0.22) 40%,
+                rgba(250, 215, 200, 0.12) 100%
             );
             bottom: -80px; right: -80px;
             animation: drift-a2 16s ease-in-out infinite;
             animation-delay: -6s;
         }
 
+        /* Honey pair — golden/sand-dominant */
         .blob-wb {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(230, 166, 255, 0.35) 0%,
-                rgba(255, 131, 199, 0.25) 40%,
-                rgba(255, 231, 76, 0.25) 100%
+                rgba(240, 208, 155, 0.38) 0%,
+                rgba(245, 218, 175, 0.26) 40%,
+                rgba(250, 235, 210, 0.14) 100%
             );
             bottom: -250px; right: -120px;
             animation: drift-b 12s ease-in-out infinite;
@@ -230,9 +232,9 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(230, 166, 255, 0.28) 0%,
-                rgba(255, 131, 199, 0.2) 40%,
-                rgba(255, 231, 76, 0.2) 100%
+                rgba(242, 212, 160, 0.32) 0%,
+                rgba(248, 222, 182, 0.20) 40%,
+                rgba(252, 238, 215, 0.10) 100%
             );
             bottom: -100px; right: -280px;
             animation: drift-b2 18s ease-in-out infinite;
@@ -242,13 +244,14 @@
         /* ---- Green blobs: lime + mint (screen 5+) ---- */
         /* Same corner anchoring as warm blobs */
 
+        /* Lime pair — yellow-green dominant */
         .blob-ga {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(242, 255, 160, 1) 0%,
-                rgba(176, 255, 222, 0.5) 60%,
-                rgba(217, 234, 234, 0.25) 100%
+                rgba(225, 238, 165, 0.95) 0%,
+                rgba(215, 235, 185, 0.50) 50%,
+                rgba(240, 245, 230, 0.20) 100%
             );
             bottom: -200px; right: -200px;
             animation: drift-a 14s ease-in-out infinite;
@@ -258,22 +261,23 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(242, 255, 160, 0.85) 0%,
-                rgba(176, 255, 222, 0.4) 60%,
-                rgba(217, 234, 234, 0.15) 100%
+                rgba(228, 240, 172, 0.80) 0%,
+                rgba(218, 236, 190, 0.40) 50%,
+                rgba(242, 246, 232, 0.15) 100%
             );
             bottom: -80px; right: -80px;
             animation: drift-a2 16s ease-in-out infinite;
             animation-delay: -6s;
         }
 
+        /* Mint pair — blue-green dominant */
         .blob-gb {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(176, 255, 222, 0.9) 0%,
-                rgba(242, 255, 160, 0.6) 40%,
-                rgba(250, 255, 231, 0.4) 100%
+                rgba(175, 222, 205, 0.85) 0%,
+                rgba(195, 230, 215, 0.50) 50%,
+                rgba(225, 240, 235, 0.25) 100%
             );
             bottom: -250px; right: -120px;
             animation: drift-b 12s ease-in-out infinite;
@@ -284,9 +288,9 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(176, 255, 222, 0.75) 0%,
-                rgba(242, 255, 160, 0.5) 40%,
-                rgba(250, 255, 231, 0.3) 100%
+                rgba(180, 225, 208, 0.70) 0%,
+                rgba(200, 232, 218, 0.40) 50%,
+                rgba(228, 242, 237, 0.20) 100%
             );
             bottom: -100px; right: -280px;
             animation: drift-b2 18s ease-in-out infinite;
@@ -297,29 +301,29 @@
 
         @keyframes drift-a {
             0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            25% { transform: translate(-10%, -35%) scale(1.08) rotate(45deg); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            50% { transform: translate(-5%, -70%) scale(0.95) rotate(90deg); border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%; }
-            75% { transform: translate(-20%, -40%) scale(1.05) rotate(135deg); border-radius: 40% 30% 60% 50% / 60% 70% 30% 40%; }
+            25% { transform: translate(-20%, -50%) scale(1.18) rotate(60deg); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { transform: translate(-10%, -85%) scale(0.85) rotate(120deg); border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%; }
+            75% { transform: translate(-35%, -45%) scale(1.12) rotate(180deg); border-radius: 40% 30% 60% 50% / 60% 70% 30% 40%; }
         }
 
         @keyframes drift-a2 {
             0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; }
-            33% { transform: translate(-50%, -8%) scale(1.1) rotate(60deg); border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; }
-            66% { transform: translate(-25%, -20%) scale(0.9) rotate(120deg); border-radius: 40% 60% 60% 40% / 60% 40% 50% 50%; }
+            33% { transform: translate(-65%, -15%) scale(1.2) rotate(80deg); border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; }
+            66% { transform: translate(-30%, -35%) scale(0.82) rotate(160deg); border-radius: 40% 60% 60% 40% / 60% 40% 50% 50%; }
         }
 
         @keyframes drift-b {
             0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; }
-            25% { transform: translate(-15%, -45%) scale(1.1) rotate(60deg); border-radius: 50% 50% 30% 70% / 50% 50% 50% 50%; }
-            50% { transform: translate(-45%, -65%) scale(0.9) rotate(120deg); border-radius: 30% 70% 70% 30% / 70% 30% 50% 60%; }
-            75% { transform: translate(-30%, -20%) scale(1.05) rotate(180deg); border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
+            25% { transform: translate(-25%, -60%) scale(1.2) rotate(80deg); border-radius: 50% 50% 30% 70% / 50% 50% 50% 50%; }
+            50% { transform: translate(-55%, -80%) scale(0.82) rotate(160deg); border-radius: 30% 70% 70% 30% / 70% 30% 50% 60%; }
+            75% { transform: translate(-40%, -25%) scale(1.12) rotate(240deg); border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%; }
         }
 
         @keyframes drift-b2 {
             0%, 100% { transform: translate(0, 0) scale(1); border-radius: 55% 45% 45% 55% / 45% 55% 55% 45%; }
-            25% { transform: translate(-40px, -60px) scale(1.15); border-radius: 40% 60% 55% 45% / 55% 45% 40% 60%; }
-            50% { transform: translate(-80px, -30px) scale(0.85); border-radius: 60% 40% 40% 60% / 40% 60% 60% 40%; }
-            75% { transform: translate(-20px, -45px) scale(1.05); border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+            25% { transform: translate(-80px, -120px) scale(1.22); border-radius: 40% 60% 55% 45% / 55% 45% 40% 60%; }
+            50% { transform: translate(-160px, -60px) scale(0.78); border-radius: 60% 40% 40% 60% / 40% 60% 60% 40%; }
+            75% { transform: translate(-40px, -90px) scale(1.10); border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
         }
 
         /* ===========================================
@@ -399,8 +403,8 @@
             cursor: not-allowed;
         }
 
-        .btn-primary--purple { background: var(--color-brand-secondary); }
-        .btn-primary--purple:hover:not(:disabled) { background: #6D28D9; }
+        .btn-primary--purple { background: #000000; }
+        .btn-primary--purple:hover:not(:disabled) { background: #2B2E34; }
 
         .btn-secondary {
             display: flex;
@@ -468,7 +472,7 @@
         .s0-wordmark {
             font-family: var(--font-display);
             font-size: 72px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             letter-spacing: -0.03em;
             line-height: 1;
@@ -492,7 +496,7 @@
             animation: fade-up 0.7s ease forwards;
             animation-delay: 0.3s;
         }
-        .s0-tagline strong { font-weight: 700; }
+        .s0-tagline strong { font-weight: 600; }
 
         .s0-body {
             font-size: 16px;
@@ -621,7 +625,7 @@
         .s1-logo {
             font-family: var(--font-display);
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 700;
             letter-spacing: -0.02em;
             color: var(--color-text-primary);
             text-align: center;
@@ -631,7 +635,7 @@
         .s1-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.01em;
@@ -766,7 +770,7 @@
         .loader-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.01em;
@@ -851,7 +855,7 @@
         .s3-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             margin-bottom: var(--space-sm);
@@ -878,7 +882,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 32px rgba(201, 122, 106, 0.30),
+                        0 2px 8px rgba(201, 122, 106, 0.12);
         }
 
         .profile-avatar-wrapper {
@@ -898,7 +903,7 @@
         .profile-initials {
             font-family: var(--font-display);
             font-size: 44px;
-            font-weight: 800;
+            font-weight: 700;
             color: rgba(255, 255, 255, 0.9);
             letter-spacing: -0.02em;
         }
@@ -959,7 +964,7 @@
         .s4-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.01em;
@@ -1154,7 +1159,7 @@
         .s5-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1.15;
             letter-spacing: -0.01em;
             color: var(--color-text-primary);
@@ -1197,7 +1202,7 @@
         .trait-name {
             font-family: var(--font-display);
             font-size: 26px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             margin-bottom: var(--space-xs);
         }
@@ -1349,8 +1354,8 @@
 
         .s6-headline {
             font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 800;
+            font-size: 32px;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.2;
             letter-spacing: -0.01em;
@@ -1415,7 +1420,7 @@
         .s7-headline {
             font-family: var(--font-display);
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.01em;
@@ -1450,7 +1455,7 @@
         .earnings-amount {
             font-family: var(--font-display);
             font-size: 52px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1;
             margin-bottom: var(--space-xs);
@@ -1541,7 +1546,7 @@
         .s8-headline {
             font-family: var(--font-display);
             font-size: 32px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.02em;
@@ -1580,107 +1585,159 @@
             box-sizing: border-box;
         }
 
-        /* Template card */
+        /* Template card — Hero collab detail */
         .s8-tpl-card {
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 24px rgba(255, 74, 255, 0.16);
+            width: 100%;
+            border-radius: 24px;
             overflow: hidden;
             transform: scale(0.88);
             opacity: 0.4;
             transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
         .s8-carousel-slide.active .s8-tpl-card {
             transform: scale(1);
             opacity: 1;
         }
 
-        .s8-card-header {
+        /* Hero section */
+        .s8-card-hero {
             position: relative;
-            padding: var(--space-lg) var(--space-lg) var(--space-md);
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px 22px 62px;
+            border-radius: 0 0 28px 28px;
             overflow: hidden;
         }
-        .s8-card-header-bg {
+        .s8-card-hero-bg {
             position: absolute;
             inset: 0;
-            opacity: 0.5;
+            overflow: hidden;
         }
-        .s8-card-header-content {
-            position: relative;
+        .s8-card-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0.25) 75%, rgba(0,0,0,0.5) 100%);
             z-index: 1;
         }
-
-        .s8-card-creator {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-sm);
+        .s8-card-hero-content {
+            position: relative;
+            z-index: 2;
         }
-        .s8-card-avatar {
-            width: 28px; height: 28px;
+
+        /* Creator pill */
+        .s8-creator-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-full);
+            padding: 5px 12px 5px 5px;
+            margin-bottom: 14px;
+        }
+        .s8-creator-pill-avatar {
+            width: 26px; height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
-        .s8-card-avatar .material-icons { font-size: 16px; color: rgba(255,255,255,0.9); }
-        .s8-card-creator-name { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); }
+        .s8-creator-pill-avatar .material-icons { font-size: 14px; color: rgba(255, 255, 255, 0.9); }
+        .s8-creator-pill-name { font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.01em; }
 
-        .s8-card-title {
-            font-size: 24px;
+        /* Hero title */
+        .s8-card-hero-title {
+            font-size: 34px;
             font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            margin-bottom: var(--space-xs);
+            color: #FFFFFF;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
-        .s8-card-meta {
+        .s8-card-hero-subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.35;
+            margin-top: 2px;
+        }
+
+        /* Stats section */
+        .s8-card-stats {
+            padding: 0 12px 12px;
+            position: relative;
+            z-index: 3;
+            display: flow-root;
+        }
+        .s8-stats-inner {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-top: -48px;
+            position: relative;
+        }
+        .s8-pool-row {
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
-            font-size: 13px;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .s8-pool-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             color: var(--color-text-tertiary);
+            margin-bottom: 1px;
         }
-        .s8-card-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-text-tertiary); }
-
-        .s8-card-body { padding: var(--space-sm) var(--space-lg) var(--space-lg); }
-        .s8-card-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: var(--space-sm); }
-
-        .s8-progress { margin-bottom: var(--space-sm); }
-        .s8-progress-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
-        .s8-progress-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-tertiary); }
-        .s8-progress-value { font-size: 11px; font-weight: 600; }
-        .s8-progress-track { height: 5px; border-radius: 3px; overflow: hidden; }
-        .s8-progress-fill { height: 100%; border-radius: 3px; }
-
-        .s8-tasks { display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--space-sm); }
-        .s8-task-item {
-            display: flex;
+        .s8-pool-amount {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        .s8-joined-badge {
+            display: inline-flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: 10px var(--space-sm);
-            border-radius: var(--radius-sm);
-            background: var(--color-bg-secondary);
+            gap: 5px;
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFFFFF;
         }
-        .s8-task-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .s8-task-icon .material-icons { font-size: 16px; }
-        .s8-task-text { flex: 1; }
-        .s8-task-day { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-tertiary); }
-        .s8-task-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
-        .s8-task-check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-border-default); flex-shrink: 0; }
-
-        .s8-card-cta {
+        .s8-joined-badge .material-icons { font-size: 16px; }
+        .s8-meta-row {
+            display: flex;
+            border-top: 1px solid var(--color-border-default);
+            padding-top: 14px;
+            margin-bottom: 16px;
+        }
+        .s8-meta-stat { flex: 1; text-align: center; }
+        .s8-meta-stat + .s8-meta-stat { border-left: 1px solid var(--color-border-default); }
+        .s8-meta-stat-value { font-size: 17px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
+        .s8-meta-stat-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); }
+        .s8-invite-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            padding: 12px 24px;
-            border: none;
+            gap: 8px;
+            padding: 11px 16px;
             border-radius: var(--radius-full);
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
+            background: var(--color-bg-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
         }
+        .s8-invite-row .material-icons { font-size: 18px; opacity: 0.6; }
 
         /* Bottom controls */
         .s8-bottom {
@@ -1744,7 +1801,7 @@
         .s9-headline {
             font-family: var(--font-display);
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             letter-spacing: -0.01em;
@@ -1813,6 +1870,82 @@
         }
         .detail-pill .material-icons { font-size: 16px; }
 
+        .detail-pill--tappable {
+            cursor: pointer;
+            transition: background 0.15s, box-shadow 0.15s;
+        }
+        .detail-pill--tappable:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .detail-pill--tappable:active {
+            transform: scale(0.97);
+        }
+        .detail-pill--tappable.active {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 1.5px var(--color-text-secondary);
+        }
+
+        .pill-editor {
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            margin-top: var(--space-xs);
+            animation: editorSlide 0.2s ease-out;
+        }
+        @keyframes editorSlide {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .pill-editor-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-xs);
+        }
+        .pill-editor-options {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        .pill-option {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            border: 1.5px solid transparent;
+            border-radius: var(--radius-full);
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .pill-option:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .pill-option--selected {
+            border-color: var(--color-text-primary);
+            color: var(--color-text-primary);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .pill-date-input {
+            width: 100%;
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+            border: 1.5px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            color-scheme: dark;
+        }
+        .pill-date-input:focus {
+            border-color: var(--color-text-secondary);
+        }
+
         .s9-cta {
             margin-top: auto;
             padding-top: var(--space-lg);
@@ -1849,7 +1982,7 @@
         .s10-headline {
             font-family: var(--font-display);
             font-size: 26px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.2;
             letter-spacing: -0.01em;
@@ -1879,7 +2012,7 @@
 
         .product-category {
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 0.04em;
             text-transform: uppercase;
             color: var(--color-brand-secondary);
@@ -1900,10 +2033,44 @@
         .product-remove .material-icons { font-size: 18px; }
         .product-remove:hover { color: var(--color-text-secondary); }
 
+        .product-body {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .product-thumb {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            font-size: 22px;
+            color: var(--color-text-tertiary);
+            transition: border-color var(--motion-fast) ease;
+        }
+
+        .product-thumb.has-image {
+            border-color: transparent;
+        }
+
+        .product-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .product-inputs {
             display: flex;
             flex-direction: column;
             gap: var(--space-xs);
+            flex: 1;
+            min-width: 0;
         }
 
         .product-input {
@@ -1920,6 +2087,24 @@
         }
         .product-input:focus { border-color: var(--color-brand-secondary); }
         .product-input::placeholder { color: var(--color-text-tertiary); }
+
+        .product-url-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .product-url-row .product-input {
+            flex: 1;
+            font-size: 12px;
+            padding: 8px var(--space-sm);
+        }
+
+        .product-url-row .material-icons {
+            font-size: 16px;
+            color: var(--color-text-tertiary);
+            flex-shrink: 0;
+        }
 
         .add-product-btn {
             display: flex;
@@ -1944,6 +2129,100 @@
             background: rgba(124, 58, 237, 0.03);
         }
         .add-product-btn .material-icons { font-size: 18px; }
+
+        .s10-context {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-xl);
+            display: flex;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .s10-context-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .s10-context p {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .s10-context strong {
+            color: var(--color-text-primary);
+        }
+
+        .s10-picks-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-xs);
+            flex-shrink: 0;
+        }
+
+        .s10-picks {
+            display: flex;
+            gap: var(--space-xs);
+            overflow-x: auto;
+            padding-bottom: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            -webkit-overflow-scrolling: touch;
+            flex-shrink: 0;
+        }
+        .s10-picks::-webkit-scrollbar { display: none; }
+
+        .s10-pick {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            padding: 6px 14px 6px 8px;
+            cursor: pointer;
+            transition: border-color var(--motion-fast) ease, background var(--motion-fast) ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .s10-pick:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.04);
+        }
+
+        .s10-pick.picked {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.08);
+        }
+
+        .s10-pick-emoji {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .s10-pick-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .s10-pick-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            white-space: nowrap;
+        }
+
+        .s10-pick-brand {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            white-space: nowrap;
+        }
 
         .s10-cta {
             margin-top: auto;
@@ -1975,7 +2254,7 @@
         .s11-headline {
             font-family: var(--font-display);
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.15;
             text-align: center;
@@ -2026,7 +2305,7 @@
         .preview-hero-title {
             font-family: var(--font-display);
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
             position: relative;
             z-index: 1;
@@ -2050,7 +2329,7 @@
         .preview-stat-value {
             font-family: var(--font-display);
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-text-primary);
         }
 
@@ -2111,7 +2390,11 @@
             <span class="nav-jump" data-screen="screen4">Questions</span> &rarr;
             <span class="nav-jump" data-screen="screen5">Archetype</span> &rarr;
             <span class="nav-jump" data-screen="screen6">Resolution</span> &rarr;
-            <span class="nav-jump" data-screen="screen7">Earnings</span>
+            <span class="nav-jump" data-screen="screen7">Earnings</span> &rarr;
+            <span class="nav-jump" data-screen="screen8">Template</span> &rarr;
+            <span class="nav-jump" data-screen="screen9">Name</span> &rarr;
+            <span class="nav-jump" data-screen="screen10">Products</span> &rarr;
+            <span class="nav-jump" data-screen="screen11">Preview</span>
         </p>
     </div>
 
@@ -2456,159 +2739,230 @@
 
                 <div class="s8-header">
                     <h1 class="s8-headline">Pick a starting point</h1>
-                    <p class="s8-subtitle">Choose a template — you can customize everything later</p>
+                    <p class="s8-subtitle">Choose a template, you can customize more later.</p>
                 </div>
 
                 <!-- Carousel -->
                 <div class="s8-carousel-viewport" id="s8CarouselViewport">
                     <div class="s8-carousel-track" id="s8CarouselTrack">
 
-                        <!-- 1: Calm & Centered — Violet + Lora -->
+                        <!-- 1: Mountain Zen — Purple gradient, Lora, meditative -->
                         <div class="s8-carousel-slide active" data-tpl="0">
-                            <div class="s8-tpl-card">
-                                <div class="s8-card-header">
-                                    <div class="s8-card-header-bg" style="background: linear-gradient(135deg, #F5F3FF, #EDE9FE);"></div>
-                                    <div class="s8-card-header-content">
-                                        <div class="s8-card-creator">
-                                            <div class="s8-card-avatar" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);"><span class="material-icons">person</span></div>
-                                            <span class="s8-card-creator-name">@sarahyoga</span>
+                            <div class="s8-tpl-card" style="background: #EDEAF4;">
+                                <div class="s8-card-hero">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(165deg, #D6CEE5 0%, #9084B8 35%, #6E549E 65%, #4A3278 100%);">
+                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+                                            <path d="M-10 220 Q30 160 80 190 Q120 130 170 170 Q210 120 260 155 Q300 100 340 140 L360 130 L360 320 L-10 320Z" fill="rgba(255,255,255,0.08)"/>
+                                            <path d="M-10 260 Q40 200 90 230 Q130 180 175 210 Q220 170 270 200 Q310 160 360 190 L360 320 L-10 320Z" fill="rgba(0,0,0,0.1)"/>
+                                            <path d="M-10 290 Q60 250 130 270 Q200 240 270 265 Q330 245 360 260 L360 320 L-10 320Z" fill="rgba(0,0,0,0.12)"/>
+                                            <path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.15)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                                            <path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                                            <circle cx="290" cy="60" r="28" fill="rgba(255,255,255,0.15)"/>
+                                            <circle cx="298" cy="54" r="24" fill="rgba(144,132,184,0.6)"/>
+                                            <circle cx="60" cy="40" r="1.5" fill="rgba(255,255,255,0.3)"/>
+                                            <circle cx="120" cy="70" r="1" fill="rgba(255,255,255,0.2)"/>
+                                            <circle cx="220" cy="35" r="1.5" fill="rgba(255,255,255,0.25)"/>
+                                            <circle cx="330" cy="90" r="1" fill="rgba(255,255,255,0.2)"/>
+                                        </svg>
+                                    </div>
+                                    <div class="s8-card-hero-content">
+                                        <div class="s8-creator-pill">
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #A698C8, #6E549E);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@slow_spokes</span>
                                         </div>
-                                        <div class="s8-card-title" style="font-family: 'Lora', serif; color: #5B21B6;">21-Day Mindfulness Reset</div>
-                                        <div class="s8-card-meta"><span>3 weeks</span><span class="s8-card-meta-dot"></span><span>21 daily practices</span></div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Lora', serif;">Mindful Miles</div>
+                                        <div class="s8-card-hero-subtitle">Slow scenic rides to clear your head and find your rhythm</div>
                                     </div>
                                 </div>
-                                <div class="s8-card-body">
-                                    <div class="s8-card-desc">Find your center through guided breathwork, journaling, and gentle movement.</div>
-                                    <div class="s8-progress">
-                                        <div class="s8-progress-header"><span class="s8-progress-label">Progress</span><span class="s8-progress-value" style="color: #8B5CF6;">7 / 21</span></div>
-                                        <div class="s8-progress-track" style="background: #F5F3FF;"><div class="s8-progress-fill" style="width: 33%; background: #8B5CF6;"></div></div>
+                                <div class="s8-card-stats">
+                                    <div class="s8-stats-inner">
+                                        <div class="s8-pool-row">
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$31,040</div></div>
+                                            <div class="s8-joined-badge" style="background: #9084B8;"><span class="material-icons">check_circle</span> Joined!</div>
+                                        </div>
+                                        <div class="s8-meta-row">
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">776</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">5 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                        </div>
+                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
-                                    <div class="s8-tasks">
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #F5F3FF;"><span class="material-icons" style="color: #8B5CF6;">self_improvement</span></div><div class="s8-task-text"><div class="s8-task-day">Day 1</div><div class="s8-task-name">Morning Stillness</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #F5F3FF;"><span class="material-icons" style="color: #8B5CF6;">spa</span></div><div class="s8-task-text"><div class="s8-task-day">Day 2</div><div class="s8-task-name">Gratitude Journal</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #F5F3FF;"><span class="material-icons" style="color: #8B5CF6;">air</span></div><div class="s8-task-text"><div class="s8-task-day">Day 3</div><div class="s8-task-name">Breathwork Flow</div></div><div class="s8-task-check"></div></div>
-                                    </div>
-                                    <button class="s8-card-cta" style="background: #8B5CF6; color: #FFF;">Join Challenge</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2: High Energy — Coral + Poppins -->
+                        <!-- 2: Peak Power — Terracotta gradient, Poppins, sprint -->
                         <div class="s8-carousel-slide" data-tpl="1">
-                            <div class="s8-tpl-card">
-                                <div class="s8-card-header">
-                                    <div class="s8-card-header-bg" style="background: linear-gradient(135deg, #FFF7ED, #FFEDD5);"></div>
-                                    <div class="s8-card-header-content">
-                                        <div class="s8-card-creator">
-                                            <div class="s8-card-avatar" style="background: linear-gradient(135deg, #F97316, #FB923C);"><span class="material-icons">person</span></div>
-                                            <span class="s8-card-creator-name">@coach_marcus</span>
+                            <div class="s8-tpl-card" style="background: #F4ECE2;">
+                                <div class="s8-card-hero">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(150deg, #E0C890 0%, #CC9A7A 30%, #B07A5E 60%, #8C5540 100%);">
+                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+                                            <ellipse cx="175" cy="320" rx="280" ry="180" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="50"/>
+                                            <ellipse cx="175" cy="340" rx="220" ry="150" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="40"/>
+                                            <line x1="-20" y1="110" x2="160" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round"/>
+                                            <line x1="-20" y1="130" x2="120" y2="127" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-linecap="round"/>
+                                            <line x1="-20" y1="150" x2="90" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-linecap="round"/>
+                                            <circle cx="300" cy="50" r="80" fill="rgba(224,200,144,0.2)"/>
+                                            <circle cx="300" cy="50" r="50" fill="rgba(224,200,144,0.15)"/>
+                                            <circle cx="300" cy="50" r="25" fill="rgba(255,255,255,0.1)"/>
+                                            <circle cx="60" cy="260" r="35" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+                                            <circle cx="60" cy="260" r="12" fill="rgba(255,255,255,0.05)"/>
+                                        </svg>
+                                    </div>
+                                    <div class="s8-card-hero-content">
+                                        <div class="s8-creator-pill">
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #CC9A7A, #B07A5E);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@crit_marcus</span>
                                         </div>
-                                        <div class="s8-card-title" style="font-family: 'Poppins', sans-serif; color: #C2410C; font-weight: 700;">30-Day HIIT Blitz</div>
-                                        <div class="s8-card-meta"><span>4 weeks</span><span class="s8-card-meta-dot"></span><span>30 workouts</span></div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: -0.04em;">Sprint Series</div>
+                                        <div class="s8-card-hero-subtitle">Max-effort interval rides that build raw power and speed</div>
                                     </div>
                                 </div>
-                                <div class="s8-card-body">
-                                    <div class="s8-card-desc">Torch calories and build explosive strength with daily HIIT sessions.</div>
-                                    <div class="s8-progress">
-                                        <div class="s8-progress-header"><span class="s8-progress-label">Progress</span><span class="s8-progress-value" style="color: #F97316;">11 / 30</span></div>
-                                        <div class="s8-progress-track" style="background: #FFF7ED;"><div class="s8-progress-fill" style="width: 37%; background: #F97316;"></div></div>
+                                <div class="s8-card-stats">
+                                    <div class="s8-stats-inner">
+                                        <div class="s8-pool-row">
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$18,750</div></div>
+                                            <div class="s8-joined-badge" style="background: #CC9A7A;"><span class="material-icons">check_circle</span> Joined!</div>
+                                        </div>
+                                        <div class="s8-meta-row">
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">1,240</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">4 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                        </div>
+                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
-                                    <div class="s8-tasks">
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF7ED;"><span class="material-icons" style="color: #F97316;">local_fire_department</span></div><div class="s8-task-text"><div class="s8-task-day">Day 1</div><div class="s8-task-name">Tabata Ignition</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF7ED;"><span class="material-icons" style="color: #F97316;">fitness_center</span></div><div class="s8-task-text"><div class="s8-task-day">Day 2</div><div class="s8-task-name">Power Circuits</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF7ED;"><span class="material-icons" style="color: #F97316;">timer</span></div><div class="s8-task-text"><div class="s8-task-day">Day 3</div><div class="s8-task-name">Sprint Intervals</div></div><div class="s8-task-check"></div></div>
-                                    </div>
-                                    <button class="s8-card-cta" style="background: #F97316; color: #FFF;">Join Challenge</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 3: Fresh Start — Emerald + Nunito -->
+                        <!-- 3: Fresh Ride — Emerald gradient, Source Serif 4 -->
                         <div class="s8-carousel-slide" data-tpl="2">
-                            <div class="s8-tpl-card">
-                                <div class="s8-card-header">
-                                    <div class="s8-card-header-bg" style="background: linear-gradient(135deg, #ECFDF5, #D1FAE5);"></div>
-                                    <div class="s8-card-header-content">
-                                        <div class="s8-card-creator">
-                                            <div class="s8-card-avatar" style="background: linear-gradient(135deg, #10B981, #34D399);"><span class="material-icons">person</span></div>
-                                            <span class="s8-card-creator-name">@nutritionwithnat</span>
+                            <div class="s8-tpl-card" style="background: #E2F4EA;">
+                                <div class="s8-card-hero">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(170deg, #A2D4BC 0%, #5FAE90 30%, #488E72 60%, #2C6050 100%);">
+                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+                                            <path d="M-10 180 Q50 130 120 165 Q180 110 240 150 Q300 100 360 135 L360 320 L-10 320Z" fill="rgba(255,255,255,0.06)"/>
+                                            <path d="M-10 220 Q80 170 150 200 Q220 160 290 190 Q340 170 360 180 L360 320 L-10 320Z" fill="rgba(0,0,0,0.07)"/>
+                                            <path d="M-10 260 Q60 230 140 250 Q220 225 300 245 Q350 235 360 240 L360 320 L-10 320Z" fill="rgba(0,0,0,0.08)"/>
+                                            <path d="M155 320 L170 140 L180 140 L195 320Z" fill="rgba(255,255,255,0.1)"/>
+                                            <line x1="175" y1="140" x2="175" y2="320" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 8"/>
+                                            <ellipse cx="130" cy="248" rx="12" ry="18" fill="rgba(0,0,0,0.08)"/>
+                                            <ellipse cx="220" cy="245" rx="13" ry="19" fill="rgba(0,0,0,0.08)"/>
+                                            <circle cx="175" cy="60" r="40" fill="rgba(255,255,255,0.12)"/>
+                                            <circle cx="175" cy="60" r="20" fill="rgba(255,255,255,0.1)"/>
+                                        </svg>
+                                    </div>
+                                    <div class="s8-card-hero-content">
+                                        <div class="s8-creator-pill">
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #7CC4A8, #488E72);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@ride_with_jules</span>
                                         </div>
-                                        <div class="s8-card-title" style="font-family: 'Nunito', sans-serif; color: #047857; font-weight: 800;">Clean Eating Kickstart</div>
-                                        <div class="s8-card-meta"><span>2 weeks</span><span class="s8-card-meta-dot"></span><span>14 daily recipes</span></div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Source Serif 4', serif; font-weight: 700;">Century Ride Challenge</div>
+                                        <div class="s8-card-hero-subtitle">Build your miles week by week toward the ultimate century ride</div>
                                     </div>
                                 </div>
-                                <div class="s8-card-body">
-                                    <div class="s8-card-desc">Simple, delicious meals that reset your energy and nourish your body.</div>
-                                    <div class="s8-progress">
-                                        <div class="s8-progress-header"><span class="s8-progress-label">Progress</span><span class="s8-progress-value" style="color: #10B981;">5 / 14</span></div>
-                                        <div class="s8-progress-track" style="background: #ECFDF5;"><div class="s8-progress-fill" style="width: 36%; background: #10B981;"></div></div>
+                                <div class="s8-card-stats">
+                                    <div class="s8-stats-inner">
+                                        <div class="s8-pool-row">
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$24,300</div></div>
+                                            <div class="s8-joined-badge" style="background: #5FAE90;"><span class="material-icons">check_circle</span> Joined!</div>
+                                        </div>
+                                        <div class="s8-meta-row">
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">512</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">8 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                        </div>
+                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
-                                    <div class="s8-tasks">
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #ECFDF5;"><span class="material-icons" style="color: #10B981;">restaurant</span></div><div class="s8-task-text"><div class="s8-task-day">Day 1</div><div class="s8-task-name">Green Smoothie Bowl</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #ECFDF5;"><span class="material-icons" style="color: #10B981;">eco</span></div><div class="s8-task-text"><div class="s8-task-day">Day 2</div><div class="s8-task-name">Meal Prep Sunday</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #ECFDF5;"><span class="material-icons" style="color: #10B981;">water_drop</span></div><div class="s8-task-text"><div class="s8-task-day">Day 3</div><div class="s8-task-name">Hydration Reset</div></div><div class="s8-task-check"></div></div>
-                                    </div>
-                                    <button class="s8-card-cta" style="background: #10B981; color: #FFF;">Join Challenge</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 4: Premium Journey — Indigo + Playfair Display -->
+                        <!-- 4: Noir Elite — Dark navy/gold, Playfair Display -->
                         <div class="s8-carousel-slide" data-tpl="3">
-                            <div class="s8-tpl-card">
-                                <div class="s8-card-header">
-                                    <div class="s8-card-header-bg" style="background: linear-gradient(135deg, #EEF2FF, #E0E7FF);"></div>
-                                    <div class="s8-card-header-content">
-                                        <div class="s8-card-creator">
-                                            <div class="s8-card-avatar" style="background: linear-gradient(135deg, #6366F1, #818CF8);"><span class="material-icons">person</span></div>
-                                            <span class="s8-card-creator-name">@elitebody</span>
+                            <div class="s8-tpl-card" style="background: #E2E0D6;">
+                                <div class="s8-card-hero">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(160deg, #334155 0%, #1E293B 35%, #0F172A 65%, #020617 100%);">
+                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+                                            <path d="M-10 200 L40 140 L70 170 L120 100 L160 150 L200 80 L240 130 L280 90 L320 150 L360 120 L360 320 L-10 320Z" fill="rgba(212,175,55,0.06)"/>
+                                            <path d="M-10 240 L30 190 L80 220 L140 160 L190 200 L250 150 L310 190 L360 170 L360 320 L-10 320Z" fill="rgba(255,255,255,0.03)"/>
+                                            <path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                            <path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.05)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                                            <circle cx="80" cy="50" r="1.5" fill="rgba(212,175,55,0.35)"/>
+                                            <circle cx="270" cy="40" r="1" fill="rgba(212,175,55,0.25)"/>
+                                            <circle cx="180" cy="30" r="1.5" fill="rgba(212,175,55,0.3)"/>
+                                            <circle cx="320" cy="70" r="1" fill="rgba(212,175,55,0.2)"/>
+                                            <path d="M0 290 Q40 270 80 280 Q120 260 160 270 Q200 250 240 265 Q280 245 320 260 Q340 250 350 255" stroke="rgba(212,175,55,0.1)" stroke-width="1.5" fill="none"/>
+                                        </svg>
+                                    </div>
+                                    <div class="s8-card-hero-content">
+                                        <div class="s8-creator-pill">
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@velonoir</span>
                                         </div>
-                                        <div class="s8-card-title" style="font-family: 'Playfair Display', serif; color: #4338CA;">12-Week Total Transformation</div>
-                                        <div class="s8-card-meta"><span>12 weeks</span><span class="s8-card-meta-dot"></span><span>84 sessions</span></div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Playfair Display', serif;">Gran Fondo Prep</div>
+                                        <div class="s8-card-hero-subtitle">A structured 12-week build to race day, for riders who demand more</div>
                                     </div>
                                 </div>
-                                <div class="s8-card-body">
-                                    <div class="s8-card-desc">An elite program designed to rebuild your body and elevate your mindset.</div>
-                                    <div class="s8-progress">
-                                        <div class="s8-progress-header"><span class="s8-progress-label">Progress</span><span class="s8-progress-value" style="color: #6366F1;">29 / 84</span></div>
-                                        <div class="s8-progress-track" style="background: #EEF2FF;"><div class="s8-progress-fill" style="width: 35%; background: #6366F1;"></div></div>
+                                <div class="s8-card-stats">
+                                    <div class="s8-stats-inner">
+                                        <div class="s8-pool-row">
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$52,800</div></div>
+                                            <div class="s8-joined-badge" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">check_circle</span> Joined!</div>
+                                        </div>
+                                        <div class="s8-meta-row">
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">340</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">12 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                        </div>
+                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
-                                    <div class="s8-tasks">
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #EEF2FF;"><span class="material-icons" style="color: #6366F1;">fitness_center</span></div><div class="s8-task-text"><div class="s8-task-day">Week 1</div><div class="s8-task-name">Foundation Phase</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #EEF2FF;"><span class="material-icons" style="color: #6366F1;">trending_up</span></div><div class="s8-task-text"><div class="s8-task-day">Week 2</div><div class="s8-task-name">Progressive Overload</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #EEF2FF;"><span class="material-icons" style="color: #6366F1;">psychology</span></div><div class="s8-task-text"><div class="s8-task-day">Week 3</div><div class="s8-task-name">Mindset Mastery</div></div><div class="s8-task-check"></div></div>
-                                    </div>
-                                    <button class="s8-card-cta" style="background: #6366F1; color: #FFF;">Join Challenge</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 5: In Bloom — Rose + Merriweather -->
+                        <!-- 5: Golden Hour — Sunset amber/rose, Merriweather -->
                         <div class="s8-carousel-slide" data-tpl="4">
-                            <div class="s8-tpl-card">
-                                <div class="s8-card-header">
-                                    <div class="s8-card-header-bg" style="background: linear-gradient(135deg, #FFF1F2, #FFE4E6);"></div>
-                                    <div class="s8-card-header-content">
-                                        <div class="s8-card-creator">
-                                            <div class="s8-card-avatar" style="background: linear-gradient(135deg, #F43F5E, #FB7185);"><span class="material-icons">person</span></div>
-                                            <span class="s8-card-creator-name">@wellnesswithgrace</span>
+                            <div class="s8-tpl-card" style="background: #F4E4E7;">
+                                <div class="s8-card-hero">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(175deg, #EDE0B8 0%, #CCA76C 20%, #C88090 55%, #8E4858 85%, #502028 100%);">
+                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
+                                            <circle cx="175" cy="160" r="55" fill="rgba(237,224,184,0.25)"/>
+                                            <circle cx="175" cy="160" r="35" fill="rgba(237,224,184,0.2)"/>
+                                            <circle cx="175" cy="160" r="18" fill="rgba(255,255,255,0.15)"/>
+                                            <path d="M0 195 Q175 185 350 195 L350 200 Q175 190 0 200Z" fill="rgba(255,255,255,0.08)"/>
+                                            <path d="M140 320 L172 195 L178 195 L210 320Z" fill="rgba(0,0,0,0.08)"/>
+                                            <line x1="175" y1="195" x2="175" y2="320" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5 7"/>
+                                            <ellipse cx="135" cy="270" rx="6" ry="3" fill="rgba(0,0,0,0.1)"/>
+                                            <line x1="135" y1="267" x2="135" y2="255" stroke="rgba(0,0,0,0.1)" stroke-width="2.5" stroke-linecap="round"/>
+                                            <circle cx="135" cy="251" r="3" fill="rgba(0,0,0,0.1)"/>
+                                            <ellipse cx="155" cy="272" rx="5.5" ry="2.8" fill="rgba(0,0,0,0.08)"/>
+                                            <line x1="155" y1="269" x2="155" y2="258" stroke="rgba(0,0,0,0.08)" stroke-width="2.5" stroke-linecap="round"/>
+                                            <circle cx="155" cy="254" r="3" fill="rgba(0,0,0,0.08)"/>
+                                            <ellipse cx="210" cy="268" rx="5" ry="2.5" fill="rgba(0,0,0,0.07)"/>
+                                            <line x1="210" y1="265" x2="210" y2="255" stroke="rgba(0,0,0,0.07)" stroke-width="2" stroke-linecap="round"/>
+                                            <circle cx="210" cy="252" r="2.5" fill="rgba(0,0,0,0.07)"/>
+                                            <ellipse cx="80" cy="100" rx="40" ry="6" fill="rgba(255,255,255,0.06)"/>
+                                            <ellipse cx="280" cy="120" rx="35" ry="5" fill="rgba(255,255,255,0.05)"/>
+                                        </svg>
+                                    </div>
+                                    <div class="s8-card-hero-content">
+                                        <div class="s8-creator-pill">
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #CCA76C, #C88090);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@golden_peloton</span>
                                         </div>
-                                        <div class="s8-card-title" style="font-family: 'Merriweather', serif; color: #9F1239; font-size: 22px;">Self-Care September</div>
-                                        <div class="s8-card-meta"><span>4 weeks</span><span class="s8-card-meta-dot"></span><span>30 daily rituals</span></div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Merriweather', serif;">Sunset Ride Club</div>
+                                        <div class="s8-card-hero-subtitle">Golden hour group rides that end the day with good vibes and good company</div>
                                     </div>
                                 </div>
-                                <div class="s8-card-body">
-                                    <div class="s8-card-desc">A gentle month of nurturing routines to help you bloom from the inside out.</div>
-                                    <div class="s8-progress">
-                                        <div class="s8-progress-header"><span class="s8-progress-label">Progress</span><span class="s8-progress-value" style="color: #F43F5E;">10 / 30</span></div>
-                                        <div class="s8-progress-track" style="background: #FFF1F2;"><div class="s8-progress-fill" style="width: 33%; background: #F43F5E;"></div></div>
+                                <div class="s8-card-stats">
+                                    <div class="s8-stats-inner">
+                                        <div class="s8-pool-row">
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$12,480</div></div>
+                                            <div class="s8-joined-badge" style="background: #C88090;"><span class="material-icons">check_circle</span> Joined!</div>
+                                        </div>
+                                        <div class="s8-meta-row">
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">2,180</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">4 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                        </div>
+                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
-                                    <div class="s8-tasks">
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF1F2;"><span class="material-icons" style="color: #F43F5E;">spa</span></div><div class="s8-task-text"><div class="s8-task-day">Day 1</div><div class="s8-task-name">Evening Skin Ritual</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF1F2;"><span class="material-icons" style="color: #F43F5E;">favorite</span></div><div class="s8-task-text"><div class="s8-task-day">Day 2</div><div class="s8-task-name">Love Letter to Self</div></div><div class="s8-task-check"></div></div>
-                                        <div class="s8-task-item"><div class="s8-task-icon" style="background: #FFF1F2;"><span class="material-icons" style="color: #F43F5E;">local_florist</span></div><div class="s8-task-text"><div class="s8-task-day">Day 3</div><div class="s8-task-name">Bath & Breathe</div></div><div class="s8-task-check"></div></div>
-                                    </div>
-                                    <button class="s8-card-cta" style="background: #F43F5E; color: #FFF;">Join Challenge</button>
                                 </div>
                             </div>
                         </div>
@@ -2655,8 +3009,25 @@
                 </div>
 
                 <div class="form-row">
-                    <span class="detail-pill"><span class="material-icons">schedule</span> <span id="s9Duration">5 weeks</span></span>
-                    <span class="detail-pill"><span class="material-icons">event</span> Dates added later</span>
+                    <span class="detail-pill detail-pill--tappable" id="durationPill"><span class="material-icons">schedule</span> <span id="s9Duration">5 weeks</span></span>
+                    <span class="detail-pill detail-pill--tappable" id="datePill"><span class="material-icons">event</span> <span id="s9Dates">Dates added later</span></span>
+                </div>
+
+                <!-- Duration Picker Dropdown -->
+                <div class="pill-editor" id="durationEditor" style="display:none;">
+                    <p class="pill-editor-label">Duration</p>
+                    <div class="pill-editor-options" id="durationOptions">
+                        <button class="pill-option" data-weeks="3">3 weeks</button>
+                        <button class="pill-option pill-option--selected" data-weeks="5">5 weeks</button>
+                        <button class="pill-option" data-weeks="8">8 weeks</button>
+                        <button class="pill-option" data-weeks="12">12 weeks</button>
+                    </div>
+                </div>
+
+                <!-- Date Picker Inline -->
+                <div class="pill-editor" id="dateEditor" style="display:none;">
+                    <p class="pill-editor-label">Start date</p>
+                    <input type="date" class="pill-date-input" id="startDateInput">
                 </div>
 
                 <div class="s9-cta">
@@ -2676,7 +3047,67 @@
 
                 <div class="s10-header">
                     <h1 class="s10-headline">What products keep you on track?</h1>
-                    <p class="s10-subtitle">Add things you actually use and love. Your audience can shop them during the collab.</p>
+                    <p class="s10-subtitle">Add the gear that's part of your routine. If you have affiliate or referral links, drop them here — your audience can shop as part of the collab.</p>
+                </div>
+
+                <p class="s10-picks-label">Popular with creators</p>
+                <div class="s10-picks" id="s10Picks">
+                    <div class="s10-pick" data-name="Protein Powder" data-brand="Optimum Nutrition">
+                        <span class="s10-pick-emoji">&#x1f964;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Protein Powder</span>
+                            <span class="s10-pick-brand">Optimum Nutrition</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Foam Roller" data-brand="TriggerPoint">
+                        <span class="s10-pick-emoji">&#x1f9d8;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Foam Roller</span>
+                            <span class="s10-pick-brand">TriggerPoint</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Resistance Bands" data-brand="Theraband">
+                        <span class="s10-pick-emoji">&#x1f4aa;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Resistance Bands</span>
+                            <span class="s10-pick-brand">Theraband</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Running Shoes" data-brand="Nike">
+                        <span class="s10-pick-emoji">&#x1f45f;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Running Shoes</span>
+                            <span class="s10-pick-brand">Nike</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Yoga Mat" data-brand="Manduka">
+                        <span class="s10-pick-emoji">&#x1f9d8;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Yoga Mat</span>
+                            <span class="s10-pick-brand">Manduka</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Meal Prep Containers" data-brand="Prep Naturals">
+                        <span class="s10-pick-emoji">&#x1f371;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Meal Prep Set</span>
+                            <span class="s10-pick-brand">Prep Naturals</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Smart Watch" data-brand="Apple">
+                        <span class="s10-pick-emoji">&#x231a;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Smart Watch</span>
+                            <span class="s10-pick-brand">Apple</span>
+                        </div>
+                    </div>
+                    <div class="s10-pick" data-name="Pre-Workout" data-brand="Ghost">
+                        <span class="s10-pick-emoji">&#x26a1;</span>
+                        <div class="s10-pick-info">
+                            <span class="s10-pick-name">Pre-Workout</span>
+                            <span class="s10-pick-brand">Ghost</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="productSlots">
@@ -2684,9 +3115,16 @@
                         <div class="product-slot-header">
                             <span class="product-category">My must-have</span>
                         </div>
-                        <div class="product-inputs">
-                            <input type="text" class="product-input" placeholder="Product name" data-field="name">
-                            <input type="text" class="product-input" placeholder="Brand" data-field="brand">
+                        <div class="product-body">
+                            <div class="product-thumb"><span class="material-icons">image</span></div>
+                            <div class="product-inputs">
+                                <input type="text" class="product-input" placeholder="Product name" data-field="name">
+                                <input type="text" class="product-input" placeholder="Brand" data-field="brand">
+                                <div class="product-url-row">
+                                    <span class="material-icons">link</span>
+                                    <input type="url" class="product-input" placeholder="Paste affiliate or product link" data-field="url">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2776,16 +3214,39 @@
 
         const lavaBg = document.querySelector('.lava-bg');
 
+        // Hash ↔ screen ID mapping
+        var hashMap = {
+            'welcome':    'screen0',
+            'instagram':  'screen1',
+            'loading':    'screen2',
+            'confirm':    'screen3',
+            'questions':  'screen4',
+            'results':    'screen5',
+            'resolution': 'screen6',
+            'earnings':   'screen7',
+            'templates':  'screen8',
+            'name':       'screen9',
+            'products':   'screen10',
+            'preview':    'screen11'
+        };
+        var idToHash = {};
+        Object.keys(hashMap).forEach(function(k) { idToHash[hashMap[k]] = k; });
+
+        function setHash(screenId) {
+            var h = idToHash[screenId];
+            if (h) history.replaceState(null, '', '#' + h);
+        }
+
         function goTo(from, to) {
             from.classList.add('exiting');
             from.classList.remove('active');
             var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10','screen11'];
-            /* screen8 = template carousel, stays green */
             if (greenScreens.indexOf(to.id) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
                 lavaBg.classList.remove('green-chapter');
             }
+            setHash(to.id);
             setTimeout(() => {
                 from.classList.remove('exiting');
                 to.classList.add('active');
@@ -3183,6 +3644,220 @@
         });
 
         // =============================================
+        // NAVIGATION: SCREENS 9–11
+        // =============================================
+
+        // Name back → Template
+        document.getElementById('s9Back').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.name, screens.template);
+        });
+
+        // Name continue → Products
+        document.getElementById('s9ContinueBtn').addEventListener('click', function() {
+            goTo(screens.name, screens.products);
+        });
+
+        // Products back → Name
+        document.getElementById('s10Back').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.products, screens.name);
+        });
+
+        // Products continue → Preview
+        document.getElementById('s10ContinueBtn').addEventListener('click', function() {
+            populatePreview();
+            goTo(screens.products, screens.preview);
+        });
+
+        // Products skip → Preview
+        document.getElementById('s10SkipBtn').addEventListener('click', function() {
+            populatePreview();
+            goTo(screens.products, screens.preview);
+        });
+
+        // Preview back → Products
+        document.getElementById('s11Back').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.preview, screens.products);
+        });
+
+        // Preview "Edit details" → Name
+        document.getElementById('s11EditBtn').addEventListener('click', function() {
+            goTo(screens.preview, screens.name);
+        });
+
+        // Preview "Create my collab" → simple celebration
+        document.getElementById('s11LaunchBtn').addEventListener('click', function() {
+            this.textContent = 'Launching…';
+            this.disabled = true;
+            setTimeout(function() {
+                document.getElementById('s11LaunchBtn').textContent = 'Collab created!';
+            }, 1200);
+        });
+
+        // Populate preview card from form inputs
+        function populatePreview() {
+            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
+            document.getElementById('previewTitle').textContent = title;
+            document.getElementById('previewEmoji').textContent = '🧘';
+            document.getElementById('previewDuration').textContent = selectedDuration.short;
+
+            // Count filled product slots
+            var slots = document.querySelectorAll('.product-slot');
+            var count = 0;
+            slots.forEach(function(s) {
+                if (s.querySelector('[data-field="name"]').value.trim()) count++;
+            });
+            if (count > 0) {
+                document.getElementById('previewProductsBadge').style.display = 'block';
+                document.getElementById('previewProductCount').textContent = count;
+            } else {
+                document.getElementById('previewProductsBadge').style.display = 'none';
+            }
+        }
+
+        // Set thumbnail on a product slot
+        function setSlotThumb(slot, content) {
+            var thumb = slot.querySelector('.product-thumb');
+            thumb.innerHTML = content;
+            thumb.classList.add('has-image');
+        }
+
+        // When a URL is pasted/typed, show favicon as thumbnail
+        function setupUrlListener(slot) {
+            var urlInput = slot.querySelector('[data-field="url"]');
+            if (!urlInput) return;
+            urlInput.addEventListener('input', function() {
+                var val = this.value.trim();
+                try {
+                    var url = new URL(val.startsWith('http') ? val : 'https://' + val);
+                    var favicon = 'https://www.google.com/s2/favicons?domain=' + url.hostname + '&sz=64';
+                    setSlotThumb(slot, '<img src="' + favicon + '" alt="">');
+                } catch(e) {
+                    // Not a valid URL yet — keep current thumb
+                }
+            });
+        }
+        // Attach to initial slot
+        setupUrlListener(document.querySelector('.product-slot'));
+
+        // Product picks — tap to fill a slot
+        document.querySelectorAll('.s10-pick').forEach(function(pick) {
+            pick.addEventListener('click', function() {
+                if (this.classList.contains('picked')) return;
+                var name = this.dataset.name;
+                var brand = this.dataset.brand;
+                var emoji = this.querySelector('.s10-pick-emoji').innerHTML;
+                // Find first empty slot
+                var slots = document.querySelectorAll('.product-slot');
+                var filled = false;
+                slots.forEach(function(slot) {
+                    if (filled) return;
+                    var nameInput = slot.querySelector('[data-field="name"]');
+                    var brandInput = slot.querySelector('[data-field="brand"]');
+                    if (!nameInput.value.trim()) {
+                        nameInput.value = name;
+                        brandInput.value = brand;
+                        setSlotThumb(slot, '<span style="font-size:22px">' + emoji + '</span>');
+                        filled = true;
+                    }
+                });
+                // If all slots full, add a new one then fill it
+                if (!filled && productSlotCount < 5) {
+                    document.getElementById('addProductBtn').click();
+                    var newSlots = document.querySelectorAll('.product-slot');
+                    var last = newSlots[newSlots.length - 1];
+                    last.querySelector('[data-field="name"]').value = name;
+                    last.querySelector('[data-field="brand"]').value = brand;
+                    setSlotThumb(last, '<span style="font-size:22px">' + emoji + '</span>');
+                }
+                this.classList.add('picked');
+            });
+        });
+
+        // Add product slot
+        var productSlotCount = 1;
+        document.getElementById('addProductBtn').addEventListener('click', function() {
+            if (productSlotCount >= 5) return;
+            var labels = ['My must-have', 'Daily go-to', 'Secret weapon', 'Game changer', 'Bonus pick'];
+            var slot = document.createElement('div');
+            slot.className = 'product-slot';
+            slot.dataset.slot = productSlotCount;
+            slot.innerHTML =
+                '<div class="product-slot-header"><span class="product-category">' + labels[productSlotCount] + '</span></div>' +
+                '<div class="product-body">' +
+                    '<div class="product-thumb"><span class="material-icons">image</span></div>' +
+                    '<div class="product-inputs">' +
+                        '<input type="text" class="product-input" placeholder="Product name" data-field="name">' +
+                        '<input type="text" class="product-input" placeholder="Brand" data-field="brand">' +
+                        '<div class="product-url-row">' +
+                            '<span class="material-icons">link</span>' +
+                            '<input type="url" class="product-input" placeholder="Paste affiliate or product link" data-field="url">' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            document.getElementById('productSlots').appendChild(slot);
+            setupUrlListener(slot);
+            productSlotCount++;
+            if (productSlotCount >= 5) this.style.display = 'none';
+        });
+
+        // =============================================
+        // DURATION & DATE CHIP EDITORS
+        // =============================================
+
+        var selectedDuration = { weeks: 5, label: '5 weeks', short: '5 wk' };
+
+        document.getElementById('durationPill').addEventListener('click', function() {
+            var ed = document.getElementById('durationEditor');
+            var dateEd = document.getElementById('dateEditor');
+            dateEd.style.display = 'none';
+            document.getElementById('datePill').classList.remove('active');
+            if (ed.style.display === 'none') {
+                ed.style.display = 'block';
+                this.classList.add('active');
+            } else {
+                ed.style.display = 'none';
+                this.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('#durationOptions .pill-option').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#durationOptions .pill-option').forEach(function(b) {
+                    b.classList.remove('pill-option--selected');
+                });
+                btn.classList.add('pill-option--selected');
+                var w = parseInt(btn.dataset.weeks);
+                selectedDuration = { weeks: w, label: w + ' weeks', short: w + ' wk' };
+                document.getElementById('s9Duration').textContent = selectedDuration.label;
+            });
+        });
+
+        document.getElementById('datePill').addEventListener('click', function() {
+            var ed = document.getElementById('dateEditor');
+            var durEd = document.getElementById('durationEditor');
+            durEd.style.display = 'none';
+            document.getElementById('durationPill').classList.remove('active');
+            if (ed.style.display === 'none') {
+                ed.style.display = 'block';
+                this.classList.add('active');
+            } else {
+                ed.style.display = 'none';
+                this.classList.remove('active');
+            }
+        });
+
+        document.getElementById('startDateInput').addEventListener('change', function() {
+            if (this.value) {
+                var d = new Date(this.value + 'T00:00:00');
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                document.getElementById('s9Dates').textContent = months[d.getMonth()] + ' ' + d.getDate();
+            }
+        });
+
+        // =============================================
         // JUMP NAV (breadcrumb clicks)
         // =============================================
 
@@ -3191,8 +3866,10 @@
                 s.classList.remove('active', 'exiting');
             });
             document.getElementById(targetId).classList.add('active');
+            setHash(targetId);
 
-            if (targetId === 'screen5' || targetId === 'screen6' || targetId === 'screen7' || targetId === 'screen8') {
+            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10','screen11'];
+            if (greenIds.indexOf(targetId) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
                 lavaBg.classList.remove('green-chapter');
@@ -3237,6 +3914,16 @@
                 jumpTo(el.dataset.screen);
             });
         });
+
+        // Restore screen from URL hash on load
+        (function restoreFromHash() {
+            var hash = location.hash.replace('#', '');
+            if (hash && hashMap[hash]) {
+                jumpTo(hashMap[hash]);
+            } else {
+                setHash('screen0');
+            }
+        })();
     </script>
 
 </body>

@@ -28,9 +28,9 @@ Each palette has exactly 3 colors with specific purposes:
 
 | Tone | Purpose | Example (Violet) |
 |------|---------|------------------|
-| **Background** | Large surfaces, cards, subtle fills | `#F5F3FF` |
-| **Emphasis** | Buttons, progress bars, interactive elements | `#8B5CF6` |
-| **Text** | Text on light backgrounds | `#5B21B6` |
+| **Background** | Large surfaces, cards, subtle fills | `#F2F0F7` |
+| **Emphasis** | Buttons, progress bars, interactive elements | `#7E6DA8` |
+| **Text** | Text on light backgrounds | `#4E3D72` |
 
 Plus `onEmphasis` (white or black) for text on emphasis-colored buttons.
 
@@ -38,18 +38,18 @@ Plus `onEmphasis` (white or black) for text on emphasis-colored buttons.
 
 | Palette | Background | Emphasis | Text | Best For |
 |---------|------------|----------|------|----------|
-| **Violet** | `#F5F3FF` | `#8B5CF6` | `#5B21B6` | Yoga, meditation, mindfulness |
-| **Rose** | `#FFF1F2` | `#F43F5E` | `#9F1239` | Self-care, wellness, beauty |
-| **Coral** | `#FFF7ED` | `#F97316` | `#C2410C` | Fitness, movement, energy |
-| **Amber** | `#FFFBEB` | `#F59E0B` | `#B45309` | Nutrition, cooking, lifestyle |
-| **Lime** | `#F7FEE7` | `#84CC16` | `#4D7C0F` | High-intensity, outdoor |
-| **Emerald** | `#ECFDF5` | `#10B981` | `#047857` | Wellness, nature, recovery |
-| **Teal** | `#F0FDFA` | `#14B8A6` | `#0F766E` | Swimming, water, calm |
-| **Cyan** | `#ECFEFF` | `#06B6D4` | `#0E7490` | Tech-forward, data-focused |
-| **Sky** | `#F0F9FF` | `#0EA5E9` | `#0369A1` | Running, outdoor, goals |
-| **Blue** | `#EFF6FF` | `#3B82F6` | `#1D4ED8` | Consistency, habits |
-| **Indigo** | `#EEF2FF` | `#6366F1` | `#4338CA` | Advanced, intensive |
-| **Plum** | `#FDF4FF` | `#D946EF` | `#A21CAF` | Premium, luxurious |
+| **Violet** | `#F2F0F7` | `#7E6DA8` | `#4E3D72` | Yoga, meditation, mindfulness |
+| **Rose** | `#F7EFF1` | `#B86B78` | `#76303F` | Self-care, wellness, beauty |
+| **Coral** | `#F7F0EB` | `#BC8464` | `#764D2C` | Fitness, movement, energy |
+| **Amber** | `#F7F3EA` | `#BB9658` | `#6F5420` | Nutrition, cooking, lifestyle |
+| **Lime** | `#F2F5EC` | `#7E9C4D` | `#4C6228` | High-intensity, outdoor |
+| **Emerald** | `#ECF5F0` | `#4D9B7E` | `#2D6252` | Wellness, nature, recovery |
+| **Teal** | `#ECF5F3` | `#4D9B92` | `#2D625B` | Swimming, water, calm |
+| **Cyan** | `#ECF2F5` | `#4D909B` | `#2D5B62` | Tech-forward, data-focused |
+| **Sky** | `#ECF1F5` | `#4A8099` | `#2C5568` | Running, outdoor, goals |
+| **Blue** | `#EDF0F6` | `#5474AC` | `#2F4266` | Consistency, habits |
+| **Indigo** | `#EFEEF6` | `#6663A5` | `#3E3B74` | Advanced, intensive |
+| **Plum** | `#F4EEF6` | `#9E57A8` | `#6B2D72` | Premium, luxurious |
 | **Slate** | `#F8FAFC` | `#64748B` | `#334155` | Neutral, versatile |
 | **Stone** | `#FAFAF9` | `#78716C` | `#44403C` | Earthy, grounded, nature |
 
@@ -61,7 +61,7 @@ Plus `onEmphasis` (white or black) for text on emphasis-colored buttons.
 
 | Font | Style | Vibe | Best For |
 |------|-------|------|----------|
-| **Nunito** | Rounded sans | Friendly, warm | General wellness (default) |
+| **Source Serif 4** | Modern serif | Warm, editorial | General wellness (default) |
 | **Inter** | Geometric sans | Clean, modern | Data-focused, professional |
 | **Poppins** | Geometric sans | Confident, bold | Fitness, energetic |
 | **Source Sans 3** | Humanist sans | Readable, trustworthy | Instructional, long-form |
@@ -119,7 +119,7 @@ Pre-made combinations for creators who want to get started fast:
 |--------|-------|------|------|
 | **Calm & Centered** | Violet | Lora | Peaceful, meditative |
 | **High Energy** | Coral | Poppins | Bold, active |
-| **Fresh Start** | Emerald | Nunito | Refreshing, new |
+| **Fresh Start** | Emerald | Source Serif 4 | Refreshing, new |
 | **Premium Journey** | Indigo | Playfair | Refined, transformative |
 | **Sunny Days** | Amber | Source Sans | Warm, cheerful |
 | **Ocean Breeze** | Teal | Inter | Cool, focused |
@@ -146,9 +146,9 @@ Pre-made combinations for creators who want to get started fast:
 ```json
 {
   "colors": {
-    "background": "#F5F3FF",
-    "emphasis": "#8B5CF6",
-    "text": "#5B21B6",
+    "background": "#F2F0F7",
+    "emphasis": "#7E6DA8",
+    "text": "#4E3D72",
     "onEmphasis": "#FFFFFF"
   },
   "typography": {
@@ -195,7 +195,7 @@ All palettes are pre-validated:
 | Check | Status |
 |-------|--------|
 | Text on background | ✅ WCAG AA (4.5:1+) |
-| onEmphasis on emphasis | ✅ WCAG AA (4.5:1+) |
+| onEmphasis on emphasis | ✅ WCAG AA large text (3:1+) |
 | Font loading | ✅ Google Fonts CDN |
 | Fallback fonts | ✅ System fonts defined |
 
@@ -207,5 +207,6 @@ Creators cannot break accessibility — the system enforces it.
 
 | Version | Changes |
 |---------|---------|
+| 1.2 | Muted all emphasis colors (~35–42% saturation) to align with brand palette |
 | 1.1 | Simplified to 3-tone color system, 7 curated fonts |
 | 1.0 | Initial challenge theming system |

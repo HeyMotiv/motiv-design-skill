@@ -1,20 +1,20 @@
 {
   "$schema": "design-tokens-v1",
   "$type": "typography",
-  "$description": "Motiv typography system. Nunito for brand/display, Roboto for UI. Warm, readable, inviting.",
+  "$description": "Motiv typography system. Roboto for UI and product screens, Source Serif 4 for editorial and storytelling. Clean, readable, inviting.",
 
   "fontFamilies": {
-    "display": {
-      "value": "Nunito, system-ui, sans-serif",
-      "description": "Display/brand font. Use for the Motiv logo, large headings, and celebratory moments.",
-      "weights": [400, 600, 700, 800],
-      "usage": ["logo", "display-heading", "celebration-title"]
-    },
-    "body": {
+    "primary": {
       "value": "Roboto, system-ui, sans-serif",
-      "description": "Body/UI font. Use for all interface text, buttons, labels, and content.",
-      "weights": [400, 500, 700],
+      "description": "Primary typeface. Use for all UI, body copy, and product screens.",
+      "weights": [400, 500, 600],
       "usage": ["body-text", "headings", "buttons", "labels", "navigation"]
+    },
+    "secondary": {
+      "value": "'Source Serif 4', Georgia, serif",
+      "description": "Secondary typeface. Use for editorial sections, creator stories, and long-form explanations.",
+      "weights": [400, 600, 700],
+      "usage": ["editorial-heading", "creator-story", "long-form-body", "display-heading"]
     },
     "mono": {
       "value": "Roboto Mono, monospace",
@@ -35,66 +35,58 @@
     },
     "semibold": {
       "value": 600,
-      "description": "Semibold weight. Subheadings, important labels."
-    },
-    "bold": {
-      "value": 700,
-      "description": "Bold weight. Headings, CTAs, emphasis."
-    },
-    "extrabold": {
-      "value": 800,
-      "description": "Extra bold weight. Display text, logo, celebrations."
+      "description": "Semibold weight. Headings, subheadings, CTAs, emphasis."
     }
   },
 
   "scale": {
     "display-large": {
-      "family": "display",
+      "family": "secondary",
       "size": "48px",
       "lineHeight": "56px",
-      "weight": 800,
+      "weight": 700,
       "letterSpacing": "-0.02em",
-      "description": "Large display text. Motiv logo, major celebrations.",
-      "usage": ["logo", "win-celebration"]
+      "description": "Large display text. Motiv logo, major celebrations, editorial heroes.",
+      "usage": ["logo", "win-celebration", "editorial-hero"]
     },
     "display-medium": {
-      "family": "display",
+      "family": "secondary",
       "size": "36px",
       "lineHeight": "44px",
       "weight": 700,
       "letterSpacing": "-0.01em",
-      "description": "Medium display text. Onboarding headlines, challenge titles.",
-      "usage": ["onboarding-headline", "challenge-title-large"]
+      "description": "Medium display text. Onboarding headlines, challenge titles, creator story headers.",
+      "usage": ["onboarding-headline", "challenge-title-large", "creator-story-header"]
     },
     "display-small": {
-      "family": "display",
+      "family": "secondary",
       "size": "28px",
       "lineHeight": "36px",
-      "weight": 700,
+      "weight": 600,
       "letterSpacing": "-0.01em",
-      "description": "Small display text. Section heroes, feature callouts.",
-      "usage": ["section-hero", "feature-headline"]
+      "description": "Small display text. Section heroes, feature callouts, editorial subheads.",
+      "usage": ["section-hero", "feature-headline", "editorial-subhead"]
     },
     "heading-1": {
-      "family": "body",
+      "family": "primary",
       "size": "24px",
       "lineHeight": "32px",
-      "weight": 700,
+      "weight": 600,
       "letterSpacing": "-0.01em",
       "description": "Heading 1. Screen titles, major section headers.",
       "usage": ["screen-title", "section-header"]
     },
     "heading-2": {
-      "family": "body",
+      "family": "primary",
       "size": "20px",
       "lineHeight": "28px",
-      "weight": 700,
+      "weight": 600,
       "letterSpacing": "0",
       "description": "Heading 2. Card titles, subsection headers.",
       "usage": ["card-title", "subsection-header"]
     },
     "heading-3": {
-      "family": "body",
+      "family": "primary",
       "size": "18px",
       "lineHeight": "24px",
       "weight": 600,
@@ -103,7 +95,7 @@
       "usage": ["list-header", "small-card-title"]
     },
     "body-large": {
-      "family": "body",
+      "family": "primary",
       "size": "18px",
       "lineHeight": "28px",
       "weight": 400,
@@ -112,7 +104,7 @@
       "usage": ["onboarding-body", "featured-description"]
     },
     "body": {
-      "family": "body",
+      "family": "primary",
       "size": "16px",
       "lineHeight": "24px",
       "weight": 400,
@@ -121,7 +113,7 @@
       "usage": ["body-text", "card-description", "list-item-text"]
     },
     "body-small": {
-      "family": "body",
+      "family": "primary",
       "size": "14px",
       "lineHeight": "20px",
       "weight": 400,
@@ -130,7 +122,7 @@
       "usage": ["secondary-text", "compact-list-item"]
     },
     "label": {
-      "family": "body",
+      "family": "primary",
       "size": "14px",
       "lineHeight": "20px",
       "weight": 500,
@@ -139,7 +131,7 @@
       "usage": ["form-label", "button-text", "nav-item"]
     },
     "label-small": {
-      "family": "body",
+      "family": "primary",
       "size": "12px",
       "lineHeight": "16px",
       "weight": 500,
@@ -148,7 +140,7 @@
       "usage": ["badge-text", "tag-text", "input-hint"]
     },
     "caption": {
-      "family": "body",
+      "family": "primary",
       "size": "12px",
       "lineHeight": "16px",
       "weight": 400,
@@ -157,7 +149,7 @@
       "usage": ["timestamp", "helper-text", "metadata"]
     },
     "overline": {
-      "family": "body",
+      "family": "primary",
       "size": "10px",
       "lineHeight": "14px",
       "weight": 600,
@@ -167,25 +159,25 @@
       "usage": ["section-label", "category-overline"]
     },
     "stat-large": {
-      "family": "body",
+      "family": "primary",
       "size": "40px",
       "lineHeight": "48px",
-      "weight": 700,
+      "weight": 600,
       "letterSpacing": "-0.02em",
       "description": "Large stat number. Hero metrics, reward amounts.",
       "usage": ["reward-amount", "hero-stat"]
     },
     "stat-medium": {
-      "family": "body",
+      "family": "primary",
       "size": "28px",
       "lineHeight": "36px",
-      "weight": 700,
+      "weight": 600,
       "letterSpacing": "-0.01em",
       "description": "Medium stat number. Dashboard metrics.",
       "usage": ["dashboard-stat", "progress-number"]
     },
     "stat-small": {
-      "family": "body",
+      "family": "primary",
       "size": "20px",
       "lineHeight": "28px",
       "weight": 600,

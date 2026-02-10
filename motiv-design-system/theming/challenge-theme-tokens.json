@@ -1,26 +1,26 @@
 {
   "$schema": "design-tokens-v1",
   "$type": "challenge-theme",
-  "$description": "Challenge theming tokens. Creators select one color palette and one accent font. Each color has 3 tones: background (light), emphasis (mid), and text (dark).",
+  "$description": "Challenge theming tokens. Creators select one color palette and one accent font. Each color has 3 tones: background (light), emphasis (mid), and text (dark). All emphasis colors are muted to align with the Motiv brand palette (warm, calm, emotionally mature).",
 
   "colors": {
-    "$description": "Each palette has exactly 3 tones for consistent, accessible theming.",
+    "$description": "Each palette has exactly 3 tones for consistent, accessible theming. Emphasis colors target 35–42% saturation to stay within brand bounds.",
 
     "violet": {
       "id": "violet",
       "name": "Violet",
       "description": "Calming, spiritual, creative. Great for yoga, meditation, and mindfulness challenges.",
       "background": {
-        "value": "#F5F3FF",
-        "description": "Very light violet for backgrounds, cards, and large surfaces."
+        "value": "#F2F0F7",
+        "description": "Warm light violet for backgrounds, cards, and large surfaces."
       },
       "emphasis": {
-        "value": "#8B5CF6",
-        "description": "Mid-tone violet for buttons, progress bars, badges, and interactive elements."
+        "value": "#7E6DA8",
+        "description": "Dusty violet for buttons, progress bars, badges, and interactive elements."
       },
       "text": {
-        "value": "#5B21B6",
-        "description": "Dark violet for text on light backgrounds."
+        "value": "#4E3D72",
+        "description": "Deep muted violet for text on light backgrounds."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -30,16 +30,16 @@
       "name": "Rose",
       "description": "Warm, nurturing, feminine. Perfect for self-care, wellness, and beauty challenges.",
       "background": {
-        "value": "#FFF1F2",
-        "description": "Soft blush pink for backgrounds."
+        "value": "#F7EFF1",
+        "description": "Soft warm blush for backgrounds."
       },
       "emphasis": {
-        "value": "#F43F5E",
-        "description": "Vibrant rose for accents and interactive elements."
+        "value": "#B86B78",
+        "description": "Dusty rose for accents and interactive elements."
       },
       "text": {
-        "value": "#9F1239",
-        "description": "Deep rose for text."
+        "value": "#76303F",
+        "description": "Deep muted rose for text."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -49,16 +49,16 @@
       "name": "Coral",
       "description": "Energetic, friendly, approachable. Great for fitness and movement challenges.",
       "background": {
-        "value": "#FFF7ED",
-        "description": "Warm peachy background."
+        "value": "#F7F0EB",
+        "description": "Warm sand-peach background."
       },
       "emphasis": {
-        "value": "#F97316",
-        "description": "Vibrant orange-coral for energy and action."
+        "value": "#BC8464",
+        "description": "Muted terracotta for energy and action."
       },
       "text": {
-        "value": "#C2410C",
-        "description": "Deep burnt orange for text."
+        "value": "#764D2C",
+        "description": "Deep warm brown for text."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -68,16 +68,16 @@
       "name": "Amber",
       "description": "Optimistic, warm, inviting. Good for nutrition, cooking, and lifestyle challenges.",
       "background": {
-        "value": "#FFFBEB",
-        "description": "Soft golden cream background."
+        "value": "#F7F3EA",
+        "description": "Soft warm cream background."
       },
       "emphasis": {
-        "value": "#F59E0B",
-        "description": "Bright amber for warmth and positivity."
+        "value": "#BB9658",
+        "description": "Muted ochre for warmth and positivity."
       },
       "text": {
-        "value": "#B45309",
-        "description": "Rich brown-amber for text."
+        "value": "#6F5420",
+        "description": "Rich earth-brown for text."
       },
       "onEmphasis": "#1A1A1A"
     },
@@ -85,18 +85,18 @@
     "lime": {
       "id": "lime",
       "name": "Lime",
-      "description": "Fresh, energetic, youthful. Great for high-intensity and outdoor challenges.",
+      "description": "Fresh, grounded, youthful. Great for high-intensity and outdoor challenges.",
       "background": {
-        "value": "#F7FEE7",
-        "description": "Fresh light green background."
+        "value": "#F2F5EC",
+        "description": "Soft sage-green background."
       },
       "emphasis": {
-        "value": "#84CC16",
-        "description": "Vibrant lime for energy and freshness."
+        "value": "#7E9C4D",
+        "description": "Muted sage-green for freshness and vitality."
       },
       "text": {
-        "value": "#4D7C0F",
-        "description": "Deep green for text."
+        "value": "#4C6228",
+        "description": "Deep olive for text."
       },
       "onEmphasis": "#1A1A1A"
     },
@@ -106,16 +106,16 @@
       "name": "Emerald",
       "description": "Balanced, healthy, natural. Perfect for wellness, nature, and recovery challenges.",
       "background": {
-        "value": "#ECFDF5",
-        "description": "Soft mint green background."
+        "value": "#ECF5F0",
+        "description": "Soft muted mint background."
       },
       "emphasis": {
-        "value": "#10B981",
-        "description": "Rich emerald for health and vitality."
+        "value": "#4D9B7E",
+        "description": "Muted jade for health and vitality."
       },
       "text": {
-        "value": "#047857",
-        "description": "Deep teal-green for text."
+        "value": "#2D6252",
+        "description": "Deep forest-green for text."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -125,15 +125,15 @@
       "name": "Teal",
       "description": "Calm, trustworthy, refreshing. Good for swimming, water sports, and mindfulness.",
       "background": {
-        "value": "#F0FDFA",
-        "description": "Light aqua background."
+        "value": "#ECF5F3",
+        "description": "Soft warm aqua background."
       },
       "emphasis": {
-        "value": "#14B8A6",
-        "description": "Clear teal for calm energy."
+        "value": "#4D9B92",
+        "description": "Muted teal for calm steadiness."
       },
       "text": {
-        "value": "#0F766E",
+        "value": "#2D625B",
         "description": "Deep teal for text."
       },
       "onEmphasis": "#FFFFFF"
@@ -142,20 +142,20 @@
     "cyan": {
       "id": "cyan",
       "name": "Cyan",
-      "description": "Clean, modern, tech-forward. Great for tracking-heavy and data-focused challenges.",
+      "description": "Clean, modern, collected. Great for tracking-heavy and data-focused challenges.",
       "background": {
-        "value": "#ECFEFF",
-        "description": "Crisp light cyan background."
+        "value": "#ECF2F5",
+        "description": "Soft cool-gray background."
       },
       "emphasis": {
-        "value": "#06B6D4",
-        "description": "Bright cyan for clarity and precision."
+        "value": "#4D909B",
+        "description": "Muted steel-cyan for clarity and precision."
       },
       "text": {
-        "value": "#0E7490",
-        "description": "Deep cyan for text."
+        "value": "#2D5B62",
+        "description": "Deep slate-cyan for text."
       },
-      "onEmphasis": "#1A1A1A"
+      "onEmphasis": "#FFFFFF"
     },
 
     "sky": {
@@ -163,16 +163,16 @@
       "name": "Sky",
       "description": "Open, peaceful, aspirational. Perfect for running, outdoor, and goal-oriented challenges.",
       "background": {
-        "value": "#F0F9FF",
-        "description": "Light sky blue background."
+        "value": "#ECF1F5",
+        "description": "Soft steel-blue background."
       },
       "emphasis": {
-        "value": "#0EA5E9",
-        "description": "Clear sky blue for openness and possibility."
+        "value": "#4A8099",
+        "description": "Muted steel-blue for openness and possibility."
       },
       "text": {
-        "value": "#0369A1",
-        "description": "Deep blue for text."
+        "value": "#2C5568",
+        "description": "Deep blue-gray for text."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -182,16 +182,16 @@
       "name": "Blue",
       "description": "Trustworthy, professional, focused. Good for consistency and habit challenges.",
       "background": {
-        "value": "#EFF6FF",
-        "description": "Soft blue background."
+        "value": "#EDF0F6",
+        "description": "Soft muted blue background."
       },
       "emphasis": {
-        "value": "#3B82F6",
-        "description": "Strong blue for trust and reliability."
+        "value": "#5474AC",
+        "description": "Muted denim-blue for trust and reliability."
       },
       "text": {
-        "value": "#1D4ED8",
-        "description": "Deep blue for text."
+        "value": "#2F4266",
+        "description": "Deep navy for text."
       },
       "onEmphasis": "#FFFFFF"
     },
@@ -201,15 +201,15 @@
       "name": "Indigo",
       "description": "Deep, focused, premium. Great for advanced and intensive challenges.",
       "background": {
-        "value": "#EEF2FF",
-        "description": "Soft indigo background."
+        "value": "#EFEEF6",
+        "description": "Soft muted indigo background."
       },
       "emphasis": {
-        "value": "#6366F1",
-        "description": "Rich indigo for depth and focus."
+        "value": "#6663A5",
+        "description": "Muted indigo for depth and focus."
       },
       "text": {
-        "value": "#4338CA",
+        "value": "#3E3B74",
         "description": "Deep indigo for text."
       },
       "onEmphasis": "#FFFFFF"
@@ -220,15 +220,15 @@
       "name": "Plum",
       "description": "Luxurious, feminine, sophisticated. Perfect for premium and self-care challenges.",
       "background": {
-        "value": "#FDF4FF",
-        "description": "Soft lavender-pink background."
+        "value": "#F4EEF6",
+        "description": "Soft warm lavender background."
       },
       "emphasis": {
-        "value": "#D946EF",
-        "description": "Vibrant magenta-purple for luxury."
+        "value": "#9E57A8",
+        "description": "Muted orchid for sophistication."
       },
       "text": {
-        "value": "#A21CAF",
+        "value": "#6B2D72",
         "description": "Deep plum for text."
       },
       "onEmphasis": "#FFFFFF"
@@ -277,18 +277,18 @@
     "$description": "7 curated fonts for challenge titles. Mix of sans-serif and serif, all highly readable and professional.",
 
     "fonts": {
-      "nunito": {
-        "id": "nunito",
-        "name": "Nunito",
-        "family": "Nunito, sans-serif",
-        "category": "sans-serif",
-        "style": "Rounded Sans",
-        "weights": [400, 600, 700, 800],
-        "description": "Warm and friendly with soft, rounded terminals. The Motiv default—approachable and optimistic.",
-        "vibe": ["friendly", "warm", "approachable", "optimistic"],
-        "bestFor": ["General wellness", "Beginner-friendly challenges", "Community-focused"],
-        "googleFonts": "https://fonts.google.com/specimen/Nunito",
-        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');"
+      "source-serif-4": {
+        "id": "source-serif-4",
+        "name": "Source Serif 4",
+        "family": "'Source Serif 4', Georgia, serif",
+        "category": "serif",
+        "style": "Modern Serif",
+        "weights": [400, 600, 700],
+        "description": "Warm and editorial with refined serifs. The Motiv default—trustworthy, mature, and inviting.",
+        "vibe": ["warm", "editorial", "trustworthy", "mature"],
+        "bestFor": ["General wellness", "Creator stories", "Long-form explanations"],
+        "googleFonts": "https://fonts.google.com/specimen/Source+Serif+4",
+        "cssImport": "@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap');"
       },
 
       "inter": {

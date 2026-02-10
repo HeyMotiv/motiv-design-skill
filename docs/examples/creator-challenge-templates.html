@@ -316,18 +316,17 @@
         }
 
         /* ===========================================
-           TEMPLATE CARD
+           TEMPLATE CARD — Hero Collab Detail
            =========================================== */
 
         .template-card {
             width: 100%;
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 12px 24px rgba(255, 74, 255, 0.16);
+            border-radius: 24px;
             overflow: hidden;
             transform: scale(0.88);
             opacity: 0.4;
             transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .carousel-slide.active .template-card {
@@ -335,189 +334,140 @@
             opacity: 1;
         }
 
-        .card-header {
+        .card-hero {
             position: relative;
-            padding: var(--space-lg) var(--space-lg) var(--space-md);
-            overflow: hidden;
-        }
-
-        .card-header-bg {
-            position: absolute;
-            inset: 0;
-            opacity: 0.5;
-        }
-
-        .card-header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-creator {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-sm);
-        }
-
-        .card-avatar {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .card-avatar .material-icons {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .card-creator-name {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-        }
-
-        .card-title {
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            margin-bottom: var(--space-xs);
-        }
-
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            font-size: 13px;
-            color: var(--color-text-tertiary);
-        }
-
-        .card-meta-dot {
-            width: 3px; height: 3px;
-            border-radius: 50%;
-            background: var(--color-text-tertiary);
-        }
-
-        /* Card body */
-
-        .card-body {
-            padding: var(--space-sm) var(--space-lg) var(--space-lg);
-        }
-
-        .card-description {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            line-height: 1.5;
-            margin-bottom: var(--space-sm);
-        }
-
-        .card-progress {
-            margin-bottom: var(--space-sm);
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
-        .progress-label {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-text-tertiary);
-        }
-
-        .progress-value {
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .progress-track {
-            height: 5px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .card-tasks {
+            height: 320px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-bottom: var(--space-sm);
+            justify-content: flex-end;
+            padding: 20px 22px 62px;
+            border-radius: 0 0 28px 28px;
+            overflow: hidden;
+        }
+        .card-hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .card-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.02) 40%, rgba(0,0,0,0.25) 75%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+        .card-hero-content {
+            position: relative;
+            z-index: 2;
         }
 
-        .task-item {
-            display: flex;
+        .creator-pill {
+            display: inline-flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: 10px var(--space-sm);
-            border-radius: var(--radius-sm);
-            background: var(--color-bg-secondary);
+            gap: 7px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-full);
+            padding: 5px 12px 5px 5px;
+            margin-bottom: 14px;
         }
-
-        .task-icon {
-            width: 28px; height: 28px;
-            border-radius: 6px;
+        .creator-pill-avatar {
+            width: 26px; height: 26px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .task-icon .material-icons {
-            font-size: 16px;
+        .creator-pill-avatar .material-icons { font-size: 14px; color: rgba(255, 255, 255, 0.9); }
+        .creator-pill-name { font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.01em; }
+
+        .card-hero-title {
+            font-size: 34px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+        .card-hero-subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.35;
+            margin-top: 2px;
         }
 
-        .task-text {
-            flex: 1;
+        .card-stats {
+            padding: 0 12px 12px;
+            position: relative;
+            z-index: 3;
+            display: flow-root;
         }
-
-        .task-day {
+        .stats-inner {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-top: -48px;
+            position: relative;
+        }
+        .pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .pool-label {
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
             color: var(--color-text-tertiary);
+            margin-bottom: 1px;
         }
-
-        .task-name {
-            font-size: 13px;
-            font-weight: 500;
+        .pool-amount {
+            font-size: 32px;
+            font-weight: 600;
             color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
         }
-
-        .task-check {
-            width: 18px; height: 18px;
-            border-radius: 50%;
-            border: 1.5px solid var(--color-border-default);
-            flex-shrink: 0;
+        .joined-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            color: #FFFFFF;
         }
-
-        .card-cta {
+        .joined-badge .material-icons { font-size: 16px; }
+        .meta-row {
+            display: flex;
+            border-top: 1px solid var(--color-border-default);
+            padding-top: 14px;
+            margin-bottom: 16px;
+        }
+        .meta-stat { flex: 1; text-align: center; }
+        .meta-stat + .meta-stat { border-left: 1px solid var(--color-border-default); }
+        .meta-stat-value { font-size: 17px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
+        .meta-stat-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); }
+        .invite-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            padding: 12px 24px;
-            border: none;
+            gap: 8px;
+            padding: 11px 16px;
             border-radius: var(--radius-full);
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+            background: var(--color-bg-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
         }
-        .card-cta:hover { transform: scale(1.02); }
-        .card-cta:active { transform: scale(0.97); }
+        .invite-row .material-icons { font-size: 18px; opacity: 0.6; }
 
         /* ===========================================
            BOTTOM CONTROLS
@@ -593,7 +543,7 @@
     <!-- Review header (outside phone) -->
     <div class="review-header">
         <div class="review-title">Challenge Templates</div>
-        <div class="review-subtitle">Creator picks a visual vibe — swipe to browse, tap to select</div>
+        <div class="review-subtitle">Mini collab detail cards — each a distinct visual world the creator can claim as their own</div>
     </div>
 
     <!-- Phone frame -->
@@ -628,350 +578,115 @@
             <!-- Header -->
             <div class="screen-header">
                 <div class="screen-title">Pick a starting point</div>
-                <div class="screen-subtitle">Choose a template — you can customize everything later</div>
+                <div class="screen-subtitle">Choose a template, you can customize more later.</div>
             </div>
 
             <!-- Carousel -->
             <div class="carousel-viewport" id="carouselViewport">
                 <div class="carousel-track" id="carouselTrack">
 
-                    <!-- Template 1: Calm & Centered — Violet + Lora -->
+                    <!-- 1: Mountain Zen — Purple gradient, Lora -->
                     <div class="carousel-slide active" data-index="0">
-                        <div class="template-card">
-                            <div class="card-header">
-                                <div class="card-header-bg" style="background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%);"></div>
-                                <div class="card-header-content">
-                                    <div class="card-creator">
-                                        <div class="card-avatar" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
-                                            <span class="material-icons">person</span>
-                                        </div>
-                                        <span class="card-creator-name">@sarahyoga</span>
-                                    </div>
-                                    <div class="card-title" style="font-family: 'Lora', serif; color: #5B21B6;">21-Day Mindfulness Reset</div>
-                                    <div class="card-meta">
-                                        <span>3 weeks</span>
-                                        <span class="card-meta-dot"></span>
-                                        <span>21 daily practices</span>
-                                    </div>
+                        <div class="template-card" style="background: #EDEAF4;">
+                            <div class="card-hero">
+                                <div class="card-hero-bg" style="background: linear-gradient(165deg, #D6CEE5 0%, #9084B8 35%, #6E549E 65%, #4A3278 100%);">
+                                    <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 220 Q30 160 80 190 Q120 130 170 170 Q210 120 260 155 Q300 100 340 140 L360 130 L360 320 L-10 320Z" fill="rgba(255,255,255,0.08)"/><path d="M-10 260 Q40 200 90 230 Q130 180 175 210 Q220 170 270 200 Q310 160 360 190 L360 320 L-10 320Z" fill="rgba(0,0,0,0.1)"/><path d="M-10 290 Q60 250 130 270 Q200 240 270 265 Q330 245 360 260 L360 320 L-10 320Z" fill="rgba(0,0,0,0.12)"/><path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.15)" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="290" cy="60" r="28" fill="rgba(255,255,255,0.15)"/><circle cx="298" cy="54" r="24" fill="rgba(144,132,184,0.6)"/><circle cx="60" cy="40" r="1.5" fill="rgba(255,255,255,0.3)"/><circle cx="120" cy="70" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="220" cy="35" r="1.5" fill="rgba(255,255,255,0.25)"/><circle cx="330" cy="90" r="1" fill="rgba(255,255,255,0.2)"/></svg>
+                                </div>
+                                <div class="card-hero-content">
+                                    <div class="creator-pill"><div class="creator-pill-avatar" style="background: linear-gradient(135deg, #A698C8, #6E549E);"><span class="material-icons">person</span></div><span class="creator-pill-name">@slow_spokes</span></div>
+                                    <div class="card-hero-title" style="font-family: 'Lora', serif;">Mindful Miles</div>
+                                    <div class="card-hero-subtitle">Slow scenic rides to clear your head and find your rhythm</div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="card-description">Find your center through guided breathwork, journaling, and gentle movement.</div>
-                                <div class="card-progress">
-                                    <div class="progress-header">
-                                        <span class="progress-label">Progress</span>
-                                        <span class="progress-value" style="color: #8B5CF6;">7 / 21</span>
-                                    </div>
-                                    <div class="progress-track" style="background: #F5F3FF;">
-                                        <div class="progress-fill" style="width: 33%; background: #8B5CF6;"></div>
-                                    </div>
-                                </div>
-                                <div class="card-tasks">
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #F5F3FF;">
-                                            <span class="material-icons" style="color: #8B5CF6;">self_improvement</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 1</div>
-                                            <div class="task-name">Morning Stillness</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #F5F3FF;">
-                                            <span class="material-icons" style="color: #8B5CF6;">spa</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 2</div>
-                                            <div class="task-name">Gratitude Journal</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #F5F3FF;">
-                                            <span class="material-icons" style="color: #8B5CF6;">air</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 3</div>
-                                            <div class="task-name">Breathwork Flow</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                </div>
-                                <button class="card-cta" style="background: #8B5CF6; color: #FFFFFF;">Join Challenge</button>
-                            </div>
+                            <div class="card-stats"><div class="stats-inner">
+                                <div class="pool-row"><div><div class="pool-label">Collab Pool</div><div class="pool-amount">$31,040</div></div><div class="joined-badge" style="background: #9084B8;"><span class="material-icons">check_circle</span> Joined!</div></div>
+                                <div class="meta-row"><div class="meta-stat"><div class="meta-stat-value">776</div><div class="meta-stat-label">Participants</div></div><div class="meta-stat"><div class="meta-stat-value">5 weeks</div><div class="meta-stat-label">Duration</div></div></div>
+                                <div class="invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
+                            </div></div>
                         </div>
                     </div>
 
-                    <!-- Template 2: High Energy — Coral + Poppins -->
+                    <!-- 2: Peak Power — Terracotta gradient, Poppins -->
                     <div class="carousel-slide" data-index="1">
-                        <div class="template-card">
-                            <div class="card-header">
-                                <div class="card-header-bg" style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);"></div>
-                                <div class="card-header-content">
-                                    <div class="card-creator">
-                                        <div class="card-avatar" style="background: linear-gradient(135deg, #F97316, #FB923C);">
-                                            <span class="material-icons">person</span>
-                                        </div>
-                                        <span class="card-creator-name">@coach_marcus</span>
-                                    </div>
-                                    <div class="card-title" style="font-family: 'Poppins', sans-serif; color: #C2410C; font-weight: 700;">30-Day HIIT Blitz</div>
-                                    <div class="card-meta">
-                                        <span>4 weeks</span>
-                                        <span class="card-meta-dot"></span>
-                                        <span>30 workouts</span>
-                                    </div>
+                        <div class="template-card" style="background: #F4ECE2;">
+                            <div class="card-hero">
+                                <div class="card-hero-bg" style="background: linear-gradient(150deg, #E0C890 0%, #CC9A7A 30%, #B07A5E 60%, #8C5540 100%);">
+                                    <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><ellipse cx="175" cy="320" rx="280" ry="180" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="50"/><ellipse cx="175" cy="340" rx="220" ry="150" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="40"/><line x1="-20" y1="110" x2="160" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round"/><line x1="-20" y1="130" x2="120" y2="127" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-linecap="round"/><line x1="-20" y1="150" x2="90" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-linecap="round"/><circle cx="300" cy="50" r="80" fill="rgba(224,200,144,0.2)"/><circle cx="300" cy="50" r="50" fill="rgba(224,200,144,0.15)"/><circle cx="300" cy="50" r="25" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="260" r="35" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/><circle cx="60" cy="260" r="12" fill="rgba(255,255,255,0.05)"/></svg>
+                                </div>
+                                <div class="card-hero-content">
+                                    <div class="creator-pill"><div class="creator-pill-avatar" style="background: linear-gradient(135deg, #CC9A7A, #B07A5E);"><span class="material-icons">person</span></div><span class="creator-pill-name">@crit_marcus</span></div>
+                                    <div class="card-hero-title" style="font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: -0.04em;">Sprint Series</div>
+                                    <div class="card-hero-subtitle">Max-effort interval rides that build raw power and speed</div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="card-description">Torch calories and build explosive strength with daily HIIT sessions.</div>
-                                <div class="card-progress">
-                                    <div class="progress-header">
-                                        <span class="progress-label">Progress</span>
-                                        <span class="progress-value" style="color: #F97316;">11 / 30</span>
-                                    </div>
-                                    <div class="progress-track" style="background: #FFF7ED;">
-                                        <div class="progress-fill" style="width: 37%; background: #F97316;"></div>
-                                    </div>
-                                </div>
-                                <div class="card-tasks">
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF7ED;">
-                                            <span class="material-icons" style="color: #F97316;">local_fire_department</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 1</div>
-                                            <div class="task-name">Tabata Ignition</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF7ED;">
-                                            <span class="material-icons" style="color: #F97316;">fitness_center</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 2</div>
-                                            <div class="task-name">Power Circuits</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF7ED;">
-                                            <span class="material-icons" style="color: #F97316;">timer</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 3</div>
-                                            <div class="task-name">Sprint Intervals</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                </div>
-                                <button class="card-cta" style="background: #F97316; color: #FFFFFF;">Join Challenge</button>
-                            </div>
+                            <div class="card-stats"><div class="stats-inner">
+                                <div class="pool-row"><div><div class="pool-label">Collab Pool</div><div class="pool-amount">$18,750</div></div><div class="joined-badge" style="background: #CC9A7A;"><span class="material-icons">check_circle</span> Joined!</div></div>
+                                <div class="meta-row"><div class="meta-stat"><div class="meta-stat-value">1,240</div><div class="meta-stat-label">Participants</div></div><div class="meta-stat"><div class="meta-stat-value">4 weeks</div><div class="meta-stat-label">Duration</div></div></div>
+                                <div class="invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
+                            </div></div>
                         </div>
                     </div>
 
-                    <!-- Template 3: Fresh Start — Emerald + Nunito -->
+                    <!-- 3: Fresh Ride — Emerald gradient, Source Serif 4 -->
                     <div class="carousel-slide" data-index="2">
-                        <div class="template-card">
-                            <div class="card-header">
-                                <div class="card-header-bg" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);"></div>
-                                <div class="card-header-content">
-                                    <div class="card-creator">
-                                        <div class="card-avatar" style="background: linear-gradient(135deg, #10B981, #34D399);">
-                                            <span class="material-icons">person</span>
-                                        </div>
-                                        <span class="card-creator-name">@nutritionwithnat</span>
-                                    </div>
-                                    <div class="card-title" style="font-family: 'Nunito', sans-serif; color: #047857; font-weight: 800;">Clean Eating Kickstart</div>
-                                    <div class="card-meta">
-                                        <span>2 weeks</span>
-                                        <span class="card-meta-dot"></span>
-                                        <span>14 daily recipes</span>
-                                    </div>
+                        <div class="template-card" style="background: #E2F4EA;">
+                            <div class="card-hero">
+                                <div class="card-hero-bg" style="background: linear-gradient(170deg, #A2D4BC 0%, #5FAE90 30%, #488E72 60%, #2C6050 100%);">
+                                    <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 180 Q50 130 120 165 Q180 110 240 150 Q300 100 360 135 L360 320 L-10 320Z" fill="rgba(255,255,255,0.06)"/><path d="M-10 220 Q80 170 150 200 Q220 160 290 190 Q340 170 360 180 L360 320 L-10 320Z" fill="rgba(0,0,0,0.07)"/><path d="M-10 260 Q60 230 140 250 Q220 225 300 245 Q350 235 360 240 L360 320 L-10 320Z" fill="rgba(0,0,0,0.08)"/><path d="M155 320 L170 140 L180 140 L195 320Z" fill="rgba(255,255,255,0.1)"/><line x1="175" y1="140" x2="175" y2="320" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 8"/><ellipse cx="130" cy="248" rx="12" ry="18" fill="rgba(0,0,0,0.08)"/><ellipse cx="220" cy="245" rx="13" ry="19" fill="rgba(0,0,0,0.08)"/><circle cx="175" cy="60" r="40" fill="rgba(255,255,255,0.12)"/><circle cx="175" cy="60" r="20" fill="rgba(255,255,255,0.1)"/></svg>
+                                </div>
+                                <div class="card-hero-content">
+                                    <div class="creator-pill"><div class="creator-pill-avatar" style="background: linear-gradient(135deg, #7CC4A8, #488E72);"><span class="material-icons">person</span></div><span class="creator-pill-name">@ride_with_jules</span></div>
+                                    <div class="card-hero-title" style="font-family: 'Source Serif 4', serif; font-weight: 700;">Century Ride Challenge</div>
+                                    <div class="card-hero-subtitle">Build your miles week by week toward the ultimate century ride</div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="card-description">Simple, delicious meals that reset your energy and nourish your body.</div>
-                                <div class="card-progress">
-                                    <div class="progress-header">
-                                        <span class="progress-label">Progress</span>
-                                        <span class="progress-value" style="color: #10B981;">5 / 14</span>
-                                    </div>
-                                    <div class="progress-track" style="background: #ECFDF5;">
-                                        <div class="progress-fill" style="width: 36%; background: #10B981;"></div>
-                                    </div>
-                                </div>
-                                <div class="card-tasks">
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #ECFDF5;">
-                                            <span class="material-icons" style="color: #10B981;">restaurant</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 1</div>
-                                            <div class="task-name">Green Smoothie Bowl</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #ECFDF5;">
-                                            <span class="material-icons" style="color: #10B981;">eco</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 2</div>
-                                            <div class="task-name">Meal Prep Sunday</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #ECFDF5;">
-                                            <span class="material-icons" style="color: #10B981;">water_drop</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 3</div>
-                                            <div class="task-name">Hydration Reset</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                </div>
-                                <button class="card-cta" style="background: #10B981; color: #FFFFFF;">Join Challenge</button>
-                            </div>
+                            <div class="card-stats"><div class="stats-inner">
+                                <div class="pool-row"><div><div class="pool-label">Collab Pool</div><div class="pool-amount">$24,300</div></div><div class="joined-badge" style="background: #5FAE90;"><span class="material-icons">check_circle</span> Joined!</div></div>
+                                <div class="meta-row"><div class="meta-stat"><div class="meta-stat-value">512</div><div class="meta-stat-label">Participants</div></div><div class="meta-stat"><div class="meta-stat-value">8 weeks</div><div class="meta-stat-label">Duration</div></div></div>
+                                <div class="invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
+                            </div></div>
                         </div>
                     </div>
 
-                    <!-- Template 4: Premium Journey — Indigo + Playfair Display -->
+                    <!-- 4: Noir Elite — Dark navy/gold, Playfair Display -->
                     <div class="carousel-slide" data-index="3">
-                        <div class="template-card">
-                            <div class="card-header">
-                                <div class="card-header-bg" style="background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);"></div>
-                                <div class="card-header-content">
-                                    <div class="card-creator">
-                                        <div class="card-avatar" style="background: linear-gradient(135deg, #6366F1, #818CF8);">
-                                            <span class="material-icons">person</span>
-                                        </div>
-                                        <span class="card-creator-name">@elitebody</span>
-                                    </div>
-                                    <div class="card-title" style="font-family: 'Playfair Display', serif; color: #4338CA;">12-Week Total Transformation</div>
-                                    <div class="card-meta">
-                                        <span>12 weeks</span>
-                                        <span class="card-meta-dot"></span>
-                                        <span>84 sessions</span>
-                                    </div>
+                        <div class="template-card" style="background: #E2E0D6;">
+                            <div class="card-hero">
+                                <div class="card-hero-bg" style="background: linear-gradient(160deg, #334155 0%, #1E293B 35%, #0F172A 65%, #020617 100%);">
+                                    <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 200 L40 140 L70 170 L120 100 L160 150 L200 80 L240 130 L280 90 L320 150 L360 120 L360 320 L-10 320Z" fill="rgba(212,175,55,0.06)"/><path d="M-10 240 L30 190 L80 220 L140 160 L190 200 L250 150 L310 190 L360 170 L360 320 L-10 320Z" fill="rgba(255,255,255,0.03)"/><path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.05)" stroke-width="12" fill="none" stroke-linecap="round"/><circle cx="80" cy="50" r="1.5" fill="rgba(212,175,55,0.35)"/><circle cx="270" cy="40" r="1" fill="rgba(212,175,55,0.25)"/><circle cx="180" cy="30" r="1.5" fill="rgba(212,175,55,0.3)"/><circle cx="320" cy="70" r="1" fill="rgba(212,175,55,0.2)"/><path d="M0 290 Q40 270 80 280 Q120 260 160 270 Q200 250 240 265 Q280 245 320 260 Q340 250 350 255" stroke="rgba(212,175,55,0.1)" stroke-width="1.5" fill="none"/></svg>
+                                </div>
+                                <div class="card-hero-content">
+                                    <div class="creator-pill"><div class="creator-pill-avatar" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">person</span></div><span class="creator-pill-name">@velonoir</span></div>
+                                    <div class="card-hero-title" style="font-family: 'Playfair Display', serif;">Gran Fondo Prep</div>
+                                    <div class="card-hero-subtitle">A structured 12-week build to race day, for riders who demand more</div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="card-description">An elite program designed to rebuild your body and elevate your mindset.</div>
-                                <div class="card-progress">
-                                    <div class="progress-header">
-                                        <span class="progress-label">Progress</span>
-                                        <span class="progress-value" style="color: #6366F1;">29 / 84</span>
-                                    </div>
-                                    <div class="progress-track" style="background: #EEF2FF;">
-                                        <div class="progress-fill" style="width: 35%; background: #6366F1;"></div>
-                                    </div>
-                                </div>
-                                <div class="card-tasks">
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #EEF2FF;">
-                                            <span class="material-icons" style="color: #6366F1;">fitness_center</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Week 1</div>
-                                            <div class="task-name">Foundation Phase</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #EEF2FF;">
-                                            <span class="material-icons" style="color: #6366F1;">trending_up</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Week 2</div>
-                                            <div class="task-name">Progressive Overload</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #EEF2FF;">
-                                            <span class="material-icons" style="color: #6366F1;">psychology</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Week 3</div>
-                                            <div class="task-name">Mindset Mastery</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                </div>
-                                <button class="card-cta" style="background: #6366F1; color: #FFFFFF;">Join Challenge</button>
-                            </div>
+                            <div class="card-stats"><div class="stats-inner">
+                                <div class="pool-row"><div><div class="pool-label">Collab Pool</div><div class="pool-amount">$52,800</div></div><div class="joined-badge" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">check_circle</span> Joined!</div></div>
+                                <div class="meta-row"><div class="meta-stat"><div class="meta-stat-value">340</div><div class="meta-stat-label">Participants</div></div><div class="meta-stat"><div class="meta-stat-value">12 weeks</div><div class="meta-stat-label">Duration</div></div></div>
+                                <div class="invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
+                            </div></div>
                         </div>
                     </div>
 
-                    <!-- Template 5: In Bloom — Rose + Merriweather -->
+                    <!-- 5: Golden Hour — Sunset amber/rose, Merriweather -->
                     <div class="carousel-slide" data-index="4">
-                        <div class="template-card">
-                            <div class="card-header">
-                                <div class="card-header-bg" style="background: linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%);"></div>
-                                <div class="card-header-content">
-                                    <div class="card-creator">
-                                        <div class="card-avatar" style="background: linear-gradient(135deg, #F43F5E, #FB7185);">
-                                            <span class="material-icons">person</span>
-                                        </div>
-                                        <span class="card-creator-name">@wellnesswithgrace</span>
-                                    </div>
-                                    <div class="card-title" style="font-family: 'Merriweather', serif; color: #9F1239; font-size: 22px;">Self-Care September</div>
-                                    <div class="card-meta">
-                                        <span>4 weeks</span>
-                                        <span class="card-meta-dot"></span>
-                                        <span>30 daily rituals</span>
-                                    </div>
+                        <div class="template-card" style="background: #F4E4E7;">
+                            <div class="card-hero">
+                                <div class="card-hero-bg" style="background: linear-gradient(175deg, #EDE0B8 0%, #CCA76C 20%, #C88090 55%, #8E4858 85%, #502028 100%);">
+                                    <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><circle cx="175" cy="160" r="55" fill="rgba(237,224,184,0.25)"/><circle cx="175" cy="160" r="35" fill="rgba(237,224,184,0.2)"/><circle cx="175" cy="160" r="18" fill="rgba(255,255,255,0.15)"/><path d="M0 195 Q175 185 350 195 L350 200 Q175 190 0 200Z" fill="rgba(255,255,255,0.08)"/><path d="M140 320 L172 195 L178 195 L210 320Z" fill="rgba(0,0,0,0.08)"/><line x1="175" y1="195" x2="175" y2="320" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5 7"/><ellipse cx="135" cy="270" rx="6" ry="3" fill="rgba(0,0,0,0.1)"/><line x1="135" y1="267" x2="135" y2="255" stroke="rgba(0,0,0,0.1)" stroke-width="2.5" stroke-linecap="round"/><circle cx="135" cy="251" r="3" fill="rgba(0,0,0,0.1)"/><ellipse cx="155" cy="272" rx="5.5" ry="2.8" fill="rgba(0,0,0,0.08)"/><line x1="155" y1="269" x2="155" y2="258" stroke="rgba(0,0,0,0.08)" stroke-width="2.5" stroke-linecap="round"/><circle cx="155" cy="254" r="3" fill="rgba(0,0,0,0.08)"/><ellipse cx="210" cy="268" rx="5" ry="2.5" fill="rgba(0,0,0,0.07)"/><line x1="210" y1="265" x2="210" y2="255" stroke="rgba(0,0,0,0.07)" stroke-width="2" stroke-linecap="round"/><circle cx="210" cy="252" r="2.5" fill="rgba(0,0,0,0.07)"/><ellipse cx="80" cy="100" rx="40" ry="6" fill="rgba(255,255,255,0.06)"/><ellipse cx="280" cy="120" rx="35" ry="5" fill="rgba(255,255,255,0.05)"/></svg>
+                                </div>
+                                <div class="card-hero-content">
+                                    <div class="creator-pill"><div class="creator-pill-avatar" style="background: linear-gradient(135deg, #CCA76C, #C88090);"><span class="material-icons">person</span></div><span class="creator-pill-name">@golden_peloton</span></div>
+                                    <div class="card-hero-title" style="font-family: 'Merriweather', serif;">Sunset Ride Club</div>
+                                    <div class="card-hero-subtitle">Golden hour group rides that end the day with good vibes and good company</div>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <div class="card-description">A gentle month of nurturing routines to help you bloom from the inside out.</div>
-                                <div class="card-progress">
-                                    <div class="progress-header">
-                                        <span class="progress-label">Progress</span>
-                                        <span class="progress-value" style="color: #F43F5E;">10 / 30</span>
-                                    </div>
-                                    <div class="progress-track" style="background: #FFF1F2;">
-                                        <div class="progress-fill" style="width: 33%; background: #F43F5E;"></div>
-                                    </div>
-                                </div>
-                                <div class="card-tasks">
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF1F2;">
-                                            <span class="material-icons" style="color: #F43F5E;">spa</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 1</div>
-                                            <div class="task-name">Evening Skin Ritual</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF1F2;">
-                                            <span class="material-icons" style="color: #F43F5E;">favorite</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 2</div>
-                                            <div class="task-name">Love Letter to Self</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                    <div class="task-item">
-                                        <div class="task-icon" style="background: #FFF1F2;">
-                                            <span class="material-icons" style="color: #F43F5E;">local_florist</span>
-                                        </div>
-                                        <div class="task-text">
-                                            <div class="task-day">Day 3</div>
-                                            <div class="task-name">Bath & Breathe</div>
-                                        </div>
-                                        <div class="task-check"></div>
-                                    </div>
-                                </div>
-                                <button class="card-cta" style="background: #F43F5E; color: #FFFFFF;">Join Challenge</button>
-                            </div>
+                            <div class="card-stats"><div class="stats-inner">
+                                <div class="pool-row"><div><div class="pool-label">Collab Pool</div><div class="pool-amount">$12,480</div></div><div class="joined-badge" style="background: #C88090;"><span class="material-icons">check_circle</span> Joined!</div></div>
+                                <div class="meta-row"><div class="meta-stat"><div class="meta-stat-value">2,180</div><div class="meta-stat-label">Participants</div></div><div class="meta-stat"><div class="meta-stat-value">4 weeks</div><div class="meta-stat-label">Duration</div></div></div>
+                                <div class="invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
+                            </div></div>
                         </div>
                     </div>
 
@@ -1001,11 +716,11 @@
         // ===========================================
 
         const templates = [
-            { name: 'Calm & Centered' },
-            { name: 'High Energy' },
-            { name: 'Fresh Start' },
-            { name: 'Premium Journey' },
-            { name: 'In Bloom' }
+            { name: 'Mindful Miles' },
+            { name: 'Sprint Series' },
+            { name: 'Century Ride' },
+            { name: 'Gran Fondo Prep' },
+            { name: 'Sunset Ride Club' }
         ];
 
         // ===========================================

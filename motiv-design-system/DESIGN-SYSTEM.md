@@ -23,21 +23,22 @@ Motiv is a fitness challenge app for **busy moms who want to get in shape**. The
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| Primary | `#1A1A1A` | Main CTAs, headings |
-| Secondary | `#7C3AED` | Secondary actions, accents, links |
-| Text | `#1A1A1A` | Body text |
-| Text Secondary | `#6B7280` | Captions, metadata |
-| Background | `#FFFFFF` | Screen backgrounds |
+| Primary Clay | `#C97A6A` | Main CTAs, brand highlights |
+| Confidence Accent | `#6B4E71` | Creator emphasis, select CTAs |
+| Ink | `#2B2E34` | Primary text, headers |
+| Sage Neutral | `#8FA6A0` | Secondary text, progress indicators |
+| Soft Blush | `#F3E6E2` | Card backgrounds, section fills |
+| Warm Sand | `#E7D9C9` | Dividers, inactive states |
 | Success | `#22C55E` | Completed, valid |
-| Error | `#EF4444` | Errors, invalid |
+| Boundary | `#B8574E` | Errors, constraints |
 
 ### Typography
 
 | Style | Font | Size/Weight |
 |-------|------|-------------|
-| Logo | Nunito | 48px/800 |
-| Heading 1 | Roboto | 24px/700 |
-| Heading 2 | Roboto | 20px/700 |
+| Logo | Source Serif 4 | 48px/700 |
+| Heading 1 | Roboto | 24px/600 |
+| Heading 2 | Roboto | 20px/600 |
 | Body | Roboto | 16px/400 |
 | Label | Roboto | 14px/500 |
 | Caption | Roboto | 12px/400 |

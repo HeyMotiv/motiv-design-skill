@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-brand-primary: #1A1A1A;
+            --color-brand-primary: #2B2E34;
             --color-text-primary: #1A1A1A;
             --color-text-secondary: #6B7280;
             --color-text-inverse: #FFFFFF;
@@ -242,7 +242,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: var(--color-brand-primary);
+            background: #000000;
             color: var(--color-text-inverse);
             font-family: var(--font-body);
             font-size: 17px;
@@ -251,9 +251,9 @@
             border: none;
             border-radius: var(--radius-full);
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
-        .btn-primary:hover { transform: scale(1.02); }
+        .btn-primary:hover { transform: scale(1.02); background: #2B2E34; }
 
         .btn-ghost {
             background: transparent;
@@ -313,7 +313,7 @@
 
             <div class="cta-section">
                 <button class="btn-primary">
-                    Start my first challenge
+                    Get started
                     <span>→</span>
                 </button>
                 <button class="btn-ghost">I already have an account</button>

@@ -154,7 +154,7 @@ class GradientBlobView: UIView {
 ### Font Loading
 
 ```swift
-// Register Nunito and Roboto in Info.plist
+// Register Source Serif 4 and Roboto in Info.plist
 // UIAppFonts array
 ```
 
