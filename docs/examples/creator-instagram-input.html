@@ -21,9 +21,9 @@
             --color-border-default: #E5E7EB;
             --color-interaction-selected: #F5F3FF;
 
-            --blob-lime: #CCDCE2;
-            --blob-mint: #CEDDE6;
-            --blob-sage: #D2DCE6;
+            --blob-lime: #CCDDD8;
+            --blob-mint: #CBDEE0;
+            --blob-sage: #D0DEE2;
             --blob-pink: #E8B4A8;
             --blob-gold: #F0DBBD;
 
@@ -169,7 +169,7 @@
             transition: background 0.8s ease;
         }
 
-        .lava-bg.green-chapter { background: #ECF0F3; }
+        .lava-bg.green-chapter { background: #ECF1F1; }
 
         .lava-layer {
             position: absolute;
@@ -246,14 +246,14 @@
         /* ---- Teal-blue blobs: sage + ocean (screen 5+) ---- */
         /* Same corner anchoring as warm blobs */
 
-        /* Sage pair — muted teal-blue dominant */
+        /* Sage pair — muted teal dominant */
         .blob-ga {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(170, 200, 215, 0.95) 0%,
-                rgba(180, 208, 220, 0.50) 50%,
-                rgba(220, 235, 242, 0.20) 100%
+                rgba(170, 210, 215, 0.95) 0%,
+                rgba(178, 215, 218, 0.50) 50%,
+                rgba(220, 238, 240, 0.20) 100%
             );
             bottom: -200px; right: -200px;
             animation: drift-a 14s ease-in-out infinite;
@@ -263,23 +263,23 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(175, 205, 218, 0.80) 0%,
-                rgba(185, 212, 225, 0.40) 50%,
-                rgba(225, 238, 245, 0.15) 100%
+                rgba(172, 212, 215, 0.80) 0%,
+                rgba(182, 218, 222, 0.40) 50%,
+                rgba(222, 240, 242, 0.15) 100%
             );
             bottom: -80px; right: -80px;
             animation: drift-a2 16s ease-in-out infinite;
             animation-delay: -6s;
         }
 
-        /* Ocean pair — deeper muted blue-teal dominant */
+        /* Ocean pair — deeper muted teal dominant */
         .blob-gb {
             width: 800px; height: 800px;
             background: radial-gradient(
                 circle,
-                rgba(155, 192, 212, 0.85) 0%,
-                rgba(175, 208, 225, 0.50) 50%,
-                rgba(210, 228, 240, 0.25) 100%
+                rgba(155, 200, 208, 0.85) 0%,
+                rgba(172, 212, 218, 0.50) 50%,
+                rgba(208, 232, 236, 0.25) 100%
             );
             bottom: -250px; right: -120px;
             animation: drift-b 12s ease-in-out infinite;
@@ -290,9 +290,9 @@
             width: 700px; height: 700px;
             background: radial-gradient(
                 circle,
-                rgba(160, 195, 215, 0.70) 0%,
-                rgba(180, 210, 228, 0.40) 50%,
-                rgba(215, 232, 242, 0.20) 100%
+                rgba(158, 205, 210, 0.70) 0%,
+                rgba(178, 215, 222, 0.40) 50%,
+                rgba(212, 235, 238, 0.20) 100%
             );
             bottom: -100px; right: -280px;
             animation: drift-b2 18s ease-in-out infinite;
@@ -1314,7 +1314,7 @@
         .s6-immersive-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(170deg, #ECF0F3 0%, #E5EBF0 35%, #DEE6ED 65%, #D7E1E8 100%);
+            background: linear-gradient(170deg, #ECF1F1 0%, #E5ECEC 35%, #DEE7E8 65%, #D7E2E4 100%);
             z-index: 0;
         }
 
@@ -3404,7 +3404,7 @@
 
                 <!-- Wave transition -->
                 <svg class="s6-wave" viewBox="0 0 390 40" preserveAspectRatio="none">
-                    <path d="M0 0 L0 12 Q65 38 130 28 Q195 18 260 30 Q325 42 390 20 L390 0 Z" fill="#D7E1E8"/>
+                    <path d="M0 0 L0 12 Q65 38 130 28 Q195 18 260 30 Q325 42 390 20 L390 0 Z" fill="#D7E2E4"/>
                     <path d="M0 12 Q65 38 130 28 Q195 18 260 30 Q325 42 390 20 L390 40 L0 40 Z" fill="#FFFFFF"/>
                 </svg>
 
