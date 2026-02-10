@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=780, initial-scale=1.0">
     <title>Creator Onboarding Flow — Motiv (AI-Generated Example)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Lora:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Lora:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root {
@@ -29,6 +29,7 @@
 
             --font-display: 'Source Serif 4', Georgia, serif;
             --font-body: 'Roboto', system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
 
             --space-xxs: 4px;
             --space-xs: 8px;
@@ -76,13 +77,14 @@
         .review-title {
             font-family: var(--font-display);
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 600;
             color: #e8e8f0;
             margin-bottom: 4px;
         }
 
         .review-subtitle {
-            font-size: 13px;
+            font-size: 12px;
+            letter-spacing: 0.01em;
             color: #8888a0;
         }
 
@@ -129,7 +131,7 @@
         .status-time {
             font-family: var(--font-body);
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--color-text-primary);
         }
 
@@ -425,7 +427,7 @@
         .btn-secondary:hover { opacity: 0.7; }
 
         .skip-link {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             color: var(--color-brand-secondary);
             background: none;
@@ -455,8 +457,8 @@
 
         .login-pill {
             font-family: var(--font-body);
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
             color: var(--color-brand-secondary);
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(16px);
@@ -488,7 +490,7 @@
             font-family: var(--font-body);
             font-size: 20px;
             color: var(--color-text-primary);
-            line-height: 1.4;
+            line-height: 1.45;
             text-align: center;
             margin-bottom: var(--space-lg);
             opacity: 0;
@@ -564,7 +566,7 @@
         }
 
         .testimonial-quote {
-            font-size: 15px;
+            font-size: 14px;
             font-style: italic;
             color: var(--color-text-primary);
             line-height: 1.5;
@@ -590,15 +592,16 @@
 
         .testimonial-name {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--color-brand-secondary);
             line-height: 1.3;
         }
 
         .testimonial-role {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--color-text-secondary);
             line-height: 1.3;
+            letter-spacing: 0.01em;
         }
 
         @keyframes fade-up {
@@ -634,19 +637,20 @@
 
         .s1-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.22;
             letter-spacing: -0.01em;
             text-align: center;
             margin-bottom: var(--space-sm);
         }
 
         .s1-subtext {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--color-text-secondary);
             text-align: center;
+            line-height: 1.5;
             margin-bottom: var(--space-2xl);
         }
 
@@ -667,7 +671,7 @@
 
         .input-prefix {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--color-text-tertiary);
             padding-right: var(--space-xs);
             user-select: none;
@@ -689,7 +693,8 @@
             display: flex;
             align-items: center;
             gap: var(--space-xxs);
-            font-size: 13px;
+            font-size: 12px;
+            letter-spacing: 0.01em;
             color: var(--color-text-tertiary);
             margin-bottom: var(--space-2xl);
         }
@@ -769,17 +774,18 @@
 
         .loader-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.22;
             letter-spacing: -0.01em;
             margin-bottom: var(--space-xs);
         }
 
         .loader-sub {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--color-text-secondary);
+            line-height: 1.5;
         }
 
         .loader-steps {
@@ -854,22 +860,24 @@
 
         .s3-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.22;
             margin-bottom: var(--space-sm);
             letter-spacing: -0.01em;
         }
 
         .s3-subtext {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--color-text-secondary);
+            line-height: 1.5;
         }
 
         .section-label {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
             color: var(--color-text-primary);
             text-align: center;
             margin-bottom: var(--space-md);
@@ -924,20 +932,22 @@
         .profile-name {
             font-family: var(--font-display);
             font-size: 24px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-text-primary);
+            letter-spacing: -0.01em;
             margin-bottom: var(--space-xxs);
         }
 
         .profile-handle {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--color-brand-secondary);
             margin-bottom: var(--space-md);
         }
 
         .follower-pill {
             font-size: 14px;
+            font-weight: 400;
             color: var(--color-text-secondary);
             border: 1.5px solid var(--color-border-default);
             border-radius: var(--radius-full);
@@ -963,10 +973,10 @@
 
         .s4-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.22;
             letter-spacing: -0.01em;
             text-align: center;
             margin-bottom: var(--space-xs);
@@ -978,9 +988,10 @@
         }
 
         .s4-subtext {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--color-text-secondary);
             text-align: center;
+            line-height: 1.5;
             margin-bottom: var(--space-xl);
         }
 
@@ -1034,17 +1045,19 @@
 
         .acc-title {
             flex: 1;
-            font-family: var(--font-display);
-            font-size: 15px;
-            font-weight: 600;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
             color: var(--color-text-primary);
             transition: color 0.2s ease;
         }
         .acc-item.waiting .acc-title { color: var(--color-text-tertiary); }
 
         .acc-answer-label {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.01em;
             color: var(--color-brand-secondary);
             display: none;
             flex-shrink: 0;
@@ -1120,9 +1133,9 @@
         .acc-opt.selected .opt-dot::after { transform: scale(1); }
 
         .opt-text {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--color-text-primary);
-            line-height: 1.4;
+            line-height: 1.45;
         }
         .acc-opt.selected .opt-text {
             color: var(--color-brand-secondary);
@@ -1158,9 +1171,9 @@
 
         .s5-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
-            line-height: 1.15;
+            line-height: 1.22;
             letter-spacing: -0.01em;
             color: var(--color-text-primary);
             margin-bottom: var(--space-md);
@@ -1168,10 +1181,10 @@
 
         .s5-subtitle {
             font-family: var(--font-body);
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 400;
             color: var(--color-text-secondary);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .trait-card {
@@ -1201,21 +1214,23 @@
 
         .trait-name {
             font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 600;
             color: var(--color-text-primary);
+            letter-spacing: -0.01em;
             margin-bottom: var(--space-xs);
         }
 
         .trait-tagline {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--color-brand-secondary);
             font-weight: 500;
+            letter-spacing: 0.01em;
             margin-bottom: var(--space-md);
         }
 
         .trait-description {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--color-text-secondary);
             line-height: 1.6;
         }
@@ -1226,7 +1241,8 @@
 
         .traits-label {
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-secondary);
             margin-bottom: var(--space-sm);
         }
@@ -1243,8 +1259,9 @@
             -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-full);
             padding: 10px 16px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-primary);
             box-shadow: 0 4px 12px rgba(0, 207, 107, 0.1);
         }
@@ -1261,7 +1278,7 @@
             background: transparent;
             color: var(--color-brand-secondary);
             font-family: var(--font-body);
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             padding: 18px 32px;
             border: 2px solid var(--color-brand-secondary);
@@ -1282,109 +1299,157 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 60px var(--space-xl) var(--space-xl);
+            padding: 0;
+            overflow: hidden;
         }
+
+        /* ---------- Immersive hero zone ---------- */
+        .s6-immersive {
+            position: relative;
+            padding: 60px var(--space-xl) 0;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .s6-immersive-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(170deg, #F5F5E8 0%, #EDF2E4 35%, #E4EDDC 65%, #DCE8D4 100%);
+            z-index: 0;
+        }
+
+        .s6-immersive-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(45px);
+            mix-blend-mode: multiply;
+            z-index: 1;
+        }
+        .s6-blob-a { width: 180px; height: 180px; background: var(--blob-lime); opacity: 0.35; top: -20%; left: -10%; animation: s6drift1 16s ease-in-out infinite; }
+        .s6-blob-b { width: 150px; height: 150px; background: var(--blob-mint); opacity: 0.3; top: 10%; right: -5%; animation: s6drift2 20s ease-in-out infinite -6s; }
+        .s6-blob-c { width: 120px; height: 120px; background: var(--blob-sage); opacity: 0.25; bottom: 10%; left: 25%; animation: s6drift3 18s ease-in-out infinite -3s; }
+
+        @keyframes s6drift1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(25px,15px) scale(1.1); } }
+        @keyframes s6drift2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-20px,10px) scale(1.08); } }
+        @keyframes s6drift3 { 0%,100% { transform: translate(0,0) scale(0.95); } 50% { transform: translate(10px,-15px) scale(1.05); } }
 
         .s6-nav {
             display: flex;
             align-items: center;
             padding: var(--space-xs) 0 var(--space-md);
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 0.8fr;
-            grid-template-rows: 1fr 1.3fr;
-            gap: 8px;
-            height: 190px;
-            margin-bottom: var(--space-xl);
-        }
-
-        .bento-item {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: var(--radius-md);
-            min-height: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
             position: relative;
+            z-index: 2;
         }
 
-        .bento-item::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            opacity: 0.15;
-        }
-
-        .bento-item:nth-child(1)::before { background: linear-gradient(135deg, var(--blob-lime), var(--blob-mint)); opacity: 0.25; }
-        .bento-item:nth-child(2)::before { background: linear-gradient(135deg, var(--blob-mint), var(--blob-sage)); }
-        .bento-item:nth-child(4)::before { background: linear-gradient(180deg, var(--blob-sage), var(--blob-mint)); opacity: 0.2; }
-        .bento-item:nth-child(5)::before { background: linear-gradient(135deg, var(--blob-lime), var(--blob-sage)); }
-        .bento-item:nth-child(6)::before { background: linear-gradient(135deg, var(--blob-mint), var(--blob-lime)); opacity: 0.25; }
-
-        .bento-icon {
-            font-size: 30px;
-            color: rgba(0, 160, 80, 0.4);
+        .s6-hero-text {
             position: relative;
-            z-index: 1;
-        }
-
-        .bento-circle {
-            border-radius: 50%;
-            aspect-ratio: 1;
-            justify-self: center;
-            align-self: center;
-        }
-        .bento-circle .bento-icon { font-size: 26px; }
-
-        .resolution-card {
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            box-shadow: 0 12px 24px rgba(0, 207, 107, 0.16);
-            margin-bottom: var(--space-xl);
+            z-index: 2;
+            text-align: center;
+            padding-bottom: var(--space-xl);
             animation: card-in 0.5s ease forwards;
         }
 
         .s6-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.2;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
             margin-bottom: var(--space-md);
         }
 
         .s6-headline .hi { color: var(--color-brand-secondary); }
 
+        .s6-bridge {
+            font-size: 15px;
+            color: rgba(43, 46, 52, 0.65);
+            line-height: 1.6;
+        }
+
+        .s6-bridge .hi {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        /* ---------- Wave transition ---------- */
+        .s6-wave {
+            display: block;
+            width: 100%;
+            flex-shrink: 0;
+            margin-top: -1px;
+        }
+
+        /* ---------- Lower content zone ---------- */
+        .s6-lower {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-lg) var(--space-xl) var(--space-xl);
+            background: var(--color-bg-primary);
+        }
+
+        .resolution-card {
+            background: #FAFAF8;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            margin-bottom: var(--space-lg);
+            text-align: center;
+            animation: card-in 0.4s ease 0.15s both;
+        }
+
+        .s6-card-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(0, 130, 60, 0.5);
+            margin-bottom: var(--space-sm);
+        }
+
         .s6-body {
             font-size: 15px;
             color: var(--color-text-secondary);
             line-height: 1.65;
-            margin-bottom: var(--space-sm);
         }
-
-        .s6-body:last-child { margin-bottom: 0; }
 
         .s6-body .hi {
             color: var(--color-text-primary);
             font-weight: 600;
         }
 
-        .s6-body--accent {
+        .s6-example-pills {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-md);
+        }
+
+        .s6-pill {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(0, 130, 60, 0.7);
+            background: rgba(0, 160, 80, 0.06);
+            border: 1px solid rgba(0, 160, 80, 0.12);
+            border-radius: 9999px;
+            padding: 5px 14px;
+            letter-spacing: 0.01em;
+        }
+
+        .s6-closing {
+            text-align: center;
             font-family: var(--font-display);
             font-size: 17px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-text-primary);
-            margin-top: var(--space-md);
-            line-height: 1.4;
+            line-height: 1.35;
+            animation: card-in 0.4s ease 0.25s both;
+        }
+
+        .s6-closing .hi {
+            color: var(--color-brand-secondary);
         }
 
         .s6-cta {
@@ -1419,16 +1484,16 @@
 
         .s7-headline {
             font-family: var(--font-display);
-            font-size: 28px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.28;
             letter-spacing: -0.01em;
             margin-bottom: var(--space-xs);
         }
 
         .s7-subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--color-text-secondary);
             line-height: 1.5;
         }
@@ -1444,9 +1509,9 @@
         }
 
         .earnings-overline {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #22C55E;
             margin-bottom: var(--space-xs);
@@ -1454,15 +1519,17 @@
 
         .earnings-amount {
             font-family: var(--font-display);
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1;
+            line-height: 1.17;
+            letter-spacing: -0.02em;
             margin-bottom: var(--space-xs);
         }
 
         .earnings-qualifier {
             font-size: 14px;
+            font-weight: 400;
             color: var(--color-text-secondary);
         }
 
@@ -1481,9 +1548,9 @@
         }
 
         .benefits-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--color-text-tertiary);
             margin-bottom: var(--space-sm);
@@ -1514,6 +1581,7 @@
             flex: 1;
             font-size: 14px;
             font-weight: 500;
+            letter-spacing: 0.01em;
             color: var(--color-text-primary);
         }
 
@@ -1541,22 +1609,23 @@
 
         .s8-header {
             padding: 0 var(--space-xl) var(--space-sm);
+            text-align: center;
         }
 
         .s8-headline {
             font-family: var(--font-display);
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+            line-height: 1.22;
+            letter-spacing: -0.01em;
             margin-bottom: var(--space-xxs);
         }
 
         .s8-subtitle {
             font-size: 16px;
             color: var(--color-text-secondary);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         /* Carousel */
@@ -1626,6 +1695,10 @@
         .s8-card-hero-content {
             position: relative;
             z-index: 2;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Creator pill */
@@ -1649,22 +1722,22 @@
             flex-shrink: 0;
         }
         .s8-creator-pill-avatar .material-icons { font-size: 14px; color: rgba(255, 255, 255, 0.9); }
-        .s8-creator-pill-name { font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.01em; }
+        .s8-creator-pill-name { font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.9); letter-spacing: 0.02em; }
 
         /* Hero title */
         .s8-card-hero-title {
-            font-size: 34px;
+            font-size: 36px;
             font-weight: 700;
             color: #FFFFFF;
-            line-height: 1.08;
-            letter-spacing: -0.03em;
+            line-height: 1.22;
+            letter-spacing: -0.02em;
             margin-bottom: 12px;
             text-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
         .s8-card-hero-subtitle {
-            font-size: 15px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.7);
-            line-height: 1.35;
+            line-height: 1.45;
             margin-top: 2px;
         }
 
@@ -1693,16 +1766,17 @@
             font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.1em;
             color: var(--color-text-tertiary);
             margin-bottom: 1px;
         }
         .s8-pool-amount {
-            font-size: 32px;
+            font-family: var(--font-body);
+            font-size: 28px;
             font-weight: 600;
             color: var(--color-text-primary);
-            line-height: 1.1;
-            letter-spacing: -0.03em;
+            line-height: 1.28;
+            letter-spacing: -0.01em;
         }
         .s8-joined-badge {
             display: inline-flex;
@@ -1710,8 +1784,9 @@
             gap: 5px;
             padding: 7px 14px;
             border-radius: var(--radius-full);
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             color: #FFFFFF;
         }
         .s8-joined-badge .material-icons { font-size: 16px; }
@@ -1723,8 +1798,8 @@
         }
         .s8-meta-stat { flex: 1; text-align: center; }
         .s8-meta-stat + .s8-meta-stat { border-left: 1px solid var(--color-border-default); }
-        .s8-meta-stat-value { font-size: 17px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
-        .s8-meta-stat-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-tertiary); }
+        .s8-meta-stat-value { font-family: var(--font-body); font-size: 18px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
+        .s8-meta-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); }
         .s8-invite-row {
             display: flex;
             align-items: center;
@@ -1733,8 +1808,9 @@
             padding: 11px 16px;
             border-radius: var(--radius-full);
             background: var(--color-bg-secondary);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-secondary);
         }
         .s8-invite-row .material-icons { font-size: 18px; opacity: 0.6; }
@@ -1801,9 +1877,9 @@
         .s9-headline {
             font-family: var(--font-display);
             font-size: 28px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-text-primary);
-            line-height: 1.15;
+            line-height: 1.28;
             letter-spacing: -0.01em;
             text-align: center;
             margin-bottom: var(--space-2xl);
@@ -1814,8 +1890,9 @@
         }
 
         .form-label {
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-secondary);
             margin-bottom: var(--space-xs);
             display: block;
@@ -1847,6 +1924,7 @@
 
         .form-hint {
             font-size: 12px;
+            letter-spacing: 0.01em;
             color: var(--color-text-tertiary);
             margin-top: var(--space-xxs);
             text-align: right;
@@ -1861,8 +1939,9 @@
             display: inline-flex;
             align-items: center;
             gap: var(--space-xxs);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-secondary);
             background: var(--color-bg-tertiary);
             padding: 8px 14px;
@@ -1897,10 +1976,10 @@
             to   { opacity: 1; transform: translateY(0); }
         }
         .pill-editor-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             color: var(--color-text-tertiary);
             margin-bottom: var(--space-xs);
         }
@@ -1915,8 +1994,9 @@
             border: 1.5px solid transparent;
             border-radius: var(--radius-full);
             padding: 6px 14px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.02em;
             font-family: inherit;
             cursor: pointer;
             transition: all 0.15s;
@@ -1981,10 +2061,10 @@
 
         .s10-headline {
             font-family: var(--font-display);
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 600;
             color: var(--color-text-primary);
-            line-height: 1.2;
+            line-height: 1.28;
             letter-spacing: -0.01em;
             margin-bottom: var(--space-xs);
         }
@@ -1992,7 +2072,7 @@
         .s10-subtitle {
             font-size: 14px;
             color: var(--color-text-secondary);
-            line-height: 1.5;
+            line-height: 1.45;
         }
 
         .product-slot {
@@ -2011,9 +2091,9 @@
         }
 
         .product-category {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--color-brand-secondary);
             background: var(--color-interaction-selected);
@@ -2148,6 +2228,7 @@
 
         .s10-context p {
             font-size: 12px;
+            letter-spacing: 0.01em;
             color: var(--color-text-secondary);
             line-height: 1.5;
         }
@@ -2157,10 +2238,10 @@
         }
 
         .s10-picks-label {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.1em;
             color: var(--color-text-tertiary);
             margin-bottom: var(--space-xs);
             flex-shrink: 0;
@@ -2212,14 +2293,16 @@
         }
 
         .s10-pick-name {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.02em;
             color: var(--color-text-primary);
             white-space: nowrap;
         }
 
         .s10-pick-brand {
-            font-size: 11px;
+            font-size: 10px;
+            letter-spacing: 0.01em;
             color: var(--color-text-tertiary);
             white-space: nowrap;
         }
@@ -2233,134 +2316,763 @@
         }
 
         /* ===========================================
-           SCREEN 11: PREVIEW & LAUNCH
+           SCREEN 11: PREVIEW & LAUNCH (Full detail)
            =========================================== */
 
-        .s11-content {
+        #screen11 {
+            --s11-accent: #9084B8;
+            --s11-accent-light: #EDE9F6;
+            --s11-accent-medium: #DDD5F3;
+            --s11-accent-strong: #9084B8;
+            --s11-accent-dark: #4F4965;
+            background: var(--s11-accent-light);
+        }
+
+        .s11-scroll {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 60px var(--space-xl) var(--space-xl);
-            align-items: center;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
+        .s11-scroll::-webkit-scrollbar { display: none; }
 
-        .s11-nav {
-            display: flex;
-            align-items: center;
-            padding: var(--space-xs) 0 var(--space-md);
-            width: 100%;
-        }
-
-        .s11-headline {
-            font-family: var(--font-display);
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-            line-height: 1.15;
-            text-align: center;
-            margin-bottom: var(--space-xs);
-        }
-
-        .s11-subtitle {
-            font-size: 15px;
-            color: var(--color-text-secondary);
-            text-align: center;
-            margin-bottom: var(--space-2xl);
-        }
-
-        .preview-card {
-            width: 100%;
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: 0 12px 24px rgba(0, 207, 107, 0.16);
-            margin-bottom: var(--space-xl);
-            animation: card-in 0.5s ease forwards;
-        }
-
-        .preview-hero {
-            height: 140px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .s11-hero {
             position: relative;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 24px 28px;
             overflow: hidden;
         }
-
-        .preview-hero::before {
+        .s11-hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .s11-hero::after {
             content: '';
             position: absolute;
             inset: 0;
-            opacity: 0.12;
-        }
-
-        .preview-hero-emoji {
-            font-size: 40px;
-            position: relative;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.02) 30%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.55) 100%);
             z-index: 1;
-            margin-bottom: var(--space-xs);
+        }
+        .s11-hero-content {
+            position: relative;
+            z-index: 2;
         }
 
-        .preview-hero-title {
-            font-family: var(--font-display);
+        .s11-creator-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-full);
+            padding: 5px 12px 5px 5px;
+            margin-bottom: 14px;
+        }
+        .s11-creator-pill-avatar {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s11-creator-pill-avatar .material-icons { font-size: 14px; color: rgba(255,255,255,0.9); }
+        .s11-creator-pill-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.9); letter-spacing: 0.02em; }
+
+        .s11-hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.22;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        .s11-back-float {
+            position: absolute;
+            top: 60px;
+            left: 16px;
+            z-index: 5;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.15s;
+            border: none;
+            padding: 0;
+        }
+        .s11-back-float:hover { background: rgba(0,0,0,0.4); }
+        .s11-back-float .material-icons { font-size: 20px; color: #fff; }
+
+        .s11-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 24px;
+            background: rgba(255,255,255,0.04);
+        }
+        .s11-count-item {
+            text-align: center;
+            min-width: 52px;
+        }
+        .s11-count-value {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.28;
+            letter-spacing: -0.01em;
+        }
+        .s11-count-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+        }
+
+        .s11-pool-card {
+            margin: -20px 16px 0;
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 20px 20px 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 3;
+        }
+        .s11-pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .s11-pool-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+            margin-bottom: 2px;
+        }
+        .s11-pool-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.22;
+            letter-spacing: -0.02em;
+        }
+        .s11-entry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #FFFFFF;
+        }
+        .s11-entry-badge .material-icons { font-size: 16px; }
+
+        .s11-meta-row {
+            display: flex;
+            border-top: 1px solid var(--color-border-default);
+            padding-top: 14px;
+        }
+        .s11-meta-stat { flex: 1; text-align: center; }
+        .s11-meta-stat + .s11-meta-stat { border-left: 1px solid var(--color-border-default); }
+        .s11-meta-stat-value { font-family: var(--font-body); font-size: 18px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
+        .s11-meta-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); }
+
+        .s11-detail-rows {
+            padding: 12px 16px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .s11-detail-card {
+            background: var(--color-bg-secondary);
+            border-radius: 16px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .s11-detail-card-pair {
+            display: flex;
+            gap: 10px;
+        }
+        .s11-detail-card-pair .s11-detail-card {
+            flex: 1;
+            min-width: 0;
+        }
+        .s11-detail-icon {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--s11-accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s11-detail-icon .material-icons { font-size: 22px; color: var(--s11-accent-strong); }
+        .s11-detail-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--s11-accent);
+            line-height: 1.4;
+            margin-bottom: 2px;
+        }
+        .s11-detail-value {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .s11-section {
+            padding: 10px 16px 0;
+        }
+        .s11-section-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 10px;
+        }
+        .s11-section-body {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+        }
+
+        .s11-product-item {
+            padding: 18px 0 16px;
+            border-bottom: 1.5px solid var(--s11-accent-light, rgba(124,92,191,0.12));
+        }
+        .s11-product-item:last-child { border-bottom: none; padding-bottom: 12px; }
+        .s11-product-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .s11-product-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--s11-accent, #7C5CBF);
+            border: 1.5px solid var(--s11-accent-light, rgba(124,92,191,0.2));
+            border-radius: 20px;
+            padding: 4px 12px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .s11-product-name {
             font-size: 20px;
             font-weight: 700;
             color: var(--color-text-primary);
-            position: relative;
-            z-index: 1;
+            line-height: 1.25;
         }
-
-        .preview-body {
-            padding: var(--space-lg);
+        .s11-product-brand {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            margin-top: 2px;
         }
-
-        .preview-stats {
+        .s11-product-arrow {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--s11-accent-light, rgba(124,92,191,0.12));
             display: flex;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s11-product-arrow .material-icons {
+            font-size: 22px;
+            color: var(--s11-accent, #7C5CBF);
         }
 
-        .preview-stat {
-            flex: 1;
-            text-align: center;
+        /* Journey outer card (white) */
+        .s11-journey-card {
+            background: #fff;
+            border: 1.5px solid rgba(0,0,0,0.06);
+            border-radius: 24px;
+            padding: 22px 20px 20px;
         }
-
-        .preview-stat-value {
-            font-family: var(--font-display);
-            font-size: 18px;
+        /* Creator bio inner (light purple tint) */
+        .s11-creator-bio-inner {
+            background: var(--s11-accent-light, rgba(124,92,191,0.07));
+            border-radius: 20px;
+            padding: 22px 20px 18px;
+            margin-top: 14px;
+        }
+        .s11-creator-bio-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .s11-creator-bio-avatar {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #A698C8, #6E549E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.8);
+        }
+        .s11-creator-bio-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .s11-creator-bio-avatar .material-icons {
+            font-size: 32px;
+            color: rgba(255,255,255,0.85);
+        }
+        .s11-creator-bio-name {
+            font-family: var(--font-body);
+            font-size: 22px;
             font-weight: 700;
             color: var(--color-text-primary);
+            line-height: 1.2;
         }
-
-        .preview-stat-label {
-            font-size: 11px;
-            color: var(--color-text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+        .s11-creator-bio-tagline {
+            font-family: var(--font-body);
+            font-size: 14px;
             font-weight: 600;
+            font-style: italic;
+            color: var(--s11-accent, #7C5CBF);
+            line-height: 1.35;
+            margin-top: 4px;
         }
-
-        .preview-products-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xxs);
+        .s11-creator-bio-text {
+            font-size: 14.5px;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+            margin-bottom: 18px;
+        }
+        .s11-creator-bio-stats {
+            display: flex;
+            gap: 8px;
+        }
+        .s11-creator-bio-stat {
+            flex: 1;
+            background: rgba(255,255,255,0.75);
+            border-radius: 16px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+        .s11-creator-bio-stat-value {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--s11-accent, #7C5CBF);
+            line-height: 1.2;
+        }
+        .s11-creator-bio-stat-label {
             font-size: 12px;
-            font-weight: 500;
-            color: var(--color-brand-secondary);
-            background: var(--color-interaction-selected);
-            padding: 6px 12px;
-            border-radius: var(--radius-full);
+            color: var(--color-text-secondary);
+            line-height: 1.3;
+            margin-top: 4px;
         }
-        .preview-products-badge .material-icons { font-size: 14px; }
+        .s11-products-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+            margin-bottom: 18px;
+        }
 
-        .s11-cta {
-            margin-top: auto;
-            padding-top: var(--space-lg);
-            width: 100%;
+        /* About expandable card */
+        .s11-about-card {
+            background: #fff;
+            border: 1.5px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .s11-about-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px 0;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .s11-about-header:active {
+            background: rgba(0,0,0,0.02);
+        }
+        .s11-about-label {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .s11-about-chevron {
+            font-size: 24px;
+            color: var(--color-text-primary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .s11-about-card.open .s11-about-chevron {
+            transform: rotate(180deg);
+        }
+        .s11-about-preview {
+            position: relative;
+            padding: 12px 22px 20px;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            max-height: 5.2em;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .s11-about-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3em;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .s11-about-card.open .s11-about-preview {
+            max-height: 600px;
+        }
+        .s11-about-card.open .s11-about-preview::after {
+            opacity: 0;
+        }
+
+        .s11-faq-card {
+            background: #fff;
+            border: 1.5px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+        .s11-faq-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 22px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .s11-faq-header:active {
+            background: rgba(0,0,0,0.02);
+        }
+        .s11-faq-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .s11-faq-chevron {
+            font-size: 24px;
+            color: var(--color-text-primary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .s11-faq-card.open .s11-faq-chevron {
+            transform: rotate(180deg);
+        }
+        .s11-faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .s11-faq-card.open .s11-faq-body {
+            max-height: 600px;
+        }
+        .s11-faq-content {
+            padding: 0 22px 20px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .s11-faq-subtitle {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            color: var(--color-text-primary);
+            margin: 16px 0 8px;
+        }
+        .s11-faq-subtitle:first-child {
+            margin-top: 14px;
+        }
+        .s11-faq-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            margin: 0;
+        }
+        .s11-faq-list {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            margin: 4px 0 0;
+            padding-left: 18px;
+        }
+        .s11-faq-list li {
+            margin-bottom: 4px;
+        }
+
+        .s11-spacer {
+            height: 180px;
+        }
+
+        .s11-sticky-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 6;
+            padding: 12px 24px 28px;
+            background: linear-gradient(to top, var(--s11-accent-light) 60%, var(--s11-accent-light) 80%, transparent 100%);
             display: flex;
             flex-direction: column;
-            gap: var(--space-sm);
+            gap: 6px;
+        }
+        .s11-sticky-bottom .btn-primary {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .s11-sticky-bottom .btn-secondary {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        /* ===========================================
+           GOAL REQUIREMENTS CARD
+           =========================================== */
+
+        .s11-goal-card {
+            margin: 0;
+            background: #FFFFFF;
+            border: 1.5px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            padding: 20px 22px;
+        }
+        .s11-goal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .s11-goal-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+        .s11-goal-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            margin-top: 2px;
+        }
+        .s11-goal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            background: #F0F4D4;
+            font-size: 12px;
+            font-weight: 500;
+            color: #5A6216;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .s11-goal-badge .material-icons {
+            font-size: 14px;
+        }
+        .s11-goal-section-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-primary);
+            margin-bottom: 12px;
+        }
+        .s11-goal-metrics {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .s11-goal-metric {
+            flex: 1;
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+        .s11-goal-metric-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--s11-accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .s11-goal-metric-icon .material-icons {
+            font-size: 20px;
+            color: var(--s11-accent-strong);
+        }
+        .s11-goal-metric-value {
+            font-family: var(--font-body);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+        .s11-goal-metric-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+        .s11-goal-metric-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            flex: 1;
+        }
+        .s11-goal-metric-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.06);
+            margin: 12px 0 10px;
+        }
+        .s11-goal-metric-footer {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Smart Target Logic */
+        .s11-goal-logic {
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-radius: 16px;
+            padding: 16px 18px 20px;
+            margin-bottom: 16px;
+        }
+        .s11-goal-logic-header {
+            margin-bottom: 14px;
+        }
+        .s11-goal-logic-title {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            margin-bottom: 2px;
+        }
+        .s11-goal-logic-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+        }
+        .s11-goal-formula {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .s11-goal-formula-item {
+            text-align: center;
+        }
+        .s11-goal-formula-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 18px;
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            margin-bottom: 6px;
+        }
+        .s11-goal-formula-pill--gray {
+            background: #E5E7EB;
+            color: var(--color-text-primary);
+        }
+        .s11-goal-formula-pill--purple {
+            background: var(--s11-accent-medium);
+            color: var(--s11-accent-dark);
+        }
+        .s11-goal-formula-pill--dark {
+            background: var(--color-text-primary);
+            color: #FFFFFF;
+        }
+        .s11-goal-formula-op {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            padding-bottom: 22px;
+        }
+        .s11-goal-formula-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Sync CTA */
+        .s11-goal-sync-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: var(--s11-accent-medium);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--s11-accent-dark);
+            letter-spacing: 0.01em;
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .s11-goal-sync-btn:hover {
+            background: var(--s11-accent-light);
+        }
+        .s11-goal-sync-btn .material-icons {
+            font-size: 20px;
         }
 
         /* ===========================================
@@ -2672,29 +3384,45 @@
              ============================================ -->
         <div class="screen" id="screen6">
             <div class="s6-content">
-                <div class="s6-nav">
-                    <a href="#" class="back-btn" id="s6Back"><span class="material-icons">chevron_left</span></a>
+
+                <!-- Immersive top half -->
+                <div class="s6-immersive">
+                    <div class="s6-immersive-bg"></div>
+                    <div class="s6-immersive-blob s6-blob-a"></div>
+                    <div class="s6-immersive-blob s6-blob-b"></div>
+                    <div class="s6-immersive-blob s6-blob-c"></div>
+
+                    <div class="s6-nav">
+                        <a href="#" class="back-btn" id="s6Back"><span class="material-icons">chevron_left</span></a>
+                    </div>
+
+                    <div class="s6-hero-text">
+                        <h1 class="s6-headline" id="s6Headline"></h1>
+                        <p class="s6-bridge" id="s6Body1"></p>
+                    </div>
                 </div>
 
-                <div class="bento-grid">
-                    <div class="bento-item"><span class="material-icons bento-icon">photo_library</span></div>
-                    <div class="bento-item"><span class="material-icons bento-icon">videocam</span></div>
-                    <div class="bento-item bento-circle"><span class="material-icons bento-icon">person</span></div>
-                    <div class="bento-item"><span class="material-icons bento-icon">groups</span></div>
-                    <div class="bento-item"><span class="material-icons bento-icon">trending_up</span></div>
-                    <div class="bento-item"><span class="material-icons bento-icon">favorite</span></div>
+                <!-- Wave transition -->
+                <svg class="s6-wave" viewBox="0 0 390 40" preserveAspectRatio="none">
+                    <path d="M0 0 L0 12 Q65 38 130 28 Q195 18 260 30 Q325 42 390 20 L390 0 Z" fill="#DCE8D4"/>
+                    <path d="M0 12 Q65 38 130 28 Q195 18 260 30 Q325 42 390 20 L390 40 L0 40 Z" fill="#FFFFFF"/>
+                </svg>
+
+                <!-- Clean lower half -->
+                <div class="s6-lower">
+                    <div class="resolution-card">
+                        <p class="s6-card-label">How it works</p>
+                        <p class="s6-body" id="s6Body2"></p>
+                        <div class="s6-example-pills" id="s6Pills"></div>
+                    </div>
+
+                    <p class="s6-closing" id="s6Body3"></p>
+
+                    <div class="s6-cta">
+                        <button class="btn-primary btn-primary--purple" id="s6ContinueBtn">Continue</button>
+                    </div>
                 </div>
 
-                <div class="resolution-card">
-                    <h1 class="s6-headline" id="s6Headline"></h1>
-                    <p class="s6-body" id="s6Body1"></p>
-                    <p class="s6-body" id="s6Body2"></p>
-                    <p class="s6-body s6-body--accent" id="s6Body3"></p>
-                </div>
-
-                <div class="s6-cta">
-                    <button class="btn-primary btn-primary--purple" id="s6ContinueBtn">Continue</button>
-                </div>
             </div>
         </div>
         <!-- ============================================
@@ -2980,7 +3708,7 @@
                         <div class="s8-dot"></div>
                     </div>
                     <div class="s8-cta">
-                        <button class="s8-use-btn" id="s8ContinueBtn">Use this template</button>
+                        <button class="btn-primary btn-primary--purple" id="s8ContinueBtn">Use this template</button>
                     </div>
                 </div>
             </div>
@@ -3134,57 +3862,276 @@
                 </button>
 
                 <div class="s10-cta">
-                    <button class="btn-primary btn-primary--purple" id="s10ContinueBtn">Continue</button>
-                    <button class="btn-secondary" id="s10SkipBtn">Skip for now</button>
+                    <button class="btn-primary btn-primary--purple" id="s10ContinueBtn">Preview my collab</button>
+                    <button class="btn-secondary" id="s10SkipBtn">Skip & preview</button>
                 </div>
             </div>
         </div>
 
         <!-- ============================================
-             SCREEN 11: PREVIEW & LAUNCH
+             SCREEN 10b: PREPARING PREVIEW (loading)
+             ============================================ -->
+        <div class="screen" id="screen10b">
+            <div class="s2-content">
+                <div class="loader-orb">
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring"></div>
+                    <div class="loader-ring"></div>
+                    <div class="loader-glow"></div>
+                    <div class="loader-icon"><span class="material-icons">auto_awesome</span></div>
+                </div>
+                <div class="loader-text-group">
+                    <p class="loader-headline">Building your preview</p>
+                    <p class="loader-sub">Applying your template & details…</p>
+                </div>
+                <div class="loader-steps">
+                    <div class="loader-step" id="prevStep1">
+                        <div class="loader-step-icon"><span class="material-icons">check</span></div>
+                        <span>Applying theme</span>
+                    </div>
+                    <div class="loader-step" id="prevStep2">
+                        <div class="loader-step-icon"><span class="material-icons">check</span></div>
+                        <span>Adding your details</span>
+                    </div>
+                    <div class="loader-step" id="prevStep3">
+                        <div class="loader-step-icon"><span class="material-icons">check</span></div>
+                        <span>Finishing up</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SCREEN 11: PREVIEW & LAUNCH (Full detail)
              ============================================ -->
         <div class="screen" id="screen11">
-            <div class="s11-content">
-                <div class="s11-nav">
-                    <a href="#" class="back-btn" id="s11Back"><span class="material-icons">chevron_left</span></a>
-                </div>
+            <button class="s11-back-float" id="s11Back"><span class="material-icons">chevron_left</span></button>
 
-                <h1 class="s11-headline">Your collab is ready</h1>
-                <p class="s11-subtitle">You can edit everything before it goes live.</p>
-
-                <div class="preview-card">
-                    <div class="preview-hero" id="previewHero">
-                        <span class="preview-hero-emoji" id="previewEmoji"></span>
-                        <p class="preview-hero-title" id="previewTitle"></p>
-                    </div>
-                    <div class="preview-body">
-                        <div class="preview-stats">
-                            <div class="preview-stat">
-                                <p class="preview-stat-value" id="previewDuration">5 wk</p>
-                                <p class="preview-stat-label">Duration</p>
-                            </div>
-                            <div class="preview-stat">
-                                <p class="preview-stat-value">$350</p>
-                                <p class="preview-stat-label">Guaranteed</p>
-                            </div>
-                            <div class="preview-stat">
-                                <p class="preview-stat-value">$40</p>
-                                <p class="preview-stat-label">Entry</p>
-                            </div>
+            <div class="s11-scroll">
+                <!-- Hero -->
+                <div class="s11-hero" id="s11Hero">
+                    <div class="s11-hero-bg" id="s11HeroBg"></div>
+                    <div class="s11-hero-content">
+                        <div class="s11-creator-pill">
+                            <div class="s11-creator-pill-avatar" id="s11PillAvatar" style="background: linear-gradient(135deg, #A698C8, #6E549E);"><span class="material-icons">person</span></div>
+                            <span class="s11-creator-pill-name" id="s11PillHandle">@doodle_cycles</span>
                         </div>
-                        <div id="previewProductsBadge" style="display: none;">
-                            <span class="preview-products-badge">
-                                <span class="material-icons">storefront</span>
-                                <span id="previewProductCount">0</span> products linked
-                            </span>
-                        </div>
+                        <div class="s11-hero-title" id="s11HeroTitle" style="font-family: 'Lora', serif;">Nature Yoga Reset</div>
                     </div>
                 </div>
 
-                <div class="s11-cta">
-                    <button class="btn-primary btn-primary--purple" id="s11LaunchBtn">Create my collab</button>
-                    <button class="btn-secondary" id="s11EditBtn">Edit details</button>
+                <!-- Countdown -->
+                <div class="s11-countdown">
+                    <div class="s11-count-item"><div class="s11-count-value">14</div><div class="s11-count-label">Days</div></div>
+                    <div class="s11-count-item"><div class="s11-count-value">06</div><div class="s11-count-label">Hrs</div></div>
+                    <div class="s11-count-item"><div class="s11-count-value">32</div><div class="s11-count-label">Min</div></div>
+                    <div class="s11-count-item"><div class="s11-count-value">48</div><div class="s11-count-label">Sec</div></div>
                 </div>
+
+                <!-- Pool Card -->
+                <div class="s11-pool-card">
+                    <div class="s11-pool-row">
+                        <div>
+                            <div class="s11-pool-label">Collab Pool</div>
+                            <div class="s11-pool-amount" id="s11PoolAmount">$0</div>
+                        </div>
+                        <div class="s11-entry-badge" id="s11EntryBadge" style="background: #9084B8;">
+                            <span class="material-icons">toll</span> $40 Entry hold
+                        </div>
+                    </div>
+                    <div class="s11-meta-row">
+                        <div class="s11-meta-stat">
+                            <div class="s11-meta-stat-value">0</div>
+                            <div class="s11-meta-stat-label">Participants</div>
+                        </div>
+                        <div class="s11-meta-stat">
+                            <div class="s11-meta-stat-value" id="s11Duration">5 weeks</div>
+                            <div class="s11-meta-stat-label">Duration</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Cards -->
+                <div class="s11-detail-rows">
+                    <div class="s11-detail-card">
+                        <div class="s11-detail-icon"><span class="material-icons">calendar_month</span></div>
+                        <div style="min-width:0;">
+                            <div class="s11-detail-label">Dates</div>
+                            <div class="s11-detail-value" id="s11Dates">Starts when published</div>
+                        </div>
+                    </div>
+                    <div class="s11-detail-card-pair">
+                        <div class="s11-detail-card">
+                            <div class="s11-detail-icon"><span class="material-icons">bar_chart</span></div>
+                            <div style="min-width:0;">
+                                <div class="s11-detail-label">Level</div>
+                                <div class="s11-detail-value" id="s11Level">All levels</div>
+                            </div>
+                        </div>
+                        <div class="s11-detail-card">
+                            <div class="s11-detail-icon"><span class="material-icons">directions_bike</span></div>
+                            <div style="min-width:0;">
+                                <div class="s11-detail-label">Type</div>
+                                <div class="s11-detail-value" id="s11Type">Cycling</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="s11-section">
+                    <div class="s11-about-card" id="s11AboutCard">
+                        <div class="s11-about-header" id="s11AboutToggle">
+                            <span class="s11-about-label">About this Collab</span>
+                            <span class="material-icons s11-about-chevron">expand_more</span>
+                        </div>
+                        <div class="s11-about-preview" id="s11About">This challenge is designed to push you beyond your comfort zone while building sustainable fitness habits. You'll work with personalized goals based on your current performance level, and track your progress alongside a community of like-minded people.<br><br>Whether you're just getting started or looking to level up, this collab gives you the structure, accountability, and motivation to stay consistent. Show up each day, log your activity, and earn rewards for putting in the work.</div>
+                    </div>
+                </div>
+
+                <!-- Creator / Products -->
+                <div class="s11-section" id="s11ProductsSection">
+                    <div class="s11-journey-card">
+                        <div class="s11-section-title" style="margin-bottom: 2px;">What supported my journey</div>
+                        <div class="s11-products-subtitle">Habits and products I embraced along the way</div>
+
+                        <div class="s11-creator-bio-inner">
+                            <div class="s11-creator-bio-header">
+                                <div class="s11-creator-bio-avatar" id="s11CreatorAvatar">
+                                    <span class="material-icons">person</span>
+                                </div>
+                                <div>
+                                    <div class="s11-creator-bio-name" id="s11CreatorName" style="font-family: 'Lora', serif;">Ellie Snackson</div>
+                                    <div class="s11-creator-bio-tagline" id="s11CreatorTagline">Rebuilding. Rediscovering. Recovering. Rocking it!</div>
+                                </div>
+                            </div>
+                            <div class="s11-creator-bio-text" id="s11CreatorBio">My journey taught me that progress comes from small, repeatable choices. Along the way, I discovered products and habits that supported my goals — then and now.</div>
+                            <div class="s11-creator-bio-stats" id="s11CreatorStats">
+                                <div class="s11-creator-bio-stat">
+                                    <div class="s11-creator-bio-stat-value">6 am</div>
+                                    <div class="s11-creator-bio-stat-label">When my day starts</div>
+                                </div>
+                                <div class="s11-creator-bio-stat">
+                                    <div class="s11-creator-bio-stat-value">100g</div>
+                                    <div class="s11-creator-bio-stat-label">My daily protein goal</div>
+                                </div>
+                                <div class="s11-creator-bio-stat">
+                                    <div class="s11-creator-bio-stat-value">60oz</div>
+                                    <div class="s11-creator-bio-stat-label">My daily water goal</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="s11ProductsList"></div>
+                    </div>
+                </div>
+
+                <!-- Goal Requirements -->
+                <div class="s11-section" id="s11GoalSection">
+                    <div class="s11-goal-card">
+                        <div class="s11-goal-header">
+                            <div>
+                                <div class="s11-goal-title">Goal Requirements</div>
+                                <div class="s11-goal-subtitle">Based on your Peloton history</div>
+                            </div>
+                            <div class="s11-goal-badge">
+                                <span class="material-icons">auto_awesome</span>
+                                Personalized
+                            </div>
+                        </div>
+
+                        <div class="s11-goal-section-label">Your Weekly Ride Plan</div>
+
+                        <div class="s11-goal-metrics">
+                            <div class="s11-goal-metric">
+                                <div class="s11-goal-metric-icon">
+                                    <span class="material-icons">local_fire_department</span>
+                                </div>
+                                <div class="s11-goal-metric-value">1.3x</div>
+                                <div class="s11-goal-metric-label">Output Target</div>
+                                <div class="s11-goal-metric-desc">Multiplier on your average weekly kJ.</div>
+                                <div class="s11-goal-metric-divider"></div>
+                                <div class="s11-goal-metric-footer">Set by Maya</div>
+                            </div>
+                            <div class="s11-goal-metric">
+                                <div class="s11-goal-metric-icon">
+                                    <span class="material-icons">calendar_today</span>
+                                </div>
+                                <div class="s11-goal-metric-value">+1</div>
+                                <div class="s11-goal-metric-label">Ride Frequency</div>
+                                <div class="s11-goal-metric-desc">More than your usual weekly volume.</div>
+                                <div class="s11-goal-metric-divider"></div>
+                                <div class="s11-goal-metric-footer">Min 3 · Max 7</div>
+                            </div>
+                        </div>
+
+                        <div class="s11-goal-logic">
+                            <div class="s11-goal-logic-header">
+                                <div class="s11-goal-logic-title">Smart Target Logic</div>
+                                <div class="s11-goal-logic-subtitle">How we calculate your goal</div>
+                            </div>
+                            <div class="s11-goal-formula">
+                                <div class="s11-goal-formula-item">
+                                    <div class="s11-goal-formula-pill s11-goal-formula-pill--gray">kJ</div>
+                                    <div class="s11-goal-formula-label">Your Avg</div>
+                                </div>
+                                <div class="s11-goal-formula-op">+</div>
+                                <div class="s11-goal-formula-item">
+                                    <div class="s11-goal-formula-pill s11-goal-formula-pill--purple">+30%</div>
+                                    <div class="s11-goal-formula-label">Push 30%</div>
+                                </div>
+                                <div class="s11-goal-formula-op">=</div>
+                                <div class="s11-goal-formula-item">
+                                    <div class="s11-goal-formula-pill s11-goal-formula-pill--dark">Total</div>
+                                    <div class="s11-goal-formula-label">Goal</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="s11-goal-sync-btn">
+                            <span class="material-icons">sync</span>
+                            Sync Peloton to Calculate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FAQ & Game Rules -->
+                <div class="s11-section">
+                    <div class="s11-faq-card" id="s11FaqCard">
+                        <div class="s11-faq-header" id="s11FaqToggle">
+                            <span class="s11-faq-title">FAQ & Game rules</span>
+                            <span class="material-icons s11-faq-chevron">expand_more</span>
+                        </div>
+                        <div class="s11-faq-body">
+                            <div class="s11-faq-content">
+                                <div class="s11-faq-subtitle">How does the entry hold work?</div>
+                                <p class="s11-faq-text">When you join, your entry amount is held securely. Complete the challenge to get it back plus bonus rewards from the prize pool.</p>
+
+                                <div class="s11-faq-subtitle">What happens if I miss a day?</div>
+                                <p class="s11-faq-text">Missing a day forfeits a portion of your entry hold. Stay consistent to maximize your rewards.</p>
+
+                                <div class="s11-faq-subtitle">Can I invite friends?</div>
+                                <p class="s11-faq-text">Yes! Share your unique invite link to bring friends into the challenge. Group challenges are more fun together.</p>
+
+                                <div class="s11-faq-subtitle">Game Rules</div>
+                                <ul class="s11-faq-list">
+                                    <li>Complete the required activity each day during the challenge window</li>
+                                    <li>Log your activity through the app before midnight</li>
+                                    <li>Rest days, if any, will be noted in the schedule</li>
+                                    <li>All participants must follow community guidelines</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s11-spacer"></div>
+            </div>
+
+            <!-- Sticky CTA -->
+            <div class="s11-sticky-bottom">
+                <button class="btn-primary btn-primary--purple" id="s11LaunchBtn">Create my collab</button>
+                <button class="btn-secondary" id="s11EditBtn">Edit details</button>
             </div>
         </div>
 
@@ -3207,6 +4154,7 @@
             template: document.getElementById('screen8'),
             name:     document.getElementById('screen9'),
             products: document.getElementById('screen10'),
+            prepPreview: document.getElementById('screen10b'),
             preview:  document.getElementById('screen11')
         };
 
@@ -3240,7 +4188,7 @@
         function goTo(from, to) {
             from.classList.add('exiting');
             from.classList.remove('active');
-            var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10','screen11'];
+            var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11'];
             if (greenScreens.indexOf(to.id) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
@@ -3424,9 +4372,10 @@
                 strengths: ['Community Builder', 'Accountability', 'Encourager', 'Consistent'],
                 resolution: {
                     headline: 'You already <span class="hi">capture attention</span> and trust.',
-                    body1: 'Where things stall is turning that interest into <span class="hi">consistent action</span>.',
-                    body2: 'A collab creates a shared moment to move from watching to doing, with a clear focus and reason to <span class="hi">show up together</span>.',
-                    body3: 'That shift is what builds momentum.'
+                    body1: 'The gap isn\'t interest — it\'s giving people a reason to <span class="hi">actually move</span>.',
+                    body2: 'With a collab, your audience commits to Peloton cycling workouts together — and <span class="hi">earns money back</span> for showing up. Some even make a little extra.',
+                    body3: 'That\'s how followers become <span class="hi">riders</span>.',
+                    pills: ['7-day ride streak', '30-day cycling reset']
                 },
                 earnings: {
                     subtitle: 'When people move together, everything compounds.',
@@ -3446,9 +4395,10 @@
                 strengths: ['Inspiration', 'Storytelling', 'Energy', 'Visibility'],
                 resolution: {
                     headline: 'You already <span class="hi">inspire people</span> to want change.',
-                    body1: 'Where things stall is right after <span class="hi">inspiration</span>.',
-                    body2: 'A collab creates a shared moment to move from wanting to acting, with a clear starting point and reason to <span class="hi">begin together</span>.',
-                    body3: 'That shift is what builds momentum.'
+                    body1: 'The gap isn\'t motivation — it\'s a reason to <span class="hi">clip in today</span>.',
+                    body2: 'With a collab, your audience does Peloton cycling workouts together — and <span class="hi">earns money back</span> for every ride they complete. Consistency literally pays.',
+                    body3: 'That\'s how inspiration becomes <span class="hi">miles logged</span>.',
+                    pills: ['14-day cycling kickstart', '21-day endurance build']
                 },
                 earnings: {
                     subtitle: 'When inspiration becomes participation, everything compounds.',
@@ -3468,9 +4418,10 @@
                 strengths: ['Structure', 'Depth', 'Trust', 'Transformation'],
                 resolution: {
                     headline: 'You already <span class="hi">support people</span> beyond content.',
-                    body1: 'What\'s missing is a clear <span class="hi">first step</span> for more of your audience.',
-                    body2: 'A collab gives people a simple moment to start, focused on <span class="hi">movement and consistency</span>.',
-                    body3: 'That first step unlocks progress.'
+                    body1: 'What\'s missing is an easy <span class="hi">first step</span> more of your audience can take.',
+                    body2: 'With a collab, your audience follows a Peloton cycling plan together — and <span class="hi">earns money back</span> for completing rides. Real structure, real reward.',
+                    body3: 'That first ride is what <span class="hi">unlocks everything</span>.',
+                    pills: ['10-day intro to cycling', '30-day power build']
                 },
                 earnings: {
                     subtitle: 'When understanding turns into action, everything compounds.',
@@ -3516,6 +4467,7 @@
             document.getElementById('s6Body1').innerHTML = res.body1;
             document.getElementById('s6Body2').innerHTML = res.body2;
             document.getElementById('s6Body3').innerHTML = res.body3;
+            document.getElementById('s6Pills').innerHTML = (res.pills || []).map(function(p) { return '<span class="s6-pill">' + p + '</span>'; }).join('');
 
             goTo(screens.results, screens.resolution);
         });
@@ -3584,6 +4536,7 @@
 
             function goToSlide(i) {
                 curIdx = Math.max(0, Math.min(i, slides.length - 1));
+                window.selectedTemplateIdx = curIdx;
                 snapTo(true);
                 updateSlides();
             }
@@ -3628,6 +4581,7 @@
 
             dots.forEach(function(d, i) { d.addEventListener('click', function() { goToSlide(i); }); });
 
+            window.selectedTemplateIdx = curIdx;
             snapTo(false);
             updateSlides();
         })();
@@ -3664,22 +4618,46 @@
             goTo(screens.products, screens.name);
         });
 
-        // Products continue → Preview
+        // Products continue → Loading → Preview
         document.getElementById('s10ContinueBtn').addEventListener('click', function() {
-            populatePreview();
-            goTo(screens.products, screens.preview);
+            goTo(screens.products, screens.prepPreview);
+            runPreviewLoading();
         });
 
-        // Products skip → Preview
+        // Products skip → Loading → Preview
         document.getElementById('s10SkipBtn').addEventListener('click', function() {
-            populatePreview();
-            goTo(screens.products, screens.preview);
+            goTo(screens.products, screens.prepPreview);
+            runPreviewLoading();
         });
+
+        function runPreviewLoading() {
+            var steps = [document.getElementById('prevStep1'), document.getElementById('prevStep2'), document.getElementById('prevStep3')];
+            steps.forEach(function(s) { s.className = 'loader-step'; });
+
+            setTimeout(function() { steps[0].classList.add('active'); }, 150);
+            setTimeout(function() { steps[0].classList.remove('active'); steps[0].classList.add('done'); steps[1].classList.add('active'); }, 700);
+            setTimeout(function() { steps[1].classList.remove('active'); steps[1].classList.add('done'); steps[2].classList.add('active'); }, 1300);
+            setTimeout(function() { steps[2].classList.remove('active'); steps[2].classList.add('done'); }, 1700);
+            setTimeout(function() {
+                populatePreview();
+                goTo(screens.prepPreview, screens.preview);
+            }, 2100);
+        }
 
         // Preview back → Products
         document.getElementById('s11Back').addEventListener('click', function(e) {
             e.preventDefault();
             goTo(screens.preview, screens.products);
+        });
+
+        // About card toggle
+        document.getElementById('s11AboutToggle').addEventListener('click', function() {
+            document.getElementById('s11AboutCard').classList.toggle('open');
+        });
+
+        // FAQ & Game Rules toggle
+        document.getElementById('s11FaqToggle').addEventListener('click', function() {
+            document.getElementById('s11FaqCard').classList.toggle('open');
         });
 
         // Preview "Edit details" → Name
@@ -3696,25 +4674,180 @@
             }, 1200);
         });
 
-        // Populate preview card from form inputs
-        function populatePreview() {
-            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
-            document.getElementById('previewTitle').textContent = title;
-            document.getElementById('previewEmoji').textContent = '🧘';
-            document.getElementById('previewDuration').textContent = selectedDuration.short;
-
-            // Count filled product slots
-            var slots = document.querySelectorAll('.product-slot');
-            var count = 0;
-            slots.forEach(function(s) {
-                if (s.querySelector('[data-field="name"]').value.trim()) count++;
-            });
-            if (count > 0) {
-                document.getElementById('previewProductsBadge').style.display = 'block';
-                document.getElementById('previewProductCount').textContent = count;
-            } else {
-                document.getElementById('previewProductsBadge').style.display = 'none';
+        // Template configurations for preview
+        var templateConfigs = [
+            {
+                gradient: 'linear-gradient(165deg, #D6CEE5 0%, #9084B8 35%, #6E549E 65%, #4A3278 100%)',
+                font: "'Lora', serif",
+                accent: '#9084B8',
+                avatarGradient: 'linear-gradient(135deg, #A698C8, #6E549E)',
+                svgArt: '<svg viewBox="0 0 390 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 180 Q30 120 80 150 Q120 90 170 130 Q210 80 260 115 Q300 60 360 100 L390 90 L390 300 L-10 300Z" fill="rgba(255,255,255,0.08)"/><path d="M-10 220 Q40 160 90 190 Q130 140 175 170 Q220 130 270 160 Q310 120 390 150 L390 300 L-10 300Z" fill="rgba(0,0,0,0.1)"/><path d="M-10 250 Q60 210 130 230 Q200 200 270 225 Q330 205 390 220 L390 300 L-10 300Z" fill="rgba(0,0,0,0.12)"/><circle cx="320" cy="50" r="28" fill="rgba(255,255,255,0.15)"/><circle cx="328" cy="44" r="24" fill="rgba(144,132,184,0.6)"/></svg>'
+            },
+            {
+                gradient: 'linear-gradient(150deg, #E0C890 0%, #CC9A7A 30%, #B07A5E 60%, #8C5540 100%)',
+                font: "'Poppins', sans-serif",
+                accent: '#CC9A7A',
+                avatarGradient: 'linear-gradient(135deg, #CC9A7A, #B07A5E)',
+                svgArt: '<svg viewBox="0 0 390 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><ellipse cx="195" cy="300" rx="280" ry="160" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="50"/><ellipse cx="195" cy="320" rx="220" ry="140" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="40"/><circle cx="320" cy="50" r="80" fill="rgba(224,200,144,0.2)"/><circle cx="320" cy="50" r="50" fill="rgba(224,200,144,0.15)"/><circle cx="320" cy="50" r="25" fill="rgba(255,255,255,0.1)"/></svg>'
+            },
+            {
+                gradient: 'linear-gradient(170deg, #A2D4BC 0%, #5FAE90 30%, #488E72 60%, #2C6050 100%)',
+                font: "'Source Serif 4', serif",
+                accent: '#5FAE90',
+                avatarGradient: 'linear-gradient(135deg, #7CC4A8, #488E72)',
+                svgArt: '<svg viewBox="0 0 390 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 140 Q50 90 120 125 Q180 70 240 110 Q300 60 390 95 L390 300 L-10 300Z" fill="rgba(255,255,255,0.06)"/><path d="M-10 180 Q80 130 150 160 Q220 120 290 150 Q340 130 390 140 L390 300 L-10 300Z" fill="rgba(0,0,0,0.07)"/><path d="M-10 220 Q60 190 140 210 Q220 185 300 205 Q350 195 390 200 L390 300 L-10 300Z" fill="rgba(0,0,0,0.08)"/><circle cx="195" cy="50" r="40" fill="rgba(255,255,255,0.12)"/><circle cx="195" cy="50" r="20" fill="rgba(255,255,255,0.1)"/></svg>'
+            },
+            {
+                gradient: 'linear-gradient(160deg, #334155 0%, #1E293B 35%, #0F172A 65%, #020617 100%)',
+                font: "'Playfair Display', serif",
+                accent: '#D4AF37',
+                avatarGradient: 'linear-gradient(135deg, #D4AF37, #B8860B)',
+                svgArt: '<svg viewBox="0 0 390 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><path d="M-10 160 L40 100 L70 130 L120 60 L160 110 L200 40 L240 90 L280 50 L320 110 L390 80 L390 300 L-10 300Z" fill="rgba(212,175,55,0.06)"/><path d="M20 300 Q60 240 120 245 Q200 250 220 220 Q240 190 300 195 Q340 198 370 170" stroke="rgba(212,175,55,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="80" cy="40" r="1.5" fill="rgba(212,175,55,0.35)"/><circle cx="270" cy="30" r="1" fill="rgba(212,175,55,0.25)"/><circle cx="180" cy="20" r="1.5" fill="rgba(212,175,55,0.3)"/></svg>'
+            },
+            {
+                gradient: 'linear-gradient(175deg, #EDE0B8 0%, #CCA76C 20%, #C88090 55%, #8E4858 85%, #502028 100%)',
+                font: "'Merriweather', serif",
+                accent: '#C88090',
+                avatarGradient: 'linear-gradient(135deg, #CCA76C, #C88090)',
+                svgArt: '<svg viewBox="0 0 390 300" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;"><circle cx="195" cy="130" r="55" fill="rgba(237,224,184,0.25)"/><circle cx="195" cy="130" r="35" fill="rgba(237,224,184,0.2)"/><circle cx="195" cy="130" r="18" fill="rgba(255,255,255,0.15)"/><path d="M0 165 Q195 155 390 165 L390 170 Q195 160 0 170Z" fill="rgba(255,255,255,0.08)"/><path d="M160 300 L190 165 L200 165 L230 300Z" fill="rgba(0,0,0,0.08)"/></svg>'
             }
+        ];
+
+        // Derive accent color variants from a hex color
+        function accentColors(hex) {
+            var r = parseInt(hex.slice(1,3), 16);
+            var g = parseInt(hex.slice(3,5), 16);
+            var b = parseInt(hex.slice(5,7), 16);
+            // Light: 12% accent blended into white
+            var lr = Math.round(255 + (r - 255) * 0.12);
+            var lg = Math.round(255 + (g - 255) * 0.12);
+            var lb = Math.round(255 + (b - 255) * 0.12);
+            // Medium: 25% accent blended into white
+            var mr = Math.round(255 + (r - 255) * 0.25);
+            var mg = Math.round(255 + (g - 255) * 0.25);
+            var mb = Math.round(255 + (b - 255) * 0.25);
+            // Dark: darken accent by 45% for text on tinted backgrounds
+            var dr = Math.round(r * 0.55);
+            var dg = Math.round(g * 0.55);
+            var db = Math.round(b * 0.55);
+            return {
+                base: hex,
+                light: 'rgb(' + lr + ',' + lg + ',' + lb + ')',
+                medium: 'rgb(' + mr + ',' + mg + ',' + mb + ')',
+                strong: hex,
+                dark: 'rgb(' + dr + ',' + dg + ',' + db + ')'
+            };
+        }
+
+        // Populate preview from form inputs + selected template
+        function populatePreview() {
+            var idx = window.selectedTemplateIdx || 0;
+            var tpl = templateConfigs[idx];
+
+            // Set accent color variables on the preview screen
+            var ac = accentColors(tpl.accent);
+            var s11 = document.getElementById('screen11');
+            s11.style.setProperty('--s11-accent', ac.base);
+            s11.style.setProperty('--s11-accent-light', ac.light);
+            s11.style.setProperty('--s11-accent-medium', ac.medium);
+            s11.style.setProperty('--s11-accent-strong', ac.strong);
+            s11.style.setProperty('--s11-accent-dark', ac.dark);
+
+            // Hero gradient + SVG
+            var heroBg = document.getElementById('s11HeroBg');
+            heroBg.style.background = tpl.gradient;
+            heroBg.innerHTML = tpl.svgArt;
+
+            // Title font (template custom)
+            var heroTitle = document.getElementById('s11HeroTitle');
+            heroTitle.style.fontFamily = tpl.font;
+
+            // Pool amount font (template custom)
+            document.getElementById('s11PoolAmount').style.fontFamily = tpl.font;
+
+            // Creator name font (template custom)
+            document.getElementById('s11CreatorName').style.fontFamily = tpl.font;
+
+            // Creator pill
+            document.getElementById('s11PillAvatar').style.background = tpl.avatarGradient;
+            var handle = document.getElementById('handleInput').value.trim() || 'doodle_cycles';
+            document.getElementById('s11PillHandle').textContent = '@' + handle.replace(/^@/, '');
+
+            // Title
+            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
+            heroTitle.textContent = title;
+
+            // Entry badge accent
+            document.getElementById('s11EntryBadge').style.background = tpl.accent;
+
+            // Duration
+            document.getElementById('s11Duration').textContent = selectedDuration.label;
+
+            // Dates
+            var startVal = document.getElementById('startDateInput').value;
+            if (startVal) {
+                var startD = new Date(startVal + 'T00:00:00');
+                var endD = new Date(startD);
+                endD.setDate(endD.getDate() + selectedDuration.weeks * 7);
+                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                document.getElementById('s11Dates').textContent = months[startD.getMonth()] + ' ' + startD.getDate() + ' – ' + months[endD.getMonth()] + ' ' + endD.getDate();
+            } else {
+                document.getElementById('s11Dates').textContent = 'Starts when published';
+            }
+
+            // Description
+            var desc = document.getElementById('collabDescInput').value.trim();
+            var fallback = 'This challenge is designed to push you beyond your comfort zone while building sustainable fitness habits. You\'ll work with personalized goals based on your current performance level, and track your progress alongside a community of like-minded people.<br><br>Whether you\'re just getting started or looking to level up, this collab gives you the structure, accountability, and motivation to stay consistent. Show up each day, log your activity, and earn rewards for putting in the work.';
+            if (desc) {
+                document.getElementById('s11About').innerHTML = desc.replace(/\n/g, '<br>');
+            } else {
+                document.getElementById('s11About').innerHTML = fallback;
+            }
+
+            // Products
+            var slots = document.querySelectorAll('.product-slot');
+            var products = [];
+            var defaultTags = ['My must-have', 'Daily go-to', 'Secret weapon', 'Game changer', 'Bonus pick'];
+            slots.forEach(function(s, i) {
+                var name = s.querySelector('[data-field="name"]').value.trim();
+                var brand = s.querySelector('[data-field="brand"]').value.trim();
+                var catEl = s.querySelector('.product-category');
+                var tag = catEl ? catEl.textContent.trim() : defaultTags[i] || 'Recent discovery';
+                if (name) {
+                    products.push({ name: name, brand: brand, tag: tag });
+                }
+            });
+
+            var prodList = document.getElementById('s11ProductsList');
+            if (products.length > 0) {
+                prodList.innerHTML = products.map(function(p) {
+                    return '<div class="s11-product-item">' +
+                        '<div class="s11-product-tag">' + p.tag + '</div>' +
+                        '<div class="s11-product-item-row">' +
+                            '<div>' +
+                                '<div class="s11-product-name">' + p.name + '</div>' +
+                                (p.brand ? '<div class="s11-product-brand">' + p.brand + '</div>' : '') +
+                            '</div>' +
+                            '<div class="s11-product-arrow"><span class="material-icons">arrow_forward</span></div>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+                prodList.style.display = 'block';
+            } else {
+                prodList.style.display = 'none';
+            }
+
+            // Creator card — match avatar gradient to template
+            document.getElementById('s11CreatorAvatar').style.background = tpl.avatarGradient;
+
+            // Reset scroll to top
+            var scrollEl = document.querySelector('#screen11 .s11-scroll');
+            if (scrollEl) scrollEl.scrollTop = 0;
+
+            // Reset launch button
+            var launchBtn = document.getElementById('s11LaunchBtn');
+            launchBtn.textContent = 'Create my collab';
+            launchBtn.disabled = false;
         }
 
         // Set thumbnail on a product slot
@@ -3868,7 +5001,7 @@
             document.getElementById(targetId).classList.add('active');
             setHash(targetId);
 
-            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10','screen11'];
+            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11'];
             if (greenIds.indexOf(targetId) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
@@ -3890,6 +5023,7 @@
                 document.getElementById('s6Body1').innerHTML = res.body1;
                 document.getElementById('s6Body2').innerHTML = res.body2;
                 document.getElementById('s6Body3').innerHTML = res.body3;
+                document.getElementById('s6Pills').innerHTML = (res.pills || []).map(function(p) { return '<span class="s6-pill">' + p + '</span>'; }).join('');
             }
             if (targetId === 'screen7') {
                 var res7 = archetypes.connector.resolution;
@@ -3897,6 +5031,7 @@
                 document.getElementById('s6Body1').innerHTML = res7.body1;
                 document.getElementById('s6Body2').innerHTML = res7.body2;
                 document.getElementById('s6Body3').innerHTML = res7.body3;
+                document.getElementById('s6Pills').innerHTML = (res7.pills || []).map(function(p) { return '<span class="s6-pill">' + p + '</span>'; }).join('');
 
                 var earn = archetypes.connector.earnings;
                 document.getElementById('s7Subtitle').textContent = earn.subtitle;
@@ -3906,6 +5041,9 @@
                         '<p class="benefit-title">' + b.title + '</p>' +
                     '</div>';
                 }).join('');
+            }
+            if (targetId === 'screen11') {
+                populatePreview();
             }
         }
 
