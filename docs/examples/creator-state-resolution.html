@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Creator State Resolution — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            /* Active archetype gradient (set by JS) */
+            --gradient-top: #FDF2F8;
+            --gradient-mid: #FBCFE8;
+            --gradient-bottom: #F9A8D4;
+            --shadow-accent: rgba(244, 114, 182, 0.35);
+            --shadow-accent-soft: rgba(244, 114, 182, 0.15);
+            --blob-1: #FBCFE8;
+            --blob-2: #F9A8D4;
+            --blob-3: #FDF2F8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* ===========================================
+           REVIEW CONTROLS (outside phone frame)
+           =========================================== */
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 720px;
+        }
+
+        .review-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: 4px;
+        }
+
+        .review-subtitle {
+            font-size: 13px;
+            color: #8888a0;
+            margin-bottom: 20px;
+        }
+
+        .archetype-selector {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .archetype-tab {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1.5px solid #2a2a3a;
+            border-radius: var(--radius-full);
+            background: #12121a;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .archetype-tab:hover {
+            border-color: #4a4a5a;
+            color: #c0c0d0;
+        }
+
+        .archetype-tab.active {
+            border-color: var(--gradient-mid);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8e8f0;
+        }
+
+        .tab-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .state-toggle {
+            display: inline-flex;
+            gap: 4px;
+            justify-content: center;
+            background: #12121a;
+            border-radius: var(--radius-full);
+            padding: 3px;
+        }
+
+        .state-toggle-wrap {
+            text-align: center;
+        }
+
+        .state-btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .state-btn.active {
+            background: #2a2a3a;
+            color: #e8e8f0;
+        }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        /* ===========================================
+           ANIMATED GRADIENT BACKGROUND
+           =========================================== */
+
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                var(--gradient-top) 0%,
+                var(--gradient-top) 15%,
+                var(--gradient-mid) 50%,
+                var(--gradient-bottom) 100%
+            );
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--blob-1);
+            top: -80px;
+            left: -80px;
+            animation: blob-drift-1 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--blob-2);
+            bottom: -60px;
+            right: -60px;
+            animation: blob-drift-2 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -7s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--blob-3);
+            top: 40%;
+            left: 20%;
+            animation: blob-drift-3 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -14s;
+        }
+
+        @keyframes blob-drift-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(10%, 15%) scale(1.15) rotate(5deg); }
+            50% { transform: translate(-5%, 10%) scale(0.85) rotate(-5deg); }
+            75% { transform: translate(15%, -5%) scale(1.1) rotate(10deg); }
+        }
+
+        @keyframes blob-drift-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(-15%, -10%) scale(0.9) rotate(-8deg); }
+            50% { transform: translate(10%, -15%) scale(1.2) rotate(5deg); }
+            75% { transform: translate(-5%, 5%) scale(0.95) rotate(-3deg); }
+        }
+
+        @keyframes blob-drift-3 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(12%, -8%) scale(1.1) rotate(12deg); }
+            50% { transform: translate(-8%, 12%) scale(0.8) rotate(-8deg); }
+            75% { transform: translate(-12%, -5%) scale(1.15) rotate(5deg); }
+        }
+
+        /* ===========================================
+           SCREEN CONTENT
+           =========================================== */
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-xl);
+            padding-top: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: 0 0 var(--space-xs);
+        }
+
+        .back-btn {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .back-btn .material-icons {
+            font-size: 28px;
+        }
+
+        /* ===========================================
+           NARRATIVE TEXT CONTENT
+           =========================================== */
+
+        .state-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 var(--space-xs);
+            animation: contentFadeIn 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .affirmation-line {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 30px;
+            color: #170D2E;
+            margin-bottom: var(--space-xs);
+        }
+
+        .friction-line {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 26px;
+            color: #3D3456;
+        }
+
+        .friction-line em {
+            font-style: normal;
+            font-weight: 500;
+            color: #170D2E;
+        }
+
+        .narrative-gap {
+            height: var(--space-2xl);
+        }
+
+        .solution-text {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 26px;
+            color: #3D3456;
+            margin-bottom: var(--space-sm);
+        }
+
+        .momentum-line {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 26px;
+            color: #170D2E;
+        }
+
+        /* ===========================================
+           CTA BUTTON
+           =========================================== */
+
+        .cta-section {
+            margin-top: auto;
+            padding-top: var(--space-lg);
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            padding: 18px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 0.15s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        /* ===========================================
+           REDUCED MOTION
+           =========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            .blob { animation: none !important; }
+            .state-content { animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Review controls -->
+    <div class="review-header">
+        <h1 class="review-title">State Resolution Screen</h1>
+        <p class="review-subtitle">Shows creators how a collab addresses their specific engagement friction</p>
+
+        <div class="archetype-selector" id="archetypeSelector">
+            <button class="archetype-tab active" data-archetype="companion">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FBCFE8, #F9A8D4)"></span>
+                Companion
+            </button>
+            <button class="archetype-tab" data-archetype="guide">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)"></span>
+                Guide
+            </button>
+            <button class="archetype-tab" data-archetype="coach">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #A7F3D0, #6EE7B7)"></span>
+                Coach
+            </button>
+            <button class="archetype-tab" data-archetype="challenger">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FDE047, #FACC15)"></span>
+                Challenger
+            </button>
+            <button class="archetype-tab" data-archetype="performer">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FED7AA, #FDBA74)"></span>
+                Performer
+            </button>
+            <button class="archetype-tab" data-archetype="connector">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #DDD6FE, #C4B5FD)"></span>
+                Connector
+            </button>
+        </div>
+
+        <div class="state-toggle-wrap">
+            <div class="state-toggle">
+                <button class="state-btn active" data-state="1">State 1</button>
+                <button class="state-btn" data-state="2">State 2</button>
+                <button class="state-btn" data-state="3">State 3</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="phone-frame">
+        <div class="gradient-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+
+        <div class="content">
+            <div class="nav-bar">
+                <a href="#" class="back-btn"><span class="material-icons">arrow_back</span></a>
+            </div>
+
+            <div class="state-content" id="stateContent">
+                <p class="affirmation-line" id="affirmationLine">You already help people want change.</p>
+                <p class="friction-line" id="frictionLine">Where things stall is <em>right after inspiration</em>.</p>
+
+                <div class="narrative-gap"></div>
+
+                <p class="solution-text" id="solutionText">A collab creates a shared moment to move from wanting to acting, with a clear starting point and a sense of support.</p>
+                <p class="momentum-line" id="momentumLine">That shift is what builds momentum.</p>
+            </div>
+
+            <div class="cta-section">
+                <button class="btn-primary">See how collabs help you earn</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // ARCHETYPE + STATE DATA
+        // =============================================
+
+        const archetypes = {
+            companion: {
+                gradient: {
+                    top: '#FDF2F8', mid: '#FBCFE8', bottom: '#F9A8D4',
+                    shadow: 'rgba(244, 114, 182, 0.35)',
+                    shadowSoft: 'rgba(244, 114, 182, 0.15)',
+                    blob1: '#FBCFE8', blob2: '#F9A8D4', blob3: '#FDF2F8'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already help people want change.',
+                        friction: 'Where things stall is <em>right after inspiration</em>.',
+                        solution: 'A collab creates a shared moment to move from wanting to acting, with a clear starting point and a sense of support.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already build trust and connection.',
+                        friction: 'Where things stall is turning that <em>care into consistent action</em>.',
+                        solution: 'A collab creates a shared moment to move from watching to doing, with encouragement and a reason to show up together.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already support people beyond content.',
+                        friction: 'What\'s missing is a <em>gentle first step</em> for more of your audience.',
+                        solution: 'A collab gives people a simple moment to start, without pressure or expectation.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            },
+            guide: {
+                gradient: {
+                    top: '#F0F9FF', mid: '#BAE6FD', bottom: '#7DD3FC',
+                    shadow: 'rgba(125, 211, 252, 0.30)',
+                    shadowSoft: 'rgba(125, 211, 252, 0.12)',
+                    blob1: '#BAE6FD', blob2: '#7DD3FC', blob3: '#F0F9FF'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already help people understand what\'s possible.',
+                        friction: 'Where things stall is <em>after inspiration, before action begins</em>.',
+                        solution: 'A collab creates a clear starting line, turning insight into movement with direction and purpose.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already provide clarity and direction.',
+                        friction: 'Where things stall is turning <em>understanding into follow-through</em>.',
+                        solution: 'A collab creates a shared moment to move from knowing to doing, with structure and a reason to show up together.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already help people move beyond ideas.',
+                        friction: 'What\'s missing is a <em>clear first step</em> for more of your audience.',
+                        solution: 'A collab gives people a defined moment to begin, grounded in simple, repeatable action.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            },
+            coach: {
+                gradient: {
+                    top: '#ECFDF5', mid: '#A7F3D0', bottom: '#6EE7B7',
+                    shadow: 'rgba(110, 231, 183, 0.30)',
+                    shadowSoft: 'rgba(110, 231, 183, 0.12)',
+                    blob1: '#A7F3D0', blob2: '#6EE7B7', blob3: '#ECFDF5'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already motivate people to want change.',
+                        friction: 'Where things stall is <em>before commitment takes hold</em>.',
+                        solution: 'A collab creates a clear starting point to act, with expectations and accountability from the start.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already command attention and respect.',
+                        friction: 'Where things stall is turning <em>motivation into consistency</em>.',
+                        solution: 'A collab creates a shared moment to move from intention to execution, with a reason to show up and follow through.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already push people to go further.',
+                        friction: 'What\'s missing is a <em>concrete first step</em> for more of your audience.',
+                        solution: 'A collab gives people a defined way to begin, with structure and accountability built in.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            },
+            challenger: {
+                gradient: {
+                    top: '#FEF9C3', mid: '#FDE047', bottom: '#FACC15',
+                    shadow: 'rgba(250, 204, 21, 0.30)',
+                    shadowSoft: 'rgba(250, 204, 21, 0.12)',
+                    blob1: '#FDE047', blob2: '#FACC15', blob3: '#FEF9C3'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already fire people up to want more.',
+                        friction: 'Where things stall is <em>before they take action</em>.',
+                        solution: 'A collab creates a moment to step up immediately, with urgency and a clear call to act.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already energize and provoke action.',
+                        friction: 'Where things stall is <em>sustaining that intensity over time</em>.',
+                        solution: 'A collab creates a shared moment to move from hype to effort, with stakes and a reason to show up together.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already push people beyond comfort.',
+                        friction: 'What\'s missing is a <em>clear first challenge</em> for more of your audience.',
+                        solution: 'A collab gives people a defined moment to prove it, with action at the center.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            },
+            performer: {
+                gradient: {
+                    top: '#FFF7ED', mid: '#FED7AA', bottom: '#FDBA74',
+                    shadow: 'rgba(253, 186, 116, 0.30)',
+                    shadowSoft: 'rgba(253, 186, 116, 0.12)',
+                    blob1: '#FED7AA', blob2: '#FDBA74', blob3: '#FFF7ED'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already inspire people with what\'s possible.',
+                        friction: 'Where things stall is <em>turning inspiration into action</em>.',
+                        solution: 'A collab creates a moment to step into the experience, with a clear starting point to participate.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already capture attention and admiration.',
+                        friction: 'Where things stall is <em>moving from watching to doing</em>.',
+                        solution: 'A collab creates a shared moment to participate, with a reason to show up and be part of it.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already motivate people to want more.',
+                        friction: 'What\'s missing is a <em>simple first step</em> to get involved.',
+                        solution: 'A collab gives people an easy way to start, by turning inspiration into participation.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            },
+            connector: {
+                gradient: {
+                    top: '#F5F3FF', mid: '#DDD6FE', bottom: '#C4B5FD',
+                    shadow: 'rgba(196, 181, 253, 0.35)',
+                    shadowSoft: 'rgba(196, 181, 253, 0.15)',
+                    blob1: '#DDD6FE', blob2: '#C4B5FD', blob3: '#F5F3FF'
+                },
+                states: {
+                    1: {
+                        affirmation: 'You already bring people together around change.',
+                        friction: 'Where things stall is <em>getting everyone moving at once</em>.',
+                        solution: 'A collab creates a shared moment to act together, with a clear starting point for the group.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    2: {
+                        affirmation: 'You already foster trust and belonging.',
+                        friction: 'Where things stall is <em>turning community into action</em>.',
+                        solution: 'A collab creates a shared moment to move forward together, with a reason for people to show up as a group.',
+                        momentum: 'That shift is what builds momentum.'
+                    },
+                    3: {
+                        affirmation: 'You already support people beyond content.',
+                        friction: 'What\'s missing is a <em>clear first step</em> for the community.',
+                        solution: 'A collab gives people a simple moment to begin together, with shared effort at the center.',
+                        momentum: 'That first step unlocks progress.'
+                    }
+                }
+            }
+        };
+
+        let currentArchetype = 'companion';
+        let currentState = 1;
+
+        // =============================================
+        // UPDATE FUNCTIONS
+        // =============================================
+
+        function setArchetype(name) {
+            currentArchetype = name;
+            const data = archetypes[name];
+            const root = document.documentElement;
+
+            // Update CSS variables for gradient
+            root.style.setProperty('--gradient-top', data.gradient.top);
+            root.style.setProperty('--gradient-mid', data.gradient.mid);
+            root.style.setProperty('--gradient-bottom', data.gradient.bottom);
+            root.style.setProperty('--shadow-accent', data.gradient.shadow);
+            root.style.setProperty('--shadow-accent-soft', data.gradient.shadowSoft);
+            root.style.setProperty('--blob-1', data.gradient.blob1);
+            root.style.setProperty('--blob-2', data.gradient.blob2);
+            root.style.setProperty('--blob-3', data.gradient.blob3);
+
+            // Update tab states
+            document.querySelectorAll('.archetype-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.archetype === name);
+            });
+
+            // Refresh the text content
+            updateStateContent();
+        }
+
+        function setState(num) {
+            currentState = num;
+
+            // Update toggle states
+            document.querySelectorAll('.state-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.state) === num);
+            });
+
+            // Refresh the text content
+            updateStateContent();
+        }
+
+        function updateStateContent() {
+            const data = archetypes[currentArchetype].states[currentState];
+            const container = document.getElementById('stateContent');
+
+            // Re-trigger the fade-in animation
+            container.style.animation = 'none';
+            container.offsetHeight; // force reflow
+            container.style.animation = '';
+
+            document.getElementById('affirmationLine').textContent = data.affirmation;
+            document.getElementById('frictionLine').innerHTML = data.friction;
+            document.getElementById('solutionText').textContent = data.solution;
+            document.getElementById('momentumLine').textContent = data.momentum;
+        }
+
+        // =============================================
+        // EVENT LISTENERS
+        // =============================================
+
+        document.querySelectorAll('.archetype-tab').forEach(tab => {
+            tab.addEventListener('click', () => setArchetype(tab.dataset.archetype));
+        });
+
+        document.querySelectorAll('.state-btn').forEach(btn => {
+            btn.addEventListener('click', () => setState(parseInt(btn.dataset.state)));
+        });
+
+        // Initialize
+        setArchetype('companion');
+    </script>
+</body>
+</html>

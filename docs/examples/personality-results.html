@@ -6,6 +6,7 @@
     <title>Personality Results — Motiv (AI-Generated Example)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* ===========================================
            DESIGN SYSTEM TOKENS (from Motiv)
@@ -105,25 +106,30 @@
             display: flex;
             flex-direction: column;
             padding: var(--space-xl);
-            padding-top: 60px;
+            padding-top: 20px;
         }
 
         .nav-bar {
             display: flex;
             align-items: center;
-            padding: 0 0 var(--space-lg);
+            padding: 0 0 var(--space-xs);
         }
 
         .back-btn {
-            font-size: 24px;
             color: var(--color-text-primary);
             text-decoration: none;
             line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn .material-icons {
+            font-size: 28px;
         }
 
         .header-section {
             text-align: center;
-            padding: var(--space-2xl) 0;
+            padding: var(--space-md) 0;
         }
 
         /* ===========================================
@@ -135,19 +141,20 @@
         .headline {
             font-family: var(--font-display);
             font-size: 36px;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            color: var(--color-text-primary);
+            font-weight: 700;
+            line-height: 44px;
+            letter-spacing: 0;
+            color: #170D2E;
             margin-bottom: var(--space-md);
         }
 
         .subtitle {
             font-family: var(--font-display);
-            font-size: 17px;
+            font-size: 22px;
             font-weight: 500;
-            color: var(--color-text-secondary);
-            line-height: 1.5;
+            color: #170D2E;
+            line-height: 28px;
+            letter-spacing: 0;
         }
 
         /* ===========================================
@@ -242,15 +249,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
             width: 100%;
-            background: var(--color-brand-primary);
-            color: var(--color-text-inverse);
+            background: transparent;
+            color: var(--color-brand-secondary);
             font-family: var(--font-body);
-            font-size: 16px;
-            font-weight: 500;
-            padding: 16px 32px;
-            border: none;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 18px 32px;
+            border: 2px solid var(--color-brand-secondary);
             border-radius: var(--radius-full);
             cursor: pointer;
         }
@@ -262,7 +268,7 @@
 
         <div class="content">
             <div class="nav-bar">
-                <a href="#" class="back-btn">‹</a>
+                <a href="#" class="back-btn"><span class="material-icons">arrow_back</span></a>
             </div>
 
             <div class="header-section">
@@ -292,10 +298,7 @@
             </div>
 
             <div class="cta-section">
-                <button class="btn-primary">
-                    Continue
-                    <span>→</span>
-                </button>
+                <button class="btn-primary">Next</button>
             </div>
         </div>
     </div>

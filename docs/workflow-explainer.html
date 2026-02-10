@@ -140,6 +140,62 @@
             flex-wrap: wrap;
         }
 
+        /* Persistent scroll-down chevron */
+        .scroll-arrow {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 900;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-arrow:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 8px 24px var(--color-accent-glow);
+        }
+
+        .scroll-arrow:hover svg path {
+            stroke: white;
+        }
+
+        .scroll-arrow svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .scroll-arrow svg path {
+            stroke: var(--color-text-secondary);
+            transition: stroke 0.2s ease;
+        }
+
+        .scroll-arrow.bounce {
+            animation: arrowBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes arrowBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -1369,40 +1425,108 @@
             border-bottom: 1px solid var(--color-border);
         }
 
-        .examples-grid {
+        .examples-strip {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .examples-strip-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .examples-strip-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .examples-strip-label {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .examples-strip-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            padding-left: 1.6rem;
+        }
+
+        .examples-strip-previews {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 1.25rem;
         }
 
-        @media (max-width: 900px) {
-            .examples-grid {
-                grid-template-columns: 1fr;
-            }
+        .examples-strip-preview-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
-        .example-card {
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .example-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .example-preview {
+        .examples-strip-item {
             position: relative;
             background: #1a1a24;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 320px;
+            border-radius: 10px;
             overflow: hidden;
+            aspect-ratio: 390 / 700;
             cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .examples-strip-item:hover {
+            transform: scale(1.02);
+        }
+
+        .examples-strip-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .examples-strip-item .iframe-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 390px;
+            height: 844px;
+            transform-origin: top left;
+        }
+
+        .examples-strip-item iframe {
+            width: 390px;
+            height: 844px;
+            border: none;
+            pointer-events: none;
+        }
+
+        .examples-strip-item-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .examples-strip-item-desc {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 600px) {
+            .examples-strip-previews {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Lightbox */
@@ -1507,59 +1631,6 @@
             }
         }
 
-        .example-preview .iframe-wrapper {
-            width: 390px;
-            height: 844px;
-            transform: scale(0.35);
-            flex-shrink: 0;
-        }
-
-        .example-preview iframe {
-            width: 390px;
-            height: 844px;
-            border: none;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-            pointer-events: none;
-        }
-
-        .example-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #22C55E;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .example-content {
-            padding: 1.5rem;
-        }
-
-        .example-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .example-description {
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .example-tokens {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
         .token-tag {
             font-family: var(--font-mono);
             font-size: 0.7rem;
@@ -1570,40 +1641,6 @@
             color: var(--color-text-muted);
         }
 
-        .example-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            color: var(--color-accent);
-            font-size: 0.875rem;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .example-link:hover {
-            text-decoration: underline;
-        }
-
-        .examples-note {
-            margin-top: 3rem;
-            padding: 1.5rem;
-            background: var(--color-surface-elevated);
-            border-radius: 12px;
-            border-left: 3px solid var(--color-ai);
-        }
-
-        .examples-note h4 {
-            color: var(--color-ai);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .examples-note p {
-            font-size: 0.9rem;
-            color: var(--color-text-muted);
-            margin: 0;
-        }
     </style>
 </head>
 <body>
@@ -1612,21 +1649,24 @@
         <div class="container">
             <div class="hero-badge animate-in">
                 <span class="dot"></span>
-                Design Workflow v1.0
+                A new kind of workflow
             </div>
             <h1 class="animate-in animate-delay-1">
-                Human Creativity,<br>
-                <span>AI Efficiency</span>
+                Design what matters most.<br>
+                <span>AI carries it forward.</span>
             </h1>
             <p class="hero-subtitle animate-in animate-delay-2">
-                A workflow that focuses designer talent on the hardest problems while leveraging AI to handle repetitive work—creating interfaces that are both unique and consistent.
+                Every flow you design encodes hundreds of decisions. Together, they form a complete design system, implicitly. This workflow extracts it, makes it machine-readable, and applies it everywhere and anywhere you want — creating results that are both unique and consistent.
             </p>
-            <div class="hero-cta animate-in animate-delay-3">
-                <a href="#flow" class="btn btn-primary">See the Workflow</a>
-                <a href="#why" class="btn btn-secondary">Why This Approach?</a>
-            </div>
         </div>
     </section>
+
+    <!-- Persistent scroll arrow -->
+    <div class="scroll-arrow bounce" id="scroll-arrow" onclick="scrollToNextSection()">
+        <svg viewBox="0 0 20 20" fill="none">
+            <path d="M4 7L10 13L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
     <!-- What We're Doing -->
     <section id="goal">
@@ -1720,133 +1760,118 @@
     </section>
 
     <!-- Examples Section -->
-    <section class="examples-section">
+    <section id="examples" class="examples-section">
         <div class="container">
             <span class="section-label">See It In Action</span>
             <h2>Designers set the standard. AI carries it forward.</h2>
             <p class="section-intro">
-                From a real project: designers crafted the key moments, then AI generated the rest of the product using the same system.
+                From a real project: designers crafted the key moments, then AI generated the rest using the same system. Click any interactive preview to expand.
             </p>
 
-            <!-- Human-designed row -->
-            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-human); margin-bottom: 1.5rem; margin-top: 2rem;">Designed by humans</h4>
-            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-human);">
-                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
-                        <img src="examples/human-onboarding.png" alt="Motiv onboarding welcome screen" style="height: 100%; width: auto; object-fit: contain;">
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Onboarding Welcome</h3>
-                        <p class="example-description">Sets the emotional tone, gradient palette, and typography hierarchy for the entire product.</p>
-                    </div>
+            <!-- Human-designed strip -->
+            <div class="examples-strip">
+                <div class="examples-strip-header">
+                    <span class="examples-strip-dot" style="background: var(--color-human);"></span>
+                    <span class="examples-strip-label" style="color: var(--color-human);">Designed by humans</span>
                 </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-human);">
-                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
-                        <img src="examples/human-dashboard.png" alt="Motiv challenge dashboard" style="height: 100%; width: auto; object-fit: contain;">
+                <p class="examples-strip-desc">The moments that define how the product feels. Designers craft these from scratch — setting the emotional tone, visual language, and key interactions.</p>
+                <div class="examples-strip-previews">
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item">
+                            <img src="examples/human-onboarding.png" alt="Onboarding Welcome">
+                        </div>
+                        <span class="examples-strip-item-name">Onboarding Welcome</span>
+                        <span class="examples-strip-item-desc">Sets the gradient palette, typography hierarchy, and emotional tone</span>
                     </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Challenge Dashboard</h3>
-                        <p class="example-description">Establishes data display, card hierarchy, progress patterns, and the encouragement tone.</p>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item">
+                            <img src="examples/human-special.png" alt="Creator Celebration">
+                        </div>
+                        <span class="examples-strip-item-name">Creator Celebration</span>
+                        <span class="examples-strip-item-desc">Defines the celebration moment and reward visual language</span>
                     </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-human);">
-                        <span class="example-badge" style="background: var(--color-human);">Human Designed</span>
-                        <img src="examples/human-special.png" alt="Motiv onboarding celebration" style="height: 100%; width: auto; object-fit: contain;">
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Creator Celebration</h3>
-                        <p class="example-description">Defines the emotional high point — how the product makes creators feel valued and seen.</p>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item">
+                            <img src="examples/human-dashboard.png" alt="Challenge Dashboard">
+                        </div>
+                        <span class="examples-strip-item-name">Challenge Dashboard</span>
+                        <span class="examples-strip-item-desc">Establishes card patterns, data layout, and navigation structure</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Human-directed, AI-produced row -->
-            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-warning); margin-bottom: 1.5rem; margin-top: 3rem;">Co-Design: AI first pass, human refined</h4>
-            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/onboarding-welcome.html', 'Welcome Screen', 'Designer defined the gradient palette and emotional tone. AI produced the screen.', 'Co-Design', '#fbbf24')">
-                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/onboarding-welcome.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Welcome Screen</h3>
-                        <p class="example-description">Designer defined the gradient palette and emotional tone. AI produced the screen.</p>
-                    </div>
+            <!-- Co-design strip -->
+            <div class="examples-strip">
+                <div class="examples-strip-header">
+                    <span class="examples-strip-dot" style="background: var(--color-warning);"></span>
+                    <span class="examples-strip-label" style="color: var(--color-warning);">Co-designed with AI</span>
                 </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/personality-results.html', 'Personality Results', 'Designer set the reveal moment and visual impact. AI executed with the right tokens.', 'Co-Design', '#fbbf24')">
-                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/personality-results.html" loading="lazy"></iframe>
+                <p class="examples-strip-desc">AI takes a first pass using the design system, then designers refine until it feels right. Click any preview to expand.</p>
+                <div class="examples-strip-previews">
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/onboarding-welcome.html', 'Welcome Screen', 'Designer defined the gradient palette and emotional tone. AI produced the screen.', 'Co-Design', '#fbbf24')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/onboarding-welcome.html" loading="lazy"></iframe>
+                            </div>
                         </div>
+                        <span class="examples-strip-item-name">Welcome Screen</span>
+                        <span class="examples-strip-item-desc">Designer set the gradient palette and tone. AI produced the layout.</span>
                     </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Personality Results</h3>
-                        <p class="example-description">Designer set the reveal moment and visual impact. AI executed with the right tokens.</p>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-warning);" onclick="openLightbox('examples/challenge-win.html', 'Challenge Win', 'Designer chose the celebration approach. AI built it with the right colors and motion.', 'Co-Design', '#fbbf24')">
-                        <span class="example-badge" style="background: var(--color-warning); color: #0a0a0f;">Co-Design</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/challenge-win.html" loading="lazy"></iframe>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/personality-results.html', 'Personality Results', 'Designer set the reveal moment and visual impact. AI executed with the right tokens.', 'Co-Design', '#fbbf24')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/personality-results.html" loading="lazy"></iframe>
+                            </div>
                         </div>
+                        <span class="examples-strip-item-name">Personality Results</span>
+                        <span class="examples-strip-item-desc">Designer set the reveal moment. AI executed with the right tokens.</span>
                     </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Challenge Win</h3>
-                        <p class="example-description">Designer chose the celebration approach. AI built it with the right colors and motion.</p>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/challenge-win.html', 'Challenge Win', 'Designer chose the celebration approach. AI built it with the right colors and motion.', 'Co-Design', '#fbbf24')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/challenge-win.html" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                        <span class="examples-strip-item-name">Challenge Win</span>
+                        <span class="examples-strip-item-desc">Designer chose the celebration approach. AI built it with the system.</span>
                     </div>
                 </div>
             </div>
 
-            <!-- AI-generated row -->
-            <h4 style="font-size: 0.875rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ai); margin-bottom: 1.5rem; margin-top: 3rem;">Generated by AI from the system</h4>
-            <div class="examples-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/settings-main.html', 'Settings', 'AI applied the list pattern, spacing, and icon styling from the system.', 'AI Generated', '#22D3EE')">
-                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/settings-main.html" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Settings</h3>
-                        <p class="example-description">AI applied the list pattern, spacing, and icon styling from the system.</p>
-                    </div>
+            <!-- AI-generated strip -->
+            <div class="examples-strip">
+                <div class="examples-strip-header">
+                    <span class="examples-strip-dot" style="background: var(--color-ai);"></span>
+                    <span class="examples-strip-label" style="color: var(--color-ai);">Generated by AI from the system</span>
                 </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/challenge-history-empty.html', 'Empty State', 'AI generated an encouraging empty state using the brand colors and patterns.', 'AI Generated', '#22D3EE')">
-                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/challenge-history-empty.html" loading="lazy"></iframe>
+                <p class="examples-strip-desc">No designer input needed. AI generates these directly from the extracted design system — correct tokens, patterns, and spacing. Click to expand.</p>
+                <div class="examples-strip-previews">
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/settings-main.html', 'Settings', 'AI applied the list pattern, spacing, and icon styling from the system.', 'AI Generated', '#22D3EE')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/settings-main.html" loading="lazy"></iframe>
+                            </div>
                         </div>
+                        <span class="examples-strip-item-name">Settings</span>
+                        <span class="examples-strip-item-desc">AI applied list patterns, spacing, and icon styling from the system</span>
                     </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Empty State</h3>
-                        <p class="example-description">AI generated an encouraging empty state using the brand colors and patterns.</p>
-                    </div>
-                </div>
-
-                <div class="example-card">
-                    <div class="example-preview" style="border: 1px solid var(--color-ai);" onclick="openLightbox('examples/notification-settings.html', 'Notification Settings', 'AI used the toggle patterns and section grouping from the designer\'s work.', 'AI Generated', '#22D3EE')">
-                        <span class="example-badge" style="background: #22D3EE; color: #0a0a0f;">AI Generated</span>
-                        <div class="iframe-wrapper">
-                            <iframe src="examples/notification-settings.html" loading="lazy"></iframe>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/challenge-history-empty.html', 'Empty State', 'AI generated an encouraging empty state using the brand colors and patterns.', 'AI Generated', '#22D3EE')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/challenge-history-empty.html" loading="lazy"></iframe>
+                            </div>
                         </div>
+                        <span class="examples-strip-item-name">Empty State</span>
+                        <span class="examples-strip-item-desc">AI generated an encouraging empty state using brand colors and patterns</span>
                     </div>
-                    <div class="example-content">
-                        <h3 class="example-title">Notification Settings</h3>
-                        <p class="example-description">AI used the toggle patterns and section grouping from the designer's work.</p>
+                    <div class="examples-strip-preview-col">
+                        <div class="examples-strip-item" onclick="openLightbox('examples/notification-settings.html', 'Notification Settings', 'AI used the toggle patterns and section grouping from the designer\'s work.', 'AI Generated', '#22D3EE')">
+                            <div class="iframe-wrapper">
+                                <iframe src="examples/notification-settings.html" loading="lazy"></iframe>
+                            </div>
+                        </div>
+                        <span class="examples-strip-item-name">Notification Settings</span>
+                        <span class="examples-strip-item-desc">AI used toggle patterns and section grouping from the designer's work</span>
                     </div>
                 </div>
             </div>
@@ -1903,15 +1928,15 @@
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">~25%</div>
+                    <div class="stat-value">25%</div>
                     <div class="stat-label">Designed by humans</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">~20%</div>
+                    <div class="stat-value">25%</div>
                     <div class="stat-label">Co-designed: AI first pass, human refined</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">~55%</div>
+                    <div class="stat-value">50%</div>
                     <div class="stat-label">Generated by AI from the system</div>
                 </div>
             </div>
@@ -1942,7 +1967,7 @@
                             <span class="phase-step review">Approve</span>
                         </div>
                     </div>
-                    <div class="phase-toggle">▼</div>
+                    <div class="phase-toggle"><svg width="14" height="8" viewBox="0 0 14 8" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 </div>
                 <div class="phase-details">
                     <!-- Understand -->
@@ -2017,7 +2042,7 @@
                             <span class="phase-step review">Review</span>
                         </div>
                     </div>
-                    <div class="phase-toggle">▼</div>
+                    <div class="phase-toggle"><svg width="14" height="8" viewBox="0 0 14 8" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 </div>
                 <div class="phase-details">
                     <!-- Design Key Screens -->
@@ -2112,7 +2137,7 @@
                             <span class="phase-step ai">Document</span>
                         </div>
                     </div>
-                    <div class="phase-toggle">▼</div>
+                    <div class="phase-toggle"><svg width="14" height="8" viewBox="0 0 14 8" fill="none"><path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 </div>
                 <div class="phase-details">
                     <!-- Engineer Handoff -->
@@ -2369,11 +2394,51 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.pain-point, .problem-card, .classification-card, .flow-item, .phase-container, .stat-card, .command-item, .artifact-card, .conflict-scenario, .iteration-point, .example-card').forEach(el => {
+        document.querySelectorAll('.pain-point, .problem-card, .classification-card, .flow-item, .phase-container, .stat-card, .command-item, .artifact-card, .conflict-scenario, .iteration-point, .examples-strip').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Scale iframes in example strips to fit their containers
+        function scaleStripIframes() {
+            document.querySelectorAll('.examples-strip-item .iframe-wrapper').forEach(wrapper => {
+                const container = wrapper.closest('.examples-strip-item');
+                const scale = container.offsetWidth / 390;
+                wrapper.style.transform = 'scale(' + scale + ')';
+                wrapper.style.transformOrigin = 'top left';
+            });
+        }
+        scaleStripIframes();
+        window.addEventListener('resize', scaleStripIframes);
+
+        // Persistent scroll arrow — advances to next section
+        const scrollSections = ['goal', 'challenge', 'why', 'examples', 'classification', 'flow', 'iteration', 'designer-role', 'next-steps'];
+        const scrollArrow = document.getElementById('scroll-arrow');
+
+        function scrollToNextSection() {
+            const scrollY = window.scrollY + window.innerHeight * 0.4;
+            for (const id of scrollSections) {
+                const el = document.getElementById(id);
+                if (el && el.offsetTop > scrollY) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    return;
+                }
+            }
+            // If at or past the last section, scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hide arrow at bottom of page, remove bounce after first scroll
+        let hasScrolled = false;
+        window.addEventListener('scroll', function() {
+            if (!hasScrolled && window.scrollY > 100) {
+                hasScrolled = true;
+                scrollArrow.classList.remove('bounce');
+            }
+            const nearBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 100);
+            scrollArrow.classList.toggle('hidden', nearBottom);
         });
     </script>
 </body>

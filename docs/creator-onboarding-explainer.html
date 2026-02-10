@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Onboarding Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-surface-elevated: #1a1a24;
+            --color-border: #2a2a3a;
+            --color-text: #e8e8f0;
+            --color-text-muted: #8888a0;
+            --color-pink: #f472b6;
+            --color-sky: #7DD3FC;
+            --color-lavender: #C4B5FD;
+            --color-mint: #6EE7B7;
+            --color-sunshine: #FACC15;
+            --color-peach: #FDBA74;
+            --color-purple: #7C3AED;
+            --color-success: #4ade80;
+            --color-warning: #fbbf24;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.12) 0%, rgba(125, 211, 252, 0.08) 40%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            width: fit-content;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--color-pink), var(--color-sky), var(--color-lavender));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 650px;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-source {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            opacity: 0.6;
+        }
+
+        /* ========================================
+           SECTION STYLING
+           ======================================== */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-pink);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-intro {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        /* ========================================
+           TIMELINE
+           ======================================== */
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 39px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-border);
+        }
+
+        .timeline-step {
+            position: relative;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-number {
+            width: 80px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .timeline-number .circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            color: var(--color-text-muted);
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-step[data-color="muted"] .circle {
+            border-color: var(--color-text-muted);
+            color: var(--color-text-muted);
+        }
+
+        .timeline-step[data-color="purple"] .circle {
+            border-color: var(--color-purple);
+            color: var(--color-purple);
+            box-shadow: 0 0 16px rgba(124, 58, 237, 0.25);
+        }
+
+        .timeline-step[data-color="pink"] .circle {
+            border-color: var(--color-pink);
+            color: var(--color-pink);
+            box-shadow: 0 0 16px rgba(244, 114, 182, 0.25);
+        }
+
+        .timeline-step[data-color="sky"] .circle {
+            border-color: var(--color-sky);
+            color: var(--color-sky);
+            box-shadow: 0 0 16px rgba(125, 211, 252, 0.25);
+        }
+
+        .timeline-step[data-color="mint"] .circle {
+            border-color: var(--color-mint);
+            color: var(--color-mint);
+            box-shadow: 0 0 16px rgba(110, 231, 183, 0.25);
+        }
+
+        .timeline-content {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-step[data-color="purple"] .timeline-content {
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+
+        .timeline-step[data-color="pink"] .timeline-content {
+            border-color: rgba(244, 114, 182, 0.3);
+        }
+
+        .timeline-step[data-color="sky"] .timeline-content {
+            border-color: rgba(125, 211, 252, 0.3);
+        }
+
+        .timeline-step[data-color="mint"] .timeline-content {
+            border-color: rgba(110, 231, 183, 0.3);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-step[data-color="muted"] .timeline-content h3 { color: var(--color-text-muted); }
+        .timeline-step[data-color="purple"] .timeline-content h3 { color: var(--color-purple); }
+        .timeline-step[data-color="pink"] .timeline-content h3 { color: var(--color-pink); }
+        .timeline-step[data-color="sky"] .timeline-content h3 { color: var(--color-sky); }
+        .timeline-step[data-color="mint"] .timeline-content h3 { color: var(--color-mint); }
+
+        .timeline-content p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           ARCHETYPE CARDS
+           ======================================== */
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .archetype-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .archetype-card:hover {
+            border-color: var(--color-text-muted);
+            transform: translateY(-2px);
+        }
+
+        .archetype-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .archetype-card[data-archetype="companion"]::before { background: linear-gradient(90deg, #FDF2F8, #F9A8D4); }
+        .archetype-card[data-archetype="guide"]::before { background: linear-gradient(90deg, #F0F9FF, #7DD3FC); }
+        .archetype-card[data-archetype="coach"]::before { background: linear-gradient(90deg, #ECFDF5, #6EE7B7); }
+        .archetype-card[data-archetype="challenger"]::before { background: linear-gradient(90deg, #FEF9C3, #FACC15); }
+        .archetype-card[data-archetype="performer"]::before { background: linear-gradient(90deg, #FFF7ED, #FDBA74); }
+        .archetype-card[data-archetype="connector"]::before { background: linear-gradient(90deg, #F5F3FF, #C4B5FD); }
+
+        .archetype-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .archetype-swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .archetype-card[data-archetype="companion"] .archetype-swatch { background: linear-gradient(135deg, #FDF2F8, #F9A8D4); }
+        .archetype-card[data-archetype="guide"] .archetype-swatch { background: linear-gradient(135deg, #F0F9FF, #7DD3FC); }
+        .archetype-card[data-archetype="coach"] .archetype-swatch { background: linear-gradient(135deg, #ECFDF5, #6EE7B7); }
+        .archetype-card[data-archetype="challenger"] .archetype-swatch { background: linear-gradient(135deg, #FEF9C3, #FACC15); }
+        .archetype-card[data-archetype="performer"] .archetype-swatch { background: linear-gradient(135deg, #FFF7ED, #FDBA74); }
+        .archetype-card[data-archetype="connector"] .archetype-swatch { background: linear-gradient(135deg, #F5F3FF, #C4B5FD); }
+
+        .archetype-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .archetype-tagline {
+            font-size: 0.9375rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .archetype-traits {
+            list-style: none;
+        }
+
+        .archetype-traits li {
+            padding: 0.375rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .archetype-traits li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .archetype-card[data-archetype="companion"] .archetype-traits li::before { background: #F9A8D4; }
+        .archetype-card[data-archetype="guide"] .archetype-traits li::before { background: #7DD3FC; }
+        .archetype-card[data-archetype="coach"] .archetype-traits li::before { background: #6EE7B7; }
+        .archetype-card[data-archetype="challenger"] .archetype-traits li::before { background: #FACC15; }
+        .archetype-card[data-archetype="performer"] .archetype-traits li::before { background: #FDBA74; }
+        .archetype-card[data-archetype="connector"] .archetype-traits li::before { background: #C4B5FD; }
+
+        /* ========================================
+           FLOW DIAGRAM (3-State Model)
+           ======================================== */
+        .flow-diagram {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            overflow-x: auto;
+        }
+
+        .flow-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            min-width: 500px;
+            position: relative;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .flow-node {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .flow-node.question {
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+        }
+
+        .flow-node.state {
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .flow-node.state-1 {
+            background: rgba(244, 114, 182, 0.1);
+            border-color: var(--color-pink);
+            color: var(--color-pink);
+        }
+
+        .flow-node.state-2 {
+            background: rgba(250, 204, 21, 0.1);
+            border-color: var(--color-sunshine);
+            color: var(--color-sunshine);
+        }
+
+        .flow-node.state-3 {
+            background: rgba(110, 231, 183, 0.1);
+            border-color: var(--color-mint);
+            color: var(--color-mint);
+        }
+
+        .flow-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.25rem 0;
+        }
+
+        .flow-connector .line {
+            width: 2px;
+            height: 20px;
+            background: var(--color-border);
+        }
+
+        .flow-connector .label {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .flow-connector .label.yes {
+            color: var(--color-mint);
+            background: rgba(110, 231, 183, 0.1);
+        }
+
+        .flow-connector .label.no {
+            color: var(--color-pink);
+            background: rgba(244, 114, 182, 0.1);
+        }
+
+        .flow-branch {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .flow-branch-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .flow-horizontal-connector {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .flow-horizontal-connector .h-line {
+            width: 40px;
+            height: 2px;
+            background: var(--color-border);
+        }
+
+        /* CSS-only flow diagram - structured approach */
+        .state-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            padding: 1rem 0;
+        }
+
+        .state-flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .state-flow-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .state-flow-side {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .sf-q {
+            padding: 0.625rem 1.25rem;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-text);
+            white-space: nowrap;
+        }
+
+        .sf-arrow-down {
+            width: 2px;
+            height: 24px;
+            background: var(--color-border);
+            position: relative;
+        }
+
+        .sf-arrow-down .sf-label {
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .sf-arrow-down .sf-label.yes { color: var(--color-mint); }
+        .sf-arrow-down .sf-label.no { color: var(--color-pink); }
+
+        .sf-arrow-right {
+            height: 2px;
+            width: 50px;
+            background: var(--color-border);
+            position: relative;
+        }
+
+        .sf-arrow-right .sf-label {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .sf-arrow-right .sf-label.no { color: var(--color-pink); }
+
+        .sf-state {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .sf-state.s1 {
+            background: rgba(244, 114, 182, 0.1);
+            border: 2px solid var(--color-pink);
+            color: var(--color-pink);
+        }
+
+        .sf-state.s2 {
+            background: rgba(250, 204, 21, 0.1);
+            border: 2px solid var(--color-sunshine);
+            color: var(--color-sunshine);
+        }
+
+        .sf-state.s3 {
+            background: rgba(110, 231, 183, 0.1);
+            border: 2px solid var(--color-mint);
+            color: var(--color-mint);
+        }
+
+        /* State descriptions below diagram */
+        .state-descriptions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .state-desc-card {
+            padding: 1.5rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            border-top: 3px solid;
+        }
+
+        .state-desc-card.s1 { border-top-color: var(--color-pink); }
+        .state-desc-card.s2 { border-top-color: var(--color-sunshine); }
+        .state-desc-card.s3 { border-top-color: var(--color-mint); }
+
+        .state-desc-card h4 {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .state-desc-card.s1 h4 { color: var(--color-pink); }
+        .state-desc-card.s2 h4 { color: var(--color-sunshine); }
+        .state-desc-card.s3 h4 { color: var(--color-mint); }
+
+        .state-desc-card .state-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .state-desc-card p {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .state-descriptions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========================================
+           SCREEN MOCKUPS
+           ======================================== */
+        .mockup-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem;
+            margin-top: 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mockup-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .mockup-scroll::-webkit-scrollbar-track {
+            background: var(--color-surface);
+            border-radius: 3px;
+        }
+
+        .mockup-scroll::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 3px;
+        }
+
+        .mockup-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-muted);
+        }
+
+        .mockup-card {
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+
+        .mockup-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .mockup-label span {
+            color: var(--color-pink);
+        }
+
+        .mockup-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--color-border);
+            background: var(--color-surface);
+            position: relative;
+        }
+
+        .mockup-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .mockup-frame .placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            gap: 0.75rem;
+        }
+
+        .mockup-frame .placeholder .placeholder-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* ========================================
+           EARNINGS MODEL
+           ======================================== */
+        .earnings-card {
+            background: var(--color-surface);
+            border: 2px solid rgba(250, 204, 21, 0.4);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .earnings-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-sunshine), var(--color-peach));
+        }
+
+        .earnings-card h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--color-sunshine);
+        }
+
+        .earnings-card .previous {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .earnings-card .previous .label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .earnings-proposed h4 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-mint);
+            margin-bottom: 1rem;
+        }
+
+        .earnings-proposed ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .earnings-proposed li {
+            padding: 0.5rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+        }
+
+        .earnings-proposed li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-mint);
+        }
+
+        .earnings-proposed li strong {
+            color: var(--color-text);
+        }
+
+        .earnings-note {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .earnings-note p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        .earnings-note strong {
+            color: var(--color-text);
+        }
+
+        .earnings-key-change {
+            background: rgba(110, 231, 183, 0.08);
+            border: 1px solid rgba(110, 231, 183, 0.2);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+        }
+
+        .earnings-key-change p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: var(--color-text-muted);
+        }
+
+        .earnings-key-change strong {
+            color: var(--color-mint);
+        }
+
+        /* ========================================
+           TERMINOLOGY TABLE
+           ======================================== */
+        .terminology-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--color-surface);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+
+        .terminology-table th {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            padding: 1rem 1.5rem;
+            text-align: left;
+            background: var(--color-surface-elevated);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .terminology-table td {
+            padding: 1rem 1.5rem;
+            font-size: 0.9375rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .terminology-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .terminology-table .before {
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .terminology-table .after {
+            color: var(--color-mint);
+            font-weight: 500;
+        }
+
+        .terminology-table .arrow-cell {
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
+            text-align: center;
+            width: 60px;
+        }
+
+        /* ========================================
+           OPEN QUESTIONS
+           ======================================== */
+        .questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .question-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 1rem;
+            align-items: start;
+            transition: all 0.2s ease;
+        }
+
+        .question-card:hover {
+            border-color: var(--color-lavender);
+            background: var(--color-surface-elevated);
+        }
+
+        .question-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(196, 181, 253, 0.1);
+            border: 1px solid rgba(196, 181, 253, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-lavender);
+        }
+
+        .question-card p {
+            color: var(--color-text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            padding-top: 0.375rem;
+        }
+
+        /* ========================================
+           SKILL TOOLKIT
+           ======================================== */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: var(--color-purple);
+            transform: translateY(-2px);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-purple), var(--color-lavender));
+        }
+
+        .skill-card .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card .skill-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+
+        .skill-card .skill-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .skill-card .skill-command {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-purple);
+            background: rgba(124, 58, 237, 0.1);
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-card .skill-desc {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card .skill-subcommands {
+            list-style: none;
+        }
+
+        .skill-card .skill-subcommands li {
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        .skill-card .skill-subcommands li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--color-purple);
+            opacity: 0.6;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .inventory-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 1.25rem;
+        }
+
+        .inventory-item .inv-label {
+            font-family: var(--font-mono);
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .inventory-item .inv-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .inventory-item .inv-detail {
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            line-height: 1.5;
+        }
+
+        .inventory-item.purple .inv-value { color: var(--color-purple); }
+        .inventory-item.pink .inv-value { color: var(--color-pink); }
+        .inventory-item.mint .inv-value { color: var(--color-mint); }
+        .inventory-item.sky .inv-value { color: var(--color-sky); }
+        .inventory-item.sunshine .inv-value { color: var(--color-sunshine); }
+        .inventory-item.lavender .inv-value { color: var(--color-lavender); }
+
+        .tip-box {
+            background: rgba(124, 58, 237, 0.06);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-box h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--color-purple);
+            margin-bottom: 0.75rem;
+        }
+
+        .tip-box ol {
+            padding-left: 1.25rem;
+        }
+
+        .tip-box li {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            line-height: 1.7;
+            padding: 0.25rem 0;
+        }
+
+        .tip-box li strong {
+            color: var(--color-text);
+        }
+
+        .tip-box code {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            background: rgba(124, 58, 237, 0.12);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            color: var(--color-lavender);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer p {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 768px) {
+            .archetype-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-step {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .timeline::before {
+                left: 29px;
+            }
+
+            .flow-diagram {
+                padding: 2rem 1rem;
+            }
+
+            .earnings-card {
+                padding: 1.5rem;
+            }
+
+            .inventory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <div class="container">
+        <div class="hero">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Creator Onboarding Flow
+            </div>
+            <h1>The <span class="gradient-text">Archetype</span> Flow</h1>
+            <p class="hero-subtitle">
+                A personalized creator onboarding experience that adapts to how each creator connects with their audience. No OAuth required, no friction — just insight.
+            </p>
+            <p class="hero-source">Source: Creator Onboarding Flows — January 31, 2026</p>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         HOW IT WORKS — 5-Step Timeline
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">How It Works</div>
+            <h2>The 5-Step Onboarding Flow</h2>
+            <p class="section-intro">
+                From Instagram handle to guaranteed earnings — each step personalizes the experience based on how the creator connects with their audience.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-step" data-color="muted">
+                    <div class="timeline-number">
+                        <div class="circle">1</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Instagram Handle</h3>
+                        <p>Creator enters their public Instagram URL. System pulls lightweight public metadata: handle, display name, profile photo, follower tier.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step" data-color="purple">
+                    <div class="timeline-number">
+                        <div class="circle">2</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Archetype Classification</h3>
+                        <p>Based on follower tier, engagement band, and content patterns, the system classifies the creator into one of six archetypes. The archetype is never shown explicitly — it only informs what the creator sees.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step" data-color="pink">
+                    <div class="timeline-number">
+                        <div class="circle">3</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Narrative Reveal</h3>
+                        <p>Two personalized screens show the creator why their community connects with them. Copy feels personal because it reflects how creators at their scale typically resonate.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step" data-color="sky">
+                    <div class="timeline-number">
+                        <div class="circle">4</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Engagement Diagnosis</h3>
+                        <p>2-3 self-reported questions about where audience engagement stalls. Based on answers, creators are placed into State 1, 2, or 3.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-step" data-color="mint">
+                    <div class="timeline-number">
+                        <div class="circle">5</div>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Collab Solution + Earnings</h3>
+                        <p>The system shows how running a collab directly addresses their specific friction point, with guaranteed earnings of $350 when their collab goes live.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         THE 6 ARCHETYPES
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Personalization Engine</div>
+            <h2>The 6 Archetypes</h2>
+            <p class="section-intro">
+                Each archetype shapes the narrative copy, engagement questions, and solution framing. The creator never sees their archetype label — they only experience its effect.
+            </p>
+
+            <div class="archetype-grid">
+                <div class="archetype-card" data-archetype="companion">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Companion</div>
+                    </div>
+                    <div class="archetype-tagline">Why your community connects so deeply</div>
+                    <ul class="archetype-traits">
+                        <li>Understanding</li>
+                        <li>Removes pressure</li>
+                        <li>Makes progress possible</li>
+                        <li>Meets people where they are</li>
+                    </ul>
+                </div>
+
+                <div class="archetype-card" data-archetype="guide">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Guide</div>
+                    </div>
+                    <div class="archetype-tagline">Why your community trusts your direction</div>
+                    <ul class="archetype-traits">
+                        <li>Shares what works</li>
+                        <li>Leads by example</li>
+                        <li>Clear steps</li>
+                        <li>Navigable path</li>
+                    </ul>
+                </div>
+
+                <div class="archetype-card" data-archetype="coach">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Coach</div>
+                    </div>
+                    <div class="archetype-tagline">Why people look to you for results</div>
+                    <ul class="archetype-traits">
+                        <li>Structure & clarity</li>
+                        <li>Focus</li>
+                        <li>High standards</li>
+                        <li>Pushes past comfort</li>
+                    </ul>
+                </div>
+
+                <div class="archetype-card" data-archetype="challenger">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Challenger</div>
+                    </div>
+                    <div class="archetype-tagline">Why your community responds to your energy</div>
+                    <ul class="archetype-traits">
+                        <li>Bold expectations</li>
+                        <li>Shows up fully</li>
+                        <li>Effort as choice</li>
+                        <li>Discipline &rarr; momentum</li>
+                    </ul>
+                </div>
+
+                <div class="archetype-card" data-archetype="performer">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Performer</div>
+                    </div>
+                    <div class="archetype-tagline">Why people are drawn to your presence</div>
+                    <ul class="archetype-traits">
+                        <li>Captures attention</li>
+                        <li>Shows possibility</li>
+                        <li>Outcomes & aesthetics</li>
+                        <li>Aspirational progress</li>
+                    </ul>
+                </div>
+
+                <div class="archetype-card" data-archetype="connector">
+                    <div class="archetype-header">
+                        <div class="archetype-swatch"></div>
+                        <div class="archetype-name">The Connector</div>
+                    </div>
+                    <div class="archetype-tagline">Why your community feels like a community</div>
+                    <ul class="archetype-traits">
+                        <li>Brings people together</li>
+                        <li>Invites participation</li>
+                        <li>Shared experience</li>
+                        <li>Collective energy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         THE 3-STATE MODEL
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Engagement Diagnosis</div>
+            <h2>The 3-State Model</h2>
+            <p class="section-intro">
+                Self-reported questions route creators into one of three engagement states. Each state gets tailored solution framing for why a collab addresses their specific gap.
+            </p>
+
+            <div class="flow-diagram">
+                <div class="state-flow">
+                    <!-- Q1 row -->
+                    <div class="state-flow-row">
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"><span class="sf-label no">No</span></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                        <div class="state-flow-center">
+                            <div class="sf-q">Q1: Do your followers take the first step?</div>
+                        </div>
+                        <div class="state-flow-side">
+                            <div class="sf-arrow-right"><span class="sf-label no">No</span></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow down (Yes) -->
+                    <div class="state-flow-row">
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                        <div class="state-flow-center">
+                            <div class="sf-arrow-down" style="height: 32px;">
+                                <span class="sf-label yes">Yes</span>
+                            </div>
+                        </div>
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                    </div>
+
+                    <!-- Q2 row -->
+                    <div class="state-flow-row">
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"><span class="sf-label no">No</span></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                        <div class="state-flow-center">
+                            <div class="sf-q">Q2: Do they stay consistent?</div>
+                        </div>
+                        <div class="state-flow-side">
+                            <div class="sf-arrow-right"><span class="sf-label no">No</span></div>
+                            <div class="sf-state s1">State 1</div>
+                        </div>
+                    </div>
+
+                    <!-- Arrow down (Yes) -->
+                    <div class="state-flow-row">
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"></div>
+                            <div class="sf-state s2">State 2</div>
+                        </div>
+                        <div class="state-flow-center">
+                            <div class="sf-arrow-down" style="height: 32px;">
+                                <span class="sf-label yes">Yes</span>
+                            </div>
+                        </div>
+                        <div class="state-flow-side" style="visibility: hidden;">
+                            <div class="sf-arrow-right"></div>
+                            <div class="sf-state s2">State 2</div>
+                        </div>
+                    </div>
+
+                    <!-- Q3 row -->
+                    <div class="state-flow-row">
+                        <div class="state-flow-side">
+                            <div class="sf-state s2" style="order: 2;">State 2</div>
+                            <div class="sf-arrow-right" style="order: 1;"><span class="sf-label no">No</span></div>
+                        </div>
+                        <div class="state-flow-center">
+                            <div class="sf-q">Q3: Do they go deeper?</div>
+                        </div>
+                        <div class="state-flow-side">
+                            <div class="sf-arrow-right"><span class="sf-label yes" style="color: var(--color-mint);">Yes</span></div>
+                            <div class="sf-state s3">State 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="state-descriptions">
+                <div class="state-desc-card s1">
+                    <h4>State 1</h4>
+                    <div class="state-title">Inspiration &rarr; Action gap</div>
+                    <p>People get inspired but don't take the first step</p>
+                </div>
+                <div class="state-desc-card s2">
+                    <h4>State 2</h4>
+                    <div class="state-title">Consistency gap</div>
+                    <p>People start but don't sustain momentum</p>
+                </div>
+                <div class="state-desc-card s3">
+                    <h4>State 3</h4>
+                    <div class="state-title">Depth gap</div>
+                    <p>People participate but don't seek deeper engagement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SCREEN MOCKUPS
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Built Screens</div>
+            <h2>Screen Mockups</h2>
+            <p class="section-intro">
+                Interactive prototypes for each step of the onboarding flow. Each screen adapts based on archetype and engagement state.
+            </p>
+
+            <div class="mockup-scroll">
+                <div class="mockup-card">
+                    <div class="mockup-label"><span>Step 1:</span> Instagram Handle</div>
+                    <div class="mockup-frame">
+                        <iframe src="creator-instagram-input.html" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-label"><span>Steps 2-3:</span> Archetype Narrative</div>
+                    <div class="mockup-frame">
+                        <iframe src="creator-archetype-narrative.html" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-label"><span>Step 4:</span> State Questions</div>
+                    <div class="mockup-frame">
+                        <iframe src="creator-state-questions.html" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-label"><span>Step 4b:</span> State Resolution</div>
+                    <div class="mockup-frame">
+                        <iframe src="creator-state-resolution.html" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-label"><span>Step 5:</span> Earnings & CTA</div>
+                    <div class="mockup-frame">
+                        <iframe src="creator-earnings-final.html" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         EARNINGS MODEL
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Revenue</div>
+            <h2>Updated Earnings Model</h2>
+
+            <div class="earnings-card">
+                <h3>Updated Earnings Model</h3>
+
+                <div class="previous">
+                    <span class="label">Previous</span>
+                    Creators could earn ~$10-15K per quarter from running 5-week collabs.
+                </div>
+
+                <div class="earnings-proposed">
+                    <h4>Proposed</h4>
+                    <ul>
+                        <li><strong>$350 guaranteed</strong> when a collab goes live (activated = minimum participants joined)</li>
+                        <li><strong>Referral bonuses</strong> for driving sign-ups (e.g., milestone at 1,000 followers)</li>
+                        <li><strong>Revenue share</strong> from participant activity</li>
+                    </ul>
+                </div>
+
+                <div class="earnings-note">
+                    <p>Total potential earnings are roughly the same range, but the <strong>guaranteed floor</strong> puts creators at ease.</p>
+                </div>
+
+                <div class="earnings-key-change">
+                    <p><strong>Key change in onboarding copy:</strong> We now lead with "you will absolutely get paid for getting a collab live" rather than a quarterly projection.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         TERMINOLOGY UPDATE
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Naming</div>
+            <h2>Terminology Update</h2>
+            <p class="section-intro">
+                Updated language across the product to be more collaborative and less competitive.
+            </p>
+
+            <table class="terminology-table">
+                <thead>
+                    <tr>
+                        <th>Before</th>
+                        <th></th>
+                        <th>After</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="before">Challenge</td>
+                        <td class="arrow-cell">&rarr;</td>
+                        <td class="after">Collab</td>
+                    </tr>
+                    <tr>
+                        <td class="before">Challenge creator</td>
+                        <td class="arrow-cell">&rarr;</td>
+                        <td class="after">Creator</td>
+                    </tr>
+                    <tr>
+                        <td class="before">Challenge participant</td>
+                        <td class="arrow-cell">&rarr;</td>
+                        <td class="after">Participant</td>
+                    </tr>
+                    <tr>
+                        <td class="before">Create a challenge</td>
+                        <td class="arrow-cell">&rarr;</td>
+                        <td class="after">Start a collab</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         OPEN QUESTIONS FOR PM
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Discussion</div>
+            <h2>Open Questions for PM</h2>
+            <p class="section-intro">
+                Decision points that need PM input before finalizing the flow and earnings model.
+            </p>
+
+            <div class="questions-list">
+                <div class="question-card">
+                    <div class="question-number">1</div>
+                    <p>What is the exact participant threshold to activate a collab? (e.g., 50 participants minimum?)</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">2</div>
+                    <p>What are the referral bonus tiers? (e.g., $X per 100 sign-ups? Milestone at 1,000?)</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">3</div>
+                    <p>What is the revenue share percentage?</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">4</div>
+                    <p>How much earnings detail should we show in onboarding vs. the creator dashboard?</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">5</div>
+                    <p>Should the archetype ever be surfaced to the creator, or stay invisible?</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">6</div>
+                    <p>Do creators choose their collab template during onboarding or after?</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-number">7</div>
+                    <p>What's the timeline for the guaranteed payment? (Immediate? After 7 days?)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SKILL TOOLKIT
+         ========================================== -->
+    <section>
+        <div class="container">
+            <div class="section-label">Toolkit</div>
+            <h2>The AI Design Skills</h2>
+            <p class="section-intro">
+                Everything in this doc — the screens, the design system, the narrative — was built with a set of Claude Code skills. Here's what's available and how to use them.
+            </p>
+
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon" style="background: rgba(124, 58, 237, 0.15);">&#9881;</div>
+                        <div class="skill-name">Design System</div>
+                    </div>
+                    <div class="skill-command">/design-system</div>
+                    <div class="skill-desc">
+                        Extracts an AI-readable design system from app screenshots. Analyzes colors, typography, spacing, components, and motion — then generates token files that other skills use.
+                    </div>
+                    <ul class="skill-subcommands">
+                        <li>/design-system update — add new screens</li>
+                        <li>/design-system validate — check consistency</li>
+                        <li>/design-system test 3 — generate 3 test screens</li>
+                        <li>/design-system export css — export as CSS vars</li>
+                        <li>/design-system deviation-report — find inconsistencies</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon" style="background: rgba(244, 114, 182, 0.15);">&#9998;</div>
+                        <div class="skill-name">Product Design</div>
+                    </div>
+                    <div class="skill-command">/product-design</div>
+                    <div class="skill-desc">
+                        Your design partner for product planning. Explores flow options, makes design decisions, iterates cheaply, and generates screens. Covers the full double-diamond from discovery to prototype.
+                    </div>
+                    <ul class="skill-subcommands">
+                        <li>/product-design discover — explore problem space</li>
+                        <li>/product-design flows — map user journeys</li>
+                        <li>/product-design generate — create screen mockups</li>
+                        <li>/product-design iterate — refine existing screens</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon" style="background: rgba(110, 231, 183, 0.15);">&#10024;</div>
+                        <div class="skill-name">Frontend Design</div>
+                    </div>
+                    <div class="skill-command">/frontend-design</div>
+                    <div class="skill-desc">
+                        Creates production-grade HTML/CSS/JS interfaces with high design quality. Reads design system tokens and generates standalone files that look polished, not generic.
+                    </div>
+                    <ul class="skill-subcommands">
+                        <li>Generates self-contained HTML files</li>
+                        <li>Uses design system tokens automatically</li>
+                        <li>Creates interactive prototypes</li>
+                        <li>Supports state variations & toggles</li>
+                    </ul>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon" style="background: rgba(125, 211, 252, 0.15);">&#128101;</div>
+                        <div class="skill-name">Designer Allocation</div>
+                    </div>
+                    <div class="skill-command">/designer-allocation</div>
+                    <div class="skill-desc">
+                        Creates designer allocation plans from the design system. Analyzes screen complexity, gathers team constraints, and outputs prioritized assignments with Gantt charts and AI fill-in specs.
+                    </div>
+                    <ul class="skill-subcommands">
+                        <li>Ranks screens by complexity tier</li>
+                        <li>Maps dependencies between screens</li>
+                        <li>Assigns human vs. AI generation</li>
+                        <li>Generates Gantt-style timeline</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- What's been built -->
+            <h3 style="margin-top: 4rem; margin-bottom: 0.5rem; font-size: 1.25rem;">What's Been Built So Far</h3>
+            <p class="section-intro" style="margin-bottom: 2rem;">
+                The Motiv design system was extracted from app screenshots and expanded through iterative work. Here's the current inventory.
+            </p>
+
+            <div class="inventory-grid">
+                <div class="inventory-item purple">
+                    <div class="inv-label">Token Files</div>
+                    <div class="inv-value">6</div>
+                    <div class="inv-detail">Colors, typography, spacing, motion, radii, shadows</div>
+                </div>
+                <div class="inventory-item pink">
+                    <div class="inv-label">Screen Inventory</div>
+                    <div class="inv-value">77</div>
+                    <div class="inv-detail">Documented in FLOW-MAP.md across participant & creator flows</div>
+                </div>
+                <div class="inventory-item mint">
+                    <div class="inv-label">HTML Mockups</div>
+                    <div class="inv-value">11</div>
+                    <div class="inv-detail">Interactive prototypes with state toggles & archetype variations</div>
+                </div>
+                <div class="inventory-item sky">
+                    <div class="inv-label">Theme Palettes</div>
+                    <div class="inv-value">14</div>
+                    <div class="inv-detail">Collab templates ready for future screen generation</div>
+                </div>
+                <div class="inventory-item sunshine">
+                    <div class="inv-label">Components</div>
+                    <div class="inv-value">2</div>
+                    <div class="inv-detail">Buttons & cards with full state specs (hover, pressed, disabled)</div>
+                </div>
+                <div class="inventory-item lavender">
+                    <div class="inv-label">Platform Specs</div>
+                    <div class="inv-value">2</div>
+                    <div class="inv-detail">iOS and Android adaptation rules</div>
+                </div>
+            </div>
+
+            <!-- Getting started tips -->
+            <div class="tip-box">
+                <h4>Getting Started (for PMs)</h4>
+                <ol>
+                    <li><strong>Open Claude Code</strong> in the <code>learn_skills</code> project directory</li>
+                    <li><strong>Try generating screens:</strong> Type <code>/product-design generate</code> and describe a screen — e.g. "create the collab creation screen where the creator picks a template"</li>
+                    <li><strong>Review the design system:</strong> Type <code>/design-system validate</code> to see a consistency report of all token files</li>
+                    <li><strong>Generate test screens:</strong> Type <code>/design-system test 3</code> to auto-generate 3 screens and check if they feel on-brand</li>
+                    <li><strong>See the flow map:</strong> Open <code>motiv-design-system/FLOW-MAP.md</code> to see all 77 screens with status indicators</li>
+                    <li><strong>Open mockups in browser:</strong> Run <code>open docs/examples/[filename].html</code> in the terminal to preview any screen</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>Generated with Claude Code — February 2026</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -8,8 +8,10 @@ This document maps every screen, state, and component in the Motiv app. Use it t
 - Identify gaps that need AI fill-in
 
 **Two user types:**
-- **Creators** — Influencers who create and manage challenges
-- **Participants** — Users who join and complete challenges
+- **Creators** — Influencers who create and manage collabs
+- **Participants** — Users who join and complete collabs
+
+> **Terminology note (Feb 2026):** "Challenge" has been renamed to **"Collab"** across the product. This flow map uses the updated terminology.
 
 ---
 
@@ -60,10 +62,12 @@ flowchart TB
     end
 
     subgraph CreatorOnboard["👑 Creator Onboarding"]
-        CO_Intro[Creator Intro]
-        CO_Profile[Profile Setup]
-        CO_Brand[Brand Quiz]
-        CO_Results[Brand Results]
+        CO_Instagram[Instagram Handle Input]
+        CO_Narrative1[Archetype Narrative S1]
+        CO_Narrative2[Archetype Narrative S2]
+        CO_StateQ[State Questions]
+        CO_StateRes[State Resolution]
+        CO_Earnings[Earnings & CTA]
         CO_Payout[Payout Setup]
         CO_Complete[Onboarding Complete]
     end
@@ -81,23 +85,23 @@ flowchart TB
 
     subgraph CreatorMain["👑 Creator Experience"]
         C_Home[Creator Dashboard]
-        C_CreateChallenge[Create Challenge]
-        C_ManageChallenge[Manage Challenge]
+        C_CreateCollab[Start a Collab]
+        C_ManageCollab[Manage Collab]
         C_Invites[Invite Participants]
-        C_Analytics[Challenge Analytics]
+        C_Analytics[Collab Analytics]
         C_Earnings[Earnings Dashboard]
-        C_History[Challenge History]
+        C_History[Collab History]
     end
 
     subgraph ParticipantMain["🏃 Participant Experience"]
         P_Home[Home Feed]
-        P_Discover[Discover Challenges]
-        P_ChallengeDetail[Challenge Detail]
-        P_ActiveChallenge[Active Challenge]
+        P_Discover[Discover Collabs]
+        P_CollabDetail[Collab Detail]
+        P_ActiveCollab[Active Collab]
         P_WeeklyStats[Weekly Stats Deep Dive]
-        P_Results[Challenge Results]
+        P_Results[Collab Results]
         P_Earnings[Earnings Dashboard]
-        P_History[Challenge History]
+        P_History[Collab History]
     end
 
     subgraph Shared["🔄 Shared Flows"]
@@ -129,11 +133,13 @@ flowchart TB
     ForgotPW --> ResetPW
     ResetPW --> Login
 
-    %% Creator onboarding
-    CO_Intro --> CO_Profile
-    CO_Profile --> CO_Brand
-    CO_Brand --> CO_Results
-    CO_Results --> CO_Payout
+    %% Creator onboarding (archetype flow)
+    CO_Instagram --> CO_Narrative1
+    CO_Narrative1 --> CO_Narrative2
+    CO_Narrative2 --> CO_StateQ
+    CO_StateQ --> CO_StateRes
+    CO_StateRes --> CO_Earnings
+    CO_Earnings --> CO_Payout
     CO_Payout --> CO_Complete
     CO_Complete --> C_Home
 
@@ -148,20 +154,20 @@ flowchart TB
     PO_Complete --> P_Home
 
     %% Creator main flows
-    C_Home --> C_CreateChallenge
-    C_Home --> C_ManageChallenge
+    C_Home --> C_CreateCollab
+    C_Home --> C_ManageCollab
     C_Home --> C_Earnings
     C_Home --> C_History
-    C_ManageChallenge --> C_Invites
-    C_ManageChallenge --> C_Analytics
+    C_ManageCollab --> C_Invites
+    C_ManageCollab --> C_Analytics
 
     %% Participant main flows
     P_Home --> P_Discover
-    P_Home --> P_ActiveChallenge
-    P_Discover --> P_ChallengeDetail
-    P_ChallengeDetail --> P_ActiveChallenge
-    P_ActiveChallenge --> P_WeeklyStats
-    P_ActiveChallenge --> P_Results
+    P_Home --> P_ActiveCollab
+    P_Discover --> P_CollabDetail
+    P_CollabDetail --> P_ActiveCollab
+    P_ActiveCollab --> P_WeeklyStats
+    P_ActiveCollab --> P_Results
     P_Results --> P_Earnings
     P_Home --> P_History
 
@@ -272,48 +278,78 @@ flowchart TB
 
 ### 👑 Creator Onboarding
 
-#### CO-001: Creator Intro
+> **Updated Feb 2026:** Creator onboarding now uses an archetype-based flow. Creators enter their Instagram handle, get classified into 1 of 6 archetypes (Companion, Guide, Coach, Challenger, Performer, Connector), see personalized narrative screens, answer engagement questions (State 1/2/3), and see how collabs address their specific friction point. Source: "Creator Onboarding Flows — January 31, 2026" PDF.
+
+#### CO-001: Instagram Handle Input
 | Attribute | Value |
 |-----------|-------|
-| **Status** | 🔴 Not started |
-| **Assigned** | — |
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
 | **Priority** | P0 |
-| **States** | default |
-| **Components** | Value prop cards, carousel/pagination, CTA |
-| **Notes** | Explain what creators can do, earnings potential |
+| **States** | default, loading (metadata pull), error |
+| **Components** | Instagram handle input with @ prefix, metadata preview card (avatar, handle, follower tier, engagement band), continue CTA, skip link |
+| **Notes** | Public metadata only — no OAuth required. System pulls handle, display name, profile photo, follower count, post count. |
+| **HTML Example** | `docs/examples/creator-instagram-input.html` |
 
-#### CO-002: Creator Profile Setup
+#### CO-002: Archetype Narrative — Screen 1
 | Attribute | Value |
 |-----------|-------|
-| **Status** | 🔴 Not started |
-| **Assigned** | — |
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
 | **Priority** | P0 |
-| **States** | default, loading, error |
-| **Components** | Avatar upload, display name, handle input, bio textarea, social links |
-| **Modals** | Image cropper |
-| **Error States** | Handle taken, image upload failed |
+| **States** | default (6 archetype variants) |
+| **Components** | Archetype emoji, headline ("Why your community [verb phrase]"), closing emotional line, progress dots, continue CTA |
+| **Gradient** | Per archetype: Companion→Pink, Guide→Sky, Coach→Mint, Challenger→Sunshine, Performer→Peach, Connector→Lavender |
+| **Notes** | Archetype is never shown explicitly to creator — copy feels personal because it reflects their scale and role. |
+| **HTML Example** | `docs/examples/creator-archetype-narrative.html` (Screen 1 tab) |
 
-#### CO-003: Brand Quiz
+#### CO-003: Archetype Narrative — Screen 2
 | Attribute | Value |
 |-----------|-------|
-| **Status** | 🔴 Not started |
-| **Assigned** | — |
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
 | **Priority** | P0 |
-| **States** | default (per question) |
-| **Components** | Question text, answer options (multi-select), progress indicator, next button |
-| **Notes** | Similar to participant motivation quiz |
+| **States** | default (6 archetype variants) |
+| **Components** | 4 descriptor cards with icons, closing line, progress dots, next CTA |
+| **Notes** | Evidence screen — shows the 4 traits that define how this archetype connects with their audience. |
+| **HTML Example** | `docs/examples/creator-archetype-narrative.html` (Screen 2 tab) |
 
-#### CO-004: Brand Results
+#### CO-004: State Questions (Q1/Q2/Q3)
 | Attribute | Value |
 |-----------|-------|
-| **Status** | 🔴 Not started |
-| **Assigned** | — |
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
 | **Priority** | P0 |
-| **States** | default, loading |
-| **Components** | Brand archetype card, description, color suggestions, sample challenge preview |
-| **Notes** | Animated gradient background like participant results |
+| **States** | Q1, Q2, Q3 (branching), result |
+| **Components** | Progress bar, archetype-aware framing text, question text, two answer cards (Yes / Not usually), continue CTA, step dots |
+| **Logic** | Q1 No → State 1, Q1 Yes + Q2 No → State 1, Q2 Yes + Q3 No → State 2, Q3 Yes → State 3 |
+| **Notes** | Self-reported questions about where engagement stalls. Framing text varies by archetype. |
+| **HTML Example** | `docs/examples/creator-state-questions.html` |
 
-#### CO-005: Payout Setup
+#### CO-005: State Resolution
+| Attribute | Value |
+|-----------|-------|
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
+| **Priority** | P0 |
+| **States** | State 1, State 2, State 3 (× 6 archetypes = 18 variations) |
+| **Components** | Affirmation line, friction diagnosis, collab solution paragraph, momentum line, CTA |
+| **Notes** | Text-focused narrative screen on archetype gradient background. Shows how a collab addresses their specific friction. |
+| **HTML Example** | `docs/examples/creator-state-resolution.html` |
+
+#### CO-006: Earnings & CTA
+| Attribute | Value |
+|-----------|-------|
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
+| **Priority** | P0 |
+| **States** | default (6 archetype variants) |
+| **Components** | Gradient header, $350 guaranteed earnings card, 4 archetype-specific benefit items, info callout about activation, "Start your first collab" CTA |
+| **Earnings Model** | $350 guaranteed when collab goes live + referral bonuses + revenue share. Light touch — emphasize certainty, not math. |
+| **Notes** | ⚠️ PM input needed: exact referral tiers, rev share %, participant activation threshold |
+| **HTML Example** | `docs/examples/creator-earnings-final.html` |
+
+#### CO-007: Payout Setup
 | Attribute | Value |
 |-----------|-------|
 | **Status** | 🔴 Not started |
@@ -324,14 +360,14 @@ flowchart TB
 | **Modals** | Stripe Connect flow (external) |
 | **Notes** | Can be completed later |
 
-#### CO-006: Creator Onboarding Complete
+#### CO-008: Creator Onboarding Complete
 | Attribute | Value |
 |-----------|-------|
 | **Status** | 🔴 Not started |
 | **Assigned** | — |
 | **Priority** | P0 |
 | **States** | default |
-| **Components** | Celebration animation, summary card, "Create First Challenge" CTA |
+| **Components** | Celebration animation, summary card, "Start your first collab" CTA |
 | **Notes** | Confetti or similar celebration |
 
 ---
@@ -954,12 +990,12 @@ flowchart TB
 | Section | Screens | States |
 |---------|---------|--------|
 | Authentication | 8 | 24 |
-| Creator Onboarding | 6 | 14 |
+| Creator Onboarding | 8 | 32 (incl. 18 archetype×state variants) |
 | Participant Onboarding | 9 | 18 |
 | Creator Main | 14 | 42 |
 | Participant Main | 16 | 48 |
 | Shared | 22 | 58 |
-| **TOTAL** | **75** | **204** |
+| **TOTAL** | **77** | **222** |
 
 ---
 
@@ -990,3 +1026,4 @@ flowchart TB
 | Version | Changes |
 |---------|---------|
 | 1.0 | Initial flow map with 75 screens |
+| 1.1 | Renamed "Challenge" → "Collab" throughout. Rewrote Creator Onboarding to archetype-based flow (6 archetypes, 3 states, 18 narrative variants). Added new screens CO-001 through CO-006 with HTML examples. Updated earnings model to $350 guaranteed + upside. Added 2 net new screens (77 total). |

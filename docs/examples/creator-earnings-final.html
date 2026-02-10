@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Creator Earnings Final Screen — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+            --color-success: #22C55E;
+            --color-success-light: #DCFCE7;
+
+            /* Active gradient (set by JS) */
+            --gradient-top: #FDF2F8;
+            --gradient-mid: #FBCFE8;
+            --gradient-bottom: #F9A8D4;
+            --shadow-accent: rgba(244, 114, 182, 0.30);
+            --shadow-accent-soft: rgba(244, 114, 182, 0.12);
+            --icon-gradient-start: #FBCFE8;
+            --icon-gradient-end: #F9A8D4;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* ===========================================
+           REVIEW CONTROLS
+           =========================================== */
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 720px;
+        }
+
+        .review-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: 4px;
+        }
+
+        .review-subtitle {
+            font-size: 13px;
+            color: #8888a0;
+            margin-bottom: 20px;
+        }
+
+        .review-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            background: rgba(250, 204, 21, 0.1);
+            border: 1px solid rgba(250, 204, 21, 0.25);
+            color: #FACC15;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .archetype-selector {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .archetype-tab {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1.5px solid #2a2a3a;
+            border-radius: var(--radius-full);
+            background: #12121a;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .archetype-tab:hover {
+            border-color: #4a4a5a;
+            color: #c0c0d0;
+        }
+
+        .archetype-tab.active {
+            border-color: var(--gradient-mid);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8e8f0;
+        }
+
+        .tab-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            background: var(--color-bg-primary);
+        }
+
+        /* ===========================================
+           GRADIENT HEADER
+           =========================================== */
+
+        .header-gradient {
+            position: relative;
+            padding: 20px var(--space-xl) var(--space-xl);
+            background: linear-gradient(
+                180deg,
+                var(--gradient-top) 0%,
+                var(--gradient-mid) 60%,
+                var(--gradient-bottom) 100%
+            );
+            transition: background 0.6s ease;
+        }
+
+        .header-gradient .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            mix-blend-mode: soft-light;
+        }
+
+        .header-blob-1 {
+            width: 250px;
+            height: 250px;
+            background: var(--icon-gradient-end);
+            top: -60px;
+            right: -40px;
+            animation: blobFloat 16s ease-in-out infinite;
+        }
+
+        .header-blob-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--icon-gradient-start);
+            bottom: -30px;
+            left: -30px;
+            animation: blobFloat 20s ease-in-out infinite reverse;
+            animation-delay: -5s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(15px, -10px) scale(1.1); }
+            66% { transform: translate(-10px, 15px) scale(0.9); }
+        }
+
+        .nav-bar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            padding-bottom: var(--space-xs);
+        }
+
+        .back-btn {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .back-btn .material-icons { font-size: 28px; }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: var(--space-md) 0 var(--space-xs);
+        }
+
+        .header-headline {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 34px;
+            color: #170D2E;
+            margin-bottom: var(--space-xs);
+        }
+
+        .header-sub {
+            font-size: 15px;
+            color: #3D3456;
+            line-height: 1.5;
+        }
+
+        /* ===========================================
+           SCROLLABLE BODY
+           =========================================== */
+
+        .body-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-lg) var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .body-scroll::-webkit-scrollbar { width: 0; }
+
+        /* ===========================================
+           GUARANTEED EARNINGS CARD
+           =========================================== */
+
+        .earnings-card {
+            background: var(--color-bg-primary);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .earnings-overline {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-success);
+            margin-bottom: var(--space-xs);
+        }
+
+        .earnings-amount {
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            line-height: 1.1;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .earnings-qualifier {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .earnings-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--color-bg-tertiary);
+            margin: 0 auto var(--space-md);
+            border-radius: 1px;
+        }
+
+        .earnings-plus {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .earnings-plus strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           BENEFIT ITEMS
+           =========================================== */
+
+        .benefit-item {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--icon-gradient-start), var(--icon-gradient-end));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .benefit-content {
+            flex: 1;
+        }
+
+        .benefit-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .benefit-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ===========================================
+           INFO CALLOUT
+           =========================================== */
+
+        .info-callout {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-xs);
+            background: #F5F3FF;
+            border-radius: var(--radius-sm);
+            padding: var(--space-sm) var(--space-md);
+        }
+
+        .info-callout-icon {
+            font-size: 14px;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        .info-callout-text {
+            font-size: 12px;
+            color: #5B21B6;
+            line-height: 1.5;
+        }
+
+        /* ===========================================
+           CTA
+           =========================================== */
+
+        .cta-section {
+            padding: var(--space-md) var(--space-xl) var(--space-2xl);
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            padding: 18px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .btn-primary:hover { transform: scale(1.02); }
+        .btn-primary:active { transform: scale(0.97); }
+
+        /* ===========================================
+           REDUCED MOTION
+           =========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            .header-blob-1, .header-blob-2 { animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="review-header">
+        <h1 class="review-title">Creator Earnings — Final Screen</h1>
+        <p class="review-subtitle">Last screen of creator onboarding &mdash; updated with new $350 guaranteed model</p>
+        <div class="review-flag">⚠️ PM input needed: exact earnings tiers, rev share %, participant threshold</div>
+
+        <div class="archetype-selector" id="archetypeSelector">
+            <button class="archetype-tab active" data-archetype="companion">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FBCFE8, #F9A8D4)"></span>
+                Companion
+            </button>
+            <button class="archetype-tab" data-archetype="guide">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)"></span>
+                Guide
+            </button>
+            <button class="archetype-tab" data-archetype="coach">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #A7F3D0, #6EE7B7)"></span>
+                Coach
+            </button>
+            <button class="archetype-tab" data-archetype="challenger">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FDE047, #FACC15)"></span>
+                Challenger
+            </button>
+            <button class="archetype-tab" data-archetype="performer">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FED7AA, #FDBA74)"></span>
+                Performer
+            </button>
+            <button class="archetype-tab" data-archetype="connector">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #DDD6FE, #C4B5FD)"></span>
+                Connector
+            </button>
+        </div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="header-gradient">
+            <div class="blob header-blob-1"></div>
+            <div class="blob header-blob-2"></div>
+            <div class="nav-bar">
+                <a href="#" class="back-btn"><span class="material-icons">arrow_back</span></a>
+            </div>
+            <div class="header-content">
+                <h1 class="header-headline" id="headerHeadline">How collabs strengthen what you already do</h1>
+                <p class="header-sub" id="headerSub">When your audience feels safe starting, everything compounds.</p>
+            </div>
+        </div>
+
+        <div class="body-scroll">
+            <!-- Guaranteed earnings -->
+            <div class="earnings-card">
+                <p class="earnings-overline">Guaranteed when your collab goes live</p>
+                <p class="earnings-amount">$350</p>
+                <p class="earnings-qualifier">Paid once your collab activates</p>
+                <div class="earnings-divider"></div>
+                <p class="earnings-plus">
+                    Plus earn more through <strong>referral bonuses</strong>
+                    and <strong>revenue share</strong> as your community grows.
+                </p>
+            </div>
+
+            <!-- Archetype-specific benefits -->
+            <div id="benefitsList">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔗</div>
+                    <div class="benefit-content">
+                        <p class="benefit-title">Referral links feel more supportive</p>
+                        <p class="benefit-desc">Products show up as help along the way — not pressure to buy.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🤝</div>
+                    <div class="benefit-content">
+                        <p class="benefit-title">Brand partnerships feel more authentic</p>
+                        <p class="benefit-desc">They're grounded in shared experience, not promotion.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💬</div>
+                    <div class="benefit-content">
+                        <p class="benefit-title">Coaching engagement deepens naturally</p>
+                        <p class="benefit-desc">Collabs create trust before asking for commitment.</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📦</div>
+                    <div class="benefit-content">
+                        <p class="benefit-title">Digital products get used, not just saved</p>
+                        <p class="benefit-desc">People engage because they're already showing up.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-callout">
+                <span class="info-callout-icon">ℹ️</span>
+                <p class="info-callout-text">Your collab activates when enough participants join. We'll help you promote it to your audience.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <button class="btn-primary">Start your first collab <span>→</span></button>
+        </div>
+    </div>
+
+    <script>
+        const archetypeData = {
+            companion: {
+                gradient: { top: '#FDF2F8', mid: '#FBCFE8', bottom: '#F9A8D4', iconStart: '#FBCFE8', iconEnd: '#F9A8D4' },
+                headerSub: 'When your audience feels safe starting, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links feel more supportive', desc: 'Products show up as help along the way — not pressure to buy.' },
+                    { icon: '🤝', title: 'Brand partnerships feel more authentic', desc: "They're grounded in shared experience, not promotion." },
+                    { icon: '💬', title: 'Coaching engagement deepens naturally', desc: 'Collabs create trust before asking for commitment.' },
+                    { icon: '📦', title: 'Digital products get used, not just saved', desc: "People engage because they're already showing up." }
+                ]
+            },
+            guide: {
+                gradient: { top: '#F0F9FF', mid: '#BAE6FD', bottom: '#7DD3FC', iconStart: '#BAE6FD', iconEnd: '#7DD3FC' },
+                headerSub: 'When understanding turns into action, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links convert with context', desc: 'Products land as the next step, not a distraction.' },
+                    { icon: '🤝', title: 'Brand partnerships become more compelling', desc: 'You can show how your guidance leads to real participation.' },
+                    { icon: '💬', title: 'Coaching engagement becomes more intentional', desc: 'Collabs create a clear bridge from insight to support.' },
+                    { icon: '📦', title: 'Digital products get applied, not just purchased', desc: "People use them because they're part of a defined path." }
+                ]
+            },
+            coach: {
+                gradient: { top: '#ECFDF5', mid: '#A7F3D0', bottom: '#6EE7B7', iconStart: '#A7F3D0', iconEnd: '#6EE7B7' },
+                headerSub: 'When commitment meets structure, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links perform with intent', desc: 'Products support execution, not passive interest.' },
+                    { icon: '🤝', title: 'Brand partnerships gain credibility', desc: 'You can point to effort and follow-through — not just views.' },
+                    { icon: '💬', title: 'Coaching engagement increases', desc: 'Collabs create a clear on-ramp to accountability.' },
+                    { icon: '📦', title: 'Digital products get completed, not just bought', desc: "People engage because they've committed to the work." }
+                ]
+            },
+            challenger: {
+                gradient: { top: '#FEF9C3', mid: '#FDE047', bottom: '#FACC15', iconStart: '#FDE68A', iconEnd: '#FACC15' },
+                headerSub: 'When energy turns into effort, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links hit at the right moment', desc: 'Products support performance once people are in it.' },
+                    { icon: '🤝', title: 'Brand partnerships become more powerful', desc: 'You can show real participation under pressure.' },
+                    { icon: '💬', title: 'Coaching engagement sharpens', desc: 'Collabs separate interest from action.' },
+                    { icon: '📦', title: 'Digital products get used, not ignored', desc: "People engage because they've stepped up." }
+                ]
+            },
+            performer: {
+                gradient: { top: '#FFF7ED', mid: '#FED7AA', bottom: '#FDBA74', iconStart: '#FED7AA', iconEnd: '#FDBA74' },
+                headerSub: 'When inspiration becomes participation, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links feel like access', desc: 'Products support the experience people want to step into.' },
+                    { icon: '🤝', title: 'Brand partnerships feel more tangible', desc: 'You can show involvement — not just admiration.' },
+                    { icon: '💬', title: 'Coaching engagement increases organically', desc: 'Collabs move people from watching to doing.' },
+                    { icon: '📦', title: 'Digital products get explored, not forgotten', desc: "People engage because they're part of something." }
+                ]
+            },
+            connector: {
+                gradient: { top: '#F5F3FF', mid: '#DDD6FE', bottom: '#C4B5FD', iconStart: '#DDD6FE', iconEnd: '#C4B5FD' },
+                headerSub: 'When people move together, everything compounds.',
+                benefits: [
+                    { icon: '🔗', title: 'Referral links spread through the group', desc: 'Products support shared progress, not individual selling.' },
+                    { icon: '🤝', title: 'Brand partnerships become more meaningful', desc: 'You can show collective participation — not just reach.' },
+                    { icon: '💬', title: 'Coaching engagement grows through community', desc: 'Collabs create a natural step into deeper support.' },
+                    { icon: '📦', title: 'Digital products get used together', desc: "People engage because they're doing it as a group." }
+                ]
+            }
+        };
+
+        function setArchetype(name) {
+            const data = archetypeData[name];
+            const root = document.documentElement;
+
+            root.style.setProperty('--gradient-top', data.gradient.top);
+            root.style.setProperty('--gradient-mid', data.gradient.mid);
+            root.style.setProperty('--gradient-bottom', data.gradient.bottom);
+            root.style.setProperty('--icon-gradient-start', data.gradient.iconStart);
+            root.style.setProperty('--icon-gradient-end', data.gradient.iconEnd);
+
+            document.querySelectorAll('.archetype-tab').forEach(t =>
+                t.classList.toggle('active', t.dataset.archetype === name));
+
+            document.getElementById('headerSub').textContent = data.headerSub;
+
+            document.getElementById('benefitsList').innerHTML = data.benefits.map(b => `
+                <div class="benefit-item">
+                    <div class="benefit-icon">${b.icon}</div>
+                    <div class="benefit-content">
+                        <p class="benefit-title">${b.title}</p>
+                        <p class="benefit-desc">${b.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.querySelectorAll('.archetype-tab').forEach(tab =>
+            tab.addEventListener('click', () => setArchetype(tab.dataset.archetype)));
+
+        setArchetype('companion');
+    </script>
+</body>
+</html>

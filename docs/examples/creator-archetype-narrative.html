@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Creator Archetype Narrative — Motiv (AI-Generated Example)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (from Motiv)
+           =========================================== */
+
+        :root {
+            /* Colors */
+            --color-brand-primary: #1A1A1A;
+            --color-brand-secondary: #7C3AED;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+
+            /* Typography */
+            --font-display: 'Nunito', system-ui, sans-serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+
+            /* Radii */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            /* Active archetype gradient (set by JS) */
+            --gradient-top: #FDF2F8;
+            --gradient-mid: #FBCFE8;
+            --gradient-bottom: #F9A8D4;
+            --shadow-accent: rgba(244, 114, 182, 0.35);
+            --shadow-accent-soft: rgba(244, 114, 182, 0.15);
+            --blob-1: #FBCFE8;
+            --blob-2: #F9A8D4;
+            --blob-3: #FDF2F8;
+            --icon-gradient-start: #FBCFE8;
+            --icon-gradient-end: #F9A8D4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* ===========================================
+           REVIEW CONTROLS (outside phone frame)
+           =========================================== */
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 720px;
+        }
+
+        .review-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: 4px;
+        }
+
+        .review-subtitle {
+            font-size: 13px;
+            color: #8888a0;
+            margin-bottom: 20px;
+        }
+
+        .archetype-selector {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .archetype-tab {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1.5px solid #2a2a3a;
+            border-radius: var(--radius-full);
+            background: #12121a;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .archetype-tab:hover {
+            border-color: #4a4a5a;
+            color: #c0c0d0;
+        }
+
+        .archetype-tab.active {
+            border-color: var(--gradient-mid);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e8e8f0;
+        }
+
+        .tab-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .screen-toggle {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            background: #12121a;
+            border-radius: var(--radius-full);
+            padding: 3px;
+            display: inline-flex;
+        }
+
+        .screen-toggle-wrap {
+            text-align: center;
+        }
+
+        .screen-btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: var(--radius-full);
+            background: transparent;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .screen-btn.active {
+            background: #2a2a3a;
+            color: #e8e8f0;
+        }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        /* ===========================================
+           ANIMATED GRADIENT BACKGROUND
+           =========================================== */
+
+        .gradient-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                var(--gradient-top) 0%,
+                var(--gradient-top) 15%,
+                var(--gradient-mid) 50%,
+                var(--gradient-bottom) 100%
+            );
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--blob-1);
+            top: -80px;
+            left: -80px;
+            animation: blob-drift-1 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--blob-2);
+            bottom: -60px;
+            right: -60px;
+            animation: blob-drift-2 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -7s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--blob-3);
+            top: 40%;
+            left: 20%;
+            animation: blob-drift-3 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -14s;
+        }
+
+        @keyframes blob-drift-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(10%, 15%) scale(1.15) rotate(5deg); }
+            50% { transform: translate(-5%, 10%) scale(0.85) rotate(-5deg); }
+            75% { transform: translate(15%, -5%) scale(1.1) rotate(10deg); }
+        }
+
+        @keyframes blob-drift-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(-15%, -10%) scale(0.9) rotate(-8deg); }
+            50% { transform: translate(10%, -15%) scale(1.2) rotate(5deg); }
+            75% { transform: translate(-5%, 5%) scale(0.95) rotate(-3deg); }
+        }
+
+        @keyframes blob-drift-3 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(12%, -8%) scale(1.1) rotate(12deg); }
+            50% { transform: translate(-8%, 12%) scale(0.8) rotate(-8deg); }
+            75% { transform: translate(-12%, -5%) scale(1.15) rotate(5deg); }
+        }
+
+        /* ===========================================
+           SCREEN CONTENT
+           =========================================== */
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-xl);
+            padding-top: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            padding: 0 0 var(--space-xs);
+        }
+
+        .back-btn {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .back-btn .material-icons {
+            font-size: 28px;
+        }
+
+        /* ===========================================
+           SCREEN 1: Headline + Emotional Hook
+           =========================================== */
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            animation: screenFadeIn 0.5s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes screenFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .screen-1-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 0 var(--space-xs);
+        }
+
+        .screen-1-emoji {
+            font-size: 48px;
+            margin-bottom: var(--space-lg);
+            animation: emojiFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .screen-1-headline {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 42px;
+            letter-spacing: -0.01em;
+            color: #170D2E;
+            margin-bottom: var(--space-xl);
+        }
+
+        .screen-1-body {
+            font-size: 17px;
+            line-height: 26px;
+            color: #3D3456;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* ===========================================
+           SCREEN 2: Descriptor Cards
+           =========================================== */
+
+        .screen-2-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen-2-overline {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6B7280;
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .screen-2-headline {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 34px;
+            color: #170D2E;
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .descriptor-cards {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .descriptor-card {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md) var(--space-lg);
+            box-shadow: 0 8px 32px var(--shadow-accent),
+                        0 2px 8px var(--shadow-accent-soft);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            animation: cardSlideIn 0.5s cubic-bezier(0, 0, 0.2, 1) backwards;
+        }
+
+        .descriptor-card:nth-child(1) { animation-delay: 0.1s; }
+        .descriptor-card:nth-child(2) { animation-delay: 0.2s; }
+        .descriptor-card:nth-child(3) { animation-delay: 0.3s; }
+        .descriptor-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes cardSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .descriptor-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--icon-gradient-start) 0%, var(--icon-gradient-end) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .descriptor-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+
+        .closing-line {
+            text-align: center;
+            font-size: 15px;
+            line-height: 22px;
+            color: #3D3456;
+            font-style: italic;
+            padding: 0 var(--space-md);
+        }
+
+        /* ===========================================
+           CTA BUTTON
+           =========================================== */
+
+        .cta-section {
+            margin-top: auto;
+            padding-top: var(--space-lg);
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            padding: 18px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 0.15s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        /* ===========================================
+           PROGRESS DOTS
+           =========================================== */
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: var(--space-md) 0;
+        }
+
+        .progress-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.15);
+            transition: all 0.25s ease;
+        }
+
+        .progress-dot.active {
+            width: 20px;
+            border-radius: 3px;
+            background: var(--color-brand-primary);
+        }
+
+        /* ===========================================
+           REDUCED MOTION
+           =========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            .blob { animation: none !important; }
+            .screen-1-emoji { animation: none !important; }
+            .descriptor-card { animation: none !important; }
+            .screen { animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Review controls -->
+    <div class="review-header">
+        <h1 class="review-title">Creator Archetype Narrative</h1>
+        <p class="review-subtitle">Onboarding screens CO-003 &amp; CO-004 &mdash; each archetype gets personalized copy and gradient</p>
+
+        <div class="archetype-selector" id="archetypeSelector">
+            <button class="archetype-tab active" data-archetype="companion">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FBCFE8, #F9A8D4)"></span>
+                Companion
+            </button>
+            <button class="archetype-tab" data-archetype="guide">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)"></span>
+                Guide
+            </button>
+            <button class="archetype-tab" data-archetype="coach">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #A7F3D0, #6EE7B7)"></span>
+                Coach
+            </button>
+            <button class="archetype-tab" data-archetype="challenger">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FDE047, #FACC15)"></span>
+                Challenger
+            </button>
+            <button class="archetype-tab" data-archetype="performer">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #FED7AA, #FDBA74)"></span>
+                Performer
+            </button>
+            <button class="archetype-tab" data-archetype="connector">
+                <span class="tab-dot" style="background: linear-gradient(135deg, #DDD6FE, #C4B5FD)"></span>
+                Connector
+            </button>
+        </div>
+
+        <div class="screen-toggle-wrap">
+            <div class="screen-toggle">
+                <button class="screen-btn active" data-screen="1">Screen 1 &mdash; Hook</button>
+                <button class="screen-btn" data-screen="2">Screen 2 &mdash; Evidence</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="phone-frame">
+        <div class="gradient-bg">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+
+        <div class="content">
+            <div class="nav-bar">
+                <a href="#" class="back-btn"><span class="material-icons">arrow_back</span></a>
+            </div>
+
+            <!-- Screen 1: Emotional Hook -->
+            <div class="screen active" id="screen1">
+                <div class="screen-1-content">
+                    <div class="screen-1-emoji" id="archetypeEmoji">🤝</div>
+                    <h1 class="screen-1-headline" id="screen1Headline">Why your community connects so deeply</h1>
+                    <p class="screen-1-body" id="screen1Body">That's why people don't just follow you. They feel safe imagining change with you.</p>
+                </div>
+
+                <div class="progress-dots">
+                    <div class="progress-dot active"></div>
+                    <div class="progress-dot"></div>
+                </div>
+
+                <div class="cta-section">
+                    <button class="btn-primary" onclick="showScreen(2)">Continue</button>
+                </div>
+            </div>
+
+            <!-- Screen 2: Descriptor Cards -->
+            <div class="screen" id="screen2">
+                <div class="screen-2-content">
+                    <p class="screen-2-overline" id="screen2Overline">What makes you different</p>
+                    <h2 class="screen-2-headline" id="screen2Headline">Here's how you show up</h2>
+
+                    <div class="descriptor-cards" id="descriptorCards">
+                        <div class="descriptor-card">
+                            <div class="descriptor-icon">💛</div>
+                            <p class="descriptor-text">Your content makes people feel understood.</p>
+                        </div>
+                        <div class="descriptor-card">
+                            <div class="descriptor-icon">🌿</div>
+                            <p class="descriptor-text">You remove pressure.</p>
+                        </div>
+                        <div class="descriptor-card">
+                            <div class="descriptor-icon">✨</div>
+                            <p class="descriptor-text">You make progress feel possible.</p>
+                        </div>
+                        <div class="descriptor-card">
+                            <div class="descriptor-icon">🪷</div>
+                            <p class="descriptor-text">You meet people where they are — without judgment or perfection.</p>
+                        </div>
+                    </div>
+
+                    <p class="closing-line" id="closingLine">That's why people don't just follow you.<br>They feel safe imagining change with you.</p>
+                </div>
+
+                <div class="progress-dots">
+                    <div class="progress-dot"></div>
+                    <div class="progress-dot active"></div>
+                </div>
+
+                <div class="cta-section">
+                    <button class="btn-primary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // ARCHETYPE DATA (from Creator Onboarding PDF)
+        // =============================================
+
+        const archetypes = {
+            companion: {
+                emoji: '🤝',
+                gradient: {
+                    top: '#FDF2F8', mid: '#FBCFE8', bottom: '#F9A8D4',
+                    shadow: 'rgba(244, 114, 182, 0.30)',
+                    shadowSoft: 'rgba(244, 114, 182, 0.12)',
+                    blob1: '#FBCFE8', blob2: '#F9A8D4', blob3: '#FDF2F8',
+                    iconStart: '#FBCFE8', iconEnd: '#F9A8D4'
+                },
+                screen1: {
+                    headline: 'Why your community connects so deeply',
+                    body: "That's why people don't just follow you. They feel safe imagining change with you."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '💛', text: 'Your content makes people feel understood.' },
+                        { icon: '🌿', text: 'You remove pressure.' },
+                        { icon: '✨', text: 'You make progress feel possible.' },
+                        { icon: '🪷', text: 'You meet people where they are — without judgment or perfection.' }
+                    ],
+                    closing: "That's why people don't just follow you.<br>They feel safe imagining change with you."
+                }
+            },
+            guide: {
+                emoji: '🧭',
+                gradient: {
+                    top: '#F0F9FF', mid: '#BAE6FD', bottom: '#7DD3FC',
+                    shadow: 'rgba(125, 211, 252, 0.30)',
+                    shadowSoft: 'rgba(125, 211, 252, 0.12)',
+                    blob1: '#BAE6FD', blob2: '#7DD3FC', blob3: '#F0F9FF',
+                    iconStart: '#BAE6FD', iconEnd: '#7DD3FC'
+                },
+                screen1: {
+                    headline: 'Why your community trusts your direction',
+                    body: "That's why people keep coming back. They trust you to help them move forward."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '🗺️', text: "You share what's worked for you." },
+                        { icon: '🚶', text: 'You lead by example, not authority.' },
+                        { icon: '🧩', text: 'You break progress into clear, doable steps.' },
+                        { icon: '🛤️', text: 'You make the path forward feel navigable.' }
+                    ],
+                    closing: "That's why people keep coming back.<br>They trust you to help them move forward."
+                }
+            },
+            coach: {
+                emoji: '🏋️',
+                gradient: {
+                    top: '#ECFDF5', mid: '#A7F3D0', bottom: '#6EE7B7',
+                    shadow: 'rgba(110, 231, 183, 0.30)',
+                    shadowSoft: 'rgba(110, 231, 183, 0.12)',
+                    blob1: '#A7F3D0', blob2: '#6EE7B7', blob3: '#ECFDF5',
+                    iconStart: '#A7F3D0', iconEnd: '#6EE7B7'
+                },
+                screen1: {
+                    headline: 'Why people look to you for results',
+                    body: "That's why people commit when they follow you. They believe you'll help them improve."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '📋', text: 'You bring structure and clarity.' },
+                        { icon: '🎯', text: 'You tell people what to focus on.' },
+                        { icon: '📏', text: 'You hold a high standard.' },
+                        { icon: '🔥', text: "You help people push past what's comfortable." }
+                    ],
+                    closing: "That's why people commit when they follow you.<br>They believe you'll help them improve."
+                }
+            },
+            challenger: {
+                emoji: '⚡',
+                gradient: {
+                    top: '#FEF9C3', mid: '#FDE047', bottom: '#FACC15',
+                    shadow: 'rgba(250, 204, 21, 0.30)',
+                    shadowSoft: 'rgba(250, 204, 21, 0.12)',
+                    blob1: '#FDE047', blob2: '#FACC15', blob3: '#FEF9C3',
+                    iconStart: '#FDE68A', iconEnd: '#FACC15'
+                },
+                screen1: {
+                    headline: 'Why your community responds to your energy',
+                    body: "That's why people rise when you call them out. They want to prove they can do more."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '💪', text: 'You set bold expectations.' },
+                        { icon: '🔔', text: 'You challenge people to show up fully.' },
+                        { icon: '⚖️', text: 'You frame effort as a choice.' },
+                        { icon: '🚀', text: 'You turn discipline into momentum.' }
+                    ],
+                    closing: "That's why people rise when you call them out.<br>They want to prove they can do more."
+                }
+            },
+            performer: {
+                emoji: '🌟',
+                gradient: {
+                    top: '#FFF7ED', mid: '#FED7AA', bottom: '#FDBA74',
+                    shadow: 'rgba(253, 186, 116, 0.30)',
+                    shadowSoft: 'rgba(253, 186, 116, 0.12)',
+                    blob1: '#FED7AA', blob2: '#FDBA74', blob3: '#FFF7ED',
+                    iconStart: '#FED7AA', iconEnd: '#FDBA74'
+                },
+                screen1: {
+                    headline: 'Why people are drawn to your presence',
+                    body: "That's why people keep watching. You inspire them to want more."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '👁️', text: 'Your content captures attention immediately.' },
+                        { icon: '🏔️', text: "You show what's possible." },
+                        { icon: '🎨', text: 'You lead with outcomes and aesthetics.' },
+                        { icon: '💫', text: 'You make progress look aspirational.' }
+                    ],
+                    closing: "That's why people keep watching.<br>You inspire them to want more."
+                }
+            },
+            connector: {
+                emoji: '🔗',
+                gradient: {
+                    top: '#F5F3FF', mid: '#DDD6FE', bottom: '#C4B5FD',
+                    shadow: 'rgba(196, 181, 253, 0.35)',
+                    shadowSoft: 'rgba(196, 181, 253, 0.15)',
+                    blob1: '#DDD6FE', blob2: '#C4B5FD', blob3: '#F5F3FF',
+                    iconStart: '#DDD6FE', iconEnd: '#C4B5FD'
+                },
+                screen1: {
+                    headline: 'Why your community feels like a community',
+                    body: "That's why people show up for each other. They feel part of something bigger."
+                },
+                screen2: {
+                    descriptors: [
+                        { icon: '🤲', text: 'You bring people together.' },
+                        { icon: '🎤', text: 'You invite participation.' },
+                        { icon: '🌊', text: 'You make progress a shared experience.' },
+                        { icon: '⚡', text: 'You turn individual effort into collective energy.' }
+                    ],
+                    closing: "That's why people show up for each other.<br>They feel part of something bigger."
+                }
+            }
+        };
+
+        let currentArchetype = 'companion';
+        let currentScreen = 1;
+
+        // =============================================
+        // UPDATE FUNCTIONS
+        // =============================================
+
+        function setArchetype(name) {
+            currentArchetype = name;
+            const data = archetypes[name];
+            const root = document.documentElement;
+
+            // Update CSS variables for gradient
+            root.style.setProperty('--gradient-top', data.gradient.top);
+            root.style.setProperty('--gradient-mid', data.gradient.mid);
+            root.style.setProperty('--gradient-bottom', data.gradient.bottom);
+            root.style.setProperty('--shadow-accent', data.gradient.shadow);
+            root.style.setProperty('--shadow-accent-soft', data.gradient.shadowSoft);
+            root.style.setProperty('--blob-1', data.gradient.blob1);
+            root.style.setProperty('--blob-2', data.gradient.blob2);
+            root.style.setProperty('--blob-3', data.gradient.blob3);
+            root.style.setProperty('--icon-gradient-start', data.gradient.iconStart);
+            root.style.setProperty('--icon-gradient-end', data.gradient.iconEnd);
+
+            // Update tab states
+            document.querySelectorAll('.archetype-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.archetype === name);
+            });
+
+            // Update Screen 1
+            document.getElementById('archetypeEmoji').textContent = data.emoji;
+            document.getElementById('screen1Headline').textContent = data.screen1.headline;
+            document.getElementById('screen1Body').textContent = data.screen1.body;
+
+            // Update Screen 2
+            const cardsContainer = document.getElementById('descriptorCards');
+            cardsContainer.innerHTML = data.screen2.descriptors.map((d, i) => `
+                <div class="descriptor-card" style="animation-delay: ${(i + 1) * 0.1}s">
+                    <div class="descriptor-icon">${d.icon}</div>
+                    <p class="descriptor-text">${d.text}</p>
+                </div>
+            `).join('');
+            document.getElementById('closingLine').innerHTML = data.screen2.closing;
+        }
+
+        function showScreen(num) {
+            currentScreen = num;
+            document.getElementById('screen1').classList.toggle('active', num === 1);
+            document.getElementById('screen2').classList.toggle('active', num === 2);
+
+            document.querySelectorAll('.screen-btn').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.screen) === num);
+            });
+        }
+
+        // =============================================
+        // EVENT LISTENERS
+        // =============================================
+
+        document.querySelectorAll('.archetype-tab').forEach(tab => {
+            tab.addEventListener('click', () => setArchetype(tab.dataset.archetype));
+        });
+
+        document.querySelectorAll('.screen-btn').forEach(btn => {
+            btn.addEventListener('click', () => showScreen(parseInt(btn.dataset.screen)));
+        });
+
+        // Initialize
+        setArchetype('companion');
+    </script>
+</body>
+</html>
