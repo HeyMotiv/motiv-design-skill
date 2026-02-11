@@ -995,151 +995,221 @@
             margin-bottom: var(--space-xl);
         }
 
-        /* Accordion */
-        .accordion {
+        /* Questions card container */
+        .questions-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: var(--space-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+            flex: 1;
             display: flex;
             flex-direction: column;
-            flex: 1;
-        }
-
-        .acc-item {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
-        .acc-item:last-child { border-bottom: none; }
-
-        .acc-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: 14px 0;
-            cursor: pointer;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .acc-num {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            border: 1.5px solid var(--color-border-default);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--color-text-tertiary);
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .acc-item.answered .acc-num {
-            border-color: var(--color-brand-secondary);
-            background: var(--color-brand-secondary);
-            color: white;
-        }
-
-        .acc-item.open .acc-num {
-            border-color: var(--color-brand-secondary);
-            color: var(--color-brand-secondary);
-        }
-
-        .acc-title {
-            flex: 1;
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-            color: var(--color-text-primary);
-            transition: color 0.2s ease;
-        }
-        .acc-item.waiting .acc-title { color: var(--color-text-tertiary); }
-
-        .acc-answer-label {
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-            color: var(--color-brand-secondary);
-            display: none;
-            flex-shrink: 0;
-        }
-        .acc-item.answered .acc-answer-label { display: block; }
-
-        .acc-chevron {
-            width: 18px; height: 18px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-            color: var(--color-text-tertiary);
-        }
-        .acc-item.open .acc-chevron {
-            transform: rotate(180deg);
-            color: var(--color-brand-secondary);
-        }
-
-        .acc-body {
-            max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
-        .acc-item.open .acc-body { max-height: 300px; }
 
-        .acc-options {
+        .q-stack-flow {
             display: flex;
             flex-direction: column;
-            gap: var(--space-xs);
-            padding-bottom: 14px;
-            padding-left: 0;
+            flex: 1;
         }
 
-        .acc-opt {
+        /* Answered summary rows */
+        .q-answered-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .q-answer-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 8px;
+            border-bottom: 1px solid #F0EBE8;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            border-radius: 6px;
+            animation: qFadeUp 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .q-answer-row:hover { background: #FAF7F5; }
+
+        @keyframes qFadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .q-row-check {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: var(--color-brand-secondary);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .q-row-check svg { width: 12px; height: 12px; stroke: white; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+        .q-row-text { flex: 1; }
+        .q-row-q {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+        .q-row-answer {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.35;
+        }
+        .q-row-edit {
+            font-size: 12px;
+            color: var(--color-brand-secondary);
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            padding-top: 8px;
+        }
+        .q-answer-row:hover .q-row-edit { opacity: 1; }
+
+        /* Spacer between answered rows and active question */
+        .q-answered-list:not(:empty) + .q-active-slot:not(:empty) {
+            padding-top: 16px;
+        }
+
+        /* Active question */
+        .q-active-q {
+            animation: qFadeUp 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .q-active-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-brand-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .q-active-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.35;
+            margin-bottom: 16px;
+        }
+        .q-active-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .q-opt {
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: 13px 16px;
-            border-radius: var(--radius-full);
-            border: none;
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid #E7DDD6;
+            background: white;
             cursor: pointer;
             transition: all 0.15s ease;
             font-family: var(--font-body);
             text-align: left;
             -webkit-tap-highlight-color: transparent;
         }
-        .acc-opt:hover { background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
-        .acc-opt:active { transform: scale(0.98); }
-        .acc-opt.selected {
-            background: var(--color-bg-primary);
-            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.12);
+        .q-opt:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.03);
         }
-
-        .opt-dot {
-            width: 18px; height: 18px;
+        .q-opt:active { transform: scale(0.98); }
+        .q-opt-dot {
+            width: 20px; height: 20px;
             border-radius: 50%;
-            border: 2px solid rgba(0, 0, 0, 0.15);
+            border: 2px solid #D4CBC4;
             flex-shrink: 0;
             transition: all 0.15s ease;
             position: relative;
         }
-        .opt-dot::after {
+        .q-opt-dot::after {
             content: '';
-            position: absolute;
-            inset: 3px;
+            position: absolute; inset: 3px;
             border-radius: 50%;
             background: var(--color-brand-secondary);
             transform: scale(0);
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .acc-opt.selected .opt-dot { border-color: var(--color-brand-secondary); }
-        .acc-opt.selected .opt-dot::after { transform: scale(1); }
-
-        .opt-text {
-            font-size: 14px;
-            color: var(--color-text-primary);
-            line-height: 1.45;
+        .q-opt.selected .q-opt-dot { border-color: var(--color-brand-secondary); }
+        .q-opt.selected .q-opt-dot::after { transform: scale(1); }
+        .q-opt.selected {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.05);
         }
-        .acc-opt.selected .opt-text {
+        .q-opt-text {
+            font-size: 15px;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+        .q-opt.selected .q-opt-text { color: var(--color-brand-secondary); font-weight: 500; }
+
+        /* Upcoming teaser */
+        .q-upcoming {
+            margin-top: auto;
+            padding-top: 12px;
+        }
+        .q-upcoming-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-top: 1px solid #F0EBE8;
+        }
+        .q-upcoming-dot {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid #E7DDD6;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .q-upcoming-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+        }
+        .q-upcoming-text {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Gap result card */
+        .gap-result {
+            background: rgba(201, 122, 106, 0.06);
+            border: 1.5px solid rgba(201, 122, 106, 0.15);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            animation: qFadeUp 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .gap-result-eyebrow {
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
             color: var(--color-brand-secondary);
+            margin-bottom: 4px;
+        }
+        .gap-result-title {
+            font-family: var(--font-display);
+            font-size: 20px; font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+        .gap-result-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+        }
+        .gap-result-bridge {
+            font-size: 13px;
             font-weight: 500;
+            color: var(--color-brand-secondary);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(201, 122, 106, 0.12);
         }
 
         .s4-cta {
@@ -3616,75 +3686,16 @@
                 <h1 class="s4-headline">A few quick <em>questions</em></h1>
                 <p class="s4-subtext">Help us understand how your community shows up.</p>
 
-                <div class="accordion">
-                    <!-- Q1 -->
-                    <div class="acc-item open" id="q1">
-                        <div class="acc-header" data-q="1">
-                            <div class="acc-num">1</div>
-                            <div class="acc-title">Do they take that first step?</div>
-                            <div class="acc-answer-label" id="q1a"></div>
-                            <span class="material-icons acc-chevron">expand_more</span>
-                        </div>
-                        <div class="acc-body">
-                            <div class="acc-options">
-                                <button class="acc-opt" data-q="1" data-val="yes" data-label="Yes, they do">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Yes — they try things out</span>
-                                </button>
-                                <button class="acc-opt" data-q="1" data-val="no" data-label="Not usually">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Not usually — they stay inspired but don't start</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div class="acc-item waiting" id="q2">
-                        <div class="acc-header" data-q="2">
-                            <div class="acc-num">2</div>
-                            <div class="acc-title">Do they stay consistent?</div>
-                            <div class="acc-answer-label" id="q2a"></div>
-                            <span class="material-icons acc-chevron">expand_more</span>
-                        </div>
-                        <div class="acc-body">
-                            <div class="acc-options">
-                                <button class="acc-opt" data-q="2" data-val="yes" data-label="Yes, they do">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Yes — they keep showing up</span>
-                                </button>
-                                <button class="acc-opt" data-q="2" data-val="no" data-label="Not usually">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Not usually — momentum fades after a few weeks</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div class="acc-item waiting" id="q3">
-                        <div class="acc-header" data-q="3">
-                            <div class="acc-num">3</div>
-                            <div class="acc-title">Do they go deeper?</div>
-                            <div class="acc-answer-label" id="q3a"></div>
-                            <span class="material-icons acc-chevron">expand_more</span>
-                        </div>
-                        <div class="acc-body">
-                            <div class="acc-options">
-                                <button class="acc-opt" data-q="3" data-val="yes" data-label="Yes">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Yes — they seek coaching, products, or community</span>
-                                </button>
-                                <button class="acc-opt" data-q="3" data-val="no" data-label="Not yet">
-                                    <div class="opt-dot"></div>
-                                    <span class="opt-text">Not yet — they engage but don't go further</span>
-                                </button>
-                            </div>
-                        </div>
+                <div class="questions-card">
+                    <div class="q-stack-flow">
+                        <div class="q-answered-list" id="qAnsweredList"></div>
+                        <div class="q-active-slot" id="qActiveSlot"></div>
+                        <div class="q-upcoming" id="qUpcoming"></div>
                     </div>
                 </div>
 
                 <div class="s4-cta">
+                    <div id="gapResultSlot"></div>
                     <button class="btn-primary btn-primary--purple" id="questionsContinueBtn" disabled>Continue</button>
                 </div>
             </div>
@@ -3700,8 +3711,8 @@
                 </div>
 
                 <div class="s5-header">
-                    <h1 class="s5-headline">Why people<br>listen to you</h1>
-                    <p class="s5-subtitle">Trust builds when you show<br>up consistently.</p>
+                    <h1 class="s5-headline" id="s5Headline">Here's what's already working</h1>
+                    <p class="s5-subtitle" id="s5Subtitle"></p>
                 </div>
 
                 <div class="trait-card" id="traitCard">
@@ -4757,94 +4768,144 @@
         setTimeout(() => { handleInput.value = 'doodle_cycles'; }, 600);
 
         // =============================================
-        // QUESTIONS ACCORDION LOGIC
+        // QUESTIONS — STACKED CARDS LOGIC
         // =============================================
 
         const answers = {};
-        const DELAY = 350;
+        let currentQ = 1;
 
-        // Delegate clicks on accordion options
-        document.querySelectorAll('.acc-opt').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const q = parseInt(btn.dataset.q);
-                const val = btn.dataset.val;
-                const label = btn.dataset.label;
-                pick(q, val, label, btn);
+        const qData = [
+            { id: 1, title: 'Do they take that first step?', options: [
+                { value: 'yes', label: 'Yes — they try things out', short: 'Yes, they try things out' },
+                { value: 'no', label: 'Not usually — they stay inspired but don\'t start', short: 'Not usually — inspired but don\'t start' }
+            ]},
+            { id: 2, title: 'Do they stay consistent?', options: [
+                { value: 'yes', label: 'Yes — they keep showing up', short: 'Yes, they keep showing up' },
+                { value: 'no', label: 'Not usually — momentum fades after a few weeks', short: 'Not usually — momentum fades' }
+            ]},
+            { id: 3, title: 'Do they go deeper?', options: [
+                { value: 'yes', label: 'Yes — they seek coaching, products, or community', short: 'Yes, they go deeper' },
+                { value: 'no', label: 'Not yet — they engage but don\'t go further', short: 'Not yet — engaged but don\'t go further' }
+            ]}
+        ];
+
+        const gapResults = {
+            state1: { title: 'The Inspiration\u2013Action Gap', desc: 'Your audience gets inspired but struggles to take that first step. A collab creates a shared moment to move from wanting to acting.' },
+            state2: { title: 'The Consistency Gap', desc: 'Your audience starts strong but momentum fades. A collab creates structured accountability that turns action into habit.' },
+            state3: { title: 'The Depth Gap', desc: 'Your audience is engaged and ready for more. A collab creates the container for deeper commitment and growth.' }
+        };
+
+        function resolveGap() {
+            if (answers[1] === 'no' || answers[2] === 'no') return 'state1';
+            if (answers[3] === 'no') return 'state2';
+            return 'state3';
+        }
+
+        function renderQuestions() {
+            const answeredEl = document.getElementById('qAnsweredList');
+            const activeEl = document.getElementById('qActiveSlot');
+            const upcomingEl = document.getElementById('qUpcoming');
+
+            // Answered rows
+            let answeredHTML = '';
+            for (let i = 1; i <= 3; i++) {
+                if (answers[i]) {
+                    const q = qData[i - 1];
+                    const opt = q.options.find(o => o.value === answers[i]);
+                    answeredHTML += '<div class="q-answer-row" data-reopen="' + i + '">' +
+                        '<div class="q-row-check"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg></div>' +
+                        '<div class="q-row-text"><div class="q-row-q">' + q.title + '</div><div class="q-row-answer">' + opt.short + '</div></div>' +
+                        '<div class="q-row-edit">Edit</div></div>';
+                }
+            }
+            answeredEl.innerHTML = answeredHTML;
+
+            // Attach reopen listeners
+            answeredEl.querySelectorAll('.q-answer-row').forEach(row => {
+                row.addEventListener('click', () => {
+                    reopenQFrom(parseInt(row.dataset.reopen));
+                });
             });
-        });
 
-        // Delegate clicks on accordion headers (to re-open answered questions)
-        document.querySelectorAll('.acc-header').forEach(hdr => {
-            hdr.addEventListener('click', () => {
-                const q = parseInt(hdr.dataset.q);
-                toggleQ(q);
-            });
-        });
+            // Active question
+            if (currentQ <= 3 && !answers[currentQ]) {
+                const q = qData[currentQ - 1];
+                let optsHTML = '';
+                q.options.forEach(o => {
+                    optsHTML += '<button class="q-opt" data-val="' + o.value + '">' +
+                        '<div class="q-opt-dot"></div><span class="q-opt-text">' + o.label + '</span></button>';
+                });
+                activeEl.innerHTML = '<div class="q-active-q">' +
+                    '<div class="q-active-label">Question ' + currentQ + ' of ' + qData.length + '</div>' +
+                    '<div class="q-active-title">' + q.title + '</div>' +
+                    '<div class="q-active-options">' + optsHTML + '</div></div>';
 
-        function pick(q, value, label, btnEl) {
+                // Attach option click listeners
+                activeEl.querySelectorAll('.q-opt').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        pickQ(currentQ, btn.dataset.val, btn);
+                    });
+                });
+            } else {
+                activeEl.innerHTML = '';
+            }
+
+            // Upcoming
+            let upHTML = '';
+            for (let i = currentQ + 1; i <= 3; i++) {
+                if (!answers[i]) {
+                    upHTML += '<div class="q-upcoming-row"><div class="q-upcoming-dot"><span class="q-upcoming-num">' + i + '</span></div>' +
+                        '<div class="q-upcoming-text">' + qData[i - 1].title + '</div></div>';
+                }
+            }
+            upcomingEl.innerHTML = upHTML;
+        }
+
+        function pickQ(q, value, btnEl) {
             answers[q] = value;
 
-            // Mark selected
-            const qEl = document.getElementById('q' + q);
-            qEl.querySelectorAll('.acc-opt').forEach(o => o.classList.remove('selected'));
-            btnEl.classList.add('selected');
-
-            // Set answer label
-            document.getElementById('q' + q + 'a').textContent = label;
+            // Visual feedback on selected option
+            const activeEl = document.getElementById('qActiveSlot');
+            activeEl.querySelectorAll('.q-opt').forEach(o => {
+                if (o.dataset.val === value) o.classList.add('selected');
+            });
 
             setTimeout(() => {
-                qEl.classList.remove('open');
-                qEl.classList.add('answered');
-
                 if (q < 3) {
-                    openQ(q + 1);
+                    currentQ = q + 1;
+                    renderQuestions();
                 } else {
-                    // All answered — enable continue
+                    currentQ = 4;
+                    renderQuestions();
+                    // Show gap result card
+                    const gap = gapResults[resolveGap()];
+                    document.getElementById('gapResultSlot').innerHTML =
+                        '<div class="gap-result"><div class="gap-result-eyebrow">Where they get stuck</div>' +
+                        '<div class="gap-result-title">' + gap.title + '</div>' +
+                        '<div class="gap-result-desc">' + gap.desc + '</div>' +
+                        '<div class="gap-result-bridge">Let\u2019s look at what\u2019s already working \u2192</div></div>';
                     document.getElementById('questionsContinueBtn').disabled = false;
                 }
-            }, DELAY);
+            }, 300);
         }
 
-        function openQ(q) {
-            const el = document.getElementById('q' + q);
-            el.classList.remove('waiting', 'answered');
-            el.classList.add('open');
-            el.querySelectorAll('.acc-opt').forEach(o => o.classList.remove('selected'));
-        }
-
-        function toggleQ(q) {
-            const el = document.getElementById('q' + q);
-            if (el.classList.contains('answered')) {
-                reopenFrom(q);
-            }
-        }
-
-        function reopenFrom(q) {
+        function reopenQFrom(fromQ) {
+            for (let i = fromQ; i <= 3; i++) delete answers[i];
+            currentQ = fromQ;
+            document.getElementById('gapResultSlot').innerHTML = '';
             document.getElementById('questionsContinueBtn').disabled = true;
-
-            for (let i = q; i <= 3; i++) {
-                delete answers[i];
-                const el = document.getElementById('q' + i);
-                el.classList.remove('answered', 'open', 'waiting');
-                el.querySelectorAll('.acc-opt').forEach(o => o.classList.remove('selected'));
-                document.getElementById('q' + i + 'a').textContent = '';
-                if (i === q) el.classList.add('open');
-                else el.classList.add('waiting');
-            }
+            renderQuestions();
         }
 
         function resetQuestions() {
-            for (let i = 1; i <= 3; i++) {
-                delete answers[i];
-                const el = document.getElementById('q' + i);
-                el.classList.remove('answered', 'open', 'waiting');
-                el.querySelectorAll('.acc-opt').forEach(o => o.classList.remove('selected'));
-                document.getElementById('q' + i + 'a').textContent = '';
-                if (i === 1) el.classList.add('open');
-                else el.classList.add('waiting');
-            }
+            for (let i = 1; i <= 3; i++) delete answers[i];
+            currentQ = 1;
+            document.getElementById('gapResultSlot').innerHTML = '';
             document.getElementById('questionsContinueBtn').disabled = true;
+            renderQuestions();
         }
+
+        renderQuestions();
 
         // =============================================
         // ARCHETYPE DATA
@@ -4933,6 +4994,11 @@
         document.getElementById('questionsContinueBtn').addEventListener('click', () => {
             const key = resolveArchetype();
             const arch = archetypes[key];
+            const gap = gapResults[resolveGap()];
+
+            // Set headline + subtitle — positive framing
+            document.getElementById('s5Headline').innerHTML = 'Here\u2019s what\u2019s<br>already working';
+            document.getElementById('s5Subtitle').textContent = 'You\u2019ve already built something your audience trusts. That\u2019s the hard part.';
 
             document.getElementById('traitIcon').textContent = arch.icon;
             document.getElementById('traitName').textContent = arch.name;

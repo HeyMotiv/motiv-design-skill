@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Question Flow v2 — Visual Refinement</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-brand-secondary: #C97A6A;
+            --color-brand-secondary-hover: #B86B5C;
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7574;
+            --color-text-tertiary: #B8C4C0;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F3E6E2;
+            --color-bg-card: #FFFFFF;
+            --color-border-default: #E7D9C9;
+            --color-border-subtle: #F3E6E2;
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            --grad-1: #FBCFE8;
+            --grad-2: #F9A8D4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 32px 24px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .page-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            font-size: 14px;
+            color: #8888a0;
+            max-width: 560px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .approach-tabs {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .approach-tab {
+            padding: 10px 20px;
+            border: 1.5px solid #2a2a3a;
+            border-radius: var(--radius-full);
+            background: #12121a;
+            color: #8888a0;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .approach-tab:hover { border-color: #4a4a5a; color: #c0c0d0; }
+        .approach-tab.active {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.1);
+            color: #e8e8f0;
+        }
+
+        .approach-description {
+            text-align: center;
+            font-size: 13px;
+            color: #6a6a80;
+            margin-bottom: 32px;
+            min-height: 20px;
+        }
+
+        .phones-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .phone-col {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .phone-col.visible { display: flex; }
+        .phone-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #6a6a80;
+        }
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+        }
+
+        /* Lava background */
+        .lava {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .lava::before, .lava::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+            animation: blobDrift 20s ease-in-out infinite;
+        }
+        .lava::before {
+            width: 300px; height: 300px;
+            background: var(--grad-1);
+            top: -60px; right: -80px;
+            animation-delay: -7s;
+        }
+        .lava::after {
+            width: 250px; height: 250px;
+            background: var(--grad-2);
+            bottom: 60px; left: -60px;
+            animation-delay: -14s;
+        }
+        @keyframes blobDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(5%, -5%) scale(1.1); }
+            50% { transform: translate(-5%, 5%) scale(0.9); }
+            75% { transform: translate(5%, 5%) scale(1.05); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-xl);
+            padding-top: 20px;
+        }
+
+        .back-btn {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-border-default);
+            background: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-bottom: var(--space-lg);
+        }
+        .back-btn:hover { border-color: #D4C4B5; background: var(--color-bg-secondary); }
+        .back-btn svg { width: 18px; height: 18px; stroke: var(--color-text-primary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+        .headline {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.25;
+            margin-bottom: var(--space-xs);
+        }
+        .headline em { font-style: normal; color: var(--color-brand-secondary); }
+        .subtext {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* ══════════════════════════════════════
+           SHARED: Question container card
+           — solid white surface for legibility
+           ══════════════════════════════════════ */
+        .questions-container {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-lg);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Shared CTA */
+        .cta-section {
+            margin-top: auto;
+            padding-top: var(--space-lg);
+        }
+        .btn-primary {
+            display: flex; align-items: center; justify-content: center; gap: var(--space-xs);
+            width: 100%;
+            background: var(--color-brand-secondary);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 17px; font-weight: 600;
+            padding: 16px 32px;
+            border: none; border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-primary:hover:not(:disabled) { transform: scale(1.02); opacity: 0.95; }
+        .btn-primary:active:not(:disabled) { transform: scale(0.97); }
+        .btn-primary:disabled {
+            background: #EDE8E4;
+            color: var(--color-text-tertiary);
+            cursor: not-allowed;
+        }
+        .btn-primary svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+        .btn-reset {
+            display: block; width: 100%; text-align: center;
+            background: none; border: none;
+            font-family: var(--font-body); font-size: 14px;
+            color: var(--color-text-tertiary);
+            padding: var(--space-sm); cursor: pointer;
+        }
+        .btn-reset:hover { color: var(--color-text-secondary); }
+
+        /* Result card */
+        .result-card {
+            background: rgba(201, 122, 106, 0.06);
+            border: 1.5px solid rgba(201, 122, 106, 0.15);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+            animation: fadeUp 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .result-eyebrow {
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--color-brand-secondary);
+            margin-bottom: 4px;
+        }
+        .result-title {
+            font-family: var(--font-display);
+            font-size: 20px; font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+        .result-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.55;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        /* ════════════════════════════════════════════
+           APPROACH A: STACKED CARDS (refined)
+           ════════════════════════════════════════════ */
+
+        .stack-flow {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* Answered summary rows */
+        .a-answered {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .a-answer-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #F0EBE8;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            border-radius: 6px;
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
+            animation: fadeUp 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .a-answer-row:hover { background: #FAF7F5; }
+
+        .a-row-check {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: var(--color-brand-secondary);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .a-row-check svg { width: 12px; height: 12px; stroke: white; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+        .a-row-text { flex: 1; }
+        .a-row-q {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 1.3;
+            margin-bottom: 1px;
+        }
+        .a-row-answer {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.35;
+        }
+        .a-row-edit {
+            font-size: 12px;
+            color: var(--color-brand-secondary);
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            padding-top: 8px;
+        }
+        .a-answer-row:hover .a-row-edit { opacity: 1; }
+
+        /* Divider between answered and active */
+        .a-divider {
+            height: 0;
+        }
+        .a-answered:not(:empty) + .a-divider {
+            height: 16px;
+        }
+
+        /* Active question */
+        .a-active-q {
+            animation: fadeUp 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .a-q-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-brand-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .a-q-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.35;
+            margin-bottom: 16px;
+        }
+        .a-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .a-opt {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid #E7DDD6;
+            background: white;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: var(--font-body);
+            text-align: left;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .a-opt:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.03);
+        }
+        .a-opt:active { transform: scale(0.98); }
+        .a-opt-dot {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            border: 2px solid #D4CBC4;
+            flex-shrink: 0;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .a-opt-dot::after {
+            content: '';
+            position: absolute; inset: 3px;
+            border-radius: 50%;
+            background: var(--color-brand-secondary);
+            transform: scale(0);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .a-opt.selected .a-opt-dot { border-color: var(--color-brand-secondary); }
+        .a-opt.selected .a-opt-dot::after { transform: scale(1); }
+        .a-opt.selected {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.05);
+        }
+        .a-opt-text {
+            font-size: 15px;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+        .a-opt.selected .a-opt-text { color: var(--color-brand-secondary); font-weight: 500; }
+
+        /* Upcoming teaser */
+        .a-upcoming {
+            margin-top: auto;
+            padding-top: 12px;
+        }
+        .a-upcoming-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-top: 1px solid #F0EBE8;
+        }
+        .a-upcoming-dot {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            border: 1.5px solid #E7DDD6;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .a-upcoming-num {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+        }
+        .a-upcoming-text {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+
+
+        /* ════════════════════════════════════════════
+           APPROACH C: TIMELINE (refined)
+           ════════════════════════════════════════════ */
+
+        .tl-flow {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 14px;
+            position: relative;
+        }
+
+        .tl-rail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 28px;
+            flex-shrink: 0;
+        }
+
+        .tl-node {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            border: 2px solid #E0D6CE;
+            background: white;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .tl-node-num {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-text-tertiary);
+            transition: all 0.3s ease;
+        }
+        .tl-node svg {
+            width: 14px; height: 14px;
+            stroke: white; stroke-width: 2.5;
+            stroke-linecap: round; stroke-linejoin: round;
+            fill: none;
+            display: none;
+        }
+        .tl-stem {
+            width: 2px;
+            flex: 1;
+            background: #EDE7E2;
+            margin: 4px 0;
+            transition: background 0.4s ease;
+        }
+        .tl-item:last-child .tl-stem { display: none; }
+
+        /* States */
+        .tl-item.active .tl-node {
+            border-color: var(--color-brand-secondary);
+            box-shadow: 0 0 0 5px rgba(201, 122, 106, 0.1);
+        }
+        .tl-item.active .tl-node-num { color: var(--color-brand-secondary); }
+
+        .tl-item.done .tl-node {
+            border-color: var(--color-brand-secondary);
+            background: var(--color-brand-secondary);
+        }
+        .tl-item.done .tl-node-num { display: none; }
+        .tl-item.done .tl-node svg { display: block; }
+        .tl-item.done .tl-stem { background: var(--color-brand-secondary); }
+
+        .tl-item.waiting .tl-node { border-color: #EDE7E2; }
+
+        /* Content */
+        .tl-body {
+            flex: 1;
+            padding-bottom: 8px;
+            min-height: 0;
+        }
+
+        .tl-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.35;
+            padding-top: 3px;
+            transition: all 0.25s ease;
+        }
+        .tl-item.waiting .tl-title { color: var(--color-text-tertiary); }
+        .tl-item.done .tl-title {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Answered inline text */
+        .tl-inline-answer {
+            font-size: 14px;
+            color: var(--color-brand-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+            cursor: pointer;
+            display: none;
+            line-height: 1.4;
+        }
+        .tl-inline-answer:hover { text-decoration: underline; }
+        .tl-item.done .tl-inline-answer { display: block; }
+
+        /* Options — use grid for smooth height animation */
+        .tl-opts-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        opacity 0.25s ease;
+            opacity: 0;
+        }
+        .tl-item.active .tl-opts-wrapper {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .tl-opts-inner {
+            overflow: hidden;
+        }
+        .tl-opts {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 12px;
+            padding-bottom: 8px;
+        }
+
+        .tl-opt {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 13px 14px;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid #E7DDD6;
+            background: white;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: var(--font-body);
+            text-align: left;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .tl-opt:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.03);
+        }
+        .tl-opt:active { transform: scale(0.98); }
+        .tl-opt-dot {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            border: 2px solid #D4CBC4;
+            flex-shrink: 0;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .tl-opt-dot::after {
+            content: '';
+            position: absolute; inset: 3px;
+            border-radius: 50%;
+            background: var(--color-brand-secondary);
+            transform: scale(0);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .tl-opt.selected .tl-opt-dot { border-color: var(--color-brand-secondary); }
+        .tl-opt.selected .tl-opt-dot::after { transform: scale(1); }
+        .tl-opt.selected {
+            border-color: var(--color-brand-secondary);
+            background: rgba(201, 122, 106, 0.05);
+        }
+        .tl-opt-text {
+            font-size: 15px;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+        .tl-opt.selected .tl-opt-text { color: var(--color-brand-secondary); font-weight: 500; }
+
+
+        @media (prefers-reduced-motion: reduce) {
+            .lava::before, .lava::after { animation: none !important; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1 class="page-title">Question Flow v2 — Visual Refinement</h1>
+        <p class="page-subtitle">Focus on legibility and smoother transitions. Questions sit on a solid white card so text is always crisp against the gradient background.</p>
+        <div class="approach-tabs">
+            <button class="approach-tab active" data-approach="a" onclick="showApproach('a')">A — Stacked Cards</button>
+            <button class="approach-tab" data-approach="c" onclick="showApproach('c')">C — Timeline</button>
+            <button class="approach-tab" data-approach="all" onclick="showApproach('all')">Both</button>
+        </div>
+        <div class="approach-description" id="approachDesc">Answered questions become compact summary rows. Active question has clear label + bordered option cards.</div>
+    </div>
+
+    <div class="phones-row">
+
+        <!-- ════════════════════════════════════════
+             APPROACH A: STACKED CARDS (refined)
+             ════════════════════════════════════════ -->
+        <div class="phone-col visible" id="phoneA">
+            <div class="phone-label">A — Stacked Cards</div>
+            <div class="phone-frame">
+                <div class="lava"></div>
+                <div class="content">
+                    <button class="back-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></button>
+                    <h1 class="headline">A few quick <em>questions</em></h1>
+                    <p class="subtext">Help us understand how your community shows up.</p>
+
+                    <div class="questions-container">
+                        <div class="stack-flow" id="stackA">
+                            <div class="a-answered" id="answeredA"></div>
+                            <div class="a-divider"></div>
+                            <div id="activeQA"></div>
+                            <div class="a-upcoming" id="upcomingA"></div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <div id="resultSlotA"></div>
+                        <button class="btn-primary" id="ctaBtnA" disabled>
+                            Continue
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                        </button>
+                        <button class="btn-reset" id="resetBtnA" style="display:none" onclick="resetA()">Change answers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ════════════════════════════════════════
+             APPROACH C: TIMELINE (refined)
+             ════════════════════════════════════════ -->
+        <div class="phone-col" id="phoneC">
+            <div class="phone-label">C — Timeline</div>
+            <div class="phone-frame">
+                <div class="lava"></div>
+                <div class="content">
+                    <button class="back-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></button>
+                    <h1 class="headline">A few quick <em>questions</em></h1>
+                    <p class="subtext">Help us understand how your community shows up.</p>
+
+                    <div class="questions-container">
+                        <div class="tl-flow" id="timelineC">
+                            <!-- Q1 -->
+                            <div class="tl-item active" id="tlQ1">
+                                <div class="tl-rail">
+                                    <div class="tl-node">
+                                        <span class="tl-node-num">1</span>
+                                        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg>
+                                    </div>
+                                    <div class="tl-stem"></div>
+                                </div>
+                                <div class="tl-body">
+                                    <div class="tl-title">Do they take that first step?</div>
+                                    <div class="tl-inline-answer" id="tlAns1" onclick="reopenC(1)"></div>
+                                    <div class="tl-opts-wrapper">
+                                        <div class="tl-opts-inner">
+                                            <div class="tl-opts">
+                                                <button class="tl-opt" onclick="pickC(1, 'yes', 'Yes — they try things out')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Yes — they try things out</span>
+                                                </button>
+                                                <button class="tl-opt" onclick="pickC(1, 'no', 'Not usually — inspired but don\'t start')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Not usually — they stay inspired but don't start</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="tl-item waiting" id="tlQ2">
+                                <div class="tl-rail">
+                                    <div class="tl-node">
+                                        <span class="tl-node-num">2</span>
+                                        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg>
+                                    </div>
+                                    <div class="tl-stem"></div>
+                                </div>
+                                <div class="tl-body">
+                                    <div class="tl-title">Do they stay consistent?</div>
+                                    <div class="tl-inline-answer" id="tlAns2" onclick="reopenC(2)"></div>
+                                    <div class="tl-opts-wrapper">
+                                        <div class="tl-opts-inner">
+                                            <div class="tl-opts">
+                                                <button class="tl-opt" onclick="pickC(2, 'yes', 'Yes — they keep showing up')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Yes — they keep showing up</span>
+                                                </button>
+                                                <button class="tl-opt" onclick="pickC(2, 'no', 'Not usually — momentum fades')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Not usually — momentum fades after a few weeks</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="tl-item waiting" id="tlQ3">
+                                <div class="tl-rail">
+                                    <div class="tl-node">
+                                        <span class="tl-node-num">3</span>
+                                        <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg>
+                                    </div>
+                                    <div class="tl-stem"></div>
+                                </div>
+                                <div class="tl-body">
+                                    <div class="tl-title">Do they go deeper?</div>
+                                    <div class="tl-inline-answer" id="tlAns3" onclick="reopenC(3)"></div>
+                                    <div class="tl-opts-wrapper">
+                                        <div class="tl-opts-inner">
+                                            <div class="tl-opts">
+                                                <button class="tl-opt" onclick="pickC(3, 'yes', 'Yes — they seek more')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Yes — they seek coaching, products, or community</span>
+                                                </button>
+                                                <button class="tl-opt" onclick="pickC(3, 'no', 'Not yet — engaged but don\'t go further')">
+                                                    <div class="tl-opt-dot"></div>
+                                                    <span class="tl-opt-text">Not yet — they engage but don't go further</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <div id="resultSlotC"></div>
+                        <button class="btn-primary" id="ctaBtnC" disabled>
+                            Continue
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                        </button>
+                        <button class="btn-reset" id="resetBtnC" style="display:none" onclick="resetC()">Change answers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ═══════════════════════════════════
+        // SHARED DATA
+        // ═══════════════════════════════════
+
+        const questions = [
+            { id: 1, title: 'Do they take that first step?', options: [
+                { value: 'yes', label: 'Yes — they try things out', short: 'Yes, they try things out' },
+                { value: 'no', label: 'Not usually — they stay inspired but don\'t start', short: 'Not usually — inspired but don\'t start' }
+            ]},
+            { id: 2, title: 'Do they stay consistent?', options: [
+                { value: 'yes', label: 'Yes — they keep showing up', short: 'Yes, they keep showing up' },
+                { value: 'no', label: 'Not usually — momentum fades after a few weeks', short: 'Not usually — momentum fades' }
+            ]},
+            { id: 3, title: 'Do they go deeper?', options: [
+                { value: 'yes', label: 'Yes — they seek coaching, products, or community', short: 'Yes, they go deeper' },
+                { value: 'no', label: 'Not yet — they engage but don\'t go further', short: 'Not yet — engaged but don\'t go further' }
+            ]}
+        ];
+
+        const stateResults = {
+            state1: { title: 'The Inspiration–Action Gap', desc: 'Your audience gets inspired but struggles to take that first step. A collab creates a shared moment to move from wanting to acting.' },
+            state2: { title: 'The Consistency Gap', desc: 'Your audience starts strong but momentum fades. A collab creates structured accountability that turns action into habit.' },
+            state3: { title: 'The Depth Gap', desc: 'Your audience is engaged and ready for more. A collab creates the container for deeper commitment and growth.' }
+        };
+
+        function resolveState(answers) {
+            if (answers[1] === 'no' || answers[2] === 'no') return 'state1';
+            if (answers[3] === 'no') return 'state2';
+            return 'state3';
+        }
+
+        function resultHTML(stateKey) {
+            const s = stateResults[stateKey];
+            return `<div class="result-card"><div class="result-eyebrow">What we see</div><div class="result-title">${s.title}</div><div class="result-desc">${s.desc}</div></div>`;
+        }
+
+        // ═══════════════════════════════════
+        // APPROACH SWITCHER
+        // ═══════════════════════════════════
+
+        const descriptions = {
+            a: 'Answered questions become compact summary rows. Active question has clear label + bordered option cards.',
+            c: 'Vertical timeline with smooth grid-based reveal instead of max-height. Answered questions show inline summaries.',
+            all: 'Compare both approaches side by side.'
+        };
+
+        function showApproach(key) {
+            document.querySelectorAll('.approach-tab').forEach(t => t.classList.toggle('active', t.dataset.approach === key));
+            document.getElementById('approachDesc').textContent = descriptions[key];
+            const show = key === 'all' ? ['phoneA', 'phoneC'] : key === 'a' ? ['phoneA'] : ['phoneC'];
+            ['phoneA', 'phoneC'].forEach(id => {
+                document.getElementById(id).classList.toggle('visible', show.includes(id));
+            });
+        }
+
+        // ═══════════════════════════════════
+        // APPROACH A
+        // ═══════════════════════════════════
+
+        let answersA = {};
+        let currentQA = 1;
+
+        function renderA() {
+            const answered = document.getElementById('answeredA');
+            const activeQ = document.getElementById('activeQA');
+            const upcoming = document.getElementById('upcomingA');
+
+            // Answered rows
+            let html = '';
+            for (let i = 1; i <= 3; i++) {
+                if (answersA[i]) {
+                    const q = questions[i - 1];
+                    const opt = q.options.find(o => o.value === answersA[i]);
+                    html += `
+                        <div class="a-answer-row" onclick="reopenA(${i})">
+                            <div class="a-row-check"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg></div>
+                            <div class="a-row-text">
+                                <div class="a-row-q">${q.title}</div>
+                                <div class="a-row-answer">${opt.short}</div>
+                            </div>
+                            <div class="a-row-edit">Edit</div>
+                        </div>`;
+                }
+            }
+            answered.innerHTML = html;
+
+            // Active
+            if (currentQA <= 3 && !answersA[currentQA]) {
+                const q = questions[currentQA - 1];
+                activeQ.innerHTML = `
+                    <div class="a-active-q">
+                        <div class="a-q-label">Question ${currentQA} of ${questions.length}</div>
+                        <div class="a-q-title">${q.title}</div>
+                        <div class="a-options">
+                            ${q.options.map(o => `
+                                <button class="a-opt" onclick="pickA(${q.id}, '${o.value}')">
+                                    <div class="a-opt-dot"></div>
+                                    <span class="a-opt-text">${o.label}</span>
+                                </button>`).join('')}
+                        </div>
+                    </div>`;
+            } else {
+                activeQ.innerHTML = '';
+            }
+
+            // Upcoming
+            let upHTML = '';
+            for (let i = currentQA + 1; i <= 3; i++) {
+                if (!answersA[i]) {
+                    upHTML += `
+                        <div class="a-upcoming-row">
+                            <div class="a-upcoming-dot"><span class="a-upcoming-num">${i}</span></div>
+                            <div class="a-upcoming-text">${questions[i - 1].title}</div>
+                        </div>`;
+                }
+            }
+            upcoming.innerHTML = upHTML;
+        }
+
+        function pickA(q, value) {
+            answersA[q] = value;
+            const opts = document.querySelectorAll('#activeQA .a-opt');
+            opts.forEach(o => { if (o.querySelector('.a-opt-text').textContent === questions[q-1].options.find(x => x.value === value).label) o.classList.add('selected'); });
+
+            setTimeout(() => {
+                if (q < 3) {
+                    currentQA = q + 1;
+                    renderA();
+                } else {
+                    currentQA = 4;
+                    renderA();
+                    const state = resolveState(answersA);
+                    document.getElementById('resultSlotA').innerHTML = resultHTML(state);
+                    document.getElementById('ctaBtnA').disabled = false;
+                    document.getElementById('resetBtnA').style.display = 'block';
+                }
+            }, 300);
+        }
+
+        function reopenA(fromQ) {
+            for (let i = fromQ; i <= 3; i++) delete answersA[i];
+            currentQA = fromQ;
+            document.getElementById('resultSlotA').innerHTML = '';
+            document.getElementById('ctaBtnA').disabled = true;
+            document.getElementById('resetBtnA').style.display = 'none';
+            renderA();
+        }
+
+        function resetA() {
+            answersA = {};
+            currentQA = 1;
+            document.getElementById('resultSlotA').innerHTML = '';
+            document.getElementById('ctaBtnA').disabled = true;
+            document.getElementById('resetBtnA').style.display = 'none';
+            renderA();
+        }
+
+        renderA();
+
+        // ═══════════════════════════════════
+        // APPROACH C
+        // ═══════════════════════════════════
+
+        let answersC = {};
+
+        function pickC(q, value, label) {
+            answersC[q] = { value, label };
+            const item = document.getElementById('tlQ' + q);
+            item.querySelectorAll('.tl-opt').forEach(o => o.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+
+            setTimeout(() => {
+                item.classList.remove('active');
+                item.classList.add('done');
+                document.getElementById('tlAns' + q).textContent = label;
+
+                if (q < 3) {
+                    const next = document.getElementById('tlQ' + (q + 1));
+                    next.classList.remove('waiting');
+                    next.classList.add('active');
+                } else {
+                    const vals = {};
+                    for (let k in answersC) vals[k] = answersC[k].value;
+                    const state = resolveState(vals);
+                    document.getElementById('resultSlotC').innerHTML = resultHTML(state);
+                    document.getElementById('ctaBtnC').disabled = false;
+                    document.getElementById('resetBtnC').style.display = 'block';
+                }
+            }, 300);
+        }
+
+        function reopenC(fromQ) {
+            for (let i = fromQ; i <= 3; i++) {
+                delete answersC[i];
+                const el = document.getElementById('tlQ' + i);
+                el.classList.remove('done', 'active', 'waiting');
+                el.querySelectorAll('.tl-opt').forEach(o => o.classList.remove('selected'));
+                document.getElementById('tlAns' + i).textContent = '';
+                if (i === fromQ) el.classList.add('active');
+                else el.classList.add('waiting');
+            }
+            document.getElementById('resultSlotC').innerHTML = '';
+            document.getElementById('ctaBtnC').disabled = true;
+            document.getElementById('resetBtnC').style.display = 'none';
+        }
+
+        function resetC() {
+            answersC = {};
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById('tlQ' + i);
+                el.classList.remove('done', 'active', 'waiting');
+                el.querySelectorAll('.tl-opt').forEach(o => o.classList.remove('selected'));
+                document.getElementById('tlAns' + i).textContent = '';
+                if (i === 1) el.classList.add('active');
+                else el.classList.add('waiting');
+            }
+            document.getElementById('resultSlotC').innerHTML = '';
+            document.getElementById('ctaBtnC').disabled = true;
+            document.getElementById('resetBtnC').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
