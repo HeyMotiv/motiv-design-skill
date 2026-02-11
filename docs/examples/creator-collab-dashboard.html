@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Creator Collab Dashboard (Pre-Live) — Motiv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (Motiv)
+           =========================================== */
+
+        :root {
+            /* Brand */
+            --color-brand-primary: #C97A6A;
+            --color-brand-primary-hover: #B86B5C;
+            --color-brand-secondary: #6B4E71;
+            --color-brand-secondary-hover: #5C4162;
+
+            /* Text */
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #8FA6A0;
+            --color-text-tertiary: #B8C4C0;
+            --color-text-inverse: #FFFFFF;
+
+            /* Backgrounds */
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F3E6E2;
+            --color-bg-tertiary: #E7D9C9;
+
+            /* Borders */
+            --color-border-default: #E7D9C9;
+            --color-border-subtle: #F3E6E2;
+
+            /* Challenge theme: Coral */
+            --theme-bg: #F7F0EB;
+            --theme-emphasis: #BC8464;
+            --theme-text: #764D2C;
+
+            /* Typography */
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+
+            /* Radii */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* ===========================================
+           REVIEW HEADER
+           =========================================== */
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 24px;
+            max-width: 720px;
+        }
+
+        .review-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: 4px;
+        }
+
+        .review-subtitle {
+            font-size: 13px;
+            color: #8888a0;
+            margin-bottom: 12px;
+        }
+
+        .review-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            background: rgba(201, 122, 106, 0.1);
+            border: 1px solid rgba(201, 122, 106, 0.25);
+            color: #C97A6A;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .phone-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===========================================
+           HEADER GRADIENT AREA
+           =========================================== */
+
+        .header-section {
+            position: relative;
+            padding: 0 var(--space-xl) var(--space-xl);
+            overflow: hidden;
+        }
+
+        .header-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0%,
+                #F7E6DE 30%,
+                #FAF0EB 65%,
+                #FFFFFF 100%
+            );
+        }
+
+        .header-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+        }
+
+        .header-blob-1 {
+            width: 300px;
+            height: 300px;
+            background: #FDBA74;
+            top: -100px;
+            left: -60px;
+            animation: blob-drift-1 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .header-blob-2 {
+            width: 250px;
+            height: 250px;
+            background: #FED7AA;
+            top: -40px;
+            right: -80px;
+            animation: blob-drift-2 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -7s;
+        }
+
+        .header-blob-3 {
+            width: 200px;
+            height: 200px;
+            background: #F9A8D4;
+            top: 60px;
+            left: 30%;
+            animation: blob-drift-3 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -14s;
+        }
+
+        @keyframes blob-drift-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(10%, 15%) scale(1.15) rotate(5deg); }
+            50% { transform: translate(-5%, 10%) scale(0.85) rotate(-5deg); }
+            75% { transform: translate(15%, -5%) scale(1.1) rotate(10deg); }
+        }
+
+        @keyframes blob-drift-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(-15%, -10%) scale(0.9) rotate(-8deg); }
+            50% { transform: translate(10%, -15%) scale(1.2) rotate(5deg); }
+            75% { transform: translate(-5%, 5%) scale(0.95) rotate(-3deg); }
+        }
+
+        @keyframes blob-drift-3 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(12%, -8%) scale(1.1) rotate(12deg); }
+            50% { transform: translate(-8%, 12%) scale(0.8) rotate(-8deg); }
+            75% { transform: translate(-12%, -5%) scale(1.15) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===========================================
+           STATUS BAR
+           =========================================== */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px var(--space-xl) 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: 0.01em;
+        }
+
+        .status-icons {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-icons svg {
+            display: block;
+        }
+
+        /* ===========================================
+           NAV BAR
+           =========================================== */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0 var(--space-xs);
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            margin-left: -8px;
+        }
+
+        .nav-back .material-icons {
+            font-size: 24px;
+        }
+
+        .nav-more {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            margin-right: -8px;
+        }
+
+        .nav-more .material-icons {
+            font-size: 24px;
+        }
+
+        /* ===========================================
+           CHALLENGE TITLE
+           =========================================== */
+
+        .challenge-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .challenge-dates {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--theme-text);
+            opacity: 0.7;
+        }
+
+        /* ===========================================
+           COUNTDOWN TIMER
+           =========================================== */
+
+        .countdown-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            padding: var(--space-xs) var(--space-lg);
+        }
+
+        .countdown-unit {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .countdown-label {
+            font-family: var(--font-body);
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            line-height: 12px;
+        }
+
+        /* ===========================================
+           MAIN CONTENT AREA
+           =========================================== */
+
+        .content-area {
+            padding: var(--space-lg) 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .content-area > .goal-card,
+        .content-area > .engagement-card {
+            margin: 0 var(--space-md);
+        }
+
+        /* ===========================================
+           PARTICIPANT GOAL CARD
+           =========================================== */
+
+        .goal-card {
+            background: #FEF9EF;
+            border: 1px solid #EDD9A3;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-lg);
+        }
+
+        .goal-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .goal-count {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            color: var(--color-brand-primary);
+        }
+
+        /* Milestone progress bar */
+        .milestone-bar {
+            position: relative;
+            display: flex;
+            gap: 2px;
+            height: 6px;
+            margin-bottom: 44px;
+        }
+
+        .milestone-segment {
+            flex: 1;
+            background: #EDD9A3;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .milestone-segment-fill {
+            position: absolute;
+            inset: 0;
+            background: var(--color-brand-primary);
+            border-radius: 3px;
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .milestone-segment-fill.partial {
+            background: var(--color-brand-primary);
+            opacity: 0.65;
+        }
+
+        /* Milestone markers */
+        .milestone-markers {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            pointer-events: none;
+        }
+
+        .milestone-marker {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: translateX(-50%);
+        }
+
+        .milestone-node {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .milestone-node.completed {
+            background: var(--color-brand-primary);
+        }
+
+        .milestone-node.completed svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        .milestone-node.next {
+            background: #FEF9EF;
+            border: 2px solid var(--color-brand-primary);
+        }
+
+        .milestone-node.locked {
+            background: #FEF9EF;
+            border: 1.5px solid #D4C4A0;
+        }
+
+        .milestone-info {
+            position: absolute;
+            top: 22px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .milestone-people {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 14px;
+            color: var(--color-text-primary);
+        }
+
+        .milestone-marker.completed .milestone-people {
+            color: var(--color-text-secondary);
+        }
+
+        .milestone-marker.locked .milestone-people {
+            color: var(--color-text-tertiary);
+        }
+
+        .milestone-reward {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .milestone-marker.locked .milestone-reward {
+            color: var(--color-text-tertiary);
+        }
+
+        .milestone-marker.next .milestone-people {
+            color: var(--color-brand-primary);
+            font-weight: 600;
+        }
+
+        .milestone-marker.next .milestone-reward {
+            color: var(--theme-emphasis);
+            font-weight: 500;
+        }
+
+        /* Next milestone callout */
+        .next-milestone-callout {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: rgba(201, 122, 106, 0.08);
+            border-radius: var(--radius-sm);
+            padding: var(--space-sm) var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .callout-text {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
+
+        .callout-text strong {
+            color: var(--color-brand-primary);
+            font-weight: 600;
+        }
+
+        .callout-arrow {
+            color: var(--color-brand-primary);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        /* Minimum met badge */
+        .min-met-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            background: rgba(34, 197, 94, 0.1);
+            margin-bottom: var(--space-sm);
+        }
+
+        .min-met-badge svg {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
+        }
+
+        .min-met-badge span {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: #16A34A;
+        }
+
+        .goal-deadline {
+            font-family: var(--font-body);
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        /* ===========================================
+           ENGAGEMENT CARD
+           =========================================== */
+
+        .engagement-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow:
+                0 4px 12px rgba(201, 122, 106, 0.15),
+                0 12px 32px rgba(201, 122, 106, 0.12),
+                0 2px 4px rgba(201, 122, 106, 0.08);
+        }
+
+        .engagement-message {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 400;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .engagement-message strong {
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--color-border-subtle);
+            margin: 0;
+        }
+
+        .pot-section {
+            padding: var(--space-lg) 0;
+            text-align: center;
+        }
+
+        .pot-label {
+            font-family: var(--font-body);
+            font-size: 10px;
+            line-height: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pot-amount {
+            font-family: var(--font-body);
+            font-size: 40px;
+            line-height: 48px;
+            font-weight: 600;
+            color: var(--color-brand-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .stats-row {
+            display: flex;
+            padding-top: var(--space-lg);
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-body);
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        /* ===========================================
+           TIPS CAROUSEL
+           =========================================== */
+
+        .tips-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tips-track {
+            display: flex;
+            transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: grab;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .tips-track.dragging {
+            transition: none;
+            cursor: grabbing;
+        }
+
+        .tip-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            padding: 0 var(--space-md);
+        }
+
+        .tip-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .tip-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--color-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tip-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .tip-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tip-title {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .tip-description {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .tips-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding-top: var(--space-sm);
+        }
+
+        .tips-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-text-tertiary);
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .tips-dot.active {
+            width: 20px;
+            border-radius: var(--radius-full);
+            background: var(--color-brand-primary);
+        }
+
+        /* ===========================================
+           PAGE INDICATORS
+           =========================================== */
+
+        .page-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-lg) 0 var(--space-2xl);
+        }
+
+        .page-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-text-tertiary);
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .page-dot.active {
+            width: 24px;
+            border-radius: var(--radius-full);
+            background: var(--color-brand-secondary);
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+
+        .fade-up {
+            animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.6, 1) backwards;
+        }
+
+        .fade-up-1 { animation-delay: 0.05s; }
+        .fade-up-2 { animation-delay: 0.1s; }
+        .fade-up-3 { animation-delay: 0.15s; }
+        .fade-up-4 { animation-delay: 0.2s; }
+        .fade-up-5 { animation-delay: 0.25s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===========================================
+           REDUCED MOTION
+           =========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            .header-blob { animation: none !important; }
+            .fade-up { animation: none !important; }
+            .progress-fill { transition: none !important; }
+            .tips-track { transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Review header -->
+    <div class="review-header">
+        <h1 class="review-title">Creator Collab Dashboard</h1>
+        <p class="review-subtitle">Pre-live state — sign-up phase before challenge starts</p>
+        <span class="review-flag">
+            <span class="material-icons" style="font-size: 14px;">schedule</span>
+            Pre-Live
+        </span>
+    </div>
+
+    <!-- Phone frame -->
+    <div class="phone-frame">
+        <div class="phone-scroll">
+
+            <!-- Header with gradient -->
+            <div class="header-section">
+                <div class="header-gradient">
+                    <div class="header-blob header-blob-1"></div>
+                    <div class="header-blob header-blob-2"></div>
+                    <div class="header-blob header-blob-3"></div>
+                </div>
+
+                <!-- Status bar -->
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <!-- Signal bars -->
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="#2B2E34"/>
+                            <rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="#2B2E34"/>
+                            <rect x="9" y="3" width="3" height="9" rx="0.5" fill="#2B2E34"/>
+                            <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="#2B2E34"/>
+                        </svg>
+                        <!-- WiFi -->
+                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <path d="M8 12a1.2 1.2 0 100-2.4A1.2 1.2 0 008 12z" fill="#2B2E34"/>
+                            <path d="M4.93 8.47a4.36 4.36 0 016.14 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M2.4 5.93a8 8 0 0111.2 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M.53 3.4a11 11 0 0114.94 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                        <!-- Battery -->
+                        <svg width="27" height="12" viewBox="0 0 27 12" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="11" rx="2" stroke="#2B2E34" stroke-opacity="0.35"/>
+                            <rect x="2" y="2" width="20" height="8" rx="1" fill="#2B2E34"/>
+                            <path d="M25 4v4a2 2 0 000-4z" fill="#2B2E34" fill-opacity="0.35"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="header-content">
+                    <!-- Nav with countdown -->
+                    <div class="nav-bar">
+                        <button class="nav-back"><span class="material-icons">chevron_left</span></button>
+                        <div class="countdown-pill">
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="days">02</div>
+                                <div class="countdown-label">Days</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="hours">23</div>
+                                <div class="countdown-label">Hrs</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="mins">58</div>
+                                <div class="countdown-label">Mins</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="secs">44</div>
+                                <div class="countdown-label">Secs</div>
+                            </div>
+                        </div>
+                        <button class="nav-more"><span class="material-icons">more_vert</span></button>
+                    </div>
+
+                    <!-- Challenge title -->
+                    <div class="challenge-title fade-up fade-up-1">Nature Yoga Reset</div>
+                    <div class="challenge-dates fade-up fade-up-1">Jan 5 – Feb 22, 2026</div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="content-area">
+
+                <!-- Participant Goal Card -->
+                <div class="goal-card fade-up fade-up-3">
+                    <div class="goal-header">
+                        <span class="goal-label">Participants</span>
+                        <span class="goal-count">150 signed up</span>
+                    </div>
+
+                    <!-- Milestone progress bar -->
+                    <div class="milestone-bar">
+                        <!-- Segment 1: 0→100 (full) -->
+                        <div class="milestone-segment">
+                            <div class="milestone-segment-fill" style="transform: scaleX(1)"></div>
+                        </div>
+                        <!-- Segment 2: 100→250 (50/150 = 33%) -->
+                        <div class="milestone-segment">
+                            <div class="milestone-segment-fill partial" style="transform: scaleX(0.33)"></div>
+                        </div>
+                        <!-- Segment 3: 250→500 (empty) -->
+                        <div class="milestone-segment"></div>
+                        <!-- Segment 4: 500→1000 (empty) -->
+                        <div class="milestone-segment"></div>
+                        <!-- Segment 5: 1000→2000 (empty) -->
+                        <div class="milestone-segment"></div>
+
+                        <!-- Markers overlaid at tier positions -->
+                        <div class="milestone-markers">
+                            <!-- 100 = end of segment 1 = 20% -->
+                            <div class="milestone-marker completed" style="left: 20%">
+                                <div class="milestone-node completed">
+                                    <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5L4 7.5L8 3" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <div class="milestone-info">
+                                    <div class="milestone-people">100</div>
+                                    <div class="milestone-reward">Min.</div>
+                                </div>
+                            </div>
+                            <!-- 250 = end of segment 2 = 40% -->
+                            <div class="milestone-marker next" style="left: 40%">
+                                <div class="milestone-node next"></div>
+                                <div class="milestone-info">
+                                    <div class="milestone-people">250</div>
+                                    <div class="milestone-reward">$75</div>
+                                </div>
+                            </div>
+                            <!-- 500 = end of segment 3 = 60% -->
+                            <div class="milestone-marker locked" style="left: 60%">
+                                <div class="milestone-node locked"></div>
+                                <div class="milestone-info">
+                                    <div class="milestone-people">500</div>
+                                    <div class="milestone-reward">$200</div>
+                                </div>
+                            </div>
+                            <!-- 1000 = end of segment 4 = 80% -->
+                            <div class="milestone-marker locked" style="left: 80%">
+                                <div class="milestone-node locked"></div>
+                                <div class="milestone-info">
+                                    <div class="milestone-people">1K</div>
+                                    <div class="milestone-reward">$500</div>
+                                </div>
+                            </div>
+                            <!-- 2000 = end of segment 5 = 100% -->
+                            <div class="milestone-marker locked" style="left: 100%">
+                                <div class="milestone-node locked"></div>
+                                <div class="milestone-info">
+                                    <div class="milestone-people">2K</div>
+                                    <div class="milestone-reward">$1,500</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next milestone callout -->
+                    <div class="next-milestone-callout">
+                        <span class="callout-text"><strong>100 more</strong> to unlock $75</span>
+                        <span class="callout-arrow material-icons">chevron_right</span>
+                    </div>
+
+                    <!-- Minimum met badge -->
+                    <div class="min-met-badge">
+                        <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#22C55E"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span>Minimum met — collab is live</span>
+                    </div>
+
+                    <div class="goal-deadline">Sign ups close on Monday at 11:59pm PST.</div>
+                </div>
+
+                <!-- Engagement & Stats Card -->
+                <div class="engagement-card fade-up fade-up-4">
+                    <p class="engagement-message"><strong>Chad, you're doing great,</strong> you've engaged about .5% of your followers! Just 3 weeks to go!</p>
+
+                    <div class="divider"></div>
+
+                    <div class="pot-section">
+                        <div class="pot-label">Total Community Pot</div>
+                        <div class="pot-amount">$11,040</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-value">+12</div>
+                            <div class="stat-label">New sign-ups</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$40</div>
+                            <div class="stat-label">Commitment</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3 weeks</div>
+                            <div class="stat-label">Starts in…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips Carousel -->
+                <div class="tips-carousel fade-up fade-up-5" id="tipsCarousel">
+                    <div class="tips-track" id="tipsTrack">
+
+                        <!-- Tip 1: Share Your Why -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 5L12.76 9.24L16.5 7.5L13.76 10.91L18 12L13.76 13.09L16.5 16.5L12.76 14.76L12 19L11.24 14.76L7.5 16.5L10.24 13.09L6 12L10.24 10.91L7.5 7.5L11.24 9.24L12 5Z" fill="var(--color-brand-primary)" opacity="0.15"/>
+                                        <path d="M12 5L12.76 9.24L16.5 7.5L13.76 10.91L18 12L13.76 13.09L16.5 16.5L12.76 14.76L12 19L11.24 14.76L7.5 16.5L10.24 13.09L6 12L10.24 10.91L7.5 7.5L11.24 9.24L12 5Z" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <circle cx="12" cy="12" r="2" fill="#C97A6A" opacity="0.3"/>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Share Your Why</div>
+                                    <div class="tip-description">Post your personal challenge story — authentic shares convert 3x better.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 2: Go Live -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="8" fill="#C97A6A" opacity="0.12"/>
+                                        <circle cx="12" cy="12" r="4.5" stroke="#C97A6A" stroke-width="1.2"/>
+                                        <circle cx="12" cy="12" r="1.5" fill="#C97A6A"/>
+                                        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Go Live This Week</div>
+                                    <div class="tip-description">A quick IG or TikTok live answering questions drives 5x more sign-ups than static posts.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 3: Countdown Reminder -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <rect x="4" y="4" width="16" height="16" rx="4" fill="#C97A6A" opacity="0.12"/>
+                                        <circle cx="12" cy="13" r="5" stroke="#C97A6A" stroke-width="1.2"/>
+                                        <path d="M12 10.5v3l2 1.5" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10 5h4" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Post a Countdown</div>
+                                    <div class="tip-description">Share the deadline to your stories — urgency boosts sign-ups by 40% in the final week.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 4: Tag Participants -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2" fill="#C97A6A" opacity="0.12"/>
+                                        <circle cx="10" cy="8" r="3.5" stroke="#C97A6A" stroke-width="1.2"/>
+                                        <path d="M16 11v-2a4 4 0 00-8 0v2" stroke="#C97A6A" stroke-width="0" fill="none"/>
+                                        <path d="M6 21v-1a4 4 0 014-4h0a4 4 0 014 4v1" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"/>
+                                        <path d="M17.5 8.5l1.5 1.5 3-3" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Shout Out Early Joiners</div>
+                                    <div class="tip-description">Tag a few sign-ups in your story — social proof from real people outperforms any ad.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 5: Pinned Comment -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <rect x="3" y="6" width="18" height="13" rx="3" fill="#C97A6A" opacity="0.12"/>
+                                        <rect x="3" y="6" width="18" height="13" rx="3" stroke="#C97A6A" stroke-width="1.2"/>
+                                        <path d="M8 11h8M8 14.5h5" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Pin Your Challenge Link</div>
+                                    <div class="tip-description">Pin a comment with your sign-up link on your top 3 posts — easy wins from existing traffic.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Carousel dots -->
+                    <div class="tips-dots" id="tipsDots">
+                        <div class="tips-dot active"></div>
+                        <div class="tips-dot"></div>
+                        <div class="tips-dot"></div>
+                        <div class="tips-dot"></div>
+                        <div class="tips-dot"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Page indicator dots -->
+            <div class="page-dots">
+                <div class="page-dot"></div>
+                <div class="page-dot"></div>
+                <div class="page-dot active"></div>
+                <div class="page-dot"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // COUNTDOWN TIMER
+        // =============================================
+
+        const secsEl = document.getElementById('secs');
+        const minsEl = document.getElementById('mins');
+        const hoursEl = document.getElementById('hours');
+        const daysEl = document.getElementById('days');
+
+        let totalSeconds = (2 * 86400) + (23 * 3600) + (58 * 60) + 44;
+
+        function padTwo(n) {
+            return n.toString().padStart(2, '0');
+        }
+
+        function updateCountdown() {
+            if (totalSeconds <= 0) return;
+            totalSeconds--;
+
+            const d = Math.floor(totalSeconds / 86400);
+            const h = Math.floor((totalSeconds % 86400) / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+
+            daysEl.textContent = padTwo(d);
+            hoursEl.textContent = padTwo(h);
+            minsEl.textContent = padTwo(m);
+            secsEl.textContent = padTwo(s);
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // =============================================
+        // TIPS CAROUSEL — swipe + drag
+        // =============================================
+
+        (function() {
+            const track = document.getElementById('tipsTrack');
+            const dots = document.querySelectorAll('#tipsDots .tips-dot');
+            const slideCount = track.children.length;
+            let current = 0;
+            let startX = 0;
+            let currentTranslate = 0;
+            let prevTranslate = 0;
+            let isDragging = false;
+            let animationId = null;
+
+            function setPosition() {
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+
+            function goTo(index) {
+                current = Math.max(0, Math.min(index, slideCount - 1));
+                prevTranslate = -current * track.offsetWidth / slideCount * slideCount;
+                // recalculate based on slide width
+                const slideWidth = track.parentElement.offsetWidth;
+                prevTranslate = -current * slideWidth;
+                currentTranslate = prevTranslate;
+                track.classList.remove('dragging');
+                setPosition();
+                updateDots();
+            }
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
+            }
+
+            // Touch events
+            track.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                track.classList.add('dragging');
+            }, { passive: true });
+
+            track.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const x = e.touches[0].clientX;
+                const diff = x - startX;
+                const slideWidth = track.parentElement.offsetWidth;
+                currentTranslate = -current * slideWidth + diff;
+                setPosition();
+            }, { passive: true });
+
+            track.addEventListener('touchend', (e) => {
+                isDragging = false;
+                const slideWidth = track.parentElement.offsetWidth;
+                const moved = currentTranslate - (-current * slideWidth);
+                const threshold = slideWidth * 0.2;
+
+                if (moved < -threshold && current < slideCount - 1) {
+                    goTo(current + 1);
+                } else if (moved > threshold && current > 0) {
+                    goTo(current - 1);
+                } else {
+                    goTo(current);
+                }
+            });
+
+            // Mouse events (for desktop preview)
+            track.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                track.classList.add('dragging');
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const diff = e.clientX - startX;
+                const slideWidth = track.parentElement.offsetWidth;
+                currentTranslate = -current * slideWidth + diff;
+                setPosition();
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                const slideWidth = track.parentElement.offsetWidth;
+                const moved = currentTranslate - (-current * slideWidth);
+                const threshold = slideWidth * 0.2;
+
+                if (moved < -threshold && current < slideCount - 1) {
+                    goTo(current + 1);
+                } else if (moved > threshold && current > 0) {
+                    goTo(current - 1);
+                } else {
+                    goTo(current);
+                }
+            });
+
+            // Dot clicks
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => goTo(i));
+                dot.style.cursor = 'pointer';
+            });
+
+            // Prevent image/link drag
+            track.addEventListener('dragstart', (e) => e.preventDefault());
+        })();
+    </script>
+
+</body>
+</html>
