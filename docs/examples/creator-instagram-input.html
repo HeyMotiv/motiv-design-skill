@@ -2342,8 +2342,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 0 24px 60px;
+            justify-content: flex-end;
+            padding: 0 24px 58px;
             overflow: hidden;
             border-radius: 0 0 28px 28px;
         }
@@ -3091,6 +3091,331 @@
         }
 
         /* ===========================================
+           SCREEN 12: EMAIL
+           =========================================== */
+
+        .s12-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px var(--space-xl) var(--space-xl);
+        }
+
+        .s12-nav {
+            display: flex;
+            align-items: center;
+            padding: var(--space-xs) 0 var(--space-md);
+        }
+
+        .s12-headline {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.28;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .s12-subtext {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .s12-cta {
+            margin-top: auto;
+            padding-top: var(--space-lg);
+        }
+
+        /* ===========================================
+           SCREEN 13: PASSWORD
+           =========================================== */
+
+        .s13-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 60px var(--space-xl) var(--space-xl);
+        }
+
+        .s13-nav {
+            display: flex;
+            align-items: center;
+            padding: var(--space-xs) 0 var(--space-md);
+        }
+
+        .s13-headline {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.28;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .s13-subtext {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .s13-password-hint {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xxs);
+            font-size: 12px;
+            letter-spacing: 0.01em;
+            color: var(--color-text-tertiary);
+        }
+
+        .s13-cta {
+            margin-top: auto;
+            padding-top: var(--space-lg);
+        }
+
+        /* ===========================================
+           SCREEN 14: HOME
+           =========================================== */
+
+        #screen14 {
+            background: var(--color-bg-primary);
+        }
+
+        .s14-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .s14-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px var(--space-xl) var(--space-md);
+        }
+
+        .s14-greeting-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .s14-greeting-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .s14-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blob-pink) 0%, var(--blob-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .s14-avatar .material-icons {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .s14-body {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 var(--space-xl) var(--space-xl);
+        }
+        .s14-body::-webkit-scrollbar { display: none; }
+
+        .s14-section-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-sm);
+            margin-top: var(--space-xl);
+        }
+        .s14-section-label:first-child {
+            margin-top: 0;
+        }
+
+        .s14-collab-card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            margin-bottom: var(--space-md);
+        }
+
+        .s14-collab-hero {
+            position: relative;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-lg);
+            overflow: hidden;
+        }
+
+        .s14-collab-hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .s14-collab-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: 1;
+        }
+
+        .s14-collab-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .s14-collab-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--space-xs);
+        }
+
+        .s14-collab-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .s14-collab-footer {
+            display: flex;
+            background: var(--color-bg-primary);
+            padding: var(--space-md) var(--space-lg);
+        }
+
+        .s14-collab-stat {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .s14-collab-stat + .s14-collab-stat {
+            border-left: 1px solid var(--color-border-default);
+        }
+
+        .s14-collab-stat-value {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .s14-collab-stat-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-tertiary);
+        }
+
+        .s14-share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 32px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+            box-shadow: 0 4px 16px rgba(26, 26, 26, 0.15);
+        }
+        .s14-share-btn:hover { transform: scale(1.02); }
+        .s14-share-btn:active { transform: scale(0.97); }
+        .s14-share-btn .material-icons { font-size: 20px; }
+
+        .s14-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .s14-action-card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg) var(--space-sm);
+            cursor: pointer;
+            transition: background var(--motion-fast);
+        }
+        .s14-action-card:hover { background: var(--color-bg-tertiary); }
+        .s14-action-card .material-icons {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+        }
+        .s14-action-card span:last-child {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--color-text-secondary);
+        }
+
+        .s14-bottom-nav {
+            display: flex;
+            background: var(--color-bg-primary);
+            border-top: 1px solid var(--color-border-default);
+            padding: var(--space-sm) 0 24px;
+            flex-shrink: 0;
+        }
+
+        .s14-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            transition: color var(--motion-fast);
+        }
+        .s14-nav-item .material-icons { font-size: 24px; }
+        .s14-nav-item--active {
+            color: var(--color-text-primary);
+        }
+
+        /* ===========================================
            REDUCED MOTION
            =========================================== */
 
@@ -3121,7 +3446,10 @@
             <span class="nav-jump" data-screen="screen8">Template</span> &rarr;
             <span class="nav-jump" data-screen="screen9">Name</span> &rarr;
             <span class="nav-jump" data-screen="screen10">Products</span> &rarr;
-            <span class="nav-jump" data-screen="screen11">Preview</span>
+            <span class="nav-jump" data-screen="screen11">Preview</span> &rarr;
+            <span class="nav-jump" data-screen="screen12">Email</span> &rarr;
+            <span class="nav-jump" data-screen="screen13">Password</span> &rarr;
+            <span class="nav-jump" data-screen="screen14">Home</span>
         </p>
     </div>
 
@@ -4144,8 +4472,147 @@
 
             <!-- Sticky CTA -->
             <div class="s11-sticky-bottom">
-                <button class="btn-primary btn-primary--purple" id="s11LaunchBtn">Create my collab</button>
+                <button class="btn-primary btn-primary--purple" id="s11LaunchBtn">Save & continue</button>
                 <button class="btn-secondary" id="s11EditBtn">Edit details</button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SCREEN 12: EMAIL
+             ============================================ -->
+        <div class="screen" id="screen12">
+            <div class="s12-content">
+                <div class="s12-nav">
+                    <a href="#" class="back-btn" id="s12Back"><span class="material-icons">chevron_left</span></a>
+                </div>
+
+                <h1 class="s12-headline">What's your email?</h1>
+                <p class="s12-subtext">We'll use this to create your account and send collab updates.</p>
+
+                <div class="form-group">
+                    <label class="form-label">Email address</label>
+                    <input type="email" class="form-input" id="emailInput" placeholder="you@example.com" autocomplete="email">
+                </div>
+
+                <div class="s12-cta">
+                    <button class="btn-primary btn-primary--purple" id="s12ContinueBtn">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SCREEN 13: PASSWORD
+             ============================================ -->
+        <div class="screen" id="screen13">
+            <div class="s13-content">
+                <div class="s13-nav">
+                    <a href="#" class="back-btn" id="s13Back"><span class="material-icons">chevron_left</span></a>
+                </div>
+
+                <h1 class="s13-headline">Create a password</h1>
+                <p class="s13-subtext">Secure your account with a strong password.</p>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-input" id="passwordInput" placeholder="At least 8 characters">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirm password</label>
+                    <input type="password" class="form-input" id="confirmPasswordInput" placeholder="Re-enter your password">
+                </div>
+
+                <p class="s13-password-hint">
+                    <span class="material-icons" style="font-size: 14px; vertical-align: middle;">lock</span>
+                    Must be at least 8 characters
+                </p>
+
+                <div class="s13-cta">
+                    <button class="btn-primary btn-primary--purple" id="s13CreateBtn">Create account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SCREEN 14: HOME
+             ============================================ -->
+        <div class="screen" id="screen14">
+            <div class="s14-content">
+                <div class="s14-top-bar">
+                    <div class="s14-greeting">
+                        <p class="s14-greeting-label">Welcome back</p>
+                        <p class="s14-greeting-name" id="s14GreetingName">Ellie</p>
+                    </div>
+                    <div class="s14-avatar" id="s14Avatar">
+                        <span class="material-icons">person</span>
+                    </div>
+                </div>
+
+                <div class="s14-body">
+                    <div class="s14-section-label">Your collab</div>
+                    <div class="s14-collab-card" id="s14CollabCard">
+                        <div class="s14-collab-hero">
+                            <div class="s14-collab-hero-bg" id="s14CollabBg"></div>
+                            <div class="s14-collab-hero-content">
+                                <div class="s14-collab-status">
+                                    <span class="material-icons" style="font-size: 14px;">schedule</span>
+                                    Starts in 14 days
+                                </div>
+                                <div class="s14-collab-title" id="s14CollabTitle">Nature Yoga Reset</div>
+                            </div>
+                        </div>
+                        <div class="s14-collab-footer">
+                            <div class="s14-collab-stat">
+                                <span class="s14-collab-stat-value">0</span>
+                                <span class="s14-collab-stat-label">Participants</span>
+                            </div>
+                            <div class="s14-collab-stat">
+                                <span class="s14-collab-stat-value">$0</span>
+                                <span class="s14-collab-stat-label">Pool</span>
+                            </div>
+                            <div class="s14-collab-stat">
+                                <span class="s14-collab-stat-value" id="s14Duration">5 wk</span>
+                                <span class="s14-collab-stat-label">Duration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="s14-share-btn" id="s14ShareBtn">
+                        <span class="material-icons">ios_share</span>
+                        Share your collab
+                    </button>
+
+                    <div class="s14-section-label">Quick actions</div>
+                    <div class="s14-actions">
+                        <div class="s14-action-card">
+                            <span class="material-icons">edit</span>
+                            <span>Edit collab</span>
+                        </div>
+                        <div class="s14-action-card">
+                            <span class="material-icons">link</span>
+                            <span>Copy link</span>
+                        </div>
+                        <div class="s14-action-card">
+                            <span class="material-icons">analytics</span>
+                            <span>Insights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s14-bottom-nav">
+                    <div class="s14-nav-item s14-nav-item--active">
+                        <span class="material-icons">home</span>
+                        <span>Home</span>
+                    </div>
+                    <div class="s14-nav-item">
+                        <span class="material-icons">explore</span>
+                        <span>Explore</span>
+                    </div>
+                    <div class="s14-nav-item">
+                        <span class="material-icons">person</span>
+                        <span>Profile</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -4169,7 +4636,10 @@
             name:     document.getElementById('screen9'),
             products: document.getElementById('screen10'),
             prepPreview: document.getElementById('screen10b'),
-            preview:  document.getElementById('screen11')
+            preview:  document.getElementById('screen11'),
+            email:    document.getElementById('screen12'),
+            password: document.getElementById('screen13'),
+            home:     document.getElementById('screen14')
         };
 
         const handleInput = document.getElementById('handleInput');
@@ -4189,7 +4659,10 @@
             'templates':  'screen8',
             'name':       'screen9',
             'products':   'screen10',
-            'preview':    'screen11'
+            'preview':    'screen11',
+            'email':      'screen12',
+            'password':   'screen13',
+            'home':       'screen14'
         };
         var idToHash = {};
         Object.keys(hashMap).forEach(function(k) { idToHash[hashMap[k]] = k; });
@@ -4202,7 +4675,7 @@
         function goTo(from, to) {
             from.classList.add('exiting');
             from.classList.remove('active');
-            var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11'];
+            var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11','screen12','screen13'];
             if (greenScreens.indexOf(to.id) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
@@ -4679,13 +5152,53 @@
             goTo(screens.preview, screens.name);
         });
 
-        // Preview "Create my collab" → simple celebration
+        // Preview "Save & continue" → Email screen
         document.getElementById('s11LaunchBtn').addEventListener('click', function() {
-            this.textContent = 'Launching…';
-            this.disabled = true;
+            goTo(screens.preview, screens.email);
+        });
+
+        // =============================================
+        // NAVIGATION: SCREENS 12–14
+        // =============================================
+
+        // Email back → Preview
+        document.getElementById('s12Back').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.email, screens.preview);
+        });
+
+        // Email continue → Password
+        document.getElementById('s12ContinueBtn').addEventListener('click', function() {
+            goTo(screens.email, screens.password);
+        });
+
+        // Password back → Email
+        document.getElementById('s13Back').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.password, screens.email);
+        });
+
+        // Password "Create account" → Home (with brief loading state)
+        document.getElementById('s13CreateBtn').addEventListener('click', function() {
+            var btn = this;
+            btn.textContent = 'Creating account\u2026';
+            btn.disabled = true;
             setTimeout(function() {
-                document.getElementById('s11LaunchBtn').textContent = 'Collab created!';
+                populateHome();
+                goTo(screens.password, screens.home);
+                btn.textContent = 'Create account';
+                btn.disabled = false;
             }, 1200);
+        });
+
+        // Share button on home
+        document.getElementById('s14ShareBtn').addEventListener('click', function() {
+            var original = this.innerHTML;
+            this.innerHTML = '<span class="material-icons">check</span> Link copied!';
+            var btn = this;
+            setTimeout(function() {
+                btn.innerHTML = original;
+            }, 2000);
         });
 
         // Template configurations for preview
@@ -4860,8 +5373,41 @@
 
             // Reset launch button
             var launchBtn = document.getElementById('s11LaunchBtn');
-            launchBtn.textContent = 'Create my collab';
+            launchBtn.textContent = 'Save & continue';
             launchBtn.disabled = false;
+        }
+
+        function populateHome() {
+            var idx = window.selectedTemplateIdx || 0;
+            var tpl = templateConfigs[idx];
+
+            // Set collab card hero gradient
+            var heroBg = document.getElementById('s14CollabBg');
+            heroBg.style.background = tpl.gradient;
+            heroBg.innerHTML = tpl.svgArt;
+
+            // Set collab title
+            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
+            var titleEl = document.getElementById('s14CollabTitle');
+            titleEl.textContent = title;
+            titleEl.style.fontFamily = tpl.font;
+
+            // Set duration
+            document.getElementById('s14Duration').textContent = selectedDuration.short || selectedDuration.label;
+
+            // Set greeting name from creator data
+            var nameEl = document.getElementById('s11CreatorName');
+            if (nameEl) {
+                var creatorName = nameEl.textContent.split(' ')[0] || 'Creator';
+                document.getElementById('s14GreetingName').textContent = creatorName;
+            }
+
+            // Set avatar gradient
+            document.getElementById('s14Avatar').style.background = tpl.avatarGradient;
+
+            // Reset scroll
+            var body = document.querySelector('#screen14 .s14-body');
+            if (body) body.scrollTop = 0;
         }
 
         // Set thumbnail on a product slot
@@ -5015,7 +5561,7 @@
             document.getElementById(targetId).classList.add('active');
             setHash(targetId);
 
-            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11'];
+            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10','screen10b','screen11','screen12','screen13'];
             if (greenIds.indexOf(targetId) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
@@ -5058,6 +5604,9 @@
             }
             if (targetId === 'screen11') {
                 populatePreview();
+            }
+            if (targetId === 'screen14') {
+                populateHome();
             }
         }
 
