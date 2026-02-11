@@ -21,8 +21,8 @@
 
             /* Text */
             --color-text-primary: #2B2E34;
-            --color-text-secondary: #8FA6A0;
-            --color-text-tertiary: #B8C4C0;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
             --color-text-inverse: #FFFFFF;
 
             /* Backgrounds */
@@ -38,6 +38,14 @@
             --theme-bg: #F7F0EB;
             --theme-emphasis: #BC8464;
             --theme-text: #764D2C;
+
+            /* Goal card (warm amber) */
+            --color-goal-bg: #FEF9EF;
+            --color-goal-border: #EDD9A3;
+
+            /* Semantic */
+            --color-success: #22C55E;
+            --color-success-dark: #16A34A;
 
             /* Typography */
             --font-display: 'Source Serif 4', Georgia, serif;
@@ -63,6 +71,7 @@
             --radius-full: 9999px;
 
             /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
         }
@@ -78,7 +87,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 32px 24px;
+            padding: var(--space-2xl) var(--space-xl);
         }
 
         /* ===========================================
@@ -87,7 +96,7 @@
 
         .review-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: var(--space-xl);
             max-width: 720px;
         }
 
@@ -96,26 +105,28 @@
             font-size: 20px;
             font-weight: 700;
             color: #e8e8f0;
-            margin-bottom: 4px;
+            margin-bottom: var(--space-xxs);
         }
 
         .review-subtitle {
-            font-size: 13px;
+            font-size: 12px;
+            line-height: 16px;
             color: #8888a0;
-            margin-bottom: 12px;
+            margin-bottom: var(--space-sm);
         }
 
         .review-flag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
             border-radius: var(--radius-full);
             background: rgba(201, 122, 106, 0.1);
             border: 1px solid rgba(201, 122, 106, 0.25);
-            color: #C97A6A;
+            color: var(--color-brand-primary);
             font-size: 12px;
             font-weight: 500;
+            line-height: 16px;
         }
 
         /* ===========================================
@@ -131,7 +142,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            margin-top: 20px;
+            margin-top: var(--space-lg);
             background: var(--color-bg-primary);
         }
 
@@ -240,7 +251,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px var(--space-xl) 0;
+            padding: var(--space-sm) var(--space-xl) 0;
             position: relative;
             z-index: 1;
         }
@@ -255,7 +266,7 @@
         .status-icons {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: var(--space-xxs);
         }
 
         .status-icons svg {
@@ -317,7 +328,7 @@
             font-family: var(--font-display);
             font-size: 24px;
             line-height: 32px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--color-text-primary);
             margin-bottom: var(--space-xxs);
         }
@@ -339,13 +350,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-md);
+            gap: var(--space-sm);
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: var(--radius-full);
-            padding: var(--space-xs) var(--space-lg);
+            padding: var(--space-xxs) var(--space-md);
         }
 
         .countdown-unit {
@@ -354,21 +365,21 @@
 
         .countdown-value {
             font-family: var(--font-mono);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             line-height: 16px;
             color: var(--color-text-primary);
-            letter-spacing: -0.01em;
+            letter-spacing: 0.02em;
         }
 
         .countdown-label {
             font-family: var(--font-body);
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--color-text-secondary);
-            line-height: 12px;
+            line-height: 14px;
         }
 
         /* ===========================================
@@ -383,7 +394,8 @@
         }
 
         .content-area > .goal-card,
-        .content-area > .engagement-card {
+        .content-area > .engagement-card,
+        .content-area > .signups-card {
             margin: 0 var(--space-md);
         }
 
@@ -392,8 +404,8 @@
            =========================================== */
 
         .goal-card {
-            background: #FEF9EF;
-            border: 1px solid #EDD9A3;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
         }
@@ -402,7 +414,7 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
         }
 
         .goal-label {
@@ -411,14 +423,16 @@
             font-weight: 500;
             line-height: 20px;
             color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
         }
 
         .goal-count {
             font-family: var(--font-body);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 20px;
             color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
         }
 
         /* Milestone progress bar */
@@ -427,13 +441,13 @@
             display: flex;
             gap: 2px;
             height: 6px;
-            margin-bottom: 44px;
+            margin-bottom: var(--space-md);
         }
 
         .milestone-segment {
             flex: 1;
-            background: #EDD9A3;
-            border-radius: 3px;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xs);
             overflow: hidden;
             position: relative;
         }
@@ -442,171 +456,228 @@
             position: absolute;
             inset: 0;
             background: var(--color-brand-primary);
-            border-radius: 3px;
+            border-radius: var(--radius-xs);
             transform-origin: left;
             transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
         }
 
         .milestone-segment-fill.partial {
-            background: var(--color-brand-primary);
-            opacity: 0.65;
+            opacity: 0.5;
         }
 
-        /* Milestone markers */
-        .milestone-markers {
+        /* Uniform dot markers at segment junctions */
+        .milestone-dots {
             position: absolute;
             top: 50%;
             left: 0;
             right: 0;
             transform: translateY(-50%);
-            display: flex;
             pointer-events: none;
         }
 
-        .milestone-marker {
+        .milestone-dot {
             position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transform: translateX(-50%);
-        }
-
-        .milestone-node {
-            width: 18px;
-            height: 18px;
+            top: 50%;
+            transform: translate(-50%, -50%);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .milestone-node.completed {
-            background: var(--color-brand-primary);
-        }
-
-        .milestone-node.completed svg {
             width: 10px;
             height: 10px;
         }
 
-        .milestone-node.next {
-            background: #FEF9EF;
+        .milestone-dot.completed {
+            background: var(--color-brand-primary);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
+        }
+
+        .milestone-dot.next {
+            background: var(--color-bg-primary);
             border: 2px solid var(--color-brand-primary);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
         }
 
-        .milestone-node.locked {
-            background: #FEF9EF;
-            border: 1.5px solid #D4C4A0;
+        .milestone-dot.locked {
+            background: var(--color-bg-primary);
+            border: 1.5px solid var(--color-border-default);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
         }
 
-        .milestone-info {
-            position: absolute;
-            top: 22px;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        .milestone-people {
-            font-family: var(--font-body);
-            font-size: 11px;
-            font-weight: 600;
-            line-height: 14px;
-            color: var(--color-text-primary);
-        }
-
-        .milestone-marker.completed .milestone-people {
-            color: var(--color-text-secondary);
-        }
-
-        .milestone-marker.locked .milestone-people {
-            color: var(--color-text-tertiary);
-        }
-
-        .milestone-reward {
-            font-family: var(--font-body);
-            font-size: 10px;
-            font-weight: 400;
-            line-height: 14px;
-            color: var(--color-text-secondary);
-        }
-
-        .milestone-marker.locked .milestone-reward {
-            color: var(--color-text-tertiary);
-        }
-
-        .milestone-marker.next .milestone-people {
-            color: var(--color-brand-primary);
-            font-weight: 600;
-        }
-
-        .milestone-marker.next .milestone-reward {
-            color: var(--theme-emphasis);
-            font-weight: 500;
-        }
-
-        /* Next milestone callout */
-        .next-milestone-callout {
+        /* Next milestone focus section */
+        .next-milestone {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
             display: flex;
             align-items: center;
-            gap: var(--space-xs);
-            background: rgba(201, 122, 106, 0.08);
-            border-radius: var(--radius-sm);
-            padding: var(--space-sm) var(--space-md);
-            margin-bottom: var(--space-sm);
+            gap: var(--space-md);
         }
 
-        .callout-text {
-            font-family: var(--font-body);
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 500;
-            color: var(--color-text-primary);
-            flex: 1;
-        }
-
-        .callout-text strong {
-            color: var(--color-brand-primary);
-            font-weight: 600;
-        }
-
-        .callout-arrow {
-            color: var(--color-brand-primary);
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        /* Minimum met badge */
-        .min-met-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: var(--radius-full);
-            background: rgba(34, 197, 94, 0.1);
-            margin-bottom: var(--space-sm);
-        }
-
-        .min-met-badge svg {
-            width: 12px;
-            height: 12px;
+        .next-milestone-ring {
+            position: relative;
+            width: 52px;
+            height: 52px;
             flex-shrink: 0;
         }
 
-        .min-met-badge span {
+        .next-milestone-ring svg {
+            width: 52px;
+            height: 52px;
+            transform: rotate(-90deg);
+        }
+
+        .next-milestone-ring .ring-track {
+            fill: none;
+            stroke: var(--color-bg-tertiary);
+            stroke-width: 3.5;
+        }
+
+        .next-milestone-ring .ring-fill {
+            fill: none;
+            stroke: var(--color-brand-primary);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .next-milestone-ring-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--color-brand-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .next-milestone-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .next-milestone-heading {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .next-milestone-heading strong {
+            color: var(--color-brand-primary);
+        }
+
+        .next-milestone-sub {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Bar legend — left/right labels under the bar */
+        .milestone-legend {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-md);
+        }
+
+        .milestone-legend-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .milestone-legend-item:last-child {
+            align-items: flex-end;
+        }
+
+        .milestone-legend-label {
             font-family: var(--font-body);
             font-size: 12px;
             font-weight: 500;
             line-height: 16px;
-            color: #16A34A;
+            color: var(--color-text-tertiary);
+            letter-spacing: 0.01em;
+        }
+
+        .milestone-legend-label strong {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .milestone-legend-earning {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Current tier status row */
+        .current-tier {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(201, 122, 106, 0.06);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .current-tier-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        .current-tier-value {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Tier pills (used in footer) */
+        .tier-pill {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            padding: var(--space-xxs) var(--space-xs);
+            border-radius: var(--radius-full);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .tier-pill.completed {
+            background: rgba(201, 122, 106, 0.12);
+            color: var(--color-brand-primary);
+        }
+
+        .goal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .goal-deadline {
             font-family: var(--font-body);
-            font-size: 13px;
-            line-height: 18px;
+            font-size: 12px;
+            line-height: 16px;
             font-weight: 400;
             color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
         }
 
         /* ===========================================
@@ -640,7 +711,6 @@
         .divider {
             height: 1px;
             background: var(--color-border-subtle);
-            margin: 0;
         }
 
         .pot-section {
@@ -684,7 +754,7 @@
             line-height: 28px;
             font-weight: 600;
             color: var(--color-text-primary);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-xxs);
         }
 
         .stat-label {
@@ -694,6 +764,168 @@
             font-weight: 400;
             color: var(--color-text-secondary);
             letter-spacing: 0.01em;
+        }
+
+        /* ===========================================
+           RECENTLY JOINED CARD
+           =========================================== */
+
+        .signups-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .signups-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .signups-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .signups-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xxs);
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(201, 122, 106, 0.1);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .signups-badge .material-icons {
+            font-size: 16px;
+        }
+
+        .signups-subtitle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .signups-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            position: relative;
+        }
+
+        .signups-list::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: linear-gradient(transparent, var(--color-bg-primary));
+            pointer-events: none;
+        }
+
+        .signup-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .signup-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .signup-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .signup-name-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .signup-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .signup-new-badge {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            background: rgba(201, 122, 106, 0.1);
+            padding: 2px var(--space-xs);
+            border-radius: var(--radius-full);
+            letter-spacing: 0.02em;
+        }
+
+        .signup-handle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .signups-view-all {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: var(--space-sm) var(--space-xl);
+            margin-top: var(--space-lg);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            background: none;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            letter-spacing: 0.01em;
+            transition: background 0.15s ease;
+        }
+
+        .signups-view-all:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .signups-view-all:active {
+            transform: scale(0.98);
         }
 
         /* ===========================================
@@ -761,7 +993,7 @@
             line-height: 24px;
             font-weight: 600;
             color: var(--color-text-primary);
-            margin-bottom: 2px;
+            margin-bottom: var(--space-xxs);
         }
 
         .tip-description {
@@ -776,7 +1008,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: var(--space-xs);
             padding-top: var(--space-sm);
         }
 
@@ -792,6 +1024,59 @@
             width: 20px;
             border-radius: var(--radius-full);
             background: var(--color-brand-primary);
+        }
+
+        /* ===========================================
+           INVITE CTA
+           =========================================== */
+
+        .invite-cta {
+            margin: 0 var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-secondary);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .invite-cta:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .invite-cta:active {
+            transform: scale(0.98);
+        }
+
+        .invite-cta-icon {
+            flex-shrink: 0;
+            color: var(--color-brand-primary);
+        }
+
+        .invite-cta-icon .material-icons {
+            font-size: 24px;
+        }
+
+        .invite-cta-text {
+            flex: 1;
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 600;
+            color: var(--color-brand-primary);
+            white-space: nowrap;
+        }
+
+        .invite-cta-share {
+            flex-shrink: 0;
+            color: var(--color-brand-primary);
+        }
+
+        .invite-cta-share .material-icons {
+            font-size: 22px;
         }
 
         /* ===========================================
@@ -833,6 +1118,7 @@
         .fade-up-3 { animation-delay: 0.15s; }
         .fade-up-4 { animation-delay: 0.2s; }
         .fade-up-5 { animation-delay: 0.25s; }
+        .fade-up-6 { animation-delay: 0.3s; }
 
         @keyframes fadeUp {
             from {
@@ -852,7 +1138,7 @@
         @media (prefers-reduced-motion: reduce) {
             .header-blob { animation: none !important; }
             .fade-up { animation: none !important; }
-            .progress-fill { transition: none !important; }
+            .milestone-segment-fill { transition: none !important; }
             .tips-track { transition: none !important; }
         }
     </style>
@@ -945,87 +1231,70 @@
                 <!-- Participant Goal Card -->
                 <div class="goal-card fade-up fade-up-3">
                     <div class="goal-header">
-                        <span class="goal-label">Participants</span>
+                        <span class="goal-label">Participant milestones</span>
                         <span class="goal-count">150 signed up</span>
                     </div>
 
-                    <!-- Milestone progress bar -->
+                    <!-- Progress bar with dot markers -->
                     <div class="milestone-bar">
-                        <!-- Segment 1: 0→100 (full) -->
+                        <!-- 5 segments: 0→100, 100→250, 250→500, 500→1K, 1K→2K -->
                         <div class="milestone-segment">
                             <div class="milestone-segment-fill" style="transform: scaleX(1)"></div>
                         </div>
-                        <!-- Segment 2: 100→250 (50/150 = 33%) -->
                         <div class="milestone-segment">
                             <div class="milestone-segment-fill partial" style="transform: scaleX(0.33)"></div>
                         </div>
-                        <!-- Segment 3: 250→500 (empty) -->
                         <div class="milestone-segment"></div>
-                        <!-- Segment 4: 500→1000 (empty) -->
                         <div class="milestone-segment"></div>
-                        <!-- Segment 5: 1000→2000 (empty) -->
                         <div class="milestone-segment"></div>
 
-                        <!-- Markers overlaid at tier positions -->
-                        <div class="milestone-markers">
-                            <!-- 100 = end of segment 1 = 20% -->
-                            <div class="milestone-marker completed" style="left: 20%">
-                                <div class="milestone-node completed">
-                                    <svg viewBox="0 0 10 10" fill="none"><path d="M2 5.5L4 7.5L8 3" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                </div>
-                                <div class="milestone-info">
-                                    <div class="milestone-people">100</div>
-                                    <div class="milestone-reward">Min.</div>
-                                </div>
-                            </div>
-                            <!-- 250 = end of segment 2 = 40% -->
-                            <div class="milestone-marker next" style="left: 40%">
-                                <div class="milestone-node next"></div>
-                                <div class="milestone-info">
-                                    <div class="milestone-people">250</div>
-                                    <div class="milestone-reward">$75</div>
-                                </div>
-                            </div>
-                            <!-- 500 = end of segment 3 = 60% -->
-                            <div class="milestone-marker locked" style="left: 60%">
-                                <div class="milestone-node locked"></div>
-                                <div class="milestone-info">
-                                    <div class="milestone-people">500</div>
-                                    <div class="milestone-reward">$200</div>
-                                </div>
-                            </div>
-                            <!-- 1000 = end of segment 4 = 80% -->
-                            <div class="milestone-marker locked" style="left: 80%">
-                                <div class="milestone-node locked"></div>
-                                <div class="milestone-info">
-                                    <div class="milestone-people">1K</div>
-                                    <div class="milestone-reward">$500</div>
-                                </div>
-                            </div>
-                            <!-- 2000 = end of segment 5 = 100% -->
-                            <div class="milestone-marker locked" style="left: 100%">
-                                <div class="milestone-node locked"></div>
-                                <div class="milestone-info">
-                                    <div class="milestone-people">2K</div>
-                                    <div class="milestone-reward">$1,500</div>
-                                </div>
-                            </div>
+                        <!-- Uniform dot markers at segment junctions -->
+                        <div class="milestone-dots">
+                            <div class="milestone-dot completed" style="left: 20%"></div>
+                            <div class="milestone-dot next" style="left: 40%"></div>
+                            <div class="milestone-dot locked" style="left: 60%"></div>
+                            <div class="milestone-dot locked" style="left: 80%"></div>
+                            <div class="milestone-dot locked" style="left: 100%"></div>
                         </div>
                     </div>
 
-                    <!-- Next milestone callout -->
-                    <div class="next-milestone-callout">
-                        <span class="callout-text"><strong>100 more</strong> to unlock $75</span>
-                        <span class="callout-arrow material-icons">chevron_right</span>
+                    <!-- Bar legend -->
+                    <div class="milestone-legend">
+                        <div class="milestone-legend-item">
+                            <span class="milestone-legend-label"><strong>150</strong> signed up</span>
+                            <span class="milestone-legend-earning">Earning $0</span>
+                        </div>
+                        <div class="milestone-legend-item">
+                            <span class="milestone-legend-label"><strong>2,000</strong> goal</span>
+                            <span class="milestone-legend-earning">Earn $1,500</span>
+                        </div>
                     </div>
 
-                    <!-- Minimum met badge -->
-                    <div class="min-met-badge">
-                        <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="6" fill="#22C55E"/><path d="M3.5 6.2L5.2 7.9L8.5 4.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <span>Minimum met — collab is live</span>
+                    <!-- Current tier + next milestone -->
+                    <div class="next-milestone">
+                        <div class="next-milestone-ring">
+                            <svg viewBox="0 0 52 52">
+                                <circle class="ring-track" cx="26" cy="26" r="22"/>
+                                <circle class="ring-fill" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="55.3"/>
+                            </svg>
+                            <div class="next-milestone-ring-label">60%</div>
+                        </div>
+                        <div class="next-milestone-text">
+                            <div class="next-milestone-heading"><strong>100 more</strong> to earn $75</div>
+                            <div class="next-milestone-sub">Next milestone at 250 participants</div>
+                        </div>
                     </div>
 
-                    <div class="goal-deadline">Sign ups close on Monday at 11:59pm PST.</div>
+                    <!-- Current tier status -->
+                    <div class="current-tier">
+                        <span class="current-tier-label">Current tier</span>
+                        <span class="current-tier-value">100 — Minimum met</span>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="goal-footer">
+                        <div class="goal-deadline">Sign-ups close Monday 11:59pm</div>
+                    </div>
                 </div>
 
                 <!-- Engagement & Stats Card -->
@@ -1058,7 +1327,7 @@
                 </div>
 
                 <!-- Tips Carousel -->
-                <div class="tips-carousel fade-up fade-up-5" id="tipsCarousel">
+                <div class="tips-carousel fade-up fade-up-6" id="tipsCarousel">
                     <div class="tips-track" id="tipsTrack">
 
                         <!-- Tip 1: Share Your Why -->
@@ -1121,7 +1390,6 @@
                                     <svg viewBox="0 0 24 24" fill="none">
                                         <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2" fill="#C97A6A" opacity="0.12"/>
                                         <circle cx="10" cy="8" r="3.5" stroke="#C97A6A" stroke-width="1.2"/>
-                                        <path d="M16 11v-2a4 4 0 00-8 0v2" stroke="#C97A6A" stroke-width="0" fill="none"/>
                                         <path d="M6 21v-1a4 4 0 014-4h0a4 4 0 014 4v1" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"/>
                                         <path d="M17.5 8.5l1.5 1.5 3-3" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -1162,14 +1430,105 @@
                     </div>
                 </div>
 
-            </div>
+                <!-- Recently Joined Card -->
+                <div class="signups-card fade-up fade-up-6">
+                    <div class="signups-header">
+                        <div class="signups-title">Recently joined</div>
+                        <div class="signups-badge">
+                            <span class="material-icons">person_add</span>
+                            +12 today
+                        </div>
+                    </div>
+                    <div class="signups-subtitle">People are signing up!</div>
 
-            <!-- Page indicator dots -->
-            <div class="page-dots">
-                <div class="page-dot"></div>
-                <div class="page-dot"></div>
-                <div class="page-dot active"></div>
-                <div class="page-dot"></div>
+                    <div class="signups-list">
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #C4B5FD, #A78BFA)">EW</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Emma Wilson</span>
+                                    <span class="signup-new-badge">New</span>
+                                </div>
+                                <div class="signup-handle">@emma_fit</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #7DD3FC, #38BDF8)">MC</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Marcus Chen</span>
+                                    <span class="signup-new-badge">New</span>
+                                </div>
+                                <div class="signup-handle">@marcus_wellness</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #F9A8D4, #F472B6)">OT</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Olivia Torres</span>
+                                </div>
+                                <div class="signup-handle">@olivia_yoga</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #6EE7B7, #34D399)">JP</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">James Park</span>
+                                </div>
+                                <div class="signup-handle">@jpark_fitness</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">SR</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Sofia Rodriguez</span>
+                                </div>
+                                <div class="signup-handle">@sofia_mindful</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #A890AD, #6B4E71)">KN</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Kai Nakamura</span>
+                                </div>
+                                <div class="signup-handle">@kai_nature</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)">AT</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Alex Turner</span>
+                                </div>
+                                <div class="signup-handle">@alex_nature</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="signups-view-all">View all</button>
+                </div>
+
+                <!-- Invite CTA -->
+                <div class="invite-cta fade-up fade-up-6">
+                    <div class="invite-cta-icon">
+                        <span class="material-icons">people</span>
+                    </div>
+                    <div class="invite-cta-text">Invite other creators to join Motiv!</div>
+                    <div class="invite-cta-share">
+                        <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -1219,9 +1578,7 @@
             let current = 0;
             let startX = 0;
             let currentTranslate = 0;
-            let prevTranslate = 0;
             let isDragging = false;
-            let animationId = null;
 
             function setPosition() {
                 track.style.transform = `translateX(${currentTranslate}px)`;
@@ -1229,11 +1586,8 @@
 
             function goTo(index) {
                 current = Math.max(0, Math.min(index, slideCount - 1));
-                prevTranslate = -current * track.offsetWidth / slideCount * slideCount;
-                // recalculate based on slide width
                 const slideWidth = track.parentElement.offsetWidth;
-                prevTranslate = -current * slideWidth;
-                currentTranslate = prevTranslate;
+                currentTranslate = -current * slideWidth;
                 track.classList.remove('dragging');
                 setPosition();
                 updateDots();
@@ -1261,7 +1615,7 @@
                 setPosition();
             }, { passive: true });
 
-            track.addEventListener('touchend', (e) => {
+            track.addEventListener('touchend', () => {
                 isDragging = false;
                 const slideWidth = track.parentElement.offsetWidth;
                 const moved = currentTranslate - (-current * slideWidth);
