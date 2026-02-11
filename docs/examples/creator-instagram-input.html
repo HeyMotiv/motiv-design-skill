@@ -3233,6 +3233,80 @@
             padding-top: var(--space-lg);
         }
 
+        .s12-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .auth-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 24px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+        }
+
+        .auth-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .auth-btn:active {
+            transform: scale(0.98);
+        }
+
+        .auth-btn--apple {
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
+            border: none;
+        }
+
+        .auth-btn--google {
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            border: 1.5px solid var(--color-border-default);
+        }
+
+        .auth-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .s12-divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .s12-divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--color-border-default);
+        }
+
+        .s12-divider-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+        }
+
+        .s12-helper {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-top: var(--space-xs);
+            line-height: 1.4;
+        }
+
         /* ===========================================
            SCREEN 13: PASSWORD
            =========================================== */
@@ -3269,13 +3343,71 @@
             margin-bottom: var(--space-2xl);
         }
 
-        .s13-password-hint {
+        .s13-subtext strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        .otp-group {
             display: flex;
-            align-items: center;
-            gap: var(--space-xxs);
-            font-size: 12px;
-            letter-spacing: 0.01em;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .otp-input {
+            width: 46px;
+            height: 56px;
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            background: var(--color-bg-primary);
+            font-family: var(--font-body);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-align: center;
+            outline: none;
+            transition: border-color var(--motion-fast), box-shadow var(--motion-fast);
+            -moz-appearance: textfield;
+        }
+
+        .otp-input::-webkit-outer-spin-button,
+        .otp-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .otp-input:focus {
+            border-color: var(--color-brand-secondary);
+            box-shadow: 0 0 0 3px rgba(107, 78, 113, 0.12);
+        }
+
+        .otp-input.filled {
+            border-color: var(--color-brand-secondary);
+            background: rgba(107, 78, 113, 0.04);
+        }
+
+        .s13-resend {
+            font-size: 14px;
             color: var(--color-text-tertiary);
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .resend-link {
+            color: var(--color-brand-secondary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: color var(--motion-fast);
+        }
+
+        .resend-link:hover {
+            color: var(--color-brand-primary);
+        }
+
+        .resend-link.disabled {
+            color: var(--color-text-tertiary);
+            pointer-events: none;
         }
 
         .s13-cta {
@@ -4544,12 +4676,30 @@
                     <a href="#" class="back-btn" id="s12Back"><span class="material-icons">chevron_left</span></a>
                 </div>
 
-                <h1 class="s12-headline">What's your email?</h1>
-                <p class="s12-subtext">We'll use this to create your account and send collab updates.</p>
+                <h1 class="s12-headline">Create your account to keep going</h1>
+                <p class="s12-subtext">This lets you finish setting up your collab and turn your audience's momentum into real participation and income.</p>
+
+                <div class="s12-auth-buttons">
+                    <button class="auth-btn auth-btn--apple">
+                        <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                        Continue with Apple
+                    </button>
+                    <button class="auth-btn auth-btn--google">
+                        <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        Continue with Google
+                    </button>
+                </div>
+
+                <div class="s12-divider">
+                    <span class="s12-divider-line"></span>
+                    <span class="s12-divider-text">or</span>
+                    <span class="s12-divider-line"></span>
+                </div>
 
                 <div class="form-group">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-input" id="emailInput" placeholder="you@example.com" autocomplete="email">
+                    <label class="form-label">Continue with email</label>
+                    <input type="email" class="form-input" id="emailInput" placeholder="Enter your email" autocomplete="email">
+                    <p class="s12-helper">We'll send you a one-time code. No password required.</p>
                 </div>
 
                 <div class="s12-cta">
@@ -4567,26 +4717,22 @@
                     <a href="#" class="back-btn" id="s13Back"><span class="material-icons">chevron_left</span></a>
                 </div>
 
-                <h1 class="s13-headline">Create a password</h1>
-                <p class="s13-subtext">Secure your account with a strong password.</p>
+                <h1 class="s13-headline">Check your email</h1>
+                <p class="s13-subtext">We sent a one-time code to <strong id="s13Email">you@email.com</strong><br>Enter it below to keep going.</p>
 
-                <div class="form-group">
-                    <label class="form-label">Password</label>
-                    <input type="password" class="form-input" id="passwordInput" placeholder="At least 8 characters">
+                <div class="otp-group">
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="0" autofocus>
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="1">
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="2">
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="3">
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="4">
+                    <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]" data-otp="5">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label">Confirm password</label>
-                    <input type="password" class="form-input" id="confirmPasswordInput" placeholder="Re-enter your password">
-                </div>
-
-                <p class="s13-password-hint">
-                    <span class="material-icons" style="font-size: 14px; vertical-align: middle;">lock</span>
-                    Must be at least 8 characters
-                </p>
+                <p class="s13-resend">Didn't get it? <a href="#" class="resend-link" id="resendCodeBtn">Resend code</a></p>
 
                 <div class="s13-cta">
-                    <button class="btn-primary btn-primary--purple" id="s13CreateBtn">Create account</button>
+                    <button class="btn-primary btn-primary--purple" id="s13CreateBtn">Continue</button>
                 </div>
             </div>
         </div>
@@ -5280,9 +5426,18 @@
             goTo(screens.email, screens.preview);
         });
 
-        // Email continue → Password
+        // Email continue → OTP verification
         document.getElementById('s12ContinueBtn').addEventListener('click', function() {
+            var emailVal = document.getElementById('emailInput').value.trim();
+            if (emailVal) {
+                document.getElementById('s13Email').textContent = emailVal;
+            }
             goTo(screens.email, screens.password);
+            // Focus first OTP input
+            setTimeout(function() {
+                var firstOtp = document.querySelector('.otp-input[data-otp="0"]');
+                if (firstOtp) firstOtp.focus();
+            }, 400);
         });
 
         // Password back → Email
@@ -5291,15 +5446,15 @@
             goTo(screens.password, screens.email);
         });
 
-        // Password "Create account" → Home (with brief loading state)
+        // OTP "Continue" → Home (with brief loading state)
         document.getElementById('s13CreateBtn').addEventListener('click', function() {
             var btn = this;
-            btn.textContent = 'Creating account\u2026';
+            btn.textContent = 'Verifying\u2026';
             btn.disabled = true;
             setTimeout(function() {
                 populateHome();
                 goTo(screens.password, screens.home);
-                btn.textContent = 'Create account';
+                btn.textContent = 'Continue';
                 btn.disabled = false;
             }, 1200);
         });
@@ -5730,6 +5885,99 @@
         });
 
         // Restore screen from URL hash on load
+        // =============================================
+        // OTP INPUT BEHAVIOR
+        // =============================================
+
+        (function setupOtpInputs() {
+            var otpInputs = document.querySelectorAll('.otp-input');
+
+            otpInputs.forEach(function(input, idx) {
+                input.addEventListener('input', function(e) {
+                    var val = this.value.replace(/[^0-9]/g, '');
+                    this.value = val;
+
+                    if (val) {
+                        this.classList.add('filled');
+                        // Move to next input
+                        if (idx < otpInputs.length - 1) {
+                            otpInputs[idx + 1].focus();
+                        }
+                    } else {
+                        this.classList.remove('filled');
+                    }
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    // Backspace: clear current and move back
+                    if (e.key === 'Backspace') {
+                        if (!this.value && idx > 0) {
+                            otpInputs[idx - 1].focus();
+                            otpInputs[idx - 1].value = '';
+                            otpInputs[idx - 1].classList.remove('filled');
+                        } else {
+                            this.classList.remove('filled');
+                        }
+                    }
+                    // Arrow keys
+                    if (e.key === 'ArrowLeft' && idx > 0) {
+                        otpInputs[idx - 1].focus();
+                    }
+                    if (e.key === 'ArrowRight' && idx < otpInputs.length - 1) {
+                        otpInputs[idx + 1].focus();
+                    }
+                });
+
+                // Select all text on focus for easy replacement
+                input.addEventListener('focus', function() {
+                    this.select();
+                });
+
+                // Handle paste
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    var pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/[^0-9]/g, '');
+                    for (var i = 0; i < Math.min(pasted.length, otpInputs.length); i++) {
+                        otpInputs[i].value = pasted[i];
+                        otpInputs[i].classList.add('filled');
+                    }
+                    var focusIdx = Math.min(pasted.length, otpInputs.length - 1);
+                    otpInputs[focusIdx].focus();
+                });
+            });
+        })();
+
+        // =============================================
+        // RESEND CODE WITH 30s COOLDOWN
+        // =============================================
+
+        (function setupResend() {
+            var resendBtn = document.getElementById('resendCodeBtn');
+            var cooldownSeconds = 30;
+            var timer = null;
+
+            resendBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (this.classList.contains('disabled')) return;
+
+                // "Send" the code
+                this.classList.add('disabled');
+                var remaining = cooldownSeconds;
+                resendBtn.textContent = 'Resend in ' + remaining + 's';
+
+                timer = setInterval(function() {
+                    remaining--;
+                    if (remaining <= 0) {
+                        clearInterval(timer);
+                        resendBtn.textContent = 'Resend code';
+                        resendBtn.classList.remove('disabled');
+                    } else {
+                        resendBtn.textContent = 'Resend in ' + remaining + 's';
+                    }
+                }, 1000);
+            });
+        })();
+
         (function restoreFromHash() {
             var hash = location.hash.replace('#', '');
             if (hash && hashMap[hash]) {
