@@ -637,7 +637,7 @@
 
         .s1-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.22;
@@ -774,7 +774,7 @@
 
         .loader-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.22;
@@ -860,7 +860,7 @@
 
         .s3-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.22;
@@ -973,7 +973,7 @@
 
         .s4-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.22;
@@ -1171,7 +1171,7 @@
 
         .s5-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             line-height: 1.22;
             letter-spacing: -0.01em;
@@ -1351,7 +1351,7 @@
 
         .s6-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.2;
@@ -1484,7 +1484,7 @@
 
         .s7-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.28;
@@ -1614,7 +1614,7 @@
 
         .s8-headline {
             font-family: var(--font-display);
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1.22;
@@ -1876,7 +1876,7 @@
 
         .s9-headline {
             font-family: var(--font-display);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: var(--color-text-primary);
             line-height: 1.28;
@@ -2061,7 +2061,7 @@
 
         .s10-headline {
             font-family: var(--font-display);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: var(--color-text-primary);
             line-height: 1.28;
@@ -2338,12 +2338,14 @@
 
         .s11-hero {
             position: relative;
-            height: 300px;
+            height: 520px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding: 0 24px 28px;
+            align-items: center;
+            justify-content: center;
+            padding: 0 24px 60px;
             overflow: hidden;
+            border-radius: 0 0 28px 28px;
         }
         .s11-hero-bg {
             position: absolute;
@@ -2354,43 +2356,49 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.02) 30%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.55) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 20%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.45) 100%);
             z-index: 1;
         }
         .s11-hero-content {
             position: relative;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .s11-creator-pill {
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: var(--radius-full);
-            padding: 5px 12px 5px 5px;
-            margin-bottom: 14px;
+            padding: 5px 14px 5px 5px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         .s11-creator-pill-avatar {
-            width: 26px; height: 26px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .s11-creator-pill-avatar .material-icons { font-size: 14px; color: rgba(255,255,255,0.9); }
-        .s11-creator-pill-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.9); letter-spacing: 0.02em; }
+        .s11-creator-pill-avatar .material-icons { font-size: 16px; color: rgba(255,255,255,0.9); }
+        .s11-creator-pill-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.95); letter-spacing: 0.02em; }
 
         .s11-hero-title {
-            font-size: 36px;
-            font-weight: 700;
+            font-size: 52px;
+            font-weight: 300;
             color: #FFFFFF;
-            line-height: 1.22;
+            line-height: 1.1;
             letter-spacing: -0.02em;
             text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            text-align: center;
         }
 
         .s11-back-float {
@@ -2415,11 +2423,13 @@
         .s11-back-float .material-icons { font-size: 20px; color: #fff; }
 
         .s11-countdown {
+            position: relative;
+            z-index: 2;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            padding: 18px 24px;
-            background: rgba(255,255,255,0.04);
+            gap: 20px;
+            padding: 0;
+            margin-top: 24px;
         }
         .s11-count-item {
             text-align: center;
@@ -2427,28 +2437,31 @@
         }
         .s11-count-value {
             font-family: var(--font-mono);
-            font-size: 28px;
-            font-weight: 500;
-            color: var(--color-text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
             line-height: 1.28;
             letter-spacing: -0.01em;
         }
         .s11-count-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-text-tertiary);
+            letter-spacing: 0.12em;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .s11-pool-card {
-            margin: -20px 16px 0;
-            background: #FFFFFF;
+            margin: -40px 16px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 20px 20px 18px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05);
             position: relative;
             z-index: 3;
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
         .s11-pool-row {
             display: flex;
@@ -2465,24 +2478,26 @@
             margin-bottom: 2px;
         }
         .s11-pool-amount {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 700;
             color: var(--color-text-primary);
-            line-height: 1.22;
-            letter-spacing: -0.02em;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
         }
         .s11-entry-badge {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 7px 14px;
+            padding: 8px 16px;
             border-radius: var(--radius-full);
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
             letter-spacing: 0.02em;
-            color: #FFFFFF;
+            color: var(--s11-accent-strong, #6E549E);
+            background: transparent !important;
+            border: 1.5px solid rgba(110, 84, 158, 0.25);
         }
-        .s11-entry-badge .material-icons { font-size: 16px; }
+        .s11-entry-badge .material-icons { font-size: 16px; color: var(--s11-accent-strong, #6E549E); }
 
         .s11-meta-row {
             display: flex;
@@ -2491,7 +2506,7 @@
         }
         .s11-meta-stat { flex: 1; text-align: center; }
         .s11-meta-stat + .s11-meta-stat { border-left: 1px solid var(--color-border-default); }
-        .s11-meta-stat-value { font-family: var(--font-body); font-size: 18px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
+        .s11-meta-stat-value { font-family: var(--font-body); font-size: 22px; font-weight: 700; color: var(--color-text-primary); line-height: 1; margin-bottom: 4px; }
         .s11-meta-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); }
 
         .s11-detail-rows {
@@ -3917,15 +3932,14 @@
                             <span class="s11-creator-pill-name" id="s11PillHandle">@doodle_cycles</span>
                         </div>
                         <div class="s11-hero-title" id="s11HeroTitle" style="font-family: 'Lora', serif;">Nature Yoga Reset</div>
+                        <!-- Countdown inside hero -->
+                        <div class="s11-countdown">
+                            <div class="s11-count-item"><div class="s11-count-value">14</div><div class="s11-count-label">Days</div></div>
+                            <div class="s11-count-item"><div class="s11-count-value">06</div><div class="s11-count-label">Hrs</div></div>
+                            <div class="s11-count-item"><div class="s11-count-value">32</div><div class="s11-count-label">Min</div></div>
+                            <div class="s11-count-item"><div class="s11-count-value">48</div><div class="s11-count-label">Sec</div></div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Countdown -->
-                <div class="s11-countdown">
-                    <div class="s11-count-item"><div class="s11-count-value">14</div><div class="s11-count-label">Days</div></div>
-                    <div class="s11-count-item"><div class="s11-count-value">06</div><div class="s11-count-label">Hrs</div></div>
-                    <div class="s11-count-item"><div class="s11-count-value">32</div><div class="s11-count-label">Min</div></div>
-                    <div class="s11-count-item"><div class="s11-count-value">48</div><div class="s11-count-label">Sec</div></div>
                 </div>
 
                 <!-- Pool Card -->
