@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=780, initial-scale=1.0">
-    <title>Creator Collab Dashboard (Pre-Live) — Motiv</title>
+    <title>Creator Collab Dashboard — Motiv</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -100,6 +100,48 @@
             max-width: 720px;
         }
 
+        .state-toggle {
+            display: inline-flex;
+            gap: var(--space-xxs);
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-full);
+            padding: 3px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .state-toggle button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xxs);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .state-toggle button .material-icons {
+            font-size: 14px;
+        }
+
+        .state-toggle button.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e8e8f0;
+        }
+
+        .state-toggle button:not(.active) {
+            background: none;
+            color: #5a5a70;
+        }
+
+        .state-toggle button:not(.active):hover {
+            color: #8888a0;
+        }
+
         .review-title {
             font-family: var(--font-display);
             font-size: 20px;
@@ -128,6 +170,21 @@
             font-weight: 500;
             line-height: 16px;
         }
+
+        .review-flag--live {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #22C55E;
+        }
+
+        /* State visibility */
+        .state-prelive, .state-live { display: none !important; }
+        body.mode-prelive p.state-prelive { display: block !important; }
+        body.mode-live p.state-live { display: block !important; }
+        body.mode-prelive .phone-frame.state-prelive { display: flex !important; }
+        body.mode-live .phone-frame.state-live { display: flex !important; }
+        body.mode-prelive .review-flag.state-prelive { display: inline-flex !important; }
+        body.mode-live .review-flag.state-live { display: inline-flex !important; }
 
         /* ===========================================
            PHONE FRAME
@@ -766,6 +823,32 @@
             letter-spacing: 0.01em;
         }
 
+        .pot-link {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            cursor: pointer;
+            margin-top: var(--space-xs);
+        }
+
+        .engagement-footer-tip {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            padding-top: var(--space-lg);
+        }
+
+        .engagement-footer-tip strong {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
         /* ===========================================
            RECENTLY JOINED CARD
            =========================================== */
@@ -1038,7 +1121,7 @@
             padding: var(--space-md) var(--space-lg);
             background: var(--color-bg-secondary);
             border: 1.5px solid var(--color-border-default);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius-full);
             cursor: pointer;
             transition: background 0.15s ease;
         }
@@ -1077,6 +1160,386 @@
 
         .invite-cta-share .material-icons {
             font-size: 22px;
+        }
+
+        /* ===========================================
+           ALL-STARS CARD (Live)
+           =========================================== */
+
+        .allstars-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: 0 var(--space-md);
+        }
+
+        .allstars-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .allstars-subtitle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .allstars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg) var(--space-md);
+        }
+
+        .allstar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .allstar-avatar-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .allstar-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid var(--color-bg-secondary);
+        }
+
+        .allstar-avatar {
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .allstar-badge {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: var(--color-brand-primary);
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 16px;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .allstar-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-top: var(--space-xxs);
+        }
+
+        .allstar-ring.warn {
+            border-color: var(--color-bg-tertiary);
+        }
+
+        /* ===========================================
+           WEEKLY UPDATE BANNER (Live)
+           =========================================== */
+
+        .weekly-update-banner {
+            margin: 0 var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-bg-secondary) 0%, #F9EDE9 100%);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .weekly-update-banner:hover {
+            background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, #F3E6E2 100%);
+        }
+
+        .weekly-update-banner:active {
+            transform: scale(0.98);
+        }
+
+        .weekly-update-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-brand-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .weekly-update-icon .material-icons {
+            font-size: 22px;
+            color: var(--color-text-inverse);
+        }
+
+        .weekly-update-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .weekly-update-title {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .weekly-update-sub {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .weekly-update-arrow .material-icons {
+            font-size: 20px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Recording overlay */
+        .record-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            background: #000;
+            flex-direction: column;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .record-overlay.open {
+            display: flex;
+        }
+
+        .record-viewfinder {
+            flex: 1;
+            background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .record-viewfinder-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: var(--space-xs);
+        }
+
+        .record-viewfinder-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .record-viewfinder-sub {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            max-width: 260px;
+            line-height: 18px;
+        }
+
+        .record-close {
+            position: absolute;
+            top: 56px;
+            left: var(--space-xl);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .record-close .material-icons {
+            font-size: 20px;
+        }
+
+        .record-timer {
+            position: absolute;
+            top: 62px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.05em;
+        }
+
+        .record-controls {
+            padding: var(--space-2xl) 0 var(--space-3xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2xl);
+            background: #000;
+        }
+
+        .record-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .record-btn-inner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #EF4444;
+            transition: all 0.2s ease;
+        }
+
+        .record-btn:hover .record-btn-inner {
+            background: #DC2626;
+        }
+
+        .record-flip {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .record-flip .material-icons {
+            font-size: 22px;
+        }
+
+        /* ===========================================
+           DAY PROGRESS PILL (Live)
+           =========================================== */
+
+        .day-progress-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            padding: var(--space-xs) var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.02em;
+        }
+
+        /* ===========================================
+           STATS GRID (Live)
+           =========================================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin: 0 var(--space-md);
+        }
+
+        .stat-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .stat-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-card-icon .material-icons {
+            font-size: 20px;
+            color: var(--color-brand-primary);
+        }
+
+        .stat-card-value {
+            font-family: var(--font-body);
+            font-size: 28px;
+            line-height: 34px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-card-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            line-height: 14px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
         }
 
         /* ===========================================
@@ -1147,16 +1610,23 @@
 
     <!-- Review header -->
     <div class="review-header">
+        <div class="state-toggle">
+            <button class="active" data-mode="prelive">
+                <span class="material-icons">schedule</span>
+                Pre-Live
+            </button>
+            <button data-mode="live">
+                <span class="material-icons">play_circle</span>
+                Live
+            </button>
+        </div>
         <h1 class="review-title">Creator Collab Dashboard</h1>
-        <p class="review-subtitle">Pre-live state — sign-up phase before challenge starts</p>
-        <span class="review-flag">
-            <span class="material-icons" style="font-size: 14px;">schedule</span>
-            Pre-Live
-        </span>
+        <p class="review-subtitle state-prelive">Pre-live state — sign-up phase before challenge starts</p>
+        <p class="review-subtitle state-live">Live state — challenge is active</p>
     </div>
 
-    <!-- Phone frame -->
-    <div class="phone-frame">
+    <!-- Pre-Live Phone frame -->
+    <div class="phone-frame state-prelive" style="flex-direction: column;">
         <div class="phone-scroll">
 
             <!-- Header with gradient -->
@@ -1220,7 +1690,7 @@
                     </div>
 
                     <!-- Challenge title -->
-                    <div class="challenge-title fade-up fade-up-1">Nature Yoga Reset</div>
+                    <div class="challenge-title fade-up fade-up-1">Mindful Miles Reset</div>
                     <div class="challenge-dates fade-up fade-up-1">Jan 5 – Feb 22, 2026</div>
                 </div>
             </div>
@@ -1534,6 +2004,251 @@
         </div>
     </div>
 
+    <!-- Live Phone frame -->
+    <div class="phone-frame state-live" style="flex-direction: column;">
+        <div class="phone-scroll">
+
+            <!-- Header with gradient -->
+            <div class="header-section">
+                <div class="header-gradient">
+                    <div class="header-blob header-blob-1"></div>
+                    <div class="header-blob header-blob-2"></div>
+                    <div class="header-blob header-blob-3"></div>
+                </div>
+
+                <!-- Status bar -->
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="#2B2E34"/>
+                            <rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="#2B2E34"/>
+                            <rect x="9" y="3" width="3" height="9" rx="0.5" fill="#2B2E34"/>
+                            <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="#2B2E34"/>
+                        </svg>
+                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <path d="M8 12a1.2 1.2 0 100-2.4A1.2 1.2 0 008 12z" fill="#2B2E34"/>
+                            <path d="M4.93 8.47a4.36 4.36 0 016.14 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M2.4 5.93a8 8 0 0111.2 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                            <path d="M.53 3.4a11 11 0 0114.94 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"/>
+                        </svg>
+                        <svg width="27" height="12" viewBox="0 0 27 12" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="11" rx="2" stroke="#2B2E34" stroke-opacity="0.35"/>
+                            <rect x="2" y="2" width="20" height="8" rx="1" fill="#2B2E34"/>
+                            <path d="M25 4v4a2 2 0 000-4z" fill="#2B2E34" fill-opacity="0.35"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="header-content">
+                    <div class="nav-bar">
+                        <button class="nav-back"><span class="material-icons">chevron_left</span></button>
+                        <div class="day-progress-pill">Day 12 of 49</div>
+                        <button class="nav-more"><span class="material-icons">more_vert</span></button>
+                    </div>
+
+                    <div class="challenge-title fade-up fade-up-1">Mindful Miles Reset</div>
+                    <div class="challenge-dates fade-up fade-up-1">Jan 5 – Feb 22, 2026</div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="content-area">
+
+                <!-- Weekly Update Banner -->
+                <div class="weekly-update-banner fade-up fade-up-2" id="weeklyUpdateBanner">
+                    <div class="weekly-update-icon">
+                        <span class="material-icons">videocam</span>
+                    </div>
+                    <div class="weekly-update-text">
+                        <div class="weekly-update-title">Record your weekly update</div>
+                        <div class="weekly-update-sub">Share progress with your community</div>
+                    </div>
+                    <div class="weekly-update-arrow">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Engagement Card (Live) -->
+                <div class="engagement-card fade-up fade-up-3" style="margin: 0 var(--space-md);">
+                    <p class="engagement-message"><strong>Nice job, Chad!</strong> Engagement is way up and you've earned $72 more. Keep it going! 💪</p>
+
+                    <div class="divider"></div>
+
+                    <div class="pot-section">
+                        <div class="pot-label">Estimated Earnings</div>
+                        <div class="pot-amount">$3,306.34</div>
+                        <div class="pot-link">How it's calculated</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-value">+ $72</div>
+                            <div class="stat-label">This week</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3 days</div>
+                            <div class="stat-label">Left this week</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">753</div>
+                            <div class="stat-label">Still in it</div>
+                        </div>
+                    </div>
+
+                    <div class="divider" style="margin-top: var(--space-lg);"></div>
+
+                    <div class="engagement-footer-tip">💬 <strong>Tell your followers:</strong> "Over 750 people are still crushing this challenge with me!"</div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid fade-up fade-up-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">payments</span>
+                        </div>
+                        <div class="stat-card-value">$82.50</div>
+                        <div class="stat-card-label">2 winners will earn</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">trending_up</span>
+                        </div>
+                        <div class="stat-card-value">74%</div>
+                        <div class="stat-card-label">Completion rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">local_fire_department</span>
+                        </div>
+                        <div class="stat-card-value">4.5M</div>
+                        <div class="stat-card-label">Total output (kj)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">directions_bike</span>
+                        </div>
+                        <div class="stat-card-value">9,233</div>
+                        <div class="stat-card-label">Total workouts</div>
+                    </div>
+                </div>
+
+                <!-- All-Stars Card -->
+                <div class="allstars-card fade-up fade-up-4">
+                    <div class="allstars-title">This week's all-stars 🏆</div>
+                    <div class="allstars-subtitle">Check out the stand outs from this week</div>
+                    <div class="allstars-grid">
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">RK</div>
+                                <div class="allstar-badge">Most workout days</div>
+                            </div>
+                            <div class="allstar-name">Rebecca K.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #7DD3FC, #38BDF8)">AS</div>
+                                <div class="allstar-badge">Most burned</div>
+                            </div>
+                            <div class="allstar-name">Andy S.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #F9A8D4, #F472B6)">RA</div>
+                                <div class="allstar-badge">Community star</div>
+                            </div>
+                            <div class="allstar-name">Robin A.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #C97A6A, #B86B5C)">MM</div>
+                                <div class="allstar-badge">Just in time</div>
+                            </div>
+                            <div class="allstar-name">Matty M.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Off Track Card -->
+                <div class="allstars-card fade-up fade-up-5">
+                    <div class="allstars-title">Off track this week</div>
+                    <div class="allstars-subtitle">At risk of missing their weekly goal</div>
+                    <div class="allstars-grid">
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #6EE7B7, #34D399)">DL</div>
+                            </div>
+                            <div class="allstar-name">Dana L.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #A5B4FC, #818CF8)">JW</div>
+                            </div>
+                            <div class="allstar-name">Jordan W.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)">TN</div>
+                            </div>
+                            <div class="allstar-name">Tessa N.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">KP</div>
+                            </div>
+                            <div class="allstar-name">Kyle P.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invite CTA -->
+                <div class="invite-cta fade-up fade-up-6">
+                    <div class="invite-cta-icon">
+                        <span class="material-icons">people</span>
+                    </div>
+                    <div class="invite-cta-text">Invite other creators to join Motiv!</div>
+                    <div class="invite-cta-share">
+                        <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Recording Overlay -->
+        <div class="record-overlay" id="recordOverlay">
+            <div class="record-viewfinder">
+                <button class="record-close" id="recordClose">
+                    <span class="material-icons">close</span>
+                </button>
+                <div class="record-timer">0:00</div>
+                <div class="record-viewfinder-label">Weekly update</div>
+                <div class="record-viewfinder-title">Mindful Miles Reset</div>
+                <div class="record-viewfinder-sub">Record a quick video to share this week's highlights with your community</div>
+            </div>
+            <div class="record-controls">
+                <div style="width: 44px;"></div>
+                <button class="record-btn" id="recordBtn">
+                    <div class="record-btn-inner"></div>
+                </button>
+                <button class="record-flip">
+                    <span class="material-icons">flip_camera_ios</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // =============================================
         // COUNTDOWN TIMER
@@ -1670,6 +2385,39 @@
 
             // Prevent image/link drag
             track.addEventListener('dragstart', (e) => e.preventDefault());
+        })();
+
+        // =============================================
+        // STATE TOGGLE (Pre-Live / Live)
+        // =============================================
+
+        (function() {
+            document.body.classList.add('mode-prelive');
+
+            document.querySelectorAll('.state-toggle button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const mode = btn.dataset.mode;
+                    document.body.classList.remove('mode-prelive', 'mode-live');
+                    document.body.classList.add('mode-' + mode);
+                    document.querySelectorAll('.state-toggle button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        })();
+
+        // =============================================
+        // RECORDING OVERLAY
+        // =============================================
+
+        (function() {
+            const banner = document.getElementById('weeklyUpdateBanner');
+            const overlay = document.getElementById('recordOverlay');
+            const closeBtn = document.getElementById('recordClose');
+
+            if (banner && overlay && closeBtn) {
+                banner.addEventListener('click', () => overlay.classList.add('open'));
+                closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+            }
         })();
     </script>
 
