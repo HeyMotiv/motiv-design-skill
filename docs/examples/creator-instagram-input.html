@@ -945,13 +945,45 @@
             margin-bottom: var(--space-md);
         }
 
-        .follower-pill {
-            font-size: 14px;
-            font-weight: 400;
-            color: var(--color-text-secondary);
-            border: 1.5px solid var(--color-border-default);
-            border-radius: var(--radius-full);
-            padding: 8px 20px;
+        .profile-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 0;
+            width: 100%;
+        }
+
+        .profile-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .profile-stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .profile-stat-divider {
+            width: 1px;
+            height: 28px;
+            background: var(--color-border-default);
+            flex-shrink: 0;
         }
 
         /* ===========================================
@@ -3560,12 +3592,12 @@
                 </div>
                 <h1 class="s0-wordmark">Motiv</h1>
                 <p class="s0-tagline">
-                    Creators inspire.<br>
-                    <strong>Motiv turns it into real revenue.</strong>
+                    Turn the influence you already have<br>
+                    <strong>into repeatable income.</strong>
                 </p>
                 <p class="s0-body">
-                    Help your followers go from watching to doing
-                    by following your journey as a blueprint for success.
+                    Motiv helps creators run short, action-based collabs with their audience.
+                    Your followers don't just feel inspired — they show up and follow through.
                 </p>
                 <div class="s0-cta">
                     <button class="btn-get-started" id="getStartedBtn">
@@ -3595,8 +3627,8 @@
                     <a href="#" class="back-btn" id="backToWelcome"><span class="material-icons">chevron_left</span></a>
                 </div>
                 <p class="s1-logo">Motiv</p>
-                <h1 class="s1-headline">Let's learn about your community</h1>
-                <p class="s1-subtext">Enter your Instagram handle. We'll use public info to personalize your experience.</p>
+                <h1 class="s1-headline">Where do you show up for your audience?</h1>
+                <p class="s1-subtext">We'll look at publicly available signals to understand how you connect — and where collabs can help you go further.</p>
                 <div class="input-wrapper">
                     <span class="input-prefix">@</span>
                     <input type="text" class="input-field" id="handleInput" placeholder="yourhandle" autocomplete="off" spellcheck="false">
@@ -3654,18 +3686,33 @@
                     <a href="#" class="back-btn" id="backToInput"><span class="material-icons">chevron_left</span></a>
                 </div>
                 <div class="s3-headline-section">
-                    <h1 class="s3-headline">You've built something special</h1>
-                    <p class="s3-subtext">Your voice, your presence, your community, it all adds up.</p>
+                    <h1 class="s3-headline">Ellie, you're in rare company.</h1>
+                    <p class="s3-subtext">You're in the top ~1% of health & fitness creators on Instagram.</p>
                 </div>
-                <p class="section-label">The basics about you</p>
+                <p class="section-label">The foundation you've built</p>
                 <div class="profile-card">
                     <div class="profile-avatar-wrapper">
-                        <div class="profile-avatar"><span class="profile-initials">ES</span></div>
+                        <div class="profile-avatar"><img src="data:image/png;base64,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" alt="Ellie Snackson" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
                         <div class="verified-badge"><span class="material-icons">check</span></div>
                     </div>
                     <p class="profile-name">Ellie Snackson</p>
                     <p class="profile-handle">@doodle_cycles</p>
-                    <span class="follower-pill">345,000 Followers</span>
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <span class="profile-stat-value">345K</span>
+                            <span class="profile-stat-label">Followers</span>
+                        </div>
+                        <div class="profile-stat-divider"></div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-value">~5.7M</span>
+                            <span class="profile-stat-label">Likes</span>
+                        </div>
+                        <div class="profile-stat-divider"></div>
+                        <div class="profile-stat">
+                            <span class="profile-stat-value">~215K</span>
+                            <span class="profile-stat-label">Comments</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="cta-section">
                     <button class="btn-primary btn-primary--purple" id="confirmBtn">Continue</button>
@@ -3789,14 +3836,14 @@
                 </div>
 
                 <div class="s7-header">
-                    <h1 class="s7-headline" id="s7Headline">How collabs strengthen what you already do</h1>
-                    <p class="s7-subtitle" id="s7Subtitle">When your audience moves together, everything compounds.</p>
+                    <h1 class="s7-headline" id="s7Headline">Turn what you already do into predictable income</h1>
+                    <p class="s7-subtitle" id="s7Subtitle">Collabs activate your audience — which makes everything you already monetize work better.</p>
                 </div>
 
                 <div class="earnings-card">
                     <p class="earnings-overline">Guaranteed per collab</p>
                     <p class="earnings-amount">$350</p>
-                    <p class="earnings-qualifier">Plus referral bonuses and revenue share</p>
+                    <p class="earnings-qualifier">plus referral bonuses and revenue share as people participate</p>
                 </div>
 
                 <div class="benefits-card">
@@ -4081,7 +4128,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Collab title</label>
-                    <input type="text" class="form-input" id="collabTitleInput" placeholder="e.g. Mindful Miles Reset" maxlength="40">
+                    <input type="text" class="form-input" id="collabTitleInput" placeholder="e.g. Nature Yoga Reset" maxlength="40">
                     <p class="form-hint" id="titleCharCount">0 / 40</p>
                 </div>
 
@@ -4270,7 +4317,7 @@
                             <div class="s11-creator-pill-avatar" id="s11PillAvatar" style="background: linear-gradient(135deg, #A698C8, #6E549E);"><span class="material-icons">person</span></div>
                             <span class="s11-creator-pill-name" id="s11PillHandle">@doodle_cycles</span>
                         </div>
-                        <div class="s11-hero-title" id="s11HeroTitle" style="font-family: 'Lora', serif;">Mindful Miles Reset</div>
+                        <div class="s11-hero-title" id="s11HeroTitle" style="font-family: 'Lora', serif;">Nature Yoga Reset</div>
                         <!-- Countdown inside hero -->
                         <div class="s11-countdown">
                             <div class="s11-count-item"><div class="s11-count-value">14</div><div class="s11-count-label">Days</div></div>
@@ -4569,7 +4616,7 @@
                                     <span class="material-icons" style="font-size: 14px;">schedule</span>
                                     Starts in 14 days
                                 </div>
-                                <div class="s14-collab-title" id="s14CollabTitle">Mindful Miles Reset</div>
+                                <div class="s14-collab-title" id="s14CollabTitle">Nature Yoga Reset</div>
                             </div>
                         </div>
                         <div class="s14-collab-footer">
@@ -4966,18 +5013,18 @@
                 strengths: ['Structure', 'Depth', 'Trust', 'Transformation'],
                 resolution: {
                     headline: 'You already <span class="hi">support people</span> beyond content.',
-                    body1: 'What\'s missing is an easy <span class="hi">first step</span> more of your audience can take.',
-                    body2: 'With a collab, your audience follows a Peloton cycling plan together — and <span class="hi">earns money back</span> for completing rides. Real structure, real reward.',
-                    body3: 'That first ride is what <span class="hi">unlocks everything</span>.',
-                    pills: ['10-day intro to cycling', '30-day power build']
+                    body1: 'What\'s missing is a shared moment that turns intention into <span class="hi">movement</span>.',
+                    body2: 'A collab creates personalized goals with built-in accountability. A small hold is returned when people follow through — and success <span class="hi">earns rewards</span>.',
+                    body3: 'That moment of action is what <span class="hi">changes the trajectory</span>.',
+                    pills: ['Personalized goals', 'Ride more often']
                 },
                 earnings: {
-                    subtitle: 'When understanding turns into action, everything compounds.',
+                    subtitle: 'Collabs activate your audience — which makes everything you already monetize work better.',
                     benefits: [
-                        { icon: '🔗', title: 'Referral links convert with context', desc: 'Products land as the next step, not a distraction.' },
-                        { icon: '🤝', title: 'Brand partnerships become more compelling', desc: 'You can show how your guidance leads to real participation.' },
-                        { icon: '💬', title: 'Coaching engagement becomes more intentional', desc: 'Collabs create a clear bridge from insight to support.' },
-                        { icon: '📦', title: 'Digital products get applied, not just purchased', desc: "People use them because they're part of a defined path." }
+                        { icon: '🔗', title: 'Referral links convert better when products follow real participation.' },
+                        { icon: '🤝', title: 'Brand partnerships become more compelling when you can show action, not just reach.' },
+                        { icon: '💬', title: 'Coaching engagement increases when people have already committed to showing up.' },
+                        { icon: '📦', title: 'Digital products get used because momentum is already in place.' }
                     ]
                 }
             }
@@ -5367,7 +5414,7 @@
             document.getElementById('s11PillHandle').textContent = '@' + handle.replace(/^@/, '');
 
             // Title
-            var title = document.getElementById('collabTitleInput').value.trim() || 'Mindful Miles Reset';
+            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
             heroTitle.textContent = title;
 
             // Entry badge accent
@@ -5453,7 +5500,7 @@
             heroBg.innerHTML = tpl.svgArt;
 
             // Set collab title
-            var title = document.getElementById('collabTitleInput').value.trim() || 'Mindful Miles Reset';
+            var title = document.getElementById('collabTitleInput').value.trim() || 'Nature Yoga Reset';
             var titleEl = document.getElementById('s14CollabTitle');
             titleEl.textContent = title;
             titleEl.style.fontFamily = tpl.font;
