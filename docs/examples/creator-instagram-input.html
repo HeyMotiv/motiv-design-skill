@@ -1730,6 +1730,13 @@
             line-height: 1.5;
         }
 
+        .s8-hint {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.4;
+            margin-top: var(--space-md);
+        }
+
         /* Carousel */
         .s8-carousel-viewport {
             flex: 1;
@@ -1880,42 +1887,28 @@
             line-height: 1.28;
             letter-spacing: -0.01em;
         }
-        .s8-joined-badge {
+        .s8-entry-hold {
             display: inline-flex;
             align-items: center;
             gap: 5px;
             padding: 7px 14px;
             border-radius: var(--radius-full);
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 0.02em;
-            color: #FFFFFF;
+            color: var(--color-brand-secondary);
+            background: rgba(107, 78, 113, 0.08);
         }
-        .s8-joined-badge .material-icons { font-size: 16px; }
+        .s8-entry-hold .material-icons { font-size: 14px; }
         .s8-meta-row {
             display: flex;
             border-top: 1px solid var(--color-border-default);
             padding-top: 14px;
-            margin-bottom: 16px;
         }
         .s8-meta-stat { flex: 1; text-align: center; }
         .s8-meta-stat + .s8-meta-stat { border-left: 1px solid var(--color-border-default); }
         .s8-meta-stat-value { font-family: var(--font-body); font-size: 18px; font-weight: 600; color: var(--color-text-primary); line-height: 1; margin-bottom: 3px; }
         .s8-meta-stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-tertiary); }
-        .s8-invite-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 11px 16px;
-            border-radius: var(--radius-full);
-            background: var(--color-bg-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            color: var(--color-text-secondary);
-        }
-        .s8-invite-row .material-icons { font-size: 18px; opacity: 0.6; }
 
         /* Bottom controls */
         .s8-bottom {
@@ -3999,230 +3992,127 @@
                 </div>
 
                 <div class="s8-header">
-                    <h1 class="s8-headline">Pick a starting point</h1>
-                    <p class="s8-subtitle">Choose a template, you can customize more later.</p>
+                    <h1 class="s8-headline">We built these to feel authentically you</h1>
+                    <p class="s8-subtitle">A few collab directions shaped by your content and audience.</p>
+                    <p class="s8-hint">Most creators pick the one that feels right — you can adjust everything later.</p>
                 </div>
 
                 <!-- Carousel -->
                 <div class="s8-carousel-viewport" id="s8CarouselViewport">
                     <div class="s8-carousel-track" id="s8CarouselTrack">
 
-                        <!-- 1: Mountain Zen — Purple gradient, Lora, meditative -->
+                        <!-- 1: Morning Miles — Warm sage/forest, Source Serif 4, community rides -->
                         <div class="s8-carousel-slide active" data-tpl="0">
-                            <div class="s8-tpl-card" style="background: #EDEAF4;">
+                            <div class="s8-tpl-card" style="background: #E8F0EC;">
                                 <div class="s8-card-hero">
-                                    <div class="s8-card-hero-bg" style="background: linear-gradient(165deg, #D6CEE5 0%, #9084B8 35%, #6E549E 65%, #4A3278 100%);">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(165deg, #B8D4C4 0%, #7AAE94 30%, #4E8E6E 60%, #2D6B4A 100%);">
                                         <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
-                                            <path d="M-10 220 Q30 160 80 190 Q120 130 170 170 Q210 120 260 155 Q300 100 340 140 L360 130 L360 320 L-10 320Z" fill="rgba(255,255,255,0.08)"/>
-                                            <path d="M-10 260 Q40 200 90 230 Q130 180 175 210 Q220 170 270 200 Q310 160 360 190 L360 320 L-10 320Z" fill="rgba(0,0,0,0.1)"/>
-                                            <path d="M-10 290 Q60 250 130 270 Q200 240 270 265 Q330 245 360 260 L360 320 L-10 320Z" fill="rgba(0,0,0,0.12)"/>
-                                            <path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.15)" stroke-width="4" fill="none" stroke-linecap="round"/>
-                                            <path d="M175 320 Q170 290 180 270 Q195 240 175 210 Q160 185 170 160" stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" stroke-linecap="round"/>
-                                            <circle cx="290" cy="60" r="28" fill="rgba(255,255,255,0.15)"/>
-                                            <circle cx="298" cy="54" r="24" fill="rgba(144,132,184,0.6)"/>
-                                            <circle cx="60" cy="40" r="1.5" fill="rgba(255,255,255,0.3)"/>
-                                            <circle cx="120" cy="70" r="1" fill="rgba(255,255,255,0.2)"/>
-                                            <circle cx="220" cy="35" r="1.5" fill="rgba(255,255,255,0.25)"/>
-                                            <circle cx="330" cy="90" r="1" fill="rgba(255,255,255,0.2)"/>
+                                            <path d="M-10 200 Q40 150 100 180 Q160 120 220 160 Q280 110 360 145 L360 320 L-10 320Z" fill="rgba(255,255,255,0.07)"/>
+                                            <path d="M-10 240 Q60 190 130 220 Q200 175 270 210 Q330 180 360 195 L360 320 L-10 320Z" fill="rgba(0,0,0,0.08)"/>
+                                            <path d="M-10 275 Q80 250 160 265 Q240 245 320 260 L360 255 L360 320 L-10 320Z" fill="rgba(0,0,0,0.1)"/>
+                                            <circle cx="290" cy="55" r="30" fill="rgba(255,255,255,0.12)"/>
+                                            <circle cx="296" cy="50" r="22" fill="rgba(78,142,110,0.5)"/>
+                                            <circle cx="70" cy="45" r="1.5" fill="rgba(255,255,255,0.25)"/>
+                                            <circle cx="180" cy="35" r="1" fill="rgba(255,255,255,0.2)"/>
                                         </svg>
                                     </div>
                                     <div class="s8-card-hero-content">
                                         <div class="s8-creator-pill">
-                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #A698C8, #6E549E);"><span class="material-icons">person</span></div>
-                                            <span class="s8-creator-pill-name">@slow_spokes</span>
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #7AAE94, #4E8E6E);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@ellie_spins</span>
                                         </div>
-                                        <div class="s8-card-hero-title" style="font-family: 'Lora', serif;">Mindful Miles</div>
-                                        <div class="s8-card-hero-subtitle">Slow scenic rides to clear your head and find your rhythm</div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Source Serif 4', serif; font-weight: 700;">Morning Miles Challenge</div>
+                                        <div class="s8-card-hero-subtitle">Ride 3x a week before 9am — build the habit that changes everything</div>
                                     </div>
                                 </div>
                                 <div class="s8-card-stats">
                                     <div class="s8-stats-inner">
                                         <div class="s8-pool-row">
-                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$31,040</div></div>
-                                            <div class="s8-joined-badge" style="background: #9084B8;"><span class="material-icons">check_circle</span> Joined!</div>
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$28,500</div></div>
+                                            <div class="s8-entry-hold"><span class="material-icons">lock</span> $40 Entry hold</div>
                                         </div>
                                         <div class="s8-meta-row">
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">776</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">950</div><div class="s8-meta-stat-label">Participants</div></div>
                                             <div class="s8-meta-stat"><div class="s8-meta-stat-value">5 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
                                         </div>
-                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2: Peak Power — Terracotta gradient, Poppins, sprint -->
+                        <!-- 2: Strength + Spin — Clay/terracotta, Poppins, cross-training -->
                         <div class="s8-carousel-slide" data-tpl="1">
-                            <div class="s8-tpl-card" style="background: #F4ECE2;">
+                            <div class="s8-tpl-card" style="background: #F3E6E2;">
                                 <div class="s8-card-hero">
-                                    <div class="s8-card-hero-bg" style="background: linear-gradient(150deg, #E0C890 0%, #CC9A7A 30%, #B07A5E 60%, #8C5540 100%);">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(155deg, #E4C4B0 0%, #C97A6A 30%, #A65D4E 60%, #7A3E32 100%);">
                                         <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
-                                            <ellipse cx="175" cy="320" rx="280" ry="180" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="50"/>
-                                            <ellipse cx="175" cy="340" rx="220" ry="150" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="40"/>
-                                            <line x1="-20" y1="110" x2="160" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round"/>
-                                            <line x1="-20" y1="130" x2="120" y2="127" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-linecap="round"/>
-                                            <line x1="-20" y1="150" x2="90" y2="148" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-linecap="round"/>
-                                            <circle cx="300" cy="50" r="80" fill="rgba(224,200,144,0.2)"/>
-                                            <circle cx="300" cy="50" r="50" fill="rgba(224,200,144,0.15)"/>
-                                            <circle cx="300" cy="50" r="25" fill="rgba(255,255,255,0.1)"/>
-                                            <circle cx="60" cy="260" r="35" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
-                                            <circle cx="60" cy="260" r="12" fill="rgba(255,255,255,0.05)"/>
+                                            <ellipse cx="175" cy="330" rx="280" ry="180" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="50"/>
+                                            <ellipse cx="175" cy="350" rx="220" ry="150" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="40"/>
+                                            <line x1="-20" y1="115" x2="160" y2="110" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-linecap="round"/>
+                                            <line x1="-20" y1="135" x2="120" y2="132" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" stroke-linecap="round"/>
+                                            <circle cx="300" cy="55" r="70" fill="rgba(228,196,176,0.18)"/>
+                                            <circle cx="300" cy="55" r="40" fill="rgba(228,196,176,0.12)"/>
+                                            <circle cx="300" cy="55" r="18" fill="rgba(255,255,255,0.08)"/>
                                         </svg>
                                     </div>
                                     <div class="s8-card-hero-content">
                                         <div class="s8-creator-pill">
-                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #CC9A7A, #B07A5E);"><span class="material-icons">person</span></div>
-                                            <span class="s8-creator-pill-name">@crit_marcus</span>
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #C97A6A, #A65D4E);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@ellie_spins</span>
                                         </div>
-                                        <div class="s8-card-hero-title" style="font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: -0.04em;">Sprint Series</div>
-                                        <div class="s8-card-hero-subtitle">Max-effort interval rides that build raw power and speed</div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: -0.04em;">Strength + Spin</div>
+                                        <div class="s8-card-hero-subtitle">Pair your rides with bodyweight strength — 4 weeks of cross-training</div>
                                     </div>
                                 </div>
                                 <div class="s8-card-stats">
                                     <div class="s8-stats-inner">
                                         <div class="s8-pool-row">
-                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$18,750</div></div>
-                                            <div class="s8-joined-badge" style="background: #CC9A7A;"><span class="material-icons">check_circle</span> Joined!</div>
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$19,200</div></div>
+                                            <div class="s8-entry-hold"><span class="material-icons">lock</span> $40 Entry hold</div>
                                         </div>
                                         <div class="s8-meta-row">
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">1,240</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">1,280</div><div class="s8-meta-stat-label">Participants</div></div>
                                             <div class="s8-meta-stat"><div class="s8-meta-stat-value">4 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
                                         </div>
-                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 3: Fresh Ride — Emerald gradient, Source Serif 4 -->
+                        <!-- 3: Rest & Recovery — Soft plum/lavender, Lora, recovery-focused -->
                         <div class="s8-carousel-slide" data-tpl="2">
-                            <div class="s8-tpl-card" style="background: #E2F4EA;">
+                            <div class="s8-tpl-card" style="background: #EDEAF4;">
                                 <div class="s8-card-hero">
-                                    <div class="s8-card-hero-bg" style="background: linear-gradient(170deg, #A2D4BC 0%, #5FAE90 30%, #488E72 60%, #2C6050 100%);">
+                                    <div class="s8-card-hero-bg" style="background: linear-gradient(170deg, #D6CEE5 0%, #9B8BBC 35%, #7A68A0 65%, #5A4478 100%);">
                                         <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
-                                            <path d="M-10 180 Q50 130 120 165 Q180 110 240 150 Q300 100 360 135 L360 320 L-10 320Z" fill="rgba(255,255,255,0.06)"/>
-                                            <path d="M-10 220 Q80 170 150 200 Q220 160 290 190 Q340 170 360 180 L360 320 L-10 320Z" fill="rgba(0,0,0,0.07)"/>
-                                            <path d="M-10 260 Q60 230 140 250 Q220 225 300 245 Q350 235 360 240 L360 320 L-10 320Z" fill="rgba(0,0,0,0.08)"/>
-                                            <path d="M155 320 L170 140 L180 140 L195 320Z" fill="rgba(255,255,255,0.1)"/>
-                                            <line x1="175" y1="140" x2="175" y2="320" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 8"/>
-                                            <ellipse cx="130" cy="248" rx="12" ry="18" fill="rgba(0,0,0,0.08)"/>
-                                            <ellipse cx="220" cy="245" rx="13" ry="19" fill="rgba(0,0,0,0.08)"/>
-                                            <circle cx="175" cy="60" r="40" fill="rgba(255,255,255,0.12)"/>
-                                            <circle cx="175" cy="60" r="20" fill="rgba(255,255,255,0.1)"/>
+                                            <path d="M-10 220 Q30 170 80 200 Q130 150 180 180 Q230 140 280 170 Q320 130 360 155 L360 320 L-10 320Z" fill="rgba(255,255,255,0.06)"/>
+                                            <path d="M-10 260 Q50 220 110 245 Q170 200 230 230 Q290 195 360 220 L360 320 L-10 320Z" fill="rgba(0,0,0,0.07)"/>
+                                            <path d="M-10 290 Q70 265 150 280 Q230 260 310 275 L360 270 L360 320 L-10 320Z" fill="rgba(0,0,0,0.09)"/>
+                                            <circle cx="80" cy="60" r="35" fill="rgba(255,255,255,0.1)"/>
+                                            <circle cx="74" cy="55" r="28" fill="rgba(155,139,188,0.45)"/>
+                                            <circle cx="250" cy="40" r="1.5" fill="rgba(255,255,255,0.2)"/>
+                                            <circle cx="310" cy="75" r="1" fill="rgba(255,255,255,0.15)"/>
                                         </svg>
                                     </div>
                                     <div class="s8-card-hero-content">
                                         <div class="s8-creator-pill">
-                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #7CC4A8, #488E72);"><span class="material-icons">person</span></div>
-                                            <span class="s8-creator-pill-name">@ride_with_jules</span>
+                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #9B8BBC, #7A68A0);"><span class="material-icons">person</span></div>
+                                            <span class="s8-creator-pill-name">@ellie_spins</span>
                                         </div>
-                                        <div class="s8-card-hero-title" style="font-family: 'Source Serif 4', serif; font-weight: 700;">Century Ride Challenge</div>
-                                        <div class="s8-card-hero-subtitle">Build your miles week by week toward the ultimate century ride</div>
+                                        <div class="s8-card-hero-title" style="font-family: 'Lora', serif;">Rest & Recovery Reset</div>
+                                        <div class="s8-card-hero-subtitle">Stretch, rest days, and slow rides that make the hard days count</div>
                                     </div>
                                 </div>
                                 <div class="s8-card-stats">
                                     <div class="s8-stats-inner">
                                         <div class="s8-pool-row">
-                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$24,300</div></div>
-                                            <div class="s8-joined-badge" style="background: #5FAE90;"><span class="material-icons">check_circle</span> Joined!</div>
+                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$34,100</div></div>
+                                            <div class="s8-entry-hold"><span class="material-icons">lock</span> $40 Entry hold</div>
                                         </div>
                                         <div class="s8-meta-row">
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">512</div><div class="s8-meta-stat-label">Participants</div></div>
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">8 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">680</div><div class="s8-meta-stat-label">Participants</div></div>
+                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">6 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
                                         </div>
-                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4: Noir Elite — Dark navy/gold, Playfair Display -->
-                        <div class="s8-carousel-slide" data-tpl="3">
-                            <div class="s8-tpl-card" style="background: #E2E0D6;">
-                                <div class="s8-card-hero">
-                                    <div class="s8-card-hero-bg" style="background: linear-gradient(160deg, #334155 0%, #1E293B 35%, #0F172A 65%, #020617 100%);">
-                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
-                                            <path d="M-10 200 L40 140 L70 170 L120 100 L160 150 L200 80 L240 130 L280 90 L320 150 L360 120 L360 320 L-10 320Z" fill="rgba(212,175,55,0.06)"/>
-                                            <path d="M-10 240 L30 190 L80 220 L140 160 L190 200 L250 150 L310 190 L360 170 L360 320 L-10 320Z" fill="rgba(255,255,255,0.03)"/>
-                                            <path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.12)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                                            <path d="M20 320 Q60 280 120 285 Q200 290 220 260 Q240 230 300 235 Q340 238 350 210" stroke="rgba(212,175,55,0.05)" stroke-width="12" fill="none" stroke-linecap="round"/>
-                                            <circle cx="80" cy="50" r="1.5" fill="rgba(212,175,55,0.35)"/>
-                                            <circle cx="270" cy="40" r="1" fill="rgba(212,175,55,0.25)"/>
-                                            <circle cx="180" cy="30" r="1.5" fill="rgba(212,175,55,0.3)"/>
-                                            <circle cx="320" cy="70" r="1" fill="rgba(212,175,55,0.2)"/>
-                                            <path d="M0 290 Q40 270 80 280 Q120 260 160 270 Q200 250 240 265 Q280 245 320 260 Q340 250 350 255" stroke="rgba(212,175,55,0.1)" stroke-width="1.5" fill="none"/>
-                                        </svg>
-                                    </div>
-                                    <div class="s8-card-hero-content">
-                                        <div class="s8-creator-pill">
-                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">person</span></div>
-                                            <span class="s8-creator-pill-name">@velonoir</span>
-                                        </div>
-                                        <div class="s8-card-hero-title" style="font-family: 'Playfair Display', serif;">Gran Fondo Prep</div>
-                                        <div class="s8-card-hero-subtitle">A structured 12-week build to race day, for riders who demand more</div>
-                                    </div>
-                                </div>
-                                <div class="s8-card-stats">
-                                    <div class="s8-stats-inner">
-                                        <div class="s8-pool-row">
-                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$52,800</div></div>
-                                            <div class="s8-joined-badge" style="background: linear-gradient(135deg, #D4AF37, #B8860B);"><span class="material-icons">check_circle</span> Joined!</div>
-                                        </div>
-                                        <div class="s8-meta-row">
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">340</div><div class="s8-meta-stat-label">Participants</div></div>
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">12 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
-                                        </div>
-                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5: Golden Hour — Sunset amber/rose, Merriweather -->
-                        <div class="s8-carousel-slide" data-tpl="4">
-                            <div class="s8-tpl-card" style="background: #F4E4E7;">
-                                <div class="s8-card-hero">
-                                    <div class="s8-card-hero-bg" style="background: linear-gradient(175deg, #EDE0B8 0%, #CCA76C 20%, #C88090 55%, #8E4858 85%, #502028 100%);">
-                                        <svg viewBox="0 0 350 320" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;">
-                                            <circle cx="175" cy="160" r="55" fill="rgba(237,224,184,0.25)"/>
-                                            <circle cx="175" cy="160" r="35" fill="rgba(237,224,184,0.2)"/>
-                                            <circle cx="175" cy="160" r="18" fill="rgba(255,255,255,0.15)"/>
-                                            <path d="M0 195 Q175 185 350 195 L350 200 Q175 190 0 200Z" fill="rgba(255,255,255,0.08)"/>
-                                            <path d="M140 320 L172 195 L178 195 L210 320Z" fill="rgba(0,0,0,0.08)"/>
-                                            <line x1="175" y1="195" x2="175" y2="320" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="5 7"/>
-                                            <ellipse cx="135" cy="270" rx="6" ry="3" fill="rgba(0,0,0,0.1)"/>
-                                            <line x1="135" y1="267" x2="135" y2="255" stroke="rgba(0,0,0,0.1)" stroke-width="2.5" stroke-linecap="round"/>
-                                            <circle cx="135" cy="251" r="3" fill="rgba(0,0,0,0.1)"/>
-                                            <ellipse cx="155" cy="272" rx="5.5" ry="2.8" fill="rgba(0,0,0,0.08)"/>
-                                            <line x1="155" y1="269" x2="155" y2="258" stroke="rgba(0,0,0,0.08)" stroke-width="2.5" stroke-linecap="round"/>
-                                            <circle cx="155" cy="254" r="3" fill="rgba(0,0,0,0.08)"/>
-                                            <ellipse cx="210" cy="268" rx="5" ry="2.5" fill="rgba(0,0,0,0.07)"/>
-                                            <line x1="210" y1="265" x2="210" y2="255" stroke="rgba(0,0,0,0.07)" stroke-width="2" stroke-linecap="round"/>
-                                            <circle cx="210" cy="252" r="2.5" fill="rgba(0,0,0,0.07)"/>
-                                            <ellipse cx="80" cy="100" rx="40" ry="6" fill="rgba(255,255,255,0.06)"/>
-                                            <ellipse cx="280" cy="120" rx="35" ry="5" fill="rgba(255,255,255,0.05)"/>
-                                        </svg>
-                                    </div>
-                                    <div class="s8-card-hero-content">
-                                        <div class="s8-creator-pill">
-                                            <div class="s8-creator-pill-avatar" style="background: linear-gradient(135deg, #CCA76C, #C88090);"><span class="material-icons">person</span></div>
-                                            <span class="s8-creator-pill-name">@golden_peloton</span>
-                                        </div>
-                                        <div class="s8-card-hero-title" style="font-family: 'Merriweather', serif;">Sunset Ride Club</div>
-                                        <div class="s8-card-hero-subtitle">Golden hour group rides that end the day with good vibes and good company</div>
-                                    </div>
-                                </div>
-                                <div class="s8-card-stats">
-                                    <div class="s8-stats-inner">
-                                        <div class="s8-pool-row">
-                                            <div><div class="s8-pool-label">Collab Pool</div><div class="s8-pool-amount">$12,480</div></div>
-                                            <div class="s8-joined-badge" style="background: #C88090;"><span class="material-icons">check_circle</span> Joined!</div>
-                                        </div>
-                                        <div class="s8-meta-row">
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">2,180</div><div class="s8-meta-stat-label">Participants</div></div>
-                                            <div class="s8-meta-stat"><div class="s8-meta-stat-value">4 weeks</div><div class="s8-meta-stat-label">Duration</div></div>
-                                        </div>
-                                        <div class="s8-invite-row"><span class="material-icons">people</span> It's more fun with friends, invite yours!</div>
                                     </div>
                                 </div>
                             </div>
@@ -4237,11 +4127,9 @@
                         <div class="s8-dot active"></div>
                         <div class="s8-dot"></div>
                         <div class="s8-dot"></div>
-                        <div class="s8-dot"></div>
-                        <div class="s8-dot"></div>
                     </div>
                     <div class="s8-cta">
-                        <button class="btn-primary btn-primary--purple" id="s8ContinueBtn">Use this template</button>
+                        <button class="btn-primary btn-primary--purple" id="s8ContinueBtn">Continue with this</button>
                     </div>
                 </div>
             </div>
