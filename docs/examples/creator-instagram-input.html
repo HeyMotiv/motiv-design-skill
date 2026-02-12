@@ -995,6 +995,8 @@
             display: flex;
             flex-direction: column;
             padding: 60px var(--space-xl) var(--space-xl);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .s4-nav {
@@ -1033,16 +1035,13 @@
             border-radius: 24px;
             padding: var(--space-lg);
             box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
-            flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         .q-stack-flow {
             display: flex;
             flex-direction: column;
-            flex: 1;
         }
 
         /* Answered summary rows */
@@ -1180,6 +1179,61 @@
         }
         .q-opt.selected .q-opt-text { color: var(--color-brand-secondary); font-weight: 500; }
 
+        /* Checkbox variant for multi-select */
+        .q-opt--checkbox .q-opt-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border-default);
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--motion-fast);
+        }
+        .q-opt--checkbox .q-opt-checkbox svg {
+            width: 14px;
+            height: 14px;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0;
+            transition: opacity var(--motion-fast);
+        }
+        .q-opt--checkbox.selected .q-opt-checkbox {
+            background: var(--color-brand-secondary);
+            border-color: var(--color-brand-secondary);
+        }
+        .q-opt--checkbox.selected .q-opt-checkbox svg { opacity: 1; }
+        .q-opt--checkbox.selected {
+            border-color: var(--color-brand-secondary);
+            background: rgba(107, 78, 113, 0.05);
+        }
+        .q-opt--checkbox.selected .q-opt-text { color: var(--color-brand-secondary); font-weight: 500; }
+
+        .q-multi-done {
+            margin-top: var(--space-md);
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: var(--color-brand-secondary);
+            color: white;
+            cursor: pointer;
+            transition: opacity var(--motion-fast), transform var(--motion-fast);
+        }
+        .q-multi-done:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .q-multi-done:not(:disabled):hover {
+            transform: scale(1.02);
+        }
+
         /* Upcoming teaser */
         .q-upcoming {
             margin-top: auto;
@@ -1247,6 +1301,99 @@
         .s4-cta {
             margin-top: auto;
             padding-top: var(--space-lg);
+        }
+
+        /* Completed state: collapse questions, show summary */
+        .s4-content.completed .questions-card {
+            display: none;
+        }
+
+        .q-summary-strip {
+            display: none;
+            padding: var(--space-md) 0 var(--space-xs);
+        }
+
+        .s4-content.completed .q-summary-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+
+        .q-summary-check {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .q-summary-check .material-icons {
+            font-size: 18px;
+            color: var(--color-accent-sage);
+        }
+
+        .q-summary-divider {
+            width: 1px;
+            height: 14px;
+            background: var(--color-border-default);
+        }
+
+        .q-summary-edit {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-brand-secondary);
+            text-decoration: none;
+        }
+
+        .q-summary-edit:hover {
+            text-decoration: underline;
+        }
+
+        /* Gap result in completed state - flush to top */
+        .s4-content.completed .s4-cta {
+            margin-top: 0;
+            padding-top: var(--space-md);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .s4-content.completed #gapResultSlot {
+            flex: 1;
+        }
+
+        .s4-content.completed .gap-result {
+            padding: var(--space-xl) var(--space-lg);
+            border-radius: 20px;
+            background: #FFFFFF;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03);
+        }
+
+        .s4-content.completed .gap-result-title {
+            font-size: 28px;
+            line-height: 1.2;
+        }
+
+        .s4-content.completed .gap-result-desc {
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .gap-result {
+            animation: gapFadeUp 0.5s ease both;
+        }
+
+        @keyframes gapFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ===========================================
@@ -3855,15 +4002,24 @@
                     <a href="#" class="back-btn" id="backToConfirm"><span class="material-icons">chevron_left</span></a>
                 </div>
 
-                <h1 class="s4-headline">A few quick <em>questions</em></h1>
-                <p class="s4-subtext">Help us understand how your community shows up.</p>
+                <div class="s4-header" id="s4Header">
+                    <h1 class="s4-headline">A few quick <em>questions</em></h1>
+                    <p class="s4-subtext">Help us understand how your community shows up.</p>
+                </div>
 
-                <div class="questions-card">
+                <div class="questions-card" id="questionsCard">
                     <div class="q-stack-flow">
                         <div class="q-answered-list" id="qAnsweredList"></div>
                         <div class="q-active-slot" id="qActiveSlot"></div>
                         <div class="q-upcoming" id="qUpcoming"></div>
                     </div>
+                </div>
+
+                <!-- Completion indicator (hidden until complete) -->
+                <div class="q-summary-strip" id="qSummaryStrip">
+                    <span class="q-summary-check"><span class="material-icons">check_circle</span> 3 of 3 answered</span>
+                    <span class="q-summary-divider"></span>
+                    <a href="#" class="q-summary-edit" id="qSummaryEdit">Edit answers</a>
                 </div>
 
                 <div class="s4-cta">
@@ -4856,17 +5012,22 @@
         let currentQ = 1;
 
         const qData = [
-            { id: 1, title: 'Do they take that first step?', options: [
-                { value: 'yes', label: 'Yes — they try things out', short: 'Yes, they try things out' },
-                { value: 'no', label: 'Not usually — they stay inspired but don\'t start', short: 'Not usually — inspired but don\'t start' }
+            { id: 1, type: 'single', title: 'After people engage with your content, what most often happens?', options: [
+                { value: 'motivated', label: 'They feel motivated, but don\u2019t take immediate action', short: 'Motivated but don\u2019t act' },
+                { value: 'some-action', label: 'Some take action, but it\u2019s hard to keep going', short: 'Some act but don\u2019t sustain' },
+                { value: 'consistent', label: 'A portion take action and stay fairly consistent', short: 'Some act and stay consistent' }
             ]},
-            { id: 2, title: 'Do they stay consistent?', options: [
-                { value: 'yes', label: 'Yes — they keep showing up', short: 'Yes, they keep showing up' },
-                { value: 'no', label: 'Not usually — momentum fades after a few weeks', short: 'Not usually — momentum fades' }
+            { id: 2, type: 'single', title: 'Where do you think people get stuck most?', options: [
+                { value: 'no-moment', label: 'There\u2019s no clear moment to start', short: 'No clear moment to start' },
+                { value: 'no-structure', label: 'There\u2019s no structure or accountability', short: 'No structure or accountability' },
+                { value: 'no-next', label: 'It\u2019s hard to see what happens next', short: 'Hard to see what\u2019s next' }
             ]},
-            { id: 3, title: 'Do they go deeper?', options: [
-                { value: 'yes', label: 'Yes — they seek coaching, products, or community', short: 'Yes, they go deeper' },
-                { value: 'no', label: 'Not yet — they engage but don\'t go further', short: 'Not yet — engaged but don\'t go further' }
+            { id: 3, type: 'multi', title: 'How do you currently support your audience beyond content?', options: [
+                { value: 'referral', label: 'Referral links / affiliate codes', short: 'Referral links' },
+                { value: 'brand', label: 'Brand partnerships or sponsorships', short: 'Brand partnerships' },
+                { value: 'coaching', label: '1:1 or group coaching', short: 'Coaching' },
+                { value: 'digital', label: 'Guides, programs, or digital products', short: 'Digital products' },
+                { value: 'nothing', label: 'Nothing right now', short: 'Nothing right now' }
             ]}
         ];
 
@@ -4892,10 +5053,19 @@
             for (let i = 1; i <= 3; i++) {
                 if (answers[i]) {
                     const q = qData[i - 1];
-                    const opt = q.options.find(o => o.value === answers[i]);
+                    let answerText = '';
+                    if (q.type === 'multi' && Array.isArray(answers[i])) {
+                        answerText = answers[i].map(v => {
+                            const opt = q.options.find(o => o.value === v);
+                            return opt ? opt.short : v;
+                        }).join(', ');
+                    } else {
+                        const opt = q.options.find(o => o.value === answers[i]);
+                        answerText = opt ? opt.short : '';
+                    }
                     answeredHTML += '<div class="q-answer-row" data-reopen="' + i + '">' +
                         '<div class="q-row-check"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg></div>' +
-                        '<div class="q-row-text"><div class="q-row-q">' + q.title + '</div><div class="q-row-answer">' + opt.short + '</div></div>' +
+                        '<div class="q-row-text"><div class="q-row-q">' + q.title + '</div><div class="q-row-answer">' + answerText + '</div></div>' +
                         '<div class="q-row-edit">Edit</div></div>';
                 }
             }
@@ -4912,21 +5082,90 @@
             if (currentQ <= 3 && !answers[currentQ]) {
                 const q = qData[currentQ - 1];
                 let optsHTML = '';
-                q.options.forEach(o => {
-                    optsHTML += '<button class="q-opt" data-val="' + o.value + '">' +
-                        '<div class="q-opt-dot"></div><span class="q-opt-text">' + o.label + '</span></button>';
-                });
-                activeEl.innerHTML = '<div class="q-active-q">' +
-                    '<div class="q-active-label">Question ' + currentQ + ' of ' + qData.length + '</div>' +
-                    '<div class="q-active-title">' + q.title + '</div>' +
-                    '<div class="q-active-options">' + optsHTML + '</div></div>';
 
-                // Attach option click listeners
-                activeEl.querySelectorAll('.q-opt').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        pickQ(currentQ, btn.dataset.val, btn);
+                if (q.type === 'multi') {
+                    // Multi-select with checkboxes
+                    q.options.forEach(o => {
+                        optsHTML += '<button class="q-opt q-opt--checkbox" data-val="' + o.value + '">' +
+                            '<div class="q-opt-checkbox"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5"></path></svg></div>' +
+                            '<span class="q-opt-text">' + o.label + '</span></button>';
                     });
-                });
+                    activeEl.innerHTML = '<div class="q-active-q">' +
+                        '<div class="q-active-label">Question ' + currentQ + ' of ' + qData.length + '</div>' +
+                        '<div class="q-active-title">' + q.title + '</div>' +
+                        '<div class="q-active-options">' + optsHTML + '</div>' +
+                        '<button class="q-multi-done" id="qMultiDone" disabled>Done</button></div>';
+
+                    // Track multi selections
+                    let multiSelected = [];
+                    activeEl.querySelectorAll('.q-opt--checkbox').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const val = btn.dataset.val;
+
+                            // "Nothing right now" is exclusive
+                            if (val === 'nothing') {
+                                multiSelected = ['nothing'];
+                                activeEl.querySelectorAll('.q-opt--checkbox').forEach(b => b.classList.remove('selected'));
+                                btn.classList.add('selected');
+                            } else {
+                                // Deselect "nothing" if selecting something else
+                                const nothingBtn = activeEl.querySelector('.q-opt--checkbox[data-val="nothing"]');
+                                if (nothingBtn) nothingBtn.classList.remove('selected');
+                                multiSelected = multiSelected.filter(v => v !== 'nothing');
+
+                                if (multiSelected.includes(val)) {
+                                    multiSelected = multiSelected.filter(v => v !== val);
+                                    btn.classList.remove('selected');
+                                } else {
+                                    multiSelected.push(val);
+                                    btn.classList.add('selected');
+                                }
+                            }
+
+                            document.getElementById('qMultiDone').disabled = multiSelected.length === 0;
+                        });
+                    });
+
+                    document.getElementById('qMultiDone').addEventListener('click', () => {
+                        if (multiSelected.length > 0) {
+                            answers[currentQ] = multiSelected;
+                            currentQ = 4;
+                            renderQuestions();
+
+                            // Transition to completed state
+                            const s4Content = document.querySelector('#screen4 .s4-content');
+                            s4Content.classList.add('completed');
+
+                            // Show gap result after collapse animation
+                            setTimeout(() => {
+                                const gap = gapResults[resolveGap()];
+                                document.getElementById('gapResultSlot').innerHTML =
+                                    '<div class="gap-result"><div class="gap-result-eyebrow">Where they get stuck</div>' +
+                                    '<div class="gap-result-title">' + gap.title + '</div>' +
+                                    '<div class="gap-result-desc">' + gap.desc + '</div>' +
+                                    '<div class="gap-result-bridge">Let\u2019s look at what\u2019s already working \u2192</div></div>';
+                                document.getElementById('questionsContinueBtn').disabled = false;
+                            }, 350);
+                        }
+                    });
+                } else {
+                    // Single-select with radio dots
+                    q.options.forEach(o => {
+                        optsHTML += '<button class="q-opt" data-val="' + o.value + '">' +
+                            '<div class="q-opt-dot"></div><span class="q-opt-text">' + o.label + '</span></button>';
+                    });
+                    activeEl.innerHTML = '<div class="q-active-q">' +
+                        '<div class="q-active-label">Question ' + currentQ + ' of ' + qData.length + '</div>' +
+                        '<div class="q-active-title">' + q.title + '</div>' +
+                        '<div class="q-active-options">' + optsHTML + '</div></div>';
+
+                    // Attach option click listeners
+                    activeEl.querySelectorAll('.q-opt').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            pickQ(currentQ, btn.dataset.val, btn);
+                        });
+                    });
+                }
             } else {
                 activeEl.innerHTML = '';
             }
@@ -4952,21 +5191,8 @@
             });
 
             setTimeout(() => {
-                if (q < 3) {
-                    currentQ = q + 1;
-                    renderQuestions();
-                } else {
-                    currentQ = 4;
-                    renderQuestions();
-                    // Show gap result card
-                    const gap = gapResults[resolveGap()];
-                    document.getElementById('gapResultSlot').innerHTML =
-                        '<div class="gap-result"><div class="gap-result-eyebrow">Where they get stuck</div>' +
-                        '<div class="gap-result-title">' + gap.title + '</div>' +
-                        '<div class="gap-result-desc">' + gap.desc + '</div>' +
-                        '<div class="gap-result-bridge">Let\u2019s look at what\u2019s already working \u2192</div></div>';
-                    document.getElementById('questionsContinueBtn').disabled = false;
-                }
+                currentQ = q + 1;
+                renderQuestions();
             }, 300);
         }
 
@@ -4975,6 +5201,7 @@
             currentQ = fromQ;
             document.getElementById('gapResultSlot').innerHTML = '';
             document.getElementById('questionsContinueBtn').disabled = true;
+            document.querySelector('#screen4 .s4-content').classList.remove('completed');
             renderQuestions();
         }
 
@@ -4983,8 +5210,15 @@
             currentQ = 1;
             document.getElementById('gapResultSlot').innerHTML = '';
             document.getElementById('questionsContinueBtn').disabled = true;
+            document.querySelector('#screen4 .s4-content').classList.remove('completed');
             renderQuestions();
         }
+
+        // Edit answers link
+        document.getElementById('qSummaryEdit').addEventListener('click', function(e) {
+            e.preventDefault();
+            resetQuestions();
+        });
 
         renderQuestions();
 
@@ -5112,7 +5346,29 @@
             const arch = archetypes[key];
 
             document.getElementById('s7Subtitle').textContent = arch.earnings.subtitle;
-            document.getElementById('benefitsList').innerHTML = arch.earnings.benefits.map(b =>
+
+            // Map Q3 answers to relevant earnings benefits
+            const benefitsMap = {
+                'referral': { icon: '🔗', title: 'Referral links convert better when products follow real participation.' },
+                'brand': { icon: '🤝', title: 'Brand partnerships become more compelling when you can show action, not just reach.' },
+                'coaching': { icon: '💬', title: 'Coaching engagement increases when people have already committed to showing up.' },
+                'digital': { icon: '📦', title: 'Digital products get used because momentum is already in place.' },
+                'nothing': { icon: '✨', title: 'Collabs give you a built-in way to earn from your audience without needing products, sponsors, or coaching.' }
+            };
+
+            let benefits = [];
+            const q3Answers = answers[3];
+            if (q3Answers && Array.isArray(q3Answers)) {
+                q3Answers.forEach(v => {
+                    if (benefitsMap[v]) benefits.push(benefitsMap[v]);
+                });
+            }
+            // Fallback if no Q3 answers
+            if (benefits.length === 0) {
+                benefits = Object.values(benefitsMap).slice(0, 4);
+            }
+
+            document.getElementById('benefitsList').innerHTML = benefits.map(b =>
                 '<div class="benefit-item">' +
                     '<div class="benefit-icon">' + b.icon + '</div>' +
                     '<p class="benefit-title">' + b.title + '</p>' +
@@ -5751,7 +6007,14 @@
 
                 var earn = archetypes.connector.earnings;
                 document.getElementById('s7Subtitle').textContent = earn.subtitle;
-                document.getElementById('benefitsList').innerHTML = earn.benefits.map(function(b) {
+                // Demo: show all benefits for nav-jump
+                var demoBenefits = [
+                    { icon: '🔗', title: 'Referral links convert better when products follow real participation.' },
+                    { icon: '🤝', title: 'Brand partnerships become more compelling when you can show action, not just reach.' },
+                    { icon: '💬', title: 'Coaching engagement increases when people have already committed to showing up.' },
+                    { icon: '📦', title: 'Digital products get used because momentum is already in place.' }
+                ];
+                document.getElementById('benefitsList').innerHTML = demoBenefits.map(function(b) {
                     return '<div class="benefit-item">' +
                         '<div class="benefit-icon">' + b.icon + '</div>' +
                         '<p class="benefit-title">' + b.title + '</p>' +
