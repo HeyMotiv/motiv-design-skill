@@ -111,7 +111,7 @@ Once designers complete their screens, AI can generate:
 ### From Designer A's Patterns:
 - Challenge Detail variations (different states)
 - All other results screens (partial win, etc.)
-- Challenge management screens (follows dashboard patterns)
+- Challenge management screens (follows dashboard patterns) — **Note:** Creator Collab Dashboard (C-MANAGE-001) already has AI-generated pre-live + live prototypes in `docs/examples/creator-collab-dashboard.html`
 - Creator analytics (follows stats patterns)
 - Empty/error states for all high-impact screens
 

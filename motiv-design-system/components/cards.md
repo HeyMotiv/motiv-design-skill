@@ -16,6 +16,10 @@ Cards group related content and actions. Motiv uses cards extensively for challe
 | **Product** | Recommendations | Image + text + category badge |
 | **Profile** | User info | Avatar + name + meta |
 | **Progress** | Challenge/goal tracking | Progress bar included |
+| **Engagement** | Creator dashboard messaging + stats | Warm glow shadow, dividers, stat row |
+| **Milestone Goal** | Tiered progress toward goals | Multi-segment progress bar, ring, dots |
+| **Tip Carousel** | Swipeable tips/advice | Icon + text cards, dot pagination |
+| **Signup List** | Recently joined users | Avatar list with fade-out, "View all" |
 
 ---
 
@@ -274,6 +278,155 @@ Used in onboarding quiz ("What motivates you?").
 
 ---
 
+## Engagement Card (Creator)
+
+Used in the Creator Collab Dashboard for personalized engagement messaging and community pot stats.
+
+### Specifications
+
+| Property | Value | Token |
+|----------|-------|-------|
+| Background | #FFFFFF | `colors.background.primary` |
+| Border | 1px solid #F3E6E2 | `colors.border.subtle` |
+| Border Radius | 16px | `radii.lg` |
+| Padding | 20px | `spacing.lg` |
+| Shadow | Warm glow: `0 4px 12px rgba(201,122,106,0.15), 0 12px 32px rgba(201,122,106,0.12), 0 2px 4px rgba(201,122,106,0.08)` | — |
+
+### Anatomy
+
+```
+┌─────────────────────────────────────────┐
+│  "Chad, you're doing great..."          │  ← Personalized message (18/28)
+│  ─────────────────────────────          │
+│          TOTAL COMMUNITY POT            │  ← Overline (10/14 uppercase)
+│              $11,040                    │  ← Large amount (40/48 600wt)
+│  ─────────────────────────────          │
+│    +12        $40        3 weeks        │  ← 3-column stats row
+│  New sign-ups  Commitment  Starts in…   │
+└─────────────────────────────────────────┘
+```
+
+### Notes
+- Warm brand-tinted box shadow distinguishes this from standard cards
+- Dividers separate logical sections
+- Pre-live shows sign-up stats; live shows active participation stats
+
+**HTML Example:** `docs/examples/creator-collab-dashboard.html`
+
+---
+
+## Milestone Goal Card (Creator)
+
+Used to show participant sign-up progress toward tiered milestones.
+
+### Specifications
+
+| Property | Value | Token |
+|----------|-------|-------|
+| Background | #FFFFFF | `colors.background.primary` |
+| Border | 1px solid #E7D9C9 | `colors.border.default` |
+| Border Radius | 16px | `radii.lg` |
+| Padding | 20px | `spacing.lg` |
+
+### Anatomy
+
+```
+┌─────────────────────────────────────────┐
+│  Participant milestones    150 signed up │
+│  ████████░░░░░░░░░░░░░░░░░░░░░         │  ← 5-segment progress bar
+│  ●    ◎    ○    ○    ○                  │  ← Dot markers (completed/next/locked)
+│  150 signed up          2,000 goal      │
+│  Earning $0             Earn $1,500     │
+│  ┌─────────────────────────────────┐    │
+│  │ (60%) 100 more to earn $75      │    │  ← Next milestone ring + text
+│  │       Next milestone at 250     │    │
+│  └─────────────────────────────────┘    │
+│  Current tier: 100 — Minimum met        │
+│  Sign-ups close Monday 11:59pm          │
+└─────────────────────────────────────────┘
+```
+
+### Milestone Dot States
+
+| State | Visual |
+|-------|--------|
+| Completed | Filled brand primary, white outline ring |
+| Next | White fill, brand primary border, white outline ring |
+| Locked | White fill, border-default border, white outline ring |
+
+**HTML Example:** `docs/examples/creator-collab-dashboard.html`
+
+---
+
+## Tip Carousel Card
+
+Used in Creator Collab Dashboard pre-live state for actionable creator tips.
+
+### Specifications
+
+| Property | Value | Token |
+|----------|-------|-------|
+| Background | #FFFFFF | `colors.background.primary` |
+| Border | 1px solid #E7D9C9 | `colors.border.default` |
+| Border Radius | 16px | `radii.lg` |
+| Padding | 20px | `spacing.lg` |
+| Layout | Icon (48px) + title + description, horizontal |
+
+### Carousel Behavior
+
+| Property | Value |
+|----------|-------|
+| Transition | 350ms cubic-bezier(0.25, 0.1, 0.25, 1) |
+| Interaction | Swipe/drag + dot indicators |
+| Dot Active | 20px wide pill, brand primary |
+| Dot Inactive | 6px circle, text tertiary |
+
+**HTML Example:** `docs/examples/creator-collab-dashboard.html`
+
+---
+
+## Signup List Card
+
+Used to show recently joined participants in the Creator Collab Dashboard.
+
+### Specifications
+
+| Property | Value | Token |
+|----------|-------|-------|
+| Background | #FFFFFF | `colors.background.primary` |
+| Border | 1px solid #E7D9C9 | `colors.border.default` |
+| Border Radius | 16px | `radii.lg` |
+| Padding | 20px | `spacing.lg` |
+
+### Anatomy
+
+```
+┌─────────────────────────────────────────┐
+│  Recently Joined        ↑ +12 this week │
+│  12 joined in the last 7 days           │
+│                                         │
+│  [Avatar] Sarah K.  NEW   @sarahk      │
+│  [Avatar] Mike R.         @mikeruns    │
+│  [Avatar] Jess T.  NEW   @jesstrains  │
+│           ░░░ fade-out gradient ░░░     │
+│                                         │
+│  ┌─────── View all 150 ───────┐         │
+│  └─────────────────────────────┘        │
+└─────────────────────────────────────────┘
+```
+
+### Avatar Specs
+
+| Property | Value |
+|----------|-------|
+| Size | 44px circle |
+| Font | 14px/600, white text |
+| Background | Per-user color |
+
+**HTML Example:** `docs/examples/creator-collab-dashboard.html`
+
+---
+
 ## Card States
 
 ### Hover (Desktop)
@@ -332,3 +485,4 @@ Used in onboarding quiz ("What motivates you?").
 | Version | Changes |
 |---------|---------|
 | 1.0 | Initial definition from Motiv screenshots |
+| 1.1 | Added Engagement Card, Milestone Goal Card, Tip Carousel Card, and Signup List Card from Creator Collab Dashboard prototype |
