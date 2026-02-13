@@ -166,7 +166,7 @@
             inset: 0;
             overflow: hidden;
             background: #F2E6E2;
-            transition: background 0.8s ease;
+            transition: background 1.2s ease-in-out;
         }
 
         .lava-bg.green-chapter { background: #ECF1F0; }
@@ -174,7 +174,7 @@
         .lava-layer {
             position: absolute;
             inset: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1.2s ease-in-out;
         }
 
         .lava-green { opacity: 0; }
@@ -1088,14 +1088,14 @@
             margin-bottom: 12px;
         }
         .strengthen-card-title {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text-primary);
             line-height: 1.2;
             margin-bottom: 4px;
         }
         .strengthen-card-desc {
-            font-size: 12px;
+            font-size: 14px;
             color: #6B7280;
             line-height: 1.4;
         }
@@ -1456,6 +1456,7 @@
             display: flex;
             flex-direction: column;
             padding: 60px 24px 28px;
+            justify-content: center;
         }
 
         .s3-nav {
@@ -1492,13 +1493,11 @@
             border-radius: 14px;
             padding: 14px 16px;
             margin-bottom: 14px;
-        }
-
-        .profile-identity {
             display: flex;
+            flex-direction: row;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
+            box-shadow: none;
         }
 
         .profile-avatar-wrap {
@@ -1512,6 +1511,7 @@
             overflow: hidden;
             border: 2px solid rgba(255,255,255,0.9);
             box-shadow: 0 2px 8px rgba(201,122,106,0.2);
+            background: #ddd;
         }
         .profile-avatar img {
             width: 100%; height: 100%;
@@ -1539,12 +1539,14 @@
             color: var(--color-text-primary);
             letter-spacing: -0.01em;
             line-height: 1.2;
+            margin: 0;
         }
         .profile-handle {
             font-size: 13px;
             color: var(--color-brand-secondary);
             font-weight: 500;
             line-height: 1.3;
+            margin: 0;
         }
 
         .profile-stats {
@@ -1829,8 +1831,6 @@
             padding: 0 24px 4px;
             scrollbar-width: none;
             scroll-padding-left: 24px;
-            flex: 1;
-            align-items: stretch;
         }
         .cc-carousel::-webkit-scrollbar { display: none; }
 
@@ -1842,7 +1842,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            min-height: 0;
+            min-height: 380px;
         }
 
         .cc-card-bg {
@@ -2106,18 +2106,14 @@
                 </div>
                 <h1 class="s0-wordmark">Motiv</h1>
                 <p class="s0-tagline">
-                    Turn the influence you already have<br>
-                    <strong>into consistent income.</strong>
+                    Turn your influence into<br>
+                    <strong>authentically earned income.</strong>
                 </p>
                 <p class="s0-body">
                     Motiv helps creators run short, action-based collabs with their audience.
                     Your followers don't just feel inspired — they show up and follow through.
                 </p>
                 <div class="s0-cta">
-                    <button class="btn-get-started" id="getStartedBtn">
-                        Get started
-                        <span class="material-icons">arrow_forward</span>
-                    </button>
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Motiv helped me actually unlock revenue doing something I already love doing, changing lives."</p>
                         <div class="testimonial-author">
@@ -2128,6 +2124,10 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn-get-started" id="getStartedBtn">
+                        Get started
+                        <span class="material-icons">arrow_forward</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -2271,30 +2271,25 @@
                     <p class="s3-subtext">Top ~1% of health & fitness creators on Instagram.</p>
                 </div>
 
-                <div class="profile-card">
-                    <div class="profile-identity">
-                        <div class="profile-avatar-wrap">
-                            <div class="profile-avatar"><img src="data:image/png;base64,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" alt="Ellie Snackson" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"></div>
-                            <div class="verified-badge"><span class="material-icons">check</span></div>
-                        </div>
-                        <div>
-                            <p class="profile-name">Ellie Snackson</p>
-                            <p class="profile-handle">@doodle_cycles</p>
-                        </div>
+                <div class="profile-card" style="display:flex !important;flex-direction:row !important;align-items:center !important;gap:12px;padding:14px 16px;box-shadow:none;">
+                    <div class="profile-avatar-wrap">
+                        <div class="profile-avatar"><img src="data:image/png;base64,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" alt="Ellie Snackson" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;"></div>
+                        <div class="verified-badge"><span class="material-icons">check</span></div>
                     </div>
-                    <div class="profile-stats">
-                        <div class="stat"><div class="stat-value">345K</div><div class="stat-label">Followers</div></div>
-                        <div class="stat-divider"></div>
-                        <div class="stat"><div class="stat-value">5.7M</div><div class="stat-label">Likes</div></div>
-                        <div class="stat-divider"></div>
-                        <div class="stat"><div class="stat-value">215K</div><div class="stat-label">Comments</div></div>
+                    <div style="flex:1;min-width:0;">
+                        <p class="profile-name">Ellie Snackson</p>
+                        <p class="profile-handle">@doodle_cycles</p>
+                    </div>
+                    <div class="stat-divider" style="height:32px;"></div>
+                    <div style="flex-shrink:0;text-align:center;">
+                        <div class="stat-value" style="font-size:18px;">345K</div>
+                        <div class="stat-label">Followers</div>
                     </div>
                 </div>
-
                 <div class="showup-card" id="showUpCard">
                     <div class="showup-label">How you show up</div>
                     <div class="showup-archetype" id="showUpArchetype">The Motivator</div>
-                    <div class="showup-desc" id="showUpDesc">You inspire action through consistency and energy. Your audience doesn't just watch — they move.</div>
+                    <div class="showup-desc" id="showUpDesc">Your energy is unmistakable. Your audience doesn't just watch — they lean in.</div>
                     <div class="showup-pills" id="showUpPills">
                         <span class="showup-pill">Motivates daily habits</span>
                         <span class="showup-pill">High engagement</span>
@@ -2391,7 +2386,7 @@
 
 
         <!-- ============================================
-             SCREEN 6: COLLAB SOLUTION
+             SCREEN 6: COLLAB — EARNINGS
              ============================================ -->
         <div class="screen" id="screen6">
             <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
@@ -2405,14 +2400,18 @@
                 <!-- Earnings hero -->
                 <div class="earnings-card">
                     <div class="earnings-label">You earn</div>
-                    <div style="text-align: center; padding: 8px 0 16px;">
+                    <div style="text-align: center; padding: 10px 0 20px;">
                         <div class="earnings-amount">$350+</div>
-                        <div style="font-family: var(--font-display); font-size: 18px; color: #6B7280; font-weight: 500; margin-top: 2px;">per collab, when it fills</div>
-                        <div style="font-size: 13px; color: #6B7280; line-height: 1.45; margin-top: 8px;">You earn by creating content, inspiring your audience, and cheering them on.</div>
+                        <div style="font-family: var(--font-display); font-size: 18px; color: #6B7280; font-weight: 500; margin-top: 4px;">per collab, when it fills</div>
+                        <div style="display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; padding: 5px 12px; border-radius: 6px; background: rgba(143,166,160,0.12); font-size: 11px; font-weight: 600; color: #8FA6A0;">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#8FA6A0" stroke-width="1.2"/><path d="M5 3.5V5.5" stroke="#8FA6A0" stroke-width="1.2" stroke-linecap="round"/><circle cx="5" cy="7" r="0.5" fill="#8FA6A0"/></svg>
+                            500 participants to fill
+                        </div>
+                        <div style="font-size: 14px; color: #6B7280; line-height: 1.5; margin-top: 12px; max-width: 280px; margin-left: auto; margin-right: auto;">You earn by creating content, inspiring your audience, and cheering them on.</div>
                     </div>
-                    <div style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 16px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <div style="flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, rgba(143,166,160,0.2), rgba(107,78,113,0.15)); display: flex; align-items: center; justify-content: center;">
+                    <div style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 18px;">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <div style="flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, rgba(143,166,160,0.2), rgba(107,78,113,0.15)); display: flex; align-items: center; justify-content: center;">
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
                                     <path d="M6 20L11 13L16 16L22 8" stroke="#6B4E71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M18 8H22V12" stroke="#6B4E71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -2420,24 +2419,49 @@
                                 </svg>
                             </div>
                             <div style="flex: 1;">
-                                <div id="earningsScenario" style="font-size: 13px; color: #374151; line-height: 1.45;">If 1% of your followers join and 85% complete the collab, you could earn</div>
-                                <div id="earningsTotal" style="font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; margin-top: 2px;">$2,623</div>
+                                <div id="earningsScenario" style="font-size: 14px; color: #374151; line-height: 1.45;">If 1% of your followers join and 85% complete, you could earn</div>
+                                <div id="earningsTotal" style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; margin-top: 3px;">$2,623</div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Strengthens — horizontal scroll -->
-                <div style="margin-left: -24px; margin-right: -24px;">
-                    <div class="strengthens-label" style="padding-left: 24px;">Everything you do gets stronger</div>
-                    <div class="strengthens-scroll" id="strengthensList">
                     </div>
                 </div>
 
                 <div style="flex: 1; min-height: 12px;"></div>
 
                 <div style="padding-top: 12px;">
-                    <button class="btn-primary btn-primary--purple" id="s6ContinueBtn">See collabs built for you →</button>
+                    <button class="btn-primary btn-primary--purple" id="s6ContinueBtn">Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SCREEN 6B: COLLAB — STRENGTHENS
+             ============================================ -->
+        <div class="screen" id="screen6b">
+            <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
+                <div style="display: flex; align-items: center; padding: 0 0 4px;">
+                    <a href="#" class="back-btn" id="backToEarnings"><span class="material-icons">chevron_left</span></a>
+                </div>
+
+                <div class="collab-headline">It's not just income.<br>It's a multiplier.</div>
+                <div class="collab-subhead">A collab gets your audience moving — and when they move, everything else you do works harder.</div>
+
+                <!-- Strengthens — horizontal scroll -->
+                <div style="margin-left: -24px; margin-right: -24px;">
+                    <div class="strengthens-label" style="padding-left: 24px;">Everything you already do</div>
+                    <div class="strengthens-scroll" id="strengthensList">
+                    </div>
+                </div>
+
+                <!-- Context note -->
+                <div style="background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: 14px; padding: 18px 20px; margin-top: 16px;">
+                    <div style="font-size: 14px; color: #374151; line-height: 1.5;">When your audience follows through, they become your strongest buyers, referrers, and advocates.</div>
+                </div>
+
+                <div style="flex: 1; min-height: 12px;"></div>
+
+                <div style="padding-top: 12px;">
+                    <button class="btn-primary btn-primary--purple" id="s6bContinueBtn">See collabs built for you →</button>
                 </div>
             </div>
         </div>
@@ -2446,30 +2470,23 @@
              SCREEN 7: COLLAB REVEAL
              ============================================ -->
         <div class="screen" id="screen7">
-            <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 0 0; overflow-y: auto; background: #F8F6F3;">
-                <div style="padding: 4px 24px 0;">
+            <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 0 0;">
+                <div style="padding: 8px 24px 0;">
                     <a href="#" class="back-btn" id="backToCollab"><span class="material-icons">chevron_left</span></a>
                     <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; line-height: 1.18; color: var(--color-text-primary); letter-spacing: -0.01em; margin: 8px 0 4px;">We built <span style="color: #C97A6A;">these</span> for you</div>
                     <div style="font-size: 14px; color: #6B7280; line-height: 1.5;">Shaped by your content, your audience, and how you show up.</div>
                 </div>
 
-                <!-- Earnings strip -->
-                <div class="earnings-strip">
-                    <div class="earnings-strip-icon">
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M5 16L9 9L13 12L17 6" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14 6H17V9" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="earnings-strip-text">You earn <strong>$350+</strong> per collab when it fills — up to <strong>$2,623</strong> if 1% of your followers join</div>
-                </div>
+                <div style="flex: 1;"></div>
 
                 <!-- Carousel - built dynamically by JS -->
                 <div class="cc-carousel" id="ccCarousel"></div>
-
                 <div class="cc-dots" id="ccDots"><div class="cc-dot active"></div><div class="cc-dot"></div><div class="cc-dot"></div></div>
+
+                <div style="flex: 1;"></div>
+
                 <div style="padding: 8px 24px 28px;">
-                    <div style="font-size:12px;color:#9CA3AF;text-align:center;margin-bottom:10px;">Pick one as a starting point — you can adjust everything later.</div>
+                    <div style="font-size:12px;color:#9CA3AF;text-align:center;margin-bottom:10px;">$350+ per collab with 500 participants · Pick one to start</div>
                     <button class="btn-primary btn-primary--purple" id="s7ContinueBtn">Continue with this →</button>
                 </div>
             </div>
@@ -2612,6 +2629,7 @@
             earn:     document.getElementById('screen4'),
             bridge:   document.getElementById('screen5'),
             collab:   document.getElementById('screen6'),
+            strengthen: document.getElementById('screen6b'),
             reveal:   document.getElementById('screen7'),
             account:  document.getElementById('screen8'),
             otp:      document.getElementById('screen9'),
@@ -2624,7 +2642,7 @@
         // Hash mapping
         var hashMap = {
             'welcome':'screen0','handle':'screen1','loading':'screen2','profile':'screen3',
-            'earn':'screen4','bridge':'screen5','collab':'screen6','reveal':'screen7',
+            'earn':'screen4','bridge':'screen5','collab':'screen6','strengthen':'screen6b','reveal':'screen7',
             'account':'screen8','otp':'screen9','youre-in':'screen10'
         };
         var idToHash = {};
@@ -2638,7 +2656,7 @@
         function goTo(from, to) {
             from.classList.add('exiting');
             from.classList.remove('active');
-            var greenScreens = ['screen5','screen6','screen7','screen8','screen9','screen10'];
+            var greenScreens = ['screen5','screen6','screen6b','screen7','screen8','screen9','screen10'];
             if (greenScreens.indexOf(to.id) !== -1) {
                 lavaBg.classList.add('green-chapter');
             } else {
@@ -2661,7 +2679,7 @@
                 desc: 'Gets people to start and keep going',
                 symbol: '<svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="3" fill="#C97A6A" opacity="0.7"/><line x1="22" y1="8" x2="22" y2="14" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.6"/><line x1="22" y1="30" x2="22" y2="36" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.6"/><line x1="8" y1="22" x2="14" y2="22" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.6"/><line x1="30" y1="22" x2="36" y2="22" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.6"/><line x1="12.1" y1="12.1" x2="16.1" y2="16.1" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.5"/><line x1="27.9" y1="27.9" x2="31.9" y2="31.9" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.5"/><line x1="12.1" y1="31.9" x2="16.1" y2="27.9" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.5"/><line x1="27.9" y1="16.1" x2="31.9" y2="12.1" stroke="#C97A6A" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>',
                 showUp: {
-                    desc: 'You turn energy into momentum. Your audience doesn\'t just watch — they start.',
+                    desc: 'Your energy is unmistakable. Your audience doesn\'t just watch — they lean in.',
                     pills: ['Emotional momentum', 'Consistency-driven', 'Personal resilience']
                 },
                 bridge: {
@@ -2800,12 +2818,12 @@
 
         // Benefits mapping for screen 6 (collab solution)
         var benefitsMap = {
-            'referral':  { title: 'Referral links', desc: 'People actually use the products they\'re moving with', gradient: 'linear-gradient(135deg, rgba(143,166,160,0.15), rgba(143,166,160,0.05))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 18C8 18 14 10 18 10C22 10 28 18 28 18" stroke="#8FA6A0" stroke-width="2" stroke-linecap="round"/><path d="M8 22C8 22 14 14 18 14C22 14 28 22 28 22" stroke="#8FA6A0" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><circle cx="28" cy="18" r="3" fill="#8FA6A0" opacity="0.3"/><circle cx="28" cy="18" r="1.5" fill="#8FA6A0" opacity="0.6"/></svg>' },
-            'brand':     { title: 'Brand deals', desc: 'Get stronger with action metrics', gradient: 'linear-gradient(135deg, rgba(201,122,106,0.12), rgba(201,122,106,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="6" y="14" width="6" height="14" rx="2" fill="#C97A6A" opacity="0.2"/><rect x="15" y="10" width="6" height="18" rx="2" fill="#C97A6A" opacity="0.35"/><rect x="24" y="6" width="6" height="22" rx="2" fill="#C97A6A" opacity="0.5"/><path d="M9 12L18 8L27 4" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>' },
-            'coaching':  { title: 'Coaching', desc: 'Clients commit after following through', gradient: 'linear-gradient(135deg, rgba(107,78,113,0.12), rgba(107,78,113,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="14" r="5" stroke="#6B4E71" stroke-width="2" opacity="0.5"/><path d="M10 28C10 22.5 13.6 18 18 18C22.4 18 26 22.5 26 28" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" opacity="0.4"/><path d="M15 14L17 16.5L22 12" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></svg>' },
-            'digital':   { title: 'Digital products', desc: 'Get used, not just bought', gradient: 'linear-gradient(135deg, rgba(143,166,160,0.15), rgba(143,166,160,0.05))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="8" y="8" width="20" height="20" rx="4" stroke="#8FA6A0" stroke-width="2" opacity="0.5"/><path d="M14 18L17 21L23 15" stroke="#8FA6A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/><path d="M8 14H28" stroke="#8FA6A0" stroke-width="1" opacity="0.2"/></svg>' },
-            'community': { title: 'Community', desc: 'Completers are your warmest members', gradient: 'linear-gradient(135deg, rgba(201,122,106,0.12), rgba(201,122,106,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="4" stroke="#C97A6A" stroke-width="2" opacity="0.5"/><circle cx="10" cy="22" r="3" stroke="#C97A6A" stroke-width="1.5" opacity="0.4"/><circle cx="26" cy="22" r="3" stroke="#C97A6A" stroke-width="1.5" opacity="0.4"/><path d="M14 15L12 19" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/><path d="M22 15L24 19" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg>' },
-            'product':   { title: 'Your products', desc: 'Participants trust your picks and buy more', gradient: 'linear-gradient(135deg, rgba(107,78,113,0.12), rgba(107,78,113,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 12L18 8L28 12V24L18 28L8 24V12Z" stroke="#6B4E71" stroke-width="2" stroke-linejoin="round" opacity="0.5"/><path d="M8 12L18 16L28 12" stroke="#6B4E71" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/><path d="M18 16V28" stroke="#6B4E71" stroke-width="1.5" opacity="0.3"/></svg>' }
+            'referral':  { title: 'Referral links', desc: 'When people are moving, your recs become needs', gradient: 'linear-gradient(135deg, rgba(143,166,160,0.15), rgba(143,166,160,0.05))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 18C8 18 14 10 18 10C22 10 28 18 28 18" stroke="#8FA6A0" stroke-width="2" stroke-linecap="round"/><path d="M8 22C8 22 14 14 18 14C22 14 28 22 28 22" stroke="#8FA6A0" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/><circle cx="28" cy="18" r="3" fill="#8FA6A0" opacity="0.3"/><circle cx="28" cy="18" r="1.5" fill="#8FA6A0" opacity="0.6"/></svg>' },
+            'brand':     { title: 'Brand deals', desc: 'Prove your audience acts — that\'s what brands pay for', gradient: 'linear-gradient(135deg, rgba(201,122,106,0.12), rgba(201,122,106,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="6" y="14" width="6" height="14" rx="2" fill="#C97A6A" opacity="0.2"/><rect x="15" y="10" width="6" height="18" rx="2" fill="#C97A6A" opacity="0.35"/><rect x="24" y="6" width="6" height="22" rx="2" fill="#C97A6A" opacity="0.5"/><path d="M9 12L18 8L27 4" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>' },
+            'coaching':  { title: 'Coaching', desc: 'Collabs are your coaching funnel — built on proof, not promises', gradient: 'linear-gradient(135deg, rgba(107,78,113,0.12), rgba(107,78,113,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="14" r="5" stroke="#6B4E71" stroke-width="2" opacity="0.5"/><path d="M10 28C10 22.5 13.6 18 18 18C22.4 18 26 22.5 26 28" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" opacity="0.4"/><path d="M15 14L17 16.5L22 12" stroke="#6B4E71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/></svg>' },
+            'digital':   { title: 'Digital products', desc: 'Sell when they\'re already in motion — not when they\'re browsing', gradient: 'linear-gradient(135deg, rgba(143,166,160,0.15), rgba(143,166,160,0.05))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="8" y="8" width="20" height="20" rx="4" stroke="#8FA6A0" stroke-width="2" opacity="0.5"/><path d="M14 18L17 21L23 15" stroke="#8FA6A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/><path d="M8 14H28" stroke="#8FA6A0" stroke-width="1" opacity="0.2"/></svg>' },
+            'community': { title: 'Paid community', desc: 'A collab creates the craving — a paid community keeps it going', gradient: 'linear-gradient(135deg, rgba(201,122,106,0.12), rgba(201,122,106,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="4" stroke="#C97A6A" stroke-width="2" opacity="0.5"/><circle cx="10" cy="22" r="3" stroke="#C97A6A" stroke-width="1.5" opacity="0.4"/><circle cx="26" cy="22" r="3" stroke="#C97A6A" stroke-width="1.5" opacity="0.4"/><path d="M14 15L12 19" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/><path d="M22 15L24 19" stroke="#C97A6A" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/></svg>' },
+            'product':   { title: 'Branded merch', desc: 'People who move with you want to rep you — and collabs need gear too', gradient: 'linear-gradient(135deg, rgba(107,78,113,0.12), rgba(107,78,113,0.04))', svg: '<svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 12L18 8L28 12V24L18 28L8 24V12Z" stroke="#6B4E71" stroke-width="2" stroke-linejoin="round" opacity="0.5"/><path d="M8 12L18 16L28 12" stroke="#6B4E71" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/><path d="M18 16V28" stroke="#6B4E71" stroke-width="1.5" opacity="0.3"/></svg>' }
         };
 
         // Track earn selections
@@ -2876,9 +2894,17 @@
             setTimeout(function() { handleInput.focus(); }, 500);
         });
 
-        // Confirm → Earn
+        // Confirm → Bridge (skip earn screen)
         document.getElementById('confirmBtn').addEventListener('click', function() {
-            goTo(screens.confirm, screens.earn);
+            // Populate bridge with archetype data
+            var arch = archetypes[currentArchetype];
+            document.getElementById('bridgeHeadline').innerHTML = arch.bridge.headline;
+            document.getElementById('bridgeSymbol').innerHTML = arch.symbol || '';
+            document.getElementById('bridgeFeel').innerHTML = arch.bridge.feel;
+            document.getElementById('bridgeBut').innerHTML = arch.bridge.but;
+            document.getElementById('bridgeConsequence').innerHTML = arch.bridge.consequence;
+            document.getElementById('bridgeKicker').textContent = arch.bridge.kicker;
+            goTo(screens.confirm, screens.bridge);
         });
 
         // =============================================
@@ -2933,21 +2959,18 @@
 
         document.getElementById('backToEarn').addEventListener('click', function(e) {
             e.preventDefault();
-            goTo(screens.bridge, screens.earn);
+            goTo(screens.bridge, screens.confirm);
         });
 
         document.getElementById('s5ContinueBtn').addEventListener('click', function() {
-            // Populate screen 6 benefits as horizontal scroll cards
+            // Populate screen 6b with all benefit cards
             var html = '';
-            var sels = earnSelections.length ? earnSelections : Object.keys(benefitsMap).slice(0,3);
-            sels.forEach(function(sel) {
-                var b = benefitsMap[sel];
-                if (b) {
-                    html += '<div class="strengthen-card">' +
-                        '<div class="strengthen-graphic" style="background:' + b.gradient + ';">' + b.svg + '</div>' +
-                        '<div class="strengthen-card-title">' + b.title + '</div>' +
-                        '<div class="strengthen-card-desc">' + b.desc + '</div></div>';
-                }
+            Object.keys(benefitsMap).forEach(function(k) {
+                var b = benefitsMap[k];
+                html += '<div class="strengthen-card">' +
+                    '<div class="strengthen-graphic" style="background:' + b.gradient + ';">' + b.svg + '</div>' +
+                    '<div class="strengthen-card-title">' + b.title + '</div>' +
+                    '<div class="strengthen-card-desc">' + b.desc + '</div></div>';
             });
             document.getElementById('strengthensList').innerHTML = html;
             var arch = archetypes[currentArchetype];
@@ -2956,7 +2979,7 @@
         });
 
         // =============================================
-        // SCREEN 6: COLLAB SOLUTION
+        // SCREEN 6: COLLAB — EARNINGS
         // =============================================
 
         document.getElementById('backToBridge').addEventListener('click', function(e) {
@@ -2965,6 +2988,19 @@
         });
 
         document.getElementById('s6ContinueBtn').addEventListener('click', function() {
+            goTo(screens.collab, screens.strengthen);
+        });
+
+        // =============================================
+        // SCREEN 6B: COLLAB — STRENGTHENS
+        // =============================================
+
+        document.getElementById('backToEarnings').addEventListener('click', function(e) {
+            e.preventDefault();
+            goTo(screens.strengthen, screens.collab);
+        });
+
+        document.getElementById('s6bContinueBtn').addEventListener('click', function() {
             // Build carousel cards dynamically from archetype data
             var arch = archetypes[currentArchetype];
             var collabs = arch.collabs;
@@ -3027,7 +3063,7 @@
                 dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
             });
 
-            goTo(screens.collab, screens.reveal);
+            goTo(screens.strengthen, screens.reveal);
         });
 
         // =============================================
@@ -3036,7 +3072,7 @@
 
         document.getElementById('backToCollab').addEventListener('click', function(e) {
             e.preventDefault();
-            goTo(screens.reveal, screens.collab);
+            goTo(screens.reveal, screens.strengthen);
         });
 
         document.getElementById('s7ContinueBtn').addEventListener('click', function() {
@@ -3170,7 +3206,7 @@
             document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active', 'exiting'); });
             document.getElementById(targetId).classList.add('active');
             setHash(targetId);
-            var greenIds = ['screen5','screen6','screen7','screen8','screen9','screen10'];
+            var greenIds = ['screen5','screen6','screen6b','screen7','screen8','screen9','screen10'];
             if (greenIds.indexOf(targetId) !== -1) { lavaBg.classList.add('green-chapter'); }
             else { lavaBg.classList.remove('green-chapter'); }
 
@@ -3192,18 +3228,20 @@
                 document.getElementById('bridgeKicker').textContent = arch.bridge.kicker;
             }
             if (targetId === 'screen6') {
-                // Show demo benefits as scroll cards
+                document.getElementById('collabHeadline').textContent = arch.bridge.collabHeadline || 'A collab is the moment you\'ve been missing.';
+            }
+            if (targetId === 'screen6b') {
+                // Show all benefit cards
                 var demoHtml = '';
-                Object.keys(benefitsMap).slice(0,3).forEach(function(k) {
+                Object.keys(benefitsMap).forEach(function(k) {
                     var b = benefitsMap[k];
                     demoHtml += '<div class="strengthen-card"><div class="strengthen-graphic" style="background:' + b.gradient + ';">' + b.svg + '</div><div class="strengthen-card-title">' + b.title + '</div><div class="strengthen-card-desc">' + b.desc + '</div></div>';
                 });
                 document.getElementById('strengthensList').innerHTML = demoHtml;
-                document.getElementById('collabHeadline').textContent = arch.bridge.collabHeadline || 'A collab is the moment you\'ve been missing.';
             }
             if (targetId === 'screen7') {
                 // Build carousel for jump nav
-                document.getElementById('s6ContinueBtn').click();
+                document.getElementById('s6bContinueBtn').click();
                 // Re-activate screen7 since the click navigated away
                 document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active', 'exiting'); });
                 document.getElementById('screen7').classList.add('active');
