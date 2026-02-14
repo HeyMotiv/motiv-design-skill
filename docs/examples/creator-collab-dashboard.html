@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Creator Collab Dashboard — Motiv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* ===========================================
+           DESIGN SYSTEM TOKENS (Motiv)
+           =========================================== */
+
+        :root {
+            /* Brand */
+            --color-brand-primary: #C97A6A;
+            --color-brand-primary-hover: #B86B5C;
+            --color-brand-secondary: #6B4E71;
+            --color-brand-secondary-hover: #5C4162;
+
+            /* Text */
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+
+            /* Backgrounds */
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F3E6E2;
+            --color-bg-tertiary: #E7D9C9;
+
+            /* Borders */
+            --color-border-default: #E7D9C9;
+            --color-border-subtle: #F3E6E2;
+
+            /* Challenge theme: Coral */
+            --theme-bg: #F7F0EB;
+            --theme-emphasis: #BC8464;
+            --theme-text: #764D2C;
+
+            /* Goal card (warm amber) */
+            --color-goal-bg: #FEF9EF;
+            --color-goal-border: #EDD9A3;
+
+            /* Semantic */
+            --color-success: #22C55E;
+            --color-success-dark: #16A34A;
+
+            /* Typography */
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+
+            /* Spacing */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+            --space-3xl: 48px;
+
+            /* Radii */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-2xl) var(--space-xl);
+        }
+
+        /* ===========================================
+           REVIEW HEADER
+           =========================================== */
+
+        .review-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+            max-width: 720px;
+        }
+
+        .state-toggle {
+            display: inline-flex;
+            gap: var(--space-xxs);
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: var(--radius-full);
+            padding: 3px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .state-toggle button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xxs);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-full);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .state-toggle button .material-icons {
+            font-size: 14px;
+        }
+
+        .state-toggle button.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e8e8f0;
+        }
+
+        .state-toggle button:not(.active) {
+            background: none;
+            color: #5a5a70;
+        }
+
+        .state-toggle button:not(.active):hover {
+            color: #8888a0;
+        }
+
+        .review-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #e8e8f0;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .review-subtitle {
+            font-size: 12px;
+            line-height: 16px;
+            color: #8888a0;
+            margin-bottom: var(--space-sm);
+        }
+
+        .review-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(201, 122, 106, 0.1);
+            border: 1px solid rgba(201, 122, 106, 0.25);
+            color: var(--color-brand-primary);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+        }
+
+        .review-flag--live {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #22C55E;
+        }
+
+        /* State visibility */
+        .state-prelive, .state-live { display: none !important; }
+        body.mode-prelive p.state-prelive { display: block !important; }
+        body.mode-live p.state-live { display: block !important; }
+        body.mode-prelive .phone-frame.state-prelive { display: flex !important; }
+        body.mode-live .phone-frame.state-live { display: flex !important; }
+        body.mode-prelive .review-flag.state-prelive { display: inline-flex !important; }
+        body.mode-live .review-flag.state-live { display: inline-flex !important; }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin-top: var(--space-lg);
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .phone-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ===========================================
+           HEADER GRADIENT AREA
+           =========================================== */
+
+        .header-section {
+            position: relative;
+            padding: 0 var(--space-xl) var(--space-xl);
+            overflow: hidden;
+        }
+
+        .header-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0%,
+                #F7E6DE 30%,
+                #FAF0EB 65%,
+                #FFFFFF 100%
+            );
+        }
+
+        .header-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+        }
+
+        .header-blob-1 {
+            width: 300px;
+            height: 300px;
+            background: #FDBA74;
+            top: -100px;
+            left: -60px;
+            animation: blob-drift-1 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .header-blob-2 {
+            width: 250px;
+            height: 250px;
+            background: #FED7AA;
+            top: -40px;
+            right: -80px;
+            animation: blob-drift-2 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -7s;
+        }
+
+        .header-blob-3 {
+            width: 200px;
+            height: 200px;
+            background: #F9A8D4;
+            top: 60px;
+            left: 30%;
+            animation: blob-drift-3 20s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            animation-delay: -14s;
+        }
+
+        @keyframes blob-drift-1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(10%, 15%) scale(1.15) rotate(5deg); }
+            50% { transform: translate(-5%, 10%) scale(0.85) rotate(-5deg); }
+            75% { transform: translate(15%, -5%) scale(1.1) rotate(10deg); }
+        }
+
+        @keyframes blob-drift-2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(-15%, -10%) scale(0.9) rotate(-8deg); }
+            50% { transform: translate(10%, -15%) scale(1.2) rotate(5deg); }
+            75% { transform: translate(-5%, 5%) scale(0.95) rotate(-3deg); }
+        }
+
+        @keyframes blob-drift-3 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(12%, -8%) scale(1.1) rotate(12deg); }
+            50% { transform: translate(-8%, 12%) scale(0.8) rotate(-8deg); }
+            75% { transform: translate(-12%, -5%) scale(1.15) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===========================================
+           STATUS BAR
+           =========================================== */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) var(--space-xl) 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: 0.01em;
+        }
+
+        .status-icons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xxs);
+        }
+
+        .status-icons svg {
+            display: block;
+        }
+
+        /* ===========================================
+           NAV BAR
+           =========================================== */
+
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) 0 var(--space-xs);
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            margin-left: -8px;
+        }
+
+        .nav-back .material-icons {
+            font-size: 24px;
+        }
+
+        .nav-more {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--color-text-primary);
+            margin-right: -8px;
+        }
+
+        .nav-more .material-icons {
+            font-size: 24px;
+        }
+
+        /* ===========================================
+           CHALLENGE TITLE
+           =========================================== */
+
+        .challenge-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .challenge-dates {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--theme-text);
+            opacity: 0.7;
+        }
+
+        /* ===========================================
+           COUNTDOWN TIMER
+           =========================================== */
+
+        .countdown-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            padding: var(--space-xxs) var(--space-md);
+        }
+
+        .countdown-unit {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.02em;
+        }
+
+        .countdown-label {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            line-height: 14px;
+        }
+
+        /* ===========================================
+           MAIN CONTENT AREA
+           =========================================== */
+
+        .content-area {
+            padding: var(--space-lg) 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .content-area > .goal-card,
+        .content-area > .engagement-card,
+        .content-area > .signups-card {
+            margin: 0 var(--space-md);
+        }
+
+        /* ===========================================
+           PARTICIPANT GOAL CARD
+           =========================================== */
+
+        .goal-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-md);
+        }
+
+        .goal-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        .goal-count {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Milestone progress bar */
+        .milestone-bar {
+            position: relative;
+            display: flex;
+            gap: 2px;
+            height: 6px;
+            margin-bottom: var(--space-md);
+        }
+
+        .milestone-segment {
+            flex: 1;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xs);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .milestone-segment-fill {
+            position: absolute;
+            inset: 0;
+            background: var(--color-brand-primary);
+            border-radius: var(--radius-xs);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .milestone-segment-fill.partial {
+            opacity: 0.5;
+        }
+
+        /* Uniform dot markers at segment junctions */
+        .milestone-dots {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .milestone-dot {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+        }
+
+        .milestone-dot.completed {
+            background: var(--color-brand-primary);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
+        }
+
+        .milestone-dot.next {
+            background: var(--color-bg-primary);
+            border: 2px solid var(--color-brand-primary);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
+        }
+
+        .milestone-dot.locked {
+            background: var(--color-bg-primary);
+            border: 1.5px solid var(--color-border-default);
+            box-shadow: 0 0 0 2px var(--color-bg-primary);
+        }
+
+        /* Next milestone focus section */
+        .next-milestone {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .next-milestone-ring {
+            position: relative;
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+        }
+
+        .next-milestone-ring svg {
+            width: 52px;
+            height: 52px;
+            transform: rotate(-90deg);
+        }
+
+        .next-milestone-ring .ring-track {
+            fill: none;
+            stroke: var(--color-bg-tertiary);
+            stroke-width: 3.5;
+        }
+
+        .next-milestone-ring .ring-fill {
+            fill: none;
+            stroke: var(--color-brand-primary);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s cubic-bezier(0, 0, 0.2, 1);
+        }
+
+        .next-milestone-ring-label {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--color-brand-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .next-milestone-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .next-milestone-heading {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .next-milestone-heading strong {
+            color: var(--color-brand-primary);
+        }
+
+        .next-milestone-sub {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Bar legend — left/right labels under the bar */
+        .milestone-legend {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: var(--space-md);
+        }
+
+        .milestone-legend-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .milestone-legend-item:last-child {
+            align-items: flex-end;
+        }
+
+        .milestone-legend-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-tertiary);
+            letter-spacing: 0.01em;
+        }
+
+        .milestone-legend-label strong {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .milestone-legend-earning {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Current tier status row */
+        .current-tier {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(201, 122, 106, 0.06);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .current-tier-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        .current-tier-value {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.01em;
+        }
+
+        /* Tier pills (used in footer) */
+        .tier-pill {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            padding: var(--space-xxs) var(--space-xs);
+            border-radius: var(--radius-full);
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+        }
+
+        .tier-pill.completed {
+            background: rgba(201, 122, 106, 0.12);
+            color: var(--color-brand-primary);
+        }
+
+        .goal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .goal-deadline {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        /* ===========================================
+           ENGAGEMENT CARD
+           =========================================== */
+
+        .engagement-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow:
+                0 4px 12px rgba(201, 122, 106, 0.15),
+                0 12px 32px rgba(201, 122, 106, 0.12),
+                0 2px 4px rgba(201, 122, 106, 0.08);
+        }
+
+        .engagement-message {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 400;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .engagement-message strong {
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--color-border-subtle);
+        }
+
+        .pot-section {
+            padding: var(--space-lg) 0;
+            text-align: center;
+        }
+
+        .pot-label {
+            font-family: var(--font-body);
+            font-size: 10px;
+            line-height: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .pot-amount {
+            font-family: var(--font-body);
+            font-size: 40px;
+            line-height: 48px;
+            font-weight: 600;
+            color: var(--color-brand-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .stats-row {
+            display: flex;
+            padding-top: var(--space-lg);
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-body);
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            letter-spacing: 0.01em;
+        }
+
+        .pot-link {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            cursor: pointer;
+            margin-top: var(--space-xs);
+        }
+
+        .engagement-footer-tip {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            padding-top: var(--space-lg);
+        }
+
+        .engagement-footer-tip strong {
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* ===========================================
+           RECENTLY JOINED CARD
+           =========================================== */
+
+        .signups-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .signups-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .signups-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .signups-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xxs);
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(201, 122, 106, 0.1);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .signups-badge .material-icons {
+            font-size: 16px;
+        }
+
+        .signups-subtitle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .signups-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            position: relative;
+        }
+
+        .signups-list::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: linear-gradient(transparent, var(--color-bg-primary));
+            pointer-events: none;
+        }
+
+        .signup-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .signup-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .signup-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .signup-name-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .signup-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .signup-new-badge {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-brand-primary);
+            background: rgba(201, 122, 106, 0.1);
+            padding: 2px var(--space-xs);
+            border-radius: var(--radius-full);
+            letter-spacing: 0.02em;
+        }
+
+        .signup-handle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .signups-view-all {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: var(--space-sm) var(--space-xl);
+            margin-top: var(--space-lg);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            background: none;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            letter-spacing: 0.01em;
+            transition: background 0.15s ease;
+        }
+
+        .signups-view-all:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .signups-view-all:active {
+            transform: scale(0.98);
+        }
+
+        /* ===========================================
+           TIPS CAROUSEL
+           =========================================== */
+
+        .tips-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tips-track {
+            display: flex;
+            transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: grab;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .tips-track.dragging {
+            transition: none;
+            cursor: grabbing;
+        }
+
+        .tip-slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            padding: 0 var(--space-md);
+        }
+
+        .tip-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+
+        .tip-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: var(--color-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tip-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .tip-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tip-title {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .tip-description {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .tips-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-xs);
+            padding-top: var(--space-sm);
+        }
+
+        .tips-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-text-tertiary);
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .tips-dot.active {
+            width: 20px;
+            border-radius: var(--radius-full);
+            background: var(--color-brand-primary);
+        }
+
+        /* ===========================================
+           INVITE CTA
+           =========================================== */
+
+        .invite-cta {
+            margin: 0 var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-secondary);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .invite-cta:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .invite-cta:active {
+            transform: scale(0.98);
+        }
+
+        .invite-cta-icon {
+            flex-shrink: 0;
+            color: var(--color-brand-primary);
+        }
+
+        .invite-cta-icon .material-icons {
+            font-size: 24px;
+        }
+
+        .invite-cta-text {
+            flex: 1;
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 600;
+            color: var(--color-brand-primary);
+            white-space: nowrap;
+        }
+
+        .invite-cta-share {
+            flex-shrink: 0;
+            color: var(--color-brand-primary);
+        }
+
+        .invite-cta-share .material-icons {
+            font-size: 22px;
+        }
+
+        /* ===========================================
+           ALL-STARS CARD (Live)
+           =========================================== */
+
+        .allstars-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: 0 var(--space-md);
+        }
+
+        .allstars-title {
+            font-family: var(--font-body);
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-xxs);
+        }
+
+        .allstars-subtitle {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .allstars-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg) var(--space-md);
+        }
+
+        .allstar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .allstar-avatar-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .allstar-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 3px solid var(--color-bg-secondary);
+        }
+
+        .allstar-avatar {
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .allstar-badge {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            padding: var(--space-xxs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: var(--color-brand-primary);
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 16px;
+            color: var(--color-text-inverse);
+            letter-spacing: 0.01em;
+        }
+
+        .allstar-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-top: var(--space-xxs);
+        }
+
+        .allstar-ring.warn {
+            border-color: var(--color-bg-tertiary);
+        }
+
+        /* ===========================================
+           WEEKLY UPDATE BANNER (Live)
+           =========================================== */
+
+        .weekly-update-banner {
+            margin: 0 var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-lg);
+            background: linear-gradient(135deg, var(--color-bg-secondary) 0%, #F9EDE9 100%);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .weekly-update-banner:hover {
+            background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, #F3E6E2 100%);
+        }
+
+        .weekly-update-banner:active {
+            transform: scale(0.98);
+        }
+
+        .weekly-update-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--color-brand-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .weekly-update-icon .material-icons {
+            font-size: 22px;
+            color: var(--color-text-inverse);
+        }
+
+        .weekly-update-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .weekly-update-title {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .weekly-update-sub {
+            font-family: var(--font-body);
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        .weekly-update-arrow .material-icons {
+            font-size: 20px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Recording overlay */
+        .record-overlay {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            background: #000;
+            flex-direction: column;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .record-overlay.open {
+            display: flex;
+        }
+
+        .record-viewfinder {
+            flex: 1;
+            background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .record-viewfinder-label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: var(--space-xs);
+        }
+
+        .record-viewfinder-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            margin-bottom: var(--space-xxs);
+        }
+
+        .record-viewfinder-sub {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            max-width: 260px;
+            line-height: 18px;
+        }
+
+        .record-close {
+            position: absolute;
+            top: 56px;
+            left: var(--space-xl);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .record-close .material-icons {
+            font-size: 20px;
+        }
+
+        .record-timer {
+            position: absolute;
+            top: 62px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.05em;
+        }
+
+        .record-controls {
+            padding: var(--space-2xl) 0 var(--space-3xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2xl);
+            background: #000;
+        }
+
+        .record-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .record-btn-inner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #EF4444;
+            transition: all 0.2s ease;
+        }
+
+        .record-btn:hover .record-btn-inner {
+            background: #DC2626;
+        }
+
+        .record-flip {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .record-flip .material-icons {
+            font-size: 22px;
+        }
+
+        /* ===========================================
+           DAY PROGRESS PILL (Live)
+           =========================================== */
+
+        .day-progress-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-full);
+            padding: var(--space-xs) var(--space-md);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 16px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.02em;
+        }
+
+        /* ===========================================
+           STATS GRID (Live)
+           =========================================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm);
+            margin: 0 var(--space-md);
+        }
+
+        .stat-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .stat-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-card-icon .material-icons {
+            font-size: 20px;
+            color: var(--color-brand-primary);
+        }
+
+        .stat-card-value {
+            font-family: var(--font-body);
+            font-size: 28px;
+            line-height: 34px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-card-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            line-height: 14px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+        }
+
+        /* ===========================================
+           PAGE INDICATORS
+           =========================================== */
+
+        .page-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-lg) 0 var(--space-2xl);
+        }
+
+        .page-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-text-tertiary);
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .page-dot.active {
+            width: 24px;
+            border-radius: var(--radius-full);
+            background: var(--color-brand-secondary);
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+
+        .fade-up {
+            animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.6, 1) backwards;
+        }
+
+        .fade-up-1 { animation-delay: 0.05s; }
+        .fade-up-2 { animation-delay: 0.1s; }
+        .fade-up-3 { animation-delay: 0.15s; }
+        .fade-up-4 { animation-delay: 0.2s; }
+        .fade-up-5 { animation-delay: 0.25s; }
+        .fade-up-6 { animation-delay: 0.3s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===========================================
+           REDUCED MOTION
+           =========================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+            .header-blob { animation: none !important; }
+            .fade-up { animation: none !important; }
+            .milestone-segment-fill { transition: none !important; }
+            .tips-track { transition: none !important; }
+        }
+    </style>
+</head>
+<body class="mode-prelive">
+
+    <!-- Review header -->
+    <div class="review-header">
+        <div class="state-toggle">
+            <button class="active" data-mode="prelive">
+                <span class="material-icons">schedule</span>
+                Pre-Live
+            </button>
+            <button data-mode="live" class="">
+                <span class="material-icons">play_circle</span>
+                Live
+            </button>
+        </div>
+        <h1 class="review-title">Creator Collab Dashboard</h1>
+        <p class="review-subtitle state-prelive">Pre-live state — sign-up phase before challenge starts</p>
+        <p class="review-subtitle state-live">Live state — challenge is active</p>
+    </div>
+
+    <!-- Pre-Live Phone frame -->
+    <div class="phone-frame state-prelive" style="flex-direction: column;">
+        <div class="phone-scroll">
+
+            <!-- Header with gradient -->
+            <div class="header-section">
+                <div class="header-gradient">
+                    <div class="header-blob header-blob-1"></div>
+                    <div class="header-blob header-blob-2"></div>
+                    <div class="header-blob header-blob-3"></div>
+                </div>
+
+                <!-- Status bar -->
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <!-- Signal bars -->
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="9" y="3" width="3" height="9" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="#2B2E34"></rect>
+                        </svg>
+                        <!-- WiFi -->
+                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <path d="M8 12a1.2 1.2 0 100-2.4A1.2 1.2 0 008 12z" fill="#2B2E34"></path>
+                            <path d="M4.93 8.47a4.36 4.36 0 016.14 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M2.4 5.93a8 8 0 0111.2 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M.53 3.4a11 11 0 0114.94 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                        </svg>
+                        <!-- Battery -->
+                        <svg width="27" height="12" viewBox="0 0 27 12" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="11" rx="2" stroke="#2B2E34" stroke-opacity="0.35"></rect>
+                            <rect x="2" y="2" width="20" height="8" rx="1" fill="#2B2E34"></rect>
+                            <path d="M25 4v4a2 2 0 000-4z" fill="#2B2E34" fill-opacity="0.35"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="header-content">
+                    <!-- Nav with countdown -->
+                    <div class="nav-bar">
+                        <button class="nav-back"><span class="material-icons">chevron_left</span></button>
+                        <div class="countdown-pill">
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="days">02</div>
+                                <div class="countdown-label">Days</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="hours">23</div>
+                                <div class="countdown-label">Hrs</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="mins">41</div>
+                                <div class="countdown-label">Mins</div>
+                            </div>
+                            <div class="countdown-unit">
+                                <div class="countdown-value" id="secs">02</div>
+                                <div class="countdown-label">Secs</div>
+                            </div>
+                        </div>
+                        <button class="nav-more"><span class="material-icons">more_vert</span></button>
+                    </div>
+
+                    <!-- Challenge title -->
+                    <div class="challenge-title fade-up fade-up-1">Mindful Miles Reset</div>
+                    <div class="challenge-dates fade-up fade-up-1">Jan 5 – Feb 22, 2026</div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="content-area">
+
+                <!-- Participant Goal Card -->
+                <div class="goal-card fade-up fade-up-3">
+                    <div class="goal-header">
+                        <span class="goal-label">Participant milestones</span>
+                        <span class="goal-count">150 signed up</span>
+                    </div>
+
+                    <!-- Progress bar with dot markers -->
+                    <div class="milestone-bar">
+                        <!-- 5 segments: 0→100, 100→250, 250→500, 500→1K, 1K→2K -->
+                        <div class="milestone-segment">
+                            <div class="milestone-segment-fill" style="transform: scaleX(1)"></div>
+                        </div>
+                        <div class="milestone-segment">
+                            <div class="milestone-segment-fill partial" style="transform: scaleX(0.33)"></div>
+                        </div>
+                        <div class="milestone-segment"></div>
+                        <div class="milestone-segment"></div>
+                        <div class="milestone-segment"></div>
+
+                        <!-- Uniform dot markers at segment junctions -->
+                        <div class="milestone-dots">
+                            <div class="milestone-dot completed" style="left: 20%"></div>
+                            <div class="milestone-dot next" style="left: 40%"></div>
+                            <div class="milestone-dot locked" style="left: 60%"></div>
+                            <div class="milestone-dot locked" style="left: 80%"></div>
+                            <div class="milestone-dot locked" style="left: 100%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bar legend -->
+                    <div class="milestone-legend">
+                        <div class="milestone-legend-item">
+                            <span class="milestone-legend-label"><strong>150</strong> signed up</span>
+                            <span class="milestone-legend-earning">Earning $0</span>
+                        </div>
+                        <div class="milestone-legend-item">
+                            <span class="milestone-legend-label"><strong>2,000</strong> goal</span>
+                            <span class="milestone-legend-earning">Earn $1,500</span>
+                        </div>
+                    </div>
+
+                    <!-- Current tier + next milestone -->
+                    <div class="next-milestone">
+                        <div class="next-milestone-ring">
+                            <svg viewBox="0 0 52 52">
+                                <circle class="ring-track" cx="26" cy="26" r="22"></circle>
+                                <circle class="ring-fill" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="55.3"></circle>
+                            </svg>
+                            <div class="next-milestone-ring-label">60%</div>
+                        </div>
+                        <div class="next-milestone-text">
+                            <div class="next-milestone-heading"><strong>100 more</strong> to earn $75</div>
+                            <div class="next-milestone-sub">Next milestone at 250 participants</div>
+                        </div>
+                    </div>
+
+                    <!-- Current tier status -->
+                    <div class="current-tier">
+                        <span class="current-tier-label">Current tier</span>
+                        <span class="current-tier-value">100 — Minimum met</span>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="goal-footer">
+                        <div class="goal-deadline">Sign-ups close Monday 11:59pm</div>
+                    </div>
+                </div>
+
+                <!-- Engagement & Stats Card -->
+                <div class="engagement-card fade-up fade-up-4">
+                    <p class="engagement-message"><strong>Chad, you're doing great,</strong> you've engaged about .5% of your followers! Just 3 weeks to go!</p>
+
+                    <div class="divider"></div>
+
+                    <div class="pot-section">
+                        <div class="pot-label">Total Community Pot</div>
+                        <div class="pot-amount">$11,040</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-value">+12</div>
+                            <div class="stat-label">New sign-ups</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">$40</div>
+                            <div class="stat-label">Commitment</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3 weeks</div>
+                            <div class="stat-label">Starts in…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tips Carousel -->
+                <div class="tips-carousel fade-up fade-up-6" id="tipsCarousel">
+                    <div class="tips-track" id="tipsTrack">
+
+                        <!-- Tip 1: Share Your Why -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 5L12.76 9.24L16.5 7.5L13.76 10.91L18 12L13.76 13.09L16.5 16.5L12.76 14.76L12 19L11.24 14.76L7.5 16.5L10.24 13.09L6 12L10.24 10.91L7.5 7.5L11.24 9.24L12 5Z" fill="var(--color-brand-primary)" opacity="0.15"></path>
+                                        <path d="M12 5L12.76 9.24L16.5 7.5L13.76 10.91L18 12L13.76 13.09L16.5 16.5L12.76 14.76L12 19L11.24 14.76L7.5 16.5L10.24 13.09L6 12L10.24 10.91L7.5 7.5L11.24 9.24L12 5Z" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <circle cx="12" cy="12" r="2" fill="#C97A6A" opacity="0.3"></circle>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Share Your Why</div>
+                                    <div class="tip-description">Post your personal challenge story — authentic shares convert 3x better.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 2: Go Live -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="8" fill="#C97A6A" opacity="0.12"></circle>
+                                        <circle cx="12" cy="12" r="4.5" stroke="#C97A6A" stroke-width="1.2"></circle>
+                                        <circle cx="12" cy="12" r="1.5" fill="#C97A6A"></circle>
+                                        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"></path>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Go Live This Week</div>
+                                    <div class="tip-description">A quick IG or TikTok live answering questions drives 5x more sign-ups than static posts.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 3: Countdown Reminder -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <rect x="4" y="4" width="16" height="16" rx="4" fill="#C97A6A" opacity="0.12"></rect>
+                                        <circle cx="12" cy="13" r="5" stroke="#C97A6A" stroke-width="1.2"></circle>
+                                        <path d="M12 10.5v3l2 1.5" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M10 5h4" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"></path>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Post a Countdown</div>
+                                    <div class="tip-description">Share the deadline to your stories — urgency boosts sign-ups by 40% in the final week.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 4: Tag Participants -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2" fill="#C97A6A" opacity="0.12"></path>
+                                        <circle cx="10" cy="8" r="3.5" stroke="#C97A6A" stroke-width="1.2"></circle>
+                                        <path d="M6 21v-1a4 4 0 014-4h0a4 4 0 014 4v1" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"></path>
+                                        <path d="M17.5 8.5l1.5 1.5 3-3" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Shout Out Early Joiners</div>
+                                    <div class="tip-description">Tag a few sign-ups in your story — social proof from real people outperforms any ad.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tip 5: Pinned Comment -->
+                        <div class="tip-slide">
+                            <div class="tip-card">
+                                <div class="tip-icon">
+                                    <svg viewBox="0 0 24 24" fill="none">
+                                        <rect x="3" y="6" width="18" height="13" rx="3" fill="#C97A6A" opacity="0.12"></rect>
+                                        <rect x="3" y="6" width="18" height="13" rx="3" stroke="#C97A6A" stroke-width="1.2"></rect>
+                                        <path d="M8 11h8M8 14.5h5" stroke="#C97A6A" stroke-width="1.2" stroke-linecap="round"></path>
+                                    </svg>
+                                </div>
+                                <div class="tip-content">
+                                    <div class="tip-title">Pin Your Challenge Link</div>
+                                    <div class="tip-description">Pin a comment with your sign-up link on your top 3 posts — easy wins from existing traffic.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Carousel dots -->
+                    <div class="tips-dots" id="tipsDots">
+                        <div class="tips-dot active" style="cursor: pointer;"></div>
+                        <div class="tips-dot" style="cursor: pointer;"></div>
+                        <div class="tips-dot" style="cursor: pointer;"></div>
+                        <div class="tips-dot" style="cursor: pointer;"></div>
+                        <div class="tips-dot" style="cursor: pointer;"></div>
+                    </div>
+                </div>
+
+                <!-- Recently Joined Card -->
+                <div class="signups-card fade-up fade-up-6">
+                    <div class="signups-header">
+                        <div class="signups-title">Recently joined</div>
+                        <div class="signups-badge">
+                            <span class="material-icons">person_add</span>
+                            +12 today
+                        </div>
+                    </div>
+                    <div class="signups-subtitle">People are signing up!</div>
+
+                    <div class="signups-list">
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #C4B5FD, #A78BFA)">EW</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Emma Wilson</span>
+                                    <span class="signup-new-badge">New</span>
+                                </div>
+                                <div class="signup-handle">@emma_fit</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #7DD3FC, #38BDF8)">MC</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Marcus Chen</span>
+                                    <span class="signup-new-badge">New</span>
+                                </div>
+                                <div class="signup-handle">@marcus_wellness</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #F9A8D4, #F472B6)">OT</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Olivia Torres</span>
+                                </div>
+                                <div class="signup-handle">@olivia_yoga</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #6EE7B7, #34D399)">JP</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">James Park</span>
+                                </div>
+                                <div class="signup-handle">@jpark_fitness</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">SR</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Sofia Rodriguez</span>
+                                </div>
+                                <div class="signup-handle">@sofia_mindful</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #A890AD, #6B4E71)">KN</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Kai Nakamura</span>
+                                </div>
+                                <div class="signup-handle">@kai_nature</div>
+                            </div>
+                        </div>
+
+                        <div class="signup-row">
+                            <div class="signup-avatar" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)">AT</div>
+                            <div class="signup-info">
+                                <div class="signup-name-row">
+                                    <span class="signup-name">Alex Turner</span>
+                                </div>
+                                <div class="signup-handle">@alex_nature</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="signups-view-all">View all</button>
+                </div>
+
+                <!-- Invite CTA -->
+                <div class="invite-cta fade-up fade-up-6">
+                    <div class="invite-cta-icon">
+                        <span class="material-icons">people</span>
+                    </div>
+                    <div class="invite-cta-text">Invite other creators to join Motiv!</div>
+                    <div class="invite-cta-share">
+                        <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Live Phone frame -->
+    <div class="phone-frame state-live" style="flex-direction: column;">
+        <div class="phone-scroll">
+
+            <!-- Header with gradient -->
+            <div class="header-section">
+                <div class="header-gradient">
+                    <div class="header-blob header-blob-1"></div>
+                    <div class="header-blob header-blob-2"></div>
+                    <div class="header-blob header-blob-3"></div>
+                </div>
+
+                <!-- Status bar -->
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                            <rect x="0" y="9" width="3" height="3" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="4.5" y="6" width="3" height="6" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="9" y="3" width="3" height="9" rx="0.5" fill="#2B2E34"></rect>
+                            <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="#2B2E34"></rect>
+                        </svg>
+                        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                            <path d="M8 12a1.2 1.2 0 100-2.4A1.2 1.2 0 008 12z" fill="#2B2E34"></path>
+                            <path d="M4.93 8.47a4.36 4.36 0 016.14 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M2.4 5.93a8 8 0 0111.2 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                            <path d="M.53 3.4a11 11 0 0114.94 0" stroke="#2B2E34" stroke-width="1.2" stroke-linecap="round"></path>
+                        </svg>
+                        <svg width="27" height="12" viewBox="0 0 27 12" fill="none">
+                            <rect x="0.5" y="0.5" width="23" height="11" rx="2" stroke="#2B2E34" stroke-opacity="0.35"></rect>
+                            <rect x="2" y="2" width="20" height="8" rx="1" fill="#2B2E34"></rect>
+                            <path d="M25 4v4a2 2 0 000-4z" fill="#2B2E34" fill-opacity="0.35"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="header-content">
+                    <div class="nav-bar">
+                        <button class="nav-back"><span class="material-icons">chevron_left</span></button>
+                        <div class="day-progress-pill">Day 12 of 49</div>
+                        <button class="nav-more"><span class="material-icons">more_vert</span></button>
+                    </div>
+
+                    <div class="challenge-title fade-up fade-up-1">Mindful Miles Reset</div>
+                    <div class="challenge-dates fade-up fade-up-1">Jan 5 – Feb 22, 2026</div>
+                </div>
+            </div>
+
+            <!-- Main content -->
+            <div class="content-area">
+
+                <!-- Weekly Update Banner -->
+                <div class="weekly-update-banner fade-up fade-up-2" id="weeklyUpdateBanner">
+                    <div class="weekly-update-icon">
+                        <span class="material-icons">videocam</span>
+                    </div>
+                    <div class="weekly-update-text">
+                        <div class="weekly-update-title">Record your weekly update</div>
+                        <div class="weekly-update-sub">Share progress with your community</div>
+                    </div>
+                    <div class="weekly-update-arrow">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- Engagement Card (Live) -->
+                <div class="engagement-card fade-up fade-up-3" style="margin: 0 var(--space-md);">
+                    <p class="engagement-message"><strong>Nice job, Chad!</strong> Engagement is way up and you've earned $72 more. Keep it going! 💪</p>
+
+                    <div class="divider"></div>
+
+                    <div class="pot-section">
+                        <div class="pot-label">Estimated Earnings</div>
+                        <div class="pot-amount">$3,306.34</div>
+                        <div class="pot-link">How it's calculated</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-value">+ $72</div>
+                            <div class="stat-label">This week</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3 days</div>
+                            <div class="stat-label">Left this week</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">753</div>
+                            <div class="stat-label">Still in it</div>
+                        </div>
+                    </div>
+
+                    <div class="divider" style="margin-top: var(--space-lg);"></div>
+
+                    <div class="engagement-footer-tip">💬 <strong>Tell your followers:</strong> "Over 750 people are still crushing this challenge with me!"</div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid fade-up fade-up-3">
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">payments</span>
+                        </div>
+                        <div class="stat-card-value">$82.50</div>
+                        <div class="stat-card-label">2 winners will earn</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">trending_up</span>
+                        </div>
+                        <div class="stat-card-value">74%</div>
+                        <div class="stat-card-label">Completion rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">local_fire_department</span>
+                        </div>
+                        <div class="stat-card-value">4.5M</div>
+                        <div class="stat-card-label">Total output (kj)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon">
+                            <span class="material-icons">directions_bike</span>
+                        </div>
+                        <div class="stat-card-value">9,233</div>
+                        <div class="stat-card-label">Total workouts</div>
+                    </div>
+                </div>
+
+                <!-- All-Stars Card -->
+                <div class="allstars-card fade-up fade-up-4">
+                    <div class="allstars-title">This week's all-stars 🏆</div>
+                    <div class="allstars-subtitle">Check out the stand outs from this week</div>
+                    <div class="allstars-grid">
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">RK</div>
+                                <div class="allstar-badge">Most workout days</div>
+                            </div>
+                            <div class="allstar-name">Rebecca K.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #7DD3FC, #38BDF8)">AS</div>
+                                <div class="allstar-badge">Most burned</div>
+                            </div>
+                            <div class="allstar-name">Andy S.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #F9A8D4, #F472B6)">RA</div>
+                                <div class="allstar-badge">Community star</div>
+                            </div>
+                            <div class="allstar-name">Robin A.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #C97A6A, #B86B5C)">MM</div>
+                                <div class="allstar-badge">Just in time</div>
+                            </div>
+                            <div class="allstar-name">Matty M.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Off Track Card -->
+                <div class="allstars-card fade-up fade-up-5">
+                    <div class="allstars-title">Off track this week</div>
+                    <div class="allstars-subtitle">At risk of missing their weekly goal</div>
+                    <div class="allstars-grid">
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #6EE7B7, #34D399)">DL</div>
+                            </div>
+                            <div class="allstar-name">Dana L.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #A5B4FC, #818CF8)">JW</div>
+                            </div>
+                            <div class="allstar-name">Jordan W.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #BAE6FD, #7DD3FC)">TN</div>
+                            </div>
+                            <div class="allstar-name">Tessa N.</div>
+                        </div>
+                        <div class="allstar-item">
+                            <div class="allstar-avatar-wrap">
+                                <div class="allstar-ring warn"></div>
+                                <div class="allstar-avatar" style="background: linear-gradient(135deg, #FDBA74, #FB923C)">KP</div>
+                            </div>
+                            <div class="allstar-name">Kyle P.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invite CTA -->
+                <div class="invite-cta fade-up fade-up-6">
+                    <div class="invite-cta-icon">
+                        <span class="material-icons">people</span>
+                    </div>
+                    <div class="invite-cta-text">Invite other creators to join Motiv!</div>
+                    <div class="invite-cta-share">
+                        <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Recording Overlay -->
+        <div class="record-overlay" id="recordOverlay">
+            <div class="record-viewfinder">
+                <button class="record-close" id="recordClose">
+                    <span class="material-icons">close</span>
+                </button>
+                <div class="record-timer">0:00</div>
+                <div class="record-viewfinder-label">Weekly update</div>
+                <div class="record-viewfinder-title">Mindful Miles Reset</div>
+                <div class="record-viewfinder-sub">Record a quick video to share this week's highlights with your community</div>
+            </div>
+            <div class="record-controls">
+                <div style="width: 44px;"></div>
+                <button class="record-btn" id="recordBtn">
+                    <div class="record-btn-inner"></div>
+                </button>
+                <button class="record-flip">
+                    <span class="material-icons">flip_camera_ios</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // COUNTDOWN TIMER
+        // =============================================
+
+        const secsEl = document.getElementById('secs');
+        const minsEl = document.getElementById('mins');
+        const hoursEl = document.getElementById('hours');
+        const daysEl = document.getElementById('days');
+
+        let totalSeconds = (2 * 86400) + (23 * 3600) + (58 * 60) + 44;
+
+        function padTwo(n) {
+            return n.toString().padStart(2, '0');
+        }
+
+        function updateCountdown() {
+            if (totalSeconds <= 0) return;
+            totalSeconds--;
+
+            const d = Math.floor(totalSeconds / 86400);
+            const h = Math.floor((totalSeconds % 86400) / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+
+            daysEl.textContent = padTwo(d);
+            hoursEl.textContent = padTwo(h);
+            minsEl.textContent = padTwo(m);
+            secsEl.textContent = padTwo(s);
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // =============================================
+        // TIPS CAROUSEL — swipe + drag
+        // =============================================
+
+        (function() {
+            const track = document.getElementById('tipsTrack');
+            const dots = document.querySelectorAll('#tipsDots .tips-dot');
+            const slideCount = track.children.length;
+            let current = 0;
+            let startX = 0;
+            let currentTranslate = 0;
+            let isDragging = false;
+
+            function setPosition() {
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+
+            function goTo(index) {
+                current = Math.max(0, Math.min(index, slideCount - 1));
+                const slideWidth = track.parentElement.offsetWidth;
+                currentTranslate = -current * slideWidth;
+                track.classList.remove('dragging');
+                setPosition();
+                updateDots();
+            }
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === current);
+                });
+            }
+
+            // Touch events
+            track.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                track.classList.add('dragging');
+            }, { passive: true });
+
+            track.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const x = e.touches[0].clientX;
+                const diff = x - startX;
+                const slideWidth = track.parentElement.offsetWidth;
+                currentTranslate = -current * slideWidth + diff;
+                setPosition();
+            }, { passive: true });
+
+            track.addEventListener('touchend', () => {
+                isDragging = false;
+                const slideWidth = track.parentElement.offsetWidth;
+                const moved = currentTranslate - (-current * slideWidth);
+                const threshold = slideWidth * 0.2;
+
+                if (moved < -threshold && current < slideCount - 1) {
+                    goTo(current + 1);
+                } else if (moved > threshold && current > 0) {
+                    goTo(current - 1);
+                } else {
+                    goTo(current);
+                }
+            });
+
+            // Mouse events (for desktop preview)
+            track.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                track.classList.add('dragging');
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const diff = e.clientX - startX;
+                const slideWidth = track.parentElement.offsetWidth;
+                currentTranslate = -current * slideWidth + diff;
+                setPosition();
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                const slideWidth = track.parentElement.offsetWidth;
+                const moved = currentTranslate - (-current * slideWidth);
+                const threshold = slideWidth * 0.2;
+
+                if (moved < -threshold && current < slideCount - 1) {
+                    goTo(current + 1);
+                } else if (moved > threshold && current > 0) {
+                    goTo(current - 1);
+                } else {
+                    goTo(current);
+                }
+            });
+
+            // Dot clicks
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => goTo(i));
+                dot.style.cursor = 'pointer';
+            });
+
+            // Prevent image/link drag
+            track.addEventListener('dragstart', (e) => e.preventDefault());
+        })();
+
+        // =============================================
+        // STATE TOGGLE (Pre-Live / Live)
+        // =============================================
+
+        (function() {
+            document.body.classList.add('mode-prelive');
+
+            document.querySelectorAll('.state-toggle button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const mode = btn.dataset.mode;
+                    document.body.classList.remove('mode-prelive', 'mode-live');
+                    document.body.classList.add('mode-' + mode);
+                    document.querySelectorAll('.state-toggle button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        })();
+
+        // =============================================
+        // RECORDING OVERLAY
+        // =============================================
+
+        (function() {
+            const banner = document.getElementById('weeklyUpdateBanner');
+            const overlay = document.getElementById('recordOverlay');
+            const closeBtn = document.getElementById('recordClose');
+
+            if (banner && overlay && closeBtn) {
+                banner.addEventListener('click', () => overlay.classList.add('open'));
+                closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+            }
+        })();
+    </script>
+
+
+
+</body></html>

@@ -533,14 +533,16 @@ flowchart TB
 | **Components** | Full challenge preview, edit buttons per section, publish CTA |
 | **Modals** | Publish confirmation |
 
-#### C-MANAGE-001: Challenge Management - Overview
+#### C-MANAGE-001: Creator Collab Dashboard
 | Attribute | Value |
 |-----------|-------|
-| **Status** | 🔴 Not started |
-| **Assigned** | — |
+| **Status** | 🟡 In progress |
+| **Assigned** | AI |
 | **Priority** | P0 |
-| **States** | pre-active, active, completed, loading, error |
-| **Components** | Status badge, participant count, time remaining, quick stats |
+| **States** | pre-live (sign-up phase), live (collab active), completed, loading, error |
+| **Components** | **Pre-live:** Countdown timer, participant milestone progress bar (5-tier: 100→250→500→1K→2K), next milestone ring, current tier status, engagement card (community pot, new sign-ups, commitment, time-to-start), tips carousel (5 swipeable cards: Share Your Why, Go Live, Post Countdown, Shout Out Early Joiners, Pin Challenge Link), recently joined list with avatars, invite CTA pill. **Live:** Day progress pill, 2×2 stats grid (completion rate, avg kJ, active today, streak), all-stars card (top performers with progress rings), weekly update banner, record video overlay (camera viewfinder + controls). **Shared:** Gradient header with animated blobs, nav bar (back + overflow menu), challenge title + dates. |
+| **Notes** | Two full states prototyped. Pre-live focuses on driving sign-ups with social proof and creator tips. Live focuses on participant progress and creator engagement tools. Includes video recording overlay for creator content creation. |
+| **HTML Example** | `docs/examples/creator-collab-dashboard.html` (toggle Pre-Live / Live states) |
 
 #### C-MANAGE-002: Challenge Management - Participants
 | Attribute | Value |
@@ -1027,3 +1029,4 @@ flowchart TB
 |---------|---------|
 | 1.0 | Initial flow map with 75 screens |
 | 1.1 | Renamed "Challenge" → "Collab" throughout. Rewrote Creator Onboarding to archetype-based flow (6 archetypes, 3 states, 18 narrative variants). Added new screens CO-001 through CO-006 with HTML examples. Updated earnings model to $350 guaranteed + upside. Added 2 net new screens (77 total). |
+| 1.2 | Re-integrated Creator Collab Dashboard (C-MANAGE-001) with full pre-live and live state prototypes. Updated components list to reflect actual prototype: milestone tiers, engagement card, tips carousel, all-stars, stats grid, video recording overlay. Added HTML example reference. |
