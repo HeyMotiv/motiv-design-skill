@@ -556,29 +556,28 @@
         .earnings-tabs {
             margin: 0 var(--space-md);
             display: flex;
-            background: var(--color-bg-secondary);
-            border-radius: var(--radius-md);
-            padding: 3px;
-            gap: 3px;
+            background: transparent;
+            gap: 8px;
         }
 
         .earnings-tab {
-            flex: 1;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: var(--space-xs) var(--space-xxs);
-            border-radius: calc(var(--radius-md) - 2px);
-            border: none;
-            background: transparent;
+            padding: 10px 8px;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-border-default);
+            background: var(--color-bg-primary);
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
-            transition: background 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .earnings-tab.active {
             background: var(--color-bg-primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+            border-color: var(--color-clay);
+            box-shadow: 0 2px 8px rgba(201, 122, 106, 0.18), 0 0 0 1px var(--color-clay);
         }
 
         .earnings-tab-name {
@@ -610,6 +609,23 @@
             font-size: 11px;
             font-weight: 400;
             color: #B8BEC6;
+        }
+
+        .earnings-tab-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .earnings-tab-status {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            line-height: 14px;
+            text-align: center;
         }
 
         /* ===========================================
@@ -3269,18 +3285,27 @@
 
                 <!-- Earnings Tabs -->
                 <div class="earnings-tabs fade-up fade-up-1">
-                    <button class="earnings-tab active" data-panel="panelRecruit">
-                        <div class="earnings-tab-name">Recruiting</div>
-                        <div class="earnings-tab-amount">$200</div>
-                    </button>
-                    <button class="earnings-tab" data-panel="panelContent">
-                        <div class="earnings-tab-name">Content</div>
-                        <div class="earnings-tab-amount upcoming">Begins Jan 5</div>
-                    </button>
-                    <button class="earnings-tab" data-panel="panelBonus">
-                        <div class="earnings-tab-name">Bonus</div>
-                        <div class="earnings-tab-amount upcoming">Begins Jan 12</div>
-                    </button>
+                    <div class="earnings-tab-col">
+                        <button class="earnings-tab active" data-panel="panelRecruit">
+                            <div class="earnings-tab-name">Recruiting</div>
+                            <div class="earnings-tab-amount">$200</div>
+                        </button>
+                        <div class="earnings-tab-status">active</div>
+                    </div>
+                    <div class="earnings-tab-col">
+                        <button class="earnings-tab" data-panel="panelContent">
+                            <div class="earnings-tab-name">Content</div>
+                            <div class="earnings-tab-amount">$0</div>
+                        </button>
+                        <div class="earnings-tab-status">starts Jan 5</div>
+                    </div>
+                    <div class="earnings-tab-col">
+                        <button class="earnings-tab" data-panel="panelBonus">
+                            <div class="earnings-tab-name">Bonus</div>
+                            <div class="earnings-tab-amount">$0</div>
+                        </button>
+                        <div class="earnings-tab-status">starts Jan 12</div>
+                    </div>
                 </div>
 
                 <!-- Panel: Recruiting -->
