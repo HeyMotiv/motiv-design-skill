@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebration Card Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    :root {
+        --color-bg-primary: #FEFCFA;
+        --color-bg-secondary: #F7F3EF;
+        --color-ink: #1E1E1E;
+        --color-clay: #C97A6A;
+        --color-clay-dark: #B56A5A;
+        --color-sage: #8FA6A0;
+        --color-sand: #E7D9C9;
+        --color-plum: #6B4E71;
+        --color-text-primary: #1E1E1E;
+        --color-text-secondary: #6B6560;
+        --color-text-tertiary: #9B9590;
+        --font-headline: 'Source Serif 4', serif;
+        --font-body: 'DM Sans', sans-serif;
+        --radius-full: 100px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 40px 20px;
+        font-family: var(--font-body);
+    }
+
+    .phone-frame {
+        position: relative;
+        width: 390px;
+        height: 844px;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+        background: var(--color-bg-primary);
+    }
+
+    .phone-scroll {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
+    }
+    .phone-scroll::-webkit-scrollbar { display: none; }
+
+    /* Status bar */
+    .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 28px 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+    .status-icons { display: flex; gap: 5px; align-items: center; }
+    .status-icons .material-icons { font-size: 16px; }
+
+    /* Nav */
+    .nav-back {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        padding: 4px 16px 0;
+        font-size: 16px;
+        color: var(--color-text-primary);
+    }
+    .nav-back .material-icons { font-size: 20px; }
+
+    /* Header */
+    .page-header {
+        padding: 4px 24px 0;
+    }
+    .page-header h1 {
+        font-family: var(--font-headline);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1.15;
+    }
+    .page-header .dates {
+        font-size: 15px;
+        color: var(--color-text-secondary);
+        margin-top: 2px;
+    }
+
+    /* ================================
+       CELEBRATION CARD
+       ================================ */
+    .celebration {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 4px;
+    }
+
+    .celebration-card {
+        position: relative; z-index: 1;
+        margin: 12px 24px 0;
+        padding: 22px 24px 18px;
+        background: var(--color-ink);
+        border-radius: 20px;
+        text-align: center;
+        color: white;
+        overflow: hidden;
+    }
+    .celebration-card::before {
+        content: '';
+        position: absolute;
+        top: -60px; left: -60px;
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(201,122,106,0.15) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .celebration-emoji {
+        font-size: 36px;
+        line-height: 1;
+        margin-bottom: 6px;
+    }
+
+    .celebration-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgba(255,255,255,0.4);
+        margin-bottom: 2px;
+    }
+
+    /* Earnings amount row — tappable for breakdown */
+    .celebration-amount-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: opacity 0.15s;
+        margin-bottom: 14px;
+    }
+    .celebration-amount-row:active { opacity: 0.8; }
+
+    .celebration-amount {
+        font-family: var(--font-headline);
+        font-size: 44px;
+        font-weight: 700;
+        color: var(--color-clay);
+        line-height: 1;
+        position: relative;
+        z-index: 1;
+    }
+
+    .celebration-amount-arrow {
+        color: rgba(255,255,255,0.25);
+        font-size: 22px;
+        margin-top: 4px;
+        transition: color 0.15s;
+    }
+    .celebration-amount-row:hover .celebration-amount-arrow {
+        color: rgba(255,255,255,0.5);
+    }
+
+    /* Highlights — icon rows */
+    .celebration-highlights {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-top: 14px;
+        text-align: left;
+    }
+
+    .celebration-hl-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 5px 0;
+    }
+
+    .celebration-hl-icon {
+        width: 26px; height: 26px; border-radius: 7px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .celebration-hl-icon .material-icons { font-size: 14px; color: white; }
+    .celebration-hl-icon.clay-bg { background: rgba(201,122,106,0.25); }
+    .celebration-hl-icon.sage-bg { background: rgba(143,166,160,0.25); }
+    .celebration-hl-icon.plum-bg { background: rgba(107,78,113,0.25); }
+
+    .celebration-hl-text {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.3;
+    }
+    .celebration-hl-text strong {
+        color: white;
+        font-weight: 600;
+    }
+
+    /* Share button — inside card */
+    .card-share-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        border: none;
+        border-radius: var(--radius-full);
+        padding: 12px 24px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: background 0.15s, transform 0.15s;
+        margin-top: 14px;
+    }
+    .card-share-btn:hover { background: rgba(255,255,255,0.14); }
+    .card-share-btn:active { transform: scale(0.97); }
+    .card-share-btn .ss-ig-icon {
+        width: 18px; height: 18px; border-radius: 5px;
+        background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+    }
+    .card-share-btn .ss-ig-icon svg { width: 11px; height: 11px; }
+
+    /* ================================
+       MOMENTUM BONUS SECTION
+       ================================ */
+    .momentum-section {
+        margin: 12px 24px 0;
+        background: linear-gradient(135deg, rgba(201,122,106,0.08) 0%, rgba(231,217,201,0.12) 100%);
+        border: 1px solid rgba(201,122,106,0.15);
+        border-radius: 16px;
+        padding: 18px 20px;
+        text-align: center;
+    }
+
+    .momentum-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(201,122,106,0.12);
+        border-radius: 100px;
+        padding: 4px 11px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-clay);
+        margin-bottom: 8px;
+    }
+    .momentum-badge .material-icons { font-size: 14px; }
+
+    .momentum-title {
+        font-family: var(--font-headline);
+        font-size: 19px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1.25;
+        margin-bottom: 5px;
+    }
+
+    .momentum-desc {
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+        margin-bottom: 14px;
+    }
+
+    .momentum-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        background: var(--color-clay);
+        color: white;
+        border: none;
+        border-radius: var(--radius-full);
+        padding: 14px 24px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: background 0.15s, transform 0.15s;
+    }
+    .momentum-cta:hover { background: var(--color-clay-dark); }
+    .momentum-cta:active { transform: scale(0.97); }
+    .momentum-cta .material-icons { font-size: 20px; }
+
+    .momentum-expires {
+        font-size: 11px;
+        color: var(--color-text-tertiary);
+        margin-top: 8px;
+    }
+
+    /* Watch again */
+    .replay-row {
+        text-align: center;
+        padding: 8px 0 8px;
+    }
+    .celebration-replay {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: none;
+        border: none;
+        color: var(--color-text-tertiary);
+        font-size: 13px;
+        font-weight: 500;
+        font-family: var(--font-body);
+        cursor: pointer;
+        padding: 8px 0;
+    }
+    .celebration-replay .material-icons { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="phone-frame">
+    <div class="phone-scroll">
+        <!-- Status bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons">
+                <span class="material-icons">signal_cellular_alt</span>
+                <span class="material-icons">wifi</span>
+                <span class="material-icons">battery_full</span>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <div class="nav-back">
+            <span class="material-icons">chevron_left</span>
+            My Collabs
+        </div>
+
+        <!-- Page header -->
+        <div class="page-header">
+            <h1>Mindful Miles Reset</h1>
+            <div class="dates">Jan 5 – Feb 15 · 6 weeks</div>
+        </div>
+
+        <!-- =====================
+             CELEBRATION CARD
+             ===================== -->
+        <div class="celebration">
+            <div class="celebration-card">
+                <div class="celebration-emoji">🎉</div>
+                <div class="celebration-label">Your impact earned you</div>
+
+                <!-- Tappable amount with arrow hint for breakdown -->
+                <div class="celebration-amount-row" id="viewEarningsLink">
+                    <div class="celebration-amount">$2,867</div>
+                    <span class="material-icons celebration-amount-arrow">chevron_right</span>
+                </div>
+
+                <!-- Highlights — icon rows -->
+                <div class="celebration-highlights">
+                    <div class="celebration-hl-row">
+                        <div class="celebration-hl-icon clay-bg"><span class="material-icons">group</span></div>
+                        <div class="celebration-hl-text"><strong>1,497</strong> enrolled · <strong>1,087</strong> finished</div>
+                    </div>
+                    <div class="celebration-hl-row">
+                        <div class="celebration-hl-icon plum-bg"><span class="material-icons">volunteer_activism</span></div>
+                        <div class="celebration-hl-text"><strong>9,847</strong> high fives · <strong>2,384</strong> comments</div>
+                    </div>
+                </div>
+
+                <!-- Share CTA — inside the card -->
+                <button class="card-share-btn">
+                    Share collab story
+                </button>
+            </div>
+        </div>
+
+        <!-- =====================
+             MOMENTUM BONUS
+             ===================== -->
+        <div class="momentum-section">
+            <div class="momentum-badge">
+                <span class="material-icons">bolt</span>
+                Momentum bonus
+            </div>
+            <div class="momentum-title">Earn 15% more<br>on your next collab</div>
+            <div class="momentum-desc">Start your next collab within 90 days and we'll boost your bonus earnings by 15%.</div>
+            <button class="momentum-cta">
+                Pick your next collab
+                <span class="material-icons">arrow_forward</span>
+            </button>
+            <div class="momentum-expires">Offer expires May 16</div>
+        </div>
+
+        <!-- Watch again -->
+        <div class="replay-row">
+            <button class="celebration-replay">
+                <span class="material-icons">replay</span> Watch again
+            </button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
