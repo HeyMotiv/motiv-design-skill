@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follower Challenge Details — All States</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0ECF5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2B2B3A;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: #6E6E82;
+    margin-bottom: 20px;
+  }
+
+  .tab-group-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #9B91AD;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
+  .tab-bar {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab-btn {
+    padding: 8px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6E6E82;
+    background: white;
+    border: 1.5px solid #E8E4F0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover {
+    border-color: #9B7FC7;
+    color: #5A3D82;
+  }
+  .tab-btn.active {
+    background: #7B5EA7;
+    color: white;
+    border-color: #7B5EA7;
+  }
+
+  .iphone-frame {
+    width: 420px;
+    background: #1C1C1E;
+    border-radius: 52px;
+    padding: 14px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.1) inset,
+      0 20px 60px rgba(0,0,0,0.3),
+      0 0 0 1px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  .iphone-frame::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 36px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 9999;
+  }
+
+  .iphone-screen {
+    width: 392px;
+    height: 852px;
+    border-radius: 40px;
+    overflow: hidden;
+    background: #F7F3FB;
+    position: relative;
+  }
+
+  .iphone-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">Follower Challenge Details</h1>
+<p class="page-subtitle">All screen states &amp; creator video states</p>
+
+<div class="tab-group-label">Challenge state</div>
+<div class="tab-bar" id="screenTabs">
+  <button class="tab-btn" data-tab="state-details.html">Not Joined</button>
+  <button class="tab-btn" data-tab="state-joined.html">Joined / Not Started</button>
+  <button class="tab-btn active" data-tab="state-progress.html">In Progress</button>
+</div>
+
+<div class="tab-group-label">Creator video pill</div>
+<div class="tab-bar" id="videoTabs">
+  <button class="tab-btn active" data-tab="state-progress.html">No Videos Yet</button>
+  <button class="tab-btn" data-tab="state-review.html">Unwatched Video</button>
+  <button class="tab-btn" data-tab="state-all-watched.html">All Watched</button>
+</div>
+
+<div class="iphone-frame">
+  <div class="iphone-screen">
+    <iframe id="state-frame" src="state-progress.html"></iframe>
+  </div>
+</div>
+
+<script>
+const iframe = document.getElementById('state-frame');
+const screenTabs = document.getElementById('screenTabs');
+const videoTabs = document.getElementById('videoTabs');
+
+const nonProgressScreens = ['state-details.html', 'state-joined.html'];
+
+function setActive(container, btn) {
+  container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function loadFrame(file) {
+  iframe.src = file;
+}
+
+function updateVideoTabsState(disabled) {
+  videoTabs.querySelectorAll('.tab-btn').forEach(b => {
+    b.style.opacity = disabled ? '0.35' : '1';
+    b.style.pointerEvents = disabled ? 'none' : 'auto';
+  });
+}
+
+screenTabs.addEventListener('click', function(e) {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  const file = btn.dataset.tab;
+  setActive(screenTabs, btn);
+
+  if (nonProgressScreens.includes(file)) {
+    updateVideoTabsState(true);
+    loadFrame(file);
+  } else {
+    updateVideoTabsState(false);
+    const activeVideoBtn = videoTabs.querySelector('.tab-btn.active');
+    loadFrame(activeVideoBtn.dataset.tab);
+  }
+});
+
+videoTabs.addEventListener('click', function(e) {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  setActive(videoTabs, btn);
+  const progressBtn = screenTabs.querySelector('[data-tab="state-progress.html"]');
+  setActive(screenTabs, progressBtn);
+  updateVideoTabsState(false);
+  loadFrame(btn.dataset.tab);
+});
+</script>
+
+</body>
+</html>
