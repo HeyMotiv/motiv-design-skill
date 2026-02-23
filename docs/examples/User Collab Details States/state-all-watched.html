@@ -88,9 +88,9 @@
 
   /* Creator badge */
   .creator-badge {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 0;
     background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
-    padding: 4px 10px 4px 4px; border-radius: 22px;
+    padding: 5px; border-radius: 32px;
     margin-bottom: 14px;
     border: 1px solid rgba(255,255,255,0.2);
     cursor: pointer;
@@ -99,23 +99,37 @@
   .creator-badge:active {
     background: rgba(255,255,255,0.28);
   }
+  .creator-badge-left {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 14px 0 2px;
+  }
   .creator-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==); background-size: cover; background-position: center;
     border: 1.5px solid rgba(255,255,255,0.5);
   }
   .creator-handle {
-    font-size: 13px; font-weight: 500; color: white;
+    font-size: 14px; font-weight: 600; color: white;
     letter-spacing: 0.2px;
   }
-  .creator-play-icon {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: rgba(255,255,255,0.25);
+  .review-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.15);
+    padding: 7px 18px 7px 7px;
+    border-radius: 26px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .review-play {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .creator-play-icon svg {
-    width: 9px; height: 9px; margin-left: 1px;
+  .review-play svg { width: 13px; height: 13px; }
+  .review-label {
+    font-size: 14px; font-weight: 600; color: white;
+    letter-spacing: 0.2px;
   }
 
   /* ── Video Library Modal ── */
@@ -813,10 +827,15 @@
   <!-- Hero -->
   <div class="hero">
     <div class="hero-content">
-      <div class="creator-badge" onclick="document.getElementById('video-modal').classList.add('show')">
-        <div class="creator-avatar"></div>
-        <span class="creator-handle">@doodle_cycles</span>
-        <div class="creator-play-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M3 1.5L10.5 6L3 10.5V1.5Z" fill="rgba(255,255,255,0.9)"/></svg></div>
+      <div class="creator-badge">
+        <div class="creator-badge-left">
+          <div class="creator-avatar"></div>
+          <span class="creator-handle">@doodle_cycles</span>
+        </div>
+        <a class="review-btn" onclick="document.getElementById('video-modal').classList.add('show')">
+          <div class="review-play"><svg viewBox="0 0 12 12" fill="none"><path d="M3 1.5L10.5 6L3 10.5V1.5Z" fill="rgba(255,255,255,0.9)"/></svg></div>
+          <span class="review-label">Videos</span>
+        </a>
       </div>
       <h1 class="challenge-title">Dog Lovers<br>Who Cycle</h1>
       <div class="challenge-dates">Jan 10 – Feb 20</div>

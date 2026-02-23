@@ -88,18 +88,24 @@
 
   /* Creator badge */
   .creator-badge {
-    display: inline-flex; align-items: center; gap: 6px;
+    display: inline-flex; align-items: center; gap: 0;
     background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
-    padding: 4px 12px 4px 4px; border-radius: 20px;
+    padding: 5px; border-radius: 32px;
     margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    min-height: 58px;
+  }
+  .creator-badge-left {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 14px 0 2px;
   }
   .creator-avatar {
-    width: 24px; height: 24px; border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==); background-size: cover; background-position: center;
     border: 1.5px solid rgba(255,255,255,0.5);
   }
   .creator-handle {
-    font-size: 12px; font-weight: 500; color: white;
+    font-size: 14px; font-weight: 600; color: white;
     letter-spacing: 0.2px;
   }
 
@@ -593,6 +599,180 @@
   }
   .sync-btn:active { opacity: 0.6; }
 
+  /* ── High Five Emoji Rain ── */
+  .emoji-rain-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 99999;
+    pointer-events: all;
+    overflow: hidden;
+  }
+  .emoji-rain-overlay .rain-emoji {
+    position: absolute;
+    top: -50px;
+    animation: emojifall linear forwards;
+    pointer-events: none;
+    user-select: none;
+  }
+  @keyframes emojifall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateY(900px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── High Five Card ── */
+  .highfive-card {
+    display: none;
+    background: var(--creator-white);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+    border: 1px solid var(--creator-border);
+    margin-bottom: 14px;
+    margin-top: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .highfive-card.visible { display: block; }
+  .highfive-card:active { background: var(--creator-primary-faint); }
+  .highfive-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .highfive-header-left {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .highfive-emoji {
+    width: 40px; height: 40px;
+    background: var(--creator-primary-faint);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .highfive-from {
+    font-size: 14px; font-weight: 700; color: var(--creator-text);
+  }
+  .highfive-from .handle { color: var(--creator-primary); }
+  .highfive-count-badge {
+    display: none;
+    background: var(--creator-vivid);
+    color: white;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .highfive-count-badge.visible { display: inline-flex; }
+  .highfive-context {
+    font-size: 13px; color: var(--creator-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 50px;
+  }
+  .highfive-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-left: 50px;
+  }
+  .highfive-time {
+    font-size: 11px; color: var(--creator-text-muted);
+  }
+  .highfive-viewall {
+    font-size: 12px; font-weight: 600; color: var(--creator-primary);
+    display: none;
+  }
+  .highfive-viewall.visible { display: inline; }
+
+  /* ── High Five History Modal ── */
+  .highfive-modal {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+  .highfive-modal .modal-card {
+    max-width: 380px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0;
+  }
+  .highfive-modal .modal-card::-webkit-scrollbar { width: 0; }
+  .highfive-modal .modal-close {
+    top: 14px; right: 16px;
+    color: white;
+    background: rgba(255,255,255,0.25);
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; z-index: 2;
+  }
+  .highfive-modal-hero {
+    background: linear-gradient(135deg, var(--creator-primary) 0%, var(--creator-vivid) 100%);
+    padding: 28px 22px 22px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    text-align: center;
+    position: relative;
+  }
+  .highfive-modal-message {
+    font-size: 14px; color: rgba(255,255,255,0.9);
+    font-style: italic;
+    line-height: 1.45;
+    margin-top: 10px;
+  }
+  .highfive-modal-body {
+    padding: 18px 22px 22px;
+  }
+  .highfive-modal-body-title {
+    font-size: 12px; font-weight: 700; color: var(--creator-text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .highfive-list-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--creator-border);
+  }
+  .highfive-list-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .highfive-list-emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 1px;
+  }
+  .highfive-list-content { flex: 1; }
+  .highfive-list-context {
+    font-size: 14px; font-weight: 500; color: var(--creator-text);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .highfive-list-time {
+    font-size: 11px; color: var(--creator-text-muted);
+  }
+  .highfive-modal-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==);
+    background-size: cover; background-position: center;
+    border: 2.5px solid rgba(255,255,255,0.6);
+    margin: 0 auto 10px;
+  }
+  .highfive-modal-creator-name {
+    font-size: 15px; font-weight: 700; color: white;
+    text-align: center;
+  }
+
+  /* ── Demo trigger ── */
+  .demo-trigger {
+    position: fixed;
+    bottom: 70px; right: 16px;
+    z-index: 100;
+    background: var(--creator-vivid);
+    color: white; border: none;
+    border-radius: 50px;
+    padding: 8px 14px;
+    font-size: 11px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(125, 59, 237, 0.3);
+  }
+  .demo-trigger:active { opacity: 0.8; }
+
   /* ── Community feed ── */
   /* ── Journey section ── */
   .journey-card {
@@ -720,8 +900,10 @@
   <div class="hero">
     <div class="hero-content">
       <div class="creator-badge">
-        <div class="creator-avatar"></div>
-        <span class="creator-handle">@doodle_cycles</span>
+        <div class="creator-badge-left">
+          <div class="creator-avatar"></div>
+          <span class="creator-handle">@doodle_cycles</span>
+        </div>
       </div>
       <h1 class="challenge-title">Dog Lovers<br>Who Cycle</h1>
       <div class="challenge-dates">Jan 10 – Feb 20</div>
@@ -854,6 +1036,24 @@
 
   </div>
   </div><!-- end hero -->
+
+  <!-- High Five Card -->
+  <div class="content">
+    <div class="highfive-card visible" id="highfiveCard" onclick="document.getElementById('highfive-history-modal').classList.add('show')">
+      <div class="highfive-header">
+        <div class="highfive-header-left">
+          <div class="highfive-emoji">🖐️</div>
+          <div class="highfive-from">High five from <span class="handle">@doodle_cycles</span></div>
+        </div>
+        <span class="highfive-count-badge visible">2</span>
+      </div>
+      <div class="highfive-context">For completing 3 days this week 💪</div>
+      <div class="highfive-meta">
+        <span class="highfive-time">2 hours ago</span>
+        <span class="highfive-viewall visible">View all</span>
+      </div>
+    </div>
+  </div>
 
   <div class="content">
     <!-- Community Stats -->
@@ -1314,6 +1514,43 @@
     </div>
   </div>
 
+  <!-- High Five History Modal -->
+  <div class="modal-overlay highfive-modal" id="highfive-history-modal" onclick="if(event.target===this)this.classList.remove('show')">
+    <div class="modal-card">
+      <div class="modal-close" onclick="document.getElementById('highfive-history-modal').classList.remove('show')">&#10005;</div>
+      <!-- Hero section -->
+      <div class="highfive-modal-hero">
+        <div class="highfive-modal-avatar"></div>
+        <div class="highfive-modal-creator-name">@doodle_cycles</div>
+        <div class="highfive-modal-message">Just wanted to show you some love! ❤️❤️</div>
+      </div>
+      <!-- Body section -->
+      <div class="highfive-modal-body">
+        <div class="highfive-modal-body-title">Your high fives</div>
+        <div class="highfive-list-item">
+          <div class="highfive-list-emoji">🖐️</div>
+          <div class="highfive-list-content">
+            <div class="highfive-list-context">For completing 3 days this week 💪</div>
+            <div class="highfive-list-time">Jan 20 · 2:15pm</div>
+          </div>
+        </div>
+        <div class="highfive-list-item">
+          <div class="highfive-list-emoji">🖐️</div>
+          <div class="highfive-list-content">
+            <div class="highfive-list-context">For your first workout 🎉</div>
+            <div class="highfive-list-time">Jan 12 · 9:30am</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Five Emoji Rain Overlay -->
+  <div class="emoji-rain-overlay" id="emojiRainOverlay" style="display: none;" onclick="dismissEmojiRain()"></div>
+
+  <!-- Demo trigger -->
+  <button class="demo-trigger" onclick="triggerHighFiveRain()">🖐️ Demo celebration</button>
+
 </div>
 
 <script>
@@ -1355,6 +1592,47 @@
       chevron.classList.add('open');
     }
   }
+
+  // ── High Five Emoji Rain ──
+  function triggerHighFiveRain() {
+    var overlay = document.getElementById('emojiRainOverlay');
+    overlay.style.display = 'block';
+    overlay.innerHTML = '';
+
+    var emojis = ['🖐️', '❤️', '✋', '💜', '🙌'];
+    var totalEmojis = 35;
+
+    for (var i = 0; i < totalEmojis; i++) {
+      var emoji = document.createElement('span');
+      emoji.className = 'rain-emoji';
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = (Math.random() * 95) + '%';
+      var size = 20 + Math.random() * 20;
+      emoji.style.fontSize = size + 'px';
+      var duration = 2 + Math.random() * 2;
+      emoji.style.animationDuration = duration + 's';
+      var delay = Math.random() * 1.5;
+      emoji.style.animationDelay = delay + 's';
+      overlay.appendChild(emoji);
+    }
+
+    setTimeout(function() {
+      dismissEmojiRain();
+    }, 4500);
+  }
+
+  function dismissEmojiRain() {
+    var overlay = document.getElementById('emojiRainOverlay');
+    overlay.style.display = 'none';
+    overlay.innerHTML = '';
+  }
+
+  // Auto-trigger celebration on load (demo)
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      triggerHighFiveRain();
+    }, 800);
+  });
 </script>
 
 </body>
