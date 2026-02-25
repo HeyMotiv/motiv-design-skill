@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nature Yoga Reset — Joined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7D3BED;
+    --purple-light: #9B7FC7;
+    --purple-lighter: #D8CCE8;
+    --purple-faint: #F0EBF5;
+    --purple-bg: #F5F1FA;
+    --purple-dark: #5C4087;
+    --text-dark: #2B2B3A;
+    --text-mid: #5A5A6E;
+    --text-muted: #8E8EA0;
+    --text-light: #AEAEC0;
+    --card-bg: #FFFFFF;
+    --border: #EBE6F2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: var(--text-dark);
+  }
+
+  .phone {
+    width: 393px;
+    min-height: 852px;
+    background: linear-gradient(180deg, #EDE7F6 0%, #F5F1FA 15%, #F8F5FC 50%, #F5F1FA 100%);
+    position: relative;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+  }
+
+  /* Sticky footer */
+  .sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 393px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: none;
+    padding: 20px 18px 34px;
+    overflow: hidden;
+  }
+  .sticky-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(245,241,250,0) 0%, rgba(245,241,250,0.97) 35%, rgba(245,241,250,1) 60%);
+    pointer-events: none;
+  }
+  .invite-btn {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: #7B5EA7;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 17px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow: 0 4px 22px rgba(91, 61, 130, 0.50);
+    pointer-events: all;
+  }
+
+  /* Status bar */
+  .status-bar {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 26px 0; color: white; font-size: 15px; font-weight: 600;
+  }
+  .status-icons { display: flex; gap: 5px; align-items: center; }
+  .status-icons svg { width: 18px; height: 18px; }
+
+  /* Hero */
+  .hero {
+    position: relative; width: 100%; height: 500px;
+    overflow: hidden;
+    border-radius: 0 0 32px 32px;
+  }
+  .hero-bg-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(123, 94, 167, 0.45) 0%,
+      rgba(108, 78, 150, 0.55) 30%,
+      rgba(92, 64, 135, 0.7) 60%,
+      rgba(70, 45, 110, 0.88) 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding-top: 70px; padding-bottom: 50px; z-index: 10;
+  }
+  .creator-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.18); backdrop-filter: blur(12px);
+    border-radius: 50px; padding: 4px 14px 4px 4px; margin-bottom: 14px;
+  }
+  .creator-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    object-fit: cover;
+  }
+  .creator-handle { color: white; font-size: 13px; font-weight: 500; }
+  .challenge-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 46px; font-weight: 300; font-style: italic;
+    color: white; text-align: center; line-height: 1.12;
+    margin-bottom: 22px; padding: 0 30px;
+  }
+  .countdown-label {
+    color: rgba(255,255,255,0.6); font-size: 10px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px;
+  }
+  .countdown { display: flex; gap: 18px; }
+  .cd-item { text-align: center; }
+  .cd-val { font-size: 22px; font-weight: 700; color: white; line-height: 1; font-variant-numeric: tabular-nums; }
+  .cd-unit { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+
+  /* Content */
+  .content { padding: 0 16px; position: relative; z-index: 20; margin-top: -120px; }
+
+  /* Pool card */
+  .pool-card {
+    background: linear-gradient(135deg, #E2D8EE, #EDE7F5);
+    border-radius: 20px; padding: 20px 22px 22px; margin-bottom: 14px;
+    border: 1px solid rgba(123,94,167,0.15);
+    box-shadow: 0 4px 24px rgba(123,94,167,0.12);
+  }
+  .pool-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+  .pool-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+  .pool-amount { font-size: 40px; font-weight: 700; color: var(--text-dark); line-height: 1; letter-spacing: -1px; }
+  .entry-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.85); border: 1.5px solid var(--purple-lighter);
+    border-radius: 50px; padding: 9px 16px; font-size: 14px; font-weight: 700; color: #7D3BED;
+  }
+  .entry-badge svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .joined-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.85); border: 1.5px solid var(--purple-lighter);
+    border-radius: 50px; padding: 9px 16px; font-size: 14px; font-weight: 700; color: #7D3BED;
+  }
+  .joined-badge svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  /* (invite-banner replaced by sticky footer) */
+
+  /* Recruit section */
+  .recruit-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(123,94,167,0.06);
+  }
+  .recruit-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 5px; }
+  .recruit-headline { font-size: 20px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 4px; }
+  .recruit-sub { font-size: 13px; color: var(--text-mid); line-height: 1.45; margin-bottom: 16px; }
+  .progress-bar-track { height: 8px; background: var(--purple-faint); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple-light) 0%, var(--purple) 100%); border-radius: 99px; width: 0%; transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .progress-bar-labels { display: flex; justify-content: space-between; align-items: center; }
+  .progress-count { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .progress-count .denom { color: var(--text-muted); font-weight: 400; }
+  .progress-milestone { font-size: 12px; color: var(--text-mid); }
+
+  /* Journey section */
+  .journey-card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); }
+  .journey-heading { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 3px; }
+  .journey-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+  .creator-testimonial { background: linear-gradient(180deg, #F5F3FF, #FAF9FC); border-radius: 16px; padding: 18px; margin-bottom: 18px; }
+  .creator-photo { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--purple-lighter); flex-shrink: 0; }
+  .creator-name { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+  .creator-tagline { font-size: 13px; font-weight: 600; color: var(--purple); line-height: 1.4; }
+  .creator-bio { font-size: 13px; color: var(--text-mid); line-height: 1.55; margin-bottom: 16px; }
+  .creator-metrics { display: flex; gap: 8px; width: 100%; }
+  .creator-metric { flex: 1; text-align: center; background: rgba(255,255,255,0.7); border-radius: 12px; padding: 12px 6px; }
+  .creator-metric-val { font-size: 17px; font-weight: 700; color: var(--purple); line-height: 1; margin-bottom: 4px; }
+  .creator-metric-label { font-size: 11.5px; color: var(--text-muted); line-height: 1.3; }
+  .product-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--border); }
+  .product-tag { display: inline-block; font-size: 10px; font-weight: 600; color: var(--purple); border: 1.5px solid var(--purple-lighter); border-radius: 50px; padding: 3px 10px; margin-bottom: 6px; background: #F5F3FF; }
+  .product-name { font-size: 15px; font-weight: 600; color: var(--text-dark); }
+  .product-brand { font-size: 13px; color: var(--text-muted); }
+  .product-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--purple-faint); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .product-arrow svg { width: 16px; height: 16px; color: var(--purple); }
+  .pool-stats { display: flex; padding-top: 18px; border-top: 1px solid rgba(123,94,167,0.15); }
+  .pool-stats > div { flex: 1; text-align: center; }
+  .pool-stat-val { font-size: 24px; font-weight: 700; color: var(--text-dark); line-height: 1; }
+  .pool-stat-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Pills */
+  .pill {
+    background: var(--card-bg); border-radius: 14px; padding: 13px 18px;
+    display: flex; align-items: center; gap: 10px; border: 1px solid var(--border);
+  }
+  .pill-icon {
+    width: 32px; height: 32px; border-radius: 50%; background: var(--purple-faint);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pill-icon svg { width: 16px; height: 16px; color: var(--purple); }
+  .pill-label { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1px; }
+  .pill-value { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+  .pills-row { display: flex; gap: 10px; margin-bottom: 14px; }
+  .pills-row .pill { flex: 1; }
+
+  /* Cards */
+  .card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); }
+  .card-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .card-title { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+  .chevron { color: var(--text-light); transition: transform 0.25s ease; }
+  .chevron.open { transform: rotate(180deg); }
+  .card-body { margin-top: 12px; }
+  .card-body p { font-size: 14px; line-height: 1.6; color: var(--text-mid); }
+  .about-text { position: relative; max-height: 90px; overflow: hidden; }
+  .about-text::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, var(--card-bg)); }
+
+  /* Goal */
+  .goal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2px; }
+  .goal-title { font-size: 16px; font-weight: 700; }
+  .goal-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+  .pers-badge { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--purple); background: #FFFDE6; padding: 4px 10px; border-radius: 8px; }
+  .pers-badge svg { width: 13px; height: 13px; }
+  .plan-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dark); margin-bottom: 12px; }
+  .goal-cards { display: flex; gap: 10px; margin-bottom: 14px; }
+  .goal-card { flex: 1; background: var(--card-bg); border-radius: 12px; padding: 14px; border: 1px solid var(--border); }
+  .gc-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--purple-faint); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid var(--border); }
+  .gc-icon svg { width: 15px; height: 15px; color: var(--purple); }
+  .gc-val { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 3px; }
+  .gc-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--text-mid); margin-bottom: 6px; }
+  .gc-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.35; }
+  .gc-footer { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+  /* Smart target */
+  .smart-target { background: var(--purple-faint); border: 1.5px solid var(--purple-lighter); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .st-head { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+  .st-icon { font-size: 16px; }
+  .st-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dark); }
+  .st-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+  .formula { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .f-item { text-align: center; }
+  .f-pill { height: 34px; padding: 0 16px; border-radius: 50px; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+  .f-pill.base { background: var(--purple-lighter); color: var(--purple-dark); }
+  .f-pill.push { background: var(--purple); color: white; }
+  .f-pill.total { background: white; color: var(--text-dark); border: 2px solid var(--text-dark); font-weight: 700; }
+  .f-label { font-size: 10px; color: var(--text-muted); }
+  .f-op { font-size: 15px; color: var(--text-muted); margin-bottom: 12px; }
+
+  /* Sync */
+  .sync-btn {
+    width: 100%; padding: 13px; background: var(--card-bg);
+    border: 1.5px solid var(--border); border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
+    color: var(--text-dark); display: flex; align-items: center; justify-content: center;
+    gap: 8px; cursor: pointer;
+  }
+  .sync-btn svg { width: 16px; height: 16px; color: var(--purple); }
+
+  /* Journey */
+  .journey-title { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+  .journey-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+  .testimonial { display: flex; gap: 12px; margin-bottom: 12px; }
+  .test-photo { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #e8d0f0, #f0c8b0); flex-shrink: 0; border: 2px solid rgba(123,94,167,0.15); }
+  .test-name { font-size: 15px; font-weight: 700; margin-bottom: 1px; }
+  .test-tagline { font-size: 12px; color: var(--purple); font-weight: 500; line-height: 1.35; }
+  .test-quote { font-size: 13px; line-height: 1.6; color: var(--text-mid); margin-bottom: 16px; }
+  .metrics { display: flex; gap: 8px; }
+  .metric { flex: 1; text-align: center; background: var(--purple-faint); border-radius: 12px; padding: 12px 8px; border: 1px solid rgba(123,94,167,0.08); }
+  .metric-val { font-size: 18px; font-weight: 700; color: var(--purple); line-height: 1; margin-bottom: 4px; }
+  .metric-label { font-size: 10.5px; color: var(--text-muted); line-height: 1.3; }
+
+  /* (bottom-bar replaced by sticky footer) */
+
+  /* Tabs */
+  .tab-bar { display: flex; background: var(--purple-faint); border-radius: 10px; padding: 3px; margin-bottom: 16px; }
+  .tab { flex: 1; padding: 9px 0; border: none; border-radius: 8px; background: transparent; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; }
+  .tab.active { background: white; color: var(--text-dark); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+  /* Rules */
+  .rule-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .rule-item:last-child { margin-bottom: 0; }
+  .rule-num { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-faint); color: var(--purple); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .rule-title { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+  .rule-desc { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+
+  /* FAQs */
+  .faq-item { border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 12px; }
+  .faq-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .faq-q span { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+  .faq-chev { color: var(--text-light); transition: transform 0.2s ease; flex-shrink: 0; margin-left: 8px; }
+  .faq-chev.open { transform: rotate(180deg); }
+  .faq-a { display: none; font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-top: 8px; }
+
+  @media (max-width: 393px) { .phone { width: 100%; } .bottom-bar { width: 100%; } .sticky-footer { width: 100%; left: 0; transform: none; } }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="status-icons">
+      <svg viewBox="0 0 18 18" fill="white"><path d="M1 9.5c0-.3.1-.5.4-.7C3.4 7.2 6 6 9 6s5.6 1.2 7.6 2.8c.3.2.4.4.4.7 0 .3-.1.5-.4.7l-7.2 5.5c-.2.2-.5.3-.7.3-.3 0-.5-.1-.7-.3L.8 10.2c-.3-.2-.4-.4-.4-.7z" opacity="0.4"/><path d="M4.2 12.2c0-.3.1-.5.4-.7C5.8 10.5 7.3 10 9 10s3.2.5 4.4 1.5c.3.2.4.4.4.7 0 .3-.1.5-.4.7l-4 3c-.2.2-.5.3-.7.3-.3 0-.5-.1-.7-.3l-4-3c-.3-.2-.4-.4-.4-.7z"/></svg>
+      <svg viewBox="0 0 18 18" fill="white"><rect x="1" y="4" width="3" height="10" rx="0.5" opacity="0.3"/><rect x="5.5" y="3" width="3" height="11" rx="0.5" opacity="0.5"/><rect x="10" y="1.5" width="3" height="12.5" rx="0.5" opacity="0.7"/><rect x="14.5" y="0" width="3" height="14" rx="0.5"/></svg>
+      <svg viewBox="0 0 25 12" fill="white"><rect x="0" y="0.5" width="21" height="11" rx="2" stroke="white" stroke-width="1" fill="none" opacity="0.35"/><rect x="22" y="3.5" width="2" height="5" rx="1" opacity="0.4"/><rect x="1.5" y="2" width="18" height="8" rx="1"/></svg>
+    </div>
+  </div>
+
+  <div class="hero">
+    <img class="hero-bg-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCADIAJYDASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAAECAwQF/8QAMhAAAgIBAwIFAwQBAwUAAAAAAAECEQMSITFBUQQTImGBMnGRI0JSoVMUkrFjcoLB4f/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAYEQEBAQEBAAAAAAAAAAAAAAAAEQESMf/aAAwDAQACEQMRAD8A3AYHRggGIAAAAQDABDAAAAAAAAAAAYCAYAADAAAqhUQIRVABIDABAOgooQDoKAQDoKAQDoAEMBgIB0FEAA6AB0FFUFEEUFFUFATQqLoKKIoKLoKAigougoCKHRVDoCKCi6CgIodFOly0iXPGuZx/JKoodEvNjX7r+yJfiYdFJikaUBi/FLpD+wFI6qFRzvxU72ikiX4jI+qXwSrHVQUcbzZH+9kynJK5Sk/kUjsk4xVyaS9yPPw/5I/k81z8xvV8Gbi10YI9fzsXSaf2JefGu7+DylNxezNoZtvUuOqBHc/Ex6RZL8S+kP7MuVYiVY1/1E+iiiXnyP8AdX2RAAinkyP97+CW2+W38gACoKGABQUMQBQAwAALUV/Cf5Q1D/pv/d/8AzM8z2SOlY3/AI18yZzeK9MkqS26MDnYtWnqJshsqNlJS5R3YIQjHZc8+552PeaO2M2lUVbJq42SjFSX7U6Qllx6tOlcES3i0n6q/Jjijqt3u+pFdikuNKr2JljveG/sc7ll8xQSS90dMG06n1Ajysn8GHlT6pL7yRUseJP1Vb7k1g9X07c7cCoWjvOC/wDJCqK5y4/yU5YIpPZKXG3JSlieV419fagM/wBP/NH4TD9P+bf2gzaS9L0pWN0ottcKxVYfp98n+wC8WaGa1jV1yAFQSaVy1Nb2U4OUnU2lXB5bzvpt2o1x+MzJ9JVzaLGXoeU/8kuhx+OXrT9jrjni4qW/FnBmyvLu+L22Cud8E02m+iKkyNTW3Qo28PSdtHVDTd/g4oz4SOmCtXqRNXFZ5KqRGP0Lfdmvl6o/YxlHR/2vgg6cckt6+7NI5MeVpRdtM4qlV70jTw8JY28iVyfQDulixycXKCbjw30F5ONavRH1c7cjxyc43JJe1lBEeXjpLRGlxtwUox1atKvvQxSkoRcnwlYE9PgJfS/scWHxGSWRJytddjsb9L+wga2WyQB0ADhXhF1nJlR8LjXc22Ht2NIjylXBzeIjp4VI7Dk8S06A5WhqLk6XIN7GmCLcrbr43Crx4dLurfv0OhRV20g+lV/yJvj1KrMtKi9VptFeTq+qqXRmeHdm056It3wQc+SEo5HUtjSKyVdfgjzNUk5bdNzpjKNbMoSlNJ7O+m5k8+SD/UU4+/KN7E2uGEiFknJWpNoJOUouLk6ezEoRjvHZdiqj7lRivDqLtNp/cuppfUzSoPugcYd2VEa5/wAv6AbUe4BRuCTfQethrZUGlnH4hPzNPU7U2+EjNxjDJ5k2r/4M7q5jnx+HSSc+exokrpfLJyZbe3BDyaVvwzLXjWTuNvZnPPI9VQVonzJTeldTojjUYLhF8T0sWTQ0k+nY2pz3a37GWipnRFpEVDdXsrXcUUuiW/YtpakS7TaApWo8OxNyfRhCa2VOzZNSVdAMYp3vVDoqUGt1uiKZvGNOgr3FuG4D+QFbAC212AQWUVOUccGm9zjlkU29mzTNCU52uPZnLnuMmur5MRqic1tpM22+WKKtgyovGn5io70k4dziXpTa5R1470W+xNXETtT7FQbVNpClWq/gFeqlxZFaxk/Ta5FODuzTGt6fQt8iDm4ds0xN8CyRt+lGmJV77cUA5v0mdo2klKLS5MKNYzphYqCiorU/YCdwAYCAoZweK+tndZw+IXqvuQZR5RTpMIK/jc0jj8yb3pIik+vuv7NMeR2oztdjWHl4o1ab7krIpz5tE1VPdd73FxNMqTSItPeyK3x5PVyaSlas5MT1Pjc6kkuS0Cj6fcppJdg4+5KTbtvgyq47IzfJU3pjpIs3jGnQUKxr7lQMB7MAESW0ujslpgTL6WcviuYnVLejk8Vvk9gJxK8lI6seRY8U8dVK+5z4Y1K735OjJjU2mlf/ALCsJTnKT3r7cE47UtSfBrLGuKlS7m/hMKc7e6XQkKwUJz6UWsDTuTOrPHRv0oyvbZ7cmWkr07LkuO27rfghxdLfp/YrboDVu976j1JKya9DfYlmuWaJS1OwQgKikxkjVgOgAACLp2WsndGa/A0t+QKmlscuaDeSl1On4E4rzU12A5/DweuTrhJHRFepCweiWRP+RtOSUbS3LhrGUd/cMb0yv2DlfIUVHRNqUO+xzJq3f2Jbe66CozyvSr2VdDOCbabCXZMaZUbJ+lkhF+liGmALEBFUhklIBoA6ABNhYAAagtXYAAfufaRtGnj7OwAuJrLhUJ8ABUQNIAAxT1Sb/BaAArWP0sNL2ACaYTTEAEU+gwABgAAf/9k=" alt="">
+    <div class="hero-content">
+      <div class="creator-badge">
+        <img class="creator-avatar" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==" alt="Creator">
+        <span class="creator-handle">@doodle_cycles</span>
+      </div>
+      <h1 class="challenge-title">Nature<br>Yoga Reset</h1>
+      <div class="countdown-label">Collab begins in</div>
+      <div class="countdown">
+        <div class="cd-item"><div class="cd-val" id="cd-d">02</div><div class="cd-unit">Days</div></div>
+        <div class="cd-item"><div class="cd-val" id="cd-h">23</div><div class="cd-unit">Hrs</div></div>
+        <div class="cd-item"><div class="cd-val" id="cd-m">58</div><div class="cd-unit">Mins</div></div>
+        <div class="cd-item"><div class="cd-val" id="cd-s">44</div><div class="cd-unit">Secs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="pool-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;">
+        <div class="pool-label">Collab Pool</div>
+        <div class="joined-badge">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="2"/><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Joined!
+        </div>
+      </div>
+      <div style="margin-bottom: 18px;">
+        <div class="pool-amount">$31,040</div>
+      </div>
+      <div class="pool-stats">
+        <div><div class="pool-stat-val">776</div><div class="pool-stat-label">Participants</div></div>
+        <div><div class="pool-stat-val">5 weeks</div><div class="pool-stat-label">Duration</div></div>
+      </div>
+    </div>
+
+    <!-- Recruit section -->
+    <div class="recruit-section">
+      <div class="recruit-label">Recruit</div>
+      <div class="recruit-headline">Unlock MVP bonuses</div>
+      <div class="recruit-sub">Hit 500 participants and the collab's two MVPs will earn a cash bonus.</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="recruitBar"></div>
+      </div>
+      <div class="progress-bar-labels">
+        <div class="progress-count"><span id="participantCount">252</span><span class="denom"> / 500 participants</span></div>
+        <div class="progress-milestone">🎉 Bonuses unlock</div>
+      </div>
+    </div>
+
+    <!-- (invite banner moved to sticky footer) -->
+
+    <!-- What supported my journey -->
+    <div class="journey-card">
+      <div class="journey-heading">What supported my journey</div>
+      <div class="journey-sub">Habits and products I embraced along the way</div>
+
+      <div class="creator-testimonial">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 14px;">
+          <img class="creator-photo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCABIAEgDASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQCAwUB/8QALRAAAgIBAwIEBQQDAAAAAAAAAQIAAxEEEiExQQUiUWETMnGBoRQjUvDB0fH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGxEBAQEAAgMAAAAAAAAAAAAAAAERAiESMUH/2gAMAwEAAhEDEQA/AMySRGsYKgJY9AIIjO4VRlicATY0+jXToPN5z1MAVr8PCYN5yf4j/ceppoAAStB9uZEg7m3N5cdTErbixIUlUH5iktFsjSZ0zgsox2zIGqi0YKI2e4mYpLZ2jPYS6unUowdSAZVgl1K/wsYLUNz/ABaZzo1bFXBDDqDNrT6oWIQww69RIaqpNSp3DawHlYiTuBjQnXUoxVhgjrCMNLwqjCtew56LHHY7sKR05kKfJp6q148vPvOircxLZ6cSb2cK6qw7QCfeKOc8eku1mBftByFEXB82T2mk6ifq3TttuUe+JpqwI4MQ0ulZ/wBxjgdveO11bQRuJJ9T0k2nIWdgmrBBGGHOPWPmxRxM+2pxfWScrnjjpGltONzYyOJPKmV8T0wCLcv0aEYucW0WJ2K8Z9YQnKDDKqg6Sq52+VepH4ktO4s09b99onLVAZXJ4Bwfof6IyZmqAW08YHbMqTBZc/eTvfe5PqZUq5PvLS1KgdgAPaBPlztYY7bsfiL0WlBhhkesZNtLLuLgfeZtVb5ZlTOGHmGTzLK0N2WUAdj9YhY7fG+KCRknH0E1NKd1e7GM4js1OufpuOWx9oSWpuWvT2NkEgHp6wi8YNJeFXjDUsenK/5jlyiythnrMFGKMGU4I6R+vVfEXp06qJcJDUULWwCEn1MhTWS2TLGtDE84J9pdpFHmUnkQsKe3QnEq1Nf7eAO+Y9tEr1BVamJ+gkSLtZ1VZcjJws0KSyr8NTkdh6RRGKA+XP8Af+SNl5TB4z6TSxGrPEXFaLQDk/M2IRBmLsWY5J6mEk3IAkHIhCAX13gfOOfWX0WAWghhg8GEJUpNHIxmJau1Mhdw45hCKHSr6gYIUZ9zFySTkwhC0CEIRB//2Q==" alt="Ellie Snackson">
+          <div>
+            <div class="creator-name">Ellie Snackson</div>
+            <div class="creator-tagline">Rebuilding. Rediscovering.<br>Recovering. Rocking it!</div>
+          </div>
+        </div>
+        <div class="creator-bio">My journey taught me that progress comes from small, repeatable choices. Along the way, I discovered products and habits that supported my goals — then and now.</div>
+        <div class="creator-metrics">
+          <div class="creator-metric">
+            <div class="creator-metric-val">6 am</div>
+            <div class="creator-metric-label">When my<br>day starts</div>
+          </div>
+          <div class="creator-metric">
+            <div class="creator-metric-val">100g</div>
+            <div class="creator-metric-label">My daily<br>protein goal</div>
+          </div>
+          <div class="creator-metric">
+            <div class="creator-metric-val">60oz</div>
+            <div class="creator-metric-label">My daily<br>water goal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-item">
+        <div>
+          <div class="product-tag">My must-have</div>
+          <div class="product-name">Self-Tanning Drops</div>
+          <div class="product-brand">Bellatan</div>
+        </div>
+        <div class="product-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="product-item">
+        <div>
+          <div class="product-tag">Recent discovery</div>
+          <div class="product-name">Protein Powder</div>
+          <div class="product-brand">Vega</div>
+        </div>
+        <div class="product-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="product-item">
+        <div>
+          <div class="product-tag">Daily driver</div>
+          <div class="product-name">Women's Multi-Vitamin</div>
+          <div class="product-brand">Hiya</div>
+        </div>
+        <div class="product-arrow"><svg viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" onclick="toggle(this)">
+        <span class="card-title">About this Collab</span>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-body" style="display: none;">
+        <div class="about-text"><p>This challenge is designed to push you beyond your comfort zone while building sustainable fitness habits. You'll work with personalized goals based on your current performance level.</p></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <div class="card-header" onclick="toggle(this)">
+        <span class="card-title">Game Rules & FAQs</span>
+        <svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75l4.5 4.5 4.5-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-body" style="display: none;">
+        <div class="tab-bar">
+          <button class="tab active" onclick="switchTab(event, 'rules')">Game Rules</button>
+          <button class="tab" onclick="switchTab(event, 'faqs')">FAQs</button>
+        </div>
+        <div class="tab-content" id="tab-rules">
+          <div class="rule-item">
+            <div class="rule-num">1</div>
+            <div><div class="rule-title">Hit your weekly goal</div><div class="rule-desc">Complete the required output and ride frequency each week to stay on track.</div></div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">2</div>
+            <div><div class="rule-title">Log rides via Peloton sync</div><div class="rule-desc">Your rides are automatically tracked through your connected Peloton account.</div></div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">3</div>
+            <div><div class="rule-title">Miss a week, you're out</div><div class="rule-desc">If you don't meet the minimum goal in any week, you're eliminated from the pool.</div></div>
+          </div>
+          <div class="rule-item">
+            <div class="rule-num">4</div>
+            <div><div class="rule-title">Finishers split the pool</div><div class="rule-desc">Everyone who completes all 5 weeks splits the collab pool equally.</div></div>
+          </div>
+        </div>
+        <div class="tab-content" id="tab-faqs" style="display: none;">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span>What happens to my $40 entry hold?</span>
+              <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="faq-a">Your entry hold is returned in full when you complete the collab. If you don't finish, it goes into the pool for those who do.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span>Can I pause for a week?</span>
+              <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to remain eligible.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span>How is the pool divided?</span>
+              <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="faq-a">The total pool is split equally among all participants who complete every week of the collab.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              <span>What if I get injured mid-collab?</span>
+              <svg class="faq-chev" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="faq-a">We understand things happen. Reach out to support and we'll review your case on an individual basis.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Invite CTA -->
+  <div class="sticky-footer">
+    <button class="invite-btn" onclick="if(navigator.share){navigator.share({url:'https://motiv.app/join/nature-yoga-reset'})}else{alert('Share sheet would open here')}">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.5 7C13.5 7 12.5 2.5 10 2.5S6.5 7 6.5 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="2" stroke="white" stroke-width="1.5"/><path d="M14.5 12.5L12 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M5.5 12.5L8 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15" cy="13.5" r="1.5" stroke="white" stroke-width="1.5"/><circle cx="5" cy="13.5" r="1.5" stroke="white" stroke-width="1.5"/></svg>
+      Invite friends
+    </button>
+  </div>
+
+</div><!-- end .phone -->
+
+<script>
+function toggle(h) {
+  h.querySelector('.chevron').classList.toggle('open');
+  const b = h.closest('.card').querySelector('.card-body');
+  if (b) b.style.display = b.style.display === 'none' ? 'block' : 'none';
+}
+function switchTab(e, tab) {
+  const bar = e.target.closest('.tab-bar');
+  bar.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  const body = e.target.closest('.card-body');
+  body.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+  body.querySelector('#tab-' + tab).style.display = 'block';
+}
+function toggleFaq(q) {
+  q.querySelector('.faq-chev').classList.toggle('open');
+  const a = q.nextElementSibling;
+  a.style.display = a.style.display === 'block' ? 'none' : 'block';
+}
+const t = Date.now() + (1*86400+16*3600+32*60+2)*1000;
+function tick() {
+  const d = Math.max(0, t - Date.now());
+  document.getElementById('cd-d').textContent = String(Math.floor(d/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(Math.floor(d%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(Math.floor(d%60000/1000)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+// Recruit progress bar animation
+setTimeout(function() {
+  var bar = document.getElementById('recruitBar');
+  if (bar) bar.style.width = '50.4%'; // 252/500
+}, 350);
+</script>
+</body>
+</html>
