@@ -842,6 +842,38 @@
     font-weight: 600;
   }
 
+  /* ── Value card CTAs ── */
+  .value-ctas {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .value-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--creator-primary-faint);
+    border: 1px solid var(--creator-primary-lighter);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .value-cta:active {
+    background: var(--creator-primary-lighter);
+  }
+  .value-cta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--creator-vivid);
+  }
+  .value-cta-arrow {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--creator-vivid);
+  }
+
   /* ── MVP Celebration Banner ── */
   /* ── MVP "you" subtle indicator ── */
   .mvp-avatar-ring.is-current-user {
@@ -1022,6 +1054,16 @@
         </div>
       </div>
       <div class="mvp-note-celebration">You earned an MVP bonus from @doodle_cycles!</div>
+      <div class="value-ctas">
+        <div class="value-cta" onclick="/* navigate to accounting tab */">
+          <span class="value-cta-text">Request my hold refund</span>
+          <span class="value-cta-arrow">→</span>
+        </div>
+        <div class="value-cta" onclick="/* navigate to accounting tab */">
+          <span class="value-cta-text">Claim my MVP bonus</span>
+          <span class="value-cta-arrow">→</span>
+        </div>
+      </div>
     </div>
   </div>
 
