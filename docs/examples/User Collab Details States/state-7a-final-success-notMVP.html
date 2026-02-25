@@ -833,6 +833,33 @@
     padding: 4px 0 2px;
   }
 
+  /* ── Value card CTA ── */
+  .value-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--creator-primary-faint);
+    border: 1px solid var(--creator-primary-lighter);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .value-cta:active {
+    background: var(--creator-primary-lighter);
+  }
+  .value-cta-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--creator-vivid);
+  }
+  .value-cta-arrow {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--creator-vivid);
+  }
+
   /* ── Personal stats card ── */
   .personal-stats-card {
     background: var(--creator-card);
@@ -987,6 +1014,10 @@
         </div>
       </div>
       <div class="not-mvp-note">Amazing work! @doodle_cycles didn't select you as an MVP this time, so you didn't earn a bonus.</div>
+      <div class="value-cta" onclick="/* navigate to accounting tab */">
+        <span class="value-cta-text">Claim your $42.18</span>
+        <span class="value-cta-arrow">→</span>
+      </div>
     </div>
   </div>
 
