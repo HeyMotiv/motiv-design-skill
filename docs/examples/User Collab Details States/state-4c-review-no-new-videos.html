@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Nature Yoga Reset — In Progress</title>
+<title>Dog Lovers Who Cycle — Review (All Passed)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -93,11 +93,7 @@
     padding: 5px; border-radius: 32px;
     margin-bottom: 14px;
     border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .creator-badge:active {
-    background: rgba(255,255,255,0.28);
+    min-height: 58px;
   }
   .creator-badge-left {
     display: flex; align-items: center; gap: 8px;
@@ -112,6 +108,8 @@
     font-size: 14px; font-weight: 600; color: white;
     letter-spacing: 0.2px;
   }
+
+  /* Review button */
   .review-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,0.15);
@@ -132,7 +130,7 @@
     letter-spacing: 0.2px;
   }
 
-  /* ── Video Library Modal ── */
+  /* Video Library Modal */
   .video-modal .modal-card {
     max-width: 380px;
     max-height: 85vh;
@@ -174,8 +172,13 @@
     text-transform: uppercase; letter-spacing: 1px;
     color: var(--creator-primary); margin-bottom: 4px;
   }
-  .video-now-title { font-size: 15px; font-weight: 700; color: var(--creator-text); margin-bottom: 2px; }
-  .video-now-date { font-size: 12px; color: var(--creator-text-muted); }
+  .video-now-title {
+    font-size: 15px; font-weight: 700; color: var(--creator-text);
+    margin-bottom: 2px;
+  }
+  .video-now-date {
+    font-size: 12px; color: var(--creator-text-muted);
+  }
   .video-list-header {
     padding: 14px 18px 8px;
     font-size: 12px; font-weight: 600; color: var(--creator-text-muted);
@@ -184,7 +187,8 @@
   }
   .video-list-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 10px 18px; cursor: pointer; transition: background 0.15s;
+    padding: 10px 18px; cursor: pointer;
+    transition: background 0.15s;
   }
   .video-list-item:hover { background: var(--creator-primary-faint); }
   .video-list-item:last-child { padding-bottom: 18px; }
@@ -195,7 +199,8 @@
     position: relative; overflow: hidden;
   }
   .video-thumb::before {
-    content: ''; position: absolute; inset: 0;
+    content: '';
+    position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(125,59,237,0.25), rgba(233,79,160,0.25));
   }
   .video-thumb svg { width: 14px; height: 14px; z-index: 1; }
@@ -207,16 +212,26 @@
   }
   .video-item-type.weekly { background: #F0E4FF; color: #7D3BED; }
   .video-item-type.checkin { background: #FCE4EC; color: #C2185B; }
-  .video-item-title { font-size: 13px; font-weight: 600; color: var(--creator-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .video-item-title {
+    font-size: 13px; font-weight: 600; color: var(--creator-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
   .video-item-date { font-size: 11px; color: var(--creator-text-muted); }
-  .video-watched-check { width: 16px; height: 16px; flex-shrink: 0; color: var(--creator-text-muted); }
+  .video-unwatched-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #7D3BED; flex-shrink: 0;
+  }
+  .video-watched-check {
+    width: 16px; height: 16px; flex-shrink: 0;
+    color: var(--creator-text-muted);
+  }
 
   /* Title */
   .challenge-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 34px; font-weight: 600; color: white;
-    line-height: 1.1; margin-bottom: 8px;
+    line-height: 1.1; margin-bottom: 34px;
     text-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
   .challenge-dates {
@@ -249,11 +264,13 @@
     letter-spacing: 1.2px; text-transform: uppercase;
   }
   .info-icon {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid var(--creator-text-muted);
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.2px solid var(--creator-text-muted);
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: var(--creator-text-muted); font-weight: 600;
+    font-size: 9px; color: var(--creator-text-muted); font-weight: 600;
+    font-style: italic;
     cursor: pointer;
+    line-height: 1;
   }
 
   /* Value info modal */
@@ -340,6 +357,8 @@
   }
   .week-page-btn.passed { color: #2E7D32; }
   .week-page-btn.passed.active { background: var(--creator-primary); color: white; }
+  .week-page-btn.failed { color: var(--creator-text-muted); }
+  .week-page-btn.failed.active { background: var(--creator-text-muted); color: white; }
   .week-page-btn .page-status {
     font-size: 9px; margin-left: 2px;
   }
@@ -365,6 +384,9 @@
   }
   .week-status.pass {
     background: #E8F5E9; color: #2E7D32;
+  }
+  .week-status.fail {
+    background: #F5F0F0; color: var(--creator-text-muted);
   }
   .week-status.current {
     background: var(--creator-primary-faint); color: var(--creator-primary);
@@ -429,6 +451,7 @@
     font-size: 12px; font-weight: 700; color: var(--creator-text);
   }
   .week-summary-value.pass-color { color: #2E7D32; }
+  .week-summary-value.fail-color { color: var(--creator-text-muted); }
   .week-summary-value.current-color { color: var(--creator-primary); }
   .week-divider {
     height: 1px; background: var(--creator-border); margin: 0 0 20px;
@@ -451,11 +474,16 @@
 
   /* Value breakdown pills */
   .value-pills {
-    display: flex; gap: 8px; justify-content: center;
+    display: flex; gap: 6px; justify-content: center; align-items: flex-start;
     margin-bottom: 20px;
   }
   .v-pill {
     flex: 1; text-align: center;
+  }
+  .v-pill-plus {
+    font-size: 14px; font-weight: 600; color: var(--creator-text-muted);
+    padding-top: 12px;
+    flex-shrink: 0;
   }
   .v-pill-box {
     background: transparent;
@@ -532,29 +560,128 @@
   }
   .kj-remaining .fire { font-size: 12px; }
 
-  /* ── Your progress (expandable) ── */
+  /* ── Last workout ── */
+  .last-workout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--creator-text-secondary);
+    padding: 8px 0 4px;
+    justify-content: center;
+  }
+  .last-workout-icon {
+    font-size: 13px;
+  }
+
+  /* ── Your progress (inline week tracker) ── */
   .section-divider {
     height: 1px; background: var(--creator-primary-light); opacity: 0.3; margin: 6px 0;
   }
 
   .progress-section {
-    padding: 0;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: rgba(123,94,167,0.06);
+    border-radius: var(--radius-md);
+    border: 1.5px solid rgba(123,94,167,0.12);
+    margin-top: 2px;
   }
+  .progress-section:active { background: rgba(123,94,167,0.12); }
   .progress-header {
     display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; padding: 6px 0; margin-bottom: 0;
+    padding: 0; margin-bottom: 4px;
   }
-  .progress-header span {
+  .progress-header-left {
     font-size: 14px; font-weight: 600; color: var(--creator-text);
   }
-  .chevron {
-    width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-    transition: transform 0.3s ease;
+  .progress-header-right {
+    display: flex; align-items: center; gap: 2px;
   }
-  .chevron.open { transform: rotate(180deg); }
-  .chevron svg { width: 14px; height: 14px; stroke: var(--creator-text-secondary); }
+  .progress-view-link {
+    font-size: 12px; font-weight: 600; color: var(--creator-primary);
+  }
+  .chevron {
+    width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
+  }
+  .chevron svg { width: 12px; height: 12px; stroke: var(--creator-primary); }
 
-  .progress-body { overflow: hidden; transition: max-height 0.4s ease; }
+  /* Week tracker row */
+  .week-tracker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4px 0 6px;
+    gap: 0;
+  }
+  .week-dot-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+  .week-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .week-dot.completed {
+    background: var(--creator-primary);
+  }
+  .week-dot.completed svg {
+    width: 12px; height: 12px;
+    stroke: white; fill: none;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .week-dot.current {
+    border: 2px solid var(--creator-primary);
+    background: transparent;
+  }
+  .week-dot.current::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--creator-primary);
+    animation: dotpulse 2s infinite;
+  }
+  @keyframes dotpulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .week-dot.failed {
+    background: transparent;
+    border: 2px solid var(--creator-text-muted);
+  }
+  .week-dot.failed svg {
+    width: 8px; height: 8px;
+    stroke: var(--creator-text-muted); fill: none;
+    stroke-width: 2.5; stroke-linecap: round;
+  }
+  .week-dot.future {
+    border: 2px solid var(--creator-primary-light);
+    background: transparent;
+  }
+  .week-dot-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--creator-text-muted);
+    white-space: nowrap;
+  }
+  .week-dot-item.completed .week-dot-label {
+    color: var(--creator-primary);
+  }
+  .week-dot-item.failed .week-dot-label {
+    color: var(--creator-text-muted);
+  }
+  .week-dot-item.current .week-dot-label {
+    color: var(--creator-primary);
+    font-weight: 700;
+  }
 
   /* Week rows */
   .week-row {
@@ -610,6 +737,74 @@
     letter-spacing: 0.2px;
   }
 
+  /* ── Standalone value card ── */
+  .value-card {
+    background: var(--creator-card);
+    border-radius: var(--radius-xl);
+    padding: 22px 20px 18px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    border: 1px solid var(--creator-border);
+    box-shadow: 0 2px 12px rgba(123,94,167,0.06);
+  }
+  .value-card .value-header {
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 0;
+  }
+  .value-card .value-header span {
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
+    letter-spacing: 0; text-transform: none;
+  }
+  .value-card .value-amount {
+    text-align: left;
+    font-size: 42px;
+    line-height: 52px;
+    font-weight: 400;
+    color: var(--creator-primary);
+    margin-bottom: 14px;
+  }
+  .value-card .value-pills {
+    justify-content: flex-start;
+    margin-bottom: 12px;
+  }
+  .value-card .mvp-note {
+    text-align: left;
+    margin-bottom: 8px;
+    color: var(--creator-text-muted);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0;
+  }
+
+  /* ── Week header in main card ── */
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .card-header-label {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--creator-text);
+    text-transform: none;
+  }
+  .card-header-dot {
+    font-size: 16px;
+    color: var(--creator-text-muted);
+    font-weight: 400;
+  }
+  .card-header-date {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--creator-text);
+    letter-spacing: 0;
+  }
+
   /* ── Community stats card ── */
   .stats-card {
     background: var(--creator-white);
@@ -629,7 +824,7 @@
     display: flex; align-items: center; gap: 8px;
   }
   .stats-title {
-    font-size: 15px; font-weight: 700; color: var(--creator-text);
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
   }
   .live-badge {
     display: inline-flex; align-items: center; gap: 4px;
@@ -701,11 +896,188 @@
   }
   .sync-btn:active { opacity: 0.6; }
 
+  /* ── High Five Emoji Rain ── */
+  .emoji-rain-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 99999;
+    pointer-events: all;
+    overflow: hidden;
+  }
+  .emoji-rain-overlay .rain-emoji {
+    position: absolute;
+    top: -50px;
+    animation: emojifall linear forwards;
+    pointer-events: none;
+    user-select: none;
+  }
+  @keyframes emojifall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateY(900px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── High Five Card ── */
+  .highfive-card {
+    display: none;
+    background: var(--creator-white);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+    border: 1px solid var(--creator-border);
+    margin-bottom: 14px;
+    margin-top: 14px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .highfive-card.visible { display: block; }
+  .highfive-card:active { background: var(--creator-primary-faint); }
+  .highfive-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1px;
+  }
+  .highfive-header-left {
+    display: flex; align-items: center;
+  }
+  .highfive-emoji-right {
+    position: relative;
+    width: 40px; height: 40px;
+    background: var(--creator-primary-faint);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .highfive-count-badge {
+    display: none;
+    position: absolute;
+    top: -5px; right: -8px;
+    background: var(--creator-vivid);
+    color: white;
+    font-size: 12px; font-weight: 700;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    align-items: center; justify-content: center;
+    border: 2px solid white;
+  }
+  .highfive-count-badge.visible { display: flex; }
+  .highfive-from {
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
+  }
+  .highfive-from .handle { color: var(--creator-primary); }
+  .highfive-context {
+    font-size: 13px; color: var(--creator-text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .highfive-meta {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .highfive-time {
+    font-size: 11px; color: var(--creator-text-muted);
+  }
+  .highfive-viewall {
+    font-size: 12px; font-weight: 600; color: var(--creator-primary);
+    display: none;
+  }
+  .highfive-viewall.visible { display: inline; }
+
+  /* ── High Five History Modal ── */
+  .highfive-modal {
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+  .highfive-modal .modal-card {
+    max-width: 380px;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 0;
+  }
+  .highfive-modal .modal-card::-webkit-scrollbar { width: 0; }
+  .highfive-modal .modal-close {
+    top: 14px; right: 16px;
+    color: white;
+    background: rgba(255,255,255,0.25);
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; z-index: 2;
+  }
+  .highfive-modal-hero {
+    background: linear-gradient(135deg, var(--creator-primary) 0%, var(--creator-vivid) 100%);
+    padding: 28px 22px 22px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    text-align: center;
+    position: relative;
+  }
+  .highfive-modal-message {
+    font-size: 14px; color: rgba(255,255,255,0.9);
+    font-style: italic;
+    line-height: 1.45;
+    margin-top: 10px;
+  }
+  .highfive-modal-body {
+    padding: 18px 22px 22px;
+  }
+  .highfive-modal-body-title {
+    font-size: 12px; font-weight: 700; color: var(--creator-text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .highfive-list-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--creator-border);
+  }
+  .highfive-list-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .highfive-list-emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 1px;
+  }
+  .highfive-list-content { flex: 1; }
+  .highfive-list-context {
+    font-size: 14px; font-weight: 500; color: var(--creator-text);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .highfive-list-time {
+    font-size: 11px; color: var(--creator-text-muted);
+  }
+  .highfive-modal-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==);
+    background-size: cover; background-position: center;
+    border: 2.5px solid rgba(255,255,255,0.6);
+    margin: 0 auto 10px;
+  }
+  .highfive-modal-creator-name {
+    font-size: 15px; font-weight: 700; color: white;
+    text-align: center;
+  }
+
+  /* ── Demo trigger ── */
+  .demo-trigger {
+    position: fixed;
+    bottom: 70px; right: 16px;
+    z-index: 100;
+    background: var(--creator-vivid);
+    color: white; border: none;
+    border-radius: 50px;
+    padding: 8px 14px;
+    font-size: 11px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(125, 59, 237, 0.3);
+  }
+  .demo-trigger:active { opacity: 0.8; }
+
   /* ── Community feed ── */
   /* ── Journey section ── */
   .journey-card {
     background: var(--creator-white); border-radius: var(--radius-xl); padding: 20px;
-    margin: 0 16px 14px; border: 1px solid var(--creator-border);
+    margin: 0 16px 28px; border: 1px solid var(--creator-border);
   }
   .journey-heading { font-size: 16px; font-weight: 700; color: var(--creator-text); margin-bottom: 3px; }
   .journey-sub { font-size: 13px; color: var(--creator-text-muted); margin-bottom: 18px; }
@@ -838,44 +1210,18 @@
         </a>
       </div>
       <h1 class="challenge-title">Dog Lovers<br>Who Cycle</h1>
-      <div class="challenge-dates">Jan 10 – Feb 20</div>
     </div>
 
   <!-- Main Card -->
   <div class="content">
     <div class="main-card">
 
-      <!-- Max Collab Value -->
-      <div class="value-header">
-        <span>MAX COLLAB VALUE</span>
-        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">ⓘ</div>
+      <!-- Week header -->
+      <div class="card-header">
+        <span class="card-header-label">Week 3</span>
+        <span class="card-header-dot">·</span>
+        <span class="card-header-date">Jan 25–31</span>
       </div>
-      <div class="value-amount">$83.67</div>
-
-      <div class="value-pills">
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$40 <span class="lock">🔒</span></div>
-          </div>
-          <div class="v-pill-label">My Hold</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$1</div>
-          </div>
-          <div class="v-pill-label">Collab Reward</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$42.67 <span class="party">🎉</span></div>
-          </div>
-          <div class="v-pill-label">MVP bonus</div>
-        </div>
-      </div>
-
-      <!-- This Week -->
-      <div class="section-divider"></div>
-      <div class="week-label">This week: Jan 18–24</div>
       <div class="week-cards">
         <div class="week-card">
           <div class="week-card-main">
@@ -902,72 +1248,112 @@
         </div>
       </div>
 
-      <div class="section-divider"></div>
+      <div class="last-workout">
+        <span class="last-workout-icon">🚴</span>
+        <span>Last ride: Today, 28 min · 310 kJ</span>
+      </div>
 
-      <!-- Your Progress -->
-      <div class="progress-section">
-        <div class="progress-header" onclick="toggleProgress()">
-          <span>Your progress</span>
-          <div class="chevron" id="progressChevron">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      <!-- Your Progress (inline week tracker) -->
+      <div class="progress-section" onclick="document.getElementById('full-details-modal').classList.add('show')">
+        <div class="progress-header">
+          <span class="progress-header-left">Your progress</span>
+          <div class="progress-header-right">
+            <span class="progress-view-link">More</span>
+            <div class="chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
           </div>
         </div>
-        <div class="progress-body" id="progressBody" style="max-height: 0px; overflow: hidden; transition: max-height 0.4s ease;">
-
-          <!-- Week 2: Jan 12–18 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 12–18</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
+        <div class="week-tracker">
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
-            <div class="week-row-right">
-              2,350 kJ <span class="fire">🔥</span>
+            <span class="week-dot-label">Wk 1</span>
+          </div>
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
+            <span class="week-dot-label">Wk 2</span>
           </div>
-          <div class="week-segments">
-            <div class="seg green"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
-            <div class="seg green"></div>
-            <div class="seg blue"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
+          <div class="week-dot-item current">
+            <div class="week-dot current"></div>
+            <span class="week-dot-label">Wk 3</span>
           </div>
-
-          <!-- Week 1: Jan 5–11 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 5–11</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
-            </div>
-            <div class="week-row-right">
-              2,260 kJ <span class="fire">🔥</span>
-            </div>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 4</span>
           </div>
-          <div class="week-segments">
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 5</span>
           </div>
-
-          <button class="full-details-btn" onclick="document.getElementById('full-details-modal').classList.add('show')">Full details</button>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 6</span>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="mvp-note">Two MVPs earn the Max Collab Value</div>
-
   </div>
   </div><!-- end hero -->
+
+  <!-- Max Collab Value Card -->
+  <div class="content">
+    <div class="value-card">
+      <div class="value-header">
+        <span>Max collab value</span>
+        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">i</div>
+      </div>
+      <div class="mvp-note">Only the two MVPs earn the MVP bonus</div>
+      <div class="value-amount">$83.67</div>
+      <div class="value-pills">
+        <div class="v-pill">
+          <div class="v-pill-box">
+            <div class="v-pill-amount">$40 <span class="lock">🔒</span></div>
+          </div>
+          <div class="v-pill-label">My hold</div>
+        </div>
+        <div class="v-pill-plus">+</div>
+        <div class="v-pill">
+          <div class="v-pill-box">
+            <div class="v-pill-amount">$1</div>
+          </div>
+          <div class="v-pill-label">Collab reward</div>
+        </div>
+        <div class="v-pill-plus">+</div>
+        <div class="v-pill">
+          <div class="v-pill-box">
+            <div class="v-pill-amount">$42.67 <span class="party">🎉</span></div>
+          </div>
+          <div class="v-pill-label">MVP bonus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Five Card -->
+  <div class="content">
+    <div class="highfive-card visible" id="highfiveCard" onclick="document.getElementById('highfive-history-modal').classList.add('show')">
+      <div class="highfive-header">
+        <div class="highfive-header-left">
+          <div class="highfive-from">High five from <span class="handle">@doodle_cycles</span></div>
+        </div>
+        <div class="highfive-emoji-right">
+          🖐️
+          <span class="highfive-count-badge visible">2</span>
+        </div>
+      </div>
+      <div class="highfive-context">For completing 3 days this week 💪</div>
+      <div class="highfive-meta">
+        <span class="highfive-time">2 hours ago</span>
+        <span class="highfive-viewall visible">View all</span>
+      </div>
+    </div>
+  </div>
 
   <div class="content">
     <!-- Community Stats -->
@@ -1428,21 +1814,62 @@
     </div>
   </div>
 
+  <!-- High Five History Modal -->
+  <div class="modal-overlay highfive-modal" id="highfive-history-modal" onclick="if(event.target===this)this.classList.remove('show')">
+    <div class="modal-card">
+      <div class="modal-close" onclick="document.getElementById('highfive-history-modal').classList.remove('show')">&#10005;</div>
+      <!-- Hero section -->
+      <div class="highfive-modal-hero">
+        <div class="highfive-modal-avatar"></div>
+        <div class="highfive-modal-creator-name">@doodle_cycles</div>
+        <div class="highfive-modal-message">Just wanted to show you some love! ❤️❤️</div>
+      </div>
+      <!-- Body section -->
+      <div class="highfive-modal-body">
+        <div class="highfive-modal-body-title">Your high fives</div>
+        <div class="highfive-list-item">
+          <div class="highfive-list-emoji">🖐️</div>
+          <div class="highfive-list-content">
+            <div class="highfive-list-context">For completing 3 days this week 💪</div>
+            <div class="highfive-list-time">Jan 20 · 2:15pm</div>
+          </div>
+        </div>
+        <div class="highfive-list-item">
+          <div class="highfive-list-emoji">🖐️</div>
+          <div class="highfive-list-content">
+            <div class="highfive-list-context">For your first workout 🎉</div>
+            <div class="highfive-list-time">Jan 12 · 9:30am</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- High Five Emoji Rain Overlay -->
+  <div class="emoji-rain-overlay" id="emojiRainOverlay" style="display: none;" onclick="dismissEmojiRain()"></div>
+
+  <!-- Demo trigger -->
+  <button class="demo-trigger" onclick="triggerHighFiveRain()">🖐️ Demo celebration</button>
+
 </div>
 
-  <!-- Video Library Modal (all watched) -->
+  <!-- Video Library Modal -->
   <div class="modal-overlay video-modal" id="video-modal" onclick="if(event.target===this)this.classList.remove('show')">
     <div class="modal-card">
       <div class="modal-close" onclick="document.getElementById('video-modal').classList.remove('show')">✕</div>
+
       <div class="video-player-placeholder">
         <div class="big-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="#7D3BED"/></svg></div>
       </div>
+
       <div class="video-now-playing">
         <div class="video-now-tag">Check in</div>
         <div class="video-now-title">Quick midweek motivation</div>
         <div class="video-now-date">Jan 15, 2025 · 1:28</div>
       </div>
+
       <div class="video-list-header">All videos</div>
+
       <div class="video-list-item">
         <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
         <div class="video-item-info">
@@ -1452,6 +1879,7 @@
         </div>
         <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
+
       <div class="video-list-item">
         <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
         <div class="video-item-info">
@@ -1461,6 +1889,7 @@
         </div>
         <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
+
       <div class="video-list-item">
         <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
         <div class="video-item-info">
@@ -1470,6 +1899,7 @@
         </div>
         <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
+
       <div class="video-list-item">
         <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
         <div class="video-item-info">
@@ -1521,6 +1951,47 @@
       chevron.classList.add('open');
     }
   }
+
+  // ── High Five Emoji Rain ──
+  function triggerHighFiveRain() {
+    var overlay = document.getElementById('emojiRainOverlay');
+    overlay.style.display = 'block';
+    overlay.innerHTML = '';
+
+    var emojis = ['🖐️', '❤️', '✋', '💜', '🙌'];
+    var totalEmojis = 35;
+
+    for (var i = 0; i < totalEmojis; i++) {
+      var emoji = document.createElement('span');
+      emoji.className = 'rain-emoji';
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = (Math.random() * 95) + '%';
+      var size = 20 + Math.random() * 20;
+      emoji.style.fontSize = size + 'px';
+      var duration = 2 + Math.random() * 2;
+      emoji.style.animationDuration = duration + 's';
+      var delay = Math.random() * 1.5;
+      emoji.style.animationDelay = delay + 's';
+      overlay.appendChild(emoji);
+    }
+
+    setTimeout(function() {
+      dismissEmojiRain();
+    }, 4500);
+  }
+
+  function dismissEmojiRain() {
+    var overlay = document.getElementById('emojiRainOverlay');
+    overlay.style.display = 'none';
+    overlay.innerHTML = '';
+  }
+
+  // Auto-trigger celebration on load (demo)
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      triggerHighFiveRain();
+    }, 800);
+  });
 </script>
 
 </body>

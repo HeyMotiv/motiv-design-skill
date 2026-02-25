@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Nature Yoga Reset — In Progress</title>
+<title>Dog Lovers Who Cycle — Results Pending (Disqualified)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -93,140 +93,11 @@
     padding: 5px; border-radius: 32px;
     margin-bottom: 14px;
     border: 1px solid rgba(255,255,255,0.2);
+    min-height: 58px;
   }
   .creator-badge-left {
     display: flex; align-items: center; gap: 8px;
     padding: 0 14px 0 2px;
-  }
-  .review-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, #7D3BED, #E94FA0);
-    padding: 7px 18px 7px 7px;
-    border-radius: 26px;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .review-play {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: white;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .review-play svg { width: 13px; height: 13px; }
-  .review-label {
-    font-size: 14px; font-weight: 600; color: white;
-    letter-spacing: 0.2px;
-  }
-  /* Unwatched badge count */
-  .review-count {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: white; color: #7D3BED;
-    font-size: 10px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    margin-left: 2px;
-  }
-
-  /* ── Video Library Modal ── */
-  .video-modal .modal-card {
-    max-width: 380px;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 0;
-  }
-  .video-modal .modal-card::-webkit-scrollbar { width: 0; }
-  .video-modal .modal-close {
-    top: 12px; right: 14px; z-index: 2;
-    color: white;
-    background: rgba(0,0,0,0.3);
-    width: 28px; height: 28px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-  .video-player-placeholder {
-    width: 100%; aspect-ratio: 16/9;
-    background: #1a1a2e;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 16px 16px 0 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .video-player-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(125,59,237,0.3), rgba(233,79,160,0.3));
-  }
-  .big-play {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: rgba(255,255,255,0.95);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 1;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  .big-play svg { width: 22px; height: 22px; margin-left: 3px; }
-  .video-now-playing {
-    padding: 14px 18px 6px;
-  }
-  .video-now-tag {
-    display: inline-block; font-size: 9px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 1px;
-    color: var(--creator-primary); margin-bottom: 4px;
-  }
-  .video-now-title {
-    font-size: 15px; font-weight: 700; color: var(--creator-text);
-    margin-bottom: 2px;
-  }
-  .video-now-date {
-    font-size: 12px; color: var(--creator-text-muted);
-  }
-  .video-list-header {
-    padding: 14px 18px 8px;
-    font-size: 12px; font-weight: 600; color: var(--creator-text-muted);
-    text-transform: uppercase; letter-spacing: 0.8px;
-    border-top: 1px solid var(--creator-border);
-  }
-  .video-list-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 18px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .video-list-item:hover { background: var(--creator-primary-faint); }
-  .video-list-item:last-child { padding-bottom: 18px; }
-  .video-thumb {
-    width: 72px; height: 44px; border-radius: 8px;
-    background: #1a1a2e; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .video-thumb::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(125,59,237,0.25), rgba(233,79,160,0.25));
-  }
-  .video-thumb svg { width: 14px; height: 14px; z-index: 1; }
-  .video-item-info { flex: 1; min-width: 0; }
-  .video-item-type {
-    display: inline-block; font-size: 9px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    padding: 2px 6px; border-radius: 4px;
-    margin-bottom: 2px;
-  }
-  .video-item-type.weekly { background: #F0E4FF; color: #7D3BED; }
-  .video-item-type.checkin { background: #FCE4EC; color: #C2185B; }
-  .video-item-title {
-    font-size: 13px; font-weight: 600; color: var(--creator-text);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .video-item-date {
-    font-size: 11px; color: var(--creator-text-muted);
-  }
-  .video-unwatched-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #7D3BED; flex-shrink: 0;
-  }
-  .video-watched-check {
-    width: 16px; height: 16px; flex-shrink: 0;
-    color: var(--creator-text-muted);
   }
   .creator-avatar {
     width: 32px; height: 32px; border-radius: 50%;
@@ -243,16 +114,11 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 34px; font-weight: 600; color: white;
-    line-height: 1.1; margin-bottom: 8px;
+    line-height: 1.1; margin-bottom: 34px;
     text-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
-  .challenge-dates {
-    font-size: 13px; color: rgba(255,255,255,0.85);
-    font-weight: 400; letter-spacing: 0.2px;
-    margin-bottom: 24px;
-  }
 
-  /* ── Main card (collab value + progress) ── */
+  /* ── Main card ── */
   .content { padding: 0 16px; position: relative; z-index: 3; }
 
   .main-card {
@@ -276,11 +142,13 @@
     letter-spacing: 1.2px; text-transform: uppercase;
   }
   .info-icon {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid var(--creator-text-muted);
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.2px solid var(--creator-text-muted);
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: var(--creator-text-muted); font-weight: 600;
+    font-size: 9px; color: var(--creator-text-muted); font-weight: 600;
+    font-style: italic;
     cursor: pointer;
+    line-height: 1;
   }
 
   /* Value info modal */
@@ -393,9 +261,6 @@
   .week-status.pass {
     background: #E8F5E9; color: #2E7D32;
   }
-  .week-status.current {
-    background: var(--creator-primary-faint); color: var(--creator-primary);
-  }
   .week-totals {
     font-size: 11px; color: var(--creator-text-muted);
     text-align: right;
@@ -456,7 +321,6 @@
     font-size: 12px; font-weight: 700; color: var(--creator-text);
   }
   .week-summary-value.pass-color { color: #2E7D32; }
-  .week-summary-value.current-color { color: var(--creator-primary); }
   .week-divider {
     height: 1px; background: var(--creator-border); margin: 0 0 20px;
   }
@@ -468,53 +332,31 @@
     border-top: 1px solid var(--creator-border);
   }
 
-  .value-amount {
-    text-align: center; font-size: 50px; font-weight: 500;
-    font-family: 'Quicksand', sans-serif;
-    line-height: 72px; letter-spacing: 0;
-    color: var(--creator-text); letter-spacing: -1px;
-    margin-bottom: 14px;
+  /* ── Week header in main card ── */
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .card-header-label {
+    font-size: 16px; font-weight: 600; color: var(--creator-text);
+  }
+  .card-header-dot {
+    font-size: 16px; color: var(--creator-text-muted); font-weight: 400;
+  }
+  .card-header-date {
+    font-size: 16px; font-weight: 600; color: var(--creator-text);
   }
 
-  /* Value breakdown pills */
-  .value-pills {
-    display: flex; gap: 8px; justify-content: center;
-    margin-bottom: 20px;
-  }
-  .v-pill {
-    flex: 1; text-align: center;
-  }
-  .v-pill-box {
-    background: transparent;
-    border: 1.5px solid var(--creator-primary-light);
-    border-radius: 50px;
-    padding: 10px 6px;
-    margin-bottom: 6px;
-  }
-  .v-pill-amount {
-    font-size: 15px; font-weight: 700; color: var(--creator-text);
-    display: flex; align-items: center; justify-content: center; gap: 3px;
-  }
-  .v-pill-amount .lock { font-size: 11px; }
-  .v-pill-amount .party { font-size: 13px; }
-  .v-pill-label {
-    font-size: 10.5px; color: var(--creator-text-muted);
-    letter-spacing: 0.1px;
-  }
-
-  /* ── This week section ── */
-  .week-label {
-    font-size: 13.5px; font-weight: 600; color: var(--creator-text);
-    margin-top: 14px; margin-bottom: 10px;
-  }
   .week-cards {
     display: flex; gap: 10px; margin-bottom: 14px;
   }
   .week-card {
     flex: 1; border-radius: var(--radius-md);
     padding: 14px;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     background: transparent;
     border: 1.5px solid var(--creator-primary-light);
   }
@@ -522,119 +364,290 @@
     font-size: 22px; font-weight: 700; color: var(--creator-primary);
     line-height: 1.2;
   }
-  .week-card-main .highlight-green { color: var(--creator-vivid); }
-  .week-card-main .highlight-blue { color: var(--creator-vivid); }
   .week-card-main .denominator { font-size: 15px; font-weight: 500; color: var(--creator-primary-light); }
   .week-card-sub {
     font-size: 11.5px; color: var(--creator-text-secondary);
     margin-top: 3px;
   }
+  .week-card-sub .pass-label { color: #6DA876; font-weight: 500; }
 
-  /* Dot progress indicator */
-  .dot-progress {
-    display: flex; gap: 5px; margin-top: 10px;
-  }
-  .dot {
-    width: 22px; height: 12px; border-radius: 6px;
-  }
+  .dot-progress { display: flex; gap: 5px; margin-top: 10px; }
+  .dot { width: 22px; height: 12px; border-radius: 6px; }
   .dot.filled { background: var(--creator-vivid); }
-  .dot.empty { border: 1.5px solid var(--creator-primary-light); background: transparent; }
 
-  /* Bar progress indicator */
   .bar-progress {
     height: 8px; border-radius: 4px;
     background: var(--creator-primary-lighter);
     margin-top: 10px; overflow: hidden;
   }
-  .bar-fill {
-    height: 100%; border-radius: 4px;
-    transition: width 0.5s ease;
-  }
+  .bar-fill { height: 100%; border-radius: 4px; }
   .bar-fill.blue { background: var(--creator-vivid); }
 
-  .kj-remaining {
-    font-size: 11px; color: var(--creator-text-secondary);
-    margin-top: 4px;
-    display: flex; align-items: center; gap: 3px;
+  .last-workout {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 500;
+    color: var(--creator-text-secondary);
+    padding: 8px 0 4px; justify-content: center;
   }
-  .kj-remaining .fire { font-size: 12px; }
+  .last-workout-icon { font-size: 13px; }
 
-  /* ── Your progress (expandable) ── */
-  .section-divider {
-    height: 1px; background: var(--creator-primary-light); opacity: 0.3; margin: 6px 0;
-  }
-
+  /* ── Your progress (inline week tracker) ── */
   .progress-section {
-    padding: 0;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: rgba(123,94,167,0.06);
+    border-radius: var(--radius-md);
+    border: 1.5px solid rgba(123,94,167,0.12);
+    margin-top: 2px;
   }
+  .progress-section:active { background: rgba(123,94,167,0.12); }
   .progress-header {
     display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; padding: 6px 0; margin-bottom: 0;
+    padding: 0; margin-bottom: 4px;
   }
-  .progress-header span {
+  .progress-header-left {
     font-size: 14px; font-weight: 600; color: var(--creator-text);
   }
+  .progress-header-right {
+    display: flex; align-items: center; gap: 2px;
+  }
+  .progress-view-link {
+    font-size: 12px; font-weight: 600; color: var(--creator-primary);
+  }
   .chevron {
-    width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-    transition: transform 0.3s ease;
+    width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
   }
-  .chevron.open { transform: rotate(180deg); }
-  .chevron svg { width: 14px; height: 14px; stroke: var(--creator-text-secondary); }
+  .chevron svg { width: 12px; height: 12px; stroke: var(--creator-primary); }
 
-  .progress-body { overflow: hidden; transition: max-height 0.4s ease; }
-
-  /* Week rows */
-  .week-row {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 10px;
+  /* Week tracker row */
+  .week-tracker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4px 0 6px;
+    gap: 0;
   }
-  .week-row-left {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 13px; font-weight: 500; color: var(--creator-text);
+  .week-dot-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
   }
-  .check-circle {
-    width: 18px; height: 18px; border-radius: 50%;
-    background: transparent;
-    border: 1.5px solid var(--creator-text);
+  .week-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
   }
-  .check-circle svg { width: 10px; height: 10px; stroke: var(--creator-text); fill: none; stroke-width: 2.5; }
-
-  .week-row-right {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 13px; font-weight: 600; color: var(--creator-text);
+  .week-dot.completed {
+    background: var(--creator-primary);
   }
-  .week-row-right .fire { font-size: 12px; }
-
-  /* Week segment bars */
-  .week-segments {
-    display: flex; gap: 3px; margin-bottom: 14px;
+  .week-dot.completed svg {
+    width: 12px; height: 12px;
+    stroke: white; fill: none;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
   }
-  .seg {
-    flex: 1; height: 5px; border-radius: 3px;
-  }
-  .seg.green { background: var(--creator-primary-light); }
-  .seg.purple { background: var(--creator-primary-light); }
-  .seg.blue { background: var(--creator-primary-light); }
-  .seg.empty { background: var(--creator-border); }
-
-  .full-details-btn {
-    display: block; width: 100%; text-align: center;
-    font-size: 13px; font-weight: 600; color: var(--creator-text);
-    padding: 10px; background: transparent;
-    border: 1.5px solid var(--creator-primary-light);
-    border-radius: 50px; cursor: pointer;
-    margin-top: 4px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .full-details-btn:active { background: var(--creator-primary-faint); }
-
-  /* MVP note */
-  .mvp-note {
-    text-align: center; font-size: 12px; color: #FFFFFF; font-weight: 600;
-    padding: 8px 0 2px;
-    font-style: italic;
+  .week-dot-label {
+    font-size: 9px;
+    font-weight: 600;
     letter-spacing: 0.2px;
+    color: var(--creator-text-muted);
+    white-space: nowrap;
+  }
+  .week-dot-item.completed .week-dot-label {
+    color: var(--creator-primary);
+  }
+  .week-dot.failed {
+    background: transparent;
+    border: 2px solid var(--creator-text-muted);
+  }
+  .week-dot.failed svg {
+    width: 8px; height: 8px;
+    stroke: var(--creator-text-muted); fill: none;
+    stroke-width: 2.5; stroke-linecap: round;
+  }
+  .week-dot.future {
+    border: 2px solid var(--creator-primary-light);
+    background: transparent;
+  }
+  .week-dot-item.failed .week-dot-label {
+    color: var(--creator-text-muted);
+  }
+
+  /* ── Eliminated status banner ── */
+  .eliminated-banner {
+    display: flex; align-items: center; justify-content: center;
+    background: #FAF5F0;
+    border: 1px solid #E8DFD6;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-top: 12px;
+  }
+  .eliminated-banner-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--creator-text-muted);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Eliminated value card ── */
+  .value-card.eliminated {
+    border-color: #E8DFD6;
+  }
+  .value-card.eliminated .value-amount {
+    color: var(--creator-text-muted);
+  }
+
+  .eliminated-reason {
+    margin-top: 12px;
+    padding: 14px;
+    background: #FAF5F0;
+    border-radius: var(--radius-md);
+    border: 1px solid #E8DFD6;
+    cursor: pointer;
+  }
+  .eliminated-reason:active { opacity: 0.7; }
+  .eliminated-reason-item {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eliminated-reason-dash {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--creator-text-muted);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .eliminated-reason-dash svg {
+    width: 8px; height: 8px;
+    stroke: var(--creator-text-muted);
+    fill: none; stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+  .eliminated-reason-desc {
+    flex: 1;
+    font-size: 13px; color: var(--creator-text-secondary); line-height: 1.4;
+  }
+  .eliminated-reason-desc strong {
+    color: var(--creator-text); font-weight: 600;
+  }
+  .eliminated-reason-chevron {
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .eliminated-reason-chevron svg {
+    width: 12px; height: 12px; stroke: var(--creator-text-muted);
+  }
+
+  /* Failed week status */
+  .week-status.fail {
+    background: #FFF3F0; color: #C0392B;
+  }
+  .week-page-btn.failed { color: var(--creator-text-muted); }
+  .week-page-btn.failed.active { background: var(--creator-text-muted); color: white; }
+  .week-page-btn.skipped { color: #C4C4D0; }
+  .week-page-btn.skipped.active { background: #C4C4D0; color: white; }
+
+  /* ── Standalone value card ── */
+  .value-card {
+    background: var(--creator-card);
+    border-radius: var(--radius-xl);
+    padding: 22px 20px 18px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    border: 1px solid var(--creator-border);
+    box-shadow: 0 2px 12px rgba(123,94,167,0.06);
+  }
+  .value-card .value-header {
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 0;
+  }
+  .value-card .value-header span {
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
+    letter-spacing: 0; text-transform: none;
+  }
+  .value-card .mvp-note {
+    text-align: left;
+    margin-bottom: 8px;
+    color: var(--creator-text-muted);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0;
+  }
+
+  .value-amount {
+    text-align: left; font-size: 42px; font-weight: 400;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 52px; letter-spacing: -1px;
+    color: var(--creator-text);
+    margin-bottom: 4px;
+  }
+  .pending-value {
+    color: var(--creator-text-muted);
+  }
+
+  /* Pending results styling */
+  .pending-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0 4px;
+  }
+  .pending-icon {
+    font-size: 15px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .pending-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--creator-text-muted);
+  }
+
+  .pending-steps {
+    padding: 6px 0 6px;
+  }
+  .pending-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+  }
+  .pending-step-icon {
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .pending-step-text {
+    font-size: 13px;
+    color: var(--creator-text-secondary);
+    line-height: 1.45;
+  }
+
+  .pending-announce {
+    background: var(--creator-primary-faint);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pending-announce-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .pending-announce-text {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--creator-primary);
+    line-height: 1.4;
   }
 
   /* ── Community stats card ── */
@@ -656,22 +669,13 @@
     display: flex; align-items: center; gap: 8px;
   }
   .stats-title {
-    font-size: 15px; font-weight: 700; color: var(--creator-text);
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
   }
-  .live-badge {
+  .ended-badge {
     display: inline-flex; align-items: center; gap: 4px;
-    background: #E8F5E9; border: 1px solid #A5D6A7;
-    border-radius: 20px; padding: 3px 10px 3px 7px;
-    font-size: 11px; font-weight: 600; color: var(--green);
-  }
-  .live-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    background: var(--creator-primary-faint); border: 1px solid var(--creator-primary-lighter);
+    border-radius: 20px; padding: 3px 10px;
+    font-size: 11px; font-weight: 600; color: var(--creator-primary);
   }
 
   .stats-grid {
@@ -728,11 +732,10 @@
   }
   .sync-btn:active { opacity: 0.6; }
 
-  /* ── Community feed ── */
   /* ── Journey section ── */
   .journey-card {
     background: var(--creator-white); border-radius: var(--radius-xl); padding: 20px;
-    margin: 0 16px 14px; border: 1px solid var(--creator-border);
+    margin: 0 16px 28px; border: 1px solid var(--creator-border);
   }
   .journey-heading { font-size: 16px; font-weight: 700; color: var(--creator-text); margin-bottom: 3px; }
   .journey-sub { font-size: 13px; color: var(--creator-text-muted); margin-bottom: 18px; }
@@ -758,17 +761,14 @@
     font-size: 20px; font-weight: 700; color: var(--creator-text);
     margin-bottom: 16px;
   }
-
-  .feed-post {
-    margin-bottom: 24px;
-  }
+  .feed-post { margin-bottom: 24px; }
   .feed-post-header {
     display: flex; align-items: center; gap: 10px;
     margin-bottom: 8px;
   }
   .feed-avatar {
     width: 36px; height: 36px; border-radius: 50%;
-    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLJA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==); background-size: cover; background-position: center;
+    background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDADUlKC8oITUvKy88OTU/UIVXUElJUKN1e2GFwarLyL6qurfV8P//1eL/5re6////////////zv//////////////2wBDATk8PFBGUJ1XV53/3Lrc////////////////////////////////////////////////////////////////////wAARCACQAJADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQIFBv/EADAQAAIBAwMCBAQGAwEAAAAAAAECAAMRIQQSMUFREyIyYQVxkaEUQoGxwdEjUvBi/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABwRAQEBAQEBAQEBAAAAAAAAAAABEQIxIRJBUf/aAAwDAQACEQMRAD8A5kkkkAkkkNp9NU1DWQWA5Y8CABjVHQVqtifIvdv6nRpaSlpluBuf/YyM/WK3DkDpfDaC+ss5+gjK6aip8tJB+kylQQysCIpdFmIAoGABMGxNiMSqlWmhywmfxFIj1faPKWodLRc+amv0gKvw2gfQWQ/URhayH0uDCKdwvDw3HrfD61IXUb17r/UUnpRxF9To6WouSNr/AOwjJwpIbU6appms4weGHBgYBJJJIBJJIbS6dtRWCDA5J7CAa0ulbUG/CDkzp01NNQqjaB2jCIlNAiABR0kLAGKw4XeowwZLB1sJqqN5x0lb1pJcxe09DciiLt9Iq9Z3PNh2lVXapUucmZYhBbk9ZpOZGd61Za3/AHMm6y3MFcs0KKZqMAOJWljBqE9MRnTas0zta5X9ptdGts8y/wAGu0iRurzDdF1q3ZWuIQmwnHps+nrkdROj4pqICP1ivyASqqVEKOAVPScbWaQ6drjNM8HtOofEYbhwJCwqUylRLgjIk/o8cKSF1FE0Km3kHIPeClEk7ujoDTacAjznLTm/DaPi6kEjypk/xOy/EAy3F+kH4gl1WG2wmLLt6SLVRDUza0TrOWZjfA4jDmysewiNQ8KO1pfE/qOv8XfaN3XpBHuZpjn5TPWXUyLGAT+kb0hBJiZNsQ+kJFXAvcRWqnrpCXBCrbDIRCXBF5KieuXyioOVM1pXuQOjC01qGR6bLfNotpntzze8Crri1gBKYXEG1QgXUG3eV4jdcj2k2zw8B1On8ekQB5hkTjT0q8Ti/EqPhaokDyv5h/McFO/CqezSlzy5+wh3qXNhB6cEaamOLLNJYwogdQyxSbbuhCmMiEHpzJw9JV706TExLg55j2vdSqIDezZiF7teaTxFVe5mqY3OO0weTLBsDGFHLRjT033br7R3k0un8RtzekfedIIoFgMSVQogq+KQW3L0NxGSP8eOZryqbAZl2uCIjIVagS10weD3gdN6iT0E6DUw3U26iKUKe2s4/wBTiMqeWshpbfzWta0tCFQAxZbB8cQlR8WHMztMwCQMxT4ou/TBxyh+xlmozCxMldt+nde4hOvowwKZChZsIBxLDYHuJe4d5fwlNYi0XrVrAAC9+ISrcq1j0gAviDxQRnA9hDSL6qlspgsfOx+nt94rxa8c1SHk9Lc+8SYiXPEoBuJmqa7jaYBtCUms0Kc9O0CQlhC7m4tB0rbfnmF5WwkNE2ki4ax7zFqqn1bvnIFIxUqP+mJVRNqHZVe9sD3hgaVmX1EE2i5O2vvBwTCv5KW5zcgZmNOFq0Tf1W/4wiaK4U2K9ZkCZo3NQU269Y6tFVHF/nIvO0SlLSMDbg2juxewltYKewEPwND0zeJpqTd1EIABEfhdTdpil8ofsY7NCURk4i1BTY0j+U/aNReoQlcm3K3v8pOGU1TbncXwD9xFWsSTN1WLMRfk5gjk2miGTmaFxIveaXJhTnpihVjiMDEAmYRXZPcTLWh4i4g/DN8/vMJqh1kfVooyf0lEX11QlvDHTJgqFU0j7HmaANWq5/MTxADmNLqJZgrjnctvrHZz9GGfYOiZP8ToEgcwCQWqbZpqrf8AkzXioDbcLxL4nW/wBBwx+sAT+HVvC1IBPlfB/idueand0epFfThifMuGgBje8V1isVuMkdBGN4PWU/QwkDl/h6hUtawgLYx1nU1Dix2WsRZogyEfLvKSCT0ELSW2ZS07sLxlEkdVXMWFmiuJoLNWkrCFPN4pqBapOgRiJ16ZveOFQVcqb9RIikmwEtUuc8dY1SXwzt69/aXiBNO5oX63OY01Xct+BFrLwcWPIhqabmALAp+8myq2M0VDMWnP+IVfE1BA9KY/udPW1xptOStg7YX+5woQkhdPWNCpuHBwR3EFJGHYFRAodWBB4PSUGLm7MTcXHynMpVTTPtGt5I3I5sf+/iVCotRgTjgQbE7eLnrBmo4wQp79JYqAknaR7E4PtGSUAXqWueMXjyoRyImSVYEAAjJj6NuUEdZPUVKrbLCzUknFaztga62pkmMRPV1DuVR845CtAQ7Xza38xhSoUKMkdukXK3GBcyVFc+t9wPA6S0Dl0vcm5AIIGb/OZWsFFySLdYIEKhzYRao+88WELcNrUV2r1NzHAwB2gpJJBpJJJAJNI5Q4mZIAyjq/LBe94ULYhyLWGF7RGFXUOPUdw95UpYOY1pXupQ9P2iPjU25BEPQqItUEOtjiO/RHQ95PnKVgeD9DLLA5IEhTLYEQc7qpY97CMaiuioQHW/sYi1degJjhUYZvm0zWqKvqNyeVHX39jAPXduPKPaCjtLGmcsczMkkk0kkkgH//2Q==); background-size: cover; background-position: center;
     flex-shrink: 0;
   }
   .feed-avatar.alt {
@@ -787,9 +787,7 @@
     overflow: hidden; margin-bottom: 10px;
     position: relative;
   }
-  .feed-image img {
-    width: 100%; height: 100%; object-fit: cover;
-  }
+  .feed-image img { width: 100%; height: 100%; object-fit: cover; }
   .feed-actions {
     display: flex; align-items: center; gap: 16px;
   }
@@ -801,8 +799,6 @@
     width: 18px; height: 18px; stroke: var(--creator-text-secondary);
     fill: none; stroke-width: 1.5;
   }
-
-  /* Mini feed post (no image) */
   .feed-post.mini .feed-text { margin-bottom: 4px; }
 
   /* ── Compose bar ── */
@@ -859,142 +855,142 @@
           <div class="creator-avatar"></div>
           <span class="creator-handle">@doodle_cycles</span>
         </div>
-        <a class="review-btn" onclick="document.getElementById('video-modal').classList.add('show')">
-          <div class="review-play"><svg viewBox="0 0 12 12" fill="none"><path d="M3 1.5L10.5 6L3 10.5V1.5Z" fill="#7D3BED"/></svg></div>
-          <span class="review-label">Weekly review</span>
-        </a>
       </div>
       <h1 class="challenge-title">Dog Lovers<br>Who Cycle</h1>
-      <div class="challenge-dates">Jan 10 – Feb 20</div>
     </div>
 
   <!-- Main Card -->
   <div class="content">
     <div class="main-card">
 
-      <!-- Max Collab Value -->
-      <div class="value-header">
-        <span>MAX COLLAB VALUE</span>
-        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">ⓘ</div>
+      <!-- Week 6 header (user kept riding after DQ) -->
+      <div class="card-header">
+        <span class="card-header-label">Week 6</span>
+        <span class="card-header-dot">·</span>
+        <span class="card-header-date">Feb 9–15</span>
       </div>
-      <div class="value-amount">$83.67</div>
-
-      <div class="value-pills">
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$40 <span class="lock">🔒</span></div>
-          </div>
-          <div class="v-pill-label">My Hold</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$1</div>
-          </div>
-          <div class="v-pill-label">Collab Reward</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$42.67 <span class="party">🎉</span></div>
-          </div>
-          <div class="v-pill-label">MVP bonus</div>
-        </div>
-      </div>
-
-      <!-- This Week -->
-      <div class="section-divider"></div>
-      <div class="week-label">This week: Jan 18–24</div>
       <div class="week-cards">
         <div class="week-card">
           <div class="week-card-main">
-            <span class="highlight-green">3</span><span class="denominator"> /6 days</span>
+            <span>6</span><span class="denominator"> /6 days</span>
           </div>
-          <div class="week-card-sub">3 days to go</div>
+          <div class="week-card-sub"><span class="pass-label">Complete ✓</span></div>
           <div class="dot-progress">
             <div class="dot filled"></div>
             <div class="dot filled"></div>
             <div class="dot filled"></div>
-            <div class="dot empty"></div>
-            <div class="dot empty"></div>
-            <div class="dot empty"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
+            <div class="dot filled"></div>
           </div>
         </div>
         <div class="week-card">
           <div class="week-card-main">
-            <span class="highlight-blue">1,100</span><span class="denominator"> /2,100 kJ</span>
+            <span>2,270</span><span class="denominator"> /2,100 kJ</span>
           </div>
-          <div class="week-card-sub">1000 kJ left 🔥</div>
+          <div class="week-card-sub"><span class="pass-label">Goal met ✓</span></div>
           <div class="bar-progress">
-            <div class="bar-fill blue" style="width: 52%"></div>
+            <div class="bar-fill blue" style="width: 100%"></div>
           </div>
         </div>
       </div>
 
-      <div class="section-divider"></div>
+      <div class="last-workout">
+        <span class="last-workout-icon">🚴</span>
+        <span>Last ride: Sat Feb 15, 45 min · 420 kJ</span>
+      </div>
 
-      <!-- Your Progress -->
-      <div class="progress-section">
-        <div class="progress-header" onclick="toggleProgress()">
-          <span>Your progress</span>
-          <div class="chevron" id="progressChevron">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      <!-- Your Progress (DQ at Week 4) -->
+      <div class="progress-section" onclick="document.getElementById('full-details-modal').classList.add('show')">
+        <div class="progress-header">
+          <span class="progress-header-left">Your progress</span>
+          <div class="progress-header-right">
+            <span class="progress-view-link">More</span>
+            <div class="chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
           </div>
         </div>
-        <div class="progress-body" id="progressBody" style="max-height: 0px; overflow: hidden; transition: max-height 0.4s ease;">
-
-          <!-- Week 2: Jan 12–18 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 12–18</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
+        <div class="week-tracker">
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
-            <div class="week-row-right">
-              2,350 kJ <span class="fire">🔥</span>
+            <span class="week-dot-label">Wk 1</span>
+          </div>
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
+            <span class="week-dot-label">Wk 2</span>
           </div>
-          <div class="week-segments">
-            <div class="seg green"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
-            <div class="seg green"></div>
-            <div class="seg blue"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
-          </div>
-
-          <!-- Week 1: Jan 5–11 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 5–11</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
-            <div class="week-row-right">
-              2,260 kJ <span class="fire">🔥</span>
+            <span class="week-dot-label">Wk 3</span>
+          </div>
+          <div class="week-dot-item failed">
+            <div class="week-dot failed">
+              <svg viewBox="0 0 12 12"><line x1="3" y1="6" x2="9" y2="6"/></svg>
             </div>
+            <span class="week-dot-label">Wk 4</span>
           </div>
-          <div class="week-segments">
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
+            </div>
+            <span class="week-dot-label">Wk 5</span>
           </div>
-
-          <button class="full-details-btn" onclick="document.getElementById('full-details-modal').classList.add('show')">Full details</button>
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
+            </div>
+            <span class="week-dot-label">Wk 6</span>
+          </div>
+        </div>
+        <div class="eliminated-banner">
+          <div class="eliminated-banner-text">
+            No longer eligible for rewards
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="mvp-note">Two MVPs earn the Max Collab Value</div>
-
   </div>
   </div><!-- end hero -->
+
+  <!-- Collab Value Card — Disqualified -->
+  <div class="content">
+    <div class="value-card eliminated">
+      <div class="value-header">
+        <span>Your collab value</span>
+        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">i</div>
+      </div>
+      <div class="mvp-note">You are no longer eligible for rewards</div>
+      <div class="value-amount">$0.00</div>
+
+      <div class="eliminated-reason" onclick="openDetailsToWeek(4)">
+        <div class="eliminated-reason-item">
+          <div class="eliminated-reason-dash">
+            <svg viewBox="0 0 12 12"><line x1="3" y1="6" x2="9" y2="6"/></svg>
+          </div>
+          <div class="eliminated-reason-desc">
+            <strong>Wk 4:</strong> 4/6 days · 1,450/2,100 kJ
+          </div>
+          <div class="eliminated-reason-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="pending-announce" style="margin-top: 12px;">
+        <div class="pending-announce-icon">📣</div>
+        <div class="pending-announce-text">Results & MVPs announced Wednesday morning</div>
+      </div>
+    </div>
+  </div>
 
   <div class="content">
     <!-- Community Stats -->
@@ -1002,10 +998,7 @@
       <div class="stats-header" onclick="toggleStats()">
         <div class="stats-header-left">
           <span class="stats-title">Community stats</span>
-          <div class="live-badge">
-            <div class="live-dot"></div>
-            Live
-          </div>
+          <div class="ended-badge">Ended</div>
         </div>
         <div class="chevron" id="statsChevron">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1021,13 +1014,13 @@
           <div class="stat-box">
             <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="stat-value">753</div>
-            <div class="stat-label">ACTIVE</div>
+            <div class="stat-label">PARTICIPANTS</div>
           </div>
         </div>
         <div class="sync-row">
           <div class="sync-info">
             <div class="sync-title">Your workout data</div>
-            <div class="sync-sub">Last synced today at 3:42pm</div>
+            <div class="sync-sub">Last synced Feb 15 at 11:42pm</div>
           </div>
           <button class="sync-btn">Sync now</button>
         </div>
@@ -1095,7 +1088,6 @@
   <div class="feed-section">
     <div class="feed-title">Collab feed</div>
 
-    <!-- Post 1 with image -->
     <div class="feed-post">
       <div class="feed-post-header">
         <div class="feed-avatar"></div>
@@ -1120,29 +1112,6 @@
       </div>
     </div>
 
-    <!-- Post 2 text only -->
-    <div class="feed-post mini">
-      <div class="feed-post-header">
-        <div class="feed-avatar alt"></div>
-        <div>
-          <div class="feed-name">Alvin Johnson</div>
-          <div class="feed-time">30m ago</div>
-        </div>
-      </div>
-      <div class="feed-text">Just wrapped up an amazing cycle!</div>
-      <div class="feed-actions">
-        <div class="feed-action">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          24
-        </div>
-        <div class="feed-action">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          5
-        </div>
-      </div>
-    </div>
-
-    <!-- Post 3 text only -->
     <div class="feed-post mini">
       <div class="feed-post-header">
         <div class="feed-avatar alt"></div>
@@ -1169,18 +1138,21 @@
   <div class="modal-overlay" id="collab-value-modal" onclick="if(event.target===this)this.classList.remove('show')">
     <div class="modal-card">
       <div class="modal-close" onclick="document.getElementById('collab-value-modal').classList.remove('show')">✕</div>
-      <div class="modal-title">How your Max Collab Value is calculated</div>
+      <div class="modal-title">How your collab value is calculated</div>
       <div class="modal-row">
-        <div class="modal-label">💰 My Hold — $40</div>
-        <div class="modal-desc">The amount you put down to join. You get it back in full when you complete the collab.</div>
+        <div class="modal-label">💰 My Hold</div>
+        <div class="modal-desc">The amount you put down to join. Because you didn't meet the weekly requirements, your hold goes into the reward pool for participants who completed the collab.</div>
       </div>
       <div class="modal-row">
-        <div class="modal-label">🎁 Collab Reward — $1</div>
-        <div class="modal-desc">Your share of the pool from participants who didn't meet requirements. This updates as the collab progresses.</div>
+        <div class="modal-label">🎁 Collab Reward</div>
+        <div class="modal-desc">Your share of the pool from participants who didn't meet requirements. You are not eligible for this because you were disqualified.</div>
       </div>
       <div class="modal-row">
-        <div class="modal-label">🎉 MVP Bonus — $42.67</div>
-        <div class="modal-desc">Awarded to two people chosen by the creator — either the most improved or most encouraging member. Amount depends on total completions and recruitment goal.</div>
+        <div class="modal-label">🎉 MVP Bonus</div>
+        <div class="modal-desc">Awarded to two people chosen by the creator — either the most improved or most encouraging member. You are not eligible for this.</div>
+      </div>
+      <div class="modal-callout" style="background: #FAF5F0; border-radius: 10px; padding: 12px 14px; margin-top: 4px; border: 1px solid #E8DFD6;">
+        <div style="font-size: 12.5px; font-weight: 600; color: var(--creator-text-muted); line-height: 1.45;">You did not meet requirements in Week 4 and are no longer eligible for any collab rewards. You can still view the final results and MVP picks when announced.</div>
       </div>
     </div>
   </div>
@@ -1190,29 +1162,242 @@
     <div class="modal-card">
       <div class="modal-close" onclick="document.getElementById('full-details-modal').classList.remove('show')">✕</div>
       <div class="modal-title">Your ride log</div>
-      <div class="details-subtitle">Dog Lovers Who Cycle · Jan 5 – Feb 20<br>Weekly goal: 2,100 kJ across 6 days</div>
+      <div class="details-subtitle">Dog Lovers Who Cycle · Jan 5 – Feb 15<br>Weekly goal: 2,100 kJ across 6 days</div>
 
       <div class="week-pagination" id="weekPagination">
-        <button class="week-page-btn active" data-week="3">Wk 3 <span class="page-status">⏳</span></button>
+        <button class="week-page-btn passed active" data-week="6">Wk 6 <span class="page-status">✓</span></button>
+        <button class="week-page-btn passed" data-week="5">Wk 5 <span class="page-status">✓</span></button>
+        <button class="week-page-btn failed" data-week="4">Wk 4 <span class="page-status">–</span></button>
+        <button class="week-page-btn passed" data-week="3">Wk 3 <span class="page-status">✓</span></button>
         <button class="week-page-btn passed" data-week="2">Wk 2 <span class="page-status">✓</span></button>
         <button class="week-page-btn passed" data-week="1">Wk 1 <span class="page-status">✓</span></button>
       </div>
 
-      <!-- Week 3: Current -->
-      <div class="details-week active" data-week-panel="3">
+      <!-- Week 6: Passed -->
+      <div class="details-week active" data-week-panel="6">
         <div class="week-header">
           <div class="week-header-left">
-            <span class="week-header-label">Week 3 · Jan 18–24</span>
-            <span class="week-status current">IN PROGRESS</span>
+            <span class="week-header-label">Week 6 · Feb 9–15</span>
+            <span class="week-status pass">✓ PASSED</span>
           </div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Sat</span> Jan 18</div>
+            <div class="day-date"><span class="day-name">Sun</span> Feb 9</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">32 min · <strong>380 kJ</strong></div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>390 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Mon</span> Feb 10</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">42 min · <strong>410 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Tue</span> Feb 11</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>360 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Wed</span> Feb 12</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">30 min · <strong>310 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
+            <div class="day-date"><span class="day-name">Thu</span> Feb 13</div>
+          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Fri</span> Feb 14</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">40 min · <strong>380 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Sat</span> Feb 15</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">45 min · <strong>420 kJ</strong></div></div>
+        </div>
+        <div class="week-summary">
+          <div>
+            <div class="week-summary-label">Days</div>
+            <div class="week-summary-value pass-color">6 / 6 ✓</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Total kJ</div>
+            <div class="week-summary-value pass-color">2,270 / 2,100 ✓</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Status</div>
+            <div class="week-summary-value pass-color">Passed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 5: Passed -->
+      <div class="details-week" data-week-panel="5">
+        <div class="week-header">
+          <div class="week-header-left">
+            <span class="week-header-label">Week 5 · Feb 2–8</span>
+            <span class="week-status pass">✓ PASSED</span>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Sun</span> Feb 2</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>350 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Mon</span> Feb 3</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">40 min · <strong>400 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Tue</span> Feb 4</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">28 min · <strong>290 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
+            <div class="day-date"><span class="day-name">Wed</span> Feb 5</div>
+          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Thu</span> Feb 6</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>370 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Fri</span> Feb 7</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">42 min · <strong>410 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Sat</span> Feb 8</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">32 min · <strong>340 kJ</strong></div></div>
+        </div>
+        <div class="week-summary">
+          <div>
+            <div class="week-summary-label">Days</div>
+            <div class="week-summary-value pass-color">6 / 6 ✓</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Total kJ</div>
+            <div class="week-summary-value pass-color">2,160 / 2,100 ✓</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Status</div>
+            <div class="week-summary-value pass-color">Passed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 4: FAILED -->
+      <div class="details-week" data-week-panel="4">
+        <div class="week-header">
+          <div class="week-header-left">
+            <span class="week-header-label">Week 4 · Jan 26 – Feb 1</span>
+            <span class="week-status fail">✗ DISQUALIFIED</span>
+          </div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Sun</span> Jan 26</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">30 min · <strong>320 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Mon</span> Jan 27</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>360 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
+            <div class="day-date"><span class="day-name">Tue</span> Jan 28</div>
+          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Wed</span> Jan 29</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">28 min · <strong>280 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
+            <div class="day-date"><span class="day-name">Thu</span> Jan 30</div>
+          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Fri</span> Jan 31</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>370 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
+            <div class="day-date"><span class="day-name">Sat</span> Feb 1</div>
+          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
+        </div>
+        <div class="week-summary">
+          <div>
+            <div class="week-summary-label">Days</div>
+            <div class="week-summary-value" style="color: #C0392B;">4 / 6 ✗</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Total kJ</div>
+            <div class="week-summary-value" style="color: #C0392B;">1,450 / 2,100 ✗</div>
+          </div>
+          <div>
+            <div class="week-summary-label">Status</div>
+            <div class="week-summary-value" style="color: #C0392B;">Disqualified</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 3: Passed -->
+      <div class="details-week" data-week-panel="3">
+        <div class="week-header">
+          <div class="week-header-left">
+            <span class="week-header-label">Week 3 · Jan 19–25</span>
+            <span class="week-status pass">✓ PASSED</span>
           </div>
         </div>
         <div class="day-row">
@@ -1220,59 +1405,62 @@
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Sun</span> Jan 19</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">45 min · <strong>410 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">45 min · <strong>410 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Mon</span> Jan 20</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">28 min · <strong>310 kJ</strong></div>
+          <div class="day-rides"><div class="day-ride-line">32 min · <strong>340 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Tue</span> Jan 21</div>
           </div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>380 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Wed</span> Jan 22</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">28 min · <strong>290 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
-            <div class="day-date"><span class="day-name">Tue</span> Jan 21</div>
+            <div class="day-date"><span class="day-name">Thu</span> Jan 23</div>
           </div>
           <div class="day-rides"><div class="day-rest">Rest day</div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
-            <div class="day-check missed"></div>
-            <div class="day-date"><span class="day-name">Wed</span> Jan 22</div>
-          </div>
-          <div class="day-rides"><div class="day-rest">Upcoming</div></div>
-        </div>
-        <div class="day-row">
-          <div class="day-info">
-            <div class="day-check missed"></div>
-            <div class="day-date"><span class="day-name">Thu</span> Jan 23</div>
-          </div>
-          <div class="day-rides"><div class="day-rest">Upcoming</div></div>
-        </div>
-        <div class="day-row">
-          <div class="day-info">
-            <div class="day-check missed"></div>
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Fri</span> Jan 24</div>
           </div>
-          <div class="day-rides"><div class="day-rest">Upcoming</div></div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>370 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Sat</span> Jan 25</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">42 min · <strong>410 kJ</strong></div></div>
         </div>
         <div class="week-summary">
           <div>
             <div class="week-summary-label">Days</div>
-            <div class="week-summary-value current-color">3 / 6</div>
+            <div class="week-summary-value pass-color">6 / 6 ✓</div>
           </div>
           <div>
             <div class="week-summary-label">Total kJ</div>
-            <div class="week-summary-value current-color">1,100 / 2,100</div>
+            <div class="week-summary-value pass-color">2,200 / 2,100 ✓</div>
           </div>
           <div>
             <div class="week-summary-label">Status</div>
-            <div class="week-summary-value current-color">3 days left</div>
+            <div class="week-summary-value pass-color">Passed</div>
           </div>
         </div>
       </div>
@@ -1288,64 +1476,51 @@
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Sat</span> Jan 12</div>
+            <div class="day-date"><span class="day-name">Sun</span> Jan 12</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">40 min · <strong>420 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">40 min · <strong>420 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Sun</span> Jan 13</div>
+            <div class="day-date"><span class="day-name">Mon</span> Jan 13</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">35 min · <strong>360 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>370 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Mon</span> Jan 14</div>
+            <div class="day-date"><span class="day-name">Tue</span> Jan 14</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">25 min · <strong>280 kJ</strong></div>
-            <div class="day-ride-line">20 min · <strong>190 kJ</strong></div>
+          <div class="day-rides"><div class="day-ride-line">25 min · <strong>280 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Wed</span> Jan 15</div>
           </div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>390 kJ</strong></div></div>
+        </div>
+        <div class="day-row">
+          <div class="day-info">
+            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-date"><span class="day-name">Thu</span> Jan 16</div>
+          </div>
+          <div class="day-rides"><div class="day-ride-line">30 min · <strong>310 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
-            <div class="day-date"><span class="day-name">Tue</span> Jan 15</div>
+            <div class="day-date"><span class="day-name">Fri</span> Jan 17</div>
           </div>
           <div class="day-rides"><div class="day-rest">Rest day</div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Wed</span> Jan 16</div>
+            <div class="day-date"><span class="day-name">Sat</span> Jan 18</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">50 min · <strong>480 kJ</strong></div>
-          </div>
-        </div>
-        <div class="day-row">
-          <div class="day-info">
-            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Thu</span> Jan 17</div>
-          </div>
-          <div class="day-rides">
-            <div class="day-ride-line">30 min · <strong>310 kJ</strong></div>
-          </div>
-        </div>
-        <div class="day-row">
-          <div class="day-info">
-            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
-            <div class="day-date"><span class="day-name">Fri</span> Jan 18</div>
-          </div>
-          <div class="day-rides">
-            <div class="day-ride-line">28 min · <strong>310 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">28 min · <strong>330 kJ</strong></div></div>
         </div>
         <div class="week-summary">
           <div>
@@ -1354,7 +1529,7 @@
           </div>
           <div>
             <div class="week-summary-label">Total kJ</div>
-            <div class="week-summary-value pass-color">2,350 / 2,100 ✓</div>
+            <div class="week-summary-value pass-color">2,100 / 2,100 ✓</div>
           </div>
           <div>
             <div class="week-summary-label">Status</div>
@@ -1376,36 +1551,28 @@
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Sun</span> Jan 5</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">35 min · <strong>340 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">35 min · <strong>340 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Mon</span> Jan 6</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">42 min · <strong>400 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">42 min · <strong>400 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Tue</span> Jan 7</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">30 min · <strong>320 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">30 min · <strong>320 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Wed</span> Jan 8</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">38 min · <strong>370 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">38 min · <strong>370 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
@@ -1419,18 +1586,14 @@
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Fri</span> Jan 10</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">45 min · <strong>430 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">45 min · <strong>430 kJ</strong></div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
             <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
             <div class="day-date"><span class="day-name">Sat</span> Jan 11</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">48 min · <strong>400 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-ride-line">48 min · <strong>400 kJ</strong></div></div>
         </div>
         <div class="week-summary">
           <div>
@@ -1457,107 +1620,31 @@
 
 </div>
 
-  <!-- Video Library Modal -->
-  <div class="modal-overlay video-modal" id="video-modal" onclick="if(event.target===this)this.classList.remove('show')">
-    <div class="modal-card">
-      <div class="modal-close" onclick="document.getElementById('video-modal').classList.remove('show')">✕</div>
-
-      <!-- Current video player -->
-      <div class="video-player-placeholder">
-        <div class="big-play"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="#7D3BED"/></svg></div>
-      </div>
-
-      <!-- Now playing info -->
-      <div class="video-now-playing">
-        <div class="video-now-tag">Weekly review</div>
-        <div class="video-now-title">Week 3 — Keep pushing!</div>
-        <div class="video-now-date">Jan 20, 2025 · 3:42</div>
-      </div>
-
-      <!-- Video list -->
-      <div class="video-list-header">All videos</div>
-
-      <div class="video-list-item">
-        <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
-        <div class="video-item-info">
-          <div class="video-item-type weekly">Weekly review</div>
-          <div class="video-item-title">Week 3 — Keep pushing!</div>
-          <div class="video-item-date">Jan 20 · 3:42</div>
-        </div>
-        <div class="video-unwatched-dot"></div>
-      </div>
-
-      <div class="video-list-item">
-        <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
-        <div class="video-item-info">
-          <div class="video-item-type checkin">Check in</div>
-          <div class="video-item-title">Quick midweek motivation</div>
-          <div class="video-item-date">Jan 15 · 1:28</div>
-        </div>
-        <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-
-      <div class="video-list-item">
-        <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
-        <div class="video-item-info">
-          <div class="video-item-type weekly">Weekly review</div>
-          <div class="video-item-title">Week 2 — You're doing great</div>
-          <div class="video-item-date">Jan 13 · 4:15</div>
-        </div>
-        <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-
-      <div class="video-list-item">
-        <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
-        <div class="video-item-info">
-          <div class="video-item-type weekly">Weekly review</div>
-          <div class="video-item-title">Week 1 — Let's gooo!</div>
-          <div class="video-item-date">Jan 6 · 5:01</div>
-        </div>
-        <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-
-      <div class="video-list-item">
-        <div class="video-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3L20 12L6 21V3Z" fill="rgba(255,255,255,0.8)"/></svg></div>
-        <div class="video-item-info">
-          <div class="video-item-type checkin">Check in</div>
-          <div class="video-item-title">Welcome to the collab! 🎉</div>
-          <div class="video-item-date">Jan 5 · 2:10</div>
-        </div>
-        <svg class="video-watched-check" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-    </div>
-  </div>
-
 <script>
+  // Open details modal to specific week
+  function openDetailsToWeek(weekNum) {
+    var modal = document.getElementById('full-details-modal');
+    modal.classList.add('show');
+    document.querySelectorAll('.week-page-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelector('.week-page-btn[data-week="' + weekNum + '"]').classList.add('active');
+    document.querySelectorAll('.details-week').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelector('[data-week-panel="' + weekNum + '"]').classList.add('active');
+  }
+
   // Week pagination in full details modal
   document.getElementById('weekPagination').addEventListener('click', function(e) {
-    const btn = e.target.closest('.week-page-btn');
+    var btn = e.target.closest('.week-page-btn');
     if (!btn) return;
-    const week = btn.dataset.week;
-    // Update buttons
-    this.querySelectorAll('.week-page-btn').forEach(b => b.classList.remove('active'));
+    var week = btn.dataset.week;
+    this.querySelectorAll('.week-page-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
-    // Update panels
-    document.querySelectorAll('.details-week').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.details-week').forEach(function(p) { p.classList.remove('active'); });
     document.querySelector('[data-week-panel="' + week + '"]').classList.add('active');
   });
 
-  function toggleProgress() {
-    const body = document.getElementById('progressBody');
-    const chevron = document.getElementById('progressChevron');
-    if (body.style.maxHeight && body.style.maxHeight !== '0px') {
-      body.style.maxHeight = '0px';
-      chevron.classList.remove('open');
-    } else {
-      body.style.maxHeight = '300px';
-      chevron.classList.add('open');
-    }
-  }
-
   function toggleStats() {
-    const body = document.getElementById('statsBody');
-    const chevron = document.getElementById('statsChevron');
+    var body = document.getElementById('statsBody');
+    var chevron = document.getElementById('statsChevron');
     if (body.style.maxHeight && body.style.maxHeight !== '0px') {
       body.style.maxHeight = '0px';
       body.style.paddingBottom = '0px';

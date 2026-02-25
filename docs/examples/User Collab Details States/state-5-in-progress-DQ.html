@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Nature Yoga Reset — In Progress</title>
+<title>Dog Lovers Who Cycle — Eliminated</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -114,7 +114,7 @@
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-size: 34px; font-weight: 600; color: white;
-    line-height: 1.1; margin-bottom: 8px;
+    line-height: 1.1; margin-bottom: 34px;
     text-shadow: 0 2px 12px rgba(0,0,0,0.15);
   }
   .challenge-dates {
@@ -147,11 +147,13 @@
     letter-spacing: 1.2px; text-transform: uppercase;
   }
   .info-icon {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid var(--creator-text-muted);
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.2px solid var(--creator-text-muted);
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: var(--creator-text-muted); font-weight: 600;
+    font-size: 9px; color: var(--creator-text-muted); font-weight: 600;
+    font-style: italic;
     cursor: pointer;
+    line-height: 1;
   }
 
   /* Value info modal */
@@ -238,6 +240,8 @@
   }
   .week-page-btn.passed { color: #2E7D32; }
   .week-page-btn.passed.active { background: var(--creator-primary); color: white; }
+  .week-page-btn.failed { color: var(--creator-text-muted); }
+  .week-page-btn.failed.active { background: var(--creator-text-muted); color: white; }
   .week-page-btn .page-status {
     font-size: 9px; margin-left: 2px;
   }
@@ -263,6 +267,9 @@
   }
   .week-status.pass {
     background: #E8F5E9; color: #2E7D32;
+  }
+  .week-status.fail {
+    background: #F5F0F0; color: var(--creator-text-muted);
   }
   .week-status.current {
     background: var(--creator-primary-faint); color: var(--creator-primary);
@@ -327,6 +334,7 @@
     font-size: 12px; font-weight: 700; color: var(--creator-text);
   }
   .week-summary-value.pass-color { color: #2E7D32; }
+  .week-summary-value.fail-color { color: var(--creator-text-muted); }
   .week-summary-value.current-color { color: var(--creator-primary); }
   .week-divider {
     height: 1px; background: var(--creator-border); margin: 0 0 20px;
@@ -349,11 +357,16 @@
 
   /* Value breakdown pills */
   .value-pills {
-    display: flex; gap: 8px; justify-content: center;
+    display: flex; gap: 6px; justify-content: center; align-items: flex-start;
     margin-bottom: 20px;
   }
   .v-pill {
     flex: 1; text-align: center;
+  }
+  .v-pill-plus {
+    font-size: 14px; font-weight: 600; color: var(--creator-text-muted);
+    padding-top: 12px;
+    flex-shrink: 0;
   }
   .v-pill-box {
     background: transparent;
@@ -430,29 +443,241 @@
   }
   .kj-remaining .fire { font-size: 12px; }
 
-  /* ── Your progress (expandable) ── */
+  /* ── Last workout ── */
+  .last-workout {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--creator-text-secondary);
+    padding: 8px 0 4px;
+    justify-content: center;
+  }
+  .last-workout-icon {
+    font-size: 13px;
+  }
+
+  /* ── Your progress (inline week tracker) ── */
   .section-divider {
     height: 1px; background: var(--creator-primary-light); opacity: 0.3; margin: 6px 0;
   }
 
   .progress-section {
-    padding: 0;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: rgba(123,94,167,0.06);
+    border-radius: var(--radius-md);
+    border: 1.5px solid rgba(123,94,167,0.12);
+    margin-top: 2px;
   }
+  .progress-section:active { background: rgba(123,94,167,0.12); }
   .progress-header {
     display: flex; justify-content: space-between; align-items: center;
-    cursor: pointer; padding: 6px 0; margin-bottom: 0;
+    padding: 0; margin-bottom: 4px;
   }
-  .progress-header span {
+  .progress-header-left {
     font-size: 14px; font-weight: 600; color: var(--creator-text);
   }
-  .chevron {
-    width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-    transition: transform 0.3s ease;
+  .progress-header-right {
+    display: flex; align-items: center; gap: 2px;
   }
-  .chevron.open { transform: rotate(180deg); }
-  .chevron svg { width: 14px; height: 14px; stroke: var(--creator-text-secondary); }
+  .progress-view-link {
+    font-size: 12px; font-weight: 600; color: var(--creator-primary);
+  }
+  .chevron {
+    width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
+  }
+  .chevron svg { width: 12px; height: 12px; stroke: var(--creator-primary); }
 
-  .progress-body { overflow: hidden; transition: max-height 0.4s ease; }
+  /* Week tracker row */
+  .week-tracker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 4px 0 6px;
+    gap: 0;
+  }
+  .week-dot-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+  .week-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .week-dot.completed {
+    background: var(--creator-primary);
+  }
+  .week-dot.completed svg {
+    width: 12px; height: 12px;
+    stroke: white; fill: none;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .week-dot.current {
+    border: 2px solid var(--creator-primary);
+    background: transparent;
+  }
+  .week-dot.current::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--creator-primary);
+    animation: dotpulse 2s infinite;
+  }
+  @keyframes dotpulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .week-dot.failed {
+    background: transparent;
+    border: 2px solid var(--creator-text-muted);
+  }
+  .week-dot.failed svg {
+    width: 8px; height: 8px;
+    stroke: var(--creator-text-muted); fill: none;
+    stroke-width: 2.5; stroke-linecap: round;
+  }
+  .week-dot.future {
+    border: 2px solid var(--creator-primary-light);
+    background: transparent;
+  }
+  .week-dot-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: var(--creator-text-muted);
+    white-space: nowrap;
+  }
+  .week-dot-item.completed .week-dot-label {
+    color: var(--creator-primary);
+  }
+  .week-dot-item.failed .week-dot-label {
+    color: var(--creator-text-muted);
+  }
+  .week-dot-item.current .week-dot-label {
+    color: var(--creator-primary);
+    font-weight: 700;
+  }
+
+  /* ── Eliminated status banner ── */
+  .eliminated-banner {
+    display: flex; align-items: center; justify-content: center;
+    background: #FAF5F0;
+    border: 1px solid #E8DFD6;
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    margin-top: 12px;
+  }
+  .eliminated-banner-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--creator-text-muted);
+    letter-spacing: 0.3px;
+  }
+  .eliminated-banner-text strong {
+    color: var(--creator-text);
+    font-weight: 600;
+  }
+
+  /* ── Eliminated value card ── */
+  .value-card.eliminated {
+    border-color: #E8DFD6;
+  }
+  .value-card.eliminated .value-amount {
+    color: var(--creator-text-muted);
+  }
+  .value-card.eliminated .v-pill-box {
+    border-color: #D5D0DB;
+    background: #FAFAFA;
+  }
+  .value-card.eliminated .v-pill-amount {
+    color: var(--creator-text-muted);
+  }
+  .value-card.eliminated .v-pill-label {
+    color: #C4C4D0;
+  }
+  .value-card.eliminated .v-pill-plus {
+    color: #C4C4D0;
+  }
+
+  .eliminated-reason {
+    margin-top: 16px;
+    padding: 16px;
+    background: #FAF5F0;
+    border-radius: var(--radius-md);
+    border: 1px solid #E8DFD6;
+  }
+  .eliminated-reason-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .eliminated-reason-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--creator-text);
+  }
+  .eliminated-reason-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .eliminated-reason-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .eliminated-reason-dash {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid var(--creator-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .eliminated-reason-dash svg {
+    width: 7px; height: 7px;
+    stroke: var(--creator-text-muted);
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+  }
+  .eliminated-reason-desc {
+    font-size: 12.5px;
+    color: var(--creator-text-secondary);
+    line-height: 1.45;
+  }
+  .eliminated-reason-desc {
+    flex: 1;
+  }
+  .eliminated-reason-desc strong {
+    color: var(--creator-text);
+    font-weight: 600;
+  }
+  .eliminated-reason-chevron {
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    margin-left: auto;
+  }
+  .eliminated-reason-chevron svg {
+    width: 16px; height: 16px;
+    stroke: var(--creator-text-muted);
+  }
+  .eliminated-reason {
+    cursor: pointer;
+  }
 
   /* Week rows */
   .week-row {
@@ -508,6 +733,74 @@
     letter-spacing: 0.2px;
   }
 
+  /* ── Standalone value card ── */
+  .value-card {
+    background: var(--creator-card);
+    border-radius: var(--radius-xl);
+    padding: 22px 20px 18px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    border: 1px solid var(--creator-border);
+    box-shadow: 0 2px 12px rgba(123,94,167,0.06);
+  }
+  .value-card .value-header {
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 0;
+  }
+  .value-card .value-header span {
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
+    letter-spacing: 0; text-transform: none;
+  }
+  .value-card .value-amount {
+    text-align: left;
+    font-size: 42px;
+    line-height: 52px;
+    font-weight: 400;
+    color: var(--creator-primary);
+    margin-bottom: 14px;
+  }
+  .value-card .value-pills {
+    justify-content: flex-start;
+    margin-bottom: 12px;
+  }
+  .value-card .mvp-note {
+    text-align: left;
+    margin-bottom: 8px;
+    color: var(--creator-text-muted);
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    padding: 0;
+  }
+
+  /* ── Week header in main card ── */
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .card-header-label {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--creator-text);
+    text-transform: none;
+  }
+  .card-header-dot {
+    font-size: 16px;
+    color: var(--creator-text-muted);
+    font-weight: 400;
+  }
+  .card-header-date {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--creator-text);
+    letter-spacing: 0;
+  }
+
   /* ── Community stats card ── */
   .stats-card {
     background: var(--creator-white);
@@ -527,7 +820,7 @@
     display: flex; align-items: center; gap: 8px;
   }
   .stats-title {
-    font-size: 15px; font-weight: 700; color: var(--creator-text);
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
   }
   .live-badge {
     display: inline-flex; align-items: center; gap: 4px;
@@ -638,12 +931,13 @@
   .highfive-card:active { background: var(--creator-primary-faint); }
   .highfive-header {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
   }
   .highfive-header-left {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center;
   }
-  .highfive-emoji {
+  .highfive-emoji-right {
+    position: relative;
     width: 40px; height: 40px;
     background: var(--creator-primary-faint);
     border-radius: 50%;
@@ -651,28 +945,30 @@
     font-size: 22px;
     flex-shrink: 0;
   }
-  .highfive-from {
-    font-size: 14px; font-weight: 700; color: var(--creator-text);
-  }
-  .highfive-from .handle { color: var(--creator-primary); }
   .highfive-count-badge {
     display: none;
+    position: absolute;
+    top: -5px; right: -8px;
     background: var(--creator-vivid);
     color: white;
-    font-size: 11px; font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
+    font-size: 12px; font-weight: 700;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    align-items: center; justify-content: center;
+    border: 2px solid white;
   }
-  .highfive-count-badge.visible { display: inline-flex; }
+  .highfive-count-badge.visible { display: flex; }
+  .highfive-from {
+    font-size: 16px; font-weight: 700; color: var(--creator-text);
+  }
+  .highfive-from .handle { color: var(--creator-primary); }
   .highfive-context {
     font-size: 13px; color: var(--creator-text-secondary);
     line-height: 1.5;
     margin-bottom: 8px;
-    padding-left: 50px;
   }
   .highfive-meta {
     display: flex; align-items: center; justify-content: space-between;
-    padding-left: 50px;
   }
   .highfive-time {
     font-size: 11px; color: var(--creator-text-muted);
@@ -777,7 +1073,7 @@
   /* ── Journey section ── */
   .journey-card {
     background: var(--creator-white); border-radius: var(--radius-xl); padding: 20px;
-    margin: 0 16px 14px; border: 1px solid var(--creator-border);
+    margin: 0 16px 28px; border: 1px solid var(--creator-border);
   }
   .journey-heading { font-size: 16px; font-weight: 700; color: var(--creator-text); margin-bottom: 3px; }
   .journey-sub { font-size: 13px; color: var(--creator-text-muted); margin-bottom: 18px; }
@@ -906,44 +1202,18 @@
         </div>
       </div>
       <h1 class="challenge-title">Dog Lovers<br>Who Cycle</h1>
-      <div class="challenge-dates">Jan 10 – Feb 20</div>
     </div>
 
   <!-- Main Card -->
   <div class="content">
     <div class="main-card">
 
-      <!-- Max Collab Value -->
-      <div class="value-header">
-        <span>MAX COLLAB VALUE</span>
-        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">ⓘ</div>
+      <!-- Week header -->
+      <div class="card-header">
+        <span class="card-header-label">Week 3</span>
+        <span class="card-header-dot">·</span>
+        <span class="card-header-date">Jan 25–31</span>
       </div>
-      <div class="value-amount">$83.67</div>
-
-      <div class="value-pills">
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$40 <span class="lock">🔒</span></div>
-          </div>
-          <div class="v-pill-label">My Hold</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$1</div>
-          </div>
-          <div class="v-pill-label">Collab Reward</div>
-        </div>
-        <div class="v-pill">
-          <div class="v-pill-box">
-            <div class="v-pill-amount">$42.67 <span class="party">🎉</span></div>
-          </div>
-          <div class="v-pill-label">MVP bonus</div>
-        </div>
-      </div>
-
-      <!-- This Week -->
-      <div class="section-divider"></div>
-      <div class="week-label">This week: Jan 18–24</div>
       <div class="week-cards">
         <div class="week-card">
           <div class="week-card-main">
@@ -970,82 +1240,103 @@
         </div>
       </div>
 
-      <div class="section-divider"></div>
+      <div class="last-workout">
+        <span class="last-workout-icon">🚴</span>
+        <span>Last ride: Today, 28 min · 310 kJ</span>
+      </div>
 
-      <!-- Your Progress -->
-      <div class="progress-section">
-        <div class="progress-header" onclick="toggleProgress()">
-          <span>Your progress</span>
-          <div class="chevron" id="progressChevron">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      <!-- Your Progress (inline week tracker) -->
+      <div class="progress-section" onclick="document.getElementById('full-details-modal').classList.add('show')">
+        <div class="progress-header">
+          <span class="progress-header-left">Your progress</span>
+          <div class="progress-header-right">
+            <span class="progress-view-link">More</span>
+            <div class="chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
           </div>
         </div>
-        <div class="progress-body" id="progressBody" style="max-height: 0px; overflow: hidden; transition: max-height 0.4s ease;">
-
-          <!-- Week 2: Jan 12–18 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 12–18</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
+        <div class="week-tracker">
+          <div class="week-dot-item completed">
+            <div class="week-dot completed">
+              <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
             </div>
-            <div class="week-row-right">
-              2,350 kJ <span class="fire">🔥</span>
+            <span class="week-dot-label">Wk 1</span>
+          </div>
+          <div class="week-dot-item failed">
+            <div class="week-dot failed">
+              <svg viewBox="0 0 12 12"><line x1="3" y1="6" x2="9" y2="6"/></svg>
             </div>
+            <span class="week-dot-label">Wk 2</span>
           </div>
-          <div class="week-segments">
-            <div class="seg green"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
-            <div class="seg green"></div>
-            <div class="seg blue"></div>
-            <div class="seg green"></div>
-            <div class="seg purple"></div>
+          <div class="week-dot-item current">
+            <div class="week-dot current"></div>
+            <span class="week-dot-label">Wk 3</span>
           </div>
-
-          <!-- Week 1: Jan 5–11 -->
-          <div class="week-row">
-            <div class="week-row-left">
-              <span>Jan 5–11</span>
-              <div class="check-circle">
-                <svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg>
-              </div>
-            </div>
-            <div class="week-row-right">
-              2,260 kJ <span class="fire">🔥</span>
-            </div>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 4</span>
           </div>
-          <div class="week-segments">
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
-            <div class="seg purple"></div>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 5</span>
           </div>
-
-          <button class="full-details-btn" onclick="document.getElementById('full-details-modal').classList.add('show')">Full details</button>
+          <div class="week-dot-item future">
+            <div class="week-dot future"></div>
+            <span class="week-dot-label">Wk 6</span>
+          </div>
+        </div>
+        <div class="eliminated-banner">
+          <div class="eliminated-banner-text">
+            No longer eligible for rewards
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="mvp-note">Two MVPs earn the Max Collab Value</div>
-
   </div>
   </div><!-- end hero -->
+
+  <!-- Max Collab Value Card -->
+  <div class="content">
+    <div class="value-card eliminated">
+      <div class="value-header">
+        <span>Max collab value</span>
+        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">i</div>
+      </div>
+      <div class="mvp-note">You are no longer eligible for rewards</div>
+      <div class="value-amount">$0.00</div>
+
+      <div class="eliminated-reason" onclick="openDetailsToWeek(2)">
+        <div class="eliminated-reason-items">
+          <div class="eliminated-reason-item">
+            <div class="eliminated-reason-dash">
+              <svg viewBox="0 0 12 12"><line x1="3" y1="6" x2="9" y2="6"/></svg>
+            </div>
+            <div class="eliminated-reason-desc">
+              <strong>Wk 2:</strong> 4/6 days · 1,250/2,100 kJ
+            </div>
+            <div class="eliminated-reason-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- High Five Card -->
   <div class="content">
     <div class="highfive-card visible" id="highfiveCard" onclick="document.getElementById('highfive-history-modal').classList.add('show')">
       <div class="highfive-header">
         <div class="highfive-header-left">
-          <div class="highfive-emoji">🖐️</div>
           <div class="highfive-from">High five from <span class="handle">@doodle_cycles</span></div>
         </div>
-        <span class="highfive-count-badge visible">2</span>
+        <div class="highfive-emoji-right">
+          🖐️
+          <span class="highfive-count-badge visible">2</span>
+        </div>
       </div>
       <div class="highfive-context">For completing 3 days this week 💪</div>
       <div class="highfive-meta">
@@ -1253,7 +1544,7 @@
 
       <div class="week-pagination" id="weekPagination">
         <button class="week-page-btn active" data-week="3">Wk 3 <span class="page-status">⏳</span></button>
-        <button class="week-page-btn passed" data-week="2">Wk 2 <span class="page-status">✓</span></button>
+        <button class="week-page-btn failed" data-week="2">Wk 2 <span class="page-status">–</span></button>
         <button class="week-page-btn passed" data-week="1">Wk 1 <span class="page-status">✓</span></button>
       </div>
 
@@ -1336,12 +1627,12 @@
         </div>
       </div>
 
-      <!-- Week 2: Passed -->
+      <!-- Week 2: Failed -->
       <div class="details-week" data-week-panel="2">
         <div class="week-header">
           <div class="week-header-left">
             <span class="week-header-label">Week 2 · Jan 12–18</span>
-            <span class="week-status pass">✓ PASSED</span>
+            <span class="week-status fail">INCOMPLETE</span>
           </div>
         </div>
         <div class="day-row">
@@ -1355,12 +1646,10 @@
         </div>
         <div class="day-row">
           <div class="day-info">
-            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
             <div class="day-date"><span class="day-name">Sun</span> Jan 13</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">35 min · <strong>360 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
@@ -1369,7 +1658,6 @@
           </div>
           <div class="day-rides">
             <div class="day-ride-line">25 min · <strong>280 kJ</strong></div>
-            <div class="day-ride-line">20 min · <strong>190 kJ</strong></div>
           </div>
         </div>
         <div class="day-row">
@@ -1385,17 +1673,15 @@
             <div class="day-date"><span class="day-name">Wed</span> Jan 16</div>
           </div>
           <div class="day-rides">
-            <div class="day-ride-line">50 min · <strong>480 kJ</strong></div>
+            <div class="day-ride-line">30 min · <strong>310 kJ</strong></div>
           </div>
         </div>
         <div class="day-row">
           <div class="day-info">
-            <div class="day-check done"><svg viewBox="0 0 12 12"><polyline points="2.5 6 5 8.5 9.5 3.5"/></svg></div>
+            <div class="day-check missed"><svg viewBox="0 0 12 12"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg></div>
             <div class="day-date"><span class="day-name">Thu</span> Jan 17</div>
           </div>
-          <div class="day-rides">
-            <div class="day-ride-line">30 min · <strong>310 kJ</strong></div>
-          </div>
+          <div class="day-rides"><div class="day-rest">Rest day</div></div>
         </div>
         <div class="day-row">
           <div class="day-info">
@@ -1403,21 +1689,21 @@
             <div class="day-date"><span class="day-name">Fri</span> Jan 18</div>
           </div>
           <div class="day-rides">
-            <div class="day-ride-line">28 min · <strong>310 kJ</strong></div>
+            <div class="day-ride-line">22 min · <strong>240 kJ</strong></div>
           </div>
         </div>
         <div class="week-summary">
           <div>
             <div class="week-summary-label">Days</div>
-            <div class="week-summary-value pass-color">6 / 6 ✓</div>
+            <div class="week-summary-value fail-color">4 / 6</div>
           </div>
           <div>
             <div class="week-summary-label">Total kJ</div>
-            <div class="week-summary-value pass-color">2,350 / 2,100 ✓</div>
+            <div class="week-summary-value fail-color">1,250 / 2,100</div>
           </div>
           <div>
             <div class="week-summary-label">Status</div>
-            <div class="week-summary-value pass-color">Passed</div>
+            <div class="week-summary-value fail-color">Incomplete</div>
           </div>
         </div>
       </div>
@@ -1554,6 +1840,17 @@
 </div>
 
 <script>
+  // Open details modal to a specific week
+  function openDetailsToWeek(week) {
+    var modal = document.getElementById('full-details-modal');
+    modal.classList.add('show');
+    // Switch to the right tab
+    document.querySelectorAll('.week-page-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelector('.week-page-btn[data-week="' + week + '"]').classList.add('active');
+    document.querySelectorAll('.details-week').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelector('[data-week-panel="' + week + '"]').classList.add('active');
+  }
+
   // Week pagination in full details modal
   document.getElementById('weekPagination').addEventListener('click', function(e) {
     const btn = e.target.closest('.week-page-btn');

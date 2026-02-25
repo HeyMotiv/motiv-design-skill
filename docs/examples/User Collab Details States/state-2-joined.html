@@ -29,6 +29,7 @@
     background: #1a1a2e;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     min-height: 100vh;
     color: var(--text-dark);
   }
@@ -39,8 +40,47 @@
     background: linear-gradient(180deg, #EDE7F6 0%, #F5F1FA 15%, #F8F5FC 50%, #F5F1FA 100%);
     position: relative;
     overflow-x: hidden;
-    overflow-y: auto;
-    padding-bottom: 40px;
+    padding-bottom: 100px;
+  }
+
+  /* Sticky footer */
+  .sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 393px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: none;
+    padding: 20px 18px 34px;
+    overflow: hidden;
+  }
+  .sticky-footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(245,241,250,0) 0%, rgba(245,241,250,0.97) 35%, rgba(245,241,250,1) 60%);
+    pointer-events: none;
+  }
+  .invite-btn {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: #7B5EA7;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 17px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    box-shadow: 0 4px 22px rgba(91, 61, 130, 0.50);
+    pointer-events: all;
   }
 
   /* Status bar */
@@ -131,16 +171,26 @@
   }
   .joined-badge svg { width: 18px; height: 18px; flex-shrink: 0; }
 
-  /* Invite banner */
-  .invite-banner {
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--purple-faint); border: 1px solid #7A39E680;
-    border-radius: 50px; padding: 14px 20px; margin-bottom: 14px;
+  /* (invite-banner replaced by sticky footer) */
+
+  /* Recruit section */
+  .recruit-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(123,94,167,0.06);
   }
-  .invite-banner-left { display: flex; align-items: center; gap: 10px; }
-  .invite-banner-left svg { width: 20px; height: 20px; color: var(--purple); flex-shrink: 0; }
-  .invite-banner-text { font-size: 13px; font-weight: 600; color: #7D3BED; }
-  .invite-banner-share { width: 20px; height: 20px; color: #7D3BED; flex-shrink: 0; }
+  .recruit-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 5px; }
+  .recruit-headline { font-size: 20px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 4px; }
+  .recruit-sub { font-size: 13px; color: var(--text-mid); line-height: 1.45; margin-bottom: 16px; }
+  .progress-bar-track { height: 8px; background: var(--purple-faint); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--purple-light) 0%, var(--purple) 100%); border-radius: 99px; width: 0%; transition: width 1.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .progress-bar-labels { display: flex; justify-content: space-between; align-items: center; }
+  .progress-count { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .progress-count .denom { color: var(--text-muted); font-weight: 400; }
+  .progress-milestone { font-size: 12px; color: var(--text-mid); }
 
   /* Journey section */
   .journey-card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); }
@@ -246,18 +296,7 @@
   .metric-val { font-size: 18px; font-weight: 700; color: var(--purple); line-height: 1; margin-bottom: 4px; }
   .metric-label { font-size: 10.5px; color: var(--text-muted); line-height: 1.3; }
 
-  /* Bottom */
-  .bottom-bar {
-    position: fixed; bottom: 0; width: 393px; padding: 14px 20px;
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); z-index: 50;
-  }
-  .join-btn {
-    width: 100%; padding: 16px; background: var(--text-dark); color: white;
-    border: none; border-radius: 50px; font-family: 'DM Sans', sans-serif;
-    font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 0.3px;
-  }
-  .join-btn:active { transform: scale(0.98); opacity: 0.9; }
+  /* (bottom-bar replaced by sticky footer) */
 
   /* Tabs */
   .tab-bar { display: flex; background: var(--purple-faint); border-radius: 10px; padding: 3px; margin-bottom: 16px; }
@@ -280,7 +319,7 @@
   .faq-chev.open { transform: rotate(180deg); }
   .faq-a { display: none; font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-top: 8px; }
 
-  @media (max-width: 393px) { .phone { width: 100%; } .bottom-bar { width: 100%; } }
+  @media (max-width: 393px) { .phone { width: 100%; } .bottom-bar { width: 100%; } .sticky-footer { width: 100%; left: 0; transform: none; } }
 </style>
 </head>
 <body>
@@ -330,14 +369,21 @@
       </div>
     </div>
 
-    <!-- Invite banner -->
-    <div class="invite-banner">
-      <div class="invite-banner-left">
-        <svg viewBox="0 0 20 20" fill="none"><path d="M10 10a3 3 0 100-6 3 3 0 000 6zM3 17c0-3.3 2.7-5 7-5s7 1.7 7 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M15 3.5c1.4.7 2.3 2 2.3 3.5s-.9 2.8-2.3 3.5M17 17c0-1.8-1-3.2-2.5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="invite-banner-text">It's more fun with friends, invite yours!</span>
+    <!-- Recruit section -->
+    <div class="recruit-section">
+      <div class="recruit-label">Recruit</div>
+      <div class="recruit-headline">Unlock MVP bonuses</div>
+      <div class="recruit-sub">Hit 500 participants and the collab's two MVPs will earn a cash bonus.</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="recruitBar"></div>
       </div>
-      <svg class="invite-banner-share" viewBox="0 0 20 20" fill="none"><path d="M5 13v3a1 1 0 001 1h8a1 1 0 001-1v-3M10 3v9M7 6l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="progress-bar-labels">
+        <div class="progress-count"><span id="participantCount">252</span><span class="denom"> / 500 participants</span></div>
+        <div class="progress-milestone">🎉 Bonuses unlock</div>
+      </div>
     </div>
+
+    <!-- (invite banner moved to sticky footer) -->
 
     <!-- What supported my journey -->
     <div class="journey-card">
@@ -467,8 +513,15 @@
     </div>
   </div>
 
+  <!-- Sticky Invite CTA -->
+  <div class="sticky-footer">
+    <button class="invite-btn" onclick="if(navigator.share){navigator.share({url:'https://motiv.app/join/nature-yoga-reset'})}else{alert('Share sheet would open here')}">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13.5 7C13.5 7 12.5 2.5 10 2.5S6.5 7 6.5 7" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="2" stroke="white" stroke-width="1.5"/><path d="M14.5 12.5L12 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><path d="M5.5 12.5L8 10.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15" cy="13.5" r="1.5" stroke="white" stroke-width="1.5"/><circle cx="5" cy="13.5" r="1.5" stroke="white" stroke-width="1.5"/></svg>
+      Invite friends
+    </button>
+  </div>
 
-</div>
+</div><!-- end .phone -->
 
 <script>
 function toggle(h) {
@@ -498,6 +551,12 @@ function tick() {
   document.getElementById('cd-s').textContent = String(Math.floor(d%60000/1000)).padStart(2,'0');
 }
 tick(); setInterval(tick, 1000);
+
+// Recruit progress bar animation
+setTimeout(function() {
+  var bar = document.getElementById('recruitBar');
+  if (bar) bar.style.width = '50.4%'; // 252/500
+}, 350);
 </script>
 </body>
 </html>
