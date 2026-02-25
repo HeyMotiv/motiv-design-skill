@@ -331,6 +331,29 @@
     padding-top: 8px;
     border-top: 1px solid var(--creator-border);
   }
+  .sync-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 16px;
+    background: var(--creator-primary-faint);
+    border: 1px solid var(--creator-primary-lighter);
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--creator-primary);
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 6px;
+  }
+  .sync-btn:active {
+    background: var(--creator-primary-lighter);
+  }
+  .sync-timestamp {
+    font-size: 10.5px;
+    color: var(--creator-text-muted);
+    margin-bottom: 4px;
+  }
 
   /* ── Week header in main card ── */
   .card-header {
@@ -1684,7 +1707,8 @@
       </div>
 
       <div class="details-footer">
-        Ride data synced from Peloton.<br>
+        <div class="sync-btn" onclick="/* trigger sync */">↻ Sync now</div>
+        <div class="sync-timestamp">Last synced: Today at 3:42 PM</div>
         Think something's wrong? <strong>Contact support</strong>
       </div>
     </div>
