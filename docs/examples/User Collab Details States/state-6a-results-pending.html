@@ -328,8 +328,22 @@
     text-align: center;
     font-size: 11px; color: var(--creator-text-muted);
     line-height: 1.5;
-    padding-top: 8px;
-    border-top: 1px solid var(--creator-border);
+    padding-top: 12px;
+  }
+  .ridelog-sync-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--creator-primary);
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .ridelog-sync-link:active {
+    opacity: 0.6;
+  }
+  .sync-timestamp {
+    font-size: 10.5px;
+    color: var(--creator-text-muted);
+    margin-bottom: 6px;
   }
 
   /* ── Week header in main card ── */
@@ -1520,7 +1534,8 @@
       </div>
 
       <div class="details-footer">
-        Ride data synced from Peloton.<br>
+        <div class="ridelog-sync-link" onclick="/* trigger sync */">↻ Sync now</div>
+        <div class="sync-timestamp">Last synced: Today at 3:42 PM</div>
         Think something's wrong? <strong>Contact support</strong>
       </div>
     </div>
