@@ -50,7 +50,8 @@
     background: var(--creator-bg);
     position: relative;
     overflow-x: hidden;
-    padding-bottom: 100px;
+    overflow-y: auto;
+    padding-bottom: 40px;
   }
 
   /* ── Status bar ── */
@@ -341,10 +342,11 @@
   }
   .share-sheet-cancel:active { background: #E5E5EA; }
   .info-icon {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid var(--creator-text-muted);
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.2px solid var(--creator-text-muted);
     display: flex; align-items: center; justify-content: center;
-    font-size: 10px; color: var(--creator-text-muted); font-weight: 600;
+    font-size: 9px; color: var(--creator-text-muted); font-weight: 600;
+    font-style: italic;
     cursor: pointer;
   }
 
