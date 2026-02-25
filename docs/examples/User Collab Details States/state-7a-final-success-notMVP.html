@@ -331,13 +331,13 @@
     padding-top: 8px;
     border-top: 1px solid var(--creator-border);
   }
-  .sync-btn {
+  .ridelog-sync-btn {
     display: inline-flex;
     align-items: center;
     gap: 5px;
     padding: 7px 16px;
-    background: #ff0000;
-    border: 2px solid #000000;
+    background: var(--creator-primary-faint);
+    border: 1px solid var(--creator-primary-lighter);
     border-radius: 50px;
     font-size: 12px;
     font-weight: 600;
@@ -346,7 +346,7 @@
     transition: background 0.15s;
     margin-bottom: 6px;
   }
-  .sync-btn:active {
+  .ridelog-sync-btn:active {
     background: var(--creator-primary-lighter);
   }
   .sync-timestamp {
@@ -1707,7 +1707,7 @@
       </div>
 
       <div class="details-footer">
-        <div class="sync-btn" onclick="/* trigger sync */">↻ Sync now</div>
+        <div class="ridelog-sync-btn" onclick="/* trigger sync */">↻ Sync now</div>
         <div class="sync-timestamp">Last synced: Today at 3:42 PM</div>
         Think something's wrong? <strong>Contact support</strong>
       </div>
