@@ -328,31 +328,22 @@
     text-align: center;
     font-size: 11px; color: var(--creator-text-muted);
     line-height: 1.5;
-    padding-top: 8px;
-    border-top: 1px solid var(--creator-border);
+    padding-top: 12px;
   }
-  .ridelog-sync-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 7px 16px;
-    background: var(--creator-primary-faint);
-    border: 1px solid var(--creator-primary-lighter);
-    border-radius: 50px;
+  .ridelog-sync-link {
     font-size: 12px;
     font-weight: 600;
     color: var(--creator-primary);
     cursor: pointer;
-    transition: background 0.15s;
-    margin-bottom: 6px;
+    margin-bottom: 2px;
   }
-  .ridelog-sync-btn:active {
-    background: var(--creator-primary-lighter);
+  .ridelog-sync-link:active {
+    opacity: 0.6;
   }
   .sync-timestamp {
     font-size: 10.5px;
     color: var(--creator-text-muted);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   /* ── Week header in main card ── */
@@ -1707,7 +1698,7 @@
       </div>
 
       <div class="details-footer">
-        <div class="ridelog-sync-btn" onclick="/* trigger sync */">↻ Sync now</div>
+        <div class="ridelog-sync-link" onclick="/* trigger sync */">↻ Sync now</div>
         <div class="sync-timestamp">Last synced: Today at 3:42 PM</div>
         Think something's wrong? <strong>Contact support</strong>
       </div>
