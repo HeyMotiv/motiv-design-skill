@@ -1416,95 +1416,6 @@
         }
 
         /* =========================================
-           ECONOMICS PREVIEW (Screen 2)
-           ========================================= */
-
-        .economics-card {
-            background: var(--color-bg-primary);
-            border: 1px solid var(--color-border-default);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-
-        .economics-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            cursor: pointer;
-        }
-
-        .economics-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .economics-title .material-icons {
-            font-size: 18px;
-            color: var(--color-sage);
-        }
-
-        .economics-title span {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--color-text-secondary);
-        }
-
-        .economics-expand .material-icons {
-            font-size: 20px;
-            color: var(--color-text-tertiary);
-            transition: transform 0.2s;
-        }
-
-        .economics-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .economics-card.expanded .economics-body {
-            max-height: 200px;
-        }
-
-        .economics-card.expanded .economics-expand .material-icons {
-            transform: rotate(180deg);
-        }
-
-        .economics-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 16px;
-            font-size: 13px;
-        }
-
-        .economics-row-label {
-            color: var(--color-text-secondary);
-        }
-
-        .economics-row-value {
-            font-weight: 600;
-            color: var(--color-text-primary);
-        }
-
-        .economics-total {
-            border-top: 1px solid var(--color-border-default);
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 16px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .economics-total-label {
-            color: var(--color-text-secondary);
-        }
-
-        .economics-total-value {
-            color: var(--color-clay);
-        }
-
-        /* =========================================
            PRODUCT ROWS (Screen 4)
            ========================================= */
 
@@ -2147,7 +2058,7 @@
                             <div class="pill selected" data-value="2" onclick="selectPill(this)">2 weeks before</div>
                             <div class="pill" data-value="3" onclick="selectPill(this)">3 weeks before</div>
                         </div>
-                        <div class="field-helper">Recruiting opens this many weeks before the start date</div>
+                        <div class="field-helper" id="recruitingHelper">Recruiting opens May 26, 2025</div>
                     </div>
 
                     <!-- Entry Hold -->
@@ -2171,45 +2082,7 @@
                             <div class="pill" data-value="stretch" onclick="selectPill(this)">Stretch</div>
                             <div class="pill" data-value="advanced" onclick="selectPill(this)">Advanced</div>
                         </div>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Economics Preview -->
-                    <div class="field-group">
-                        <div class="economics-card" id="economicsCard">
-                            <div class="economics-header" onclick="document.getElementById('economicsCard').classList.toggle('expanded')">
-                                <div class="economics-title">
-                                    <span class="material-icons">insights</span>
-                                    <span>Economics preview</span>
-                                </div>
-                                <div class="economics-expand">
-                                    <span class="material-icons">expand_more</span>
-                                </div>
-                            </div>
-                            <div class="economics-body">
-                                <div class="economics-row">
-                                    <span class="economics-row-label">Est. participants</span>
-                                    <span class="economics-row-value" id="econParticipants">500</span>
-                                </div>
-                                <div class="economics-row">
-                                    <span class="economics-row-label">Total pool</span>
-                                    <span class="economics-row-value" id="econPool">$20,000</span>
-                                </div>
-                                <div class="economics-row">
-                                    <span class="economics-row-label">Your rate (per post)</span>
-                                    <span class="economics-row-value" id="econRate">$63</span>
-                                </div>
-                                <div class="economics-row">
-                                    <span class="economics-row-label">Your bonus pool share</span>
-                                    <span class="economics-row-value" id="econBonus">17.5%</span>
-                                </div>
-                                <div class="economics-total">
-                                    <span class="economics-total-label">Est. creator earnings</span>
-                                    <span class="economics-total-value" id="econTotal">$1,241</span>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="field-helper" id="difficultyHelper">A balanced challenge — most participants will need to push a bit to finish</div>
                     </div>
 
                 </div>
@@ -2866,6 +2739,14 @@
             if (field === 'duration') {
                 updateEndDate();
             }
+            /* Update recruiting date when recruiting window changes */
+            if (field === 'recruiting') {
+                updateRecruitingDate();
+            }
+            /* Update difficulty description */
+            if (field === 'difficulty') {
+                updateDifficultyHelper();
+            }
         }
 
         /* =========================================
@@ -2901,6 +2782,18 @@
             document.getElementById('econRate').textContent = '$' + rate;
             document.getElementById('econBonus').textContent = bonusPct + '%';
             document.getElementById('econTotal').textContent = '$' + Math.round(totalEarnings).toLocaleString();
+        }
+
+        function updateDifficultyHelper() {
+            var helper = document.getElementById('difficultyHelper');
+            if (!helper) return;
+            var descriptions = {
+                steady: 'A gentle pace — great for beginners or anyone easing back into a routine',
+                strong: 'A balanced challenge — most participants will need to push a bit to finish',
+                stretch: 'A demanding commitment — designed for experienced and motivated participants',
+                advanced: 'An intense grind — only the most dedicated will make it to the finish line'
+            };
+            helper.textContent = descriptions[state.difficulty] || '';
         }
 
         /* =========================================
@@ -3041,6 +2934,9 @@
             /* Update end date helper */
             updateEndDate();
 
+            /* Update recruiting date helper */
+            updateRecruitingDate();
+
             /* Update hero stats dates */
             updateHeroStats();
 
@@ -3127,6 +3023,24 @@
             helper.textContent = 'Ends ' + monthNames[end.getMonth()] + ' ' + end.getDate() + ', ' + end.getFullYear();
         }
 
+        function updateRecruitingDate() {
+            var helper = document.getElementById('recruitingHelper');
+            if (!helper) return;
+
+            var parts = state.startDate.replace(',', '').split(' ');
+            var monthIdx = monthNames.indexOf(parts[0]);
+            var day = parseInt(parts[1]);
+            var year = parseInt(parts[2]);
+
+            if (monthIdx === -1 || isNaN(day) || isNaN(year)) return;
+
+            var start = new Date(year, monthIdx, day);
+            var recruitWeeks = parseInt(state.recruiting) || 2;
+            var openDate = new Date(start.getTime() - recruitWeeks * 7 * 24 * 60 * 60 * 1000);
+
+            helper.textContent = 'Recruiting opens ' + monthNames[openDate.getMonth()] + ' ' + openDate.getDate() + ', ' + openDate.getFullYear();
+        }
+
         /* =========================================
            INIT
            ========================================= */
@@ -3134,6 +3048,7 @@
         updateScreens();
         updateEconomics();
         updateEndDate();
+        updateRecruitingDate();
         updatePreview();
 
     </script>
