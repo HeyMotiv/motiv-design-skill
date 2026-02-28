@@ -1,0 +1,45 @@
+#,Category,Decision,Example from Prototypes,Source
+1,Identity & Branding,Collab name,"Dog Lovers Who Cycle / Mindful Miles Reset","state-1, redesigned, creator"
+2,Identity & Branding,Brand color,"Purple #7B5EA7 (user) / Terracotta #C97A6A (creator)",all
+3,Identity & Branding,Headline font,"Source Serif 4 (state-1), Playfair Display (redesigned)","state-1, redesigned"
+4,Identity & Branding,Hero image,Dog/cycling photo,"state-1, redesigned"
+5,Identity & Branding,Creator avatar,Ellie's headshot,all
+6,Identity & Branding,Creator handle,@doodle_cycles,all
+7,Identity & Branding,Collab link / slug,motiv.app/join/chad-mindful-miles,creator
+8,Structure & Timing,Start date,Jan 5 / June 10,"state-1, redesigned"
+9,Structure & Timing,End date,Feb 15 / Jul 15,"state-1, redesigned"
+10,Structure & Timing,Duration (weeks),5 weeks / 6 weeks,"state-1, redesigned"
+11,Structure & Timing,Recruiting window,Open through Week 1 (Jan 12),creator
+12,Financial Model,Entry hold amount,$40,"state-1, redesigned"
+13,Financial Model,Creator reward pool,$1 per participant (implied),redesigned
+14,Financial Model,MVP bonus structure,2 MVPs share the DQ pool ($42.67 each projected),"redesigned, creator"
+15,Financial Model,Number of MVPs,2,"redesigned, creator"
+16,Financial Model,Creator rate per post,$63 (scales with participant count; locks at recruiting close),creator
+17,Financial Model,Creator bonus %,17.5% of bonus pool,creator
+18,Financial Model,Recruitment milestone tiers,+$50 per 100 participants up to 2000; +$100 per 500 after,creator
+19,Financial Model,DQ pool redistribution rule,Miss a week = hold goes to pool for finishers,"state-1, creator"
+20,Goals & Metrics,Fitness platform,Peloton,state-1
+21,Goals & Metrics,Difficulty level,Intermediate,state-1
+22,Goals & Metrics,Days per week,6,redesigned
+23,Goals & Metrics,Weekly kJ goal,2100 kJ,redesigned
+24,Goals & Metrics,Output target multiplier,1.3x (multiplier on average weekly kJ),state-1
+25,Goals & Metrics,Rides per week range,+1-2 above usual volume (min 3; max 7),state-1
+26,Goals & Metrics,Goal personalization method,Based on participant's recent Peloton history,state-1
+27,Content & Engagement,Creator message explaining goals,"I've picked the metrics below to challenge us...",state-1
+28,Content & Engagement,About this collab description,"This challenge is designed to push you beyond...",state-1
+29,Content & Engagement,Weekly video cadence,Weekly review videos + midweek check-ins,redesigned
+30,Content & Engagement,Number of paid posts,7 (6 weekly messages + 1 collab review),creator
+31,Content & Engagement,Creator's essentials / products,"Self-Tanning Drops (Bellatan), Protein Powder (Vega), Multi-Vitamin (Hiya)",redesigned
+32,Content & Engagement,Product categories,"Skincare, Nutrition, Wellness",redesigned
+33,Content & Engagement,Creator quote / philosophy,"Progress comes from small, repeatable choices...",redesigned
+34,Content & Engagement,Creator lifestyle stats,"6am start, 100g protein, 60oz water",redesigned
+35,Content & Engagement,MVP categories,"Most Improved (kJ improvement), Most Encouraging (community engagement)",creator
+36,Rules & Policies,Weekly completion rule,Hit your weekly goal or you're out,state-1
+37,Rules & Policies,Ride logging method,Automatic via Peloton sync,state-1
+38,Rules & Policies,Pause policy,No pauses allowed,state-1
+39,Rules & Policies,Pool division rule,Finishers split equally,state-1
+40,Rules & Policies,Injury / hardship policy,Case-by-case review via support,state-1
+41,Community Features,Community feed,Enabled — participants post updates,"redesigned, creator"
+42,Community Features,High fives,Enabled — creator can high five participants,"redesigned, creator"
+43,Community Features,Shout-outs,Enabled — creator welcomes new participants publicly,creator
+44,Community Features,Creator love / ratings,Enabled — participants rate the experience,creator-love
