@@ -559,7 +559,7 @@
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
-            background: #4a4a5a;
+            background: #7E6DA8;
         }
 
         .preview-hero-image {
@@ -622,6 +622,10 @@
         }
         .screen1-hero-content .preview-creator-badge-handle {
             color: var(--color-text-primary);
+        }
+
+        .screen[data-screen="0"] .preview-hero-image {
+            background-position: center -130px;
         }
 
         .screen1-hero-bottom {
@@ -727,7 +731,7 @@
         .preview-pool-amount {
             font-size: 26px;
             font-weight: 700;
-            color: var(--color-clay);
+            color: #7E6DA8;
             line-height: 1;
             margin-bottom: 3px;
         }
@@ -743,12 +747,12 @@
             align-items: center;
             gap: 5px;
             padding: 7px 12px;
-            background: var(--color-blush);
+            background: #F2F0F7;
             border: 1.5px solid var(--color-border-default);
             border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 600;
-            color: var(--color-clay);
+            color: #7E6DA8;
         }
         .preview-hold-badge .material-icons {
             font-size: 15px;
@@ -813,7 +817,7 @@
         .preview-stat-value {
             font-size: 20px;
             font-weight: 700;
-            color: var(--color-text-primary);
+            color: #7E6DA8;
             line-height: 1;
             margin-bottom: 3px;
         }
@@ -2174,6 +2178,7 @@
                                 <div class="swatch" data-color="plum" style="background: #9E57A8;" onclick="selectColor(this)"></div>
                                 <div class="swatch" data-color="slate" style="background: #64748B;" onclick="selectColor(this)"></div>
                                 <div class="swatch" data-color="stone" style="background: #78716C;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="ink" style="background: #2B2E34;" onclick="selectColor(this)"></div>
                             </div>
                         </div>
 
@@ -2528,7 +2533,8 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             indigo:  { emphasis: '#6663A5', text: '#3E3B74', bg: '#EFEEF6', name: 'Indigo' },
             plum:    { emphasis: '#9E57A8', text: '#6B2D72', bg: '#F4EEF6', name: 'Plum' },
             slate:   { emphasis: '#64748B', text: '#334155', bg: '#F8FAFC', name: 'Slate' },
-            stone:   { emphasis: '#78716C', text: '#44403C', bg: '#FAFAF9', name: 'Stone' }
+            stone:   { emphasis: '#78716C', text: '#44403C', bg: '#FAFAF9', name: 'Stone' },
+            ink:     { emphasis: '#2B2E34', text: '#1A1C20', bg: '#F4F4F5', name: 'Ink' }
         };
 
         /* Font family data */
@@ -2671,6 +2677,9 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             var titleInput = document.getElementById('titleEditInput');
             if (titleInput) titleInput.style.fontFamily = f.family;
 
+            /* Update stats content first, then apply brand colors */
+            updateHeroStats();
+
             /* Brand color on pool amount, hold badge, participants, duration */
             var poolAmt = document.getElementById('previewPoolAmount');
             var holdBadge = document.getElementById('previewHoldBadge');
@@ -2684,8 +2693,9 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             if (participantsVal) participantsVal.style.color = p.emphasis;
             if (durationVal) durationVal.style.color = p.emphasis;
 
-            /* Update stats */
-            updateHeroStats();
+            /* Card background matches brand */
+            var previewCard = document.getElementById('previewCard');
+            if (previewCard) previewCard.style.background = p.emphasis;
 
             /* Screen 5 mini preview */
             var miniGradient = document.getElementById('miniPreviewGradient');
@@ -3274,6 +3284,8 @@ Each week brings a fresh target calibrated to keep you progressing without burni
         updateEndDate();
         updateRecruitingDate();
         updatePreview();
+        /* Re-apply brand colors after browser completes layout */
+        requestAnimationFrame(function() { updatePreview(); });
 
     </script>
 
