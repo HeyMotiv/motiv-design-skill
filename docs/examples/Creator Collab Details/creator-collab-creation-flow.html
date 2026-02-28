@@ -542,8 +542,6 @@
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
-            height: 360px;
-            border: 3px solid #7E6DA8;
         }
 
         .preview-hero-image {
@@ -576,13 +574,8 @@
         .preview-card-scroll {
             position: relative;
             z-index: 2;
-            height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            overflow: hidden;
         }
-        .preview-card-scroll::-webkit-scrollbar { display: none; }
 
         .preview-hero-bleed {
             position: relative;
@@ -858,6 +851,11 @@
         .controls-compact .swatch {
             width: 38px;
             height: 38px;
+        }
+
+        .controls-compact .font-scroll {
+            margin: 0;
+            padding: 0 24px;
         }
 
         /* Old controls-panel — kept for backward compat but hidden on Screen 1 */
@@ -1926,13 +1924,11 @@
                                         <div class="preview-card-divider"></div>
                                         <div class="preview-stats-row">
                                             <div class="preview-stat">
-                                                <div class="preview-stat-icon"><span class="material-icons">group</span></div>
                                                 <div class="preview-stat-value" id="previewParticipants">624</div>
                                                 <div class="preview-stat-label">Participants</div>
                                             </div>
                                             <div class="preview-stat-divider"></div>
                                             <div class="preview-stat">
-                                                <div class="preview-stat-icon"><span class="material-icons">schedule</span></div>
                                                 <div class="preview-stat-value" id="previewDuration">6 wks</div>
                                                 <div class="preview-stat-label">Duration</div>
                                             </div>
@@ -1940,22 +1936,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Details Card -->
-                                <div class="preview-details-section">
-                                    <div class="preview-details-card">
-                                        <div class="preview-details-label">Details</div>
-                                        <div class="preview-details-row">
-                                            <div class="preview-detail-chip">
-                                                <span class="material-icons">fitness_center</span>
-                                                Strong
-                                            </div>
-                                            <div class="preview-detail-chip">
-                                                <span class="material-icons">directions_bike</span>
-                                                Peloton
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Inline title edit overlay -->
@@ -2634,10 +2614,8 @@
             /* Screen 1 preview card */
             var heroOverlay = document.getElementById('heroPreviewOverlay');
             var heroTitle = document.getElementById('heroPreviewTitle');
-            var previewCard = document.getElementById('previewCard');
             if (heroOverlay) heroOverlay.style.background = heroOverlayGradient;
             if (heroTitle) heroTitle.style.fontFamily = f.family;
-            if (previewCard) previewCard.style.borderColor = p.emphasis;
 
             /* Also update the title edit input font */
             var titleInput = document.getElementById('titleEditInput');
