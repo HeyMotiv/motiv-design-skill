@@ -239,8 +239,20 @@
             margin-bottom: 8px;
         }
 
+        .ai-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-sage);
+            background: rgba(143, 166, 160, 0.12);
+            padding: 2px 8px;
+            border-radius: 10px;
+            letter-spacing: 0.02em;
+        }
+        .screen-subtitle .ai-badge {
+            margin-right: 4px;
+        }
         .field-label .ai-badge {
-            display: none;
+            margin-left: 6px;
         }
 
         .field-input {
@@ -284,7 +296,8 @@
         }
 
         .field-textarea.ai-filled {
-            /* No special styling — pre-filled fields look like normal fields */
+            border-color: rgba(143, 166, 160, 0.35);
+            background: rgba(143, 166, 160, 0.05);
         }
 
         .field-helper {
@@ -306,6 +319,10 @@
         .screen[data-screen="0"] .screen-body {
             flex: none;
             padding: 0 0 120px;
+        }
+        .screen[data-screen="0"] .screen-title,
+        .screen[data-screen="0"] .screen-subtitle {
+            padding: 0 16px;
         }
 
         /* Hero preview — top 3/5 */
@@ -542,7 +559,7 @@
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
-            background: #4a4a5a;
+            background: #7E6DA8;
         }
 
         .preview-hero-image {
@@ -590,6 +607,32 @@
             align-items: center;
             text-align: center;
             padding: 180px 20px 20px;
+        }
+
+        /* Screen 1 — badge at top, title group at bottom */
+        .screen1-hero-content {
+            padding: 24px 20px 20px;
+            min-height: 280px;
+            justify-content: space-between;
+        }
+
+        .screen1-hero-content .preview-creator-badge {
+            background: rgba(255,255,255,0.45);
+            box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+        }
+        .screen1-hero-content .preview-creator-badge-handle {
+            color: var(--color-text-primary);
+        }
+
+        .screen[data-screen="0"] .preview-hero-image {
+            background-position: center -130px;
+        }
+
+        .screen1-hero-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .preview-creator-badge {
@@ -688,7 +731,7 @@
         .preview-pool-amount {
             font-size: 26px;
             font-weight: 700;
-            color: var(--color-clay);
+            color: #7E6DA8;
             line-height: 1;
             margin-bottom: 3px;
         }
@@ -704,12 +747,12 @@
             align-items: center;
             gap: 5px;
             padding: 7px 12px;
-            background: var(--color-blush);
+            background: #F2F0F7;
             border: 1.5px solid var(--color-border-default);
             border-radius: var(--radius-full);
             font-size: 12px;
             font-weight: 600;
-            color: var(--color-clay);
+            color: #7E6DA8;
         }
         .preview-hold-badge .material-icons {
             font-size: 15px;
@@ -751,10 +794,30 @@
             color: var(--color-clay);
         }
 
+        /* Custom 4-bar level indicator */
+        .level-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 16px;
+        }
+        .level-bars .bar {
+            width: 4px;
+            border-radius: 1.5px;
+            background: var(--color-border-default);
+        }
+        .level-bars .bar.filled {
+            background: var(--color-clay);
+        }
+        .level-bars .bar:nth-child(1) { height: 5px; }
+        .level-bars .bar:nth-child(2) { height: 8px; }
+        .level-bars .bar:nth-child(3) { height: 11px; }
+        .level-bars .bar:nth-child(4) { height: 16px; }
+
         .preview-stat-value {
             font-size: 20px;
             font-weight: 700;
-            color: var(--color-text-primary);
+            color: #7E6DA8;
             line-height: 1;
             margin-bottom: 3px;
         }
@@ -1778,6 +1841,82 @@
         }
 
         /* =========================================
+           REVIEW SCREEN
+           ========================================= */
+
+        /* Review screen — match Screen 1 body padding so card is same width */
+        .screen[data-screen="3"] .screen-body {
+            padding: 0 0 24px;
+        }
+        .screen[data-screen="3"] .screen-title,
+        .screen[data-screen="3"] .screen-subtitle {
+            padding: 0 16px;
+        }
+
+        /* Review card — taller hero, badge at top above dog, title at bottom */
+        .review-hero-content {
+            padding: 24px 20px 20px;
+            min-height: 280px;
+            justify-content: space-between;
+        }
+
+        /* Review card — center the dog's face between badge and title */
+        #reviewHeroImage {
+            background-position: center -100px !important;
+        }
+
+        /* Review card — title + dates grouped at bottom of hero */
+        .review-hero-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Review card — title styling (non-editable, no hover) */
+        .review-collab-name {
+            cursor: default;
+            font-size: 22px;
+        }
+        .review-collab-name:hover {
+            background: none;
+        }
+
+        .review-go-live {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 16px 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .review-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 10px;
+        }
+
+        .btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid var(--color-border-default);
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+
+        /* =========================================
            LAUNCH SUCCESS OVERLAY
            ========================================= */
 
@@ -1790,28 +1929,39 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 40px 32px;
             text-align: center;
+            overflow: hidden;
         }
 
         .launch-overlay.show {
             display: flex;
         }
 
-        .launch-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--green-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
+        .launch-confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .launch-icon .material-icons {
-            font-size: 40px;
-            color: var(--green);
+        .launch-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .launch-emoji {
+            font-size: 56px;
+            margin-bottom: 16px;
+            line-height: 1;
         }
 
         .launch-title {
@@ -1826,15 +1976,72 @@
             font-size: 15px;
             color: var(--color-text-secondary);
             line-height: 1.5;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .launch-ig-note {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .launch-ig-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #833AB4 0%, #C13584 40%, #E1306C 70%, #F77737 100%);
+            color: white;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+        }
+        .launch-ig-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        .launch-edit-note {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.4;
+            margin-bottom: 20px;
             max-width: 280px;
+        }
+
+        .launch-close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--color-text-tertiary);
+            transition: all 0.2s;
+        }
+        .launch-close:active {
+            color: var(--color-text-primary);
         }
 
     </style>
 </head>
 <body>
-
-    <div class="label">Creator Collab Setup</div>
-    <div class="sublabel">5-step wizard — Motiv creator-side branding. AI pre-fills, creator reviews & customizes.</div>
 
     <div class="phone-frame">
 
@@ -1858,7 +2065,6 @@
                 <div class="step-dot" data-step="1"></div>
                 <div class="step-dot" data-step="2"></div>
                 <div class="step-dot" data-step="3"></div>
-                <div class="step-dot" data-step="4"></div>
             </div>
             <!-- save removed -->
         </div>
@@ -1870,6 +2076,8 @@
                  ========================================= -->
             <div class="screen active" data-screen="0">
                 <div class="screen-body">
+                    <div class="screen-title">Your Vibe</div>
+                    <div class="screen-subtitle"><span class="ai-badge">✦ AI Suggested</span> We built this from your profile — tweak anything to match your style.</div>
 
                     <!-- Preview Card -->
                     <div class="preview-card-wrapper">
@@ -1887,13 +2095,20 @@
                                         Photo
                                     </button>
 
-                                    <div class="preview-hero-content">
-                                        <div class="preview-collab-name" id="heroPreviewTitle" style="font-family: 'Playfair Display', serif;" onclick="enterTitleEdit()">Dog Lovers Who Cycle</div>
-                                        <div class="preview-edit-hint" id="heroEditHint">
-                                            <span class="material-icons">edit</span>
-                                            tap to rename
+                                    <div class="preview-hero-content screen1-hero-content">
+                                        <!-- Creator badge / pill -->
+                                        <div class="preview-creator-badge" id="screen1CreatorBadge">
+                                            <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80')"></div>
+                                            <div class="preview-creator-badge-handle">@sarah_rides</div>
                                         </div>
-                                        <div class="preview-collab-dates" id="heroPreviewDates">June 9 — Jul 21 · 6 weeks</div>
+                                        <div class="screen1-hero-bottom">
+                                            <div class="preview-collab-name" id="heroPreviewTitle" style="font-family: 'Playfair Display', serif;" onclick="enterTitleEdit()">Dog Lovers Who Cycle</div>
+                                            <div class="preview-edit-hint" id="heroEditHint">
+                                                <span class="material-icons">edit</span>
+                                                tap to rename
+                                            </div>
+                                            <div class="preview-collab-dates" id="heroPreviewDates">June 9 — Jul 21</div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1963,6 +2178,7 @@
                                 <div class="swatch" data-color="plum" style="background: #9E57A8;" onclick="selectColor(this)"></div>
                                 <div class="swatch" data-color="slate" style="background: #64748B;" onclick="selectColor(this)"></div>
                                 <div class="swatch" data-color="stone" style="background: #78716C;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="ink" style="background: #2B2E34;" onclick="selectColor(this)"></div>
                             </div>
                         </div>
 
@@ -2026,7 +2242,7 @@
             <div class="screen" data-screen="1">
                 <div class="screen-body">
                     <div class="screen-title">Structure</div>
-                    <div class="screen-subtitle">We've tailored these defaults for your audience — adjust anything to make it yours.</div>
+                    <div class="screen-subtitle"><span class="ai-badge">✦ AI Suggested</span> We've tailored these defaults for your audience — adjust anything.</div>
 
                     <!-- Start Date (pre-filled from onboarding) -->
                     <div class="field-group">
@@ -2073,9 +2289,9 @@
                         <div class="field-helper">Participants put this amount on the line — returned if they finish</div>
                     </div>
 
-                    <!-- Difficulty -->
+                    <!-- Level -->
                     <div class="field-group">
-                        <div class="field-label">Difficulty</div>
+                        <div class="field-label">Level</div>
                         <div class="pill-row" data-field="difficulty">
                             <div class="pill" data-value="steady" onclick="selectPill(this)">Steady</div>
                             <div class="pill selected" data-value="strong" onclick="selectPill(this)">Strong</div>
@@ -2089,264 +2305,124 @@
             </div>
 
             <!-- =========================================
-                 SCREEN 3: Goals & Message
+                 SCREEN 3: About
                  ========================================= -->
             <div class="screen" data-screen="2">
                 <div class="screen-body">
-                    <div class="screen-title">Goals</div>
-                    <div class="screen-subtitle">What are participants working toward each week?</div>
+                    <div class="screen-title">About</div>
+                    <div class="screen-subtitle">Tell potential participants what this collab is all about</div>
 
-                    <!-- Fitness Platform -->
+                    <!-- About this collab -->
                     <div class="field-group">
-                        <div class="field-label">Fitness platform</div>
-                        <div class="platform-chips">
-                            <div class="platform-chip" data-value="peloton" onclick="selectPlatformChip(this)">
-                                <span class="material-icons">pedal_bike</span>
-                                <span class="platform-chip-name">Peloton</span>
-                            </div>
-                            <div class="platform-chip" data-value="apple" onclick="selectPlatformChip(this)">
-                                <span class="material-icons">watch</span>
-                                <span class="platform-chip-name">Apple Watch</span>
-                            </div>
-                            <div class="platform-chip" data-value="strava" onclick="selectPlatformChip(this)">
-                                <span class="material-icons">directions_run</span>
-                                <span class="platform-chip-name">Strava</span>
-                            </div>
-                            <div class="platform-chip" data-value="garmin" onclick="selectPlatformChip(this)">
-                                <span class="material-icons">explore</span>
-                                <span class="platform-chip-name">Garmin</span>
-                            </div>
-                            <div class="platform-chip" data-value="manual" onclick="selectPlatformChip(this)">
-                                <span class="material-icons">edit_note</span>
-                                <span class="platform-chip-name">Manual</span>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="field-label">About this collab <span class="ai-badge">✦ AI Draft</span></div>
+                        <textarea class="field-textarea ai-filled" id="collabAbout" rows="14">This challenge is designed to push you beyond your usual rides with structured weekly goals that build on your Peloton history. Whether you're a seasoned rider or looking to level up, you'll join a crew of dog-loving cyclists committed to showing up consistently over 6 weeks.
 
-                    <!-- Days per Week -->
-                    <div class="field-group">
-                        <div class="field-label">Days per week</div>
-                        <div class="pill-row circle-pills" data-field="days">
-                            <div class="pill" data-value="3" onclick="selectPill(this)">3</div>
-                            <div class="pill" data-value="4" onclick="selectPill(this)">4</div>
-                            <div class="pill" data-value="5" onclick="selectPill(this)">5</div>
-                            <div class="pill selected" data-value="6" onclick="selectPill(this)">6</div>
-                            <div class="pill" data-value="7" onclick="selectPill(this)">7</div>
-                        </div>
-                    </div>
-
-                    <!-- Weekly Target -->
-                    <div class="field-group">
-                        <div class="field-label">Weekly target <span class="ai-badge">✦ AI Calculated</span></div>
-                        <div class="target-input-row">
-                            <input type="text" class="field-input ai-filled" id="weeklyTarget" value="2,100" style="max-width: 120px;">
-                            <span class="target-unit">kJ / week</span>
-                        </div>
-                        <div class="field-helper">Based on difficulty level and platform averages</div>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Goal Explanation -->
-                    <div class="field-group">
-                        <div class="field-label">Goal explanation <span class="ai-badge">✦ AI Draft</span></div>
-                        <textarea class="field-textarea ai-filled" id="goalExplanation" rows="3">I've picked the metrics below to challenge us without burning out. They're based on what a strong intermediate rider can handle.</textarea>
-                        <div class="field-helper">Shown to participants alongside their weekly goals</div>
-                    </div>
-
-                    <!-- About this collab (moved from Screen 1) -->
-                    <div class="field-group">
-                        <div class="field-label">About this collab</div>
-                        <textarea class="field-textarea ai-filled" id="collabAbout" rows="3">This challenge is designed to push you beyond your usual rides with structured weekly goals that build on your Peloton history.</textarea>
+Each week brings a fresh target calibrated to keep you progressing without burning out. You'll have the support of a community that shares your passions — and real money on the line to keep you accountable.</textarea>
                         <div class="field-helper">Shown on the collab details page</div>
                     </div>
 
-                    <!-- Welcome Message -->
-                    <div class="field-group">
-                        <div class="field-label">Welcome message</div>
-                        <textarea class="field-textarea" id="welcomeMsg" rows="3" placeholder="Write a personal welcome to your participants..."></textarea>
-                        <div class="field-helper">Sent when participants join the collab</div>
-                    </div>
-
                 </div>
             </div>
 
             <!-- =========================================
-                 SCREEN 4: Content & Products (Optional)
+                 SCREEN 4: Review & Launch
                  ========================================= -->
             <div class="screen" data-screen="3">
                 <div class="screen-body">
-                    <div class="screen-title">Content</div>
-                    <div class="screen-subtitle">Add your recommended products and content plan</div>
-
-                    <button class="skip-btn" onclick="goToScreen(4)">
-                        Skip for now <span class="material-icons" style="font-size: 16px;">arrow_forward</span>
-                    </button>
-
-                    <div class="info-banner">
-                        <span class="material-icons">info</span>
-                        <div class="info-banner-text">You can add this anytime before your collab goes live. Products and content help drive engagement.</div>
-                    </div>
-
-                    <!-- Weekly Video Cadence -->
-                    <div class="field-group">
-                        <div class="field-label">Weekly video cadence</div>
-                        <div class="pill-row" data-field="videoCadence">
-                            <div class="pill selected" data-value="weekly" onclick="selectPill(this)">Weekly</div>
-                            <div class="pill" data-value="twice" onclick="selectPill(this)">Twice weekly</div>
-                            <div class="pill" data-value="asNeeded" onclick="selectPill(this)">As needed</div>
-                        </div>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Creator Essentials (Products) -->
-                    <div class="field-group">
-                        <div class="field-label">Your essentials</div>
-                        <div class="product-list" id="productList">
-                            <!-- Products added dynamically -->
-                        </div>
-                        <button class="add-product-btn" onclick="addProductRow()">
-                            <span class="material-icons" style="font-size: 18px;">add</span>
-                            Add a product
-                        </button>
-                    </div>
-
-                    <div class="section-divider"></div>
-
-                    <!-- Creator Lifestyle Stats -->
-                    <div class="field-group">
-                        <div class="field-label">Your daily routine</div>
-                        <input type="text" class="field-input" id="lifestyleStats" placeholder="e.g. 6am start, 100g protein, 60oz water">
-                        <div class="field-helper">Shown in your creator profile on the collab page</div>
-                    </div>
-
-                    <!-- Creator Quote -->
-                    <div class="field-group">
-                        <div class="field-label">Your philosophy</div>
-                        <textarea class="field-textarea" id="creatorQuote" rows="2" placeholder="e.g. Progress comes from small, repeatable choices..."></textarea>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- =========================================
-                 SCREEN 5: Review & Launch
-                 ========================================= -->
-            <div class="screen" data-screen="4">
-                <div class="screen-body">
                     <div class="screen-title">Review</div>
-                    <div class="screen-subtitle">Here's what your followers will see</div>
+                    <div class="screen-subtitle">Here's what participants will see when your collab goes live.</div>
 
-                    <!-- Mini Preview -->
-                    <div class="mini-preview-frame">
-                        <div class="mini-preview-gradient" id="miniPreviewGradient" style="background: linear-gradient(135deg, #7E6DA8 0%, #4E3D72 100%);"></div>
-                        <div class="mini-preview-content">
-                            <div class="mini-preview-badge">@doodle_cycles</div>
-                            <div class="mini-preview-title" id="miniPreviewTitle" style="font-family: 'Playfair Display', serif;">Dog Lovers Who Cycle</div>
-                            <div class="mini-preview-dates" id="miniPreviewDates">5 weeks · $40 hold</div>
-                        </div>
-                    </div>
+                    <!-- Review Preview Card (mirrors Screen 1, read-only) -->
+                    <div class="preview-card-wrapper">
+                        <div class="preview-card" id="reviewPreviewCard">
+                            <div class="preview-hero-image" id="reviewHeroImage"></div>
+                            <div class="preview-hero-gradient" id="reviewHeroGradient"></div>
 
-                    <!-- Identity Checklist -->
-                    <div class="checklist-group">
-                        <div class="checklist-group-title">Identity & Brand</div>
-                        <div class="checklist-card">
-                            <div class="checklist-row" onclick="goToScreen(0)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Name</span>
+                            <div class="preview-card-scroll">
+                                <div class="preview-hero-bleed">
+                                    <div class="preview-hero-content review-hero-content">
+                                        <!-- Creator badge / pill -->
+                                        <div class="preview-creator-badge" id="reviewCreatorBadge">
+                                            <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80')"></div>
+                                            <div class="preview-creator-badge-handle">@sarah_rides</div>
+                                        </div>
+                                        <div class="review-hero-bottom">
+                                            <div class="preview-collab-name review-collab-name" id="reviewCardTitle" style="font-family: 'Playfair Display', serif;">Dog Lovers Who Cycle</div>
+                                            <div class="preview-collab-dates" id="reviewCardDates">June 9 — Jul 21</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="checklist-row-value" id="reviewName">Dog Lovers Who Cycle</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(0)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Cover photo</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewImage">Added</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(0)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Color</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewColor">Violet</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(0)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Font</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewFont">Refined</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Structure Checklist -->
-                    <div class="checklist-group">
-                        <div class="checklist-group-title">Structure & Timing</div>
-                        <div class="checklist-card">
-                            <div class="checklist-row" onclick="goToScreen(1)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done" id="reviewStartCheck"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Start date</span>
+                                <div class="preview-stats-section">
+                                    <div class="preview-grouped-card">
+                                        <div class="preview-pool-row">
+                                            <div class="preview-pool-left">
+                                                <div class="preview-pool-amount" id="reviewCardPool">$24,960</div>
+                                                <div class="preview-pool-label">Collab pool</div>
+                                            </div>
+                                            <div class="preview-hold-badge" id="reviewCardHold">
+                                                <span class="material-icons">credit_card</span>
+                                                $40 hold
+                                            </div>
+                                        </div>
+                                        <div class="preview-card-divider"></div>
+                                        <div class="preview-stats-row">
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-value" id="reviewCardParticipants">624</div>
+                                                <div class="preview-stat-label">Participants</div>
+                                            </div>
+                                            <div class="preview-stat-divider"></div>
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-value" id="reviewCardDuration">6 wks</div>
+                                                <div class="preview-stat-label">Duration</div>
+                                            </div>
+                                        </div>
+                                        <div class="preview-card-divider"></div>
+                                        <div class="preview-stats-row">
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-icon" id="reviewLevelIcon">
+                                                    <div class="level-bars" id="reviewLevelBars">
+                                                        <div class="bar filled"></div>
+                                                        <div class="bar filled"></div>
+                                                        <div class="bar"></div>
+                                                        <div class="bar"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="preview-stat-value" id="reviewCardDifficulty" style="font-size: 16px;">Strong</div>
+                                                <div class="preview-stat-label">Level</div>
+                                            </div>
+                                            <div class="preview-stat-divider"></div>
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-icon" id="reviewTypeIcon">
+                                                    <span class="material-icons">directions_bike</span>
+                                                </div>
+                                                <div class="preview-stat-value" id="reviewCardType" style="font-size: 16px;">Cycling</div>
+                                                <div class="preview-stat-label">Type</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span class="checklist-row-value" id="reviewStart">June 10, 2025</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(1)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Duration</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewDuration">5 weeks</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(1)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Entry hold</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewHold">$40</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(1)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check missing" id="reviewDifficultyCheck"><span class="material-icons">remove</span></div>
-                                    <span class="checklist-row-label">Difficulty</span>
-                                </div>
-                                <span class="checklist-row-value missing" id="reviewDifficulty">Not set</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
+
                             </div>
                         </div>
                     </div>
 
-                    <!-- Goals Checklist -->
-                    <div class="checklist-group">
-                        <div class="checklist-group-title">Goals</div>
-                        <div class="checklist-card">
-                            <div class="checklist-row" onclick="goToScreen(2)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check missing" id="reviewPlatformCheck"><span class="material-icons">remove</span></div>
-                                    <span class="checklist-row-label">Platform</span>
-                                </div>
-                                <span class="checklist-row-value missing" id="reviewPlatform">Not set</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                            <div class="checklist-row" onclick="goToScreen(2)">
-                                <div class="checklist-row-left">
-                                    <div class="checklist-check done"><span class="material-icons">check</span></div>
-                                    <span class="checklist-row-label">Weekly target</span>
-                                </div>
-                                <span class="checklist-row-value" id="reviewTarget">2,100 kJ</span>
-                                <span class="checklist-row-arrow"><span class="material-icons">chevron_right</span></span>
-                            </div>
-                        </div>
+                    <!-- Recruiting date -->
+                    <div class="review-go-live" id="reviewGoLive">
+                        <span class="material-icons" style="font-size: 18px; color: var(--color-sage);">event</span>
+                        <span>Recruiting opens <strong id="reviewRecruitDate">May 26, 2025</strong></span>
+                    </div>
+
+                    <!-- Review CTAs (inline, not in bottom bar) -->
+                    <div class="review-actions" id="reviewInlineActions" style="padding: 16px 16px 0;">
+                        <button class="btn-primary" onclick="nextScreen()">
+                            Finalize Collab
+                            <span class="material-icons" style="font-size: 20px;">check_circle</span>
+                        </button>
+                        <button class="btn-secondary" onclick="goToScreen(0)">
+                            <span class="material-icons" style="font-size: 18px;">edit</span>
+                            Make Edits
+                        </button>
                     </div>
 
                 </div>
@@ -2402,11 +2478,19 @@
 
         <!-- Launch Success Overlay -->
         <div class="launch-overlay" id="launchOverlay">
-            <div class="launch-icon">
-                <span class="material-icons">rocket_launch</span>
+            <canvas class="launch-confetti" id="confettiCanvas"></canvas>
+            <div class="launch-content">
+                <div class="launch-emoji">🎉</div>
+                <div class="launch-title">Collab Created!</div>
+                <div class="launch-message">Your collab looks amazing — you're almost there! One quick step and you'll be ready to go live.</div>
+                <div class="launch-ig-note">To keep everyone safe, we just need to confirm you're really <strong>@sarah_rides</strong>. It only takes a sec.</div>
+                <button class="launch-ig-btn" onclick="closeLaunch()">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" alt="Instagram" style="width: 18px; height: 18px;">
+                    Connect Instagram
+                </button>
+                <div class="launch-edit-note">Your collab link will be on your details page once you're verified. You can edit anything anytime from your dashboard.</div>
+                <button class="launch-close" onclick="closeLaunch()">I'll do this later</button>
             </div>
-            <div class="launch-title">You're Live!</div>
-            <div class="launch-message">Your collab is now recruiting. Share the link with your followers to start building your crew.</div>
         </div>
 
     </div><!-- /phone-frame -->
@@ -2418,7 +2502,7 @@
            ========================================= */
 
         var currentScreen = 0;
-        var totalScreens = 5;
+        var totalScreens = 4;
 
         var state = {
             collabName: 'Dog Lovers Who Cycle',
@@ -2449,7 +2533,8 @@
             indigo:  { emphasis: '#6663A5', text: '#3E3B74', bg: '#EFEEF6', name: 'Indigo' },
             plum:    { emphasis: '#9E57A8', text: '#6B2D72', bg: '#F4EEF6', name: 'Plum' },
             slate:   { emphasis: '#64748B', text: '#334155', bg: '#F8FAFC', name: 'Slate' },
-            stone:   { emphasis: '#78716C', text: '#44403C', bg: '#FAFAF9', name: 'Stone' }
+            stone:   { emphasis: '#78716C', text: '#44403C', bg: '#FAFAF9', name: 'Stone' },
+            ink:     { emphasis: '#2B2E34', text: '#1A1C20', bg: '#F4F4F5', name: 'Ink' }
         };
 
         /* Font family data */
@@ -2507,20 +2592,20 @@
                 if (i === currentScreen) d.classList.add('active');
             });
 
-            /* Back button visibility */
+            /* Back button — always visible */
             var backBtn = document.getElementById('navBack');
-            backBtn.classList.toggle('invisible', currentScreen === 0);
+            backBtn.classList.remove('invisible');
 
-            /* Next button text */
-            var nextBtn = document.getElementById('nextBtn');
+            /* Hide bottom bar on review screen (CTAs are inline) */
+            var bottomBar = document.getElementById('bottomBar');
             if (currentScreen === totalScreens - 1) {
-                nextBtn.innerHTML = 'Launch Collab <span class="material-icons" style="font-size: 20px;">rocket_launch</span>';
+                bottomBar.style.display = 'none';
             } else {
-                nextBtn.innerHTML = 'Continue <span class="material-icons" style="font-size: 20px;">arrow_forward</span>';
+                bottomBar.style.display = '';
             }
 
             /* Update review screen if navigating to it */
-            if (currentScreen === 4) {
+            if (currentScreen === 3) {
                 updateReview();
             }
 
@@ -2592,17 +2677,25 @@
             var titleInput = document.getElementById('titleEditInput');
             if (titleInput) titleInput.style.fontFamily = f.family;
 
-            /* Brand color on pool amount and hold badge */
+            /* Update stats content first, then apply brand colors */
+            updateHeroStats();
+
+            /* Brand color on pool amount, hold badge, participants, duration */
             var poolAmt = document.getElementById('previewPoolAmount');
             var holdBadge = document.getElementById('previewHoldBadge');
+            var participantsVal = document.getElementById('previewParticipants');
+            var durationVal = document.getElementById('previewDuration');
             if (poolAmt) poolAmt.style.color = p.emphasis;
             if (holdBadge) {
                 holdBadge.style.color = p.emphasis;
                 holdBadge.style.background = p.bg;
             }
+            if (participantsVal) participantsVal.style.color = p.emphasis;
+            if (durationVal) durationVal.style.color = p.emphasis;
 
-            /* Update stats */
-            updateHeroStats();
+            /* Card background matches brand */
+            var previewCard = document.getElementById('previewCard');
+            if (previewCard) previewCard.style.background = p.emphasis;
 
             /* Screen 5 mini preview */
             var miniGradient = document.getElementById('miniPreviewGradient');
@@ -2629,7 +2722,7 @@
             if (holdBadge) holdBadge.innerHTML = '<span class="material-icons">credit_card</span> $' + hold + ' hold';
             if (participantsEl) participantsEl.textContent = participants.toLocaleString();
             if (durationEl) durationEl.textContent = duration + ' wks';
-            if (datesEl) datesEl.textContent = 'June 9 — Jul 21 · ' + duration + ' weeks';
+            if (datesEl) datesEl.textContent = 'June 9 — Jul 21';
         }
 
         /* Helper: hex color to rgb string */
@@ -2827,62 +2920,130 @@
            ========================================= */
 
         function updateReview() {
-            /* Name */
-            var name = state.collabName;
-            document.getElementById('reviewName').textContent = name || 'Not set';
-
-            /* Color */
             var p = palettes[state.color];
-            document.getElementById('reviewColor').textContent = p ? p.name : 'Not set';
-
-            /* Font */
             var f = fonts[state.font];
-            document.getElementById('reviewFont').textContent = f ? f.name : 'Not set';
+            if (!p || !f) return;
 
-            /* Duration */
-            document.getElementById('reviewDuration').textContent = state.duration ? state.duration + ' weeks' : 'Not set';
-
-            /* Hold */
-            document.getElementById('reviewHold').textContent = state.hold ? '$' + state.hold : 'Not set';
-
-            /* Difficulty */
-            var diffEl = document.getElementById('reviewDifficulty');
-            var diffCheck = document.getElementById('reviewDifficultyCheck');
-            if (state.difficulty) {
-                diffEl.textContent = state.difficulty.charAt(0).toUpperCase() + state.difficulty.slice(1);
-                diffEl.classList.remove('missing');
-                diffCheck.className = 'checklist-check done';
-                diffCheck.innerHTML = '<span class="material-icons">check</span>';
-            } else {
-                diffEl.textContent = 'Not set';
-                diffEl.classList.add('missing');
-                diffCheck.className = 'checklist-check missing';
-                diffCheck.innerHTML = '<span class="material-icons">remove</span>';
+            /* Mirror the hero image from Screen 1 */
+            var srcImage = document.getElementById('heroImage');
+            var revImage = document.getElementById('reviewHeroImage');
+            if (srcImage && revImage) {
+                revImage.style.backgroundImage = srcImage.style.backgroundImage;
+                revImage.style.backgroundPosition = 'center -100px';
             }
 
-            /* Platform */
-            var platEl = document.getElementById('reviewPlatform');
-            var platCheck = document.getElementById('reviewPlatformCheck');
-            var platNames = { peloton: 'Peloton', apple: 'Apple Watch', strava: 'Strava', garmin: 'Garmin', manual: 'Manual' };
-            if (state.platform) {
-                platEl.textContent = platNames[state.platform] || state.platform;
-                platEl.classList.remove('missing');
-                platCheck.className = 'checklist-check done';
-                platCheck.innerHTML = '<span class="material-icons">check</span>';
-            } else {
-                platEl.textContent = 'Not set';
-                platEl.classList.add('missing');
-                platCheck.className = 'checklist-check missing';
-                platCheck.innerHTML = '<span class="material-icons">remove</span>';
+            /* Mirror gradient */
+            var revGradient = document.getElementById('reviewHeroGradient');
+            var heroOverlayGradient = 'linear-gradient(180deg, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.15) 0%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.20) 30%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.50) 50%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.70) 65%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.82) 80%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.88) 100%)';
+            if (revGradient) revGradient.style.background = heroOverlayGradient;
+
+            /* Card background */
+            var revCard = document.getElementById('reviewPreviewCard');
+            if (revCard) revCard.style.background = p.bg;
+
+            /* Title */
+            var revTitle = document.getElementById('reviewCardTitle');
+            if (revTitle) {
+                revTitle.textContent = state.collabName || 'Collab Name';
+                revTitle.style.fontFamily = f.family;
             }
 
-            /* Weekly target */
-            document.getElementById('reviewTarget').textContent = document.getElementById('weeklyTarget').value + ' kJ';
+            /* Dates — strip "· X weeks" since duration is shown below */
+            var revDates = document.getElementById('reviewCardDates');
+            if (revDates) {
+                var srcDates = document.getElementById('heroPreviewDates');
+                if (srcDates) {
+                    var dateText = srcDates.textContent.split('·')[0].trim();
+                    revDates.textContent = dateText;
+                }
+            }
 
-            /* Mini preview */
-            document.getElementById('miniPreviewTitle').textContent = name || 'Collab Name';
-            document.getElementById('miniPreviewDates').textContent = (state.duration || '5') + ' weeks · $' + (state.hold || '40') + ' hold';
-            updatePreview();
+            /* Pool & hold — with brand color */
+            var hold = parseInt(state.hold) || 40;
+            var participants = Math.round(hold * 15.6);
+            var pool = hold * participants;
+            var revPool = document.getElementById('reviewCardPool');
+            var revHold = document.getElementById('reviewCardHold');
+            if (revPool) {
+                revPool.textContent = '$' + pool.toLocaleString();
+                revPool.style.color = p.emphasis;
+            }
+            if (revHold) {
+                revHold.innerHTML = '<span class="material-icons">credit_card</span> $' + hold + ' hold';
+                revHold.style.color = p.emphasis;
+                revHold.style.background = p.bg;
+            }
+
+            /* Participants & Duration — colored with brand emphasis */
+            var revPart = document.getElementById('reviewCardParticipants');
+            if (revPart) {
+                revPart.textContent = participants.toLocaleString();
+                revPart.style.color = p.emphasis;
+            }
+            var revDur = document.getElementById('reviewCardDuration');
+            if (revDur) {
+                revDur.textContent = (state.duration || '6') + ' wks';
+                revDur.style.color = p.emphasis;
+            }
+
+            /* Level — colored with brand emphasis */
+            var revDiff = document.getElementById('reviewCardDifficulty');
+            if (revDiff && state.difficulty) {
+                revDiff.textContent = state.difficulty.charAt(0).toUpperCase() + state.difficulty.slice(1);
+                revDiff.style.color = p.emphasis;
+            }
+
+            /* Type — colored with brand emphasis */
+            var revType = document.getElementById('reviewCardType');
+            if (revType) {
+                revType.textContent = 'Cycling';
+                revType.style.color = p.emphasis;
+            }
+
+            /* Level bars — fill count based on difficulty */
+            var levelMap = { steady: 1, strong: 2, stretch: 3, advanced: 4 };
+            var fillCount = levelMap[state.difficulty] || 2;
+            var revLevelBars = document.getElementById('reviewLevelBars');
+            if (revLevelBars) {
+                var bars = revLevelBars.querySelectorAll('.bar');
+                bars.forEach(function(bar, i) {
+                    if (i < fillCount) {
+                        bar.classList.add('filled');
+                        bar.style.background = p.emphasis;
+                    } else {
+                        bar.classList.remove('filled');
+                        bar.style.background = '';
+                    }
+                });
+            }
+            var revLevelIcon = document.getElementById('reviewLevelIcon');
+            if (revLevelIcon) revLevelIcon.style.background = p.bg;
+
+            /* Type icon — brand colored */
+            var revTypeIcon = document.getElementById('reviewTypeIcon');
+            if (revTypeIcon) {
+                revTypeIcon.style.background = p.bg;
+                revTypeIcon.querySelector('.material-icons').style.color = p.emphasis;
+            }
+
+            /* Recruiting date */
+            var parts = state.startDate.replace(',', '').split(' ');
+            var monthIdx = monthNames.indexOf(parts[0]);
+            var day = parseInt(parts[1]);
+            var year = parseInt(parts[2]);
+            if (monthIdx !== -1 && !isNaN(day) && !isNaN(year)) {
+                var start = new Date(year, monthIdx, day);
+                var recruitWeeks = parseInt(state.recruiting) || 2;
+                var openDate = new Date(start.getTime() - recruitWeeks * 7 * 24 * 60 * 60 * 1000);
+                var revRecruit = document.getElementById('reviewRecruitDate');
+                if (revRecruit) revRecruit.textContent = monthNames[openDate.getMonth()] + ' ' + openDate.getDate() + ', ' + openDate.getFullYear();
+            }
         }
 
         /* =========================================
@@ -2891,6 +3052,79 @@
 
         function launchCollab() {
             document.getElementById('launchOverlay').classList.add('show');
+            startConfetti();
+        }
+
+        function closeLaunch() {
+            document.getElementById('launchOverlay').classList.remove('show');
+            currentScreen = 0;
+            updateScreens();
+            updatePreview();
+            document.querySelector('.phone-scroll').scrollTop = 0;
+        }
+
+        /* Confetti animation */
+        function startConfetti() {
+            /* Defer one frame so the overlay has display:flex and layout is computed */
+            requestAnimationFrame(function() {
+                var canvas = document.getElementById('confettiCanvas');
+                if (!canvas) return;
+                var ctx = canvas.getContext('2d');
+
+                /* Size canvas to the overlay (phone frame), fallback to 390×844 */
+                var overlay = document.getElementById('launchOverlay');
+                var w = (overlay ? overlay.offsetWidth : 0) || 390;
+                var h = (overlay ? overlay.offsetHeight : 0) || 844;
+                canvas.width = w;
+                canvas.height = h;
+
+                var colors = ['#C97A6A', '#8FA6A0', '#F3E6E2', '#E7D9C9', '#6B4E71', '#B8574E', '#D4A574', '#A3C4A8'];
+                var particles = [];
+                for (var i = 0; i < 120; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: -(Math.random() * h * 0.6),
+                        w: Math.random() * 8 + 4,
+                        h: Math.random() * 6 + 3,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        vy: Math.random() * 3 + 2,
+                        vx: (Math.random() - 0.5) * 2,
+                        rot: Math.random() * 360,
+                        rotSpeed: (Math.random() - 0.5) * 8,
+                        opacity: 1
+                    });
+                }
+
+                var frame = 0;
+                var maxFrames = 180;
+                function draw() {
+                    ctx.clearRect(0, 0, w, h);
+                    frame++;
+                    var fadeStart = maxFrames * 0.7;
+                    particles.forEach(function(p) {
+                        p.y += p.vy;
+                        p.x += p.vx;
+                        p.rot += p.rotSpeed;
+                        p.vx += (Math.random() - 0.5) * 0.2;
+                        if (frame > fadeStart) {
+                            p.opacity = Math.max(0, 1 - (frame - fadeStart) / (maxFrames - fadeStart));
+                        }
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate(p.rot * Math.PI / 180);
+                        ctx.globalAlpha = p.opacity;
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                        ctx.restore();
+                    });
+                    if (frame < maxFrames) {
+                        requestAnimationFrame(draw);
+                    } else {
+                        ctx.clearRect(0, 0, w, h);
+                    }
+                }
+                draw();
+            });
         }
 
         /* =========================================
@@ -3050,6 +3284,8 @@
         updateEndDate();
         updateRecruitingDate();
         updatePreview();
+        /* Re-apply brand colors after browser completes layout */
+        requestAnimationFrame(function() { updatePreview(); });
 
     </script>
 
