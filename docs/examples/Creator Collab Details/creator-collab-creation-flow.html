@@ -310,9 +310,7 @@
         }
 
         .screen[data-screen="0"] .screen-body {
-            padding: 0;
-            display: flex;
-            flex-direction: column;
+            padding: 0 0 20px;
         }
 
         /* Hero preview — top 3/5 */
@@ -516,16 +514,312 @@
             font-size: 15px;
         }
 
-        /* Controls panel — bottom 2/5 */
-        .controls-panel {
-            flex: 2;
-            min-height: 0;
+        /* =========================================
+           PREVIEW CARD (Screen 1 Redesign)
+           ========================================= */
+
+        .preview-card-wrapper {
+            position: relative;
+            padding: 12px 16px 0;
+        }
+
+        .preview-card {
+            position: relative;
+            border-radius: 14px;
             overflow: hidden;
-            background: var(--color-bg-primary);
-            padding: 12px 0 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+            height: 500px;
+        }
+
+        .preview-hero-image {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80');
+            background-size: cover;
+            background-position: center 65%;
+            background-repeat: no-repeat;
+            z-index: 0;
+            transition: background-image 0.5s ease;
+        }
+
+        .preview-hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(126,109,168, 0.15) 0%,
+                rgba(126,109,168, 0.20) 30%,
+                rgba(126,109,168, 0.50) 50%,
+                rgba(126,109,168, 0.70) 65%,
+                rgba(126,109,168, 0.82) 80%,
+                rgba(126,109,168, 0.88) 100%
+            );
+            z-index: 1;
+            transition: background 0.4s ease;
+        }
+
+        .preview-card-scroll {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .preview-card-scroll::-webkit-scrollbar { display: none; }
+
+        .preview-hero-bleed {
+            position: relative;
+        }
+
+        .preview-hero-content {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            align-items: center;
+            text-align: center;
+            padding: 18px 20px 20px;
+        }
+
+        .preview-creator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px 5px 5px;
+            background: rgba(255,255,255,0.20);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255,255,255,0.25);
+            margin-bottom: 16px;
+        }
+
+        .preview-creator-badge-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            flex-shrink: 0;
+        }
+
+        .preview-creator-badge-handle {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .preview-collab-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 22px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            text-shadow: 0 2px 12px rgba(60,30,90,0.35), 0 1px 3px rgba(0,0,0,0.15);
+            transition: font-family 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+        .preview-collab-name:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .preview-edit-hint {
+            font-size: 10px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .preview-edit-hint .material-icons {
+            font-size: 12px;
+        }
+
+        .preview-collab-dates {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 0.3px;
+        }
+
+        /* Pool & Details Card inside preview */
+        .preview-stats-section {
+            padding: 4px 14px 14px;
+        }
+
+        .preview-grouped-card {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .preview-pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 16px;
+        }
+
+        .preview-pool-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-pool-amount {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--color-clay);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        .preview-pool-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .preview-hold-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 9px 16px;
+            background: var(--color-blush);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-clay);
+        }
+        .preview-hold-badge .material-icons {
+            font-size: 18px;
+        }
+
+        .preview-card-divider {
+            height: 1px;
+            background: var(--color-border-default);
+            margin: 0 14px;
+        }
+
+        .preview-stats-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .preview-stat {
+            flex: 1;
+            text-align: center;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .preview-stat-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--color-blush);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+        .preview-stat-icon .material-icons {
+            font-size: 16px;
+            color: var(--color-clay);
+        }
+
+        .preview-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        .preview-stat-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .preview-stat-divider {
+            width: 1px;
+            height: 38px;
+            background: var(--color-border-default);
+            flex-shrink: 0;
+        }
+
+        /* Details row inside preview card */
+        .preview-details-section {
+            padding: 14px 14px 0;
+        }
+
+        .preview-details-card {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+
+        .preview-details-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .preview-details-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .preview-detail-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            background: var(--color-blush);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-clay);
+        }
+        .preview-detail-chip .material-icons {
+            font-size: 15px;
+        }
+
+        /* =========================================
+           COMPACT CONTROLS (below preview card)
+           ========================================= */
+
+        .controls-compact {
+            padding: 20px 0 0;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .controls-section {
+            display: flex;
+            flex-direction: column;
         }
 
         .controls-section-label {
@@ -535,9 +829,29 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding: 0 24px;
+            margin-bottom: 6px;
         }
 
-        /* Horizontal swatch scroll */
+        .controls-compact .swatch-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 8px 24px;
+        }
+        .controls-compact .swatch-scroll::-webkit-scrollbar { display: none; }
+
+        .controls-compact .swatch {
+            width: 38px;
+            height: 38px;
+        }
+
+        /* Old controls-panel — kept for backward compat but hidden on Screen 1 */
+        .controls-panel {
+            display: none;
+        }
+
+        /* Horizontal swatch scroll (legacy) */
         .controls-panel .swatch-scroll {
             display: flex;
             gap: 10px;
@@ -1556,133 +1870,170 @@
             <div class="screen active" data-screen="0">
                 <div class="screen-body">
 
-                    <!-- Hero Preview — top ~60% -->
-                    <div class="hero-preview">
-                        <div class="hero-preview-image" id="heroImage"></div>
-                        <div class="hero-preview-overlay" id="heroPreviewOverlay" style="background: linear-gradient(to top, rgba(78,61,114,0.95) 0%, rgba(126,109,168,0.55) 35%, rgba(126,109,168,0.2) 60%, rgba(126,109,168,0.35) 100%);"></div>
+                    <!-- Preview Card -->
+                    <div class="preview-card-wrapper">
+                        <div class="preview-card" id="previewCard">
+                            <!-- Full-card background image + gradient -->
+                            <div class="preview-hero-image" id="heroImage"></div>
+                            <div class="preview-hero-gradient" id="heroPreviewOverlay"></div>
 
-                        <!-- Glass photo button -->
-                        <button class="hero-photo-btn" onclick="openPhotoAction()">
-                            <span class="material-icons">photo_camera</span>
-                            Photo
-                        </button>
+                            <div class="preview-card-scroll">
+                                <!-- Hero Section -->
+                                <div class="preview-hero-bleed">
+                                    <!-- Glass photo button -->
+                                    <button class="hero-photo-btn" onclick="openPhotoAction()" style="position: absolute; top: 12px; right: 12px; z-index: 5;">
+                                        <span class="material-icons">photo_camera</span>
+                                        Photo
+                                    </button>
 
-                        <div class="hero-preview-content">
-                            <div class="hero-preview-center">
-                                <div class="hero-preview-badge">
-                                    <div class="hero-preview-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80');"></div>
-                                    @doodle_cycles
+                                    <div class="preview-hero-content">
+                                        <div class="preview-creator-badge">
+                                            <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80');"></div>
+                                            <span class="preview-creator-badge-handle">@doodle_cycles</span>
+                                        </div>
+                                        <div class="preview-collab-name" id="heroPreviewTitle" style="font-family: 'Playfair Display', serif;" onclick="enterTitleEdit()">Dog Lovers Who Cycle</div>
+                                        <div class="preview-edit-hint" id="heroEditHint">
+                                            <span class="material-icons">edit</span>
+                                            tap to rename
+                                        </div>
+                                        <div class="preview-collab-dates" id="heroPreviewDates">June 9 — Jul 21 · 6 weeks</div>
+                                    </div>
                                 </div>
-                                <div class="hero-preview-title" id="heroPreviewTitle" style="font-family: 'Playfair Display', serif;" onclick="enterTitleEdit()">Dog Lovers Who Cycle</div>
-                                <div class="hero-edit-hint" id="heroEditHint">
-                                    <span class="material-icons">edit</span>
-                                    tap to rename
+
+                                <!-- Pool Card -->
+                                <div class="preview-stats-section">
+                                    <div class="preview-grouped-card">
+                                        <div class="preview-pool-row">
+                                            <div class="preview-pool-left">
+                                                <div class="preview-pool-amount" id="previewPoolAmount">$24,960</div>
+                                                <div class="preview-pool-label">Collab pool</div>
+                                            </div>
+                                            <div class="preview-hold-badge" id="previewHoldBadge">
+                                                <span class="material-icons">credit_card</span>
+                                                $40 hold
+                                            </div>
+                                        </div>
+                                        <div class="preview-card-divider"></div>
+                                        <div class="preview-stats-row">
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-icon"><span class="material-icons">group</span></div>
+                                                <div class="preview-stat-value" id="previewParticipants">624</div>
+                                                <div class="preview-stat-label">Participants</div>
+                                            </div>
+                                            <div class="preview-stat-divider"></div>
+                                            <div class="preview-stat">
+                                                <div class="preview-stat-icon"><span class="material-icons">schedule</span></div>
+                                                <div class="preview-stat-value" id="previewDuration">6 wks</div>
+                                                <div class="preview-stat-label">Duration</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="hero-preview-dates" id="heroPreviewDates">June 10 — Jul 15 · 5 weeks</div>
-                            </div>
-                        </div>
 
-                        <!-- Inline title edit overlay -->
-                        <div class="title-edit-overlay" id="titleEditOverlay">
-                            <input type="text" class="title-edit-input" id="titleEditInput" value="Dog Lovers Who Cycle" placeholder="Name your collab">
-                            <div class="title-edit-actions">
-                                <button class="title-edit-btn cancel" onclick="exitTitleEdit(false)">Cancel</button>
-                                <button class="title-edit-btn done" onclick="exitTitleEdit(true)">Done</button>
+                                <!-- Details Card -->
+                                <div class="preview-details-section">
+                                    <div class="preview-details-card">
+                                        <div class="preview-details-label">Details</div>
+                                        <div class="preview-details-row">
+                                            <div class="preview-detail-chip">
+                                                <span class="material-icons">fitness_center</span>
+                                                Strong
+                                            </div>
+                                            <div class="preview-detail-chip">
+                                                <span class="material-icons">directions_bike</span>
+                                                Peloton
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo change toast -->
-                        <div class="photo-toast" id="photoToast">
-                            <span class="material-icons">check_circle</span>
-                            Photo updated
+                            <!-- Inline title edit overlay -->
+                            <div class="title-edit-overlay" id="titleEditOverlay">
+                                <input type="text" class="title-edit-input" id="titleEditInput" value="Dog Lovers Who Cycle" placeholder="Name your collab">
+                                <div class="title-edit-actions">
+                                    <button class="title-edit-btn cancel" onclick="exitTitleEdit(false)">Cancel</button>
+                                    <button class="title-edit-btn done" onclick="exitTitleEdit(true)">Done</button>
+                                </div>
+                            </div>
+
+                            <!-- Photo change toast -->
+                            <div class="photo-toast" id="photoToast">
+                                <span class="material-icons">check_circle</span>
+                                Photo updated
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Stats card — overlaps hero/controls boundary -->
-                    <div class="hero-preview-stats-wrapper">
-                        <div class="hero-preview-stats">
-                            <div class="hero-stat">
-                                <div class="hero-stat-value"><span class="stat-emphasis" id="heroStatHold">$40</span></div>
-                                <div class="hero-stat-label">Hold</div>
-                            </div>
-                            <div class="hero-stat">
-                                <div class="hero-stat-value"><span class="stat-emphasis" id="heroStatParticipants">~500</span></div>
-                                <div class="hero-stat-label">Est. going</div>
-                            </div>
-                            <div class="hero-stat">
-                                <div class="hero-stat-value"><span class="stat-emphasis" id="heroStatPool">$20K</span></div>
-                                <div class="hero-stat-label">Pool</div>
+                    <!-- Compact Controls -->
+                    <div class="controls-compact">
+                        <div class="controls-section">
+                            <div class="controls-section-label">Brand color</div>
+                            <div class="swatch-scroll">
+                                <div class="swatch selected" data-color="violet" style="background: #7E6DA8;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="rose" style="background: #B86B78;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="coral" style="background: #BC8464;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="amber" style="background: #BB9658;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="lime" style="background: #7E9C4D;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="emerald" style="background: #4D9B7E;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="teal" style="background: #4D9B92;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="cyan" style="background: #4D909B;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="sky" style="background: #4A8099;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="blue" style="background: #5474AC;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="indigo" style="background: #6663A5;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="plum" style="background: #9E57A8;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="slate" style="background: #64748B;" onclick="selectColor(this)"></div>
+                                <div class="swatch" data-color="stone" style="background: #78716C;" onclick="selectColor(this)"></div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Controls Panel — bottom ~40% -->
-                    <div class="controls-panel">
-                        <!-- Brand Color -->
-                        <div class="controls-section-label">Brand color</div>
-                        <div class="swatch-scroll">
-                            <div class="swatch selected" data-color="violet" style="background: #7E6DA8;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="rose" style="background: #B86B78;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="coral" style="background: #BC8464;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="amber" style="background: #BB9658;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="lime" style="background: #7E9C4D;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="emerald" style="background: #4D9B7E;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="teal" style="background: #4D9B92;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="cyan" style="background: #4D909B;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="sky" style="background: #4A8099;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="blue" style="background: #5474AC;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="indigo" style="background: #6663A5;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="plum" style="background: #9E57A8;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="slate" style="background: #64748B;" onclick="selectColor(this)"></div>
-                            <div class="swatch" data-color="stone" style="background: #78716C;" onclick="selectColor(this)"></div>
-                        </div>
-
-                        <!-- Headline Font -->
-                        <div class="controls-section-label">Headline font</div>
-                        <div class="font-scroll" id="fontScroll">
-                            <div class="font-card" data-font="source-serif-4" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: 'Source Serif 4', serif;">Aa</div>
-                                <div class="font-name">Warm</div>
-                            </div>
-                            <div class="font-card" data-font="inter" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Inter, sans-serif;">Aa</div>
-                                <div class="font-name">Modern</div>
-                            </div>
-                            <div class="font-card" data-font="poppins" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Poppins, sans-serif;">Aa</div>
-                                <div class="font-name">Bold</div>
-                            </div>
-                            <div class="font-card" data-font="sourceSans" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: 'Source Sans 3', sans-serif;">Aa</div>
-                                <div class="font-name">Clean</div>
-                            </div>
-                            <div class="font-card" data-font="merriweather" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Merriweather, serif;">Aa</div>
-                                <div class="font-name">Classic</div>
-                            </div>
-                            <div class="font-card" data-font="lora" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Lora, serif;">Aa</div>
-                                <div class="font-name">Elegant</div>
-                            </div>
-                            <div class="font-card selected" data-font="playfair" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: 'Playfair Display', serif;">Aa</div>
-                                <div class="font-name">Refined</div>
-                            </div>
-                            <div class="font-card" data-font="raleway" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Raleway, sans-serif;">Aa</div>
-                                <div class="font-name">Sleek</div>
-                            </div>
-                            <div class="font-card" data-font="outfit" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Outfit, sans-serif;">Aa</div>
-                                <div class="font-name">Fresh</div>
-                            </div>
-                            <div class="font-card" data-font="crimsonPro" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: 'Crimson Pro', serif;">Aa</div>
-                                <div class="font-name">Literary</div>
-                            </div>
-                            <div class="font-card" data-font="sora" onclick="selectFont(this)">
-                                <div class="font-sample" style="font-family: Sora, sans-serif;">Aa</div>
-                                <div class="font-name">Geometric</div>
+                        <div class="controls-section">
+                            <div class="controls-section-label">Headline font</div>
+                            <div class="font-scroll" id="fontScroll">
+                                <div class="font-card" data-font="source-serif-4" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: 'Source Serif 4', serif;">Aa</div>
+                                    <div class="font-name">Warm</div>
+                                </div>
+                                <div class="font-card" data-font="inter" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Inter, sans-serif;">Aa</div>
+                                    <div class="font-name">Modern</div>
+                                </div>
+                                <div class="font-card" data-font="poppins" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Poppins, sans-serif;">Aa</div>
+                                    <div class="font-name">Bold</div>
+                                </div>
+                                <div class="font-card" data-font="sourceSans" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: 'Source Sans 3', sans-serif;">Aa</div>
+                                    <div class="font-name">Clean</div>
+                                </div>
+                                <div class="font-card" data-font="merriweather" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Merriweather, serif;">Aa</div>
+                                    <div class="font-name">Classic</div>
+                                </div>
+                                <div class="font-card" data-font="lora" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Lora, serif;">Aa</div>
+                                    <div class="font-name">Elegant</div>
+                                </div>
+                                <div class="font-card selected" data-font="playfair" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: 'Playfair Display', serif;">Aa</div>
+                                    <div class="font-name">Refined</div>
+                                </div>
+                                <div class="font-card" data-font="raleway" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Raleway, sans-serif;">Aa</div>
+                                    <div class="font-name">Sleek</div>
+                                </div>
+                                <div class="font-card" data-font="outfit" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Outfit, sans-serif;">Aa</div>
+                                    <div class="font-name">Fresh</div>
+                                </div>
+                                <div class="font-card" data-font="crimsonPro" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: 'Crimson Pro', serif;">Aa</div>
+                                    <div class="font-name">Literary</div>
+                                </div>
+                                <div class="font-card" data-font="sora" onclick="selectFont(this)">
+                                    <div class="font-sample" style="font-family: Sora, sans-serif;">Aa</div>
+                                    <div class="font-name">Geometric</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2261,9 +2612,16 @@
             var f = fonts[state.font];
             if (!p || !f) return;
 
-            var heroOverlayGradient = 'linear-gradient(to top, rgba(' + hexToRgb(p.text) + ',0.95) 0%, rgba(' + hexToRgb(p.emphasis) + ',0.55) 35%, rgba(' + hexToRgb(p.emphasis) + ',0.2) 60%, rgba(' + hexToRgb(p.emphasis) + ',0.35) 100%)';
+            /* Top-down gradient matching full-bleed card design */
+            var heroOverlayGradient = 'linear-gradient(180deg, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.15) 0%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.20) 30%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.50) 50%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.70) 65%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.82) 80%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.88) 100%)';
 
-            /* Screen 1 hero preview */
+            /* Screen 1 preview card */
             var heroOverlay = document.getElementById('heroPreviewOverlay');
             var heroTitle = document.getElementById('heroPreviewTitle');
             if (heroOverlay) heroOverlay.style.background = heroOverlayGradient;
@@ -2273,7 +2631,7 @@
             var titleInput = document.getElementById('titleEditInput');
             if (titleInput) titleInput.style.fontFamily = f.family;
 
-            /* Update stats bar */
+            /* Update stats */
             updateHeroStats();
 
             /* Screen 5 mini preview */
@@ -2284,22 +2642,24 @@
             if (miniTitle) miniTitle.style.fontFamily = f.family;
         }
 
-        /* Update hero stats card from current state */
+        /* Update preview card stats from current state */
         function updateHeroStats() {
             var hold = parseInt(state.hold) || 40;
             var duration = parseInt(state.duration) || 6;
-            var participants = 500; /* estimated */
+            var participants = 624;
             var pool = hold * participants;
 
-            var holdEl = document.getElementById('heroStatHold');
-            var participantsEl = document.getElementById('heroStatParticipants');
-            var poolEl = document.getElementById('heroStatPool');
+            var poolEl = document.getElementById('previewPoolAmount');
+            var holdBadge = document.getElementById('previewHoldBadge');
+            var participantsEl = document.getElementById('previewParticipants');
+            var durationEl = document.getElementById('previewDuration');
             var datesEl = document.getElementById('heroPreviewDates');
 
-            if (holdEl) holdEl.textContent = '$' + hold;
-            if (participantsEl) participantsEl.textContent = '~' + participants;
-            if (poolEl) poolEl.textContent = pool >= 1000 ? '$' + Math.round(pool / 1000) + 'K' : '$' + pool;
-            if (datesEl) datesEl.textContent = 'June 10 — Jul 15 · ' + duration + ' weeks';
+            if (poolEl) poolEl.textContent = '$' + pool.toLocaleString();
+            if (holdBadge) holdBadge.innerHTML = '<span class="material-icons">credit_card</span> $' + hold + ' hold';
+            if (participantsEl) participantsEl.textContent = participants.toLocaleString();
+            if (durationEl) durationEl.textContent = duration + ' wks';
+            if (datesEl) datesEl.textContent = 'June 9 — Jul 21 · ' + duration + ' weeks';
         }
 
         /* Helper: hex color to rgb string */
