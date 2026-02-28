@@ -560,9 +560,9 @@
             inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(126,109,168, 0.15) 0%,
-                rgba(126,109,168, 0.20) 30%,
-                rgba(126,109,168, 0.50) 50%,
+                rgba(126,109,168, 0) 0%,
+                rgba(126,109,168, 0.10) 30%,
+                rgba(126,109,168, 0.45) 50%,
                 rgba(126,109,168, 0.70) 65%,
                 rgba(126,109,168, 0.82) 80%,
                 rgba(126,109,168, 0.88) 100%
@@ -992,6 +992,83 @@
         .photo-toast .material-icons {
             font-size: 18px;
             color: var(--green);
+        }
+
+        /* iOS Action Sheet */
+        .action-sheet-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 10px 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .action-sheet-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .action-sheet {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .action-sheet-overlay.show .action-sheet {
+            transform: translateY(0);
+        }
+        .action-sheet-group {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+        .action-sheet-title {
+            padding: 14px 16px 4px;
+            font-size: 13px;
+            color: #86868b;
+            text-align: center;
+            font-family: var(--font-body);
+        }
+        .action-sheet-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 17px 16px;
+            border: none;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 20px;
+            color: #007AFF;
+            cursor: pointer;
+            position: relative;
+        }
+        .action-sheet-btn:active {
+            background: rgba(0,0,0,0.06);
+        }
+        .action-sheet-btn + .action-sheet-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0.5px;
+            background: rgba(0,0,0,0.15);
+        }
+        .action-sheet-btn .material-icons {
+            font-size: 22px;
+        }
+        .action-sheet-cancel {
+            font-weight: 600;
         }
 
         /* =========================================
@@ -2421,6 +2498,26 @@
             </div>
         </div>
 
+        <!-- iOS Photo Action Sheet -->
+        <div class="action-sheet-overlay" id="photoActionSheet" onclick="closePhotoSheet()">
+            <div class="action-sheet" onclick="event.stopPropagation()">
+                <div class="action-sheet-group">
+                    <div class="action-sheet-title">Change Cover Photo</div>
+                    <button class="action-sheet-btn" onclick="pickPhoto('camera')">
+                        <span class="material-icons">photo_camera</span>
+                        Take Photo
+                    </button>
+                    <button class="action-sheet-btn" onclick="pickPhoto('library')">
+                        <span class="material-icons">photo_library</span>
+                        Choose from Library
+                    </button>
+                </div>
+                <div class="action-sheet-group">
+                    <button class="action-sheet-btn action-sheet-cancel" onclick="closePhotoSheet()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Bottom Button Bar -->
         <div class="bottom-bar" id="bottomBar">
             <button class="btn-primary" id="nextBtn" onclick="nextScreen()">
@@ -2604,9 +2701,9 @@
 
             /* Top-down gradient matching full-bleed card design */
             var heroOverlayGradient = 'linear-gradient(180deg, '
-                + 'rgba(' + hexToRgb(p.emphasis) + ',0.15) 0%, '
-                + 'rgba(' + hexToRgb(p.emphasis) + ',0.20) 30%, '
-                + 'rgba(' + hexToRgb(p.emphasis) + ',0.50) 50%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0) 0%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.10) 30%, '
+                + 'rgba(' + hexToRgb(p.emphasis) + ',0.45) 50%, '
                 + 'rgba(' + hexToRgb(p.emphasis) + ',0.70) 65%, '
                 + 'rgba(' + hexToRgb(p.emphasis) + ',0.82) 80%, '
                 + 'rgba(' + hexToRgb(p.emphasis) + ',0.88) 100%)';
@@ -2721,6 +2818,16 @@
         ];
 
         function openPhotoAction() {
+            document.getElementById('photoActionSheet').classList.add('show');
+        }
+
+        function closePhotoSheet() {
+            document.getElementById('photoActionSheet').classList.remove('show');
+        }
+
+        function pickPhoto(source) {
+            closePhotoSheet();
+
             /* Toggle between two stock photos to demonstrate the interaction */
             photoIndex = (photoIndex + 1) % photos.length;
             var heroImage = document.getElementById('heroImage');
