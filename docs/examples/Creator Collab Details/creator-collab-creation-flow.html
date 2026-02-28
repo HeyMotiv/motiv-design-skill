@@ -194,7 +194,6 @@
         .screen {
             display: none;
             flex-direction: column;
-            min-height: 100%;
             position: relative;
         }
 
@@ -304,13 +303,9 @@
            ========================================= */
 
         /* Screen 1 needs definite height for flex split to work */
-        .screen[data-screen="0"] {
-            height: 100%;
-            min-height: 0;
-        }
-
         .screen[data-screen="0"] .screen-body {
-            padding: 0 0 20px;
+            flex: none;
+            padding: 0 0 120px;
         }
 
         /* Hero preview — top 3/5 */
@@ -514,6 +509,25 @@
             font-size: 15px;
         }
 
+        /* Smaller photo button inside preview card */
+        .preview-card .hero-photo-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            bottom: auto;
+            padding: 5px 10px;
+            font-size: 11px;
+            gap: 4px;
+            background: rgba(255,255,255,0.20);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.25);
+            z-index: 5;
+        }
+        .preview-card .hero-photo-btn .material-icons {
+            font-size: 13px;
+        }
+
         /* =========================================
            PREVIEW CARD (Screen 1 Redesign)
            ========================================= */
@@ -528,7 +542,8 @@
             border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
-            height: 500px;
+            height: 360px;
+            border: 3px solid #7E6DA8;
         }
 
         .preview-hero-image {
@@ -615,10 +630,10 @@
         .preview-collab-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
             color: white;
-            line-height: 1.2;
+            line-height: 1.25;
             margin-bottom: 4px;
             cursor: pointer;
             padding: 4px 8px;
@@ -627,7 +642,6 @@
             transition: font-family 0.3s ease;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            max-width: 100%;
         }
         .preview-collab-name:hover {
             background: rgba(255,255,255,0.08);
@@ -669,7 +683,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 16px;
+            padding: 14px 14px;
         }
 
         .preview-pool-left {
@@ -678,7 +692,7 @@
         }
 
         .preview-pool-amount {
-            font-size: 30px;
+            font-size: 26px;
             font-weight: 700;
             color: var(--color-clay);
             line-height: 1;
@@ -694,17 +708,17 @@
         .preview-hold-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 9px 16px;
+            gap: 5px;
+            padding: 7px 12px;
             background: var(--color-blush);
             border: 1.5px solid var(--color-border-default);
             border-radius: var(--radius-full);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--color-clay);
         }
         .preview-hold-badge .material-icons {
-            font-size: 18px;
+            font-size: 15px;
         }
 
         .preview-card-divider {
@@ -721,7 +735,7 @@
         .preview-stat {
             flex: 1;
             text-align: center;
-            padding: 16px 14px;
+            padding: 12px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -744,7 +758,7 @@
         }
 
         .preview-stat-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 1;
@@ -1881,16 +1895,12 @@
                                 <!-- Hero Section -->
                                 <div class="preview-hero-bleed">
                                     <!-- Glass photo button -->
-                                    <button class="hero-photo-btn" onclick="openPhotoAction()" style="position: absolute; top: 12px; right: 12px; z-index: 5;">
+                                    <button class="hero-photo-btn" onclick="openPhotoAction()">
                                         <span class="material-icons">photo_camera</span>
                                         Photo
                                     </button>
 
                                     <div class="preview-hero-content">
-                                        <div class="preview-creator-badge">
-                                            <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80');"></div>
-                                            <span class="preview-creator-badge-handle">@doodle_cycles</span>
-                                        </div>
                                         <div class="preview-collab-name" id="heroPreviewTitle" style="font-family: 'Playfair Display', serif;" onclick="enterTitleEdit()">Dog Lovers Who Cycle</div>
                                         <div class="preview-edit-hint" id="heroEditHint">
                                             <span class="material-icons">edit</span>
@@ -2624,8 +2634,10 @@
             /* Screen 1 preview card */
             var heroOverlay = document.getElementById('heroPreviewOverlay');
             var heroTitle = document.getElementById('heroPreviewTitle');
+            var previewCard = document.getElementById('previewCard');
             if (heroOverlay) heroOverlay.style.background = heroOverlayGradient;
             if (heroTitle) heroTitle.style.fontFamily = f.family;
+            if (previewCard) previewCard.style.borderColor = p.emphasis;
 
             /* Also update the title edit input font */
             var titleInput = document.getElementById('titleEditInput');
