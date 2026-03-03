@@ -243,6 +243,36 @@ p { max-width: 640px; }
   overflow: hidden;
 }
 
+#page-product .hero,
+#page-how-it-works .hero,
+#page-earnings .hero,
+#page-faq .hero {
+  padding-top: calc(72px + clamp(2rem, 5vw, 3.5rem));
+  padding-bottom: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+#page-product .hero .hero-sub,
+#page-how-it-works .hero .hero-sub,
+#page-earnings .hero .hero-sub,
+#page-faq .hero .hero-sub {
+  margin-bottom: 0;
+}
+
+#page-product .hero + .section,
+#page-how-it-works .hero + .section,
+#page-earnings .hero + .section,
+#page-faq .hero + .section {
+  padding-top: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+#page-faq .hero + .section .faq-list {
+  margin-top: 1rem;
+}
+
+#page-how-it-works .hero + .section .how-steps {
+  margin-top: 1rem;
+}
+
 .hero::before {
   content: '';
   position: absolute;
