@@ -258,11 +258,14 @@ p { max-width: 640px; }
   margin-bottom: 0;
 }
 
-#page-product .hero + .section,
 #page-how-it-works .hero + .section,
 #page-earnings .hero + .section,
 #page-faq .hero + .section {
   padding-top: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+#page-product .hero + .section {
+  padding-top: clamp(4rem, 8vw, 6rem);
 }
 
 #page-faq .hero + .section .faq-list {
@@ -271,6 +274,14 @@ p { max-width: 640px; }
 
 #page-how-it-works .hero + .section .how-steps {
   margin-top: 1rem;
+}
+
+#positioning {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+#what-you-host {
+  padding-top: clamp(2rem, 4vw, 3rem);
 }
 
 .hero::before {
@@ -1213,10 +1224,11 @@ p { max-width: 640px; }
 }
 
 .experience-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
   gap: 0.8rem;
   margin-bottom: 1.2rem;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .experience-week {
@@ -1228,7 +1240,7 @@ p { max-width: 640px; }
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
   white-space: nowrap;
-  flex-shrink: 0;
+  text-align: center;
   margin-top: 1px;
 }
 
@@ -1355,7 +1367,7 @@ p { max-width: 640px; }
         <p class="hero-sub">Your audience already wants to act on what you share. Motiv gives them a way to commit—with real stakes, real structure, and real rewards for following through. You bring your voice. We handle the rest.</p>
         <div class="patreon-frame" style="animation: fadeUp 1s var(--ease-out) 0.2s forwards; opacity: 0;">
           <p class="frame-label">The simplest way to think about it</p>
-          <p>Patreon lets fans support a creator. Motiv lets creators lead their fans in <em>doing</em> something—and everyone gets paid to show up.</p>
+          <p>A platform that channels what you've built into something your audience does together—with real stakes and real rewards.</p>
         </div>
         <form class="email-capture" data-form="waitlist" onsubmit="return handleSubmit(this, event)">
           <input type="email" placeholder="Email address" required aria-label="Email address">
@@ -1408,7 +1420,7 @@ p { max-width: 640px; }
   <section class="section" id="positioning">
     <div class="container">
       <div class="section-header reveal">
-        <p class="label">Positioning</p>
+        <p class="label">How Motiv compares</p>
         <h2>What makes Motiv different</h2>
       </div>
       <p class="section-intro reveal">Creators already have options for monetization. Here's how Motiv fits alongside what you know—and where it goes further.</p>
@@ -1688,44 +1700,44 @@ p { max-width: 640px; }
         <p class="label">The experience</p>
         <h2>What a live collab looks like</h2>
       </div>
-      <p class="section-intro reveal">Here's what a typical 6-week walking collab looks like from both sides—so you can picture what you'd actually be doing, and what your audience would experience.</p>
+      <p class="section-intro reveal">A typical 6-week walking collab, from both sides.</p>
       <div class="experience-grid">
         <div class="experience-column reveal">
           <h3>What the creator does</h3>
           <div class="experience-item">
             <span class="experience-week">Pre-launch</span>
-            <p>Review and approve the AI-generated collab draft. Tweak the voice, goals, and messaging to feel like you. Share with your audience.</p>
+            <p>Review your AI-drafted collab. Tweak the voice and goals. Share with your audience.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 1</span>
-            <p>Post a kickoff message. Share your own starting point. Set the tone—encouraging, real, low-pressure.</p>
+            <p>Post a kickoff message. Share your starting point. Set the tone.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 2–5</span>
-            <p>Drop weekly check-ins. Share your progress, tips, or struggles. Respond to momentum in the group. Reuse this content on social.</p>
+            <p>Weekly check-ins — your progress, tips, or struggles. Reuse on social.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 6</span>
-            <p>Celebrate completions. Share final reflections. Motiv handles refunds, rewards, and your payout automatically.</p>
+            <p>Celebrate completions. Motiv handles refunds and your payout.</p>
           </div>
         </div>
         <div class="experience-column reveal reveal-delay-2">
           <h3>What the participant sees</h3>
           <div class="experience-item">
             <span class="experience-week">Join</span>
-            <p>Clear signup page explaining the commitment, hold amount, and what it takes to qualify. Place their refundable hold.</p>
+            <p>Clear signup with the commitment, hold amount, and rules. Place a refundable hold.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 1</span>
-            <p>Welcome message from the creator. Progress dashboard activates. First tracking check-in.</p>
+            <p>Welcome from the creator. Progress dashboard goes live.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 2–5</span>
-            <p>Weekly creator content arrives. Progress updates show how they're tracking. Momentum from the group keeps them showing up.</p>
+            <p>Weekly creator content. Progress updates. Group momentum.</p>
           </div>
           <div class="experience-item">
             <span class="experience-week">Week 6</span>
-            <p>Final self-accounting of their progress. Completers get their hold back (plus any rewards). A clear, dignified outcome either way.</p>
+            <p>Final check-in. Completers get their hold back. Clear outcome either way.</p>
           </div>
         </div>
       </div>
