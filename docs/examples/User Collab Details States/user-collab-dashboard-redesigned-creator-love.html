@@ -1686,10 +1686,6 @@
             text-align: center;
             margin-bottom: 6px;
         }
-        .love-prompt-emoji {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
         .love-prompt-title {
             font-family: var(--font-headline);
             font-size: 22px;
@@ -1697,6 +1693,13 @@
             color: var(--color-text-primary);
             line-height: 1.3;
             margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .love-prompt-title .love-title-emoji {
+            font-size: 18px;
         }
         .love-prompt-sub {
             font-size: 14px;
@@ -1704,56 +1707,53 @@
             line-height: 1.4;
         }
 
-        /* Heart rating row */
-        .love-hearts {
+        /* Emoji row picker */
+        .love-emojis {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            padding: 20px 0 4px;
+            gap: 16px;
+            padding: 16px 0 12px;
         }
-        .love-heart {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        .love-emoji-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 4px;
             border: none;
             background: transparent;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
             -webkit-tap-highlight-color: transparent;
+            opacity: 0.4;
+            filter: grayscale(0.3);
         }
-        .love-heart:active {
-            transform: scale(0.88);
+        .love-emoji-option:active {
+            transform: scale(0.92);
         }
-        .love-heart .material-icons {
+        .love-emoji-option.selected {
+            opacity: 1;
+            filter: none;
+        }
+        .love-emoji-option .love-emoji-icon {
             font-size: 36px;
-            transition: color 0.15s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            line-height: 1;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .love-heart.filled .material-icons {
-            color: #E74C7A;
+        .love-emoji-option.selected .love-emoji-icon {
+            transform: scale(1.1);
         }
-        .love-heart.empty .material-icons {
-            color: #D8D4DE;
-        }
-        .love-heart.filled.pop .material-icons {
-            animation: heartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes heartPop {
-            0% { transform: scale(1); }
-            40% { transform: scale(1.35); }
-            100% { transform: scale(1); }
-        }
-
-        .love-heart-label {
-            text-align: center;
-            font-size: 13px;
+        .love-emoji-option .love-emoji-name {
+            font-family: var(--font-body);
+            font-size: 11px;
             font-weight: 600;
+            color: var(--color-text-secondary);
+            line-height: 1.2;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .love-emoji-option.selected .love-emoji-name {
             color: var(--color-clay);
-            min-height: 18px;
-            margin-bottom: 16px;
-            transition: opacity 0.2s ease;
         }
 
         /* Editable review area */
@@ -1841,8 +1841,7 @@
 
         /* ---- Sent state ---- */
         .love-sheet.sent .love-prompt,
-        .love-sheet.sent .love-hearts,
-        .love-sheet.sent .love-heart-label,
+        .love-sheet.sent .love-emojis,
         .love-sheet.sent .love-review-wrap,
         .love-sheet.sent .love-actions {
             display: none;
@@ -1890,21 +1889,18 @@
             line-height: 1.5;
             max-width: 280px;
         }
-        .love-sent-hearts {
-            display: flex;
-            gap: 4px;
+        .love-sent-emoji {
+            font-size: 48px;
             margin: 16px 0 4px;
-        }
-        .love-sent-hearts .material-icons {
-            font-size: 22px;
-            color: #E74C7A;
-            animation: sentHeartStagger 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: sentBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
             opacity: 0;
             transform: scale(0);
         }
-        @keyframes sentHeartStagger {
-            0% { opacity: 0; transform: scale(0); }
-            100% { opacity: 1; transform: scale(1); }
+        .love-sent-emoji-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-clay);
+            margin-bottom: 2px;
         }
         .love-sent-preview {
             font-size: 13px;
@@ -2877,24 +2873,33 @@
 
                 <!-- Prompt -->
                 <div class="love-prompt">
-                    <div class="love-prompt-emoji">✨</div>
-                    <div class="love-prompt-title">Loving this collab?</div>
-                    <div class="love-prompt-sub">Let Ellie know how the experience has been for you so far.</div>
+                    <div class="love-prompt-title">Send Ellie some love</div>
+                    <div class="love-prompt-sub">How's this collab making you feel?</div>
                 </div>
 
-                <!-- Heart rating -->
-                <div class="love-hearts" id="loveHearts">
-                    <button class="love-heart filled" data-heart="1"><span class="material-icons">favorite</span></button>
-                    <button class="love-heart filled" data-heart="2"><span class="material-icons">favorite</span></button>
-                    <button class="love-heart filled" data-heart="3"><span class="material-icons">favorite</span></button>
-                    <button class="love-heart filled" data-heart="4"><span class="material-icons">favorite</span></button>
-                    <button class="love-heart filled" data-heart="5"><span class="material-icons">favorite</span></button>
+                <!-- Emoji vibes -->
+                <div class="love-emojis" id="loveEmojis">
+                    <button class="love-emoji-option selected" data-emoji="fired">
+                        <span class="love-emoji-icon">🔥</span>
+                        <span class="love-emoji-name">Fired up</span>
+                    </button>
+                    <button class="love-emoji-option" data-emoji="worthit">
+                        <span class="love-emoji-icon">💪</span>
+                        <span class="love-emoji-name">So worth it</span>
+                    </button>
+                    <button class="love-emoji-option" data-emoji="feels">
+                        <span class="love-emoji-icon">💜</span>
+                        <span class="love-emoji-name">All the feels</span>
+                    </button>
+                    <button class="love-emoji-option" data-emoji="growing">
+                        <span class="love-emoji-icon">🌱</span>
+                        <span class="love-emoji-name">Growing</span>
+                    </button>
                 </div>
-                <div class="love-heart-label" id="loveHeartLabel">Absolutely love it</div>
 
                 <!-- Editable review -->
                 <div class="love-review-wrap">
-                    <textarea class="love-review" id="loveReview" rows="3">This collab is everything! Ellie's energy keeps me showing up and I genuinely look forward to each week.</textarea>
+                    <textarea class="love-review" id="loveReview" rows="3" placeholder="Tap a vibe above and we'll draft something for you...">This collab fires me up every single week. Ellie's energy is infectious and I've never been this consistent with my workouts.</textarea>
                     <div class="love-review-hint">
                         <span class="material-icons">auto_awesome</span>
                         AI-drafted for you · tap to edit or clear
@@ -2905,7 +2910,7 @@
                 <div class="love-actions">
                     <button class="love-btn-skip" id="loveSkip">Not now</button>
                     <button class="love-btn-send" id="loveSend">
-                        <span class="material-icons">favorite</span>
+                        <span class="material-icons">send</span>
                         Send to Ellie
                     </button>
                 </div>
@@ -2915,9 +2920,10 @@
                     <div class="love-sent-check">
                         <span class="material-icons">check</span>
                     </div>
-                    <div class="love-sent-title">Sent with love</div>
-                    <div class="love-sent-sub">Ellie will see your rating and message. It means more than you know.</div>
-                    <div class="love-sent-hearts" id="loveSentHearts"></div>
+                    <div class="love-sent-title">Ellie's going to love this</div>
+                    <div class="love-sent-sub">Your message is on its way.</div>
+                    <div class="love-sent-emoji" id="loveSentEmoji"></div>
+                    <div class="love-sent-emoji-label" id="loveSentEmojiLabel"></div>
                     <div class="love-sent-preview" id="loveSentPreview"></div>
                     <button class="love-sent-done" id="loveSentDone">Done</button>
                 </div>
@@ -3083,70 +3089,71 @@
 
         var loveBackdrop = frame.querySelector('#loveBackdrop');
         var loveSheet = frame.querySelector('#loveSheet');
-        var loveHearts = frame.querySelector('#loveHearts');
-        var loveHeartLabel = frame.querySelector('#loveHeartLabel');
+        var loveEmojis = frame.querySelector('#loveEmojis');
         var loveReview = frame.querySelector('#loveReview');
         var loveSendBtn = frame.querySelector('#loveSend');
         var loveSkipBtn = frame.querySelector('#loveSkip');
         var loveSentDone = frame.querySelector('#loveSentDone');
-        var loveSentHearts = frame.querySelector('#loveSentHearts');
+        var loveSentEmoji = frame.querySelector('#loveSentEmoji');
+        var loveSentEmojiLabel = frame.querySelector('#loveSentEmojiLabel');
         var loveSentPreview = frame.querySelector('#loveSentPreview');
 
-        var currentHearts = 5;
+        var selectedEmoji = null;
         var userEdited = false;
 
-        // AI-authored reviews for each heart level
-        var aiReviews = {
-            5: "This collab is everything! Ellie\u2019s energy keeps me showing up and I genuinely look forward to each week.",
-            4: "Really enjoying this! The weekly videos and community support have kept me motivated.",
-            3: "Solid so far. The structure keeps me accountable and I appreciate Ellie\u2019s check-ins.",
-            2: "Still finding my rhythm, but staying with it. Hoping the second half clicks more.",
-            1: "Slow start for me, but I\u2019m still here. Appreciate the effort Ellie puts in."
+        // Emoji data — descriptions are personalized per user
+        var emojiData = {
+            fired: {
+                icon: '🔥',
+                name: 'Fired up',
+                desc: 'Every week I feel more motivated to push my limits. Ellie\u2019s energy is contagious.',
+                review: 'This collab fires me up every single week. Ellie\u2019s energy is infectious and I\u2019ve never been this consistent with my workouts.'
+            },
+            worthit: {
+                icon: '💪',
+                name: 'So worth it',
+                desc: 'The effort is paying off and it feels so rewarding.',
+                review: 'Every bit of effort I\u2019ve put into this collab has been so worth it. I can see real progress and it feels incredible.'
+            },
+            feels: {
+                icon: '💜',
+                name: 'All the feels',
+                desc: 'The people in this collab make it. I genuinely care about everyone\u2019s progress.',
+                review: 'I love this community so much. Everyone showing up and cheering each other on is what makes this special.'
+            },
+            growing: {
+                icon: '🌱',
+                name: 'Growing',
+                desc: 'I can feel myself becoming a better version of me.',
+                review: 'This collab is making me grow in ways I didn\u2019t expect. I\u2019m stronger, more consistent, and honestly proud of who I\u2019m becoming.'
+            }
         };
 
-        var heartLabels = {
-            5: "Absolutely love it",
-            4: "Really enjoying it",
-            3: "It\u2019s been solid",
-            2: "It\u2019s been okay",
-            1: "Not great so far"
-        };
-
-        function setHearts(count) {
-            currentHearts = count;
-            var heartBtns = loveHearts.querySelectorAll('.love-heart');
-            heartBtns.forEach(function(btn, i) {
-                var heartIndex = i + 1;
-                if (heartIndex <= count) {
-                    btn.classList.add('filled');
-                    btn.classList.remove('empty');
-                    // pop animation on the clicked one
-                    if (heartIndex === count) {
-                        btn.classList.remove('pop');
-                        void btn.offsetWidth; // reflow
-                        btn.classList.add('pop');
-                    }
+        function selectEmoji(key) {
+            selectedEmoji = key;
+            var options = loveEmojis.querySelectorAll('.love-emoji-option');
+            options.forEach(function(opt) {
+                if (opt.dataset.emoji === key) {
+                    opt.classList.add('selected');
                 } else {
-                    btn.classList.remove('filled', 'pop');
-                    btn.classList.add('empty');
+                    opt.classList.remove('selected');
                 }
             });
-            loveHeartLabel.textContent = heartLabels[count] || '';
 
-            // Only update text if user hasn't manually edited
-            if (!userEdited) {
-                loveReview.value = aiReviews[count] || '';
+            // Update AI review if user hasn't manually edited
+            var data = emojiData[key];
+            if (!userEdited && data) {
+                loveReview.value = data.review;
             }
         }
 
-        // Heart click handler
-        if (loveHearts) {
-            loveHearts.addEventListener('click', function(e) {
-                var btn = e.target.closest('.love-heart');
+        // Emoji click handler
+        if (loveEmojis) {
+            loveEmojis.addEventListener('click', function(e) {
+                var btn = e.target.closest('.love-emoji-option');
                 if (!btn) return;
-                var heartNum = parseInt(btn.dataset.heart);
-                userEdited = false; // reset on new heart selection
-                setHearts(heartNum);
+                userEdited = false;
+                selectEmoji(btn.dataset.emoji);
             });
         }
 
@@ -3170,22 +3177,28 @@
             // Reset after animation
             setTimeout(function() {
                 if (loveSheet) loveSheet.classList.remove('sent');
+                selectedEmoji = null;
                 userEdited = false;
-                setHearts(5);
+                // Reset emoji selection
+                var options = loveEmojis ? loveEmojis.querySelectorAll('.love-emoji-option') : [];
+                options.forEach(function(opt) { opt.classList.remove('selected'); });
+                if (loveReview) loveReview.value = '';
             }, 500);
         }
 
-        // Spawn floating hearts from the send button
+        // Spawn floating emojis from the send button
         function spawnFloatingHearts() {
             var rect = loveSendBtn.getBoundingClientRect();
             var frameRect = frame.getBoundingClientRect();
             var centerX = rect.left - frameRect.left + rect.width / 2;
             var bottomY = rect.top - frameRect.top;
+            var floatEmojis = ['🔥', '✨', '💜', '🙌'];
+            var data = selectedEmoji ? emojiData[selectedEmoji] : null;
 
             for (var i = 0; i < 8; i++) {
                 var heart = document.createElement('span');
                 heart.className = 'love-float-heart';
-                heart.textContent = '❤️';
+                heart.textContent = data ? data.icon : floatEmojis[i % floatEmojis.length];
                 heart.style.left = (centerX + (Math.random() - 0.5) * 120) + 'px';
                 heart.style.top = (bottomY - 10) + 'px';
                 heart.style.fontSize = (14 + Math.random() * 14) + 'px';
@@ -3205,14 +3218,14 @@
                 spawnFloatingHearts();
                 loveSheet.classList.add('sent');
 
-                // Populate sent confirmation hearts
-                loveSentHearts.innerHTML = '';
-                for (var i = 0; i < currentHearts; i++) {
-                    var heartSpan = document.createElement('span');
-                    heartSpan.className = 'material-icons';
-                    heartSpan.textContent = 'favorite';
-                    heartSpan.style.animationDelay = (i * 0.08) + 's';
-                    loveSentHearts.appendChild(heartSpan);
+                // Show selected emoji in sent confirmation
+                var data = selectedEmoji ? emojiData[selectedEmoji] : null;
+                if (data) {
+                    loveSentEmoji.textContent = data.icon;
+                    loveSentEmojiLabel.textContent = data.name;
+                } else {
+                    loveSentEmoji.textContent = '💜';
+                    loveSentEmojiLabel.textContent = '';
                 }
 
                 // Show preview of what they sent
@@ -3249,7 +3262,8 @@
             });
         }
 
-        // 8. Auto-trigger: show love rating after 2 seconds
+        // 8. Select first emoji by default and show love rating
+        selectEmoji('fired');
         setTimeout(function() {
             showLoveSheet();
         }, 2000);
