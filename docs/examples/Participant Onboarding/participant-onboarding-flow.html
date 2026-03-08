@@ -111,7 +111,12 @@
             padding: 14px 28px 0;
             height: 54px;
         }
-        .status-time { font-family: var(--font-body); font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+        .status-time {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
         .status-icons { display: flex; align-items: center; gap: 6px; }
         .status-icons svg { height: 12px; }
 
@@ -312,6 +317,7 @@
             opacity: 0; transform: translateY(20px);
             animation: fade-up 0.7s ease forwards 0.65s;
         }
+
         .btn-get-started {
             display: flex; align-items: center; justify-content: center; gap: var(--space-sm);
             width: 100%;
@@ -333,38 +339,38 @@
         .btn-get-started:hover .material-icons { transform: translateX(3px); }
 
         /* ===========================================
-           SCREEN 1: INVITATION — image-forward
+           SCREEN 1: ELLIE'S INVITATION
            =========================================== */
-        .s1-hero-img {
-            width: 100%;
-            height: 200px;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-bottom: var(--space-lg);
-        }
-        .s1-hero-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .s1-creator-row {
+        .s1-creator-intro {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-md);
+            text-align: center;
+            margin-bottom: var(--space-xl);
         }
         .s1-avatar {
-            width: 44px;
-            height: 44px;
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.8);
-            flex-shrink: 0;
+            border: 3px solid rgba(255,255,255,0.8);
+            margin-bottom: var(--space-sm);
         }
         .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s1-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        .s1-handle {
+            font-size: 14px;
+            color: var(--color-brand-secondary);
+        }
 
         /* ===========================================
-           SCREEN 2: ELLIE IN ACTION — visual vignettes
+           SCREEN 2: ELLIE IN ACTION
            =========================================== */
         .vignette {
             background: rgba(255,255,255,0.75);
@@ -375,9 +381,8 @@
             position: relative;
             overflow: hidden;
         }
-        .vignette--highfive {
-            padding: 16px 16px 24px;
-            background: rgba(255,255,255,0.82);
+        .vignette--highlight {
+            padding-bottom: 20px;
         }
         .vignette-row {
             display: flex;
@@ -385,13 +390,29 @@
             gap: 10px;
         }
         .vignette-avatar {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
         }
         .vignette-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .vignette-text {
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.45;
+        }
+        .vignette-text strong { font-weight: 600; }
+        .vignette-sub {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            margin-top: 4px;
+        }
+        .vignette-label {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
 
         /* Emoji rain */
         .emoji-rain {
@@ -402,17 +423,17 @@
         }
         .emoji-particle {
             position: absolute;
-            font-size: 22px;
-            top: -28px;
+            font-size: 20px;
+            top: -24px;
             opacity: 0;
         }
         .screen.active .emoji-particle {
-            animation: emoji-fall 2.4s ease-in forwards;
+            animation: emoji-fall 2.2s ease-in forwards;
         }
         @keyframes emoji-fall {
             0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-            60% { opacity: 1; }
-            100% { transform: translateY(160px) rotate(300deg) scale(0.4); opacity: 0; }
+            70% { opacity: 0.9; }
+            100% { transform: translateY(140px) rotate(260deg) scale(0.5); opacity: 0; }
         }
 
         /* MVP vignette */
@@ -432,7 +453,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 5px 0;
+            padding: 6px 0;
         }
         .mvp-avatar {
             width: 28px;
@@ -442,83 +463,89 @@
             flex-shrink: 0;
         }
         .mvp-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .mvp-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            flex: 1;
+        }
 
         /* ===========================================
-           SCREEN 3: HOW IT WORKS — icon-driven
+           SCREEN 3: HOW IT WORKS
            =========================================== */
-        .how-card {
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
             background: rgba(255,255,255,0.65);
             backdrop-filter: blur(10px);
             border-radius: var(--radius-md);
-            padding: 18px 16px;
+            padding: 16px;
             margin-bottom: var(--space-xs);
+        }
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: var(--color-brand-primary);
+            color: var(--color-text-inverse);
             display: flex;
             align-items: center;
-            gap: 14px;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
         }
-        .how-icon {
-            font-size: 28px;
-            line-height: 1;
-            flex-shrink: 0;
-            width: 40px;
-            text-align: center;
-        }
-        .how-title {
+        .step-card-title {
             font-size: 15px;
             font-weight: 600;
             color: var(--color-text-primary);
+            margin-bottom: 2px;
         }
-        .how-sub {
-            font-size: 13px;
+        .step-card-body {
+            font-size: 14px;
             color: var(--color-text-secondary);
-            line-height: 1.35;
+            line-height: 1.45;
         }
 
         /* ===========================================
-           SCREEN 4: THE COLLAB — image card
+           SCREEN 4: THE COLLAB
            =========================================== */
         .collab-card {
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(14px);
             border-radius: var(--radius-lg);
-            overflow: hidden;
+            padding: var(--space-xl);
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        .collab-hero {
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-        }
-        .collab-hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .collab-body {
-            padding: var(--space-lg) var(--space-xl) var(--space-xl);
         }
         .collab-card-header {
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-md);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
         }
         .collab-avatar {
-            width: 36px; height: 36px;
+            width: 48px; height: 48px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
         }
         .collab-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .collab-host-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); }
-        .collab-host-sub { font-size: 11px; color: var(--color-text-tertiary); }
+        .collab-host-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .collab-host-sub { font-size: 12px; color: var(--color-text-tertiary); }
         .collab-title {
             font-family: var(--font-display);
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--color-text-primary);
             letter-spacing: -0.01em;
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+        .collab-desc {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: var(--space-lg);
         }
         .collab-details {
             display: flex;
@@ -528,17 +555,17 @@
             flex: 1;
             background: rgba(0,0,0,0.03);
             border-radius: var(--radius-sm);
-            padding: var(--space-xs) var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
             text-align: center;
         }
         .collab-detail-value {
             font-family: var(--font-body);
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text-primary);
         }
         .collab-detail-label {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--color-text-tertiary);
             font-weight: 500;
         }
@@ -743,11 +770,13 @@
             <div class="s0-top-bar">
                 <button class="login-pill" onclick="goTo(5)">Log in</button>
             </div>
+
             <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
                 <div class="s0-wordmark">Motiv</div>
                 <div class="s0-tagline"><strong>Go beyond the feed.</strong></div>
                 <div class="s0-body">Join your favorite creators in real fitness collabs — ride together, get exclusive content, and actually do the thing.</div>
             </div>
+
             <div class="s0-cta">
                 <button class="btn-get-started" onclick="goTo(1)">Get started <span class="material-icons">arrow_forward</span></button>
             </div>
@@ -755,7 +784,7 @@
     </div>
 
     <!-- ============================================
-         SCREEN 1: INVITATION — image-forward
+         SCREEN 1: ELLIE'S INVITATION
          ============================================ -->
     <div class="screen" id="screen1">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
@@ -763,24 +792,25 @@
                 <a href="#" class="back-btn" onclick="goTo(0);return false"><span class="material-icons">chevron_left</span></a>
             </div>
 
-            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; letter-spacing: -0.01em; margin-bottom: var(--space-md);">Ellie invited you.</div>
-
-            <div class="s1-hero-img">
-                <img src="https://images.unsplash.com/photo-1534787238916-9ba6764efd4f?w=700&h=400&fit=crop&crop=center" alt="Cycling community in action">
+            <div style="text-align: center; padding: 0 8px var(--space-md);">
+                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; letter-spacing: -0.01em;">Ellie invited you.</div>
             </div>
 
-            <div class="s1-creator-row">
+            <div class="s1-creator-intro">
                 <div class="s1-avatar">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=88&h=88&fit=crop&crop=face" alt="Ellie Snackson">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Ellie Snackson">
                 </div>
-                <div>
-                    <div style="font-size: 15px; font-weight: 600; color: var(--color-text-primary);">Ellie Snackson</div>
-                    <div style="font-size: 13px; color: var(--color-brand-secondary);">@doodle_cycles</div>
-                </div>
+                <div class="s1-name">Ellie Snackson</div>
+                <div class="s1-handle">@doodle_cycles</div>
             </div>
 
-            <div style="font-size: 16px; color: var(--color-text-secondary); line-height: 1.55;">
-                A collab where you ride alongside her, hit real goals, and earn everything back.
+            <div style="background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); border-radius: var(--radius-md); padding: 20px; text-align: center;">
+                <div style="font-size: 16px; color: var(--color-text-primary); line-height: 1.6; margin-bottom: 12px;">
+                    Ever wished you could do more than just watch? <strong>Now you can.</strong>
+                </div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.55;">
+                    Ellie is leading a collab on Motiv — a real challenge where you ride alongside her, hit your goals, connect with her community, and earn everything back.
+                </div>
             </div>
 
             <div style="flex: 1; min-height: 16px;"></div>
@@ -796,7 +826,7 @@
     </div>
 
     <!-- ============================================
-         SCREEN 2: ELLIE IN ACTION — visual vignettes
+         SCREEN 2: ELLIE IN ACTION
          ============================================ -->
     <div class="screen" id="screen2">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
@@ -804,80 +834,75 @@
                 <a href="#" class="back-btn" onclick="goTo(1);return false"><span class="material-icons">chevron_left</span></a>
             </div>
 
-            <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.18; letter-spacing: -0.01em; margin-bottom: var(--space-lg);">Ellie shows up.</div>
+            <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.18; letter-spacing: -0.01em; margin-bottom: 4px;">This is what it's like.</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: var(--space-lg);">Ellie doesn't just post and disappear. She shows up.</div>
 
-            <!-- Vignette 1: High five with emoji rain -->
-            <div class="vignette vignette--highfive">
+            <!-- Vignette 1: High Five with emoji rain -->
+            <div class="vignette vignette--highlight">
                 <div class="emoji-rain" id="emojiRain">
                     <div class="emoji-particle" style="left: 5%; animation-delay: 0.1s;">&#x1F64C;</div>
-                    <div class="emoji-particle" style="left: 15%; animation-delay: 0.45s;">&#x2728;</div>
-                    <div class="emoji-particle" style="left: 28%; animation-delay: 0.75s;">&#x1F44F;</div>
-                    <div class="emoji-particle" style="left: 40%; animation-delay: 0.2s;">&#x1F525;</div>
-                    <div class="emoji-particle" style="left: 52%; animation-delay: 0.55s;">&#x1F64C;</div>
-                    <div class="emoji-particle" style="left: 63%; animation-delay: 0.85s;">&#x2728;</div>
-                    <div class="emoji-particle" style="left: 74%; animation-delay: 0.3s;">&#x1F44F;</div>
-                    <div class="emoji-particle" style="left: 88%; animation-delay: 0.65s;">&#x1F525;</div>
-                    <div class="emoji-particle" style="left: 10%; animation-delay: 1.1s;">&#x1F64C;</div>
-                    <div class="emoji-particle" style="left: 48%; animation-delay: 1.25s;">&#x2728;</div>
-                    <div class="emoji-particle" style="left: 78%; animation-delay: 1.0s;">&#x1F44F;</div>
-                    <div class="emoji-particle" style="left: 33%; animation-delay: 1.4s;">&#x1F525;</div>
+                    <div class="emoji-particle" style="left: 18%; animation-delay: 0.5s;">&#x2728;</div>
+                    <div class="emoji-particle" style="left: 30%; animation-delay: 0.8s;">&#x1F44F;</div>
+                    <div class="emoji-particle" style="left: 42%; animation-delay: 0.2s;">&#x1F525;</div>
+                    <div class="emoji-particle" style="left: 55%; animation-delay: 0.6s;">&#x1F64C;</div>
+                    <div class="emoji-particle" style="left: 65%; animation-delay: 0.9s;">&#x2728;</div>
+                    <div class="emoji-particle" style="left: 75%; animation-delay: 0.35s;">&#x1F44F;</div>
+                    <div class="emoji-particle" style="left: 88%; animation-delay: 0.7s;">&#x1F525;</div>
+                    <div class="emoji-particle" style="left: 12%; animation-delay: 1.1s;">&#x1F64C;</div>
+                    <div class="emoji-particle" style="left: 50%; animation-delay: 1.3s;">&#x2728;</div>
+                    <div class="emoji-particle" style="left: 80%; animation-delay: 1.0s;">&#x1F44F;</div>
+                    <div class="emoji-particle" style="left: 35%; animation-delay: 1.5s;">&#x1F525;</div>
                 </div>
                 <div class="vignette-row">
                     <div class="vignette-avatar">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64&h=64&fit=crop&crop=face" alt="Ellie">
                     </div>
                     <div>
-                        <div style="font-size: 15px; font-weight: 600; color: var(--color-text-primary);">Ellie gave you a high five!</div>
-                        <div style="font-size: 13px; color: var(--color-text-secondary);">4-day streak</div>
+                        <div class="vignette-text"><strong>Ellie gave you a high five!</strong></div>
+                        <div class="vignette-sub">Keep going — you're on a 4-day streak!</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Vignette 2: Community shoutout with image -->
+            <!-- Vignette 2: Community shoutout -->
             <div class="vignette">
-                <div class="vignette-row" style="margin-bottom: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                     <div class="vignette-avatar">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64&h=64&fit=crop&crop=face" alt="Ellie">
                     </div>
                     <div>
-                        <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary);">Ellie</div>
-                        <div style="font-size: 11px; color: var(--color-text-tertiary);">Mindful Miles Reset</div>
+                        <div class="vignette-text" style="font-size: 13px;"><strong>Ellie</strong></div>
+                        <div class="vignette-label">Mindful Miles Reset</div>
                     </div>
                 </div>
-                <div style="display: flex; gap: 10px; align-items: center;">
-                    <div style="width: 52px; height: 52px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=104&h=104&fit=crop&crop=face" alt="Sarah" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div style="font-size: 14px; color: var(--color-text-primary); line-height: 1.4;">
-                        Shout-out <strong>@sarah_rides</strong> — 5 straight days!
-                    </div>
-                </div>
+                <div class="vignette-text">Shout-out to <strong>@sarah_rides</strong> for 5 days straight! You're making this community so good.</div>
             </div>
 
             <!-- Vignette 3: MVP Award -->
             <div class="vignette">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                    <span style="font-size: 20px;">&#x1F3C6;</span>
-                    <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Collab MVPs</div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                    <span style="font-size: 18px;">&#x1F3C6;</span>
+                    <div class="vignette-text"><strong>Collab MVPs</strong></div>
                 </div>
                 <div class="mvp-row">
                     <div class="mvp-avatar">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=56&h=56&fit=crop&crop=face" alt="Jamie K.">
                     </div>
-                    <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1;">Jamie K.</div>
+                    <div class="mvp-name">Jamie K.</div>
                     <div class="mvp-badge">MVP</div>
                 </div>
                 <div class="mvp-row">
                     <div class="mvp-avatar">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=56&h=56&fit=crop&crop=face" alt="Alex M.">
                     </div>
-                    <div style="font-size: 14px; font-weight: 500; color: var(--color-text-primary); flex: 1;">Alex M.</div>
+                    <div class="mvp-name">Alex M.</div>
                     <div class="mvp-badge">MVP</div>
                 </div>
-                <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px;">Cash prizes at the end of every collab.</div>
+                <div style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 6px;">Cash prizes awarded at the end of every collab.</div>
             </div>
 
             <div style="flex: 1; min-height: 12px;"></div>
+
             <div style="padding-top: 12px;">
                 <button class="btn-primary" onclick="goTo(3)">Continue</button>
             </div>
@@ -885,7 +910,7 @@
     </div>
 
     <!-- ============================================
-         SCREEN 3: HOW IT WORKS — icon-driven
+         SCREEN 3: HOW IT WORKS
          ============================================ -->
     <div class="screen" id="screen3">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
@@ -893,41 +918,39 @@
                 <a href="#" class="back-btn" onclick="goTo(2);return false"><span class="material-icons">chevron_left</span></a>
             </div>
 
-            <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.18; letter-spacing: -0.01em; margin-bottom: var(--space-xl);">How it works.</div>
+            <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.18; letter-spacing: -0.01em; margin-bottom: 4px;">Here's how it works.</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: var(--space-xl);">Simple commitment. Real accountability. You earn everything back.</div>
 
-            <div class="how-card">
-                <div class="how-icon">&#x1F4B0;</div>
+            <div class="step-card">
+                <div class="step-num">1</div>
                 <div>
-                    <div class="how-title">$40 hold</div>
-                    <div class="how-sub">Your commitment, not a fee.</div>
+                    <div class="step-card-title">Commit with a small hold</div>
+                    <div class="step-card-body">$40 holds your spot. It's not a fee — it's your skin in the game.</div>
                 </div>
             </div>
 
-            <div class="how-card">
-                <div class="how-icon">&#x1F3AF;</div>
+            <div class="step-card">
+                <div class="step-num">2</div>
                 <div>
-                    <div class="how-title">Personalized goals</div>
-                    <div class="how-sub">Show up each week with Ellie.</div>
+                    <div class="step-card-title">Follow Ellie's program</div>
+                    <div class="step-card-body">Show up each week and hit your personalized goals. Ellie will be right there with you.</div>
                 </div>
             </div>
 
-            <div class="how-card">
-                <div class="how-icon">&#x1F389;</div>
+            <div class="step-card">
+                <div class="step-num">3</div>
                 <div>
-                    <div class="how-title">Get every dollar back</div>
-                    <div class="how-sub">Complete it — done.</div>
+                    <div class="step-card-title">Earn it all back</div>
+                    <div class="step-card-body">Complete the collab, get every dollar back. The 2 top performers win cash prizes.</div>
                 </div>
             </div>
 
-            <div class="how-card">
-                <div class="how-icon">&#x1F3C6;</div>
-                <div>
-                    <div class="how-title">2 MVPs win cash</div>
-                    <div class="how-sub">Selected at the end of the collab.</div>
-                </div>
+            <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-radius: var(--radius-md); padding: 14px 16px; margin-top: var(--space-sm); text-align: center;">
+                <div style="font-size: 13px; color: var(--color-text-tertiary); line-height: 1.5;">Your goals are personalized to you — not one-size-fits-all. The collab meets you where you are.</div>
             </div>
 
             <div style="flex: 1; min-height: 12px;"></div>
+
             <div style="padding-top: 12px;">
                 <button class="btn-primary" onclick="goTo(4)">Continue</button>
             </div>
@@ -935,55 +958,54 @@
     </div>
 
     <!-- ============================================
-         SCREEN 4: THE COLLAB — image card
+         SCREEN 4: THE COLLAB
          ============================================ -->
     <div class="screen" id="screen4">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
-            <div style="display: flex; align-items: center; padding: 0 0 8px;">
+            <div style="display: flex; align-items: center; padding: 0 0 4px;">
                 <a href="#" class="back-btn" onclick="goTo(3);return false"><span class="material-icons">chevron_left</span></a>
             </div>
 
+            <div style="font-size: 12px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">Ellie's active collab</div>
+
             <div class="collab-card">
-                <div class="collab-hero">
-                    <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=700&h=300&fit=crop&crop=center" alt="Cycling trail">
-                </div>
-                <div class="collab-body">
-                    <div class="collab-card-header">
-                        <div class="collab-avatar">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie">
-                        </div>
-                        <div>
-                            <div class="collab-host-name">Ellie Snackson</div>
-                            <div class="collab-host-sub">@doodle_cycles</div>
-                        </div>
+                <div class="collab-card-header">
+                    <div class="collab-avatar">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&crop=face" alt="Ellie">
                     </div>
-                    <div class="collab-title">Mindful Miles Reset</div>
-                    <div class="collab-details">
-                        <div class="collab-detail">
-                            <div class="collab-detail-value">$40</div>
-                            <div class="collab-detail-label">Hold</div>
-                        </div>
-                        <div class="collab-detail">
-                            <div class="collab-detail-value">6 wks</div>
-                            <div class="collab-detail-label">Duration</div>
-                        </div>
-                        <div class="collab-detail">
-                            <div class="collab-detail-value">6/wk</div>
-                            <div class="collab-detail-label">Days</div>
-                        </div>
+                    <div>
+                        <div class="collab-host-name">Hosted by Ellie</div>
+                        <div class="collab-host-sub">@doodle_cycles</div>
+                    </div>
+                </div>
+                <div class="collab-title">Mindful Miles Reset</div>
+                <div class="collab-desc">6 weeks of cycling with Ellie. Hit your weekly goals and earn your entry back.</div>
+                <div class="collab-details">
+                    <div class="collab-detail">
+                        <div class="collab-detail-value">$40</div>
+                        <div class="collab-detail-label">Entry hold</div>
+                    </div>
+                    <div class="collab-detail">
+                        <div class="collab-detail-value">6 wks</div>
+                        <div class="collab-detail-label">Duration</div>
+                    </div>
+                    <div class="collab-detail">
+                        <div class="collab-detail-value">6/wk</div>
+                        <div class="collab-detail-label">Days</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Ellie's short message -->
-            <div style="display: flex; align-items: center; gap: 10px; margin-top: 16px; padding: 0 4px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=64&h=64&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
+            <!-- Ellie's message -->
+            <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-radius: 12px; padding: 16px 18px; margin-top: 16px; display: flex; align-items: flex-start; gap: 12px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <div style="font-size: 14px; color: var(--color-text-secondary); font-style: italic; line-height: 1.45;">"I hope you'll join me. Let's ride."</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.55; font-style: italic;">"I hope you'll join me for this one. I've been planning it for months and I know we can do something special together. Let's ride."</div>
             </div>
 
             <div style="flex: 1; min-height: 16px;"></div>
+
             <div style="padding-top: 12px;">
                 <button class="btn-primary" onclick="goTo(5)">Join this collab</button>
             </div>
@@ -1040,6 +1062,7 @@
          SCREEN 6: PUSH NOTIFICATIONS
          ============================================ -->
     <div class="screen" id="screen6">
+        <!-- iOS Permission Dialog -->
         <div class="ios-dialog-overlay" id="iosDialogOverlay">
             <div class="ios-dialog">
                 <div class="ios-dialog-body">
@@ -1057,6 +1080,7 @@
             <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
                 <a href="#" class="back-btn" onclick="goTo(5);return false"><span class="material-icons">chevron_left</span></a>
             </div>
+
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                 <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
                     <span class="material-icons" style="font-size: 28px; color: var(--color-brand-secondary);">notifications_active</span>
@@ -1065,6 +1089,7 @@
                 <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; max-width: 280px;">Her weekly videos, collab milestones, community shout-outs — straight to your phone.</div>
             </div>
 
+            <!-- Notification preview -->
             <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: 16px; padding: 16px 18px; width: 100%; margin-bottom: 24px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
@@ -1107,6 +1132,7 @@
                 </div>
             </div>
 
+            <!-- Ellie's welcome message -->
             <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: 14px; padding: 18px 20px; width: 100%; margin-bottom: 20px;">
                 <div style="display: flex; align-items: flex-start; gap: 12px;">
                     <div style="width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
@@ -1114,7 +1140,7 @@
                     </div>
                     <div>
                         <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px;">Ellie</div>
-                        <div style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.5;">YES! So pumped you're here. See you on the bike!</div>
+                        <div style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.5;">YES! Ok I'm so pumped you're here. This is going to be fun — I've got so much planned for us. See you on the bike!</div>
                     </div>
                 </div>
             </div>
@@ -1139,6 +1165,8 @@
     const names = ['Welcome','Invitation','In Action','How it Works','The Collab','Account','Notifications','You\'re In'];
     let cur = 0;
     const total = names.length;
+
+    // Screens that use green/sage blobs (post-account-creation)
     const greenScreens = [6, 7];
 
     function updateUI() {
@@ -1146,6 +1174,8 @@
         document.getElementById('stepName').textContent = names[cur];
         document.getElementById('prevBtn').disabled = cur === 0;
         document.getElementById('nextBtn').disabled = cur === total - 1;
+
+        // Toggle lava bg chapter
         const lava = document.getElementById('lavaBg');
         if (greenScreens.includes(cur)) {
             lava.classList.add('green-chapter');
@@ -1166,12 +1196,12 @@
         updateUI();
         setTimeout(() => { screens[prev].classList.remove('exiting'); }, 500);
 
-        // Restart emoji rain on screen 2
+        // Restart emoji rain animation when entering screen 2
         if (i === 2) {
             const rain = document.getElementById('emojiRain');
             if (rain) {
                 rain.style.display = 'none';
-                rain.offsetHeight;
+                rain.offsetHeight; // force reflow
                 rain.style.display = '';
             }
         }
@@ -1180,6 +1210,7 @@
     function next() { goTo(cur + 1); }
     function prev() { goTo(cur - 1); }
 
+    // iOS dialog
     function showDialog() {
         document.getElementById('iosDialogOverlay').classList.add('visible');
     }
@@ -1188,6 +1219,7 @@
         setTimeout(() => goTo(7), 300);
     }
 
+    // Keyboard nav
     document.addEventListener('keydown', e => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }

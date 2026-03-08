@@ -152,28 +152,51 @@
 
         .wizard-nav-back.invisible { visibility: hidden; }
 
-        .step-dots {
+        .step-nav-group {
             display: flex;
-            gap: 8px;
             align-items: center;
+            gap: 10px;
         }
 
-        .step-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--color-border-default);
-            transition: all 0.3s ease;
+        .step-counter {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
         }
 
-        .step-dot.active {
-            background: var(--color-clay);
-            width: 24px;
-            border-radius: 4px;
+        .step-counter .current {
+            color: var(--color-text-primary);
         }
 
-        .step-dot.completed {
-            background: var(--color-sage);
+        .save-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .save-indicator .material-icons {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            transition: color 0.3s ease;
+        }
+
+        .save-indicator.show {
+            opacity: 1;
+        }
+
+        .save-indicator.pulse .material-icons {
+            color: var(--green);
+        }
+
+        .save-indicator.pulse {
+            color: var(--green);
         }
 
         .wizard-nav-save {
@@ -667,7 +690,7 @@
         .preview-collab-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 20px;
+            font-size: 45px;
             font-weight: 600;
             color: white;
             line-height: 1.25;
@@ -1349,7 +1372,67 @@
         }
 
         /* =========================================
-           CALENDAR OVERLAY
+           INLINE CALENDAR (Screen 3)
+           ========================================= */
+
+        .inline-calendar {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--color-border-default);
+        }
+
+        .date-confirmation {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+        }
+
+        .date-confirmation-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .date-confirmation-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+        }
+
+        .date-confirmation-value {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .date-confirmation-badge {
+            margin-left: auto;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-sage);
+            background: rgba(143, 166, 160, 0.12);
+            padding: 4px 10px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .date-confirmation-divider {
+            height: 1px;
+            background: var(--color-border-default);
+            margin: 0;
+        }
+
+        /* =========================================
+           CALENDAR OVERLAY (legacy — kept for compat)
            ========================================= */
 
         .calendar-overlay {
@@ -1876,7 +1959,7 @@
         /* Review card — title styling (non-editable, no hover) */
         .review-collab-name {
             cursor: default;
-            font-size: 22px;
+            font-size: 40px;
         }
         .review-collab-name:hover {
             background: none;
@@ -2060,13 +2143,13 @@
             <button class="wizard-nav-back" id="navBack" onclick="goBack()">
                 <span class="material-icons">arrow_back</span>
             </button>
-            <div class="step-dots" id="stepDots">
-                <div class="step-dot active" data-step="0"></div>
-                <div class="step-dot" data-step="1"></div>
-                <div class="step-dot" data-step="2"></div>
-                <div class="step-dot" data-step="3"></div>
+            <div class="step-nav-group">
+                <div class="save-indicator" id="saveIndicator">
+                    <span class="material-icons">check_circle</span>
+                    Saved
+                </div>
+                <div class="step-counter" id="stepCounter"><span class="current">1</span> of 4</div>
             </div>
-            <!-- save removed -->
         </div>
 
         <div class="phone-scroll" id="phoneScroll">
@@ -2107,7 +2190,7 @@
                                                 <span class="material-icons">edit</span>
                                                 tap to rename
                                             </div>
-                                            <div class="preview-collab-dates" id="heroPreviewDates">June 9 — Jul 21</div>
+                                            <div class="preview-collab-dates" id="heroPreviewDates">Apr 6 — May 17</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2241,17 +2324,8 @@
                  ========================================= -->
             <div class="screen" data-screen="1">
                 <div class="screen-body">
-                    <div class="screen-title">Structure</div>
+                    <div class="screen-title">Details</div>
                     <div class="screen-subtitle"><span class="ai-badge">✦ AI Suggested</span> We've tailored these defaults for your audience — adjust anything.</div>
-
-                    <!-- Start Date (pre-filled from onboarding) -->
-                    <div class="field-group">
-                        <div class="field-label">Start date</div>
-                        <div class="date-field" onclick="openCalendar()">
-                            <span class="material-icons">calendar_today</span>
-                            <span class="date-field-text" id="dateFieldText">June 9, 2025</span>
-                        </div>
-                    </div>
 
                     <!-- Duration -->
                     <div class="field-group">
@@ -2260,21 +2334,8 @@
                             <div class="pill" data-value="4" onclick="selectPill(this)">4 wk</div>
                             <div class="pill" data-value="5" onclick="selectPill(this)">5 wk</div>
                             <div class="pill selected" data-value="6" onclick="selectPill(this)">6 wk</div>
-                            <div class="pill" data-value="7" onclick="selectPill(this)">7 wk</div>
-                            <div class="pill" data-value="8" onclick="selectPill(this)">8 wk</div>
                         </div>
-                        <div class="field-helper" id="endDateHelper">Ends July 21, 2025</div>
-                    </div>
-
-                    <!-- Recruiting Window -->
-                    <div class="field-group">
-                        <div class="field-label">Recruiting window</div>
-                        <div class="pill-row" data-field="recruiting">
-                            <div class="pill" data-value="1" onclick="selectPill(this)">1 week before</div>
-                            <div class="pill selected" data-value="2" onclick="selectPill(this)">2 weeks before</div>
-                            <div class="pill" data-value="3" onclick="selectPill(this)">3 weeks before</div>
-                        </div>
-                        <div class="field-helper" id="recruitingHelper">Recruiting opens May 26, 2025</div>
+                        <div class="field-helper" id="durationHelper">Longer commitment — sign-ups may dip, but your earnings potential goes up.</div>
                     </div>
 
                     <!-- Entry Hold -->
@@ -2286,31 +2347,20 @@
                             <div class="pill" data-value="50" onclick="selectPill(this); updateEconomics();">$50</div>
                             <div class="pill" data-value="60" onclick="selectPill(this); updateEconomics();">$60</div>
                         </div>
-                        <div class="field-helper">Participants put this amount on the line — returned if they finish</div>
+                        <div class="field-helper" id="holdHelper">Returned if they finish. Good balance of sign-ups and earnings.</div>
                     </div>
 
-                    <!-- Level -->
+                    <!-- Difficulty -->
                     <div class="field-group">
-                        <div class="field-label">Level</div>
+                        <div class="field-label">Difficulty</div>
                         <div class="pill-row" data-field="difficulty">
                             <div class="pill" data-value="steady" onclick="selectPill(this)">Steady</div>
                             <div class="pill selected" data-value="strong" onclick="selectPill(this)">Strong</div>
                             <div class="pill" data-value="stretch" onclick="selectPill(this)">Stretch</div>
                             <div class="pill" data-value="advanced" onclick="selectPill(this)">Advanced</div>
                         </div>
-                        <div class="field-helper" id="difficultyHelper">A balanced challenge — most participants will need to push a bit to finish</div>
+                        <div class="field-helper" id="difficultyHelper">Balanced challenge. Solid sign-up rates with healthy earnings potential.</div>
                     </div>
-
-                </div>
-            </div>
-
-            <!-- =========================================
-                 SCREEN 3: About
-                 ========================================= -->
-            <div class="screen" data-screen="2">
-                <div class="screen-body">
-                    <div class="screen-title">About</div>
-                    <div class="screen-subtitle">Tell potential participants what this collab is all about</div>
 
                     <!-- About this collab -->
                     <div class="field-group">
@@ -2319,6 +2369,59 @@
 
 Each week brings a fresh target calibrated to keep you progressing without burning out. You'll have the support of a community that shares your passions — and real money on the line to keep you accountable.</textarea>
                         <div class="field-helper">Shown on the collab details page</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- =========================================
+                 SCREEN 3: Pick Your Date
+                 ========================================= -->
+            <div class="screen" data-screen="2">
+                <div class="screen-body">
+                    <div class="screen-title">Pick your date</div>
+                    <div class="screen-subtitle">Collabs always start on a Monday. You need at least 1 week before launch to recruit.</div>
+
+                    <!-- Inline Calendar -->
+                    <div class="inline-calendar" id="inlineCalendar">
+                        <div class="calendar-header">
+                            <div class="calendar-month-label" id="calMonthLabel">June 2025</div>
+                            <div class="calendar-nav">
+                                <button onclick="calNavMonth(-1)"><span class="material-icons">chevron_left</span></button>
+                                <button onclick="calNavMonth(1)"><span class="material-icons">chevron_right</span></button>
+                            </div>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                        </div>
+                        <div class="calendar-grid" id="calGrid"></div>
+                    </div>
+
+                    <!-- Selected date confirmation -->
+                    <div class="date-confirmation" id="dateConfirmation">
+                        <div class="date-confirmation-row">
+                            <span class="material-icons" style="font-size: 20px; color: var(--color-sage);">event</span>
+                            <div class="date-confirmation-text">
+                                <div class="date-confirmation-label">Starts</div>
+                                <div class="date-confirmation-value" id="dateConfirmStart">April 6, 2026</div>
+                            </div>
+                            <div class="date-confirmation-badge" id="dateConfirmDaysUntil">93 days away</div>
+                        </div>
+                        <div class="date-confirmation-row">
+                            <span class="material-icons" style="font-size: 20px; color: var(--color-clay);">flag</span>
+                            <div class="date-confirmation-text">
+                                <div class="date-confirmation-label">Ends</div>
+                                <div class="date-confirmation-value" id="dateConfirmEnd">May 17, 2026</div>
+                            </div>
+                        </div>
+                        <div class="date-confirmation-divider"></div>
+                        <div class="date-confirmation-row">
+                            <span class="material-icons" style="font-size: 20px; color: var(--color-plum);">campaign</span>
+                            <div class="date-confirmation-text">
+                                <div class="date-confirmation-label">Recruiting window</div>
+                                <div class="date-confirmation-value" id="dateConfirmRecruit">93 days to recruit</div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -2348,7 +2451,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                                         </div>
                                         <div class="review-hero-bottom">
                                             <div class="preview-collab-name review-collab-name" id="reviewCardTitle" style="font-family: 'Playfair Display', serif;">Dog Lovers Who Cycle</div>
-                                            <div class="preview-collab-dates" id="reviewCardDates">June 9 — Jul 21</div>
+                                            <div class="preview-collab-dates" id="reviewCardDates">Apr 6 — May 17</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2407,12 +2510,6 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                         </div>
                     </div>
 
-                    <!-- Recruiting date -->
-                    <div class="review-go-live" id="reviewGoLive">
-                        <span class="material-icons" style="font-size: 18px; color: var(--color-sage);">event</span>
-                        <span>Recruiting opens <strong id="reviewRecruitDate">May 26, 2025</strong></span>
-                    </div>
-
                     <!-- Review CTAs (inline, not in bottom bar) -->
                     <div class="review-actions" id="reviewInlineActions" style="padding: 16px 16px 0;">
                         <button class="btn-primary" onclick="nextScreen()">
@@ -2429,24 +2526,6 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             </div>
 
         </div><!-- /phone-scroll -->
-
-        <!-- Calendar Overlay -->
-        <div class="calendar-overlay" id="calendarOverlay" onclick="if(event.target===this)closeCalendar()">
-            <div class="calendar-card">
-                <div class="calendar-header">
-                    <div class="calendar-month-label" id="calMonthLabel">June 2025</div>
-                    <div class="calendar-nav">
-                        <button onclick="calNavMonth(-1)"><span class="material-icons">chevron_left</span></button>
-                        <button onclick="calNavMonth(1)"><span class="material-icons">chevron_right</span></button>
-                    </div>
-                </div>
-                <div class="calendar-weekdays">
-                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
-                </div>
-                <div class="calendar-grid" id="calGrid"></div>
-                <div class="calendar-hint">Collabs always start on a Monday</div>
-            </div>
-        </div>
 
         <!-- iOS Photo Action Sheet -->
         <div class="action-sheet-overlay" id="photoActionSheet" onclick="closePhotoSheet()">
@@ -2514,7 +2593,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             difficulty: 'strong',
             platform: null,
             days: '6',
-            startDate: 'June 9, 2025',
+            startDate: 'April 6, 2026',
             videoCadence: 'weekly'
         };
 
@@ -2557,8 +2636,9 @@ Each week brings a fresh target calibrated to keep you progressing without burni
            ========================================= */
 
         function goToScreen(n) {
+            var fromScreen = currentScreen;
             currentScreen = n;
-            updateScreens();
+            updateScreens(fromScreen);
         }
 
         function nextScreen() {
@@ -2566,42 +2646,50 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 launchCollab();
                 return;
             }
+            var fromScreen = currentScreen;
             currentScreen++;
-            updateScreens();
+            updateScreens(fromScreen);
         }
 
         function goBack() {
             if (currentScreen > 0) {
+                var fromScreen = currentScreen;
                 currentScreen--;
-                updateScreens();
+                updateScreens(fromScreen);
             }
         }
 
-        function updateScreens() {
+        function updateScreens(fromScreen) {
             /* Show/hide screens */
             var screens = document.querySelectorAll('.screen');
             screens.forEach(function(s, i) {
                 s.classList.toggle('active', i === currentScreen);
             });
 
-            /* Update step dots */
-            var dots = document.querySelectorAll('.step-dot');
-            dots.forEach(function(d, i) {
-                d.classList.remove('active', 'completed');
-                if (i < currentScreen) d.classList.add('completed');
-                if (i === currentScreen) d.classList.add('active');
-            });
+            /* Update step counter */
+            document.getElementById('stepCounter').innerHTML = '<span class="current">' + (currentScreen + 1) + '</span> of ' + totalScreens;
+
+            /* Flash save indicator on screen transition */
+            if (fromScreen !== undefined && fromScreen !== currentScreen) {
+                flashSaveIndicator();
+            }
 
             /* Back button — always visible */
             var backBtn = document.getElementById('navBack');
             backBtn.classList.remove('invisible');
 
-            /* Hide bottom bar on review screen (CTAs are inline) */
+            /* Hide bottom bar on review screen (screen 3 — CTAs are inline) */
             var bottomBar = document.getElementById('bottomBar');
-            if (currentScreen === totalScreens - 1) {
+            if (currentScreen === 3) {
                 bottomBar.style.display = 'none';
             } else {
                 bottomBar.style.display = '';
+            }
+
+            /* Render inline calendar when navigating to date screen */
+            if (currentScreen === 2) {
+                renderCalendar();
+                updateDateConfirmEnd();
             }
 
             /* Update review screen if navigating to it */
@@ -2611,6 +2699,31 @@ Each week brings a fresh target calibrated to keep you progressing without burni
 
             /* Scroll to top */
             document.getElementById('phoneScroll').scrollTop = 0;
+        }
+
+        /* =========================================
+           SAVE INDICATOR
+           ========================================= */
+
+        var saveTimeout = null;
+
+        function flashSaveIndicator() {
+            var indicator = document.getElementById('saveIndicator');
+            if (!indicator) return;
+
+            /* Clear any existing timeout */
+            if (saveTimeout) clearTimeout(saveTimeout);
+
+            /* Show and pulse green */
+            indicator.classList.add('show', 'pulse');
+
+            /* After 1.5s, fade the green pulse back to gray */
+            saveTimeout = setTimeout(function() {
+                indicator.classList.remove('pulse');
+            }, 1500);
+
+            /* After 3s, keep it visible but neutral */
+            /* The indicator stays visible ("Saved") after first transition */
         }
 
         /* =========================================
@@ -2722,7 +2835,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             if (holdBadge) holdBadge.innerHTML = '<span class="material-icons">credit_card</span> $' + hold + ' hold';
             if (participantsEl) participantsEl.textContent = participants.toLocaleString();
             if (durationEl) durationEl.textContent = duration + ' wks';
-            if (datesEl) datesEl.textContent = 'June 9 — Jul 21';
+            if (datesEl) datesEl.textContent = 'Apr 6 — May 17';
         }
 
         /* Helper: hex color to rgb string */
@@ -2828,15 +2941,17 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             if (field === 'hold' || field === 'duration') {
                 updateHeroStats();
             }
-            /* Update end date helper if duration changed */
+            /* Update helpers when duration changes */
             if (field === 'duration') {
                 updateEndDate();
+                updateDateConfirmEnd();
+                updateDurationHelper();
             }
-            /* Update recruiting date when recruiting window changes */
-            if (field === 'recruiting') {
-                updateRecruitingDate();
+            /* Update hold helper */
+            if (field === 'hold') {
+                updateHoldHelper();
             }
-            /* Update difficulty description */
+            /* Update difficulty helper */
             if (field === 'difficulty') {
                 updateDifficultyHelper();
             }
@@ -2877,14 +2992,37 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             document.getElementById('econTotal').textContent = '$' + Math.round(totalEarnings).toLocaleString();
         }
 
+        function updateDurationHelper() {
+            var helper = document.getElementById('durationHelper');
+            if (!helper) return;
+            var descriptions = {
+                '4': 'Shorter collabs see the highest sign-up rates — but earnings tend to be more modest.',
+                '5': 'Solid middle ground. Good activation with stronger earnings potential.',
+                '6': 'Longer commitment — sign-ups may dip, but your earnings potential goes up.'
+            };
+            helper.textContent = descriptions[state.duration] || '';
+        }
+
+        function updateHoldHelper() {
+            var helper = document.getElementById('holdHelper');
+            if (!helper) return;
+            var descriptions = {
+                '30': 'Returned if they finish. Low barrier — maximizes sign-ups, but lower earnings potential.',
+                '40': 'Returned if they finish. Good balance of sign-ups and earnings.',
+                '50': 'Returned if they finish. Higher commitment — fewer sign-ups, but stronger earnings.',
+                '60': 'Returned if they finish. Premium hold — sign-ups may dip, but your earnings potential is highest.'
+            };
+            helper.textContent = descriptions[state.hold] || '';
+        }
+
         function updateDifficultyHelper() {
             var helper = document.getElementById('difficultyHelper');
             if (!helper) return;
             var descriptions = {
-                steady: 'A gentle pace — great for beginners or anyone easing back into a routine',
-                strong: 'A balanced challenge — most participants will need to push a bit to finish',
-                stretch: 'A demanding commitment — designed for experienced and motivated participants',
-                advanced: 'An intense grind — only the most dedicated will make it to the finish line'
+                steady: 'Gentle pace, great for beginners. High sign-up rates, but lower earnings potential.',
+                strong: 'Balanced challenge. Solid sign-up rates with healthy earnings potential.',
+                stretch: 'Demanding commitment. Activation may dip, but your earnings potential grows.',
+                advanced: 'Intense challenge. Fewer will sign up, but your earnings potential is highest.'
             };
             helper.textContent = descriptions[state.difficulty] || '';
         }
@@ -3032,18 +3170,6 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 revTypeIcon.querySelector('.material-icons').style.color = p.emphasis;
             }
 
-            /* Recruiting date */
-            var parts = state.startDate.replace(',', '').split(' ');
-            var monthIdx = monthNames.indexOf(parts[0]);
-            var day = parseInt(parts[1]);
-            var year = parseInt(parts[2]);
-            if (monthIdx !== -1 && !isNaN(day) && !isNaN(year)) {
-                var start = new Date(year, monthIdx, day);
-                var recruitWeeks = parseInt(state.recruiting) || 2;
-                var openDate = new Date(start.getTime() - recruitWeeks * 7 * 24 * 60 * 60 * 1000);
-                var revRecruit = document.getElementById('reviewRecruitDate');
-                if (revRecruit) revRecruit.textContent = monthNames[openDate.getMonth()] + ' ' + openDate.getDate() + ', ' + openDate.getFullYear();
-            }
         }
 
         /* =========================================
@@ -3131,22 +3257,12 @@ Each week brings a fresh target calibrated to keep you progressing without burni
            CALENDAR DATE PICKER (Screen 2)
            ========================================= */
 
-        var calYear = 2025;
-        var calMonth = 5; /* June (0-indexed) */
-        var calSelectedDay = 9; /* June 9 = Monday */
+        var calYear = 2026;
+        var calMonth = 3; /* April (0-indexed) */
+        var calSelectedDay = 6; /* April 6 = Monday */
 
         var monthNames = ['January','February','March','April','May','June',
                           'July','August','September','October','November','December'];
-
-        function openCalendar() {
-            /* Parse current startDate back to calendar state */
-            renderCalendar();
-            document.getElementById('calendarOverlay').classList.add('show');
-        }
-
-        function closeCalendar() {
-            document.getElementById('calendarOverlay').classList.remove('show');
-        }
 
         function calNavMonth(dir) {
             calMonth += dir;
@@ -3161,21 +3277,65 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             var label = monthNames[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
             state.startDate = label;
 
-            /* Update date field text */
-            var el = document.getElementById('dateFieldText');
-            if (el) el.textContent = label;
+            /* Update inline date confirmation */
+            var startEl = document.getElementById('dateConfirmStart');
+            if (startEl) startEl.textContent = label;
 
-            /* Update end date helper */
+            /* Update end date on confirmation card */
+            updateDateConfirmEnd();
+
+            /* Update end date helper on Screen 2 */
             updateEndDate();
-
-            /* Update recruiting date helper */
-            updateRecruitingDate();
 
             /* Update hero stats dates */
             updateHeroStats();
 
             renderCalendar();
-            setTimeout(closeCalendar, 250);
+        }
+
+        function updateDateConfirmEnd() {
+            var parts = state.startDate.replace(',', '').split(' ');
+            var monthIdx = monthNames.indexOf(parts[0]);
+            var day = parseInt(parts[1]);
+            var year = parseInt(parts[2]);
+            if (monthIdx === -1 || isNaN(day) || isNaN(year)) return;
+
+            var start = new Date(year, monthIdx, day);
+            var weeks = parseInt(state.duration) || 6;
+            var end = new Date(start.getTime() + (weeks * 7 - 1) * 24 * 60 * 60 * 1000); /* ends on Sunday */
+
+            var endEl = document.getElementById('dateConfirmEnd');
+            if (endEl) endEl.textContent = monthNames[end.getMonth()] + ' ' + end.getDate() + ', ' + end.getFullYear();
+
+            /* Days until start */
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            start.setHours(0, 0, 0, 0);
+            var daysUntil = Math.round((start - today) / (24 * 60 * 60 * 1000));
+            var daysUntilEl = document.getElementById('dateConfirmDaysUntil');
+            if (daysUntilEl) {
+                if (daysUntil <= 0) {
+                    daysUntilEl.textContent = 'Starts today';
+                } else if (daysUntil === 1) {
+                    daysUntilEl.textContent = '1 day away';
+                } else {
+                    daysUntilEl.textContent = daysUntil + ' days away';
+                }
+            }
+
+            /* Days available to recruit (from today through end of first Sunday) */
+            var firstSunday = new Date(start.getTime() + 6 * 24 * 60 * 60 * 1000); /* Monday + 6 = Sunday */
+            var recruitDays = Math.round((firstSunday - today) / (24 * 60 * 60 * 1000));
+            var recruitEl = document.getElementById('dateConfirmRecruit');
+            if (recruitEl) {
+                if (recruitDays <= 0) {
+                    recruitEl.textContent = 'No time to recruit';
+                } else if (recruitDays === 1) {
+                    recruitEl.textContent = '1 day to recruit';
+                } else {
+                    recruitEl.textContent = recruitDays + ' days to recruit';
+                }
+            }
         }
 
         function renderCalendar() {
@@ -3252,28 +3412,11 @@ Each week brings a fresh target calibrated to keep you progressing without burni
 
             var start = new Date(year, monthIdx, day);
             var weeks = parseInt(state.duration) || 6;
-            var end = new Date(start.getTime() + weeks * 7 * 24 * 60 * 60 * 1000);
+            var end = new Date(start.getTime() + (weeks * 7 - 1) * 24 * 60 * 60 * 1000); /* ends on Sunday */
 
             helper.textContent = 'Ends ' + monthNames[end.getMonth()] + ' ' + end.getDate() + ', ' + end.getFullYear();
         }
 
-        function updateRecruitingDate() {
-            var helper = document.getElementById('recruitingHelper');
-            if (!helper) return;
-
-            var parts = state.startDate.replace(',', '').split(' ');
-            var monthIdx = monthNames.indexOf(parts[0]);
-            var day = parseInt(parts[1]);
-            var year = parseInt(parts[2]);
-
-            if (monthIdx === -1 || isNaN(day) || isNaN(year)) return;
-
-            var start = new Date(year, monthIdx, day);
-            var recruitWeeks = parseInt(state.recruiting) || 2;
-            var openDate = new Date(start.getTime() - recruitWeeks * 7 * 24 * 60 * 60 * 1000);
-
-            helper.textContent = 'Recruiting opens ' + monthNames[openDate.getMonth()] + ' ' + openDate.getDate() + ', ' + openDate.getFullYear();
-        }
 
         /* =========================================
            INIT
@@ -3282,7 +3425,6 @@ Each week brings a fresh target calibrated to keep you progressing without burni
         updateScreens();
         updateEconomics();
         updateEndDate();
-        updateRecruitingDate();
         updatePreview();
         /* Re-apply brand colors after browser completes layout */
         requestAnimationFrame(function() { updatePreview(); });
