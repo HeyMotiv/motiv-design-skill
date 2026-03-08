@@ -638,7 +638,7 @@
         .grouped-stat {
             flex: 1;
             padding: 18px 16px;
-            text-align: center;
+            text-align: left;
         }
 
         .grouped-stat-value {
@@ -653,6 +653,38 @@
             font-size: 12px;
             font-weight: 500;
             color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .grouped-stat-bar {
+            width: 80%;
+            height: 6px;
+            background: var(--color-border-default);
+            border-radius: 3px;
+            margin: 0;
+            overflow: hidden;
+        }
+        .grouped-stat-bar-fill {
+            height: 100%;
+            background: var(--color-clay);
+            border-radius: 3px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-pills {
+            display: flex;
+            gap: 4px;
+            width: 80%;
+            margin: 2px 0 0;
+        }
+        .day-pill {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--color-border-default);
+        }
+        .day-pill.filled {
+            background: var(--color-clay);
         }
 
         .grouped-divider {
@@ -1768,16 +1800,27 @@
                         <div class="grouped-card-row">
                             <div class="grouped-stat">
                                 <div class="grouped-stat-value">
-                                    <span style="color: var(--color-clay);">3</span><span style="color: var(--color-text-tertiary); font-size: 18px;">/6</span>
+                                    <span style="color: var(--color-clay);">3</span><span style="color: var(--color-text-tertiary); font-size: 18px;"> /6 days</span>
                                 </div>
-                                <div class="grouped-stat-label">Days completed</div>
+                                <div class="grouped-stat-label">3 days to go</div>
+                                <div class="day-pills">
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                </div>
                             </div>
                             <div class="grouped-divider"></div>
                             <div class="grouped-stat">
                                 <div class="grouped-stat-value">
-                                    <span style="color: var(--color-clay);">1,100</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/2,100 kJ</span>
+                                    <span style="color: var(--color-clay);">1,100</span><span style="color: var(--color-text-tertiary); font-size: 14px;"> /2,100 kJ</span>
                                 </div>
-                                <div class="grouped-stat-label">kJ logged</div>
+                                <div class="grouped-stat-label">1,000 kJ left 🔥</div>
+                                <div class="grouped-stat-bar">
+                                    <div class="grouped-stat-bar-fill" style="width: 52%;"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="grouped-card-divider"></div>

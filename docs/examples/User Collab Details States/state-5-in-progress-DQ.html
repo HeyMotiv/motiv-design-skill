@@ -600,25 +600,101 @@
     font-weight: 600;
   }
 
-  /* ── Eliminated value card ── */
-  .value-card.eliminated {
-    border-color: #E8DFD6;
+  /* ── Rewards Unavailable (collapsed card) ── */
+  .rewards-unavailable {
+    background: var(--creator-white);
+    border-radius: var(--radius-xl);
+    border: 1px solid #E8DFD6;
+    overflow: hidden;
   }
-  .value-card.eliminated .value-amount {
+  .rewards-unavailable-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .rewards-unavailable-header:active {
+    background: rgba(0,0,0,0.02);
+  }
+  .rewards-unavailable-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rewards-unavailable-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--creator-primary-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .rewards-unavailable-icon svg {
+    width: 16px; height: 16px;
+    stroke: var(--creator-primary-light);
+  }
+  .rewards-unavailable-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--creator-text);
+    line-height: 1.2;
+  }
+  .rewards-unavailable-sub {
+    font-size: 12px;
     color: var(--creator-text-muted);
+    margin-top: 2px;
   }
-  .value-card.eliminated .v-pill-box {
-    border-color: #D5D0DB;
-    background: #FAFAFA;
+  .rewards-chevron {
+    width: 20px; height: 20px;
+    transition: transform 0.3s ease;
   }
-  .value-card.eliminated .v-pill-amount {
+  .rewards-chevron svg {
+    width: 20px; height: 20px;
+    stroke: var(--creator-text-muted);
+  }
+  .rewards-chevron.open {
+    transform: rotate(180deg);
+  }
+  .rewards-unavailable-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 18px;
+  }
+  .rewards-unavailable-body.open {
+    max-height: 200px;
+    padding: 0 18px 18px;
+  }
+  .rewards-unavailable-detail {
+    background: #FAF5F0;
+    border-radius: var(--radius-md);
+    border: 1px solid #E8DFD6;
+    padding: 12px 14px;
+  }
+  .rewards-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .rewards-detail-text {
+    flex: 1;
+    font-size: 12.5px;
+    color: var(--creator-text-secondary);
+    line-height: 1.45;
+  }
+  .rewards-detail-text strong {
+    color: var(--creator-text);
+    font-weight: 600;
+  }
+  .rewards-unavailable-note {
+    font-size: 11.5px;
     color: var(--creator-text-muted);
-  }
-  .value-card.eliminated .v-pill-label {
-    color: #C4C4D0;
-  }
-  .value-card.eliminated .v-pill-plus {
-    color: #C4C4D0;
+    line-height: 1.5;
+    margin-top: 12px;
   }
 
   .eliminated-reason {
@@ -906,27 +982,6 @@
   }
   .sync-btn:active { opacity: 0.6; }
 
-  /* ── High Five Emoji Rain ── */
-  .emoji-rain-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 99999;
-    pointer-events: all;
-    overflow: hidden;
-  }
-  .emoji-rain-overlay .rain-emoji {
-    position: absolute;
-    top: -50px;
-    animation: emojifall linear forwards;
-    pointer-events: none;
-    user-select: none;
-  }
-  @keyframes emojifall {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: translateY(900px) rotate(360deg); opacity: 0; }
-  }
-
   /* ── High Five Card ── */
   .highfive-card {
     display: none;
@@ -1066,22 +1121,6 @@
     font-size: 15px; font-weight: 700; color: white;
     text-align: center;
   }
-
-  /* ── Demo trigger ── */
-  .demo-trigger {
-    position: fixed;
-    bottom: 70px; right: 16px;
-    z-index: 100;
-    background: var(--creator-vivid);
-    color: white; border: none;
-    border-radius: 50px;
-    padding: 8px 14px;
-    font-size: 11px; font-weight: 700;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(125, 59, 237, 0.3);
-  }
-  .demo-trigger:active { opacity: 0.8; }
 
   /* ── Community feed ── */
   /* ── Journey section ── */
@@ -1300,11 +1339,6 @@
             <span class="week-dot-label">Wk 6</span>
           </div>
         </div>
-        <div class="eliminated-banner">
-          <div class="eliminated-banner-text">
-            No longer eligible for rewards
-          </div>
-        </div>
       </div>
 
     </div>
@@ -1312,23 +1346,30 @@
   </div>
   </div><!-- end hero -->
 
-  <!-- Max Collab Value Card -->
-  <div class="content">
-    <div class="value-card eliminated">
-      <div class="value-header">
-        <span>Max collab value</span>
-        <div class="info-icon" onclick="document.getElementById('collab-value-modal').classList.add('show')">i</div>
+  <!-- Collab Value (Collapsed Intermediate State) -->
+  <div class="content" style="margin-top: 8px;">
+    <div class="rewards-unavailable" id="rewardsCard">
+      <div class="rewards-unavailable-header" onclick="toggleRewardsDetail()">
+        <div class="rewards-unavailable-left">
+          <div class="rewards-unavailable-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>
+          </div>
+          <div>
+            <div class="rewards-unavailable-title">Collab value</div>
+            <div class="rewards-unavailable-sub">Tap to view your details</div>
+          </div>
+        </div>
+        <div class="rewards-chevron" id="rewardsChevron">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
-      <div class="mvp-note">You are no longer eligible for rewards</div>
-      <div class="value-amount">$0.00</div>
-
-      <div class="eliminated-reason" onclick="openDetailsToWeek(2)">
-        <div class="eliminated-reason-items">
-          <div class="eliminated-reason-item">
+      <div class="rewards-unavailable-body" id="rewardsBody">
+        <div class="rewards-unavailable-detail">
+          <div class="rewards-detail-row" onclick="openDetailsToWeek(2)">
             <div class="eliminated-reason-dash">
               <svg viewBox="0 0 12 12"><line x1="3" y1="6" x2="9" y2="6"/></svg>
             </div>
-            <div class="eliminated-reason-desc">
+            <div class="rewards-detail-text">
               <strong>Wk 2:</strong> 4/6 days · 1,250/2,100 kJ
             </div>
             <div class="eliminated-reason-chevron">
@@ -1336,6 +1377,7 @@
             </div>
           </div>
         </div>
+        <div class="rewards-unavailable-note">You can still participate and track your progress — rewards just won't be available for this collab.</div>
       </div>
     </div>
   </div>
@@ -1846,15 +1888,18 @@
     </div>
   </div>
 
-  <!-- High Five Emoji Rain Overlay -->
-  <div class="emoji-rain-overlay" id="emojiRainOverlay" style="display: none;" onclick="dismissEmojiRain()"></div>
-
-  <!-- Demo trigger -->
-  <button class="demo-trigger" onclick="triggerHighFiveRain()">🖐️ Demo celebration</button>
 
 </div>
 
 <script>
+  // Toggle rewards detail
+  function toggleRewardsDetail() {
+    var body = document.getElementById('rewardsBody');
+    var chevron = document.getElementById('rewardsChevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
   // Open details modal to a specific week
   function openDetailsToWeek(week) {
     var modal = document.getElementById('full-details-modal');
@@ -1905,46 +1950,6 @@
     }
   }
 
-  // ── High Five Emoji Rain ──
-  function triggerHighFiveRain() {
-    var overlay = document.getElementById('emojiRainOverlay');
-    overlay.style.display = 'block';
-    overlay.innerHTML = '';
-
-    var emojis = ['🖐️', '❤️', '✋', '💜', '🙌'];
-    var totalEmojis = 35;
-
-    for (var i = 0; i < totalEmojis; i++) {
-      var emoji = document.createElement('span');
-      emoji.className = 'rain-emoji';
-      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      emoji.style.left = (Math.random() * 95) + '%';
-      var size = 20 + Math.random() * 20;
-      emoji.style.fontSize = size + 'px';
-      var duration = 2 + Math.random() * 2;
-      emoji.style.animationDuration = duration + 's';
-      var delay = Math.random() * 1.5;
-      emoji.style.animationDelay = delay + 's';
-      overlay.appendChild(emoji);
-    }
-
-    setTimeout(function() {
-      dismissEmojiRain();
-    }, 4500);
-  }
-
-  function dismissEmojiRain() {
-    var overlay = document.getElementById('emojiRainOverlay');
-    overlay.style.display = 'none';
-    overlay.innerHTML = '';
-  }
-
-  // Auto-trigger celebration on load (demo)
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      triggerHighFiveRain();
-    }, 800);
-  });
 </script>
 
 </body>
