@@ -1587,29 +1587,76 @@
            HIGH FIVE TOAST
            ========================================= */
 
-        .highfive-toast {
+        /* Flip notification card */
+        .highfive-notif {
             position: absolute;
-            right: -110%;
             top: 48px;
+            left: 24px;
+            right: 24px;
             z-index: 10000;
+            perspective: 800px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            cursor: pointer;
+        }
+        .highfive-notif.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .highfive-notif.fade-out {
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .highfive-notif-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .highfive-notif.flipped .highfive-notif-inner {
+            transform: rotateY(180deg);
+        }
+
+        .highfive-notif-front,
+        .highfive-notif-back {
             display: flex;
             align-items: center;
             gap: 14px;
             padding: 16px 22px;
-            width: calc(100% - 48px);
             background: rgba(255,255,255,0.94);
             backdrop-filter: blur(16px) saturate(1.4);
             -webkit-backdrop-filter: blur(16px) saturate(1.4);
             border-radius: 20px;
             box-shadow: 0 6px 32px rgba(60,30,90,0.20), 0 2px 6px rgba(0,0,0,0.08);
             border: 1px solid rgba(255,255,255,0.5);
-            transition: right 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
-        .highfive-toast.visible {
-            right: 24px;
+        .highfive-notif-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #7B5EA7 0%, #9B6FD4 50%, #C084FC 100%);
+            border: none;
         }
-        .highfive-toast-avatar {
+        .highfive-notif-back .highfive-notif-title {
+            color: #FFFFFF;
+            font-size: 19px;
+        }
+        .highfive-notif-back .highfive-notif-sub {
+            color: rgba(255,255,255,0.85);
+        }
+        .highfive-notif-back .highfive-notif-sub strong {
+            color: #FFFFFF;
+        }
+        .highfive-notif-back .highfive-notif-avatar {
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .highfive-notif-avatar {
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -1619,25 +1666,32 @@
             flex-shrink: 0;
             border: 2px solid var(--color-clay);
         }
-        .highfive-toast-text {
+        .highfive-notif-text {
             display: flex;
             flex-direction: column;
             gap: 2px;
+            flex: 1;
         }
-        .highfive-toast-title {
+        .highfive-notif-title {
             font-size: 17px;
             font-weight: 700;
             color: var(--color-text-primary);
         }
-        .highfive-toast-from {
+        .highfive-notif-sub {
             font-size: 13px;
             font-weight: 500;
             color: var(--color-text-secondary);
             line-height: 1.3;
         }
-        .highfive-toast-from strong {
+        .highfive-notif-sub strong {
             font-weight: 700;
             color: var(--color-clay);
+        }
+        .highfive-notif-tap {
+            font-size: 12px;
+            color: var(--color-clay);
+            font-weight: 600;
+            white-space: nowrap;
         }
 
     </style>
@@ -1855,20 +1909,10 @@
                     <div class="earnings-content">
                         <div>
                             <div class="earnings-value">$83.67</div>
-                            <div class="earnings-sub">$40 hold + $1 reward + $42.67 MVP bonus</div>
+                            <div class="earnings-sub">Only two MVPs earn the max collab value</div>
                         </div>
                         <span class="material-icons" style="color: var(--color-text-tertiary);">chevron_right</span>
                     </div>
-                    <div class="earnings-card-note">Only the two MVPs earn the MVP bonus</div>
-                </div>
-            </div>
-
-            <!-- High five toast (slides in from top during emoji rain) -->
-            <div class="highfive-toast" id="highfiveToast">
-                <div class="highfive-toast-avatar"></div>
-                <div class="highfive-toast-text">
-                    <span class="highfive-toast-title">🖐️ High five!</span>
-                    <span class="highfive-toast-from">You received some love from <strong>Ellie (@doodle_cycles)</strong></span>
                 </div>
             </div>
 
@@ -1987,6 +2031,29 @@
 
         </div>
         <!-- END .phone-scroll -->
+
+        <!-- High five flip notification (outside scroll container for fixed positioning) -->
+        <div class="highfive-notif" id="highfiveNotif">
+            <div class="highfive-notif-inner">
+                <!-- Front: teaser prompt -->
+                <div class="highfive-notif-front">
+                    <div class="highfive-notif-avatar"></div>
+                    <div class="highfive-notif-text">
+                        <span class="highfive-notif-title">I have something for you! 💌</span>
+                        <span class="highfive-notif-sub">— Ellie, @doodle_cycles</span>
+                    </div>
+                    <span class="highfive-notif-tap">Open</span>
+                </div>
+                <!-- Back: the high five reveal -->
+                <div class="highfive-notif-back">
+                    <div class="highfive-notif-avatar"></div>
+                    <div class="highfive-notif-text">
+                        <span class="highfive-notif-title">You're crushing it! 🖐️🔥</span>
+                        <span class="highfive-notif-sub">High five from <strong>Ellie</strong> — keep showing up!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- compose bar removed -->
 
@@ -2675,36 +2742,52 @@
             });
         }
 
-        // 5. Emoji rain celebration + high five toast
+        // 5. High five notification: show prompt → tap to flip → emoji rain → fade out
+        var notif = frame.querySelector('#highfiveNotif');
+
+        function showHighFivePrompt() {
+            if (!notif) return;
+            notif.classList.remove('flipped', 'fade-out');
+            notif.classList.add('visible');
+        }
+
         function triggerEmojiRain() {
             var overlay = frame.querySelector('.emoji-rain-overlay');
             if (!overlay) {
                 overlay = document.createElement('div');
                 overlay.className = 'emoji-rain-overlay';
-                overlay.style.cssText = 'position:absolute;inset:0;z-index:9999;pointer-events:all;overflow:hidden;';
-                overlay.addEventListener('click', function() {
-                    this.style.display = 'none';
-                    var toast = frame.querySelector('#highfiveToast');
-                    if (toast) toast.classList.remove('visible');
-                });
+                overlay.style.cssText = 'position:absolute;inset:0;z-index:9998;pointer-events:none;overflow:hidden;';
                 frame.appendChild(overlay);
             }
             overlay.style.display = 'block';
             overlay.innerHTML = '';
-            var emojis = ['🖐️', '❤️', '✋', '💜', '🙌'];
-            for (var i = 0; i < 30; i++) {
+            var emojis = ['🔥', '🎉', '❤️', '🙌'];
+            for (var i = 0; i < 35; i++) {
                 var span = document.createElement('span');
                 span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                 span.style.cssText = 'position:absolute;top:-50px;left:' + (Math.random() * 95) + '%;font-size:' + (20 + Math.random() * 20) + 'px;animation:emojifall ' + (2 + Math.random() * 2) + 's linear ' + (Math.random() * 1.5) + 's forwards;pointer-events:none;';
                 overlay.appendChild(span);
             }
-            // Show toast
-            var toast = frame.querySelector('#highfiveToast');
-            if (toast) {
-                setTimeout(function() { toast.classList.add('visible'); }, 300);
-                setTimeout(function() { toast.classList.remove('visible'); }, 5300);
-            }
-            setTimeout(function() { overlay.style.display = 'none'; }, 6000);
+            // Fade out the notification card after the rain settles
+            setTimeout(function() {
+                if (notif) notif.classList.add('fade-out');
+            }, 3500);
+            setTimeout(function() {
+                overlay.style.display = 'none';
+                if (notif) {
+                    notif.classList.remove('visible', 'flipped', 'fade-out');
+                }
+            }, 5000);
+        }
+
+        // Tap the notification to flip and trigger rain
+        if (notif) {
+            notif.addEventListener('click', function() {
+                if (notif.classList.contains('flipped')) return;
+                notif.classList.add('flipped');
+                // Start emoji rain after flip animation completes
+                setTimeout(function() { triggerEmojiRain(); }, 650);
+            });
         }
 
         // 6. Sync button interaction
@@ -2747,8 +2830,8 @@
             });
         }
 
-        // 8. Auto-trigger emoji rain + toast on page load (simulates entering app after high five)
-        setTimeout(function() { triggerEmojiRain(); }, 1500);
+        // 8. Auto-show high five notification on page load (simulates entering app after creator sends love)
+        setTimeout(function() { showHighFivePrompt(); }, 1500);
     });
     </script>
 
