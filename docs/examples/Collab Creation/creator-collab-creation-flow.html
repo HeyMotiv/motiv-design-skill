@@ -2563,7 +2563,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 Continue
                 <span class="material-icons" style="font-size: 20px;">arrow_forward</span>
             </button>
-            <button class="bottom-bar-skip" id="skipDateBtn" onclick="nextScreen()" style="display: none;">I'll pick a date later</button>
+            <button class="bottom-bar-skip" id="skipDateBtn" onclick="skipDate()" style="display: none;">I'll pick a date later</button>
         </div>
 
         <!-- Launch Success Overlay -->
@@ -2593,6 +2593,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
 
         var currentScreen = 0;
         var totalScreens = 4;
+        var dateSkipped = false;
 
         var state = {
             collabName: 'Dog Lovers Who Cycle',
@@ -2660,6 +2661,11 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             var fromScreen = currentScreen;
             currentScreen++;
             updateScreens(fromScreen);
+        }
+
+        function skipDate() {
+            dateSkipped = true;
+            nextScreen();
         }
 
         function goBack() {
@@ -3107,13 +3113,17 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 revTitle.style.fontFamily = f.family;
             }
 
-            /* Dates — strip "· X weeks" since duration is shown below */
+            /* Dates — show TBD if skipped, otherwise strip "· X weeks" */
             var revDates = document.getElementById('reviewCardDates');
             if (revDates) {
-                var srcDates = document.getElementById('heroPreviewDates');
-                if (srcDates) {
-                    var dateText = srcDates.textContent.split('·')[0].trim();
-                    revDates.textContent = dateText;
+                if (dateSkipped) {
+                    revDates.textContent = 'Start date to be determined';
+                } else {
+                    var srcDates = document.getElementById('heroPreviewDates');
+                    if (srcDates) {
+                        var dateText = srcDates.textContent.split('·')[0].trim();
+                        revDates.textContent = dateText;
+                    }
                 }
             }
 
