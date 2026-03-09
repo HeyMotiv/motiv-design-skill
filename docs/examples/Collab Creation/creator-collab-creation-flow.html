@@ -2374,7 +2374,6 @@
                         <div class="pill-row" data-field="difficulty">
                             <div class="pill" data-value="steady" onclick="selectPill(this)">Steady</div>
                             <div class="pill selected" data-value="strong" onclick="selectPill(this)">Strong</div>
-                            <div class="pill" data-value="stretch" onclick="selectPill(this)">Stretch</div>
                             <div class="pill" data-value="advanced" onclick="selectPill(this)">Advanced</div>
                         </div>
                         <div class="field-helper" id="difficultyHelper">Balanced challenge. Solid sign-up rates with healthy earnings potential.</div>
@@ -2502,7 +2501,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                                                     </div>
                                                 </div>
                                                 <div class="preview-stat-value" id="reviewCardDifficulty" style="font-size: 16px;">Strong</div>
-                                                <div class="preview-stat-label">Level</div>
+                                                <div class="preview-stat-label">Difficulty</div>
                                             </div>
                                             <div class="preview-stat-divider"></div>
                                             <div class="preview-stat">
@@ -3170,7 +3169,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             }
 
             /* Level bars — fill count based on difficulty */
-            var levelMap = { steady: 1, strong: 2, stretch: 3, advanced: 4 };
+            var levelMap = { steady: 1, strong: 2, advanced: 3 };
             var fillCount = levelMap[state.difficulty] || 2;
             var revLevelBars = document.getElementById('reviewLevelBars');
             if (revLevelBars) {
