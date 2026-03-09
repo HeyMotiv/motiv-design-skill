@@ -1843,6 +1843,24 @@
             z-index: 50;
         }
 
+        .bottom-bar-skip {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            text-align: center;
+        }
+        .bottom-bar-skip:active {
+            opacity: 0.6;
+        }
+
         .btn-primary {
             display: flex;
             align-items: center;
@@ -2379,7 +2397,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                  ========================================= -->
             <div class="screen" data-screen="2">
                 <div class="screen-body">
-                    <div class="screen-title">Pick your date</div>
+                    <div class="screen-title">Pick a date, adjust anytime</div>
                     <div class="screen-subtitle">Collabs always start on a Monday. You need at least 1 week before launch to recruit.</div>
 
                     <!-- Inline Calendar -->
@@ -2412,14 +2430,6 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                             <div class="date-confirmation-text">
                                 <div class="date-confirmation-label">Ends</div>
                                 <div class="date-confirmation-value" id="dateConfirmEnd">May 17, 2026</div>
-                            </div>
-                        </div>
-                        <div class="date-confirmation-divider"></div>
-                        <div class="date-confirmation-row">
-                            <span class="material-icons" style="font-size: 20px; color: var(--color-plum);">campaign</span>
-                            <div class="date-confirmation-text">
-                                <div class="date-confirmation-label">Recruiting window</div>
-                                <div class="date-confirmation-value" id="dateConfirmRecruit">93 days to recruit</div>
                             </div>
                         </div>
                     </div>
@@ -2553,6 +2563,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 Continue
                 <span class="material-icons" style="font-size: 20px;">arrow_forward</span>
             </button>
+            <button class="bottom-bar-skip" id="skipDateBtn" onclick="nextScreen()" style="display: none;">I'll pick a date later</button>
         </div>
 
         <!-- Launch Success Overlay -->
@@ -2685,6 +2696,10 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             } else {
                 bottomBar.style.display = '';
             }
+
+            /* Show skip-date link only on date screen (screen 2) */
+            var skipDateBtn = document.getElementById('skipDateBtn');
+            skipDateBtn.style.display = (currentScreen === 2) ? '' : 'none';
 
             /* Render inline calendar when navigating to date screen */
             if (currentScreen === 2) {
