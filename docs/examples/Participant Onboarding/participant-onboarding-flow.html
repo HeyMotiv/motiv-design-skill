@@ -133,6 +133,13 @@
         .btn-primary:active:not(:disabled) { transform: scale(0.97); }
         .btn-primary.btn-disabled { opacity: 0.35; cursor: not-allowed; }
 
+        /* OTP Screen */
+        .otp-inputs { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .otp-box { width: 48px; height: 56px; text-align: center; font-family: var(--font-body); font-size: 24px; font-weight: 600; color: var(--color-text-primary); border: 1.5px solid var(--color-border-default); border-radius: var(--radius-md); outline: none; background: var(--color-bg-primary); transition: border-color var(--motion-fast); }
+        .otp-box:focus { border-color: var(--color-text-secondary); box-shadow: none; }
+        .otp-resend { font-size: 14px; color: var(--color-text-tertiary); text-align: center; }
+        .otp-resend a { color: var(--color-text-secondary); text-decoration: underline; cursor: pointer; }
+
         .btn-secondary { display: flex; align-items: center; justify-content: center; width: 100%; background: transparent; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 16px; font-weight: 500; padding: 16px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: opacity var(--motion-fast); }
         .btn-secondary:hover { opacity: 0.7; }
 
@@ -831,10 +838,11 @@
     <div class="review-subtitle">
         <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
         <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
-        <span class="nav-jump" onclick="goTo(2)">2 Welcome</span> ·
-        <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
-        <span class="nav-jump" onclick="goTo(4)">4 Collab Details</span> ·
-        <span class="nav-jump" onclick="goTo(5)">5 Notifications</span>
+        <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Welcome</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 Collab Details</span> ·
+        <span class="nav-jump" onclick="goTo(6)">6 Notifications</span>
     </div>
 </div>
 
@@ -897,11 +905,11 @@
             <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 40px;">Join me and your other favorite creators</div>
 
             <div class="auth-section">
-                <button class="auth-btn auth-btn--apple" onclick="goTo(2)">
+                <button class="auth-btn auth-btn--apple" onclick="goTo(3)">
                     <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                     Continue with Apple
                 </button>
-                <button class="auth-btn auth-btn--google" onclick="goTo(2)">
+                <button class="auth-btn auth-btn--google" onclick="goTo(3)">
                     <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                     Continue with Google
                 </button>
@@ -921,15 +929,47 @@
             <div style="flex: 1; min-height: 16px;"></div>
 
             <div>
-                <button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="goTo(2)" disabled>Continue</button>
+                <button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="submitEmail()" disabled>Continue</button>
             </div>
         </div>
     </div>
 
     <!-- ============================================
-         SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
+         SCREEN 2: VERIFY CODE (OTP)
          ============================================ -->
     <div class="screen" id="screen2">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+
+            <div style="margin-bottom: 8px;">
+                <a class="back-btn" onclick="goTo(1)"><span class="material-icons">arrow_back</span></a>
+            </div>
+
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 8px;">Check your email</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 36px;">We sent a code to <strong id="otpEmailDisplay">your email</strong></div>
+
+                <div class="otp-inputs">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 0)" onkeydown="handleCodeKeydown(event, this, 0)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 1)" onkeydown="handleCodeKeydown(event, this, 1)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 2)" onkeydown="handleCodeKeydown(event, this, 2)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 3)" onkeydown="handleCodeKeydown(event, this, 3)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 4)" onkeydown="handleCodeKeydown(event, this, 4)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 5)" onkeydown="handleCodeKeydown(event, this, 5)">
+                </div>
+
+                <div class="otp-resend">Didn't get it? <a onclick="resendCode()">Resend</a></div>
+            </div>
+
+            <div>
+                <button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="goTo(3)" disabled>Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 3: YOU'VE UNLOCKED SOMETHING SPECIAL
+         ============================================ -->
+    <div class="screen" id="screen3">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
 
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
@@ -963,18 +1003,18 @@
             </div>
 
             <div>
-                <button class="btn-primary" onclick="goTo(3)">Continue</button>
+                <button class="btn-primary" onclick="goTo(4)">Continue</button>
             </div>
         </div>
     </div>
 
     <!-- ============================================
-         SCREEN 3: PROFILE COMPLETION
+         SCREEN 4: PROFILE COMPLETION
          ============================================ -->
-    <div class="screen" id="screen3">
+    <div class="screen" id="screen4">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
             <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
-                <a href="#" class="back-btn" onclick="goTo(2);return false"><span class="material-icons">chevron_left</span></a>
+                <a href="#" class="back-btn" onclick="goTo(3);return false"><span class="material-icons">chevron_left</span></a>
             </div>
 
             <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px;">
@@ -1016,23 +1056,23 @@
             <div style="flex: 1; min-height: 16px;"></div>
 
             <div>
-                <button class="btn-primary" onclick="goTo(4)">Continue</button>
-                <button class="btn-secondary" onclick="goTo(4)" style="font-size: 14px; padding: 12px;">Skip for now</button>
+                <button class="btn-primary" onclick="goTo(5)">Continue</button>
+                <button class="btn-secondary" onclick="goTo(5)" style="font-size: 14px; padding: 12px;">Skip for now</button>
             </div>
         </div>
     </div>
 
     <!-- ============================================
-         SCREEN 4: COLLAB DETAILS (from state-1-details-redesigned)
+         SCREEN 5: COLLAB DETAILS (from state-1-details-redesigned)
          ============================================ -->
-    <div class="screen" id="screen4">
+    <div class="screen" id="screen5">
         <div class="s4-scroll">
             <div class="s4-hero-wrapper">
                 <div class="s4-hero-image"></div>
                 <div class="s4-hero-gradient"></div>
 
                 <div class="s4-hero-content">
-                    <button class="s4-back-row" onclick="goTo(3)">
+                    <button class="s4-back-row" onclick="goTo(4)">
                         <span class="material-icons">arrow_back_ios</span> Back
                     </button>
 
@@ -1240,7 +1280,7 @@
 
         <!-- Sticky bottom CTA -->
         <div class="s4-bottom-bar">
-            <button class="s4-join-btn" onclick="goTo(5)">
+            <button class="s4-join-btn" onclick="goTo(6)">
                 Join Collab — $40 hold
                 <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
             </button>
@@ -1248,9 +1288,9 @@
     </div>
 
     <!-- ============================================
-         SCREEN 5: PUSH NOTIFICATIONS (post-join)
+         SCREEN 6: PUSH NOTIFICATIONS (post-join)
          ============================================ -->
-    <div class="screen" id="screen5">
+    <div class="screen" id="screen6">
         <!-- iOS Permission Dialog -->
         <div class="ios-dialog-overlay" id="iosDialogOverlay">
             <div class="ios-dialog">
@@ -1344,10 +1384,10 @@
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign In','Welcome','Profile','Collab Details','Notifications'];
+    const names = ['Splash','Sign In','Verify','Welcome','Profile','Collab Details','Notifications'];
     let cur = 0;
     const total = names.length;
-    const greenScreens = [5]; // Only notifications screen gets green
+    const greenScreens = [6]; // Only notifications screen gets green
 
     function updateUI() {
         document.getElementById('stepNum').textContent = `Step ${cur+1} of ${total}`;
@@ -1369,6 +1409,48 @@
         const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
         btn.disabled = !valid;
         btn.classList.toggle('btn-disabled', !valid);
+    }
+
+    function submitEmail() {
+        const email = document.getElementById('emailInput').value.trim();
+        document.getElementById('otpEmailDisplay').textContent = email;
+        // Clear any previous OTP entries
+        document.querySelectorAll('.otp-box').forEach(b => { b.value = ''; });
+        const otpBtn = document.getElementById('otpContinueBtn');
+        otpBtn.disabled = true;
+        otpBtn.classList.add('btn-disabled');
+        goTo(2);
+        // Focus first OTP box after transition
+        setTimeout(() => { document.querySelectorAll('.otp-box')[0].focus(); }, 400);
+    }
+
+    function handleCodeInput(el, index) {
+        el.value = el.value.replace(/[^0-9]/g, '').slice(0, 1);
+        if (el.value && index < 5) {
+            document.querySelectorAll('.otp-box')[index + 1].focus();
+        }
+        validateOtp();
+    }
+
+    function handleCodeKeydown(e, el, index) {
+        if (e.key === 'Backspace' && !el.value && index > 0) {
+            document.querySelectorAll('.otp-box')[index - 1].focus();
+        }
+    }
+
+    function validateOtp() {
+        const boxes = document.querySelectorAll('.otp-box');
+        const filled = [...boxes].every(b => b.value.length === 1);
+        const btn = document.getElementById('otpContinueBtn');
+        btn.disabled = !filled;
+        btn.classList.toggle('btn-disabled', !filled);
+    }
+
+    function resendCode() {
+        // Visual feedback — flash the resend link
+        const link = document.querySelector('.otp-resend a');
+        link.textContent = 'Sent!';
+        setTimeout(() => { link.textContent = 'Resend'; }, 2000);
     }
 
     function goTo(i) {
