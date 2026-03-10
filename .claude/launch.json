@@ -2,22 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "creator-flow",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/serve.js"],
-      "port": 8765
-    },
-    {
       "name": "participant-onboarding",
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/worktrees/unruffled-morse/serve-participant.js"],
       "port": 8766
-    },
-    {
-      "name": "user-collab-states",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["-e", "const h=require('http'),f=require('fs'),p=require('path'),d='/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/worktrees/musing-engelbart/docs/examples/User Collab Details States';h.createServer((q,r)=>{let u=decodeURIComponent(q.url==='/'?'/index.html':q.url),fp=p.join(d,u);if(!f.existsSync(fp)){if(q.url==='/'){let files=f.readdirSync(d).filter(x=>x.endsWith('.html')).map(x=>'<li><a href=\"/'+x+'\">'+x+'</a></li>').join('');r.writeHead(200,{'Content-Type':'text/html'});r.end('<html><body><h1>Files</h1><ul>'+files+'</ul></body></html>');return}r.writeHead(404);r.end('Not found');return}r.writeHead(200,{'Content-Type':'text/html'});f.createReadStream(fp).pipe(r)}).listen(8767,()=>console.log('Serving on 8767'))"],
-      "port": 8767
     }
   ]
 }

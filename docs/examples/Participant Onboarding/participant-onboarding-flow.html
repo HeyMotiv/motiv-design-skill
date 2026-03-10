@@ -145,30 +145,12 @@
            =========================================== */
         .s0-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
 
-        .login-pill { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--color-brand-secondary); background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); border-radius: var(--radius-full); padding: 10px 24px; cursor: pointer; transition: background var(--motion-fast), transform var(--motion-fast); }
-        .login-pill:hover { background: rgba(255,255,255,0.9); transform: scale(1.03); }
-
         .s0-wordmark { font-family: var(--font-display); font-size: 72px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.03em; line-height: 1; text-align: center; position: relative; z-index: 2; opacity: 0; transform: scale(0.92); }
         .s0-wordmark.visible { animation: splash-word-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes splash-word-in {
             to { opacity: 1; transform: scale(1); }
         }
-        .s0-wordmark.breathing { animation: splash-breathe 2.4s ease-in-out infinite; }
-        @keyframes splash-breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
 
-        /* Ripple rings */
-        .s0-ripple-container { position: absolute; z-index: 1; pointer-events: none; }
-        .s0-ripple { position: absolute; border: 1.5px solid var(--color-brand-secondary); border-radius: 50%; opacity: 0; transform: translate(-50%, -50%) scale(0); }
-        @keyframes ripple-expand {
-            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0); }
-            60% { opacity: 0.25; }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        /* Tagline */
         .s0-tagline { font-family: var(--font-body); font-size: 18px; color: var(--color-text-secondary); text-align: center; line-height: 1.55; margin-top: 20px; position: relative; z-index: 2; opacity: 0; transform: translateY(10px); }
         .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
 
@@ -198,219 +180,623 @@
         .form-helper { font-size: 12px; color: var(--color-text-tertiary); margin-top: var(--space-xs); }
 
         /* ===========================================
-           SCREEN 2: STORY MODE — HOW MOTIV WORKS
+           SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
            =========================================== */
-        .story-bar {
-            position: absolute;
-            top: 56px;
-            left: 12px;
-            right: 12px;
-            z-index: 15;
+        .s2-banner {
             display: flex;
-            gap: 4px;
-        }
-        .story-segment {
-            flex: 1;
-            height: 3px;
-            background: rgba(0,0,0,0.12);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .story-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--color-brand-primary);
-            border-radius: 2px;
-        }
-        .story-fill.filling {
-            width: 100%;
-            transition: width 3s linear;
-        }
-        .story-fill.done {
-            width: 100%;
-        }
-
-        .story-skip {
-            position: absolute;
-            top: 70px;
-            right: 16px;
-            z-index: 16;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            background: rgba(255,255,255,0.6);
-            backdrop-filter: blur(8px);
-            border: none;
-            border-radius: var(--radius-full);
-            padding: 5px 12px;
-            cursor: pointer;
-            transition: opacity var(--motion-fast);
-        }
-        .story-skip:hover { opacity: 0.7; }
-
-        .story-card {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 100px 32px 48px;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .screen.active .story-card.active { opacity: 1; pointer-events: all; }
-
-        .story-visual { margin-bottom: 32px; }
-
-        .story-headline {
-            font-family: var(--font-display);
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-            text-align: center;
-            margin-bottom: 10px;
-            line-height: 1.2;
-        }
-        .story-body {
-            font-size: 16px;
-            color: var(--color-text-secondary);
-            text-align: center;
-            line-height: 1.5;
-            max-width: 300px;
-        }
-
-        /* Story card enter animations */
-        .story-card .story-visual,
-        .story-card .story-headline,
-        .story-card .story-body {
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .story-card.active .story-visual { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
-        .story-card.active .story-headline { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
-        .story-card.active .story-body { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
-
-        /* Story tap zones */
-        .story-taps {
-            position: absolute;
-            top: 92px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 14;
-            display: flex;
-        }
-        .story-tap { flex: 1; cursor: pointer; }
-
-        /* Card 1: Join — Mini collab card illustration */
-        .mini-collab {
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            width: 260px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-        }
-        .mini-collab-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-        .mini-collab-av { width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
-        .mini-collab-av img { width: 100%; height: 100%; object-fit: cover; }
-        .mini-collab-creator { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
-        .mini-collab-handle { font-size: 12px; color: var(--color-text-tertiary); }
-        .mini-collab-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 12px; }
-        .mini-collab-pills { display: flex; gap: 8px; }
-        .mini-collab-pill { background: rgba(0,0,0,0.04); border-radius: var(--radius-sm); padding: 8px 14px; text-align: center; }
-        .mini-collab-pill-value { font-size: 16px; font-weight: 700; color: var(--color-text-primary); }
-        .mini-collab-pill-label { font-size: 10px; color: var(--color-text-tertiary); font-weight: 500; }
-
-        /* Card 2: Show up — Streak visualization */
-        .streak-week { display: flex; gap: 6px; margin-bottom: 16px; }
-        .streak-day {
-            width: 38px; height: 54px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(8px);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            gap: 2px;
-            font-size: 11px; font-weight: 600;
-            color: var(--color-text-secondary);
-        }
-        .streak-day.done { background: var(--color-brand-primary); color: var(--color-text-inverse); }
-        .streak-day.today { background: rgba(255,255,255,0.8); border: 2px solid var(--color-brand-secondary); color: var(--color-brand-secondary); }
-        .streak-day .material-icons { font-size: 16px; }
-        .streak-label { font-size: 11px; font-weight: 500; }
-        .streak-summary { display: flex; align-items: center; gap: 8px; }
-        .streak-fire { font-size: 28px; }
-        .streak-count { font-size: 15px; font-weight: 600; color: var(--color-text-primary); }
-
-        /* Stagger animation for streak days */
-        .story-card.active .streak-day { opacity: 0; animation: fade-up 0.3s ease forwards; }
-        .story-card.active .streak-day:nth-child(1) { animation-delay: 0.1s; }
-        .story-card.active .streak-day:nth-child(2) { animation-delay: 0.18s; }
-        .story-card.active .streak-day:nth-child(3) { animation-delay: 0.26s; }
-        .story-card.active .streak-day:nth-child(4) { animation-delay: 0.34s; }
-        .story-card.active .streak-day:nth-child(5) { animation-delay: 0.42s; }
-        .story-card.active .streak-day:nth-child(6) { animation-delay: 0.50s; }
-        .story-card.active .streak-day:nth-child(7) { animation-delay: 0.58s; }
-
-        /* Card 3: Get recognized — High five notification */
-        .highfive-card {
-            background: rgba(255,255,255,0.85);
+            gap: 12px;
+            background: rgba(255,255,255,0.75);
             backdrop-filter: blur(12px);
             border-radius: var(--radius-md);
-            padding: 16px 18px;
-            width: 280px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+        .s2-banner-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 22px;
+        }
+        .s2-banner-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+        }
+        .s2-banner-text strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           SCREEN 3: PROFILE COMPLETION
+           =========================================== */
+        .s3-photo-upload {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            border: 2px dashed var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: var(--space-md);
+            transition: border-color var(--motion-fast), background var(--motion-fast);
             position: relative;
             overflow: hidden;
         }
-        .highfive-row { display: flex; align-items: center; gap: 12px; }
-        .highfive-av { width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-        .highfive-av img { width: 100%; height: 100%; object-fit: cover; }
-        .highfive-text { font-size: 15px; font-weight: 600; color: var(--color-text-primary); }
-        .highfive-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 3px; }
-
-        .shoutout-card {
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(8px);
-            border-radius: var(--radius-md);
-            padding: 14px 16px;
-            width: 280px;
-            margin-top: 10px;
+        .s3-photo-upload:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(255,255,255,0.95);
         }
-        .shoutout-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-        .shoutout-av { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; }
-        .shoutout-av img { width: 100%; height: 100%; object-fit: cover; }
-        .shoutout-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); }
-        .shoutout-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; }
+        .s3-photo-upload .material-icons {
+            font-size: 28px;
+            color: var(--color-text-tertiary);
+        }
+        .s3-photo-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
+        .s3-photo-label {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-xl);
+        }
 
-        /* Emoji rain */
-        .emoji-rain { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-        .emoji-particle { position: absolute; font-size: 18px; top: -24px; opacity: 0; }
-        .story-card.active .emoji-particle { animation: emoji-fall 2.2s ease-in forwards; }
-        @keyframes emoji-fall { 0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; } 70% { opacity: 0.9; } 100% { transform: translateY(140px) rotate(260deg) scale(0.5); opacity: 0; } }
+        .s3-form-group {
+            width: 100%;
+            margin-bottom: var(--space-md);
+        }
+        .s3-form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+            display: block;
+        }
 
-        /* Card 4: Earn it back */
-        .earn-visual { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        @keyframes bounce-in { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
-        .earn-amount { font-family: var(--font-display); font-size: 60px; font-weight: 700; color: var(--color-text-primary); line-height: 1; }
-        .story-card.active .earn-amount { opacity: 0; animation: bounce-in 0.5s ease forwards 0.1s; }
-        .earn-back { font-size: 16px; font-weight: 500; color: var(--color-brand-secondary); display: flex; align-items: center; gap: 4px; }
-        .earn-back .material-icons { font-size: 20px; }
-        .earn-mvp { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px); border-radius: var(--radius-full); padding: 10px 18px; margin-top: 12px; }
-        .earn-mvp-text { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
-
-        /* Card 5: Discover more creators */
-        .creator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 20px; }
-        .creator-bubble { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .creator-bubble-img { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.7); }
-        .creator-bubble-img img { width: 100%; height: 100%; object-fit: cover; }
-        .creator-bubble-name { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); }
+        .s3-name-row {
+            display: flex;
+            gap: var(--space-sm);
+            width: 100%;
+            margin-bottom: var(--space-md);
+        }
+        .s3-name-row .s3-form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
 
         /* ===========================================
-           SCREEN 3: PUSH NOTIFICATIONS
+           SCREEN 4: COLLAB DETAILS
+           =========================================== */
+        .s4-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 90px;
+        }
+        .s4-scroll::-webkit-scrollbar { display: none; }
+
+        .s4-hero-wrapper {
+            position: relative;
+        }
+        .s4-hero-image {
+            position: absolute;
+            inset: -56px 0 0 0;
+            background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80&v=2');
+            background-size: 100% auto;
+            background-position: center -60px;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        .s4-hero-gradient {
+            position: absolute;
+            inset: -56px 0 0 0;
+            background: linear-gradient(
+                180deg,
+                rgba(201, 122, 106, 0.50) 0%,
+                rgba(201, 122, 106, 0.45) 18%,
+                rgba(235, 210, 200, 0.95) 26%,
+                #F2E6E2 31%,
+                #F2E6E2 100%
+            );
+            z-index: 1;
+        }
+
+        .s4-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 60px 24px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .s4-back-row {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 24px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.3);
+        }
+        .s4-back-row .material-icons { font-size: 20px; }
+
+        .s4-creator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px 6px 6px;
+            background: rgba(255,255,255,0.30);
+            backdrop-filter: blur(12px) saturate(1.4);
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.35);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(80,40,30,0.12);
+        }
+        .s4-creator-badge-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+        .s4-creator-badge-handle {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .s4-collab-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-top: 90px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 12px rgba(80,40,30,0.35), 0 1px 3px rgba(0,0,0,0.15);
+        }
+        .s4-collab-dates {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 8px rgba(80,40,30,0.25);
+        }
+
+        /* Countdown */
+        .s4-countdown {
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+        .s4-countdown-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 8px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.4);
+        }
+        .s4-countdown-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .s4-countdown-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 2px 10px rgba(80,40,30,0.5), 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .s4-countdown-unit {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.4);
+        }
+
+        /* Pool + Stats section */
+        .s4-stats {
+            padding: 0 24px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .s4-stats-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .s4-grouped-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .s4-grouped-row {
+            display: flex;
+            align-items: center;
+        }
+        .s4-grouped-stat {
+            flex: 1;
+            padding: 18px 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .s4-grouped-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+        .s4-grouped-stat-icon .material-icons {
+            font-size: 20px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-grouped-stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .s4-grouped-stat-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+        .s4-pool-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+            line-height: 1;
+            margin-bottom: 2px;
+            text-align: left;
+        }
+        .s4-grouped-divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(0,0,0,0.08);
+            flex-shrink: 0;
+        }
+        .s4-card-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.08);
+            margin: 0 16px;
+        }
+
+        .s4-entry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(201,122,106,0.15);
+            border: 1.5px solid rgba(201,122,106,0.3);
+            border-radius: var(--radius-full);
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+        }
+        .s4-entry-badge .material-icons { font-size: 20px; }
+
+        /* Info rows */
+        .s4-info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+        }
+        .s4-info-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s4-info-icon .material-icons {
+            font-size: 18px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-info-label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 1px;
+        }
+        .s4-info-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* About accordion */
+        .s4-about-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .s4-about-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            cursor: pointer;
+        }
+        .s4-about-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .s4-about-chevron {
+            color: var(--color-text-tertiary);
+            transition: transform 0.25s ease;
+        }
+        .s4-about-chevron.open { transform: rotate(180deg); }
+        .s4-about-body {
+            padding: 0 16px 16px;
+        }
+        .s4-about-body p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+
+        /* Creator message */
+        .s4-creator-msg {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+        }
+        .s4-creator-msg-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--color-brand-secondary);
+            flex-shrink: 0;
+        }
+        .s4-creator-msg-bubble {
+            background: rgba(201,122,106,0.08);
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+            padding: 12px 16px;
+            flex: 1;
+        }
+        .s4-creator-msg-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-brand-secondary);
+            margin-bottom: 4px;
+        }
+        .s4-creator-msg-text {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+        }
+
+        /* Goal cards */
+        .s4-goal-row {
+            display: flex;
+            gap: 10px;
+            padding: 0 16px 16px;
+        }
+        .s4-goal-card {
+            flex: 1;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+        .s4-goal-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(201,122,106,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .s4-goal-icon .material-icons {
+            font-size: 17px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-goal-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .s4-goal-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .s4-goal-desc {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 1.35;
+        }
+
+        /* Rules/FAQs */
+        .s4-tab-bar {
+            display: flex;
+            background: rgba(201,122,106,0.10);
+            border-radius: 10px;
+            padding: 3px;
+            margin-bottom: 14px;
+        }
+        .s4-tab-btn {
+            flex: 1;
+            padding: 9px 0;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .s4-tab-btn.active {
+            background: white;
+            color: var(--color-text-primary);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .s4-rule-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .s4-rule-item:last-child { margin-bottom: 0; }
+        .s4-rule-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.12);
+            color: var(--color-brand-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .s4-rule-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        .s4-rule-desc {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.45;
+        }
+
+        .s4-faq-item {
+            border-bottom: 1px solid var(--color-border-default);
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        .s4-faq-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+        .s4-faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .s4-faq-q span { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .s4-faq-chevron {
+            color: var(--color-text-tertiary);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .s4-faq-chevron.open { transform: rotate(180deg); }
+        .s4-faq-a {
+            display: none;
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.55;
+            margin-top: 8px;
+        }
+
+        /* Sticky bottom bar */
+        .s4-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 14px 20px;
+            padding-bottom: 32px;
+            background: linear-gradient(to top, #F2E6E2 60%, transparent);
+            z-index: 5;
+        }
+        .s4-join-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-brand-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .s4-join-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* ===========================================
+           SCREEN 5: PUSH NOTIFICATIONS (post-join)
            =========================================== */
         .ios-dialog-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 50; display: flex; align-items: center; justify-content: center; padding: var(--space-xl); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .screen.active .ios-dialog-overlay.visible { opacity: 1; pointer-events: all; }
@@ -422,61 +808,6 @@
         .ios-dialog-btn { flex: 1; padding: 12px; font-size: 17px; color: #007AFF; background: none; border: none; cursor: pointer; }
         .ios-dialog-btn + .ios-dialog-btn { border-left: 0.5px solid rgba(0,0,0,0.15); }
         .ios-dialog-btn--bold { font-weight: 600; }
-
-        /* ===========================================
-           SCREEN 4: CREATOR PAGE
-           =========================================== */
-        .creator-profile { display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: var(--space-lg); margin-bottom: var(--space-lg); }
-        .creator-profile-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); margin-bottom: var(--space-sm); }
-        .creator-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .creator-profile-name { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 2px; }
-        .creator-profile-meta { font-size: 13px; color: var(--color-text-tertiary); margin-bottom: var(--space-xs); }
-        .creator-profile-bio { font-size: 14px; color: var(--color-text-secondary); line-height: 1.5; }
-
-        .collabs-header { font-size: 12px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-sm); }
-
-        .collab-list-card {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
-            border-radius: var(--radius-md);
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            cursor: pointer;
-            transition: transform var(--motion-fast), box-shadow var(--motion-fast);
-            margin-bottom: var(--space-xs);
-        }
-        .collab-list-card:hover { transform: scale(1.01); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-        .collab-list-card.disabled { opacity: 0.5; cursor: default; }
-        .collab-list-card.disabled:hover { transform: none; box-shadow: none; }
-        .collab-list-thumb { width: 48px; height: 48px; border-radius: var(--radius-sm); overflow: hidden; flex-shrink: 0; background: var(--color-bg-tertiary); display: flex; align-items: center; justify-content: center; }
-        .collab-list-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .collab-list-info { flex: 1; }
-        .collab-list-name { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 2px; }
-        .collab-list-meta { font-size: 12px; color: var(--color-text-tertiary); }
-        .collab-list-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: var(--radius-full); flex-shrink: 0; }
-        .collab-list-badge--open { background: rgba(139,195,74,0.15); color: #558B2F; }
-        .collab-list-badge--soon { background: rgba(0,0,0,0.05); color: var(--color-text-tertiary); }
-
-        .collab-list-arrow { color: var(--color-text-tertiary); }
-        .collab-list-arrow .material-icons { font-size: 20px; }
-
-        /* ===========================================
-           SCREEN 5: COLLAB DETAIL + JOIN
-           =========================================== */
-        .collab-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(14px); border-radius: var(--radius-lg); padding: var(--space-xl); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
-        .collab-card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg); }
-        .collab-avatar { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-        .collab-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .collab-host-name { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
-        .collab-host-sub { font-size: 12px; color: var(--color-text-tertiary); }
-        .collab-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.01em; margin-bottom: var(--space-xs); }
-        .collab-desc { font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: var(--space-lg); }
-        .collab-details { display: flex; gap: var(--space-sm); }
-        .collab-detail { flex: 1; background: rgba(0,0,0,0.03); border-radius: var(--radius-sm); padding: var(--space-sm) var(--space-md); text-align: center; }
-        .collab-detail-value { font-size: 16px; font-weight: 600; color: var(--color-text-primary); }
-        .collab-detail-label { font-size: 11px; color: var(--color-text-tertiary); font-weight: 500; }
 
         /* ===========================================
            NAVIGATION
@@ -498,11 +829,11 @@
     <div class="review-title">Participant Onboarding — @doodle_cycles deeplink</div>
     <div class="review-subtitle">
         <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
-        <span class="nav-jump" onclick="goTo(1)">1 Sign Up</span> ·
-        <span class="nav-jump" onclick="goTo(2)">2 How it Works</span> ·
-        <span class="nav-jump" onclick="goTo(3)">3 Notifications</span> ·
-        <span class="nav-jump" onclick="goTo(4)">4 Ellie's Page</span> ·
-        <span class="nav-jump" onclick="goTo(5)">5 Join Collab</span>
+        <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
+        <span class="nav-jump" onclick="goTo(2)">2 Welcome</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 Collab Details</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 Notifications</span>
     </div>
 </div>
 
@@ -542,20 +873,16 @@
          ============================================ -->
     <div class="screen active" id="screen0">
         <div class="s0-content">
-            <div class="s0-ripple-container" id="rippleContainer"></div>
             <div class="s0-wordmark" id="splashWordmark">Motiv</div>
             <div class="s0-tagline" id="splashTagline">Join your favorite creators<br>in movement-based collabs</div>
         </div>
     </div>
 
     <!-- ============================================
-         SCREEN 1: CREATOR-FRAMED ACCOUNT CREATION
+         SCREEN 1: CREATOR-FRAMED SIGN IN
          ============================================ -->
     <div class="screen" id="screen1">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
-            <div style="display: flex; align-items: center; padding: 0 0 8px;">
-                <a href="#" class="back-btn" onclick="goTo(0);return false"><span class="material-icons">chevron_left</span></a>
-            </div>
 
             <div class="s1-creator-header">
                 <div class="s1-avatar">
@@ -600,175 +927,330 @@
     </div>
 
     <!-- ============================================
-         SCREEN 2: STORY MODE — HOW MOTIV WORKS
+         SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
          ============================================ -->
     <div class="screen" id="screen2">
-        <!-- Story progress bar -->
-        <div class="story-bar">
-            <div class="story-segment"><div class="story-fill" id="storyFill0"></div></div>
-            <div class="story-segment"><div class="story-fill" id="storyFill1"></div></div>
-            <div class="story-segment"><div class="story-fill" id="storyFill2"></div></div>
-            <div class="story-segment"><div class="story-fill" id="storyFill3"></div></div>
-            <div class="story-segment"><div class="story-fill" id="storyFill4"></div></div>
-        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
 
-        <!-- Skip button -->
-        <button class="story-skip" onclick="goTo(3)">Skip</button>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
 
-        <!-- Story Card 0: Join a collab -->
-        <div class="story-card active" id="storyCard0">
-            <div class="story-visual">
-                <div class="mini-collab">
-                    <div class="mini-collab-header">
-                        <div class="mini-collab-av">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Ellie">
-                        </div>
-                        <div>
-                            <div class="mini-collab-creator">Ellie Snackson</div>
-                            <div class="mini-collab-handle">@doodle_cycles</div>
-                        </div>
+                <!-- Ellie avatar with glow -->
+                <div style="position: relative; margin-bottom: 24px;">
+                    <div style="position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(201,122,106,0.25) 0%, transparent 70%); animation: glow-pulse 3s ease-in-out infinite;"></div>
+                    <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); position: relative;">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&h=160&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
-                    <div class="mini-collab-name">Mindful Miles Reset</div>
-                    <div class="mini-collab-pills">
-                        <div class="mini-collab-pill">
-                            <div class="mini-collab-pill-value">$40</div>
-                            <div class="mini-collab-pill-label">Entry hold</div>
-                        </div>
-                        <div class="mini-collab-pill">
-                            <div class="mini-collab-pill-value">6 wks</div>
-                            <div class="mini-collab-pill-label">Duration</div>
-                        </div>
-                        <div class="mini-collab-pill">
-                            <div class="mini-collab-pill-value">6/wk</div>
-                            <div class="mini-collab-pill-label">Days</div>
-                        </div>
+                </div>
+
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">You've unlocked<br>something special</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.55; max-width: 300px; margin-bottom: 28px;">Motiv gives you real time and space with creators like Ellie — not just content, but actual experiences you do together.</div>
+
+                <!-- Banners -->
+                <div style="width: 100;">
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F64C;</div>
+                        <div class="s2-banner-text"><strong>High fives from Ellie</strong> — she sees your effort and cheers you on personally</div>
+                    </div>
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F6B4;</div>
+                        <div class="s2-banner-text"><strong>Ride together</strong> — weekly content, tips, and Ellie's actual routine</div>
+                    </div>
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F4B0;</div>
+                        <div class="s2-banner-text"><strong>Earn it all back</strong> — commit with a hold, hit your goals, get every dollar returned</div>
                     </div>
                 </div>
             </div>
-            <div class="story-headline">Join a collab</div>
-            <div class="story-body">Pick a creator, put your money where your motivation is.</div>
-        </div>
 
-        <!-- Story Card 1: Show up -->
-        <div class="story-card" id="storyCard1">
-            <div class="story-visual">
-                <div class="streak-week">
-                    <div class="streak-day done"><span class="streak-label">M</span><span class="material-icons">check</span></div>
-                    <div class="streak-day done"><span class="streak-label">T</span><span class="material-icons">check</span></div>
-                    <div class="streak-day done"><span class="streak-label">W</span><span class="material-icons">check</span></div>
-                    <div class="streak-day done"><span class="streak-label">T</span><span class="material-icons">check</span></div>
-                    <div class="streak-day today"><span class="streak-label">F</span><span style="font-size: 14px;">!</span></div>
-                    <div class="streak-day"><span class="streak-label">S</span></div>
-                    <div class="streak-day"><span class="streak-label">S</span></div>
-                </div>
-                <div class="streak-summary">
-                    <span class="streak-fire">&#x1F525;</span>
-                    <span class="streak-count">4-day streak</span>
-                </div>
+            <div>
+                <button class="btn-primary" onclick="goTo(3)">Continue</button>
             </div>
-            <div class="story-headline">Show up</div>
-            <div class="story-body">Follow the program. Log your workouts. Build your streak.</div>
-        </div>
-
-        <!-- Story Card 2: Get recognized -->
-        <div class="story-card" id="storyCard2">
-            <div class="story-visual">
-                <div class="highfive-card">
-                    <div class="emoji-rain" id="storyEmojiRain">
-                        <div class="emoji-particle" style="left: 8%; animation-delay: 0.1s;">&#x1F64C;</div>
-                        <div class="emoji-particle" style="left: 22%; animation-delay: 0.4s;">&#x2728;</div>
-                        <div class="emoji-particle" style="left: 38%; animation-delay: 0.7s;">&#x1F44F;</div>
-                        <div class="emoji-particle" style="left: 52%; animation-delay: 0.2s;">&#x1F525;</div>
-                        <div class="emoji-particle" style="left: 68%; animation-delay: 0.6s;">&#x1F64C;</div>
-                        <div class="emoji-particle" style="left: 82%; animation-delay: 0.9s;">&#x2728;</div>
-                        <div class="emoji-particle" style="left: 15%; animation-delay: 1.1s;">&#x1F44F;</div>
-                        <div class="emoji-particle" style="left: 60%; animation-delay: 1.3s;">&#x1F525;</div>
-                    </div>
-                    <div class="highfive-row">
-                        <div class="highfive-av">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie">
-                        </div>
-                        <div>
-                            <div class="highfive-text">Ellie gave you a high five!</div>
-                            <div class="highfive-sub">Keep going — you're crushing it!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="shoutout-card">
-                    <div class="shoutout-header">
-                        <div class="shoutout-av">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
-                        </div>
-                        <div class="shoutout-name">Ellie</div>
-                    </div>
-                    <div class="shoutout-text">Shout-out to <strong>@sarah_rides</strong> for 5 days straight!</div>
-                </div>
-            </div>
-            <div class="story-headline">Get recognized</div>
-            <div class="story-body">Your creator cheers you on with high fives and shout-outs.</div>
-        </div>
-
-        <!-- Story Card 3: Earn it back -->
-        <div class="story-card" id="storyCard3">
-            <div class="story-visual">
-                <div class="earn-visual">
-                    <div class="earn-amount">$40</div>
-                    <div class="earn-back"><span class="material-icons">undo</span> back to you</div>
-                    <div class="earn-mvp">
-                        <span style="font-size: 20px;">&#x1F3C6;</span>
-                        <span class="earn-mvp-text">2 MVPs win cash prizes</span>
-                    </div>
-                </div>
-            </div>
-            <div class="story-headline">Earn it back</div>
-            <div class="story-body">Hit your goals, get every dollar back. Top performers win cash.</div>
-        </div>
-
-        <!-- Story Card 4: Explore more creators -->
-        <div class="story-card" id="storyCard4">
-            <div class="story-visual">
-                <div class="creator-grid">
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=112&h=112&fit=crop&crop=face" alt="Ellie"></div>
-                        <div class="creator-bubble-name">Ellie</div>
-                    </div>
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=112&h=112&fit=crop&crop=face" alt="Marcus"></div>
-                        <div class="creator-bubble-name">Marcus</div>
-                    </div>
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=112&h=112&fit=crop&crop=face" alt="Sarah"></div>
-                        <div class="creator-bubble-name">Sarah</div>
-                    </div>
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=112&h=112&fit=crop&crop=face" alt="James"></div>
-                        <div class="creator-bubble-name">James</div>
-                    </div>
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=112&h=112&fit=crop&crop=face" alt="Priya"></div>
-                        <div class="creator-bubble-name">Priya</div>
-                    </div>
-                    <div class="creator-bubble">
-                        <div class="creator-bubble-img"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=112&h=112&fit=crop&crop=face" alt="Kai"></div>
-                        <div class="creator-bubble-name">Kai</div>
-                    </div>
-                </div>
-            </div>
-            <div class="story-headline">Ellie is just the beginning</div>
-            <div class="story-body">Dozens of creators are hosting collabs on Motiv.</div>
-        </div>
-
-        <!-- Tap zones -->
-        <div class="story-taps">
-            <div class="story-tap" onclick="storyPrev()"></div>
-            <div class="story-tap" onclick="storyNext()"></div>
         </div>
     </div>
 
     <!-- ============================================
-         SCREEN 3: PUSH NOTIFICATIONS
+         SCREEN 3: PROFILE COMPLETION
          ============================================ -->
     <div class="screen" id="screen3">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
+                <a href="#" class="back-btn" onclick="goTo(2);return false"><span class="material-icons">chevron_left</span></a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px;">
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px;">Complete your profile</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); max-width: 280px;">This is how Ellie and the community will see you.</div>
+            </div>
+
+            <!-- Photo upload -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="s3-photo-upload" id="photoUpload">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                    <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
+                </div>
+                <div class="s3-photo-label">Tap to change</div>
+            </div>
+
+            <!-- Name fields -->
+            <div class="s3-name-row">
+                <div class="s3-form-group">
+                    <label class="s3-form-label">First name</label>
+                    <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 14px;">
+                </div>
+                <div class="s3-form-group">
+                    <label class="s3-form-label">Last name</label>
+                    <input type="text" class="form-input" value="Miller" style="font-size: 15px; padding: 14px;">
+                </div>
+            </div>
+
+            <!-- Instagram handle -->
+            <div class="s3-form-group">
+                <label class="s3-form-label">Instagram handle</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 14px 14px 14px 30px;">
+                </div>
+                <div class="form-helper">Optional — lets creators recognize you from IG</div>
+            </div>
+
+            <div style="flex: 1; min-height: 16px;"></div>
+
+            <div>
+                <button class="btn-primary" onclick="goTo(4)">Continue</button>
+                <button class="btn-secondary" onclick="goTo(4)" style="font-size: 14px; padding: 12px;">Skip for now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 4: COLLAB DETAILS (from state-1-details-redesigned)
+         ============================================ -->
+    <div class="screen" id="screen4">
+        <div class="s4-scroll">
+            <div class="s4-hero-wrapper">
+                <div class="s4-hero-image"></div>
+                <div class="s4-hero-gradient"></div>
+
+                <div class="s4-hero-content">
+                    <button class="s4-back-row" onclick="goTo(3)">
+                        <span class="material-icons">arrow_back_ios</span> Back
+                    </button>
+
+                    <div class="s4-creator-badge">
+                        <div class="s4-creator-badge-avatar"></div>
+                        <span class="s4-creator-badge-handle">@doodle_cycles</span>
+                    </div>
+
+                    <div class="s4-collab-name">Mindful Miles Reset</div>
+                    <div class="s4-collab-dates">Mar 15 – Apr 26 · 6 weeks</div>
+                </div>
+
+                <!-- Countdown -->
+                <div class="s4-countdown">
+                    <div class="s4-countdown-label">Collab begins in</div>
+                    <div class="s4-countdown-row">
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-d">04</div>
+                            <div class="s4-countdown-unit">Days</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-h">18</div>
+                            <div class="s4-countdown-unit">Hrs</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-m">32</div>
+                            <div class="s4-countdown-unit">Mins</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-s">15</div>
+                            <div class="s4-countdown-unit">Secs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pool + Entry -->
+                <div class="s4-stats" style="position: relative; z-index: 2;">
+                    <div class="s4-grouped-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 16px;">
+                            <div>
+                                <div class="s4-pool-amount">$24,960</div>
+                                <div class="s4-grouped-stat-label" style="text-align: left;">Collab pool</div>
+                            </div>
+                            <div class="s4-entry-badge">
+                                <span class="material-icons">credit_card</span>
+                                $40 hold
+                            </div>
+                        </div>
+                        <div class="s4-card-divider"></div>
+                        <div class="s4-grouped-row">
+                            <div class="s4-grouped-stat">
+                                <div class="s4-grouped-stat-value">624</div>
+                                <div class="s4-grouped-stat-label">Participants</div>
+                            </div>
+                            <div class="s4-grouped-divider"></div>
+                            <div class="s4-grouped-stat">
+                                <div class="s4-grouped-stat-value">6 wks</div>
+                                <div class="s4-grouped-stat-label">Duration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end hero wrapper -->
+
+            <!-- Details: Level + Type -->
+            <div class="s4-stats">
+                <div class="s4-stats-title">Details</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-grouped-row">
+                        <div class="s4-grouped-stat">
+                            <div class="s4-grouped-stat-icon"><span class="material-icons">fitness_center</span></div>
+                            <div class="s4-grouped-stat-value" style="font-size: 20px;">Strong</div>
+                            <div class="s4-grouped-stat-label">Level</div>
+                        </div>
+                        <div class="s4-grouped-divider"></div>
+                        <div class="s4-grouped-stat">
+                            <div class="s4-grouped-stat-icon"><span class="material-icons">pedal_bike</span></div>
+                            <div class="s4-grouped-stat-value" style="font-size: 20px;">Peloton</div>
+                            <div class="s4-grouped-stat-label">Type</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="s4-stats">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleAbout(this)">
+                        <span class="s4-about-title">About this Collab</span>
+                        <span class="material-icons s4-about-chevron open">expand_more</span>
+                    </div>
+                    <div class="s4-about-body" id="s4AboutBody">
+                        <p>6 weeks of cycling with Ellie. She's designed a program that pushes you beyond your comfort zone while building sustainable fitness habits. Personalized goals based on your current performance level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Goal -->
+            <div class="s4-stats">
+                <div class="s4-stats-title">Weekly collab goal</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-creator-msg">
+                        <div class="s4-creator-msg-avatar"></div>
+                        <div class="s4-creator-msg-bubble">
+                            <div class="s4-creator-msg-name">Ellie, @doodle_cycles</div>
+                            <div class="s4-creator-msg-text">I've picked the metrics below to challenge us to work a bit harder and ride more days each week.</div>
+                        </div>
+                    </div>
+                    <div class="s4-card-divider"></div>
+                    <div class="s4-goal-row">
+                        <div class="s4-goal-card">
+                            <div class="s4-goal-icon"><span class="material-icons">local_fire_department</span></div>
+                            <div class="s4-goal-value">1.3x</div>
+                            <div class="s4-goal-label">Output Target</div>
+                            <div class="s4-goal-desc">Multiplier on your average weekly kJ.</div>
+                        </div>
+                        <div class="s4-goal-card">
+                            <div class="s4-goal-icon"><span class="material-icons">description</span></div>
+                            <div class="s4-goal-value">+1-2</div>
+                            <div class="s4-goal-label">Rides Per Week</div>
+                            <div class="s4-goal-desc">Above your usual weekly volume.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules & FAQs -->
+            <div class="s4-stats" style="margin-bottom: 40px;">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleRules(this)">
+                        <span class="s4-about-title">Game Rules & FAQs</span>
+                        <span class="material-icons s4-about-chevron">expand_more</span>
+                    </div>
+                    <div class="s4-about-body" id="s4RulesBody" style="display: none;">
+                        <div class="s4-tab-bar">
+                            <button class="s4-tab-btn active" onclick="switchTab(event, 'rules')">Game Rules</button>
+                            <button class="s4-tab-btn" onclick="switchTab(event, 'faqs')">FAQs</button>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-rules">
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">1</div>
+                                <div>
+                                    <div class="s4-rule-title">Hit your weekly goal</div>
+                                    <div class="s4-rule-desc">Complete the required output and ride frequency each week to stay on track.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">2</div>
+                                <div>
+                                    <div class="s4-rule-title">Log rides via Peloton sync</div>
+                                    <div class="s4-rule-desc">Your rides are automatically tracked through your connected Peloton account.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">3</div>
+                                <div>
+                                    <div class="s4-rule-title">Miss a week, you're out</div>
+                                    <div class="s4-rule-desc">If you don't meet the minimum goal in any week, you're eliminated from the pool.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">4</div>
+                                <div>
+                                    <div class="s4-rule-title">Finishers split the pool</div>
+                                    <div class="s4-rule-desc">Everyone who completes all 6 weeks splits the collab pool equally.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-faqs" style="display: none;">
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>What happens to my $40 hold?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">Your hold is returned in full when you complete the collab. If you don't finish, it goes into the pool for those who do.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>Can I pause for a week?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to remain eligible.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>How is the pool divided?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">The total pool is split equally among all participants who complete every week of the collab.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>What if I get injured?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">We understand things happen. Reach out to support and we'll review your case on an individual basis.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end s4-scroll -->
+
+        <!-- Sticky bottom CTA -->
+        <div class="s4-bottom-bar">
+            <button class="s4-join-btn" onclick="goTo(5)">
+                Join Collab — $40 hold
+                <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 5: PUSH NOTIFICATIONS (post-join)
+         ============================================ -->
+    <div class="screen" id="screen5">
         <!-- iOS Permission Dialog -->
         <div class="ios-dialog-overlay" id="iosDialogOverlay">
             <div class="ios-dialog">
@@ -784,16 +1266,13 @@
         </div>
 
         <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 24px 28px;">
-            <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
-                <a href="#" class="back-btn" onclick="goTo(2);return false"><span class="material-icons">chevron_left</span></a>
-            </div>
 
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
                 <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
                     <span class="material-icons" style="font-size: 28px; color: var(--color-brand-secondary);">notifications_active</span>
                 </div>
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">Stay in the loop with Ellie</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; max-width: 280px;">Her weekly videos, collab milestones, community shout-outs — straight to your phone.</div>
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">Never miss a check-in</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; max-width: 280px;">Ellie's weekly videos, collab milestones, and your streak reminders — straight to your phone.</div>
             </div>
 
             <!-- Notification preview -->
@@ -803,7 +1282,7 @@
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div>
-                        <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Ellie Snackson</div>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Mindful Miles Reset</div>
                         <div style="font-size: 13px; color: var(--color-text-secondary);">Week 3 video is live! You're crushing it</div>
                     </div>
                 </div>
@@ -811,118 +1290,7 @@
 
             <div style="width: 100%;">
                 <button class="btn-primary" onclick="showDialog()">Turn on notifications</button>
-                <button class="btn-secondary" onclick="goTo(4)">Maybe later</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         SCREEN 4: CREATOR PAGE
-         ============================================ -->
-    <div class="screen" id="screen4">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
-            <!-- Small Motiv wordmark at top -->
-            <div style="display: flex; align-items: center; justify-content: center; padding: 0 0 20px;">
-                <div style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; opacity: 0.6;">Motiv</div>
-            </div>
-
-            <div class="creator-profile">
-                <div class="creator-profile-avatar">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&h=160&fit=crop&crop=face" alt="Ellie Snackson">
-                </div>
-                <div class="creator-profile-name">Ellie Snackson</div>
-                <div class="creator-profile-meta">@doodle_cycles · 345K followers</div>
-                <div class="creator-profile-bio">Cycling, coffee & good vibes. NYC &#x1F6B2;</div>
-            </div>
-
-            <div class="collabs-header">Active Collabs</div>
-
-            <div class="collab-list-card" onclick="goTo(5)">
-                <div class="collab-list-thumb">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&crop=face" alt="Mindful Miles Reset">
-                </div>
-                <div class="collab-list-info">
-                    <div class="collab-list-name">Mindful Miles Reset</div>
-                    <div class="collab-list-meta">6 weeks · $40 hold · Starts Mar 15</div>
-                </div>
-                <div class="collab-list-badge collab-list-badge--open">Open</div>
-                <div class="collab-list-arrow"><span class="material-icons">chevron_right</span></div>
-            </div>
-
-            <div class="collab-list-card disabled">
-                <div class="collab-list-thumb" style="font-size: 22px;">&#x2600;&#xFE0F;</div>
-                <div class="collab-list-info">
-                    <div class="collab-list-name">Summer Spin Series</div>
-                    <div class="collab-list-meta">Coming June 2026</div>
-                </div>
-                <div class="collab-list-badge collab-list-badge--soon">Soon</div>
-            </div>
-
-            <div style="flex: 1;"></div>
-
-            <!-- Email signup for future collabs -->
-            <div style="background: rgba(255,255,255,0.6); backdrop-filter: blur(8px); border-radius: var(--radius-md); padding: 16px; text-align: center; margin-top: var(--space-lg);">
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">Get notified about Ellie's future collabs</div>
-                <div style="display: flex; gap: 8px;">
-                    <input type="email" class="form-input" placeholder="your@email.com" style="font-size: 14px; padding: 12px;">
-                    <button style="background: var(--color-brand-primary); color: white; border: none; border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Notify me</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         SCREEN 5: COLLAB DETAIL + JOIN
-         ============================================ -->
-    <div class="screen" id="screen5">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px; overflow-y: auto;">
-            <div style="display: flex; align-items: center; padding: 0 0 4px;">
-                <a href="#" class="back-btn" onclick="goTo(4);return false"><span class="material-icons">chevron_left</span></a>
-            </div>
-
-            <div style="font-size: 12px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">Ellie's active collab</div>
-
-            <div class="collab-card">
-                <div class="collab-card-header">
-                    <div class="collab-avatar">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&crop=face" alt="Ellie">
-                    </div>
-                    <div>
-                        <div class="collab-host-name">Hosted by Ellie</div>
-                        <div class="collab-host-sub">@doodle_cycles</div>
-                    </div>
-                </div>
-                <div class="collab-title">Mindful Miles Reset</div>
-                <div class="collab-desc">6 weeks of cycling with Ellie. Hit your weekly goals and earn your entry back.</div>
-                <div class="collab-details">
-                    <div class="collab-detail">
-                        <div class="collab-detail-value">$40</div>
-                        <div class="collab-detail-label">Entry hold</div>
-                    </div>
-                    <div class="collab-detail">
-                        <div class="collab-detail-value">6 wks</div>
-                        <div class="collab-detail-label">Duration</div>
-                    </div>
-                    <div class="collab-detail">
-                        <div class="collab-detail-value">6/wk</div>
-                        <div class="collab-detail-label">Days</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ellie's message -->
-            <div style="background: rgba(255,255,255,0.5); backdrop-filter: blur(10px); border-radius: 12px; padding: 16px 18px; margin-top: 16px; display: flex; align-items: flex-start; gap: 12px;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=72&h=72&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.55; font-style: italic;">"I hope you'll join me for this one. I've been planning it for months and I know we can do something special together. Let's ride."</div>
-            </div>
-
-            <div style="flex: 1; min-height: 16px;"></div>
-
-            <div style="padding-top: 12px;">
-                <button class="btn-primary">Join — $40 hold</button>
-                <div style="text-align: center; margin-top: 10px; font-size: 12px; color: var(--color-text-tertiary);">Refunded when you complete the collab</div>
+                <button class="btn-secondary" onclick="finishOnboarding()">Maybe later</button>
             </div>
         </div>
     </div>
@@ -940,59 +1308,29 @@
 </div>
 
 <script>
-    // ─── Splash breathing pulse animation ───
+    // ─── Splash animation ───
     let splashDone = false;
     let splashTimeouts = [];
 
     function runSplash() {
         const wordmark = document.getElementById('splashWordmark');
         const tagline = document.getElementById('splashTagline');
-        const rippleContainer = document.getElementById('rippleContainer');
         if (!wordmark) return;
 
-        // Phase 1: Wordmark appears (0.2s delay, 0.8s animation)
         splashTimeouts.push(setTimeout(() => {
             wordmark.classList.add('visible');
         }, 200));
 
-        // Phase 2: Start breathing + ripples after wordmark lands (1.1s)
         splashTimeouts.push(setTimeout(() => {
-            wordmark.classList.remove('visible');
-            wordmark.style.opacity = '1';
-            wordmark.style.transform = 'scale(1)';
-            wordmark.classList.add('breathing');
-
-            // Fire 3 ripples staggered 900ms apart
-            [0, 900, 1800].forEach((delay, i) => {
-                splashTimeouts.push(setTimeout(() => {
-                    const ripple = document.createElement('div');
-                    ripple.className = 's0-ripple';
-                    ripple.style.width = '280px';
-                    ripple.style.height = '280px';
-                    ripple.style.left = '50%';
-                    ripple.style.top = '50%';
-                    ripple.style.animation = `ripple-expand 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
-                    rippleContainer.appendChild(ripple);
-                    // Clean up after animation
-                    setTimeout(() => ripple.remove(), 1700);
-                }, delay));
-            });
-        }, 1100));
-
-        // Phase 3: Stop breathing, show tagline (after 3 ripples ~3.8s from start of breathing)
-        splashTimeouts.push(setTimeout(() => {
-            wordmark.classList.remove('breathing');
-            wordmark.style.transform = 'scale(1)';
             tagline.classList.add('visible');
-        }, 4200));
+        }, 1200));
 
-        // Phase 4: Auto-advance after reader has time to read tagline (~2.5s reading time)
         splashTimeouts.push(setTimeout(() => {
             if (cur === 0 && !splashDone) {
                 splashDone = true;
                 goTo(1);
             }
-        }, 6800));
+        }, 3800));
     }
 
     function cancelSplash() {
@@ -1001,16 +1339,15 @@
         splashDone = true;
     }
 
-    // Start splash when page loads
     window.addEventListener('DOMContentLoaded', () => {
         setTimeout(runSplash, 100);
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign Up','How it Works','Notifications','Ellie\'s Page','Join Collab'];
+    const names = ['Splash','Sign In','Welcome','Profile','Collab Details','Notifications'];
     let cur = 0;
     const total = names.length;
-    const greenScreens = [3, 4, 5];
+    const greenScreens = [5]; // Only notifications screen gets green
 
     function updateUI() {
         document.getElementById('stepNum').textContent = `Step ${cur+1} of ${total}`;
@@ -1035,6 +1372,11 @@
         screens[prevScreen].classList.add('exiting');
         screens[i].classList.add('active');
         screens[i].scrollTop = 0;
+        // Also reset scroll on s4 inner scroll
+        if (i === 4) {
+            const s4scroll = screens[4].querySelector('.s4-scroll');
+            if (s4scroll) s4scroll.scrollTop = 0;
+        }
         cur = i;
         updateUI();
         setTimeout(() => { screens[prevScreen].classList.remove('exiting'); }, 500);
@@ -1042,134 +1384,104 @@
         // Cancel splash animation if navigating away
         if (prevScreen === 0) cancelSplash();
 
-        // Story mode management
-        if (prevScreen === 2 && i !== 2) stopStory();
-        if (i === 2) startStory();
+        // Start countdown when entering screen 4
+        if (i === 4) startCountdown();
     }
 
     function next() { goTo(cur + 1); }
     function prev() { goTo(cur - 1); }
 
-    // ─── Story mode ───
-    let storyIndex = 0;
-    let storyTimer = null;
-    const STORY_COUNT = 5;
-    const STORY_DURATION = 3000;
+    // ─── Countdown timer (Screen 4) ───
+    let cdTarget = Date.now() + (4*86400 + 18*3600 + 32*60 + 15) * 1000;
+    let cdInterval = null;
 
-    function startStory() {
-        storyIndex = 0;
-        showStoryCard(0);
-        startStoryTimer();
+    function startCountdown() {
+        if (cdInterval) return;
+        cdInterval = setInterval(tickCountdown, 1000);
     }
 
-    function stopStory() {
-        clearTimeout(storyTimer);
-        storyTimer = null;
-        // Reset all fills
-        for (let i = 0; i < STORY_COUNT; i++) {
-            const fill = document.getElementById('storyFill' + i);
-            fill.classList.remove('filling', 'done');
-            fill.style.width = '0%';
-        }
-        // Reset all cards
-        const cards = document.querySelectorAll('.story-card');
-        cards.forEach(c => c.classList.remove('active'));
+    function tickCountdown() {
+        var d = Math.max(0, cdTarget - Date.now());
+        var el;
+        el = document.getElementById('cd-d');
+        if (el) el.textContent = String(Math.floor(d / 86400000)).padStart(2, '0');
+        el = document.getElementById('cd-h');
+        if (el) el.textContent = String(Math.floor(d % 86400000 / 3600000)).padStart(2, '0');
+        el = document.getElementById('cd-m');
+        if (el) el.textContent = String(Math.floor(d % 3600000 / 60000)).padStart(2, '0');
+        el = document.getElementById('cd-s');
+        if (el) el.textContent = String(Math.floor(d % 60000 / 1000)).padStart(2, '0');
     }
 
-    function showStoryCard(i) {
-        const cards = document.querySelectorAll('.story-card');
-        cards.forEach(c => c.classList.remove('active'));
-        if (cards[i]) cards[i].classList.add('active');
-        storyIndex = i;
-        updateStoryBar();
-
-        // Restart emoji rain on card 2
-        if (i === 2) {
-            const rain = document.getElementById('storyEmojiRain');
-            if (rain) {
-                rain.style.display = 'none';
-                rain.offsetHeight;
-                rain.style.display = '';
-            }
-        }
+    // ─── Collab details interactions ───
+    function toggleAbout(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = header.closest('.s4-about-card').querySelector('.s4-about-body');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
     }
 
-    function updateStoryBar() {
-        for (let i = 0; i < STORY_COUNT; i++) {
-            const fill = document.getElementById('storyFill' + i);
-            fill.classList.remove('filling', 'done');
-
-            if (i < storyIndex) {
-                fill.style.width = '100%';
-                fill.classList.add('done');
-            } else if (i === storyIndex) {
-                fill.style.width = '0%';
-                fill.offsetHeight; // force reflow
-                requestAnimationFrame(() => {
-                    fill.classList.add('filling');
-                });
-            } else {
-                fill.style.width = '0%';
-            }
-        }
+    function toggleRules(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = document.getElementById('s4RulesBody');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
     }
 
-    function startStoryTimer() {
-        clearTimeout(storyTimer);
-        storyTimer = setTimeout(() => {
-            if (storyIndex < STORY_COUNT - 1) {
-                showStoryCard(storyIndex + 1);
-                startStoryTimer();
-            } else {
-                // Last card done — advance to next screen
-                goTo(3);
-            }
-        }, STORY_DURATION);
+    function switchTab(e, tab) {
+        var bar = e.target.closest('.s4-tab-bar');
+        bar.querySelectorAll('.s4-tab-btn').forEach(function(t) { t.classList.remove('active'); });
+        e.target.classList.add('active');
+        var body = e.target.closest('.s4-about-body');
+        body.querySelectorAll('.s4-tab-content').forEach(function(c) { c.style.display = 'none'; });
+        body.querySelector('#s4-tab-' + tab).style.display = 'block';
     }
 
-    function storyNext() {
-        clearTimeout(storyTimer);
-        if (storyIndex < STORY_COUNT - 1) {
-            showStoryCard(storyIndex + 1);
-            startStoryTimer();
-        } else {
-            goTo(3);
-        }
+    function toggleFaq(q) {
+        var chevron = q.querySelector('.s4-faq-chevron');
+        chevron.classList.toggle('open');
+        var a = q.nextElementSibling;
+        a.style.display = a.style.display === 'block' ? 'none' : 'block';
     }
 
-    function storyPrev() {
-        clearTimeout(storyTimer);
-        if (storyIndex > 0) {
-            showStoryCard(storyIndex - 1);
-            startStoryTimer();
-        } else {
-            goTo(1);
-        }
-    }
-
-    // ─── iOS dialog ───
+    // ─── iOS notification dialog ───
     function showDialog() {
         document.getElementById('iosDialogOverlay').classList.add('visible');
     }
     function dismissDialog() {
         document.getElementById('iosDialogOverlay').classList.remove('visible');
-        setTimeout(() => goTo(4), 300);
+        setTimeout(() => finishOnboarding(), 300);
+    }
+    function finishOnboarding() {
+        // End state — in production this would navigate to the app home
+        alert('Onboarding complete! In the real app, this would take you to the collab dashboard.');
     }
 
     // ─── Keyboard nav ───
     document.addEventListener('keydown', e => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            if (cur === 2) { storyNext(); } else { next(); }
+            next();
         }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            if (cur === 2) { storyPrev(); } else { prev(); }
+            prev();
         }
     });
 
     updateUI();
 </script>
+
+<style>
+    @keyframes glow-pulse {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+</style>
 
 </body>
 </html>
