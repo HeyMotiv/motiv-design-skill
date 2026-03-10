@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Participant Onboarding — Motiv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --color-brand-primary: #2B2E34;
+            --color-brand-secondary: #C97A6A;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+
+            --blob-pink: #E8B4A8;
+            --blob-gold: #F0DBBD;
+            --blob-sage: #CDDDD7;
+            --blob-mint: #CBDEDE;
+
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 20px;
+            --space-xl: 24px;
+            --space-2xl: 32px;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            --motion-fast: 150ms;
+            --motion-normal: 250ms;
+            --motion-slow: 350ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* ===========================================
+           REVIEW HEADER
+           =========================================== */
+        .review-header { text-align: center; margin-bottom: 24px; max-width: 720px; }
+        .review-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: #e8e8f0; margin-bottom: 4px; }
+        .review-subtitle { font-size: 12px; letter-spacing: 0.01em; color: #8888a0; }
+        .nav-jump { cursor: pointer; transition: color 0.15s ease; padding: 2px 4px; border-radius: 4px; }
+        .nav-jump:hover { color: #d0d0e0; background: rgba(255,255,255,0.08); }
+
+        /* ===========================================
+           PHONE FRAME
+           =========================================== */
+        .phone-frame { width: 390px; height: 844px; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 80px rgba(0,0,0,0.5); position: relative; margin-top: 20px; }
+
+        /* ===========================================
+           STATUS BAR + HOME INDICATOR
+           =========================================== */
+        .status-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 54px; }
+        .status-time { font-family: var(--font-body); font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+        .status-icons { display: flex; align-items: center; gap: 6px; }
+        .status-icons svg { height: 12px; }
+
+        .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--color-text-primary); border-radius: 3px; opacity: 0.2; z-index: 10; }
+
+        /* ===========================================
+           LAVA LAMP BACKGROUND
+           =========================================== */
+        .lava-bg { position: absolute; inset: 0; overflow: hidden; background: #F2E6E2; transition: background 1.2s ease-in-out; pointer-events: none; }
+        .lava-bg.green-chapter { background: #ECF1F0; }
+
+        .lava-layer { position: absolute; inset: 0; transition: opacity 1.2s ease-in-out; }
+        .lava-green { opacity: 0; }
+        .lava-bg.green-chapter .lava-warm { opacity: 0; }
+        .lava-bg.green-chapter .lava-green { opacity: 1; }
+
+        .blob { position: absolute; border-radius: 50%; filter: blur(40px); }
+
+        .blob-wa { width: 800px; height: 800px; background: radial-gradient(circle, rgba(235,160,155,0.40) 0%, rgba(242,180,172,0.28) 40%, rgba(248,210,195,0.15) 100%); bottom: -200px; right: -200px; animation: drift-a 14s ease-in-out infinite; }
+        .blob-wa2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(240,168,162,0.34) 0%, rgba(245,188,178,0.22) 40%, rgba(250,215,200,0.12) 100%); bottom: -80px; right: -80px; animation: drift-a2 16s ease-in-out infinite; animation-delay: -6s; }
+        .blob-wb { width: 800px; height: 800px; background: radial-gradient(circle, rgba(240,208,155,0.38) 0%, rgba(245,218,175,0.26) 40%, rgba(250,235,210,0.14) 100%); bottom: -250px; right: -120px; animation: drift-b 12s ease-in-out infinite; animation-delay: -3s; }
+        .blob-wb2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(242,212,160,0.32) 0%, rgba(248,222,182,0.20) 40%, rgba(252,238,215,0.10) 100%); bottom: -100px; right: -280px; animation: drift-b2 18s ease-in-out infinite; animation-delay: -8s; }
+
+        .blob-ga { width: 800px; height: 800px; background: radial-gradient(circle, rgba(170,215,210,0.95) 0%, rgba(178,218,214,0.50) 50%, rgba(220,240,237,0.20) 100%); bottom: -200px; right: -200px; animation: drift-a 14s ease-in-out infinite; }
+        .blob-ga2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(172,216,212,0.80) 0%, rgba(182,222,218,0.40) 50%, rgba(222,242,239,0.15) 100%); bottom: -80px; right: -80px; animation: drift-a2 16s ease-in-out infinite; animation-delay: -6s; }
+        .blob-gb { width: 800px; height: 800px; background: radial-gradient(circle, rgba(155,205,200,0.85) 0%, rgba(172,216,212,0.50) 50%, rgba(208,235,232,0.25) 100%); bottom: -250px; right: -120px; animation: drift-b 12s ease-in-out infinite; animation-delay: -3s; }
+        .blob-gb2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(158,208,204,0.70) 0%, rgba(178,218,214,0.40) 50%, rgba(212,238,235,0.20) 100%); bottom: -100px; right: -280px; animation: drift-b2 18s ease-in-out infinite; animation-delay: -8s; }
+
+        @keyframes drift-a { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:60% 40% 30% 70%/60% 30% 70% 40%}25%{transform:translate(-20%,-50%)scale(1.18)rotate(60deg);border-radius:30% 60% 70% 40%/50% 60% 30% 60%}50%{transform:translate(-10%,-85%)scale(0.85)rotate(120deg);border-radius:50% 60% 30% 60%/30% 40% 70% 50%}75%{transform:translate(-35%,-45%)scale(1.12)rotate(180deg);border-radius:40% 30% 60% 50%/60% 70% 30% 40%} }
+        @keyframes drift-a2 { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:50% 50% 40% 60%/40% 60% 50% 50%}33%{transform:translate(-65%,-15%)scale(1.2)rotate(80deg);border-radius:60% 40% 50% 50%/50% 50% 40% 60%}66%{transform:translate(-30%,-35%)scale(0.82)rotate(160deg);border-radius:40% 60% 60% 40%/60% 40% 50% 50%} }
+        @keyframes drift-b { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:70% 30% 50% 50%/30% 70% 30% 70%}25%{transform:translate(-25%,-60%)scale(1.2)rotate(80deg);border-radius:50% 50% 30% 70%/50% 50% 50% 50%}50%{transform:translate(-55%,-80%)scale(0.82)rotate(160deg);border-radius:30% 70% 70% 30%/70% 30% 50% 60%}75%{transform:translate(-40%,-25%)scale(1.12)rotate(240deg);border-radius:60% 40% 40% 60%/40% 60% 40% 60%} }
+        @keyframes drift-b2 { 0%,100%{transform:translate(0,0)scale(1);border-radius:55% 45% 45% 55%/45% 55% 55% 45%}25%{transform:translate(-80px,-120px)scale(1.22);border-radius:40% 60% 55% 45%/55% 45% 40% 60%}50%{transform:translate(-160px,-60px)scale(0.78);border-radius:60% 40% 40% 60%/40% 60% 60% 40%}75%{transform:translate(-40px,-90px)scale(1.10);border-radius:45% 55% 50% 50%/50% 50% 55% 45%} }
+
+        /* ===========================================
+           SCREEN TRANSITIONS
+           =========================================== */
+        .screen { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.5s ease, transform 0.5s ease; transform: translateX(30px); }
+        .screen.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+        .screen.exiting { opacity: 0; transform: translateX(-30px); }
+
+        /* ===========================================
+           SHARED COMPONENTS
+           =========================================== */
+        .back-btn { color: var(--color-text-primary); text-decoration: none; line-height: 1; display: flex; align-items: center; opacity: 0.5; cursor: pointer; transition: opacity var(--motion-fast) var(--easing-smooth); }
+        .back-btn:hover { opacity: 0.8; }
+        .back-btn .material-icons { font-size: 26px; }
+
+        .btn-primary { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); width: 100%; background: var(--color-brand-primary); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 17px; font-weight: 600; padding: 18px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: transform var(--motion-fast), box-shadow var(--motion-fast); }
+        .btn-primary:hover:not(:disabled) { transform: scale(1.02); }
+        .btn-primary:active:not(:disabled) { transform: scale(0.97); }
+
+        .btn-secondary { display: flex; align-items: center; justify-content: center; width: 100%; background: transparent; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 16px; font-weight: 500; padding: 16px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: opacity var(--motion-fast); }
+        .btn-secondary:hover { opacity: 0.7; }
+
+        .skip-link { font-size: 14px; font-weight: 500; color: var(--color-brand-secondary); background: none; border: none; cursor: pointer; padding: var(--space-xs) var(--space-md); transition: opacity var(--motion-fast); }
+        .skip-link:hover { opacity: 0.7; }
+
+        @keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+
+        /* ===========================================
+           SCREEN 0: SPLASH
+           =========================================== */
+        .s0-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+
+        .s0-wordmark { font-family: var(--font-display); font-size: 72px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.03em; line-height: 1; text-align: center; position: relative; z-index: 2; opacity: 0; transform: scale(0.92); }
+        .s0-wordmark.visible { animation: splash-word-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes splash-word-in {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .s0-tagline { font-family: var(--font-body); font-size: 18px; color: var(--color-text-secondary); text-align: center; line-height: 1.55; margin-top: 20px; position: relative; z-index: 2; opacity: 0; transform: translateY(10px); }
+        .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
+
+        /* ===========================================
+           SCREEN 1: CREATOR-FRAMED ACCOUNT
+           =========================================== */
+        .s1-creator-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--space-lg); }
+        .s1-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); margin-bottom: var(--space-sm); }
+        .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s1-name { font-family: var(--font-body); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .s1-handle { font-size: 14px; color: var(--color-brand-secondary); }
+
+        .auth-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .auth-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); width: 100%; font-family: var(--font-body); font-size: 17px; font-weight: 600; padding: 18px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: transform var(--motion-fast); }
+        .auth-btn:active { transform: scale(0.97); }
+        .auth-btn--apple { background: #000; color: #fff; }
+        .auth-btn--google { background: #fff; color: var(--color-text-primary); border: 1.5px solid var(--color-border-default); }
+        .auth-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+        .divider { display: flex; align-items: center; gap: var(--space-md); margin: var(--space-md) 0; }
+        .divider-line { flex: 1; height: 1px; background: var(--color-border-default); }
+        .divider-text { font-size: 13px; color: var(--color-text-tertiary); }
+
+        .form-input { width: 100%; font-family: var(--font-body); font-size: 16px; color: var(--color-text-primary); padding: var(--space-md); border: 1.5px solid var(--color-border-default); border-radius: var(--radius-md); outline: none; background: var(--color-bg-primary); transition: border-color var(--motion-fast); }
+        .form-input:focus { border-color: var(--color-brand-secondary); box-shadow: 0 0 0 3px rgba(201,122,106,0.1); }
+        .form-input::placeholder { color: var(--color-text-tertiary); }
+        .form-helper { font-size: 12px; color: var(--color-text-tertiary); margin-top: var(--space-xs); }
+
+        /* ===========================================
+           SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
+           =========================================== */
+        .s2-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            margin-bottom: 12px;
+        }
+        .s2-banner-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 22px;
+        }
+        .s2-banner-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+        }
+        .s2-banner-text strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+
+        /* ===========================================
+           SCREEN 3: PROFILE COMPLETION
+           =========================================== */
+        .s3-photo-upload {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+            border: 2px dashed var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: var(--space-md);
+            transition: border-color var(--motion-fast), background var(--motion-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        .s3-photo-upload:hover {
+            border-color: var(--color-brand-secondary);
+            background: rgba(255,255,255,0.95);
+        }
+        .s3-photo-upload .material-icons {
+            font-size: 28px;
+            color: var(--color-text-tertiary);
+        }
+        .s3-photo-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            inset: 0;
+        }
+        .s3-photo-label {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .s3-form-group {
+            width: 100%;
+            margin-bottom: var(--space-md);
+        }
+        .s3-form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .s3-name-row {
+            display: flex;
+            gap: var(--space-sm);
+            width: 100%;
+            margin-bottom: var(--space-md);
+        }
+        .s3-name-row .s3-form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        /* ===========================================
+           SCREEN 4: COLLAB DETAILS
+           =========================================== */
+        .s4-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 90px;
+        }
+        .s4-scroll::-webkit-scrollbar { display: none; }
+
+        .s4-hero-wrapper {
+            position: relative;
+        }
+        .s4-hero-image {
+            position: absolute;
+            inset: -56px 0 0 0;
+            background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80&v=2');
+            background-size: 100% auto;
+            background-position: center -60px;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        .s4-hero-gradient {
+            position: absolute;
+            inset: -56px 0 0 0;
+            background: linear-gradient(
+                180deg,
+                rgba(201, 122, 106, 0.50) 0%,
+                rgba(201, 122, 106, 0.45) 18%,
+                rgba(235, 210, 200, 0.95) 26%,
+                #F2E6E2 31%,
+                #F2E6E2 100%
+            );
+            z-index: 1;
+        }
+
+        .s4-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 60px 24px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .s4-back-row {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 24px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.3);
+        }
+        .s4-back-row .material-icons { font-size: 20px; }
+
+        .s4-creator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px 6px 6px;
+            background: rgba(255,255,255,0.30);
+            backdrop-filter: blur(12px) saturate(1.4);
+            border-radius: 32px;
+            border: 1px solid rgba(255,255,255,0.35);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(80,40,30,0.12);
+        }
+        .s4-creator-badge-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+        .s4-creator-badge-handle {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .s4-collab-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-top: 90px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 12px rgba(80,40,30,0.35), 0 1px 3px rgba(0,0,0,0.15);
+        }
+        .s4-collab-dates {
+            font-size: 15px;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 8px rgba(80,40,30,0.25);
+        }
+
+        /* Countdown */
+        .s4-countdown {
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 20px;
+        }
+        .s4-countdown-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 8px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.4);
+        }
+        .s4-countdown-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .s4-countdown-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 2px 10px rgba(80,40,30,0.5), 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .s4-countdown-unit {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+            text-shadow: 0 1px 6px rgba(80,40,30,0.4);
+        }
+
+        /* Pool + Stats section */
+        .s4-stats {
+            padding: 0 24px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .s4-stats-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .s4-grouped-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .s4-grouped-row {
+            display: flex;
+            align-items: center;
+        }
+        .s4-grouped-stat {
+            flex: 1;
+            padding: 18px 16px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .s4-grouped-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+        .s4-grouped-stat-icon .material-icons {
+            font-size: 20px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-grouped-stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .s4-grouped-stat-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+        .s4-pool-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+            line-height: 1;
+            margin-bottom: 2px;
+            text-align: left;
+        }
+        .s4-grouped-divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(0,0,0,0.08);
+            flex-shrink: 0;
+        }
+        .s4-card-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.08);
+            margin: 0 16px;
+        }
+
+        .s4-entry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(201,122,106,0.15);
+            border: 1.5px solid rgba(201,122,106,0.3);
+            border-radius: var(--radius-full);
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-brand-secondary);
+        }
+        .s4-entry-badge .material-icons { font-size: 20px; }
+
+        /* Info rows */
+        .s4-info-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+        }
+        .s4-info-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .s4-info-icon .material-icons {
+            font-size: 18px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-info-label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 1px;
+        }
+        .s4-info-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        /* About accordion */
+        .s4-about-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .s4-about-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            cursor: pointer;
+        }
+        .s4-about-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .s4-about-chevron {
+            color: var(--color-text-tertiary);
+            transition: transform 0.25s ease;
+        }
+        .s4-about-chevron.open { transform: rotate(180deg); }
+        .s4-about-body {
+            padding: 0 16px 16px;
+        }
+        .s4-about-body p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+        }
+
+        /* Creator message */
+        .s4-creator-msg {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+        }
+        .s4-creator-msg-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--color-brand-secondary);
+            flex-shrink: 0;
+        }
+        .s4-creator-msg-bubble {
+            background: rgba(201,122,106,0.08);
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+            padding: 12px 16px;
+            flex: 1;
+        }
+        .s4-creator-msg-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-brand-secondary);
+            margin-bottom: 4px;
+        }
+        .s4-creator-msg-text {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: var(--color-text-secondary);
+        }
+
+        /* Goal cards */
+        .s4-goal-row {
+            display: flex;
+            gap: 10px;
+            padding: 0 16px 16px;
+        }
+        .s4-goal-card {
+            flex: 1;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+        .s4-goal-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(201,122,106,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .s4-goal-icon .material-icons {
+            font-size: 17px;
+            color: var(--color-brand-secondary);
+        }
+        .s4-goal-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .s4-goal-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .s4-goal-desc {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 1.35;
+        }
+
+        /* Rules/FAQs */
+        .s4-tab-bar {
+            display: flex;
+            background: rgba(201,122,106,0.10);
+            border-radius: 10px;
+            padding: 3px;
+            margin-bottom: 14px;
+        }
+        .s4-tab-btn {
+            flex: 1;
+            padding: 9px 0;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .s4-tab-btn.active {
+            background: white;
+            color: var(--color-text-primary);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .s4-rule-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+        .s4-rule-item:last-child { margin-bottom: 0; }
+        .s4-rule-num {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.12);
+            color: var(--color-brand-secondary);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .s4-rule-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        .s4-rule-desc {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.45;
+        }
+
+        .s4-faq-item {
+            border-bottom: 1px solid var(--color-border-default);
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        .s4-faq-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+        .s4-faq-q {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .s4-faq-q span { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .s4-faq-chevron {
+            color: var(--color-text-tertiary);
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+        .s4-faq-chevron.open { transform: rotate(180deg); }
+        .s4-faq-a {
+            display: none;
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            line-height: 1.55;
+            margin-top: 8px;
+        }
+
+        /* Sticky bottom bar */
+        .s4-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 14px 20px;
+            padding-bottom: 32px;
+            background: linear-gradient(to top, #F2E6E2 60%, transparent);
+            z-index: 5;
+        }
+        .s4-join-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-brand-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .s4-join-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* ===========================================
+           SCREEN 5: PUSH NOTIFICATIONS (post-join)
+           =========================================== */
+        .ios-dialog-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 50; display: flex; align-items: center; justify-content: center; padding: var(--space-xl); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .screen.active .ios-dialog-overlay.visible { opacity: 1; pointer-events: all; }
+        .ios-dialog { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-radius: 14px; width: 100%; max-width: 280px; overflow: hidden; }
+        .ios-dialog-body { padding: 20px 20px 16px; text-align: center; }
+        .ios-dialog-title { font-size: 17px; font-weight: 600; color: #000; margin-bottom: 6px; }
+        .ios-dialog-text { font-size: 13px; color: #666; line-height: 1.4; }
+        .ios-dialog-actions { display: flex; border-top: 0.5px solid rgba(0,0,0,0.15); }
+        .ios-dialog-btn { flex: 1; padding: 12px; font-size: 17px; color: #007AFF; background: none; border: none; cursor: pointer; }
+        .ios-dialog-btn + .ios-dialog-btn { border-left: 0.5px solid rgba(0,0,0,0.15); }
+        .ios-dialog-btn--bold { font-weight: 600; }
+
+        /* ===========================================
+           NAVIGATION
+           =========================================== */
+        .step-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0; margin-top: 16px; }
+        .step-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: #aaa; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; }
+        .step-btn:hover { background: rgba(255,255,255,0.15); color: #ddd; }
+        .step-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+        .step-btn .material-icons { font-size: 20px; }
+        .step-label { flex: 1; text-align: center; }
+        .step-number { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; }
+        .step-name { font-size: 14px; font-weight: 500; color: #ccc; }
+    </style>
+</head>
+<body>
+
+<!-- Review Header -->
+<div class="review-header">
+    <div class="review-title">Participant Onboarding — @doodle_cycles deeplink</div>
+    <div class="review-subtitle">
+        <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
+        <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
+        <span class="nav-jump" onclick="goTo(2)">2 Welcome</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 Collab Details</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 Notifications</span>
+    </div>
+</div>
+
+<!-- Phone Frame -->
+<div class="phone-frame">
+    <!-- Lava Background -->
+    <div class="lava-bg" id="lavaBg">
+        <div class="lava-layer lava-warm">
+            <div class="blob blob-wa"></div>
+            <div class="blob blob-wa2"></div>
+            <div class="blob blob-wb"></div>
+            <div class="blob blob-wb2"></div>
+        </div>
+        <div class="lava-layer lava-green">
+            <div class="blob blob-ga"></div>
+            <div class="blob blob-ga2"></div>
+            <div class="blob blob-gb"></div>
+            <div class="blob blob-gb2"></div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-icons">
+            <svg viewBox="0 0 18 12" fill="currentColor"><path d="M1 4.5C3.5 1.5 7 0 9 0s5.5 1.5 8 4.5L15.5 6C13.5 3.5 11 2.5 9 2.5S4.5 3.5 2.5 6L1 4.5z"/><circle cx="9" cy="10" r="2"/></svg>
+            <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="1" width="3" height="10" rx=".5"/><rect x="5" y="0" width="3" height="11" rx=".5"/><rect x="10" y="3" width="3" height="8" rx=".5"/><rect x="15" y="5" width="3" height="6" rx=".5" opacity=".3"/></svg>
+            <svg viewBox="0 0 28 14" fill="currentColor"><rect x="0" y="1" width="24" height="12" rx="3" stroke="currentColor" stroke-width="1" fill="none"/><rect x="25" y="4.5" width="2" height="5" rx="1"/><rect x="2" y="3" width="16" height="8" rx="1.5"/></svg>
+        </div>
+    </div>
+
+    <!-- Home Indicator -->
+    <div class="home-indicator"></div>
+
+    <!-- ============================================
+         SCREEN 0: SPLASH
+         ============================================ -->
+    <div class="screen active" id="screen0">
+        <div class="s0-content">
+            <div class="s0-wordmark" id="splashWordmark">Motiv</div>
+            <div class="s0-tagline" id="splashTagline">Join your favorite creators<br>in movement-based collabs</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 1: CREATOR-FRAMED SIGN IN
+         ============================================ -->
+    <div class="screen" id="screen1">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+
+            <div class="s1-creator-header">
+                <div class="s1-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Ellie Snackson">
+                </div>
+                <div class="s1-name">Ellie Snackson</div>
+                <div class="s1-handle">@doodle_cycles</div>
+            </div>
+
+            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Collab with Ellie on Motiv</div>
+            <div style="font-size: 14px; color: var(--color-text-tertiary); text-align: center; margin-bottom: 20px;">and other creators you follow</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); text-align: center; margin-bottom: 24px;">Sign in or create an account to continue.</div>
+
+            <div class="auth-section">
+                <button class="auth-btn auth-btn--apple" onclick="goTo(2)">
+                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                    Continue with Apple
+                </button>
+                <button class="auth-btn auth-btn--google" onclick="goTo(2)">
+                    <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    Continue with Google
+                </button>
+            </div>
+
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-text">or</span>
+                <span class="divider-line"></span>
+            </div>
+
+            <div>
+                <input type="email" class="form-input" placeholder="Enter your email" autocomplete="email">
+                <div class="form-helper">We'll send you a one-time code. No password needed.</div>
+            </div>
+
+            <div style="flex: 1; min-height: 16px;"></div>
+
+            <div>
+                <button class="btn-primary" onclick="goTo(2)">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
+         ============================================ -->
+    <div class="screen" id="screen2">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+
+                <!-- Ellie avatar with glow -->
+                <div style="position: relative; margin-bottom: 24px;">
+                    <div style="position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(201,122,106,0.25) 0%, transparent 70%); animation: glow-pulse 3s ease-in-out infinite;"></div>
+                    <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); position: relative;">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&h=160&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">You've unlocked<br>something special</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.55; max-width: 300px; margin-bottom: 28px;">Motiv gives you real time and space with creators like Ellie — not just content, but actual experiences you do together.</div>
+
+                <!-- Banners -->
+                <div style="width: 100;">
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F64C;</div>
+                        <div class="s2-banner-text"><strong>High fives from Ellie</strong> — she sees your effort and cheers you on personally</div>
+                    </div>
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F6B4;</div>
+                        <div class="s2-banner-text"><strong>Ride together</strong> — weekly content, tips, and Ellie's actual routine</div>
+                    </div>
+                    <div class="s2-banner">
+                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F4B0;</div>
+                        <div class="s2-banner-text"><strong>Earn it all back</strong> — commit with a hold, hit your goals, get every dollar returned</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn-primary" onclick="goTo(3)">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 3: PROFILE COMPLETION
+         ============================================ -->
+    <div class="screen" id="screen3">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
+                <a href="#" class="back-btn" onclick="goTo(2);return false"><span class="material-icons">chevron_left</span></a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px;">
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px;">Complete your profile</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); max-width: 280px;">This is how Ellie and the community will see you.</div>
+            </div>
+
+            <!-- Photo upload -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="s3-photo-upload" id="photoUpload">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                    <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
+                </div>
+                <div class="s3-photo-label">Tap to change</div>
+            </div>
+
+            <!-- Name fields -->
+            <div class="s3-name-row">
+                <div class="s3-form-group">
+                    <label class="s3-form-label">First name</label>
+                    <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 14px;">
+                </div>
+                <div class="s3-form-group">
+                    <label class="s3-form-label">Last name</label>
+                    <input type="text" class="form-input" value="Miller" style="font-size: 15px; padding: 14px;">
+                </div>
+            </div>
+
+            <!-- Instagram handle -->
+            <div class="s3-form-group">
+                <label class="s3-form-label">Instagram handle</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 14px 14px 14px 30px;">
+                </div>
+                <div class="form-helper">Optional — lets creators recognize you from IG</div>
+            </div>
+
+            <div style="flex: 1; min-height: 16px;"></div>
+
+            <div>
+                <button class="btn-primary" onclick="goTo(4)">Continue</button>
+                <button class="btn-secondary" onclick="goTo(4)" style="font-size: 14px; padding: 12px;">Skip for now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 4: COLLAB DETAILS (from state-1-details-redesigned)
+         ============================================ -->
+    <div class="screen" id="screen4">
+        <div class="s4-scroll">
+            <div class="s4-hero-wrapper">
+                <div class="s4-hero-image"></div>
+                <div class="s4-hero-gradient"></div>
+
+                <div class="s4-hero-content">
+                    <button class="s4-back-row" onclick="goTo(3)">
+                        <span class="material-icons">arrow_back_ios</span> Back
+                    </button>
+
+                    <div class="s4-creator-badge">
+                        <div class="s4-creator-badge-avatar"></div>
+                        <span class="s4-creator-badge-handle">@doodle_cycles</span>
+                    </div>
+
+                    <div class="s4-collab-name">Mindful Miles Reset</div>
+                    <div class="s4-collab-dates">Mar 15 – Apr 26 · 6 weeks</div>
+                </div>
+
+                <!-- Countdown -->
+                <div class="s4-countdown">
+                    <div class="s4-countdown-label">Collab begins in</div>
+                    <div class="s4-countdown-row">
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-d">04</div>
+                            <div class="s4-countdown-unit">Days</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-h">18</div>
+                            <div class="s4-countdown-unit">Hrs</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-m">32</div>
+                            <div class="s4-countdown-unit">Mins</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div class="s4-countdown-value" id="cd-s">15</div>
+                            <div class="s4-countdown-unit">Secs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pool + Entry -->
+                <div class="s4-stats" style="position: relative; z-index: 2;">
+                    <div class="s4-grouped-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 16px;">
+                            <div>
+                                <div class="s4-pool-amount">$24,960</div>
+                                <div class="s4-grouped-stat-label" style="text-align: left;">Collab pool</div>
+                            </div>
+                            <div class="s4-entry-badge">
+                                <span class="material-icons">credit_card</span>
+                                $40 hold
+                            </div>
+                        </div>
+                        <div class="s4-card-divider"></div>
+                        <div class="s4-grouped-row">
+                            <div class="s4-grouped-stat">
+                                <div class="s4-grouped-stat-value">624</div>
+                                <div class="s4-grouped-stat-label">Participants</div>
+                            </div>
+                            <div class="s4-grouped-divider"></div>
+                            <div class="s4-grouped-stat">
+                                <div class="s4-grouped-stat-value">6 wks</div>
+                                <div class="s4-grouped-stat-label">Duration</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end hero wrapper -->
+
+            <!-- Details: Level + Type -->
+            <div class="s4-stats">
+                <div class="s4-stats-title">Details</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-grouped-row">
+                        <div class="s4-grouped-stat">
+                            <div class="s4-grouped-stat-icon"><span class="material-icons">fitness_center</span></div>
+                            <div class="s4-grouped-stat-value" style="font-size: 20px;">Strong</div>
+                            <div class="s4-grouped-stat-label">Level</div>
+                        </div>
+                        <div class="s4-grouped-divider"></div>
+                        <div class="s4-grouped-stat">
+                            <div class="s4-grouped-stat-icon"><span class="material-icons">pedal_bike</span></div>
+                            <div class="s4-grouped-stat-value" style="font-size: 20px;">Peloton</div>
+                            <div class="s4-grouped-stat-label">Type</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About -->
+            <div class="s4-stats">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleAbout(this)">
+                        <span class="s4-about-title">About this Collab</span>
+                        <span class="material-icons s4-about-chevron open">expand_more</span>
+                    </div>
+                    <div class="s4-about-body" id="s4AboutBody">
+                        <p>6 weeks of cycling with Ellie. She's designed a program that pushes you beyond your comfort zone while building sustainable fitness habits. Personalized goals based on your current performance level.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Goal -->
+            <div class="s4-stats">
+                <div class="s4-stats-title">Weekly collab goal</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-creator-msg">
+                        <div class="s4-creator-msg-avatar"></div>
+                        <div class="s4-creator-msg-bubble">
+                            <div class="s4-creator-msg-name">Ellie, @doodle_cycles</div>
+                            <div class="s4-creator-msg-text">I've picked the metrics below to challenge us to work a bit harder and ride more days each week.</div>
+                        </div>
+                    </div>
+                    <div class="s4-card-divider"></div>
+                    <div class="s4-goal-row">
+                        <div class="s4-goal-card">
+                            <div class="s4-goal-icon"><span class="material-icons">local_fire_department</span></div>
+                            <div class="s4-goal-value">1.3x</div>
+                            <div class="s4-goal-label">Output Target</div>
+                            <div class="s4-goal-desc">Multiplier on your average weekly kJ.</div>
+                        </div>
+                        <div class="s4-goal-card">
+                            <div class="s4-goal-icon"><span class="material-icons">description</span></div>
+                            <div class="s4-goal-value">+1-2</div>
+                            <div class="s4-goal-label">Rides Per Week</div>
+                            <div class="s4-goal-desc">Above your usual weekly volume.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules & FAQs -->
+            <div class="s4-stats" style="margin-bottom: 40px;">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleRules(this)">
+                        <span class="s4-about-title">Game Rules & FAQs</span>
+                        <span class="material-icons s4-about-chevron">expand_more</span>
+                    </div>
+                    <div class="s4-about-body" id="s4RulesBody" style="display: none;">
+                        <div class="s4-tab-bar">
+                            <button class="s4-tab-btn active" onclick="switchTab(event, 'rules')">Game Rules</button>
+                            <button class="s4-tab-btn" onclick="switchTab(event, 'faqs')">FAQs</button>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-rules">
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">1</div>
+                                <div>
+                                    <div class="s4-rule-title">Hit your weekly goal</div>
+                                    <div class="s4-rule-desc">Complete the required output and ride frequency each week to stay on track.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">2</div>
+                                <div>
+                                    <div class="s4-rule-title">Log rides via Peloton sync</div>
+                                    <div class="s4-rule-desc">Your rides are automatically tracked through your connected Peloton account.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">3</div>
+                                <div>
+                                    <div class="s4-rule-title">Miss a week, you're out</div>
+                                    <div class="s4-rule-desc">If you don't meet the minimum goal in any week, you're eliminated from the pool.</div>
+                                </div>
+                            </div>
+                            <div class="s4-rule-item">
+                                <div class="s4-rule-num">4</div>
+                                <div>
+                                    <div class="s4-rule-title">Finishers split the pool</div>
+                                    <div class="s4-rule-desc">Everyone who completes all 6 weeks splits the collab pool equally.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-faqs" style="display: none;">
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>What happens to my $40 hold?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">Your hold is returned in full when you complete the collab. If you don't finish, it goes into the pool for those who do.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>Can I pause for a week?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to remain eligible.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>How is the pool divided?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">The total pool is split equally among all participants who complete every week of the collab.</div>
+                            </div>
+                            <div class="s4-faq-item">
+                                <div class="s4-faq-q" onclick="toggleFaq(this)">
+                                    <span>What if I get injured?</span>
+                                    <span class="material-icons s4-faq-chevron">expand_more</span>
+                                </div>
+                                <div class="s4-faq-a">We understand things happen. Reach out to support and we'll review your case on an individual basis.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end s4-scroll -->
+
+        <!-- Sticky bottom CTA -->
+        <div class="s4-bottom-bar">
+            <button class="s4-join-btn" onclick="goTo(5)">
+                Join Collab — $40 hold
+                <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 5: PUSH NOTIFICATIONS (post-join)
+         ============================================ -->
+    <div class="screen" id="screen5">
+        <!-- iOS Permission Dialog -->
+        <div class="ios-dialog-overlay" id="iosDialogOverlay">
+            <div class="ios-dialog">
+                <div class="ios-dialog-body">
+                    <div class="ios-dialog-title">"Motiv" Would Like to Send You Notifications</div>
+                    <div class="ios-dialog-text">Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.</div>
+                </div>
+                <div class="ios-dialog-actions">
+                    <button class="ios-dialog-btn" onclick="dismissDialog()">Don't Allow</button>
+                    <button class="ios-dialog-btn ios-dialog-btn--bold" onclick="dismissDialog()">Allow</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 24px 28px;">
+
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <span class="material-icons" style="font-size: 28px; color: var(--color-brand-secondary);">notifications_active</span>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 8px;">Never miss a check-in</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; max-width: 280px;">Ellie's weekly videos, collab milestones, and your streak reminders — straight to your phone.</div>
+            </div>
+
+            <!-- Notification preview -->
+            <div style="background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-radius: 16px; padding: 16px 18px; width: 100%; margin-bottom: 24px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0;">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; font-weight: 600; color: var(--color-text-primary);">Mindful Miles Reset</div>
+                        <div style="font-size: 13px; color: var(--color-text-secondary);">Week 3 video is live! You're crushing it</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 100%;">
+                <button class="btn-primary" onclick="showDialog()">Turn on notifications</button>
+                <button class="btn-secondary" onclick="finishOnboarding()">Maybe later</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Step Bar -->
+<div class="step-bar">
+    <button class="step-btn" id="prevBtn" onclick="prev()" disabled><span class="material-icons">chevron_left</span></button>
+    <div class="step-label">
+        <div class="step-number" id="stepNum">Step 1 of 6</div>
+        <div class="step-name" id="stepName">Splash</div>
+    </div>
+    <button class="step-btn" id="nextBtn" onclick="next()"><span class="material-icons">chevron_right</span></button>
+</div>
+
+<script>
+    // ─── Splash animation ───
+    let splashDone = false;
+    let splashTimeouts = [];
+
+    function runSplash() {
+        const wordmark = document.getElementById('splashWordmark');
+        const tagline = document.getElementById('splashTagline');
+        if (!wordmark) return;
+
+        splashTimeouts.push(setTimeout(() => {
+            wordmark.classList.add('visible');
+        }, 200));
+
+        splashTimeouts.push(setTimeout(() => {
+            tagline.classList.add('visible');
+        }, 1200));
+
+        splashTimeouts.push(setTimeout(() => {
+            if (cur === 0 && !splashDone) {
+                splashDone = true;
+                goTo(1);
+            }
+        }, 3800));
+    }
+
+    function cancelSplash() {
+        splashTimeouts.forEach(t => clearTimeout(t));
+        splashTimeouts = [];
+        splashDone = true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(runSplash, 100);
+    });
+
+    // ─── Main screen navigation ───
+    const names = ['Splash','Sign In','Welcome','Profile','Collab Details','Notifications'];
+    let cur = 0;
+    const total = names.length;
+    const greenScreens = [5]; // Only notifications screen gets green
+
+    function updateUI() {
+        document.getElementById('stepNum').textContent = `Step ${cur+1} of ${total}`;
+        document.getElementById('stepName').textContent = names[cur];
+        document.getElementById('prevBtn').disabled = cur === 0;
+        document.getElementById('nextBtn').disabled = cur === total - 1;
+
+        const lava = document.getElementById('lavaBg');
+        if (greenScreens.includes(cur)) {
+            lava.classList.add('green-chapter');
+        } else {
+            lava.classList.remove('green-chapter');
+        }
+    }
+
+    function goTo(i) {
+        if (i === cur || i < 0 || i >= total) return;
+        const screens = document.querySelectorAll('.screen');
+        const prevScreen = cur;
+
+        screens[prevScreen].classList.remove('active');
+        screens[prevScreen].classList.add('exiting');
+        screens[i].classList.add('active');
+        screens[i].scrollTop = 0;
+        // Also reset scroll on s4 inner scroll
+        if (i === 4) {
+            const s4scroll = screens[4].querySelector('.s4-scroll');
+            if (s4scroll) s4scroll.scrollTop = 0;
+        }
+        cur = i;
+        updateUI();
+        setTimeout(() => { screens[prevScreen].classList.remove('exiting'); }, 500);
+
+        // Cancel splash animation if navigating away
+        if (prevScreen === 0) cancelSplash();
+
+        // Start countdown when entering screen 4
+        if (i === 4) startCountdown();
+    }
+
+    function next() { goTo(cur + 1); }
+    function prev() { goTo(cur - 1); }
+
+    // ─── Countdown timer (Screen 4) ───
+    let cdTarget = Date.now() + (4*86400 + 18*3600 + 32*60 + 15) * 1000;
+    let cdInterval = null;
+
+    function startCountdown() {
+        if (cdInterval) return;
+        cdInterval = setInterval(tickCountdown, 1000);
+    }
+
+    function tickCountdown() {
+        var d = Math.max(0, cdTarget - Date.now());
+        var el;
+        el = document.getElementById('cd-d');
+        if (el) el.textContent = String(Math.floor(d / 86400000)).padStart(2, '0');
+        el = document.getElementById('cd-h');
+        if (el) el.textContent = String(Math.floor(d % 86400000 / 3600000)).padStart(2, '0');
+        el = document.getElementById('cd-m');
+        if (el) el.textContent = String(Math.floor(d % 3600000 / 60000)).padStart(2, '0');
+        el = document.getElementById('cd-s');
+        if (el) el.textContent = String(Math.floor(d % 60000 / 1000)).padStart(2, '0');
+    }
+
+    // ─── Collab details interactions ───
+    function toggleAbout(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = header.closest('.s4-about-card').querySelector('.s4-about-body');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
+    }
+
+    function toggleRules(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = document.getElementById('s4RulesBody');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
+    }
+
+    function switchTab(e, tab) {
+        var bar = e.target.closest('.s4-tab-bar');
+        bar.querySelectorAll('.s4-tab-btn').forEach(function(t) { t.classList.remove('active'); });
+        e.target.classList.add('active');
+        var body = e.target.closest('.s4-about-body');
+        body.querySelectorAll('.s4-tab-content').forEach(function(c) { c.style.display = 'none'; });
+        body.querySelector('#s4-tab-' + tab).style.display = 'block';
+    }
+
+    function toggleFaq(q) {
+        var chevron = q.querySelector('.s4-faq-chevron');
+        chevron.classList.toggle('open');
+        var a = q.nextElementSibling;
+        a.style.display = a.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // ─── iOS notification dialog ───
+    function showDialog() {
+        document.getElementById('iosDialogOverlay').classList.add('visible');
+    }
+    function dismissDialog() {
+        document.getElementById('iosDialogOverlay').classList.remove('visible');
+        setTimeout(() => finishOnboarding(), 300);
+    }
+    function finishOnboarding() {
+        // End state — in production this would navigate to the app home
+        alert('Onboarding complete! In the real app, this would take you to the collab dashboard.');
+    }
+
+    // ─── Keyboard nav ───
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            next();
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            prev();
+        }
+    });
+
+    updateUI();
+</script>
+
+<style>
+    @keyframes glow-pulse {
+        0%, 100% { opacity: 0.6; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+</style>
+
+</body>
+</html>
