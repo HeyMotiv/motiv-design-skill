@@ -224,8 +224,8 @@
            SCREEN 3: PROFILE COMPLETION
            =========================================== */
         .s3-photo-upload {
-            width: 88px;
-            height: 88px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: rgba(255,255,255,0.8);
             border: none;
@@ -276,7 +276,7 @@
         /* Sarah's reply row — right-aligned, mirroring Ellie's left inset */
         .s3-reply-row {
             display: flex;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             padding-left: 100px;
         }
         .s3-reply-row .s3-reply-bubble {
@@ -958,6 +958,8 @@
     <div class="screen" id="screen1">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
 
+            <div style="flex: 1.2; min-height: 24px;"></div>
+
             <div class="s1-creator-header">
                 <div class="s1-avatar">
                     <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Ellie Snackson">
@@ -996,7 +998,7 @@
                 <div class="form-helper">We'll send you a one-time code. No password required.</div>
             </div>
 
-            <div style="flex: 1; min-height: 16px;"></div>
+            <div style="flex: 0.5; min-height: 16px;"></div>
 
             <div>
                 <button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="submitEmail()" disabled>Continue</button>
@@ -1044,7 +1046,7 @@
         <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
             <!-- Celebratory header -->
-            <div style="text-align: center; margin-bottom: 28px; margin-top: 12px;">
+            <div style="text-align: center; margin-bottom: 16px; margin-top: 64px;">
                 <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.15;">Almost collab-ready</div>
             </div>
 
@@ -1062,7 +1064,7 @@
                 <!-- Sarah replies with photo -->
                 <div class="s3-reply-row s3-reply-row-photo">
                     <div class="s3-reply-bubble s3-reply-photo">
-                        <div class="s3-reply-label">Here's my glamour shot…</div>
+                        <div class="s3-reply-label">Here's a good one…</div>
                         <div class="s3-photo-upload" id="photoUpload">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
                             <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
@@ -1103,13 +1105,14 @@
                     </div>
                 </div>
 
-                <div style="font-size: 12.5px; color: var(--color-text-tertiary); text-align: center; margin-top: 14px;">Visible to all collab participants</div>
-
-                <div style="height: 80px;"></div>
+                <div style="height: 96px;"></div>
             </div>
         </div>
         <!-- Pinned bottom button -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center; letter-spacing: 0.01em;">
+                <span style="font-size: 14px;">&#9888;&#65039;</span> Above info is visible to all participants
+            </div>
             <button class="btn-primary" onclick="goTo(4)">Continue</button>
         </div>
     </div>
@@ -1696,7 +1699,7 @@
     }
 
     /* Profile screen — Ellie chat bubbles */
-    .s3-chat-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 16px; max-width: 88%; }
+    .s3-chat-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 10px; max-width: 88%; }
     .s3-chat-avatar { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--color-brand-secondary); flex-shrink: 0; }
     .s3-chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .s3-bubble { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px 18px 18px 6px; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.5); font-size: 14px; color: var(--color-text-primary); line-height: 1.45; }
