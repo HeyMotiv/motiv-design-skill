@@ -188,37 +188,116 @@
         .form-helper { font-size: 12px; color: var(--color-text-tertiary); margin-top: var(--space-xs); }
 
         /* ===========================================
-           SCREEN 2: YOU'VE UNLOCKED SOMETHING SPECIAL
+           SCREEN 4: HOW IT WORKS (Hybrid)
            =========================================== */
-        .s2-banner {
+        .s4h-layout {
+            flex: 1;
             display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255,255,255,0.75);
-            backdrop-filter: blur(12px);
-            border-radius: var(--radius-md);
-            padding: 14px 16px;
-            margin-bottom: 12px;
+            flex-direction: column;
+            padding: 56px 24px 28px;
         }
-        .s2-banner-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 22px;
+        .s4h-header {
+            text-align: center;
+            margin-bottom: 14px;
+            margin-top: 20px;
         }
-        .s2-banner-text {
-            font-size: 14px;
+        .s4h-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+        .s4h-subtitle {
+            font-size: 15px;
             color: var(--color-text-secondary);
             line-height: 1.45;
         }
-        .s2-banner-text strong {
+        /* IG-style bubble base */
+        .s4h-ig-bubble {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 10px 14px;
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.45;
+            align-self: flex-start;
+        }
+        .s4h-ig-bubble strong { font-weight: 600; }
+
+        /* IG grouping radii:
+           first:  round TL, round TR, round BR, round BL
+           middle: small TL, round TR, round BR, small BL
+           last:   small TL, round TR, round BR, round BL (tail) */
+        .s4h-ig-bubble.ig-first { border-radius: 18px 18px 18px 4px; }
+        .s4h-ig-bubble.ig-mid   { border-radius: 4px 18px 18px 4px; }
+        .s4h-ig-bubble.ig-last  { border-radius: 4px 18px 18px 18px; }
+        /* solo bubble (only one) */
+        .s4h-ig-bubble.ig-solo  { border-radius: 18px 18px 18px 18px; }
+
+        /* The bubbles column */
+        .s4h-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-left: 36px;
+        }
+
+        /* Last bubble row: avatar + bubble side by side */
+        .s4h-tail-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            margin-top: 3px;
+        }
+        .s4h-ellie-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid var(--color-brand-secondary);
+            flex-shrink: 0;
+        }
+        .s4h-ellie-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* System message — centered, above CTA */
+        .s4h-system-msg {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            padding: 0 20px;
+            margin-bottom: 10px;
+        }
+        .s4h-system-msg strong {
             color: var(--color-text-primary);
             font-weight: 600;
         }
+
+        .s4h-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: auto;
+        }
+        .s4h-cta-tertiary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: transparent;
+            color: var(--color-text-tertiary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .s4h-cta-tertiary:hover { opacity: 0.7; }
 
         /* ===========================================
            SCREEN 3: PROFILE COMPLETION
@@ -917,7 +996,7 @@
         <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
         <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
         <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
-        <span class="nav-jump" onclick="goTo(4)">4 Welcome</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 How It Works</span> ·
         <span class="nav-jump" onclick="goTo(5)">5 Collab Details</span> ·
         <span class="nav-jump" onclick="goTo(6)">6 Notifications</span>
     </div>
@@ -1057,9 +1136,10 @@
         <div class="emoji-rain-overlay" id="screen3EmojiRain"></div>
         <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
-            <!-- Celebratory header -->
-            <div style="text-align: center; margin-bottom: 16px; margin-top: 64px;">
-                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.15;">Almost collab-ready</div>
+            <!-- Header — matches Screen 4 pattern -->
+            <div class="s4h-header">
+                <div class="s4h-title">Almost collab-ready</div>
+                <div class="s4h-subtitle">This is how you'll show up in collabs</div>
             </div>
 
             <!-- Ellie's opening bubble — staggered -->
@@ -1161,43 +1241,42 @@
     </div>
 
     <!-- ============================================
-         SCREEN 4: YOU'VE UNLOCKED SOMETHING SPECIAL
+         SCREEN 4: HOW IT WORKS (Hybrid)
          ============================================ -->
     <div class="screen" id="screen4">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+        <div class="s4h-layout">
 
-            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-
-                <!-- Ellie avatar with glow -->
-                <div style="position: relative; margin-bottom: 24px;">
-                    <div style="position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(201,122,106,0.25) 0%, transparent 70%); animation: glow-pulse 3s ease-in-out infinite;"></div>
-                    <div style="width: 80px; height: 80px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); position: relative;">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=160&h=160&fit=crop&crop=face" alt="Ellie" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                </div>
-
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">You've unlocked<br>something special</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.55; max-width: 300px; margin-bottom: 28px;">Motiv gives you real time and space with creators like Ellie — not just content, but actual experiences you do together.</div>
-
-                <!-- Banners -->
-                <div style="width: 100;">
-                    <div class="s2-banner">
-                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F64C;</div>
-                        <div class="s2-banner-text"><strong>High fives from Ellie</strong> — she sees your effort and cheers you on personally</div>
-                    </div>
-                    <div class="s2-banner">
-                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F6B4;</div>
-                        <div class="s2-banner-text"><strong>Ride together</strong> — weekly content, tips, and Ellie's actual routine</div>
-                    </div>
-                    <div class="s2-banner">
-                        <div class="s2-banner-icon" style="background: rgba(201,122,106,0.12);">&#x1F4B0;</div>
-                        <div class="s2-banner-text"><strong>Earn it all back</strong> — commit with a hold, hit your goals, get every dollar returned</div>
-                    </div>
-                </div>
+            <div style="margin-bottom: 8px;">
+                <a class="back-btn" onclick="goTo(3)"><span class="material-icons">arrow_back</span></a>
             </div>
 
-            <div>
-                <button class="btn-primary" onclick="goTo(5)">Continue</button>
+            <!-- App header — frames the concept -->
+            <div class="s4h-header">
+                <div class="s4h-title">How collabs work</div>
+                <div class="s4h-subtitle">Get moving alongside creators you love</div>
+            </div>
+
+            <!-- Ellie's message sequence — IG-style bubble shapes, avatar on last only -->
+            <div class="s4h-bubbles">
+                <div class="s4h-ig-bubble ig-first">Here's the deal 👇</div>
+                <div class="s4h-ig-bubble ig-mid"><strong>4–6 weeks</strong> of getting moving together toward a common goal 💪</div>
+                <div class="s4h-ig-bubble ig-mid">I'll be your biggest cheerleader and you'll be part of my crew 🤝</div>
+                <div class="s4h-ig-bubble ig-mid">Small $$ hold up front — about <strong>a week of daily lattes</strong> ☕</div>
+                <div class="s4h-ig-bubble ig-mid">Hit your personalized goal? You get it <strong>all back</strong> + rewards + a potential bonus 💰</div>
+            </div>
+            <!-- Last bubble with avatar -->
+            <div class="s4h-tail-row">
+                <div class="s4h-ellie-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
+                </div>
+                <div class="s4h-ig-bubble ig-last">I've got a collab coming up — <strong>check it out</strong> and see if it's your vibe 👀</div>
+            </div>
+
+            <!-- CTAs with system message just above -->
+            <div class="s4h-ctas">
+                <div class="s4h-system-msg">Right now we have <strong>Peloton-based</strong> collabs.<br>Soon: walking, running, active minutes, and more!</div>
+                <button class="btn-primary" onclick="goTo(5)">See Ellie's upcoming collab</button>
+                <button class="s4h-cta-tertiary" onclick="goTo(6)">Notify me of future collabs</button>
             </div>
         </div>
     </div>
@@ -1524,7 +1603,7 @@
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign In','Verify','Profile','Welcome','Collab Details','Notifications'];
+    const names = ['Splash','Sign In','Verify','Profile','How It Works','Collab Details','Notifications'];
     let cur = 0;
     const total = names.length;
     const greenScreens = [6]; // Only notifications screen gets green
