@@ -228,19 +228,18 @@
             height: 88px;
             border-radius: 50%;
             background: rgba(255,255,255,0.8);
-            border: 2px dashed var(--color-border-default);
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin-bottom: var(--space-md);
-            transition: border-color var(--motion-fast), background var(--motion-fast);
+            transition: transform var(--motion-fast);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
         }
         .s3-photo-upload:hover {
-            border-color: var(--color-brand-secondary);
-            background: rgba(255,255,255,0.95);
+            transform: scale(1.03);
         }
         .s3-photo-upload .material-icons {
             font-size: 28px;
@@ -253,10 +252,76 @@
             position: absolute;
             inset: 0;
         }
+        .s3-photo-edit {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.45);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 500;
+            text-align: center;
+            padding: 4px 0;
+            letter-spacing: 0.3px;
+        }
         .s3-photo-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Sarah's reply row — right-aligned, mirroring Ellie's left inset */
+        .s3-reply-row {
+            display: flex;
+            margin-bottom: 16px;
+            padding-left: 100px;
+        }
+        .s3-reply-row .s3-reply-bubble {
+            flex: 1;
+        }
+        .s3-reply-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1.5px solid var(--color-brand-secondary);
+            flex-shrink: 0;
+        }
+        .s3-reply-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .s3-reply-bubble {
+            background: rgba(201,122,106,0.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 18px 18px 6px 18px;
+            padding: 10px 14px;
+            border: 1px solid rgba(201,122,106,0.15);
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.45;
+        }
+        .s3-reply-bubble .s3-reply-label {
             font-size: 13px;
-            color: var(--color-text-tertiary);
-            margin-bottom: var(--space-xl);
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+        .s3-reply-photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 14px 10px;
+        }
+        .s3-reply-photo .s3-reply-label {
+            align-self: flex-start;
+        }
+        .s3-reply-row-photo {
+            padding-left: 160px;
         }
 
         .s3-form-group {
@@ -839,8 +904,8 @@
         <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
         <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
         <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
-        <span class="nav-jump" onclick="goTo(3)">3 Welcome</span> ·
-        <span class="nav-jump" onclick="goTo(4)">4 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 Welcome</span> ·
         <span class="nav-jump" onclick="goTo(5)">5 Collab Details</span> ·
         <span class="nav-jump" onclick="goTo(6)">6 Notifications</span>
     </div>
@@ -967,9 +1032,87 @@
     </div>
 
     <!-- ============================================
-         SCREEN 3: YOU'VE UNLOCKED SOMETHING SPECIAL
+         SCREEN 3: PROFILE (Ellie's welcome)
          ============================================ -->
-    <div class="screen" id="screen3">
+    <div class="screen" id="screen3" style="overflow-y: auto;">
+        <div class="emoji-rain-overlay" id="screen3EmojiRain"></div>
+        <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+
+            <!-- Celebratory header -->
+            <div style="text-align: center; margin-bottom: 28px; margin-top: 12px;">
+                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.15;">Welcome to Motiv!</div>
+            </div>
+
+            <!-- Ellie's opening bubble — staggered -->
+            <div class="s3-chat-row s3-stagger s3-stagger-1">
+                <div class="s3-chat-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
+                </div>
+                <div class="s3-bubble">Add a photo so I can spot you in collabs! 📸</div>
+            </div>
+
+            <!-- Conversation continues — fades in after intro bubbles -->
+            <div class="s3-form-area">
+
+                <!-- Sarah replies with photo -->
+                <div class="s3-reply-row s3-reply-row-photo">
+                    <div class="s3-reply-bubble s3-reply-photo">
+                        <div class="s3-reply-label">Here's my glamour shot…</div>
+                        <div class="s3-photo-upload" id="photoUpload">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                            <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
+                            <div class="s3-photo-edit">Edit</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ellie asks for name -->
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="s3-bubble">What should we call you?</div>
+                </div>
+
+                <!-- Sarah replies with name -->
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">You can call me…</div>
+                        <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
+                    </div>
+                </div>
+
+                <!-- Ellie asks for IG -->
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="s3-bubble">What's your IG handle? 💬</div>
+                </div>
+
+                <!-- Sarah replies with handle (optional) -->
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">This is me…</div>
+                        <div style="position: relative;">
+                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                            <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                        </div>
+                        <div style="font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 6px;">Totally optional — you can add it later</div>
+                    </div>
+                </div>
+
+                <div style="font-size: 12.5px; color: var(--color-text-tertiary); text-align: center; margin-top: 14px;">Visible to all collab participants</div>
+
+                <div style="height: 80px;"></div>
+            </div>
+        </div>
+        <!-- Pinned bottom button -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">
+            <button class="btn-primary" onclick="goTo(4)">Continue</button>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 4: YOU'VE UNLOCKED SOMETHING SPECIAL
+         ============================================ -->
+    <div class="screen" id="screen4">
         <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
 
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
@@ -1003,61 +1146,7 @@
             </div>
 
             <div>
-                <button class="btn-primary" onclick="goTo(4)">Continue</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         SCREEN 4: PROFILE COMPLETION
-         ============================================ -->
-    <div class="screen" id="screen4">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
-            <div style="width: 100%; display: flex; align-items: center; padding: 0 0 8px;">
-                <a href="#" class="back-btn" onclick="goTo(3);return false"><span class="material-icons">chevron_left</span></a>
-            </div>
-
-            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 24px;">
-                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 6px;">Complete your profile</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); max-width: 280px;">This is how Ellie and the community will see you.</div>
-            </div>
-
-            <!-- Photo upload -->
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <div class="s3-photo-upload" id="photoUpload">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
-                    <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
-                </div>
-                <div class="s3-photo-label">Tap to change</div>
-            </div>
-
-            <!-- Name fields -->
-            <div class="s3-name-row">
-                <div class="s3-form-group">
-                    <label class="s3-form-label">First name</label>
-                    <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 14px;">
-                </div>
-                <div class="s3-form-group">
-                    <label class="s3-form-label">Last name</label>
-                    <input type="text" class="form-input" value="Miller" style="font-size: 15px; padding: 14px;">
-                </div>
-            </div>
-
-            <!-- Instagram handle -->
-            <div class="s3-form-group">
-                <label class="s3-form-label">Instagram handle</label>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
-                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 14px 14px 14px 30px;">
-                </div>
-                <div class="form-helper">Optional — lets creators recognize you from IG</div>
-            </div>
-
-            <div style="flex: 1; min-height: 16px;"></div>
-
-            <div>
                 <button class="btn-primary" onclick="goTo(5)">Continue</button>
-                <button class="btn-secondary" onclick="goTo(5)" style="font-size: 14px; padding: 12px;">Skip for now</button>
             </div>
         </div>
     </div>
@@ -1384,7 +1473,7 @@
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign In','Verify','Welcome','Profile','Collab Details','Notifications'];
+    const names = ['Splash','Sign In','Verify','Profile','Welcome','Collab Details','Notifications'];
     let cur = 0;
     const total = names.length;
     const greenScreens = [6]; // Only notifications screen gets green
@@ -1453,6 +1542,22 @@
         setTimeout(() => { link.textContent = 'Resend'; }, 2000);
     }
 
+    let profileRainFired = false;
+    function triggerProfileEmojiRain() {
+        if (profileRainFired) return;
+        profileRainFired = true;
+        const overlay = document.getElementById('screen3EmojiRain');
+        overlay.innerHTML = '';
+        const emojis = ['🎉', '❤️', '🙌', '🔥', '✨'];
+        for (let i = 0; i < 28; i++) {
+            const span = document.createElement('span');
+            span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.cssText = `position:absolute;top:-50px;left:${Math.random()*92}%;font-size:${18+Math.random()*18}px;animation:emojifall ${2+Math.random()*2}s linear ${Math.random()*1.2}s forwards;pointer-events:none;`;
+            overlay.appendChild(span);
+        }
+        setTimeout(() => { overlay.innerHTML = ''; }, 5000);
+    }
+
     function goTo(i) {
         if (i === cur || i < 0 || i >= total) return;
         const screens = document.querySelectorAll('.screen');
@@ -1462,9 +1567,9 @@
         screens[prevScreen].classList.add('exiting');
         screens[i].classList.add('active');
         screens[i].scrollTop = 0;
-        // Also reset scroll on s4 inner scroll
-        if (i === 4) {
-            const s4scroll = screens[4].querySelector('.s4-scroll');
+        // Also reset scroll on s4 inner scroll (collab details = screen 5)
+        if (i === 5) {
+            const s4scroll = screens[5].querySelector('.s4-scroll');
             if (s4scroll) s4scroll.scrollTop = 0;
         }
         cur = i;
@@ -1474,8 +1579,11 @@
         // Cancel splash animation if navigating away
         if (prevScreen === 0) cancelSplash();
 
-        // Start countdown when entering screen 4
-        if (i === 4) startCountdown();
+        // Emoji rain when arriving at profile screen
+        if (i === 3) setTimeout(() => triggerProfileEmojiRain(), 300);
+
+        // Start countdown when entering collab details (screen 5)
+        if (i === 5) startCountdown();
     }
 
     function next() { goTo(cur + 1); }
@@ -1571,6 +1679,36 @@
         0%, 100% { opacity: 0.6; transform: scale(1); }
         50% { opacity: 1; transform: scale(1.1); }
     }
+
+    /* Emoji rain */
+    @keyframes emojifall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        70% { opacity: 1; }
+        100% { transform: translateY(900px) rotate(360deg); opacity: 0; }
+    }
+    .emoji-rain-overlay {
+        position: absolute; inset: 0; z-index: 9999; pointer-events: none; overflow: hidden;
+    }
+
+    /* Profile screen — Ellie chat bubbles */
+    .s3-chat-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 16px; max-width: 88%; }
+    .s3-chat-avatar { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--color-brand-secondary); flex-shrink: 0; }
+    .s3-chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .s3-bubble { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px 18px 18px 6px; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.5); font-size: 14px; color: var(--color-text-primary); line-height: 1.45; }
+    .s3-bubble-solo { border-radius: 18px 18px 18px 18px; margin-left: 36px; }
+
+    /* Stagger animation */
+    @keyframes bubbleIn {
+        0% { opacity: 0; transform: translateY(8px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    .s3-stagger { opacity: 0; animation: bubbleIn 0.35s ease-out forwards; }
+    .s3-stagger-1 { animation-delay: 0.3s; }
+    .s3-stagger-2 { animation-delay: 0.9s; }
+    .s3-stagger-3 { animation-delay: 1.6s; }
+
+    /* Profile form area */
+    .s3-form-area { opacity: 0; animation: bubbleIn 0.4s ease-out 2.1s forwards; }
 </style>
 
 </body>
