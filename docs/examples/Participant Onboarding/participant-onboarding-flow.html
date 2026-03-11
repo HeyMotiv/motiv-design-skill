@@ -178,7 +178,7 @@
         .auth-btn--google { background: #fff; color: var(--color-text-primary); border: 1.5px solid var(--color-border-default); }
         .auth-icon { width: 22px; height: 22px; flex-shrink: 0; }
 
-        .divider { display: flex; align-items: center; gap: var(--space-md); margin: var(--space-md) 0; }
+        .divider { display: flex; align-items: center; gap: var(--space-md); margin: 0; }
         .divider-line { flex: 1; height: 1px; background: var(--color-border-default); }
         .divider-text { font-size: 13px; color: var(--color-text-tertiary); }
 
@@ -967,7 +967,7 @@
             </div>
 
             <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Let's collab on Motiv!</div>
-            <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 40px;">Join me and your other favorite creators</div>
+            <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Join me and your other favorite creators</div>
 
             <div class="auth-section">
                 <button class="auth-btn auth-btn--apple" onclick="goTo(3)">
@@ -980,15 +980,20 @@
                 </button>
             </div>
 
+            <div style="height: 28px;"></div>
+
             <div class="divider">
                 <span class="divider-line"></span>
                 <span class="divider-text">or</span>
                 <span class="divider-line"></span>
             </div>
 
+            <div style="height: 28px;"></div>
+
             <div>
+                <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px;">Continue with email</div>
                 <input type="email" class="form-input" id="emailInput" placeholder="Enter your email" autocomplete="email" oninput="validateEmail()">
-                <div class="form-helper">We'll send you a one-time code. No password needed.</div>
+                <div class="form-helper">We'll send you a one-time code. No password required.</div>
             </div>
 
             <div style="flex: 1; min-height: 16px;"></div>
@@ -1040,7 +1045,7 @@
 
             <!-- Celebratory header -->
             <div style="text-align: center; margin-bottom: 28px; margin-top: 12px;">
-                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.15;">Welcome to Motiv!</div>
+                <div style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--color-text-primary); line-height: 1.15;">Almost collab-ready</div>
             </div>
 
             <!-- Ellie's opening bubble — staggered -->
