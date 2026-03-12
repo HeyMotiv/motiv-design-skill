@@ -960,6 +960,18 @@
             transform: scale(0.98);
             opacity: 0.9;
         }
+        .s4-notify-link {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 0 0;
+            width: 100%;
+            text-align: center;
+        }
 
         /* ===========================================
            SCREEN 5: PUSH NOTIFICATIONS (post-join)
@@ -1520,9 +1532,10 @@
         <!-- Sticky bottom CTA -->
         <div class="s4-bottom-bar">
             <button class="s4-join-btn" onclick="goTo(6)">
-                Join Collab — $40 hold
+                Join Collab
                 <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
             </button>
+            <button class="s4-notify-link" onclick="goTo(6)">Notify me of future collabs</button>
         </div>
     </div>
 
