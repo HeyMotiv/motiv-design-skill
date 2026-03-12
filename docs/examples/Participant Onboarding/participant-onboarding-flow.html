@@ -1024,7 +1024,8 @@
         <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
         <span class="nav-jump" onclick="goTo(4)">4 How It Works</span> ·
         <span class="nav-jump" onclick="goTo(5)">5 Collab Details</span> ·
-        <span class="nav-jump" onclick="goTo(6)">6 Notifications</span>
+        <span class="nav-jump" onclick="goTo(6)">6 Notifications</span> ·
+        <span class="nav-jump" onclick="goTo(7)">7 Join Flow</span>
     </div>
 </div>
 
@@ -1531,10 +1532,7 @@
 
         <!-- Sticky bottom CTA -->
         <div class="s4-bottom-bar">
-            <button class="s4-join-btn" onclick="goTo(6)">
-                Join Collab
-                <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
-            </button>
+            <button class="s4-join-btn" onclick="goTo(7)">Join Ellie's collab</button>
             <button class="s4-notify-link" onclick="goTo(6)">Notify me of future collabs</button>
         </div>
     </div>
@@ -1590,6 +1588,29 @@
         </div>
     </div>
 
+    <!-- ============================================
+         SCREEN 7: GOAL CALCULATION & PAYMENT (placeholder)
+         ============================================ -->
+    <div class="screen" id="screen7">
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 32px 40px; text-align: center;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <span class="material-icons" style="font-size: 36px; color: var(--color-brand-secondary);">calculate</span>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">Goal Calculation &amp; Payment</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 32px;">This is where the participant would calculate their personalized goal based on their fitness data, review the hold amount, and complete payment to join the collab.</div>
+            <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px 24px; width: 100%; text-align: left;">
+                <div style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Flow includes</div>
+                <div style="font-size: 14px; color: var(--color-text-primary); line-height: 1.8;">
+                    📊 Personalized goal calculation<br>
+                    💳 Hold amount &amp; payment<br>
+                    ✅ Collab confirmation<br>
+                    🔔 Push notification setup
+                </div>
+            </div>
+            <button class="btn-primary" style="margin-top: auto; width: 100%;" onclick="goTo(5)">← Back to Collab Details</button>
+        </div>
+    </div>
+
 </div>
 
 <!-- Step Bar -->
@@ -1639,7 +1660,7 @@
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign In','Verify','Profile','How It Works','Collab Details','Notifications'];
+    const names = ['Splash','Sign In','Verify','Profile','How It Works','Collab Details','Notifications','Join Flow'];
     let cur = 0;
     const total = names.length;
     const greenScreens = []; // No screens use green currently
