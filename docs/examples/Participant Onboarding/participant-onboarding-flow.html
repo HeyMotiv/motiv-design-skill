@@ -438,6 +438,9 @@
         /* ===========================================
            SCREEN 4: COLLAB DETAILS
            =========================================== */
+        #screen5 {
+            background: #F7F3FB;
+        }
         .s4-scroll {
             flex: 1;
             overflow-y: auto;
@@ -455,8 +458,8 @@
             position: absolute;
             inset: -56px 0 0 0;
             background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80&v=2');
-            background-size: 100% auto;
-            background-position: center -60px;
+            background-size: cover;
+            background-position: center 30%;
             background-repeat: no-repeat;
             z-index: 0;
         }
@@ -465,11 +468,13 @@
             inset: -56px 0 0 0;
             background: linear-gradient(
                 180deg,
-                rgba(123, 94, 167, 0.55) 0%,
-                rgba(123, 94, 167, 0.50) 18%,
-                rgba(209, 194, 232, 0.95) 26%,
-                var(--color-bg-primary) 31%,
-                var(--color-bg-primary) 100%
+                rgba(123, 94, 167, 0.40) 0%,
+                rgba(123, 94, 167, 0.20) 20%,
+                rgba(123, 94, 167, 0.15) 40%,
+                rgba(123, 94, 167, 0.35) 55%,
+                rgba(209, 194, 232, 0.92) 65%,
+                #F7F3FB 72%,
+                #F7F3FB 100%
             );
             z-index: 1;
         }
