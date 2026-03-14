@@ -994,6 +994,100 @@
         .processing-title { font-size: 18px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }
         .processing-desc { font-size: 14px; color: var(--color-text-secondary); }
 
+        /* Decline */
+        .decline-step {
+            display: none;
+            text-align: center;
+            padding-top: 40px;
+        }
+        .decline-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #FEF2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .decline-icon .material-icons {
+            font-size: 32px;
+            color: var(--surface-error);
+        }
+        .decline-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .decline-desc {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+        .decline-reason {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            border-radius: var(--radius-md);
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--surface-error);
+            margin-bottom: 24px;
+        }
+        .decline-reason .material-icons { font-size: 16px; }
+        .decline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 4px;
+        }
+        .decline-retry-btn {
+            width: 100%;
+            height: 52px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .decline-retry-btn:hover { background: var(--brand-deep); }
+        .decline-retry-btn:active { transform: scale(0.98); }
+        .decline-alt-btn {
+            width: 100%;
+            height: 48px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: var(--font-body);
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        .decline-alt-btn:hover { border-color: var(--color-clay); color: var(--color-text-primary); }
+        .decline-help {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 18px;
+        }
+        .decline-help a {
+            color: var(--color-clay);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
         /* Welcome */
         .welcome-step {
             display: none;
@@ -1414,6 +1508,38 @@
                     <div class="processing-desc">Securing your spot in the collab</div>
                 </div>
 
+                <!-- Decline — Generic (fraud, unknown) -->
+                <div id="step-decline-generic" class="decline-step">
+                    <div class="decline-icon">
+                        <span class="material-icons">close</span>
+                    </div>
+                    <div class="decline-title">Payment didn't go through</div>
+                    <div class="decline-desc">Your payment couldn't be processed. This can happen for a variety of reasons.</div>
+                    <div class="decline-actions">
+                        <button class="decline-retry-btn" onclick="retryPayment()">Try again</button>
+                        <button class="decline-alt-btn" onclick="retryDifferentMethod()">Use a different payment method</button>
+                    </div>
+                    <div class="decline-help">Still having trouble? <a href="#">Contact your bank</a> or <a href="#">get help</a></div>
+                </div>
+
+                <!-- Decline — Specific (expired, CVC, funds, ZIP) -->
+                <div id="step-decline-specific" class="decline-step">
+                    <div class="decline-icon">
+                        <span class="material-icons">close</span>
+                    </div>
+                    <div class="decline-title">Payment declined</div>
+                    <div class="decline-desc">There was an issue with your card.</div>
+                    <div class="decline-reason" id="declineReasonBadge">
+                        <span class="material-icons">info_outline</span>
+                        <span id="declineReasonText">Your card has expired</span>
+                    </div>
+                    <div class="decline-actions">
+                        <button class="decline-retry-btn" onclick="retryPayment()">Update card &amp; retry</button>
+                        <button class="decline-alt-btn" onclick="retryDifferentMethod()">Use a different payment method</button>
+                    </div>
+                    <div class="decline-help">Still having trouble? <a href="#">Contact your bank</a> or <a href="#">get help</a></div>
+                </div>
+
                 <!-- Welcome -->
                 <div id="step-welcome" class="welcome-step">
                     <div class="welcome-hero">
@@ -1534,9 +1660,12 @@
         }
     }
 
+    // Track which method was last used for retry
+    var lastPaymentMethod = null;
+
     function processPayment(method) {
-        document.getElementById('step-payment').style.display = 'none';
-        document.getElementById('step-card-input').style.display = 'none';
+        lastPaymentMethod = method;
+        hideAllSteps();
         document.getElementById('step-processing').style.display = 'block';
         document.getElementById('sheetTitle').textContent = 'Processing';
 
@@ -1549,6 +1678,77 @@
             // Match sheet bg to gradient start so no white band behind handle
             document.getElementById('bottomSheet').style.background = '#C4B1DC';
         }, 2000);
+    }
+
+    // Simulate a generic decline (fraud, unknown reason)
+    function simulateDeclineGeneric(method) {
+        lastPaymentMethod = method || 'Credit Card';
+        hideAllSteps();
+        document.getElementById('step-processing').style.display = 'block';
+        document.getElementById('sheetTitle').textContent = 'Processing';
+
+        setTimeout(function() {
+            document.getElementById('step-processing').style.display = 'none';
+            document.getElementById('step-decline-generic').style.display = 'block';
+            document.getElementById('sheetTitle').textContent = 'Payment failed';
+        }, 2000);
+    }
+
+    // Simulate a specific decline (expired card, bad CVC, insufficient funds, wrong ZIP)
+    function simulateDeclineSpecific(reason) {
+        lastPaymentMethod = 'Credit Card';
+        var reasons = {
+            'expired': 'Your card has expired',
+            'cvc': 'Incorrect security code (CVC)',
+            'funds': 'Insufficient funds',
+            'zip': 'ZIP code doesn\'t match card'
+        };
+        document.getElementById('declineReasonText').textContent = reasons[reason] || reasons['expired'];
+
+        // Update retry button text based on reason
+        var retryBtn = document.querySelector('#step-decline-specific .decline-retry-btn');
+        if (reason === 'funds') {
+            retryBtn.textContent = 'Try again';
+        } else {
+            retryBtn.textContent = 'Update card & retry';
+        }
+
+        hideAllSteps();
+        document.getElementById('step-processing').style.display = 'block';
+        document.getElementById('sheetTitle').textContent = 'Processing';
+
+        setTimeout(function() {
+            document.getElementById('step-processing').style.display = 'none';
+            document.getElementById('step-decline-specific').style.display = 'block';
+            document.getElementById('sheetTitle').textContent = 'Payment failed';
+        }, 2000);
+    }
+
+    function retryPayment() {
+        hideAllSteps();
+        if (lastPaymentMethod === 'Credit Card') {
+            document.getElementById('step-card-input').style.display = 'block';
+            document.getElementById('sheetTitle').textContent = 'Card details';
+        } else {
+            // For Apple/Google Pay, go back to payment picker
+            document.getElementById('step-payment').style.display = 'block';
+            document.getElementById('sheetTitle').textContent = 'Pay entry hold';
+        }
+    }
+
+    function retryDifferentMethod() {
+        hideAllSteps();
+        document.getElementById('step-payment').style.display = 'block';
+        document.getElementById('sheetTitle').textContent = 'Pay entry hold';
+    }
+
+    function hideAllSteps() {
+        document.getElementById('step-payment').style.display = 'none';
+        document.getElementById('step-card-input').style.display = 'none';
+        document.getElementById('step-processing').style.display = 'none';
+        document.getElementById('step-decline-generic').style.display = 'none';
+        document.getElementById('step-decline-specific').style.display = 'none';
+        document.getElementById('step-welcome').style.display = 'none';
     }
 
     function goToCollab() {
