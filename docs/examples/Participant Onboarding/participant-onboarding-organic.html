@@ -904,7 +904,7 @@
 
             <div class="hiw-ctas">
                 <div class="hiw-system-msg">Right now we have <strong>Peloton-based</strong> collabs.<br>Soon: walking, running, active minutes, and more!</div>
-                <button class="btn-primary" onclick="goTo(6)">Browse collabs</button>
+                <button class="btn-primary" id="hiwCTA" onclick="goTo(6)">Browse collabs</button>
                 <button class="hiw-cta-tertiary" onclick="goTo(7)">Notify me of future collabs</button>
             </div>
         </div>
@@ -1225,8 +1225,8 @@
 
     function goToCreatorCollab() {
         if (selectedCreator === null) return;
-        // Skip How It Works — go straight to collab details
-        goTo(6);
+        // Go to How It Works first, then collab details
+        goTo(5);
     }
 
     // ─── Form helpers ───
@@ -1296,6 +1296,17 @@
 
         if (prevScreen === 0) cancelSplash();
         if (i === 6) startCountdown();
+
+        // Update How It Works CTA based on whether a creator was selected
+        if (i === 5) {
+            const hiwCTA = document.getElementById('hiwCTA');
+            if (selectedCreator !== null) {
+                const creatorNames = ['Ellie','Marcus','Jess','Tyler','Priya','Dan','Chris','Aisha','Leo','Mia'];
+                hiwCTA.textContent = "See " + creatorNames[selectedCreator] + "'s collab";
+            } else {
+                hiwCTA.textContent = 'Browse collabs';
+            }
+        }
     }
 
     function next() { goTo(cur + 1); }
