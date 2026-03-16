@@ -150,11 +150,11 @@
         .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
 
         /* CREATOR PICKER */
-        .picker-layout { flex: 1; display: flex; flex-direction: column; padding: 56px 20px 28px; }
+        /* picker-layout styles moved to inline */
         .picker-header { text-align: center; margin-bottom: 16px; margin-top: 16px; }
         .picker-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px; }
         .picker-subtitle { font-size: 14px; color: var(--color-text-secondary); line-height: 1.45; }
-        .picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; flex: 1; align-content: start; overflow-y: auto; padding-bottom: 60px; }
+        .picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
         .picker-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 14px 10px; text-align: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
         .picker-card:hover { transform: scale(1.03); }
         .picker-card:active { transform: scale(0.97); }
@@ -164,7 +164,7 @@
         .picker-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
         .picker-handle { font-size: 11px; color: var(--color-brand-secondary); }
         .picker-tag { font-size: 10px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
-        .picker-bottom { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 20px 28px; background: linear-gradient(to top, rgba(242,230,226,1) 60%, transparent); z-index: 5; }
+        .picker-bottom { padding: 12px 20px 28px; }
         .picker-explore-link { background: none; border: none; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 0 0; width: 100%; text-align: center; }
 
         /* SIGN IN — creator variant */
@@ -388,11 +388,12 @@
 
     <!-- SCREEN 1: CREATOR PICKER -->
     <div class="screen" id="screen1">
-        <div class="picker-layout">
+        <div style="flex:1; display:flex; flex-direction:column; padding:56px 20px 0; min-height:0;">
             <div class="picker-header">
                 <div class="picker-title">Welcome to Motiv</div>
                 <div class="picker-subtitle">Most people find us through a creator they follow. Who brought you here?</div>
             </div>
+            <div style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0;">
             <div class="picker-grid">
                 <div class="picker-card" onclick="selectCreator(this, 0)">
                     <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face" alt="Ellie"></div>
@@ -455,10 +456,11 @@
                     <div class="picker-tag">Cycling · Yoga</div>
                 </div>
             </div>
-            <div class="picker-bottom">
-                <button class="btn-primary" id="pickerCTA" onclick="confirmCreator()" style="opacity: 0.35; pointer-events: none;">See their collab</button>
-                <button class="picker-explore-link" onclick="chooseExploring()">I'm just exploring</button>
             </div>
+        </div>
+        <div class="picker-bottom" style="position:relative; flex-shrink:0;">
+            <button class="btn-primary" id="pickerCTA" onclick="confirmCreator()" style="opacity: 0.35; pointer-events: none;">See their collab</button>
+            <button class="picker-explore-link" onclick="chooseExploring()">I'm just exploring</button>
         </div>
     </div>
 
