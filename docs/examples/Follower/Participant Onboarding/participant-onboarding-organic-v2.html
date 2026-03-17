@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>Participant Onboarding — Organic v2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --color-brand-primary: #2B2E34;
+            --color-brand-secondary: #C97A6A;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #F9FAFB;
+            --color-bg-tertiary: #F3F4F6;
+            --color-border-default: #E5E7EB;
+
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+
+            --space-xxs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+            --space-lg: 20px; --space-xl: 24px; --space-2xl: 32px;
+
+            --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-full: 9999px;
+
+            --motion-fast: 150ms; --motion-normal: 250ms; --motion-slow: 350ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        /* REVIEW HEADER */
+        .review-header { text-align: center; margin-bottom: 24px; max-width: 720px; }
+        .review-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: #e8e8f0; margin-bottom: 4px; }
+        .review-subtitle { font-size: 12px; letter-spacing: 0.01em; color: #8888a0; }
+        .nav-jump { cursor: pointer; transition: color 0.15s ease; padding: 2px 4px; border-radius: 4px; }
+        .nav-jump:hover { color: #d0d0e0; background: rgba(255,255,255,0.08); }
+
+        /* PHONE FRAME */
+        .phone-frame { width: 390px; height: 844px; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 80px rgba(0,0,0,0.5); position: relative; margin-top: 20px; }
+
+        /* STATUS BAR + HOME INDICATOR */
+        .status-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 54px; }
+        .status-time { font-family: var(--font-body); font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+        .status-icons { display: flex; align-items: center; gap: 6px; }
+        .status-icons svg { height: 12px; }
+        .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--color-text-primary); border-radius: 3px; opacity: 0.2; z-index: 10; }
+
+        /* LAVA LAMP BACKGROUND */
+        .lava-bg { position: absolute; inset: 0; overflow: hidden; background: #F2E6E2; transition: background 1.2s ease-in-out; pointer-events: none; }
+        .lava-bg.purple-chapter { background: #F7F3FB; }
+        .lava-layer { position: absolute; inset: 0; transition: opacity 1.2s ease-in-out; }
+        .lava-purple { opacity: 0; }
+        .lava-bg.purple-chapter .lava-warm { opacity: 0; }
+        .lava-bg.purple-chapter .lava-purple { opacity: 1; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(40px); }
+
+        .blob-wa { width: 800px; height: 800px; background: radial-gradient(circle, rgba(235,160,155,0.40) 0%, rgba(242,180,172,0.28) 40%, rgba(248,210,195,0.15) 100%); bottom: -200px; right: -200px; animation: drift-a 14s ease-in-out infinite; }
+        .blob-wa2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(240,168,162,0.34) 0%, rgba(245,188,178,0.22) 40%, rgba(250,215,200,0.12) 100%); bottom: -80px; right: -80px; animation: drift-a2 16s ease-in-out infinite; animation-delay: -6s; }
+        .blob-wb { width: 800px; height: 800px; background: radial-gradient(circle, rgba(240,208,155,0.38) 0%, rgba(245,218,175,0.26) 40%, rgba(250,235,210,0.14) 100%); bottom: -250px; right: -120px; animation: drift-b 12s ease-in-out infinite; animation-delay: -3s; }
+        .blob-wb2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(242,212,160,0.32) 0%, rgba(248,222,182,0.20) 40%, rgba(252,238,215,0.10) 100%); bottom: -100px; right: -280px; animation: drift-b2 18s ease-in-out infinite; animation-delay: -8s; }
+
+        .blob-pa { width: 800px; height: 800px; background: radial-gradient(circle, rgba(180,155,220,0.40) 0%, rgba(195,175,230,0.28) 40%, rgba(220,205,240,0.15) 100%); bottom: -200px; right: -200px; animation: drift-a 14s ease-in-out infinite; }
+        .blob-pa2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(185,160,225,0.34) 0%, rgba(200,180,235,0.22) 40%, rgba(225,210,245,0.12) 100%); bottom: -80px; right: -80px; animation: drift-a2 16s ease-in-out infinite; animation-delay: -6s; }
+        .blob-pb { width: 800px; height: 800px; background: radial-gradient(circle, rgba(170,145,215,0.38) 0%, rgba(190,170,230,0.26) 40%, rgba(215,200,242,0.14) 100%); bottom: -250px; right: -120px; animation: drift-b 12s ease-in-out infinite; animation-delay: -3s; }
+        .blob-pb2 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(175,150,218,0.32) 0%, rgba(195,175,235,0.20) 40%, rgba(220,208,245,0.10) 100%); bottom: -100px; right: -280px; animation: drift-b2 18s ease-in-out infinite; animation-delay: -8s; }
+
+        @keyframes drift-a { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:60% 40% 30% 70%/60% 30% 70% 40%}25%{transform:translate(-20%,-50%)scale(1.18)rotate(60deg);border-radius:30% 60% 70% 40%/50% 60% 30% 60%}50%{transform:translate(-10%,-85%)scale(0.85)rotate(120deg);border-radius:50% 60% 30% 60%/30% 40% 70% 50%}75%{transform:translate(-35%,-45%)scale(1.12)rotate(180deg);border-radius:40% 30% 60% 50%/60% 70% 30% 40%} }
+        @keyframes drift-a2 { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:50% 50% 40% 60%/40% 60% 50% 50%}33%{transform:translate(-65%,-15%)scale(1.2)rotate(80deg);border-radius:60% 40% 50% 50%/50% 50% 40% 60%}66%{transform:translate(-30%,-35%)scale(0.82)rotate(160deg);border-radius:40% 60% 60% 40%/60% 40% 50% 50%} }
+        @keyframes drift-b { 0%,100%{transform:translate(0,0)scale(1)rotate(0);border-radius:70% 30% 50% 50%/30% 70% 30% 70%}25%{transform:translate(-25%,-60%)scale(1.2)rotate(80deg);border-radius:50% 50% 30% 70%/50% 50% 50% 50%}50%{transform:translate(-55%,-80%)scale(0.82)rotate(160deg);border-radius:30% 70% 70% 30%/70% 30% 50% 60%}75%{transform:translate(-40%,-25%)scale(1.12)rotate(240deg);border-radius:60% 40% 40% 60%/40% 60% 40% 60%} }
+        @keyframes drift-b2 { 0%,100%{transform:translate(0,0)scale(1);border-radius:55% 45% 45% 55%/45% 55% 55% 45%}25%{transform:translate(-80px,-120px)scale(1.22);border-radius:40% 60% 55% 45%/55% 45% 40% 60%}50%{transform:translate(-160px,-60px)scale(0.78);border-radius:60% 40% 40% 60%/40% 60% 60% 40%}75%{transform:translate(-40px,-90px)scale(1.10);border-radius:45% 55% 50% 50%/50% 50% 55% 45%} }
+
+        /* SCREEN TRANSITIONS */
+        .screen { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.5s ease, transform 0.5s ease; transform: translateX(30px); }
+        .screen.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+        .screen.exiting { opacity: 0; transform: translateX(-30px); }
+
+        /* Adaptive content toggle */
+        .path-creator { display: none; }
+        .path-generic { display: none; }
+        body.has-creator .path-creator { display: block; }
+        body.has-creator .path-generic { display: none !important; }
+        body:not(.has-creator) .path-generic { display: block; }
+        body:not(.has-creator) .path-creator { display: none !important; }
+        /* Flex variants */
+        body.has-creator .path-creator-flex { display: flex !important; }
+        body:not(.has-creator) .path-generic-flex { display: flex !important; }
+
+        /* SHARED COMPONENTS */
+        .back-btn { color: var(--color-text-primary); text-decoration: none; line-height: 1; display: flex; align-items: center; opacity: 0.5; cursor: pointer; transition: opacity var(--motion-fast) var(--easing-smooth); }
+        .back-btn:hover { opacity: 0.8; }
+        .back-btn .material-icons { font-size: 26px; }
+
+        .btn-primary { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); width: 100%; background: var(--color-brand-primary); color: var(--color-text-inverse); font-family: var(--font-body); font-size: 17px; font-weight: 600; padding: 18px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: transform var(--motion-fast), box-shadow var(--motion-fast); }
+        .btn-primary:hover:not(:disabled) { transform: scale(1.02); }
+        .btn-primary:active:not(:disabled) { transform: scale(0.97); }
+        .btn-primary.btn-disabled { opacity: 0.35; cursor: not-allowed; }
+
+        .btn-secondary { display: flex; align-items: center; justify-content: center; width: 100%; background: transparent; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 16px; font-weight: 500; padding: 16px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: opacity var(--motion-fast); }
+        .btn-secondary:hover { opacity: 0.7; }
+
+        .otp-inputs { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; }
+        .otp-box { width: 48px; height: 56px; text-align: center; font-family: var(--font-body); font-size: 24px; font-weight: 600; color: var(--color-text-primary); border: 1.5px solid var(--color-border-default); border-radius: var(--radius-md); outline: none; background: var(--color-bg-primary); transition: border-color var(--motion-fast); }
+        .otp-box:focus { border-color: var(--color-text-secondary); box-shadow: none; }
+        .otp-resend { font-size: 14px; color: var(--color-text-tertiary); text-align: center; }
+        .otp-resend a { color: var(--color-text-secondary); text-decoration: underline; cursor: pointer; }
+
+        .auth-section { display: flex; flex-direction: column; gap: var(--space-sm); }
+        .auth-btn { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); width: 100%; font-family: var(--font-body); font-size: 17px; font-weight: 600; padding: 18px 32px; border: none; border-radius: var(--radius-full); cursor: pointer; transition: transform var(--motion-fast); }
+        .auth-btn:active { transform: scale(0.97); }
+        .auth-btn--apple { background: #000; color: #fff; }
+        .auth-btn--google { background: #fff; color: var(--color-text-primary); border: 1.5px solid var(--color-border-default); }
+        .auth-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+        .divider { display: flex; align-items: center; gap: var(--space-md); }
+        .divider-line { flex: 1; height: 1px; background: var(--color-border-default); }
+        .divider-text { font-size: 13px; color: var(--color-text-tertiary); }
+
+        .form-input { width: 100%; font-family: var(--font-body); font-size: 16px; color: var(--color-text-primary); padding: var(--space-md); border: 1.5px solid var(--color-border-default); border-radius: var(--radius-md); outline: none; background: var(--color-bg-primary); transition: border-color var(--motion-fast); }
+        .form-input:focus { border-color: var(--color-text-secondary); box-shadow: none; }
+        .form-input::placeholder { color: var(--color-text-tertiary); }
+        .form-helper { font-size: 12px; color: var(--color-text-tertiary); margin-top: var(--space-xs); }
+
+        @keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+
+        /* SPLASH */
+        .s0-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .s0-wordmark { font-family: var(--font-display); font-size: 72px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.03em; line-height: 1; text-align: center; position: relative; z-index: 2; opacity: 0; transform: scale(0.92); }
+        .s0-wordmark.visible { animation: splash-word-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes splash-word-in { to { opacity: 1; transform: scale(1); } }
+        .s0-tagline { font-family: var(--font-body); font-size: 18px; color: var(--color-text-secondary); text-align: center; line-height: 1.55; margin-top: 20px; position: relative; z-index: 2; opacity: 0; transform: translateY(10px); }
+        .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
+
+        /* CREATOR PICKER */
+        /* picker-layout styles moved to inline */
+        .picker-header { text-align: center; margin-bottom: 16px; margin-top: 16px; }
+        .picker-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px; }
+        .picker-subtitle { font-size: 14px; color: var(--color-text-secondary); line-height: 1.45; }
+        .picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
+        .picker-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 14px 10px; text-align: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .picker-card:hover { transform: scale(1.03); }
+        .picker-card:active { transform: scale(0.97); }
+        .picker-card.selected { border: 2px solid var(--color-brand-secondary); box-shadow: 0 0 0 3px rgba(201,122,106,0.15); }
+        .picker-avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; margin: 0 auto 8px; border: 2px solid rgba(255,255,255,0.8); }
+        .picker-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .picker-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .picker-handle { font-size: 11px; color: var(--color-brand-secondary); }
+        .picker-tag { font-size: 10px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .picker-bottom { padding: 12px 20px 28px; }
+        .picker-explore-link { background: none; border: none; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 0 0; width: 100%; text-align: center; }
+
+        /* SIGN IN — creator variant */
+        .s1-creator-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--space-lg); }
+        .s1-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); margin-bottom: var(--space-sm); }
+        .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s1-name { font-family: var(--font-body); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .s1-handle { font-size: 14px; color: var(--color-brand-secondary); }
+
+        /* PROFILE — creator chat variant */
+        .s3-chat-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 10px; max-width: 88%; }
+        .s3-chat-avatar { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--color-brand-secondary); flex-shrink: 0; }
+        .s3-chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s3-bubble { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px 18px 18px 6px; padding: 10px 14px; border: 1px solid rgba(255,255,255,0.5); font-size: 14px; color: var(--color-text-primary); line-height: 1.45; }
+        .s3-reply-row { display: flex; margin-bottom: 10px; padding-left: 100px; }
+        .s3-reply-row .s3-reply-bubble { flex: 1; }
+        .s3-reply-bubble { background: rgba(201,122,106,0.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 18px 18px 6px 18px; padding: 10px 14px; border: 1px solid rgba(201,122,106,0.15); font-size: 14px; color: var(--color-text-primary); line-height: 1.45; }
+        .s3-reply-label { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px; }
+        .s3-reply-photo { display: flex; flex-direction: column; align-items: center; padding: 10px 14px 10px; }
+        .s3-reply-photo .s3-reply-label { align-self: flex-start; }
+        .s3-reply-row-photo { padding-left: 160px; }
+
+        .s3-photo-upload { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.8); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform var(--motion-fast); position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+        .s3-photo-upload:hover { transform: scale(1.03); }
+        .s3-photo-upload .material-icons { font-size: 28px; color: var(--color-text-tertiary); }
+        .s3-photo-upload img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+        .s3-photo-edit { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.45); color: #fff; font-size: 10px; font-weight: 500; text-align: center; padding: 4px 0; letter-spacing: 0.3px; }
+        .s3-form-group { width: 100%; margin-bottom: var(--space-md); }
+        .s3-form-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; display: block; }
+        .s3-name-row { display: flex; gap: var(--space-sm); width: 100%; margin-bottom: var(--space-md); }
+        .s3-name-row .s3-form-group { flex: 1; margin-bottom: 0; }
+
+        @keyframes bubbleIn { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+        .s3-stagger { opacity: 0; animation: bubbleIn 0.35s ease-out forwards; }
+        .s3-stagger-1 { animation-delay: 0.3s; }
+        .s3-form-area { opacity: 0; animation: bubbleIn 0.4s ease-out 2.1s forwards; }
+
+        /* HOW IT WORKS — DM bubble variant (shared with deeplink) */
+        .s4h-layout { flex: 1; display: flex; flex-direction: column; padding: 56px 24px 28px; }
+        .s4h-header { text-align: center; margin-bottom: 14px; margin-top: 20px; }
+        .s4h-title { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px; }
+        .s4h-subtitle { font-size: 15px; color: var(--color-text-secondary); line-height: 1.45; }
+        .s4h-ig-bubble { background: rgba(255,255,255,0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); padding: 10px 14px; font-size: 14px; color: var(--color-text-primary); line-height: 1.45; align-self: flex-start; }
+        .s4h-ig-bubble strong { font-weight: 600; }
+        .s4h-ig-bubble.ig-accent { border-left: 5px solid var(--color-brand-secondary); }
+        .s4h-ig-bubble.ig-first { border-radius: 18px 18px 18px 4px; }
+        .s4h-ig-bubble.ig-mid { border-radius: 4px 18px 18px 4px; }
+        .s4h-ig-bubble.ig-last { border-radius: 4px 18px 18px 18px; }
+        .s4h-bubbles { display: flex; flex-direction: column; gap: 3px; margin-left: 36px; }
+        .s4h-tail-row { display: flex; gap: 8px; align-items: flex-end; margin-top: 3px; }
+        .s4h-ellie-avatar { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--color-brand-secondary); flex-shrink: 0; }
+        .s4h-ellie-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s4h-system-msg { text-align: center; font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; padding: 0 20px; margin-bottom: 10px; }
+        .s4h-system-msg strong { color: var(--color-text-primary); font-weight: 600; }
+        .s4h-ctas { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
+        .s4h-cta-tertiary { display: flex; align-items: center; justify-content: center; width: 100%; background: transparent; color: var(--color-text-tertiary); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 10px; border: none; cursor: pointer; }
+
+        /* ── How It Works: Card-in-card ── */
+        .hiw-outer {
+            background: #FFFFFF;
+            border: 1px solid #E7D9C9;
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 12px;
+        }
+        .hiw-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            background: rgba(107,78,113,0.10);
+        }
+        .hiw-icon .material-icons {
+            font-size: 28px;
+            color: #6B4E71;
+        }
+        .hiw-big-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: #2B2E34;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+        .hiw-body {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: #6B7280;
+            line-height: 1.45;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+        .hiw-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(107,78,113,0.08);
+            border: 1px solid rgba(107,78,113,0.20);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B4E71;
+            letter-spacing: 0.3px;
+            margin-bottom: 22px;
+        }
+        .hiw-pill .material-icons {
+            font-size: 14px;
+        }
+        .hiw-inner {
+            width: 100%;
+            background: #F3E6E2;
+            border-radius: 14px;
+            padding: 20px 20px;
+            text-align: center;
+        }
+        .hiw-inner-setup {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 500;
+            color: #6B7280;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+        .hiw-inner-value {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: #2B2E34;
+            line-height: 1.3;
+        }
+        .hiw-inner-note {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 400;
+            color: #9CA3AF;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* HOW IT WORKS — Step cards variant (generic) */
+        .hiw-steps { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+        .hiw-step { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 16px; display: flex; gap: 14px; align-items: flex-start; }
+        .hiw-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--color-brand-secondary); color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .hiw-step-title { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .hiw-step-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; }
+
+        /* COLLAB DETAILS */
+        #screen6 { background: #F7F3FB; }
+        .s4-scroll { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 90px; }
+        .s4-scroll::-webkit-scrollbar { display: none; }
+        .s4-hero-wrapper { position: relative; }
+        .s4-hero-image { position: absolute; inset: -56px 0 0 0; background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80&v=2'); background-size: cover; background-position: center 30%; z-index: 0; }
+        .s4-hero-gradient { position: absolute; inset: -56px 0 0 0; background: linear-gradient(180deg, rgba(123,94,167,0.40) 0%, rgba(123,94,167,0.20) 20%, rgba(123,94,167,0.15) 40%, rgba(123,94,167,0.35) 55%, rgba(209,194,232,0.92) 65%, #F7F3FB 72%, #F7F3FB 100%); z-index: 1; }
+        .s4-hero-content { position: relative; z-index: 2; padding: 60px 24px 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .s4-back-row { display: flex; align-items: center; align-self: flex-start; gap: 2px; font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.95); background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 24px; text-shadow: 0 1px 6px rgba(60,30,90,0.3); }
+        .s4-back-row .material-icons { font-size: 20px; }
+        .s4-creator-badge { display: inline-flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; background: rgba(255,255,255,0.30); backdrop-filter: blur(12px) saturate(1.4); border-radius: 32px; border: 1px solid rgba(255,255,255,0.35); margin-bottom: 20px; box-shadow: 0 2px 12px rgba(60,30,90,0.12); }
+        .s4-creator-badge-avatar { width: 32px; height: 32px; border-radius: 50%; background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80'); background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,0.6); }
+        .s4-creator-badge-handle { font-size: 14px; font-weight: 600; color: white; }
+        .s4-collab-name { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: white; line-height: 1.2; margin-top: 90px; margin-bottom: 6px; text-shadow: 0 2px 12px rgba(60,30,90,0.35), 0 1px 3px rgba(0,0,0,0.15); }
+        .s4-collab-dates { font-size: 15px; color: rgba(255,255,255,0.9); text-shadow: 0 1px 8px rgba(60,30,90,0.25); }
+        .s4-countdown { text-align: center; padding: 0 24px; position: relative; z-index: 2; margin-bottom: 20px; }
+        .s4-countdown-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.75); margin-bottom: 8px; text-shadow: 0 1px 6px rgba(60,30,90,0.4); }
+        .s4-countdown-row { display: flex; justify-content: center; gap: 20px; }
+        .s4-countdown-value { font-size: 24px; font-weight: 700; color: white; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 2px 10px rgba(60,30,90,0.5), 0 1px 3px rgba(0,0,0,0.2); }
+        .s4-countdown-unit { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.7); margin-top: 5px; text-shadow: 0 1px 6px rgba(60,30,90,0.4); }
+        .s4-stats { padding: 0 24px; margin-bottom: 20px; position: relative; z-index: 2; }
+        .s4-stats-title { font-size: 12px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .s4-grouped-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 10px; }
+        .s4-grouped-row { display: flex; align-items: center; }
+        .s4-grouped-stat { flex: 1; padding: 18px 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .s4-grouped-stat-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(123,94,167,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+        .s4-grouped-stat-icon .material-icons { font-size: 20px; color: #7B5EA7; }
+        .s4-grouped-stat-value { font-size: 26px; font-weight: 700; color: #7B5EA7; line-height: 1; margin-bottom: 4px; }
+        .s4-grouped-stat-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); }
+        .s4-pool-amount { font-size: 36px; font-weight: 700; color: #7B5EA7; line-height: 1; margin-bottom: 2px; text-align: left; }
+        .s4-grouped-divider { width: 1px; height: 40px; background: rgba(0,0,0,0.08); flex-shrink: 0; }
+        .s4-card-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 0 16px; }
+        .s4-entry-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(123,94,167,0.15); border: 1.5px solid rgba(123,94,167,0.3); border-radius: var(--radius-full); padding: 10px 18px; font-size: 15px; font-weight: 700; color: #7B5EA7; }
+        .s4-entry-badge .material-icons { font-size: 20px; }
+        .s4-about-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.5); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 10px; }
+        .s4-about-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; cursor: pointer; }
+        .s4-about-title { font-size: 15px; font-weight: 700; color: var(--color-text-primary); }
+        .s4-about-chevron { color: var(--color-text-tertiary); transition: transform 0.25s ease; }
+        .s4-about-chevron.open { transform: rotate(180deg); }
+        .s4-about-body { padding: 0 16px 16px; }
+        .s4-about-body p { font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); }
+        .s4-creator-msg { display: flex; align-items: flex-start; gap: 12px; padding: 16px; }
+        .s4-creator-msg-avatar { width: 40px; height: 40px; border-radius: 50%; background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80'); background-size: cover; background-position: center; border: 2px solid #7B5EA7; flex-shrink: 0; }
+        .s4-creator-msg-bubble { background: rgba(123,94,167,0.08); border-radius: 16px; border-top-left-radius: 4px; padding: 12px 16px; flex: 1; }
+        .s4-creator-msg-name { font-size: 12px; font-weight: 600; color: #7B5EA7; margin-bottom: 4px; }
+        .s4-creator-msg-text { font-size: 13.5px; line-height: 1.5; color: var(--color-text-secondary); }
+        .s4-goal-row { display: flex; gap: 10px; padding: 0 16px 16px; }
+        .s4-goal-card { flex: 1; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.5); border-radius: var(--radius-md); padding: 16px; }
+        .s4-goal-icon { width: 32px; height: 32px; border-radius: 10px; background: rgba(123,94,167,0.10); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+        .s4-goal-icon .material-icons { font-size: 17px; color: #7B5EA7; }
+        .s4-goal-value { font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1; margin-bottom: 4px; }
+        .s4-goal-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: var(--color-text-secondary); margin-bottom: 6px; }
+        .s4-goal-desc { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.35; }
+        .s4-tab-bar { display: flex; background: rgba(123,94,167,0.10); border-radius: 10px; padding: 3px; margin-bottom: 14px; }
+        .s4-tab-btn { flex: 1; padding: 9px 0; border: none; border-radius: 8px; background: transparent; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--color-text-tertiary); cursor: pointer; transition: all 0.2s ease; }
+        .s4-tab-btn.active { background: white; color: var(--color-text-primary); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+        .s4-rule-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+        .s4-rule-item:last-child { margin-bottom: 0; }
+        .s4-rule-num { width: 26px; height: 26px; border-radius: 50%; background: rgba(123,94,167,0.12); color: #7B5EA7; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+        .s4-rule-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .s4-rule-desc { font-size: 13px; color: var(--color-text-tertiary); line-height: 1.45; }
+        .s4-faq-item { border-bottom: 1px solid var(--color-border-default); padding-bottom: 12px; margin-bottom: 12px; }
+        .s4-faq-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+        .s4-faq-q { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .s4-faq-q span { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .s4-faq-chevron { color: var(--color-text-tertiary); transition: transform 0.2s ease; flex-shrink: 0; margin-left: 8px; }
+        .s4-faq-chevron.open { transform: rotate(180deg); }
+        .s4-faq-a { display: none; font-size: 13px; color: var(--color-text-tertiary); line-height: 1.55; margin-top: 8px; }
+        .s4-bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 20px 32px; background: linear-gradient(to top, #F7F3FB 60%, transparent); z-index: 5; }
+        .s4-join-btn { width: 100%; padding: 16px; background: var(--color-brand-primary); color: white; border: none; border-radius: var(--radius-full); font-family: var(--font-body); font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .s4-join-btn:active { transform: scale(0.98); opacity: 0.9; }
+        .s4-notify-link { background: none; border: none; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 0 0; width: 100%; text-align: center; }
+
+        /* NOTIFICATIONS */
+        .ios-dialog-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 50; display: flex; align-items: center; justify-content: center; padding: var(--space-xl); opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .screen.active .ios-dialog-overlay.visible { opacity: 1; pointer-events: all; }
+        .ios-dialog { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); border-radius: 14px; width: 100%; max-width: 280px; overflow: hidden; }
+        .ios-dialog-body { padding: 20px 20px 16px; text-align: center; }
+        .ios-dialog-title { font-size: 17px; font-weight: 600; color: #000; margin-bottom: 6px; }
+        .ios-dialog-text { font-size: 13px; color: #666; line-height: 1.4; }
+        .ios-dialog-actions { display: flex; border-top: 0.5px solid rgba(0,0,0,0.15); }
+        .ios-dialog-btn { flex: 1; padding: 12px; font-size: 17px; color: #007AFF; background: none; border: none; cursor: pointer; }
+        .ios-dialog-btn + .ios-dialog-btn { border-left: 0.5px solid rgba(0,0,0,0.15); }
+        .ios-dialog-btn--bold { font-weight: 600; }
+
+        .action-sheet-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 50; display: flex; align-items: flex-end; justify-content: center; padding: 8px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+        .screen.active .action-sheet-overlay.visible { opacity: 1; pointer-events: all; }
+        .action-sheet { width: 100%; max-width: 360px; transform: translateY(20px); transition: transform 0.3s ease; }
+        .screen.active .action-sheet-overlay.visible .action-sheet { transform: translateY(0); }
+        .action-sheet-group { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 14px; overflow: hidden; }
+        .action-sheet-btn { width: 100%; padding: 16px; font-size: 20px; color: #007AFF; background: none; border: none; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .action-sheet-btn + .action-sheet-btn { border-top: 0.5px solid rgba(0,0,0,0.12); }
+        .action-sheet-btn .material-icons { font-size: 22px; }
+        .action-sheet-cancel { margin-top: 8px; }
+        .action-sheet-cancel .action-sheet-btn { font-weight: 600; border-radius: 14px; }
+
+        /* Emoji rain */
+        @keyframes emojifall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 70% { opacity: 1; } 100% { transform: translateY(900px) rotate(360deg); opacity: 0; } }
+        .emoji-rain-overlay { position: absolute; inset: 0; z-index: 9999; pointer-events: none; overflow: hidden; }
+
+        /* NAVIGATION */
+        .step-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0; margin-top: 16px; }
+        .step-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: #aaa; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s ease; }
+        .step-btn:hover { background: rgba(255,255,255,0.15); color: #ddd; }
+        .step-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+        .step-btn .material-icons { font-size: 20px; }
+        .step-label { flex: 1; text-align: center; }
+        .step-number { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.06em; }
+        .step-name { font-size: 14px; font-weight: 500; color: #ccc; }
+    </style>
+</head>
+<body>
+
+<div class="review-header">
+    <div class="review-title">Participant Onboarding — Organic / No Deeplink</div>
+    <div class="review-subtitle">
+        <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
+        <span class="nav-jump" onclick="goTo(1)">1 Find Creator</span> ·
+        <span class="nav-jump" onclick="goTo(2)">2 Sign In</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Verify</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 How It Works</span> ·
+        <span class="nav-jump" onclick="goTo(6)">6 Challenge Details</span> ·
+        <span class="nav-jump" onclick="goTo(7)">7 Notifications</span> ·
+        <span class="nav-jump" onclick="goTo(8)">8 Join Flow</span>
+    </div>
+</div>
+
+<div class="phone-frame">
+    <div class="lava-bg" id="lavaBg">
+        <div class="lava-layer lava-warm">
+            <div class="blob blob-wa"></div><div class="blob blob-wa2"></div>
+            <div class="blob blob-wb"></div><div class="blob blob-wb2"></div>
+        </div>
+        <div class="lava-layer lava-purple">
+            <div class="blob blob-pa"></div><div class="blob blob-pa2"></div>
+            <div class="blob blob-pb"></div><div class="blob blob-pb2"></div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-icons">
+            <svg viewBox="0 0 18 12" fill="currentColor"><path d="M1 4.5C3.5 1.5 7 0 9 0s5.5 1.5 8 4.5L15.5 6C13.5 3.5 11 2.5 9 2.5S4.5 3.5 2.5 6L1 4.5z"/><circle cx="9" cy="10" r="2"/></svg>
+            <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="1" width="3" height="10" rx=".5"/><rect x="5" y="0" width="3" height="11" rx=".5"/><rect x="10" y="3" width="3" height="8" rx=".5"/><rect x="15" y="5" width="3" height="6" rx=".5" opacity=".3"/></svg>
+            <svg viewBox="0 0 28 14" fill="currentColor"><rect x="0" y="1" width="24" height="12" rx="3" stroke="currentColor" stroke-width="1" fill="none"/><rect x="25" y="4.5" width="2" height="5" rx="1"/><rect x="2" y="3" width="16" height="8" rx="1.5"/></svg>
+        </div>
+    </div>
+    <div class="home-indicator"></div>
+
+    <!-- SCREEN 0: SPLASH -->
+    <div class="screen active" id="screen0">
+        <div class="s0-content">
+            <div class="s0-wordmark" id="splashWordmark">Motiv</div>
+            <div class="s0-tagline" id="splashTagline">Put your money where<br>your <strong>motivation</strong> is.</div>
+        </div>
+    </div>
+
+    <!-- SCREEN 1: CREATOR PICKER -->
+    <div class="screen" id="screen1">
+        <div style="flex:1; display:flex; flex-direction:column; padding:56px 20px 0; min-height:0;">
+            <div class="picker-header">
+                <div class="picker-title">Welcome to Motiv</div>
+                <div class="picker-subtitle">Most people find us through a creator they follow. Who brought you here?</div>
+            </div>
+            <div style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0;">
+            <div class="picker-grid">
+                <div class="picker-card" onclick="selectCreator(this, 0)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="picker-name">Ellie Snackson</div>
+                    <div class="picker-handle">@doodle_cycles</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 1)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" alt="Marcus"></div>
+                    <div class="picker-name">Marcus Rivera</div>
+                    <div class="picker-handle">@marcus_rides</div>
+                    <div class="picker-tag">Cycling · Running</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 2)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face" alt="Jess"></div>
+                    <div class="picker-name">Jess Hernandez</div>
+                    <div class="picker-handle">@jess_spins</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 3)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face" alt="Tyler"></div>
+                    <div class="picker-name">Tyler Okonkwo</div>
+                    <div class="picker-handle">@tyler_pedals</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 4)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face" alt="Priya"></div>
+                    <div class="picker-name">Priya Sharma</div>
+                    <div class="picker-handle">@priya_peloton</div>
+                    <div class="picker-tag">Cycling · Wellness</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 5)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" alt="Dan"></div>
+                    <div class="picker-name">Dan Kowalski</div>
+                    <div class="picker-handle">@dan_k_rides</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 6)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=120&h=120&fit=crop&crop=face" alt="Chris"></div>
+                    <div class="picker-name">Chris Nakamura</div>
+                    <div class="picker-handle">@chris_cycles</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 7)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=face" alt="Aisha"></div>
+                    <div class="picker-name">Aisha Williams</div>
+                    <div class="picker-handle">@aisha_rides</div>
+                    <div class="picker-tag">Cycling · Strength</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 8)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=face" alt="Leo"></div>
+                    <div class="picker-name">Leo Martinez</div>
+                    <div class="picker-handle">@leo_spins</div>
+                    <div class="picker-tag">Cycling</div>
+                </div>
+                <div class="picker-card" onclick="selectCreator(this, 9)">
+                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face" alt="Mia"></div>
+                    <div class="picker-name">Mia Thompson</div>
+                    <div class="picker-handle">@mia_moves</div>
+                    <div class="picker-tag">Cycling · Yoga</div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="picker-bottom" style="position:relative; flex-shrink:0;">
+            <button class="btn-primary" id="pickerCTA" onclick="confirmCreator()" style="opacity: 0.35; pointer-events: none;">See their challenge</button>
+            <button class="picker-explore-link" onclick="chooseExploring()">I'm just exploring</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: SIGN IN (adaptive) -->
+    <div class="screen" id="screen2">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="flex: 1.2; min-height: 24px;"></div>
+
+            <!-- Creator-personalized sign in -->
+            <div class="path-creator">
+                <div class="s1-creator-header">
+                    <div class="s1-avatar"><img id="signInAvatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Creator"></div>
+                    <div class="s1-name" id="signInName">Ellie Snackson</div>
+                    <div class="s1-handle" id="signInHandle">@doodle_cycles</div>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">My playbook.<br>Your moment.</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Create your account to get started.</div>
+            </div>
+
+            <!-- Generic sign in -->
+            <div class="path-generic">
+                <div style="text-align: center; margin-bottom: var(--space-lg);">
+                    <div style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; line-height: 1;">Motiv</div>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Let's get moving</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Create your account to get started.</div>
+            </div>
+
+            <div class="auth-section">
+                <button class="auth-btn auth-btn--apple" onclick="goTo(4)">
+                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                    Continue with Apple
+                </button>
+                <button class="auth-btn auth-btn--google" onclick="goTo(4)">
+                    <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    Continue with Google
+                </button>
+            </div>
+            <div style="height: 28px;"></div>
+            <div class="divider"><span class="divider-line"></span><span class="divider-text">or</span><span class="divider-line"></span></div>
+            <div style="height: 28px;"></div>
+            <div>
+                <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px;">Continue with email</div>
+                <input type="email" class="form-input" id="emailInput" placeholder="Enter your email" autocomplete="email" oninput="validateEmail()">
+                <div class="form-helper">We'll send you a one-time code. No password required.</div>
+            </div>
+            <div style="flex: 0.5; min-height: 16px;"></div>
+            <div><button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="submitEmail()" disabled>Continue</button></div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: VERIFY CODE -->
+    <div class="screen" id="screen3">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(2)"><span class="material-icons">arrow_back</span></a></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 8px;">Check your email</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 36px;">We sent a code to <strong id="otpEmailDisplay">your email</strong></div>
+                <div class="otp-inputs">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 0)" onkeydown="handleCodeKeydown(event, this, 0)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 1)" onkeydown="handleCodeKeydown(event, this, 1)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 2)" onkeydown="handleCodeKeydown(event, this, 2)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 3)" onkeydown="handleCodeKeydown(event, this, 3)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 4)" onkeydown="handleCodeKeydown(event, this, 4)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 5)" onkeydown="handleCodeKeydown(event, this, 5)">
+                </div>
+                <div class="otp-resend">Didn't get it? <a onclick="resendCode()">Resend</a></div>
+            </div>
+            <div><button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="goTo(4)" disabled>Continue</button></div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: PROFILE (adaptive) -->
+    <div class="screen" id="screen4" style="overflow-y: auto;">
+        <div class="emoji-rain-overlay" id="screen4EmojiRain"></div>
+
+        <!-- Creator chat-style profile -->
+        <div class="path-creator" style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+            <div class="s4h-header">
+                <div class="s4h-title">Welcome in.</div>
+                <div class="s4h-subtitle">Quick intro so the crew knows who's showing up.</div>
+            </div>
+            <div class="s3-chat-row s3-stagger s3-stagger-1">
+                <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
+                <div class="s3-bubble">Add a photo so your fellow challengers can spot you 📸</div>
+            </div>
+            <div class="s3-form-area">
+                <div class="s3-reply-row s3-reply-row-photo">
+                    <div class="s3-reply-bubble s3-reply-photo">
+                        <div class="s3-reply-label">Here's a good one…</div>
+                        <div class="s3-photo-upload" onclick="showPhotoPermission()">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" style="display: block;">
+                            <div class="s3-photo-edit">Edit</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
+                    <div class="s3-bubble">What should we call you?</div>
+                </div>
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">You can call me…</div>
+                        <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
+                    </div>
+                </div>
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
+                    <div class="s3-bubble">What's your IG handle? 💬</div>
+                </div>
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">This is me…</div>
+                        <div style="position: relative;">
+                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                            <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                        </div>
+                        <div style="font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 6px;">Totally optional — you can add it later</div>
+                    </div>
+                </div>
+                <div style="height: 96px;"></div>
+            </div>
+        </div>
+
+        <!-- Generic form profile -->
+        <div class="path-generic" style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+            <div style="text-align: center; margin-bottom: 20px; margin-top: 16px;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome in.</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Quick intro so the crew knows who's showing up.</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 24px;">
+                <div class="s3-photo-upload" onclick="showPhotoPermission()">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" style="display: block;">
+                    <div class="s3-photo-edit">Edit</div>
+                </div>
+                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 8px;">Profile photo</div>
+            </div>
+            <div class="s3-name-row">
+                <div class="s3-form-group"><label class="s3-form-label">First name</label><input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;"></div>
+                <div class="s3-form-group"><label class="s3-form-label">Last name</label><input type="text" class="form-input" value="Chen" style="font-size: 15px; padding: 12px 14px;"></div>
+            </div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">Instagram handle (optional)</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                </div>
+            </div>
+            <div style="flex: 1;"></div>
+        </div>
+
+        <!-- Shared bottom bar -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(242,230,226,1) 60%, rgba(242,230,226,0)); z-index: 5;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center;">
+                <span style="font-size: 14px;">&#9888;&#65039;</span> Your name and photo are visible to all challenge participants
+            </div>
+            <button class="btn-primary" onclick="goTo(5)">Continue</button>
+        </div>
+
+        <!-- iOS Photo Permission Dialog -->
+        <div class="ios-dialog-overlay" id="photoPermissionOverlay">
+            <div class="ios-dialog">
+                <div class="ios-dialog-body">
+                    <div class="ios-dialog-title">"Motiv" Would Like to Access Your Photos</div>
+                    <div class="ios-dialog-text">This lets you set a profile photo that other challenge participants can see.</div>
+                </div>
+                <div class="ios-dialog-actions">
+                    <button class="ios-dialog-btn" onclick="dismissPhotoPermission()">Don't Allow</button>
+                    <button class="ios-dialog-btn ios-dialog-btn--bold" onclick="allowPhotoAccess()">Allow</button>
+                </div>
+            </div>
+        </div>
+        <div class="action-sheet-overlay" id="photoActionSheet">
+            <div class="action-sheet">
+                <div class="action-sheet-group">
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_camera</span> Take Photo</button>
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_library</span> Choose from Library</button>
+                </div>
+                <div class="action-sheet-cancel action-sheet-group">
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: HOW IT WORKS (card-in-card) -->
+    <div class="screen" id="screen5">
+        <div class="s4h-layout">
+            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(4)"><span class="material-icons">arrow_back</span></a></div>
+
+            <div class="s4h-header">
+                <div class="s4h-title">Your accountability superpower</div>
+                <div class="s4h-subtitle">Here's how it works.</div>
+            </div>
+
+            <!-- Accountability: card-in-card -->
+            <div class="hiw-outer">
+                <div class="hiw-icon"><span class="material-icons">shield</span></div>
+                <div class="hiw-big-title">Your Motiv</div>
+                <div class="hiw-body">A small deposit — your skin in the game. Hit your goals, earn it back. Miss, and you forfeit it.</div>
+                <div class="hiw-pill"><span class="material-icons">lock</span> Stripe Secured</div>
+                <div class="hiw-inner">
+                    <div class="hiw-inner-setup">Hit your goals?</div>
+                    <div class="hiw-inner-value">Earn it all back + more.</div>
+                    <div class="hiw-inner-note">Rewards &amp; bonuses when available</div>
+                </div>
+            </div>
+
+            <div class="s4h-ctas">
+                <div class="s4h-system-msg">Currently we have <strong>Peloton-based</strong> challenges.<br>Soon: walking, running, active minutes, and more!</div>
+                <button class="btn-primary" id="hiwCTA" onclick="goTo(6)">Browse challenges</button>
+                <button class="s4h-cta-tertiary" onclick="goTo(7)">Notify me of future challenges</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: COLLAB DETAILS -->
+    <div class="screen" id="screen6">
+        <div class="s4-scroll">
+            <div class="s4-hero-wrapper">
+                <div class="s4-hero-image"></div>
+                <div class="s4-hero-gradient"></div>
+                <div class="s4-hero-content">
+                    <button class="s4-back-row" onclick="goTo(5)"><span class="material-icons">arrow_back_ios</span> Back</button>
+                    <div class="s4-creator-badge">
+                        <div class="s4-creator-badge-avatar"></div>
+                        <span class="s4-creator-badge-handle" id="collabBadgeHandle">@doodle_cycles</span>
+                    </div>
+                    <div class="s4-collab-name">Mindful Miles Reset</div>
+                    <div class="s4-collab-dates">Mar 15 – Apr 26 · 6 weeks</div>
+                </div>
+                <div class="s4-countdown">
+                    <div class="s4-countdown-label">Challenge begins in</div>
+                    <div class="s4-countdown-row">
+                        <div style="text-align: center;"><div class="s4-countdown-value" id="cd-d">04</div><div class="s4-countdown-unit">Days</div></div>
+                        <div style="text-align: center;"><div class="s4-countdown-value" id="cd-h">18</div><div class="s4-countdown-unit">Hrs</div></div>
+                        <div style="text-align: center;"><div class="s4-countdown-value" id="cd-m">32</div><div class="s4-countdown-unit">Mins</div></div>
+                        <div style="text-align: center;"><div class="s4-countdown-value" id="cd-s">15</div><div class="s4-countdown-unit">Secs</div></div>
+                    </div>
+                </div>
+                <div class="s4-stats" style="position: relative; z-index: 2;">
+                    <div class="s4-grouped-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px 16px;">
+                            <div><div class="s4-pool-amount">$24,960</div><div class="s4-grouped-stat-label" style="text-align: left;">Rewards pool</div></div>
+                            <div class="s4-entry-badge"><span class="material-icons">credit_card</span> $40 Motiv</div>
+                        </div>
+                        <div class="s4-card-divider"></div>
+                        <div class="s4-grouped-row">
+                            <div class="s4-grouped-stat"><div class="s4-grouped-stat-value">624</div><div class="s4-grouped-stat-label">Participants</div></div>
+                            <div class="s4-grouped-divider"></div>
+                            <div class="s4-grouped-stat"><div class="s4-grouped-stat-value">6 wks</div><div class="s4-grouped-stat-label">Duration</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="s4-stats">
+                <div class="s4-stats-title">Details</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-grouped-row">
+                        <div class="s4-grouped-stat"><div class="s4-grouped-stat-icon"><span class="material-icons">fitness_center</span></div><div class="s4-grouped-stat-value" style="font-size: 20px;">Strong</div><div class="s4-grouped-stat-label">Level</div></div>
+                        <div class="s4-grouped-divider"></div>
+                        <div class="s4-grouped-stat"><div class="s4-grouped-stat-icon"><span class="material-icons">pedal_bike</span></div><div class="s4-grouped-stat-value" style="font-size: 20px;">Peloton</div><div class="s4-grouped-stat-label">Type</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="s4-stats">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleAbout(this)"><span class="s4-about-title">About this Challenge</span><span class="material-icons s4-about-chevron open">expand_more</span></div>
+                    <div class="s4-about-body" id="s4AboutBody"><p>6 weeks of cycling with <span id="aboutCreatorName">Ellie</span>. She's designed a program that pushes you beyond your comfort zone while building sustainable fitness habits. Personalized goals based on your current performance level.</p></div>
+                </div>
+            </div>
+            <div class="s4-stats">
+                <div class="s4-stats-title">Weekly challenge goal</div>
+                <div class="s4-grouped-card">
+                    <div class="s4-creator-msg">
+                        <div class="s4-creator-msg-avatar"></div>
+                        <div class="s4-creator-msg-bubble">
+                            <div class="s4-creator-msg-name" id="collabMsgName">Ellie, @doodle_cycles</div>
+                            <div class="s4-creator-msg-text">I've picked the metrics below to challenge us to work a bit harder and ride more days each week.</div>
+                        </div>
+                    </div>
+                    <div class="s4-card-divider"></div>
+                    <div class="s4-goal-row">
+                        <div class="s4-goal-card"><div class="s4-goal-icon"><span class="material-icons">local_fire_department</span></div><div class="s4-goal-value">1.3x</div><div class="s4-goal-label">Output Target</div><div class="s4-goal-desc">Multiplier on your average weekly kJ.</div></div>
+                        <div class="s4-goal-card"><div class="s4-goal-icon"><span class="material-icons">description</span></div><div class="s4-goal-value">+1-2</div><div class="s4-goal-label">Rides Per Week</div><div class="s4-goal-desc">Above your usual weekly volume.</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="s4-stats" style="margin-bottom: 40px;">
+                <div class="s4-about-card">
+                    <div class="s4-about-header" onclick="toggleRules(this)"><span class="s4-about-title">Game Rules & FAQs</span><span class="material-icons s4-about-chevron">expand_more</span></div>
+                    <div class="s4-about-body" id="s4RulesBody" style="display: none;">
+                        <div class="s4-tab-bar">
+                            <button class="s4-tab-btn active" onclick="switchTab(event, 'rules')">Game Rules</button>
+                            <button class="s4-tab-btn" onclick="switchTab(event, 'faqs')">FAQs</button>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-rules">
+                            <div class="s4-rule-item"><div class="s4-rule-num">1</div><div><div class="s4-rule-title">Hit your weekly goal</div><div class="s4-rule-desc">Complete the required output and ride frequency each week.</div></div></div>
+                            <div class="s4-rule-item"><div class="s4-rule-num">2</div><div><div class="s4-rule-title">Log rides via Peloton sync</div><div class="s4-rule-desc">Your rides are automatically tracked through your connected Peloton account.</div></div></div>
+                            <div class="s4-rule-item"><div class="s4-rule-num">3</div><div><div class="s4-rule-title">Miss a week, you forfeit</div><div class="s4-rule-desc">If you don't meet the minimum goal in any week, you forfeit your Motiv — but you keep going.</div></div></div>
+                            <div class="s4-rule-item"><div class="s4-rule-num">4</div><div><div class="s4-rule-title">Goal-hitters earn rewards</div><div class="s4-rule-desc">Challenges can unlock a rewards pool split among everyone who hits their goals.</div></div></div>
+                        </div>
+                        <div class="s4-tab-content" id="s4-tab-faqs" style="display: none;">
+                            <div class="s4-faq-item"><div class="s4-faq-q" onclick="toggleFaq(this)"><span>What happens to my $40 Motiv?</span><span class="material-icons s4-faq-chevron">expand_more</span></div><div class="s4-faq-a">Your Motiv is returned in full when you hit your goals. If you miss, you forfeit it — but you keep participating.</div></div>
+                            <div class="s4-faq-item"><div class="s4-faq-q" onclick="toggleFaq(this)"><span>Can I pause for a week?</span><span class="material-icons s4-faq-chevron">expand_more</span></div><div class="s4-faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to remain eligible.</div></div>
+                            <div class="s4-faq-item"><div class="s4-faq-q" onclick="toggleFaq(this)"><span>How is the pool divided?</span><span class="material-icons s4-faq-chevron">expand_more</span></div><div class="s4-faq-a">The rewards pool is split equally among all participants who hit their weekly goals.</div></div>
+                            <div class="s4-faq-item"><div class="s4-faq-q" onclick="toggleFaq(this)"><span>What if I get injured?</span><span class="material-icons s4-faq-chevron">expand_more</span></div><div class="s4-faq-a">We understand things happen. Reach out to support and we'll review your case on an individual basis.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s4-bottom-bar">
+            <button class="s4-join-btn" id="joinCTA" onclick="goTo(8)">Join Ellie's challenge</button>
+            <button class="s4-notify-link" onclick="goTo(7)">Notify me of future challenges</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 7: NOTIFICATIONS -->
+    <div class="screen" id="screen7">
+        <div class="ios-dialog-overlay" id="iosDialogOverlay">
+            <div class="ios-dialog">
+                <div class="ios-dialog-body">
+                    <div class="ios-dialog-title">"Motiv" Would Like to Send You Notifications</div>
+                    <div class="ios-dialog-text">Notifications may include alerts, sounds, and icon badges. These can be configured in Settings.</div>
+                </div>
+                <div class="ios-dialog-actions">
+                    <button class="ios-dialog-btn" onclick="dismissDialog()">Don't Allow</button>
+                    <button class="ios-dialog-btn ios-dialog-btn--bold" onclick="dismissDialog()">Allow</button>
+                </div>
+            </div>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+            <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Don't miss a thing</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">We'll only ping you when it matters.</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 3px; margin-left: 36px;">
+                <div class="s4h-ig-bubble ig-first">New challenge just dropped — <strong>Summer Shred</strong> 🚴 Spots are filling fast!</div>
+                <div class="s4h-ig-bubble ig-mid">Your challenge starts in <strong>2 days</strong> — your Motiv is locked in. Let's go! ⏰</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-end; margin-top: 3px;">
+                <div class="s4h-ellie-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
+                <div class="s4h-ig-bubble ig-last">Week 3 post is live — the habit that changed everything for me 💪</div>
+            </div>
+            <div style="text-align: center; font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; padding: 0 20px; margin-top: 16px;">
+                Ellie's posts are exclusive to challengers — don't miss them.
+            </div>
+            <div style="width: 100%; margin-top: auto;">
+                <button class="btn-primary" onclick="showDialog()">Turn on notifications</button>
+                <button class="btn-secondary" onclick="finishOnboarding()">Maybe later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 8: JOIN FLOW (placeholder) -->
+    <div class="screen" id="screen8">
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 32px 40px; text-align: center;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <span class="material-icons" style="font-size: 36px; color: var(--color-brand-secondary);">calculate</span>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">Goal Calculation &amp; Payment</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 32px;">This is where the participant would calculate their personalized goal based on their fitness data, review the Motiv amount, and complete payment to join the challenge.</div>
+            <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px 24px; width: 100%; text-align: left;">
+                <div style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Flow includes</div>
+                <div style="font-size: 14px; color: var(--color-text-primary); line-height: 1.8;">
+                    📊 Personalized goal calculation<br>💳 Motiv amount &amp; payment<br>✅ Challenge confirmation<br>🔔 Push notification setup
+                </div>
+            </div>
+            <button class="btn-primary" style="margin-top: auto; width: 100%;" onclick="goTo(6)">← Back to Challenge Details</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Step Bar -->
+<div class="step-bar">
+    <button class="step-btn" id="prevBtn" onclick="prev()" disabled><span class="material-icons">chevron_left</span></button>
+    <div class="step-label">
+        <div class="step-number" id="stepNum">Step 1 of 9</div>
+        <div class="step-name" id="stepName">Splash</div>
+    </div>
+    <button class="step-btn" id="nextBtn" onclick="next()"><span class="material-icons">chevron_right</span></button>
+</div>
+
+<script>
+    // ─── Creator data ───
+    const creators = [
+        { name: 'Ellie Snackson', handle: '@doodle_cycles', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face', first: 'Ellie' },
+        { name: 'Marcus Rivera', handle: '@marcus_rides', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=144&h=144&fit=crop&crop=face', first: 'Marcus' },
+        { name: 'Jess Hernandez', handle: '@jess_spins', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=144&h=144&fit=crop&crop=face', first: 'Jess' },
+        { name: 'Tyler Okonkwo', handle: '@tyler_pedals', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=144&h=144&fit=crop&crop=face', first: 'Tyler' },
+        { name: 'Priya Sharma', handle: '@priya_peloton', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=144&h=144&fit=crop&crop=face', first: 'Priya' },
+        { name: 'Dan Kowalski', handle: '@dan_k_rides', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=144&h=144&fit=crop&crop=face', first: 'Dan' },
+        { name: 'Chris Nakamura', handle: '@chris_cycles', avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=144&h=144&fit=crop&crop=face', first: 'Chris' },
+        { name: 'Aisha Williams', handle: '@aisha_rides', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=144&h=144&fit=crop&crop=face', first: 'Aisha' },
+        { name: 'Leo Martinez', handle: '@leo_spins', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=144&h=144&fit=crop&crop=face', first: 'Leo' },
+        { name: 'Mia Thompson', handle: '@mia_moves', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=144&h=144&fit=crop&crop=face', first: 'Mia' }
+    ];
+
+    let selectedCreator = null;
+
+    function selectCreator(card, index) {
+        document.querySelectorAll('.picker-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedCreator = index;
+        const cta = document.getElementById('pickerCTA');
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+    }
+
+    function applyCreatorPath() {
+        document.body.classList.add('has-creator');
+        const c = creators[selectedCreator];
+        // Update sign-in
+        document.getElementById('signInAvatar').src = c.avatar;
+        document.getElementById('signInName').textContent = c.name;
+        document.getElementById('signInHandle').textContent = c.handle;
+        // Update all creator avatar images (profile chat, notifications)
+        document.querySelectorAll('.creator-avatar-img').forEach(img => img.src = c.avatar);
+        // Update How It Works CTA
+        document.getElementById('hiwCTA').textContent = "See " + c.first + "'s challenge";
+        // Update Challenge Details
+        document.getElementById('collabBadgeHandle').textContent = c.handle;
+        document.getElementById('aboutCreatorName').textContent = c.first;
+        document.getElementById('collabMsgName').textContent = c.first + ", " + c.handle;
+        document.querySelector('.s4-creator-badge-avatar').style.backgroundImage = "url('" + c.avatar + "')";
+        document.querySelector('.s4-creator-msg-avatar').style.backgroundImage = "url('" + c.avatar + "')";
+        // Update Join CTA
+        document.getElementById('joinCTA').textContent = "Join " + c.first + "'s challenge";
+    }
+
+    function applyGenericPath() {
+        document.body.classList.remove('has-creator');
+        document.getElementById('hiwCTA').textContent = 'Browse challenges';
+        document.getElementById('joinCTA').textContent = 'Join challenge';
+    }
+
+    function confirmCreator() {
+        if (selectedCreator === null) return;
+        applyCreatorPath();
+        goTo(2);
+    }
+
+    function chooseExploring() {
+        selectedCreator = null;
+        applyGenericPath();
+        goTo(2);
+    }
+
+    // ─── Splash animation ───
+    let splashDone = false;
+    let splashTimeouts = [];
+
+    function runSplash() {
+        const wordmark = document.getElementById('splashWordmark');
+        const tagline = document.getElementById('splashTagline');
+        if (!wordmark) return;
+        splashTimeouts.push(setTimeout(() => { wordmark.classList.add('visible'); }, 200));
+        splashTimeouts.push(setTimeout(() => { tagline.classList.add('visible'); }, 1200));
+        splashTimeouts.push(setTimeout(() => {
+            if (cur === 0 && !splashDone) { splashDone = true; goTo(1); }
+        }, 3800));
+    }
+
+    function cancelSplash() {
+        splashTimeouts.forEach(t => clearTimeout(t));
+        splashTimeouts = [];
+        splashDone = true;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => { setTimeout(runSplash, 100); });
+
+    // ─── Navigation ───
+    const names = ['Splash','Find Creator','Sign In','Verify','Profile','How It Works','Challenge Details','Notifications','Join Flow'];
+    let cur = 0;
+    const total = names.length;
+    const purpleScreens = [6];
+
+    function updateUI() {
+        document.getElementById('stepNum').textContent = `Step ${cur+1} of ${total}`;
+        document.getElementById('stepName').textContent = names[cur];
+        document.getElementById('prevBtn').disabled = cur === 0;
+        document.getElementById('nextBtn').disabled = cur === total - 1;
+        const lava = document.getElementById('lavaBg');
+        lava.classList.remove('purple-chapter');
+        if (purpleScreens.includes(cur)) lava.classList.add('purple-chapter');
+    }
+
+    function validateEmail() {
+        const input = document.getElementById('emailInput');
+        const btn = document.getElementById('emailContinueBtn');
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+        btn.disabled = !valid;
+        btn.classList.toggle('btn-disabled', !valid);
+    }
+
+    function submitEmail() {
+        const email = document.getElementById('emailInput').value.trim();
+        document.getElementById('otpEmailDisplay').textContent = email;
+        document.querySelectorAll('.otp-box').forEach(b => { b.value = ''; });
+        const otpBtn = document.getElementById('otpContinueBtn');
+        otpBtn.disabled = true;
+        otpBtn.classList.add('btn-disabled');
+        goTo(3);
+        setTimeout(() => { document.querySelectorAll('.otp-box')[0].focus(); }, 400);
+    }
+
+    function handleCodeInput(el, index) {
+        el.value = el.value.replace(/[^0-9]/g, '').slice(0, 1);
+        if (el.value && index < 5) document.querySelectorAll('.otp-box')[index + 1].focus();
+        validateOtp();
+    }
+
+    function handleCodeKeydown(e, el, index) {
+        if (e.key === 'Backspace' && !el.value && index > 0) document.querySelectorAll('.otp-box')[index - 1].focus();
+    }
+
+    function validateOtp() {
+        const boxes = document.querySelectorAll('.otp-box');
+        const filled = [...boxes].every(b => b.value.length === 1);
+        const btn = document.getElementById('otpContinueBtn');
+        btn.disabled = !filled;
+        btn.classList.toggle('btn-disabled', !filled);
+    }
+
+    function resendCode() {
+        const link = document.querySelector('.otp-resend a');
+        link.textContent = 'Sent!';
+        setTimeout(() => { link.textContent = 'Resend'; }, 2000);
+    }
+
+    let profileRainFired = false;
+    function triggerProfileEmojiRain() {
+        if (profileRainFired) return;
+        profileRainFired = true;
+        const overlay = document.getElementById('screen4EmojiRain');
+        overlay.innerHTML = '';
+        const emojis = ['🎉', '❤️', '🙌', '🔥', '✨'];
+        for (let i = 0; i < 28; i++) {
+            const span = document.createElement('span');
+            span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            span.style.cssText = `position:absolute;top:-50px;left:${Math.random()*92}%;font-size:${18+Math.random()*18}px;animation:emojifall ${2+Math.random()*2}s linear ${Math.random()*1.2}s forwards;pointer-events:none;`;
+            overlay.appendChild(span);
+        }
+        setTimeout(() => { overlay.innerHTML = ''; }, 5000);
+    }
+
+    function goTo(i) {
+        if (i === cur || i < 0 || i >= total) return;
+        const screens = document.querySelectorAll('.screen');
+        const prevScreen = cur;
+
+        screens[prevScreen].classList.remove('active');
+        screens[prevScreen].classList.add('exiting');
+        screens[i].classList.add('active');
+        screens[i].scrollTop = 0;
+        if (i === 6) {
+            const s4scroll = screens[6].querySelector('.s4-scroll');
+            if (s4scroll) s4scroll.scrollTop = 0;
+        }
+        cur = i;
+        updateUI();
+        setTimeout(() => { screens[prevScreen].classList.remove('exiting'); }, 500);
+
+        if (prevScreen === 0) cancelSplash();
+        if (i === 4) setTimeout(() => triggerProfileEmojiRain(), 300);
+        if (i === 6) startCountdown();
+    }
+
+    function next() { goTo(cur + 1); }
+    function prev() { goTo(cur - 1); }
+
+    // ─── Countdown ───
+    let cdTarget = Date.now() + (4*86400 + 18*3600 + 32*60 + 15) * 1000;
+    let cdInterval = null;
+    function startCountdown() {
+        if (cdInterval) return;
+        cdInterval = setInterval(tickCountdown, 1000);
+    }
+    function tickCountdown() {
+        var d = Math.max(0, cdTarget - Date.now());
+        var el;
+        el = document.getElementById('cd-d'); if (el) el.textContent = String(Math.floor(d / 86400000)).padStart(2, '0');
+        el = document.getElementById('cd-h'); if (el) el.textContent = String(Math.floor(d % 86400000 / 3600000)).padStart(2, '0');
+        el = document.getElementById('cd-m'); if (el) el.textContent = String(Math.floor(d % 3600000 / 60000)).padStart(2, '0');
+        el = document.getElementById('cd-s'); if (el) el.textContent = String(Math.floor(d % 60000 / 1000)).padStart(2, '0');
+    }
+
+    // ─── Collab details interactions ───
+    function toggleAbout(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = header.closest('.s4-about-card').querySelector('.s4-about-body');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
+    }
+    function toggleRules(header) {
+        var chevron = header.querySelector('.s4-about-chevron');
+        var body = document.getElementById('s4RulesBody');
+        if (!body) return;
+        var showing = body.style.display !== 'none';
+        body.style.display = showing ? 'none' : 'block';
+        chevron.classList.toggle('open', !showing);
+    }
+    function switchTab(e, tab) {
+        var bar = e.target.closest('.s4-tab-bar');
+        bar.querySelectorAll('.s4-tab-btn').forEach(function(t) { t.classList.remove('active'); });
+        e.target.classList.add('active');
+        var body = e.target.closest('.s4-about-body');
+        body.querySelectorAll('.s4-tab-content').forEach(function(c) { c.style.display = 'none'; });
+        body.querySelector('#s4-tab-' + tab).style.display = 'block';
+    }
+    function toggleFaq(q) {
+        var chevron = q.querySelector('.s4-faq-chevron');
+        chevron.classList.toggle('open');
+        var a = q.nextElementSibling;
+        a.style.display = a.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // ─── Photo permission ───
+    function showPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.add('visible'); }
+    function dismissPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.remove('visible'); }
+    function allowPhotoAccess() {
+        document.getElementById('photoPermissionOverlay').classList.remove('visible');
+        setTimeout(() => { document.getElementById('photoActionSheet').classList.add('visible'); }, 250);
+    }
+    function dismissPhotoSheet() { document.getElementById('photoActionSheet').classList.remove('visible'); }
+
+    // ─── iOS notification dialog ───
+    function showDialog() { document.getElementById('iosDialogOverlay').classList.add('visible'); }
+    function dismissDialog() {
+        document.getElementById('iosDialogOverlay').classList.remove('visible');
+        setTimeout(() => finishOnboarding(), 300);
+    }
+    function finishOnboarding() {
+        alert('Onboarding complete! In the real app, this would take you to the challenge dashboard.');
+    }
+
+    // ─── Keyboard nav ───
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); next(); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
+    });
+
+    updateUI();
+</script>
+
+</body>
+</html>
