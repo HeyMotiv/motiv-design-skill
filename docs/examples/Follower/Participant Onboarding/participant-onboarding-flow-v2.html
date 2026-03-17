@@ -1343,69 +1343,29 @@
         <div class="emoji-rain-overlay" id="screen3EmojiRain"></div>
         <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
-            <!-- Header — matches Screen 4 pattern -->
-            <div class="s4h-header">
-                <div class="s4h-title">Welcome to Motiv!</div>
-                <div class="s4h-subtitle">Let Ellie and the crew know who's joining.</div>
+            <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome to Motiv!</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let Ellie and the crew know who's joining.</div>
             </div>
-
-            <!-- Ellie's opening bubble — staggered -->
-            <div class="s3-chat-row s3-stagger s3-stagger-1">
-                <div class="s3-chat-avatar">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
+                <div class="s3-photo-upload" style="width: 120px; height: 120px;" id="photoUpload" onclick="showPhotoPermission()">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                    <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
                 </div>
-                <div class="s3-bubble">Add a photo so your fellow challengers can spot you 📸</div>
+                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
             </div>
-
-            <!-- Conversation continues — fades in after intro bubbles -->
-            <div class="s3-form-area">
-
-                <!-- Sarah replies with photo -->
-                <div class="s3-reply-row s3-reply-row-photo">
-                    <div class="s3-reply-bubble s3-reply-photo">
-                        <div class="s3-reply-label">Here's a good one…</div>
-                        <div class="s3-photo-upload" id="photoUpload" onclick="showPhotoPermission()">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
-                            <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
-                            <div class="s3-photo-edit">Edit</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ellie asks for name -->
-                <div class="s3-chat-row">
-                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
-                    <div class="s3-bubble">What should we call you?</div>
-                </div>
-
-                <!-- Sarah replies with name -->
-                <div class="s3-reply-row">
-                    <div class="s3-reply-bubble">
-                        <div class="s3-reply-label">You can call me…</div>
-                        <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
-                    </div>
-                </div>
-
-                <!-- Ellie asks for IG -->
-                <div class="s3-chat-row">
-                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
-                    <div class="s3-bubble">What's your IG handle? 💬</div>
-                </div>
-
-                <!-- Sarah replies with handle (optional) -->
-                <div class="s3-reply-row">
-                    <div class="s3-reply-bubble">
-                        <div class="s3-reply-label">This is me…</div>
-                        <div style="position: relative;">
-                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
-                            <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
-                        </div>
-                        <div style="font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 6px;">Totally optional — you can add it later</div>
-                    </div>
-                </div>
-
-                <div style="height: 96px;"></div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">What should we call you?</label>
+                <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
             </div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">Instagram handle (optional)</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                </div>
+            </div>
+            <div style="flex: 1;"></div>
         </div>
         <!-- Pinned bottom button -->
         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">

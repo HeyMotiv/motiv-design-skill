@@ -707,59 +707,11 @@
     <div class="screen" id="screen4" style="overflow-y: auto;">
         <div class="emoji-rain-overlay" id="screen4EmojiRain"></div>
 
-        <!-- Creator chat-style profile -->
-        <div class="path-creator" style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
-            <div class="s4h-header">
-                <div class="s4h-title">Welcome to Motiv!</div>
-                <div class="s4h-subtitle">Let Ellie and the crew know who's joining.</div>
-            </div>
-            <div class="s3-chat-row s3-stagger s3-stagger-1">
-                <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
-                <div class="s3-bubble">Add a photo so your fellow challengers can spot you 📸</div>
-            </div>
-            <div class="s3-form-area">
-                <div class="s3-reply-row s3-reply-row-photo">
-                    <div class="s3-reply-bubble s3-reply-photo">
-                        <div class="s3-reply-label">Here's a good one…</div>
-                        <div class="s3-photo-upload" onclick="showPhotoPermission()">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" style="display: block;">
-                            <div class="s3-photo-edit">Edit</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="s3-chat-row">
-                    <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
-                    <div class="s3-bubble">What should we call you?</div>
-                </div>
-                <div class="s3-reply-row">
-                    <div class="s3-reply-bubble">
-                        <div class="s3-reply-label">You can call me…</div>
-                        <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
-                    </div>
-                </div>
-                <div class="s3-chat-row">
-                    <div class="s3-chat-avatar"><img class="creator-avatar-img" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Creator"></div>
-                    <div class="s3-bubble">What's your IG handle? 💬</div>
-                </div>
-                <div class="s3-reply-row">
-                    <div class="s3-reply-bubble">
-                        <div class="s3-reply-label">This is me…</div>
-                        <div style="position: relative;">
-                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
-                            <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
-                        </div>
-                        <div style="font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 6px;">Totally optional — you can add it later</div>
-                    </div>
-                </div>
-                <div style="height: 96px;"></div>
-            </div>
-        </div>
-
-        <!-- Generic form profile -->
-        <div class="path-generic" style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+        <!-- Profile (single layout for all users) -->
+        <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
             <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
                 <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome to Motiv!</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let Ellie and the crew know who's joining.</div>
+                <div id="profileSubhead" style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let the crew know who's joining.</div>
             </div>
             <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
                 <div class="s3-photo-upload" style="width: 120px; height: 120px;" onclick="showPhotoPermission()">
@@ -1094,12 +1046,15 @@
         document.querySelector('.s4-creator-msg-avatar').style.backgroundImage = "url('" + c.avatar + "')";
         // Update Join CTA
         document.getElementById('joinCTA').textContent = "Join " + c.first + "'s challenge";
+        // Update profile subhead
+        document.getElementById('profileSubhead').textContent = "Let " + c.first + " and the crew know who's joining.";
     }
 
     function applyGenericPath() {
         document.body.classList.remove('has-creator');
         document.getElementById('hiwCTA').textContent = 'Browse challenges';
         document.getElementById('joinCTA').textContent = 'Join challenge';
+        document.getElementById('profileSubhead').textContent = "Let the crew know who's joining.";
     }
 
     function confirmCreator() {
