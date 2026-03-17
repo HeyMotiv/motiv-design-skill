@@ -757,20 +757,20 @@
 
         <!-- Generic form profile -->
         <div class="path-generic" style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
-            <div style="text-align: center; margin-bottom: 20px; margin-top: 16px;">
+            <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
                 <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome in.</div>
                 <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Quick intro so the crew knows who's showing up.</div>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 24px;">
-                <div class="s3-photo-upload" onclick="showPhotoPermission()">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" style="display: block;">
-                    <div class="s3-photo-edit">Edit</div>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
+                <div class="s3-photo-upload" style="width: 120px; height: 120px;" onclick="showPhotoPermission()">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" style="display: block;">
+                    <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
                 </div>
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 8px;">Profile photo</div>
+                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
             </div>
-            <div class="s3-name-row">
-                <div class="s3-form-group"><label class="s3-form-label">First name</label><input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;"></div>
-                <div class="s3-form-group"><label class="s3-form-label">Last name</label><input type="text" class="form-input" value="Chen" style="font-size: 15px; padding: 12px 14px;"></div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">What should we call you?</label>
+                <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
             </div>
             <div class="s3-form-group">
                 <label class="s3-form-label">Instagram handle (optional)</label>
