@@ -6,6 +6,30 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/worktrees/unruffled-morse/serve-participant.js"],
       "port": 8766
+    },
+    {
+      "name": "updated-details",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-updated-details.js"],
+      "port": 8767
+    },
+    {
+      "name": "signup-flow",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-signup-flow.js"],
+      "port": 8768
+    },
+    {
+      "name": "view-toggle",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-view-toggle.js"],
+      "port": 8769
+    },
+    {
+      "name": "collab-creation",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-collab-creation.js"],
+      "port": 8770
     }
   ]
 }
