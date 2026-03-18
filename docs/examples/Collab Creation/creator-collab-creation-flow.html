@@ -1159,6 +1159,240 @@
         }
 
         /* =========================================
+           PERMISSIONS DENIED OVERLAY (Screen 1)
+           ========================================= */
+
+        .perm-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .perm-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .perm-card {
+            background: var(--color-bg-primary);
+            border-radius: 20px;
+            padding: 28px 24px 24px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            transform: scale(0.92);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .perm-overlay.show .perm-card {
+            transform: scale(1);
+        }
+        .perm-icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #FEF2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .perm-icon-circle .material-icons {
+            font-size: 28px;
+            color: var(--color-boundary);
+        }
+        .perm-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .perm-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .perm-steps {
+            text-align: left;
+            background: #F9FAFB;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .perm-steps-title {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-tertiary);
+            margin-bottom: 12px;
+        }
+        .perm-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+        .perm-step + .perm-step {
+            margin-top: 10px;
+        }
+        .perm-step-num {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .perm-step-text {
+            padding-top: 1px;
+        }
+        .perm-step-text strong {
+            font-weight: 600;
+        }
+        .perm-open-settings {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: var(--color-ink);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .perm-open-settings:active {
+            transform: scale(0.97);
+            opacity: 0.9;
+        }
+        .perm-open-settings .material-icons {
+            font-size: 20px;
+        }
+        .perm-dismiss {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: none;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            margin-top: 4px;
+        }
+        .perm-dismiss:active {
+            color: var(--color-text-secondary);
+        }
+
+        /* iOS settings toggle mock (shown after "Open Settings" tap) */
+        .perm-settings-mock {
+            display: none;
+        }
+        .perm-settings-mock.show {
+            display: block;
+        }
+        .settings-mock-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: #007AFF;
+            margin-bottom: 14px;
+            cursor: pointer;
+        }
+        .settings-mock-header .material-icons {
+            font-size: 18px;
+        }
+        .settings-mock-app {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .settings-mock-app-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--color-clay);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .settings-mock-app-icon .material-icons {
+            font-size: 22px;
+            color: white;
+        }
+        .settings-mock-app-name {
+            font-family: var(--font-body);
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .settings-toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 0.5px solid var(--color-border-default);
+        }
+        .settings-toggle-label {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--color-text-primary);
+        }
+        .ios-toggle {
+            width: 51px;
+            height: 31px;
+            border-radius: 16px;
+            background: #E5E5EA;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.25s ease;
+        }
+        .ios-toggle.on {
+            background: #34C759;
+        }
+        .ios-toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: transform 0.25s ease;
+        }
+        .ios-toggle.on .ios-toggle-knob {
+            transform: translateX(20px);
+        }
+
+        /* =========================================
            COLOR SWATCHES (Screen 1)
            ========================================= */
 
@@ -2431,6 +2665,14 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                                 <div class="date-confirmation-value" id="dateConfirmEnd">May 17, 2026</div>
                             </div>
                         </div>
+                        <div class="date-confirmation-divider"></div>
+                        <div class="date-confirmation-row">
+                            <span class="material-icons" style="font-size: 20px; color: var(--color-plum);">campaign</span>
+                            <div class="date-confirmation-text">
+                                <div class="date-confirmation-label">Recruiting window</div>
+                                <div class="date-confirmation-value" id="dateConfirmRecruit">93 days to recruit</div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -2553,6 +2795,80 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 <div class="action-sheet-group">
                     <button class="action-sheet-btn action-sheet-cancel" onclick="closePhotoSheet()">Cancel</button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Permissions Denied Overlay -->
+        <div class="perm-overlay" id="permOverlay" onclick="closePermOverlay()">
+            <div class="perm-card" onclick="event.stopPropagation()">
+
+                <!-- Initial state: permission denied message -->
+                <div id="permDeniedView">
+                    <div class="perm-icon-circle">
+                        <span class="material-icons" id="permIcon">no_photography</span>
+                    </div>
+                    <div class="perm-title" id="permTitle">Photo Access Needed</div>
+                    <div class="perm-desc" id="permDesc">Motiv needs access to your photo library to set a cover image for your collab. You previously denied this permission.</div>
+
+                    <div class="perm-steps">
+                        <div class="perm-steps-title">How to enable</div>
+                        <div class="perm-step">
+                            <div class="perm-step-num">1</div>
+                            <div class="perm-step-text">Open <strong>Settings</strong> on your iPhone</div>
+                        </div>
+                        <div class="perm-step">
+                            <div class="perm-step-num">2</div>
+                            <div class="perm-step-text">Scroll down and tap <strong>Motiv</strong></div>
+                        </div>
+                        <div class="perm-step">
+                            <div class="perm-step-num">3</div>
+                            <div class="perm-step-text" id="permStepThree">Toggle on <strong>Photos</strong></div>
+                        </div>
+                        <div class="perm-step">
+                            <div class="perm-step-num">4</div>
+                            <div class="perm-step-text">Return to Motiv and try again</div>
+                        </div>
+                    </div>
+
+                    <button class="perm-open-settings" onclick="openSettingsMock()">
+                        <span class="material-icons">settings</span>
+                        Open Settings
+                    </button>
+                    <button class="perm-dismiss" onclick="closePermOverlay()">Not now</button>
+                </div>
+
+                <!-- Settings mock state: shown after "Open Settings" -->
+                <div class="perm-settings-mock" id="permSettingsView">
+                    <div class="settings-mock-header" onclick="backFromSettings()">
+                        <span class="material-icons">arrow_back_ios</span>
+                        Settings
+                    </div>
+                    <div class="settings-mock-app">
+                        <div class="settings-mock-app-icon">
+                            <span class="material-icons">local_fire_department</span>
+                        </div>
+                        <div class="settings-mock-app-name">Motiv</div>
+                    </div>
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-label">Camera</div>
+                        <div class="ios-toggle" id="toggleCamera" onclick="togglePermission(this)">
+                            <div class="ios-toggle-knob"></div>
+                        </div>
+                    </div>
+                    <div class="settings-toggle-row">
+                        <div class="settings-toggle-label">Photos</div>
+                        <div class="ios-toggle" id="togglePhotos" onclick="togglePermission(this)">
+                            <div class="ios-toggle-knob"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px;">
+                        <button class="perm-open-settings" onclick="doneWithSettings()" id="permDoneBtn" style="opacity: 0.4; pointer-events: none;">
+                            <span class="material-icons">check_circle</span>
+                            Done
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -2925,8 +3241,18 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             document.getElementById('photoActionSheet').classList.remove('show');
         }
 
+        /* Permission state — starts denied for demo */
+        var permGranted = { camera: false, photos: false };
+
         function pickPhoto(source) {
             closePhotoSheet();
+
+            /* Check permissions — show denied overlay if not granted */
+            if ((source === 'camera' && !permGranted.camera) ||
+                (source === 'library' && !permGranted.photos)) {
+                showPermDenied(source);
+                return;
+            }
 
             /* Toggle between two stock photos to demonstrate the interaction */
             photoIndex = (photoIndex + 1) % photos.length;
@@ -2941,6 +3267,95 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             setTimeout(function() {
                 toast.classList.remove('show');
             }, 1500);
+        }
+
+        /* =========================================
+           PERMISSIONS DENIED FLOW
+           ========================================= */
+
+        var permSource = null; /* which source triggered the overlay */
+
+        function showPermDenied(source) {
+            permSource = source;
+            var overlay = document.getElementById('permOverlay');
+            var icon = document.getElementById('permIcon');
+            var title = document.getElementById('permTitle');
+            var desc = document.getElementById('permDesc');
+            var step3 = document.getElementById('permStepThree');
+
+            /* Reset to denied view */
+            document.getElementById('permDeniedView').style.display = 'block';
+            document.getElementById('permSettingsView').classList.remove('show');
+
+            if (source === 'camera') {
+                icon.textContent = 'no_photography';
+                title.textContent = 'Camera Access Needed';
+                desc.textContent = 'Motiv needs access to your camera to take a cover photo for your collab. You previously denied this permission.';
+                step3.innerHTML = 'Toggle on <strong>Camera</strong>';
+            } else {
+                icon.textContent = 'photo_library';
+                title.textContent = 'Photo Access Needed';
+                desc.textContent = 'Motiv needs access to your photo library to choose a cover image for your collab. You previously denied this permission.';
+                step3.innerHTML = 'Toggle on <strong>Photos</strong>';
+            }
+
+            overlay.classList.add('show');
+        }
+
+        function closePermOverlay() {
+            document.getElementById('permOverlay').classList.remove('show');
+            /* Reset settings view after close */
+            setTimeout(function() {
+                document.getElementById('permDeniedView').style.display = 'block';
+                document.getElementById('permSettingsView').classList.remove('show');
+            }, 300);
+        }
+
+        function openSettingsMock() {
+            document.getElementById('permDeniedView').style.display = 'none';
+            document.getElementById('permSettingsView').classList.add('show');
+
+            /* Reset toggles to match current perm state */
+            var camToggle = document.getElementById('toggleCamera');
+            var photoToggle = document.getElementById('togglePhotos');
+            camToggle.classList.toggle('on', permGranted.camera);
+            photoToggle.classList.toggle('on', permGranted.photos);
+            updateDoneBtn();
+        }
+
+        function backFromSettings() {
+            document.getElementById('permSettingsView').classList.remove('show');
+            document.getElementById('permDeniedView').style.display = 'block';
+        }
+
+        function togglePermission(el) {
+            el.classList.toggle('on');
+            var isOn = el.classList.contains('on');
+            if (el.id === 'toggleCamera') permGranted.camera = isOn;
+            if (el.id === 'togglePhotos') permGranted.photos = isOn;
+            updateDoneBtn();
+        }
+
+        function updateDoneBtn() {
+            var btn = document.getElementById('permDoneBtn');
+            /* Enable Done if the relevant permission is now on */
+            var needed = permSource === 'camera' ? permGranted.camera : permGranted.photos;
+            if (needed) {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            } else {
+                btn.style.opacity = '0.4';
+                btn.style.pointerEvents = 'none';
+            }
+        }
+
+        function doneWithSettings() {
+            closePermOverlay();
+
+            /* Now that permission is granted, auto-trigger the photo pick */
+            setTimeout(function() {
+                pickPhoto(permSource);
+            }, 400);
         }
 
         /* =========================================
