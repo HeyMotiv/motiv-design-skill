@@ -631,6 +631,7 @@
         <div class="picker-bottom" style="position:relative; flex-shrink:0;">
             <button class="btn-primary" id="pickerCTA" onclick="confirmCreator()" style="opacity: 0.35; pointer-events: none;">See their challenge</button>
             <button class="picker-explore-link" onclick="chooseExploring()">I'm just exploring</button>
+            <button class="picker-explore-link" onclick="chooseExploring(); setTimeout(function(){ goTo(2); }, 50);" style="margin-top: 4px; font-size: 13px; color: var(--color-text-tertiary);">Already have an account? <strong style="color: var(--color-text-secondary);">Sign in</strong></button>
         </div>
     </div>
 
