@@ -168,7 +168,7 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .s0-tagline { font-family: var(--font-body); font-size: 17px; color: var(--color-text-secondary); text-align: center; line-height: 1.55; margin-top: 20px; position: relative; z-index: 2; opacity: 0; transform: translateY(10px); }
+        .s0-tagline { font-family: var(--font-body); font-size: 18px; color: var(--color-text-secondary); text-align: center; line-height: 1.55; margin-top: 20px; position: relative; z-index: 2; opacity: 0; transform: translateY(10px); }
         .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
 
         /* ===========================================
@@ -236,7 +236,6 @@
             align-self: flex-start;
         }
         .s4h-ig-bubble strong { font-weight: 600; }
-        .s4h-ig-bubble.ig-accent { border-left: 5px solid var(--color-brand-secondary); }
 
         /* IG grouping radii:
            first:  round TL, round TR, round BR, round BL
@@ -263,101 +262,6 @@
             align-items: flex-end;
             margin-top: 3px;
         }
-
-        /* ── How It Works: Card-in-card ── */
-        .hiw-outer {
-            background: #FFFFFF;
-            border: 1px solid #E7D9C9;
-            border-radius: 20px;
-            padding: 32px 24px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 12px;
-        }
-        .hiw-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 18px;
-            background: rgba(107,78,113,0.10);
-        }
-        .hiw-icon .material-icons {
-            font-size: 28px;
-            color: #6B4E71;
-        }
-        .hiw-big-title {
-            font-family: var(--font-display);
-            font-size: 24px;
-            font-weight: 700;
-            color: #2B2E34;
-            line-height: 1.15;
-            margin-bottom: 12px;
-        }
-        .hiw-body {
-            font-family: var(--font-body);
-            font-size: 13px;
-            color: #6B7280;
-            line-height: 1.45;
-            margin-bottom: 20px;
-            max-width: 300px;
-        }
-        .hiw-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            background: rgba(107,78,113,0.08);
-            border: 1px solid rgba(107,78,113,0.20);
-            font-family: var(--font-body);
-            font-size: 12px;
-            font-weight: 600;
-            color: #6B4E71;
-            letter-spacing: 0.3px;
-            margin-bottom: 22px;
-        }
-        .hiw-pill .material-icons {
-            font-size: 14px;
-        }
-        .hiw-inner {
-            width: 100%;
-            background: #F3E6E2;
-            border-radius: 14px;
-            padding: 20px 20px;
-            text-align: center;
-        }
-        .hiw-inner-setup {
-            font-family: var(--font-body);
-            font-size: 13px;
-            font-weight: 500;
-            color: #6B7280;
-            line-height: 1.4;
-            margin-bottom: 4px;
-        }
-        .hiw-inner-value {
-            font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 700;
-            color: #2B2E34;
-            line-height: 1.3;
-        }
-        .hiw-inner-note {
-            font-family: var(--font-body);
-            font-size: 12px;
-            font-weight: 400;
-            color: #9CA3AF;
-            margin-top: 4px;
-            font-style: italic;
-        }
-        .hiw-inner-icon .material-icons {
-            font-size: 20px;
-            color: #547577;
-        }
         .s4h-ellie-avatar {
             width: 28px;
             height: 28px;
@@ -367,84 +271,6 @@
             flex-shrink: 0;
         }
         .s4h-ellie-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Push notification cards */
-        .push-notif {
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 16px;
-            padding: 14px 16px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-        }
-        .push-notif-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 9px;
-            background: #2B2E34;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            position: relative;
-        }
-        .push-notif-icon span {
-            font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 700;
-            color: #FFFFFF;
-        }
-        .push-notif-badge {
-            position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #CB3E3E;
-            color: #FFF;
-            font-size: 11px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-body);
-        }
-        .push-notif-content {
-            flex: 1;
-            min-width: 0;
-        }
-        .push-notif-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3px;
-        }
-        .push-notif-app {
-            font-family: var(--font-body);
-            font-size: 13px;
-            font-weight: 600;
-            color: #6B7280;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .push-notif-time {
-            font-family: var(--font-body);
-            font-size: 12px;
-            color: #9CA3AF;
-        }
-        .push-notif-text {
-            font-family: var(--font-body);
-            font-size: 14px;
-            color: #2B2E34;
-            line-height: 1.4;
-        }
-        .push-notif-text strong {
-            font-weight: 600;
-        }
 
         /* System message — centered, above CTA */
         .s4h-system-msg {
@@ -1197,9 +1023,9 @@
         <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
         <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
         <span class="nav-jump" onclick="goTo(4)">4 How It Works</span> ·
-        <span class="nav-jump" onclick="goTo(5)">5 Challenge Details</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 Collab Details</span> ·
         <span class="nav-jump" onclick="goTo(6)">6 Notifications</span> ·
-        <span class="nav-jump" onclick="goTo(7)">7 Goal & Motiv</span>
+        <span class="nav-jump" onclick="goTo(7)">7 Join Flow</span>
     </div>
 </div>
 
@@ -1246,7 +1072,7 @@
     <div class="screen active" id="screen0">
         <div class="s0-content">
             <div class="s0-wordmark" id="splashWordmark">Motiv</div>
-            <div class="s0-tagline" id="splashTagline">Put your money where<br>your <strong>motivation</strong> is.</div>
+            <div class="s0-tagline" id="splashTagline">Collab with your favorite creators.<br>Motiv-ation starts here.</div>
         </div>
     </div>
 
@@ -1266,8 +1092,8 @@
                 <div class="s1-handle">@doodle_cycles</div>
             </div>
 
-            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">My vibe.<br>Your moment.</div>
-            <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Create your account to get started.</div>
+            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Let's collab on Motiv!</div>
+            <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Join me and your other favorite creators</div>
 
             <div class="auth-section">
                 <button class="auth-btn auth-btn--apple" onclick="goTo(3)">
@@ -1343,34 +1169,74 @@
         <div class="emoji-rain-overlay" id="screen3EmojiRain"></div>
         <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
-            <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome to Motiv!</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let Ellie and the crew know who's joining.</div>
+            <!-- Header — matches Screen 4 pattern -->
+            <div class="s4h-header">
+                <div class="s4h-title">Welcome to the crew 👋</div>
+                <div class="s4h-subtitle">A quick intro for your fellow collabbers</div>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
-                <div class="s3-photo-upload" style="width: 120px; height: 120px;" id="photoUpload" onclick="showPhotoPermission()">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
-                    <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
+
+            <!-- Ellie's opening bubble — staggered -->
+            <div class="s3-chat-row s3-stagger s3-stagger-1">
+                <div class="s3-chat-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
                 </div>
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
+                <div class="s3-bubble">Add a photo so I can spot you in collabs! 📸</div>
             </div>
-            <div class="s3-form-group">
-                <label class="s3-form-label">What should we call you?</label>
-                <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
-            </div>
-            <div class="s3-form-group">
-                <label class="s3-form-label">Instagram handle (optional)</label>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
-                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+
+            <!-- Conversation continues — fades in after intro bubbles -->
+            <div class="s3-form-area">
+
+                <!-- Sarah replies with photo -->
+                <div class="s3-reply-row s3-reply-row-photo">
+                    <div class="s3-reply-bubble s3-reply-photo">
+                        <div class="s3-reply-label">Here's a good one…</div>
+                        <div class="s3-photo-upload" id="photoUpload" onclick="showPhotoPermission()">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=176&h=176&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                            <span class="material-icons" id="photoIcon" style="display: none;">add_a_photo</span>
+                            <div class="s3-photo-edit">Edit</div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Ellie asks for name -->
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="s3-bubble">What should we call you?</div>
+                </div>
+
+                <!-- Sarah replies with name -->
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">You can call me…</div>
+                        <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
+                    </div>
+                </div>
+
+                <!-- Ellie asks for IG -->
+                <div class="s3-chat-row">
+                    <div class="s3-chat-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="s3-bubble">What's your IG handle? 💬</div>
+                </div>
+
+                <!-- Sarah replies with handle (optional) -->
+                <div class="s3-reply-row">
+                    <div class="s3-reply-bubble">
+                        <div class="s3-reply-label">This is me…</div>
+                        <div style="position: relative;">
+                            <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                            <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                        </div>
+                        <div style="font-size: 12.5px; color: var(--color-text-tertiary); margin-top: 6px;">Totally optional — you can add it later</div>
+                    </div>
+                </div>
+
+                <div style="height: 96px;"></div>
             </div>
-            <div style="flex: 1;"></div>
         </div>
         <!-- Pinned bottom button -->
         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">
             <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center; letter-spacing: 0.01em;">
-                <span style="font-size: 14px;">&#9888;&#65039;</span> This info will be visible to challenge participants
+                <span style="font-size: 14px;">&#9888;&#65039;</span> Above info is visible to all collab participants
             </div>
             <button class="btn-primary" onclick="goTo(4)">Continue</button>
         </div>
@@ -1419,28 +1285,31 @@
 
             <!-- App header — frames the concept -->
             <div class="s4h-header">
-                <div class="s4h-title">Your accountability superpower</div>
-                <div class="s4h-subtitle">Here's how it works.</div>
+                <div class="s4h-title">How collabs work</div>
+                <div class="s4h-subtitle">Get moving alongside creators you love</div>
             </div>
 
-            <!-- Accountability: card-in-card -->
-            <div class="hiw-outer">
-                <div class="hiw-icon"><span class="material-icons">shield</span></div>
-                <div class="hiw-big-title">Your Motiv</div>
-                <div class="hiw-body">A small deposit — your skin in the game. Hit your goals, earn it back. Miss, and you forfeit it.</div>
-                <div class="hiw-pill"><span class="material-icons">lock</span> Stripe Secured</div>
-                <div class="hiw-inner">
-                    <div class="hiw-inner-setup">Hit your goals?</div>
-                    <div class="hiw-inner-value">Earn it all back + more.</div>
-                    <div class="hiw-inner-note">Rewards &amp; bonuses when available</div>
+            <!-- Ellie's message sequence — IG-style bubble shapes, avatar on last only -->
+            <div class="s4h-bubbles">
+                <div class="s4h-ig-bubble ig-first">Here's the deal 👇</div>
+                <div class="s4h-ig-bubble ig-mid"><strong>4–6 weeks</strong> of getting moving together toward a common goal 💪</div>
+                <div class="s4h-ig-bubble ig-mid">I'll be your biggest cheerleader and you'll be part of my crew 🤝</div>
+                <div class="s4h-ig-bubble ig-mid">Small $$ hold up front — about <strong>a week of daily lattes</strong> ☕</div>
+                <div class="s4h-ig-bubble ig-mid">Hit your personalized goal? You get it <strong>all back</strong> + rewards + a potential bonus 💰</div>
+            </div>
+            <!-- Last bubble with avatar -->
+            <div class="s4h-tail-row">
+                <div class="s4h-ellie-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
                 </div>
+                <div class="s4h-ig-bubble ig-last">I've got a collab coming up — <strong>check it out</strong> and see if it's your vibe 👀</div>
             </div>
 
             <!-- CTAs with system message just above -->
             <div class="s4h-ctas">
-                <div class="s4h-system-msg">Currently we have <strong>Peloton-based</strong> challenges.<br>Soon: walking, running, active minutes, and more!</div>
-                <button class="btn-primary" onclick="goTo(5)">See Ellie's challenge</button>
-                <button class="s4h-cta-tertiary" onclick="goTo(6)">Notify me of future challenges</button>
+                <div class="s4h-system-msg">Right now we have <strong>Peloton-based</strong> collabs.<br>Soon: walking, running, active minutes, and more!</div>
+                <button class="btn-primary" onclick="goTo(5)">See Ellie's upcoming collab</button>
+                <button class="s4h-cta-tertiary" onclick="goTo(6)">Notify me of future collabs</button>
             </div>
         </div>
     </div>
@@ -1465,7 +1334,7 @@
                     </div>
 
                     <div class="s4-collab-name">Mindful Miles Reset</div>
-                    <div class="s4-collab-dates">Mar 15 – Apr 26 · 6-week challenge</div>
+                    <div class="s4-collab-dates">Mar 15 – Apr 26 · 6 weeks</div>
                 </div>
 
                 <!-- Countdown -->
@@ -1501,7 +1370,7 @@
                             </div>
                             <div class="s4-entry-badge">
                                 <span class="material-icons">credit_card</span>
-                                $40 Motiv
+                                $40 hold
                             </div>
                         </div>
                         <div class="s4-card-divider"></div>
@@ -1545,18 +1414,18 @@
             <div class="s4-stats">
                 <div class="s4-about-card">
                     <div class="s4-about-header" onclick="toggleAbout(this)">
-                        <span class="s4-about-title">About this Challenge</span>
+                        <span class="s4-about-title">About this Collab</span>
                         <span class="material-icons s4-about-chevron open">expand_more</span>
                     </div>
                     <div class="s4-about-body" id="s4AboutBody">
-                        <p>6 weeks of cycling hosted by Ellie. She's not your coach — she's your chief inspiration. Inside the challenge you'll get the habits, products, and mindset behind her journey, exclusively for participants. Show up, hit your goal, get your Motiv back.</p>
+                        <p>6 weeks of cycling with Ellie. She's designed a program that pushes you beyond your comfort zone while building sustainable fitness habits. Personalized goals based on your current performance level.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Weekly Goal -->
             <div class="s4-stats">
-                <div class="s4-stats-title">Weekly challenge goal</div>
+                <div class="s4-stats-title">Weekly collab goal</div>
                 <div class="s4-grouped-card">
                     <div class="s4-creator-msg">
                         <div class="s4-creator-msg-avatar"></div>
@@ -1613,60 +1482,46 @@
                             <div class="s4-rule-item">
                                 <div class="s4-rule-num">3</div>
                                 <div>
-                                    <div class="s4-rule-title">Miss a week, you forfeit your Motiv</div>
-                                    <div class="s4-rule-desc">If you don't meet the weekly goal, you're out and your Motiv goes to the rewards pool.</div>
+                                    <div class="s4-rule-title">Miss a week, you're out</div>
+                                    <div class="s4-rule-desc">If you don't meet the minimum goal in any week, you're eliminated from the pool.</div>
                                 </div>
                             </div>
                             <div class="s4-rule-item">
                                 <div class="s4-rule-num">4</div>
                                 <div>
-                                    <div class="s4-rule-title">Finishers split the rewards pool</div>
-                                    <div class="s4-rule-desc">Everyone who completes all 6 weeks gets their Motiv back and splits the rewards pool equally.</div>
-                                </div>
-                            </div>
-                            <div class="s4-rule-item">
-                                <div class="s4-rule-num">5</div>
-                                <div>
-                                    <div class="s4-rule-title">Ellie picks 2 MVPs</div>
-                                    <div class="s4-rule-desc">At the end, Ellie personally selects two standout challengers who take home an even bigger share.</div>
+                                    <div class="s4-rule-title">Finishers split the pool</div>
+                                    <div class="s4-rule-desc">Everyone who completes all 6 weeks splits the collab pool equally.</div>
                                 </div>
                             </div>
                         </div>
                         <div class="s4-tab-content" id="s4-tab-faqs" style="display: none;">
                             <div class="s4-faq-item">
                                 <div class="s4-faq-q" onclick="toggleFaq(this)">
-                                    <span>What happens to my $40 Motiv?</span>
+                                    <span>What happens to my $40 hold?</span>
                                     <span class="material-icons s4-faq-chevron">expand_more</span>
                                 </div>
-                                <div class="s4-faq-a">Your Motiv is returned in full when you complete the challenge. If you don't finish, you forfeit it entirely — it goes into the rewards pool for those who did the work.</div>
+                                <div class="s4-faq-a">Your hold is returned in full when you complete the collab. If you don't finish, it goes into the pool for those who do.</div>
                             </div>
                             <div class="s4-faq-item">
                                 <div class="s4-faq-q" onclick="toggleFaq(this)">
                                     <span>Can I pause for a week?</span>
                                     <span class="material-icons s4-faq-chevron">expand_more</span>
                                 </div>
-                                <div class="s4-faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to stay eligible. That's what makes it real.</div>
+                                <div class="s4-faq-a">No — consistency is the point. Every participant must meet the weekly goal each week to remain eligible.</div>
                             </div>
                             <div class="s4-faq-item">
                                 <div class="s4-faq-q" onclick="toggleFaq(this)">
-                                    <span>How is the rewards pool divided?</span>
+                                    <span>How is the pool divided?</span>
                                     <span class="material-icons s4-faq-chevron">expand_more</span>
                                 </div>
-                                <div class="s4-faq-a">The pool is split equally among all participants who complete every week. Ellie also personally selects 2 MVPs who take home an even bigger share on top of that.</div>
+                                <div class="s4-faq-a">The total pool is split equally among all participants who complete every week of the collab.</div>
                             </div>
                             <div class="s4-faq-item">
                                 <div class="s4-faq-q" onclick="toggleFaq(this)">
                                     <span>What if I get injured?</span>
                                     <span class="material-icons s4-faq-chevron">expand_more</span>
                                 </div>
-                                <div class="s4-faq-a">We understand things happen. Reach out to support and we'll review your case individually.</div>
-                            </div>
-                            <div class="s4-faq-item">
-                                <div class="s4-faq-q" onclick="toggleFaq(this)">
-                                    <span>Is this gambling?</span>
-                                    <span class="material-icons s4-faq-chevron">expand_more</span>
-                                </div>
-                                <div class="s4-faq-a">No. Your Motiv is a refundable commitment tied to your own effort — not a bet on chance. You control the outcome entirely.</div>
+                                <div class="s4-faq-a">We understand things happen. Reach out to support and we'll review your case on an individual basis.</div>
                             </div>
                         </div>
                     </div>
@@ -1677,8 +1532,8 @@
 
         <!-- Sticky bottom CTA -->
         <div class="s4-bottom-bar">
-            <button class="s4-join-btn" onclick="goTo(7)">Join Ellie's challenge</button>
-            <button class="s4-notify-link" onclick="goTo(6)">Notify me of future challenges</button>
+            <button class="s4-join-btn" onclick="goTo(7)">Join Ellie's collab</button>
+            <button class="s4-notify-link" onclick="goTo(6)">Notify me of future collabs</button>
         </div>
     </div>
 
@@ -1704,56 +1559,25 @@
 
             <!-- Header -->
             <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Don't miss a thing</div>
-                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">We'll only ping you when it matters.</div>
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Stay in the loop</div>
+                <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">We'll let you know when new collabs drop, send reminders before yours kicks off, and keep you updated along the way</div>
             </div>
 
-            <!-- Push notification previews -->
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <div class="push-notif">
-                    <div class="push-notif-icon">
-                        <span>M</span>
-                        <div class="push-notif-badge">1</div>
-                    </div>
-                    <div class="push-notif-content">
-                        <div class="push-notif-header">
-                            <div class="push-notif-app">Motiv</div>
-                            <div class="push-notif-time">2m ago</div>
-                        </div>
-                        <div class="push-notif-text">Your challenge starts in <strong>2 days</strong> — your Motiv is locked in. Let's go! ⏰</div>
-                    </div>
+            <!-- Chat-style notification previews -->
+            <div style="display: flex; flex-direction: column; gap: 3px; margin-left: 36px;">
+                <div class="s4h-ig-bubble ig-first">Just dropped a new collab — <strong>Summer Shred</strong> 🚴 Spots are filling up!</div>
+                <div class="s4h-ig-bubble ig-mid">Your collab starts in <strong>2 days</strong> — let's go! ⏰</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-end; margin-top: 3px;">
+                <div class="s4h-ellie-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=56&h=56&fit=crop&crop=face" alt="Ellie">
                 </div>
-                <div class="push-notif">
-                    <div class="push-notif-icon">
-                        <span>M</span>
-                        <div class="push-notif-badge">1</div>
-                    </div>
-                    <div class="push-notif-content">
-                        <div class="push-notif-header">
-                            <div class="push-notif-app">Motiv</div>
-                            <div class="push-notif-time">1h ago</div>
-                        </div>
-                        <div class="push-notif-text">Ellie's Week 3 post is live — exclusive to challengers 💪</div>
-                    </div>
-                </div>
-                <div class="push-notif">
-                    <div class="push-notif-icon">
-                        <span>M</span>
-                        <div class="push-notif-badge">1</div>
-                    </div>
-                    <div class="push-notif-content">
-                        <div class="push-notif-header">
-                            <div class="push-notif-app">Motiv</div>
-                            <div class="push-notif-time">3h ago</div>
-                        </div>
-                        <div class="push-notif-text">New challenge just dropped — <strong>Summer Shred</strong> 🚴</div>
-                    </div>
-                </div>
+                <div class="s4h-ig-bubble ig-last">Week 3 video is live! You're crushing it 💪</div>
             </div>
 
             <!-- System message -->
             <div style="text-align: center; font-size: 13px; color: var(--color-text-secondary); line-height: 1.45; padding: 0 20px; margin-top: 16px;">
-                Ellie's posts are exclusive to challengers — don't miss them.
+                Turn on notifications so you never miss a message from <strong style="color: var(--color-text-primary);">Ellie</strong> or updates about your collabs
             </div>
 
             <!-- CTAs -->
@@ -1772,8 +1596,8 @@
             <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
                 <span class="material-icons" style="font-size: 36px; color: var(--color-brand-secondary);">calculate</span>
             </div>
-            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">Goal & Motiv</div>
-            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 32px;">This is where the participant sets their personalized weekly goal based on their fitness data, reviews their $40 Motiv, and confirms payment to join the challenge. Complete it — get your Motiv back plus a share of the rewards pool.</div>
+            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 10px;">Goal Calculation &amp; Payment</div>
+            <div style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 32px;">This is where the participant would calculate their personalized goal based on their fitness data, review the hold amount, and complete payment to join the collab.</div>
             <div style="background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); border-radius: 16px; padding: 20px 24px; width: 100%; text-align: left;">
                 <div style="font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Flow includes</div>
                 <div style="font-size: 14px; color: var(--color-text-primary); line-height: 1.8;">

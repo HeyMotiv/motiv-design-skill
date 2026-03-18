@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Central — View Toggle (Creator ↔ My Progress)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --color-ink: #2B2E34;
+            --color-clay: #C97A6A;
+            --color-blush: #F3E6E2;
+            --color-sage: #8FA6A0;
+            --color-sand: #E7D9C9;
+            --color-plum: #6B4E71;
+            --color-boundary: #B8574E;
+            --color-white: #FEFCFA;
+
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-bg-primary: #FEFCFA;
+            --color-bg-secondary: #F3E6E2;
+            --color-border-default: #E5E7EB;
+            --color-border-subtle: #F3F4F6;
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .sublabel {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 32px;
+            max-width: 440px;
+            line-height: 1.5;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .phone-scroll::-webkit-scrollbar { display: none; }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            position: relative;
+            z-index: 10;
+            background: #F5DDD4;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        .hero-section {
+            position: relative;
+            padding: 0 24px 24px;
+            overflow: visible;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0%,
+                #F7E6DE 40%,
+                #FAF0EB 70%,
+                var(--color-bg-primary) 100%
+            );
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-back {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .hero-back .material-icons { font-size: 20px; }
+
+        .hero-collab-name {
+            font-family: var(--font-headline);
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 36px;
+            margin-bottom: 6px;
+        }
+
+        .hero-collab-dates {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        /* =========================================
+           KEBAB MENU
+           ========================================= */
+
+        .hero-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .hero-top-row .hero-back {
+            margin-bottom: 0;
+        }
+
+        .kebab-wrapper {
+            position: relative;
+            z-index: 50;
+        }
+
+        .kebab-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0,0,0,0.05);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            transition: background 0.15s ease;
+        }
+        .kebab-btn:active {
+            background: rgba(0,0,0,0.1);
+        }
+        .kebab-btn .material-icons { font-size: 20px; }
+
+        .kebab-dropdown {
+            position: absolute;
+            top: 42px;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+            padding: 6px;
+            min-width: 210px;
+            z-index: 50;
+            opacity: 0;
+            transform: scale(0.95) translateY(-4px);
+            transform-origin: top right;
+            pointer-events: none;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+        }
+        .kebab-dropdown.open {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+        }
+
+        .kebab-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            transition: background 0.1s ease;
+        }
+        .kebab-item:active {
+            background: var(--color-blush);
+        }
+        .kebab-item .material-icons {
+            font-size: 20px;
+            color: var(--color-clay);
+        }
+
+        .kebab-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            display: none;
+        }
+        .kebab-backdrop.open {
+            display: block;
+        }
+
+        /* =========================================
+           VIEW CONTAINERS
+           ========================================= */
+
+        .view-container {
+            position: relative;
+        }
+
+        .view-panel {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .view-panel.hidden {
+            display: none;
+        }
+
+        .view-panel.entering {
+            animation: viewFadeIn 0.35s ease forwards;
+        }
+
+        @keyframes viewFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           TIMELINE (condensed)
+           ========================================= */
+
+        .timeline-section {
+            padding: 0 4px 28px;
+        }
+
+        .timeline-condensed {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .tl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            position: relative;
+        }
+
+        .tl-grid::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: calc(16.67%);
+            right: calc(16.67%);
+            height: 3px;
+            background: var(--color-border-default);
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .tl-grid::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: calc(16.67%);
+            width: calc(28%);
+            height: 3px;
+            background: var(--color-sage);
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .tl-active-dot {
+            position: absolute;
+            top: -1px;
+            left: 40%;
+            z-index: 3;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            border: 3px solid var(--color-bg-primary);
+            box-shadow: 0 0 0 4px rgba(201, 122, 106, 0.12);
+            transform: translateX(-50%);
+        }
+
+        .tl-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tl-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+            border: 2.5px solid var(--color-bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tl-dot.completed {
+            background: var(--color-sage);
+            border-color: var(--color-bg-primary);
+        }
+
+        .tl-dot.completed .material-icons {
+            font-size: 10px;
+            color: white;
+        }
+
+        .tl-dot.active {
+            background: var(--color-sage);
+            border-color: var(--color-bg-primary);
+        }
+
+        .tl-col-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            margin-top: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .tl-col.is-completed .tl-col-label {
+            color: var(--color-sage);
+        }
+
+        .tl-col.is-active .tl-col-label {
+            color: var(--color-sage);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .tl-col-sub {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            margin-top: 2px;
+            text-align: center;
+        }
+
+        .tl-grid-week1 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .tl-grid-week1::before {
+            left: calc(12.5%);
+            right: calc(12.5%);
+            top: 7px;
+        }
+
+        .tl-grid-week1::after {
+            left: calc(12.5%);
+            width: calc(51.8% - 12.5%);
+            top: 7px;
+        }
+
+        .tl-active-week1 {
+            left: 51.8% !important;
+        }
+
+        /* =========================================
+           RECRUITING BANNER
+           ========================================= */
+
+        .recruiting-banner {
+            padding: 0 24px 24px;
+        }
+
+        .recruiting-banner-inner {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: rgba(201, 122, 106, 0.06);
+            border: 1px solid rgba(201, 122, 106, 0.15);
+            border-radius: var(--radius-md);
+        }
+
+        .recruiting-banner-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .recruiting-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            flex-shrink: 0;
+            margin-top: 6px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .recruiting-banner-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recruiting-banner-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 19px;
+        }
+
+        .recruiting-banner-meta {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 19px;
+            margin-top: 2px;
+        }
+
+        .recruiting-banner-countdown {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-clay);
+            white-space: nowrap;
+            padding-left: 12px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* =========================================
+           RIGHT NOW / DON'T MISS CAROUSEL
+           ========================================= */
+
+        .now-section {
+            padding: 0 0 24px;
+        }
+
+        .now-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            padding: 0 24px;
+        }
+
+        .now-carousel {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 24px;
+            scroll-padding-left: 24px;
+        }
+        .now-carousel::-webkit-scrollbar { display: none; }
+        .now-carousel::after {
+            content: '';
+            flex: 0 0 24px;
+        }
+
+        .now-card {
+            background: var(--color-ink);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            color: white;
+            cursor: pointer;
+            flex: 0 0 316px;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .now-card.now-card--share {
+            background: var(--color-plum);
+        }
+        .now-card.now-card--share .now-badge {
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.85);
+        }
+        .now-card.now-card--share .now-idea {
+            background: rgba(255,255,255,0.08);
+        }
+        .now-card.now-card--share .now-idea-icon {
+            background: rgba(255,255,255,0.12);
+        }
+        .now-card.now-card--share .now-idea-icon .material-icons {
+            color: rgba(255,255,255,0.8);
+        }
+        .now-card.now-card--share .now-btn {
+            background: white;
+            color: var(--color-plum);
+        }
+
+        .now-card.now-card--highfive {
+            background: var(--color-sage);
+        }
+        .now-card.now-card--highfive .now-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .now-card.now-card--highfive .now-btn {
+            background: white;
+            color: var(--color-sage);
+        }
+        .now-card.now-card--highfive .now-meta {
+            flex: none;
+            margin-bottom: 0;
+        }
+        .now-card.now-card--highfive .now-actions {
+            margin-top: auto;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .now-card.now-card--highfive .now-actions .now-btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .now-card.now-card--highfive .now-secondary-btn {
+            border: none;
+            color: rgba(255,255,255,0.65);
+            padding: 4px 0;
+            font-size: 13px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Participant view card variants */
+        .now-card.now-card--video {
+            background: var(--color-clay);
+        }
+        .now-card.now-card--video .now-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .now-card.now-card--video .now-btn {
+            background: white;
+            color: var(--color-clay);
+        }
+
+        .now-card.now-card--recruit {
+            background: var(--color-ink);
+        }
+        .now-card.now-card--recruit .now-badge {
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.8);
+        }
+        .now-card.now-card--recruit .now-btn {
+            background: var(--color-clay);
+            color: white;
+        }
+        .now-card.now-card--recruit .now-meta {
+            flex: none;
+            margin-bottom: 8px;
+        }
+
+        .now-card.now-card--product {
+            background: linear-gradient(135deg, #FAF6F4 0%, #F3E6E2 100%);
+            border: 1px solid var(--color-border-default);
+            padding: 16px 20px;
+        }
+        .now-card--product .now-badge {
+            background: rgba(201,122,106,0.12);
+            color: var(--color-clay);
+        }
+        .now-card--product .now-title {
+            color: var(--color-text-primary);
+        }
+        .now-card--product .now-title-brand {
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .now-card--product .now-meta {
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+            flex: none;
+        }
+        .now-card--product .now-btn {
+            background: var(--color-clay);
+            color: white;
+        }
+
+        .now-promo-line {
+            font-size: 13px;
+            color: var(--color-clay);
+            font-weight: 600;
+            margin-top: 8px;
+            margin-bottom: 12px;
+        }
+
+        .now-card.now-card--community {
+            background: var(--color-ink);
+        }
+        .now-card--community .now-badge {
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.8);
+        }
+        .now-card--community .now-btn {
+            background: white;
+            color: var(--color-ink);
+        }
+
+        .recruit-progress-wrap {
+            margin-bottom: 12px;
+        }
+        .recruit-progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+        .recruit-progress-fill {
+            height: 100%;
+            background: var(--color-clay);
+            border-radius: 4px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .recruit-progress-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+        .recruit-progress-label strong {
+            color: white;
+            font-weight: 700;
+        }
+
+        .now-avatar-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex: 1;
+        }
+        .now-avatar-row .now-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-left: -7px;
+            border: 2.5px solid var(--color-sage);
+            flex-shrink: 0;
+        }
+        .now-avatar-row .now-avatar:first-child {
+            margin-left: 0;
+        }
+        .now-avatar-row .now-avatar-more {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            background: rgba(255,255,255,0.25);
+            margin-left: -7px;
+            border: 2.5px solid var(--color-sage);
+            flex-shrink: 0;
+        }
+
+        .now-card.now-card--also {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 0;
+        }
+
+        .now-also-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 20px;
+            cursor: pointer;
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border-default);
+            flex: 1;
+        }
+        .now-also-item:active {
+            background: #F9F7F5;
+        }
+        .now-also-item .also-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .now-also-item .also-icon .material-icons {
+            font-size: 22px;
+        }
+        .also-icon .material-icons { color: white; }
+        .also-icon.plum-bg { background: var(--color-plum); }
+        .also-icon.clay-bg { background: rgba(201,122,106,0.1); }
+        .also-icon.clay-bg .material-icons { color: var(--color-clay); }
+        .now-also-item .also-label {
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.3;
+        }
+        .now-also-item .also-meta {
+            color: var(--color-text-tertiary);
+            font-size: 14px;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+        .now-also-item .also-arrow {
+            color: var(--color-text-tertiary);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .now-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .now-carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+            transition: all 0.2s ease;
+        }
+        .now-carousel-dot.active {
+            width: 18px;
+            border-radius: 3px;
+            background: var(--color-clay);
+        }
+
+        .now-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            background: rgba(201, 122, 106, 0.2);
+            color: var(--color-clay);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .now-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            line-height: 24px;
+            margin-bottom: 6px;
+        }
+
+        .now-meta {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            line-height: 20px;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .now-last {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .now-last .material-icons { font-size: 14px; }
+
+        .now-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 12px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        .now-btn .material-icons { font-size: 18px; }
+
+        .now-idea {
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .now-idea-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .now-idea-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            line-height: 16px;
+        }
+        .now-idea-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(201,122,106,0.15);
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .now-idea-icon .material-icons {
+            font-size: 16px;
+            color: var(--color-clay);
+        }
+        .now-idea-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .now-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .now-secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-full);
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        .now-secondary-btn .material-icons { font-size: 16px; }
+
+        /* =========================================
+           STATS SECTIONS
+           ========================================= */
+
+        .stats-section {
+            padding: 0 24px;
+            margin-bottom: 8px;
+        }
+
+        .stats-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        /* =========================================
+           EARNINGS CARD
+           ========================================= */
+
+        .earnings-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .earnings-card:active { background: #F9F7F5; }
+
+        .earnings-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .earnings-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-clay);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .earnings-sub {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+        }
+
+        .earnings-sub strong {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           GROUPED STAT CARDS
+           ========================================= */
+
+        .grouped-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .grouped-card-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .grouped-stat {
+            flex: 1;
+            padding: 18px 16px;
+            text-align: center;
+        }
+
+        .grouped-stat-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .grouped-stat-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .grouped-stat-bar {
+            width: 80%;
+            height: 6px;
+            background: var(--color-border-default);
+            border-radius: 3px;
+            margin: 0;
+            overflow: hidden;
+        }
+        .grouped-stat-bar-fill {
+            height: 100%;
+            background: var(--color-clay);
+            border-radius: 3px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-pills {
+            display: flex;
+            gap: 4px;
+            width: 80%;
+            margin: 2px 0 0;
+        }
+        .day-pill {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--color-border-default);
+        }
+        .day-pill.filled {
+            background: var(--color-clay);
+        }
+
+        .grouped-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-border-default);
+            flex-shrink: 0;
+        }
+
+        .grouped-card-footer {
+            border-top: 1px solid var(--color-border-default);
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+        .grouped-footer-text {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+
+        .grouped-footer-text strong {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .grouped-card-divider {
+            height: 1px;
+            background: var(--color-border-default);
+            margin: 0 16px;
+        }
+
+        /* =========================================
+           COMMUNITY CARD
+           ========================================= */
+
+        .community-card {
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .community-card:active { background: #F9F7F5; }
+
+        .community-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .community-card-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .community-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .community-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 0;
+        }
+
+        .community-emoji {
+            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #F5F5F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-tertiary);
+        }
+
+        .community-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+        }
+
+        .community-label {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Community icons for participant view */
+        .community-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .community-item-icon .material-icons { font-size: 18px; }
+        .community-item-icon.clay-tint {
+            background: rgba(201, 122, 106, 0.1);
+            color: var(--color-clay);
+        }
+
+        .community-item-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .community-item-label {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* =========================================
+           PARTICIPANT VIEW: PROGRESS CARD
+           ========================================= */
+
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px 0;
+        }
+        .progress-header-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+        .progress-header-link {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-clay);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .progress-header-link .material-icons { font-size: 14px; }
+
+        .progress-weeks {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px 14px;
+        }
+        .progress-week {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .progress-week-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+        .progress-week-dot.partial {
+            border: none;
+            position: relative;
+            background: conic-gradient(
+                from 0deg,
+                var(--color-clay) 0deg 120deg,
+                #E8DFD8 120deg 360deg
+            );
+        }
+        .progress-week-dot.partial::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 50%;
+            background: white;
+        }
+        .progress-week-dot.partial::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+        }
+        .progress-week-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+        }
+        .progress-week.is-active .progress-week-label {
+            color: var(--color-clay);
+            font-weight: 700;
+        }
+
+        /* =========================================
+           PARTICIPANT VIEW: ESSENTIALS
+           ========================================= */
+
+        .playbook-creator-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+        }
+        .playbook-creator-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-sand);
+            border: 2px solid var(--color-clay);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-clay);
+        }
+        .playbook-creator-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .playbook-creator-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .playbook-creator-quote {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            line-height: 1.45;
+            margin-top: 2px;
+        }
+
+        .playbook-product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+        }
+        .playbook-product-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--color-sand);
+            color: var(--color-clay);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .playbook-product-info { flex: 1; min-width: 0; }
+        .playbook-product-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .playbook-product-brand {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+        }
+        .promo-inline {
+            color: var(--color-clay);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           BOTTOM SPACER
+           ========================================= */
+
+        .bottom-spacer {
+            height: 40px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="label">Creator Collab Dashboard — View Toggle</div>
+    <div class="sublabel">Creators who participate in their own challenge can switch between admin and participant views. Three-dot menu in the hero lets you swap views.</div>
+
+    <div class="phone-frame">
+    <div class="phone-scroll" id="phoneScroll">
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-bar-icons">
+                <span class="material-icons">signal_cellular_alt</span>
+                <span class="material-icons">wifi</span>
+                <span class="material-icons">battery_full</span>
+            </div>
+        </div>
+
+        <!-- Hero (shared) -->
+        <div class="hero-section">
+            <div class="hero-gradient"></div>
+            <div class="hero-content">
+                <div class="hero-top-row">
+                    <button class="hero-back">
+                        <span class="material-icons">arrow_back_ios</span>
+                        My Collabs
+                    </button>
+                    <div class="kebab-wrapper">
+                        <button class="kebab-btn" id="kebabBtn">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+                        <div class="kebab-dropdown" id="kebabMenu">
+                            <button class="kebab-item" id="kebabItem">
+                                <span class="material-icons" id="kebabIcon">directions_run</span>
+                                <span id="kebabLabel">Switch to My Progress</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-collab-name">Mindful Miles Reset</div>
+                <div class="hero-collab-dates">Jan 5 – Feb 15 · 6 weeks</div>
+            </div>
+        </div>
+        <div class="kebab-backdrop" id="kebabBackdrop"></div>
+
+        <!-- View Container -->
+        <div class="view-container">
+
+            <!-- =============================================
+                 CREATOR VIEW
+                 ============================================= -->
+            <div class="view-panel" id="creatorView">
+
+                <!-- Timeline (condensed) — Week 1 -->
+                <div class="timeline-section">
+                    <div class="timeline-condensed">
+                        <div class="tl-grid tl-grid-week1">
+                            <div class="tl-active-dot tl-active-week1"></div>
+                            <div class="tl-col is-completed">
+                                <div class="tl-dot completed">
+                                    <span class="material-icons">check</span>
+                                </div>
+                                <div class="tl-col-label">Setup</div>
+                            </div>
+                            <div class="tl-col is-active">
+                                <div class="tl-dot active"></div>
+                                <div class="tl-col-label">Week 1</div>
+                                <div class="tl-col-sub">Day 4 of 7</div>
+                            </div>
+                            <div class="tl-col">
+                                <div class="tl-dot"></div>
+                                <div class="tl-col-label">Weeks 2–6</div>
+                            </div>
+                            <div class="tl-col">
+                                <div class="tl-dot"></div>
+                                <div class="tl-col-label">Wrap-up</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recruiting Banner -->
+                <div class="recruiting-banner">
+                    <div class="recruiting-banner-inner">
+                        <div class="recruiting-banner-left">
+                            <div class="recruiting-pulse"></div>
+                            <div class="recruiting-banner-text">
+                                <div class="recruiting-banner-title">Actively recruiting</div>
+                                <div class="recruiting-banner-meta">49 more to unlock next +$50</div>
+                            </div>
+                        </div>
+                        <div class="recruiting-banner-countdown">3 days left</div>
+                    </div>
+                </div>
+
+                <!-- RIGHT NOW: Carousel -->
+                <div class="now-section">
+                    <div class="now-label">RIGHT NOW</div>
+                    <div class="now-carousel" id="creatorCarousel">
+                        <!-- Card 1: Welcome -->
+                        <div class="now-card">
+                            <div class="now-badge">
+                                <span class="material-icons" style="font-size: 14px;">group_add</span>
+                                +28 this week
+                            </div>
+                            <div class="now-title">It's not too late to join</div>
+                            <div class="now-meta">Remind your audience the door is still open. Week 1 drives more sign-ups than any other week.</div>
+                            <button class="now-btn">
+                                Share shout-out
+                                <span class="material-icons">arrow_forward</span>
+                            </button>
+                            <div class="now-last">
+                                <span class="material-icons">history</span>
+                                Last shout-out: yesterday · welcomed 15 people
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Invite Link -->
+                        <div class="now-card now-card--share">
+                            <div class="now-badge">
+                                <span class="material-icons" style="font-size: 14px;">trending_up</span>
+                                49 to next tier
+                            </div>
+                            <div class="now-title">Share your invite link</div>
+                            <div class="now-meta">Every share drives sign-ups and moves you closer to the $450 tier</div>
+                            <div class="now-idea">
+                                <div class="now-idea-icon">
+                                    <span class="material-icons">auto_awesome</span>
+                                </div>
+                                <div class="now-idea-text">
+                                    <div class="now-idea-name">Countdown Urgency</div>
+                                    <div class="now-idea-desc">Remind followers the window is closing</div>
+                                </div>
+                            </div>
+                            <div class="now-actions">
+                                <button class="now-secondary-btn">
+                                    More ideas
+                                    <span class="material-icons">arrow_forward</span>
+                                </button>
+                                <button class="now-btn">
+                                    Post now
+                                    <span class="material-icons">ios_share</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: High Five -->
+                        <div class="now-card now-card--highfive">
+                            <div class="now-badge">
+                                <span class="material-icons" style="font-size: 14px;">volunteer_activism</span>
+                                8 waiting
+                            </div>
+                            <div class="now-title">Share some love</div>
+                            <div class="now-meta">These participants are waiting for a high five — a quick tap goes a long way</div>
+                            <div class="now-avatar-row">
+                                <div class="now-avatar" style="background: #E8C4B8;">ER</div>
+                                <div class="now-avatar" style="background: #E0D5C9;">MW</div>
+                                <div class="now-avatar" style="background: #B8CCC7;">AP</div>
+                                <div class="now-avatar" style="background: #D4C9BD;">LC</div>
+                                <div class="now-avatar" style="background: #C4B5C9;">DR</div>
+                                <div class="now-avatar" style="background: #DEBAAE;">MT</div>
+                                <div class="now-avatar-more">+2</div>
+                            </div>
+                            <div class="now-actions">
+                                <button class="now-btn">
+                                    Send love to all
+                                    <span class="material-icons">volunteer_activism</span>
+                                </button>
+                                <button class="now-secondary-btn">
+                                    See who's waiting →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Also -->
+                        <div class="now-card now-card--also">
+                            <div class="now-also-item">
+                                <div class="also-icon plum-bg">
+                                    <span class="material-icons">forum</span>
+                                </div>
+                                <div class="also-text">
+                                    <div class="also-label">Reply to community comments</div>
+                                    <div class="also-meta">6 new comments since yesterday</div>
+                                </div>
+                                <span class="material-icons also-arrow">chevron_right</span>
+                            </div>
+                            <div class="now-also-item">
+                                <div class="also-icon clay-bg">
+                                    <span class="material-icons">group_add</span>
+                                </div>
+                                <div class="also-text">
+                                    <div class="also-label">Invite other creators to Motiv</div>
+                                    <div class="also-meta">Earn rewards when they launch a collab</div>
+                                </div>
+                                <span class="material-icons also-arrow">chevron_right</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="now-carousel-dots" id="creatorDots">
+                        <div class="now-carousel-dot active"></div>
+                        <div class="now-carousel-dot"></div>
+                        <div class="now-carousel-dot"></div>
+                        <div class="now-carousel-dot"></div>
+                    </div>
+                </div>
+
+                <!-- Earnings -->
+                <div class="stats-section">
+                    <div class="stats-section-title">Earnings</div>
+                    <div class="earnings-card">
+                        <div class="earnings-content">
+                            <div>
+                                <div class="earnings-value">$442</div>
+                                <div class="earnings-sub">$400 recruitment · $42 content</div>
+                            </div>
+                            <span class="material-icons" style="font-size: 18px; color: var(--color-text-tertiary);">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Your Collab -->
+                <div class="stats-section">
+                    <div class="stats-section-title">Your collab</div>
+
+                    <!-- Participants + Completion rate -->
+                    <div class="grouped-card">
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">951</div>
+                                <div class="grouped-stat-label">Active participants</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">100%</div>
+                                <div class="grouped-stat-label">Completion rate</div>
+                            </div>
+                        </div>
+                        <div class="grouped-card-footer">
+                            <span class="grouped-footer-text"><strong>14</strong> joined today · <strong>+38</strong> this week</span>
+                        </div>
+                    </div>
+
+                    <!-- Total output + Total workouts -->
+                    <div class="grouped-card">
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">218K</div>
+                                <div class="grouped-stat-label">Total output (kJ)</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">2,158</div>
+                                <div class="grouped-stat-label">Total workouts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Community -->
+                    <div class="community-card">
+                        <div class="community-card-header">
+                            <span class="community-card-label">Community</span>
+                            <span class="material-icons" style="font-size: 18px; color: var(--color-text-tertiary);">chevron_right</span>
+                        </div>
+                        <div class="community-row">
+                            <div class="community-item">
+                                <span class="community-emoji"><span class="material-icons" style="font-size: 18px; color: var(--color-clay);">volunteer_activism</span></span>
+                                <span class="community-value">916</span>
+                                <span class="community-label">high fives</span>
+                            </div>
+                            <div class="community-item">
+                                <span class="community-emoji"><span class="material-icons" style="font-size: 18px; color: var(--color-sage);">chat_bubble_outline</span></span>
+                                <span class="community-value">32</span>
+                                <span class="community-label">comments</span>
+                            </div>
+                            <div class="community-item">
+                                <span class="community-emoji"><span class="material-icons" style="font-size: 18px; color: var(--color-plum);">campaign</span></span>
+                                <span class="community-value">18</span>
+                                <span class="community-label">shout-outs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-spacer"></div>
+
+            </div><!-- end creatorView -->
+
+            <!-- =============================================
+                 MY PROGRESS VIEW (participant)
+                 ============================================= -->
+            <div class="view-panel hidden" id="progressView">
+
+                <!-- This Week -->
+                <div class="stats-section" style="margin-top: 4px;">
+                    <div class="stats-section-title">This week</div>
+
+                    <div class="grouped-card" style="cursor: pointer;">
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat" style="text-align: left;">
+                                <div class="grouped-stat-value">
+                                    <span style="color: var(--color-clay);">2</span><span style="color: var(--color-text-tertiary); font-size: 18px;"> /6 days</span>
+                                </div>
+                                <div class="grouped-stat-label">4 days to go</div>
+                                <div class="day-pills">
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                </div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat" style="text-align: left;">
+                                <div class="grouped-stat-value">
+                                    <span style="color: var(--color-clay);">800</span><span style="color: var(--color-text-tertiary); font-size: 14px;"> /2,100 kJ</span>
+                                </div>
+                                <div class="grouped-stat-label">1,300 kJ left</div>
+                                <div class="grouped-stat-bar">
+                                    <div class="grouped-stat-bar-fill" style="width: 38%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="progress-header">
+                            <span class="progress-header-title">Your progress</span>
+                            <span class="progress-header-link">More <span class="material-icons">chevron_right</span></span>
+                        </div>
+                        <div class="progress-weeks">
+                            <div class="progress-week is-active">
+                                <div class="progress-week-dot partial"></div>
+                                <span class="progress-week-label">Wk 1</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 2</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 3</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 4</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 5</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 6</span>
+                            </div>
+                        </div>
+                        <div class="grouped-card-footer">
+                            <div class="grouped-footer-text">
+                                <span class="material-icons" style="font-size: 12px; vertical-align: middle; margin-right: 3px;">directions_bike</span>
+                                <span style="font-size: 11px;">Last ride: Today, 28 min · 310 kJ</span>
+                                <span style="font-size: 11px; color: var(--color-clay); font-weight: 600; margin-left: 6px; cursor: pointer;">Sync</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DON'T MISS Carousel -->
+                <div class="now-section">
+                    <div class="now-label">DON'T MISS</div>
+                    <div class="now-carousel" id="progressCarousel">
+                        <!-- Card 1: Recruit Goal -->
+                        <div class="now-card now-card--recruit">
+                            <div class="now-badge">
+                                <span style="font-size: 14px;">💰</span>
+                                Unlock MVP bonuses
+                            </div>
+                            <div class="now-title">It's recruitment week!</div>
+                            <div class="now-meta">Hit 500 participants and the collab's two MVPs will earn a cash bonus.</div>
+                            <div class="recruit-progress-wrap">
+                                <div class="recruit-progress-bar">
+                                    <div class="recruit-progress-fill" id="recruitFill" style="width: 0%;"></div>
+                                </div>
+                                <div class="recruit-progress-label"><strong id="recruitCount">0</strong> / 500 participants</div>
+                            </div>
+                            <div class="now-actions" style="margin-top: auto;">
+                                <button class="now-btn">
+                                    Invite friends <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Watch Video -->
+                        <div class="now-card now-card--video">
+                            <div class="now-badge">
+                                <span class="material-icons">videocam</span>
+                                New this week
+                            </div>
+                            <div class="now-title">Watch this week's video</div>
+                            <div class="now-meta">Week 1 kickoff — tips, shout-outs, and a pep talk.</div>
+                            <div class="now-actions" style="margin-top: auto;">
+                                <button class="now-btn">
+                                    Watch now <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div class="now-last">
+                                <span class="material-icons">schedule</span>
+                                Posted 2 hours ago
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Product — Self-Tanning Drops -->
+                        <div class="now-card now-card--product">
+                            <div class="now-badge">
+                                <span class="material-icons">storefront</span>
+                                Supported my journey
+                            </div>
+                            <div class="now-title">Self-Tanning Drops <span class="now-title-brand">by Bellatan</span></div>
+                            <div class="now-meta">The everyday glow drops — no streaks, no fuss.</div>
+                            <div class="now-promo-line">15% off · use code <strong>ELLIE15</strong> at checkout</div>
+                            <div class="now-actions" style="margin-top: auto;">
+                                <button class="now-btn">
+                                    Shop now <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div class="now-last" style="color: var(--color-text-tertiary); border-top-color: var(--color-border-default);">
+                                <span class="material-icons">favorite</span>
+                                Loved by the creator
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Product — Protein Powder -->
+                        <div class="now-card now-card--product">
+                            <div class="now-badge">
+                                <span class="material-icons">storefront</span>
+                                Supported my journey
+                            </div>
+                            <div class="now-title">Protein Powder <span class="now-title-brand">by Vega</span></div>
+                            <div class="now-meta">Post-ride shake — plant-based, easy to mix, and actually tastes good.</div>
+                            <div class="now-actions" style="margin-top: auto;">
+                                <button class="now-btn">
+                                    Learn more <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div class="now-last" style="color: var(--color-text-tertiary); border-top-color: var(--color-border-default);">
+                                <span class="material-icons">favorite</span>
+                                Loved by the creator
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Community -->
+                        <div class="now-card now-card--community">
+                            <div class="now-badge">
+                                <span class="material-icons">forum</span>
+                                4 new posts
+                            </div>
+                            <div class="now-title">Join the conversation</div>
+                            <div class="now-meta">Participants are sharing updates, tips, and encouragement. Jump in!</div>
+                            <div class="now-actions" style="margin-top: auto;">
+                                <button class="now-btn">
+                                    View feed <span class="material-icons">arrow_forward</span>
+                                </button>
+                            </div>
+                            <div class="now-last">
+                                <span class="material-icons">groups</span>
+                                342 participants active this week
+                            </div>
+                        </div>
+                    </div>
+                    <div class="now-carousel-dots" id="progressDots">
+                        <div class="now-carousel-dot active"></div>
+                        <div class="now-carousel-dot"></div>
+                        <div class="now-carousel-dot"></div>
+                        <div class="now-carousel-dot"></div>
+                        <div class="now-carousel-dot"></div>
+                    </div>
+                </div>
+
+                <!-- Your Perks -->
+                <div class="stats-section">
+                    <div class="stats-section-title">Your perks</div>
+                    <div class="earnings-card">
+                        <div class="earnings-content">
+                            <div>
+                                <div class="earnings-value">$83.67</div>
+                                <div class="earnings-sub">Max for two collab MVPs chosen by creator</div>
+                            </div>
+                            <span class="material-icons" style="color: var(--color-text-tertiary);">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-section">
+                    <div class="stats-section-title">Stats</div>
+                    <div class="grouped-card">
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">$13,680</div>
+                                <div class="grouped-stat-label">Collab pool</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">342<span style="color: var(--color-text-tertiary); font-size: 14px;">/400</span></div>
+                                <div class="grouped-stat-label">Active participants</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="community-card">
+                        <div class="community-card-header">
+                            <span class="community-card-label">Community feed</span>
+                            <span class="material-icons" style="font-size: 18px; color: var(--color-text-tertiary);">chevron_right</span>
+                        </div>
+                        <div class="community-row">
+                            <div class="community-item">
+                                <div class="community-item-icon clay-tint">
+                                    <span class="material-icons">volunteer_activism</span>
+                                </div>
+                                <div class="community-item-value">1,211</div>
+                                <div class="community-item-label">high fives</div>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-item-icon clay-tint">
+                                    <span class="material-icons">chat_bubble_outline</span>
+                                </div>
+                                <div class="community-item-value">301</div>
+                                <div class="community-item-label">comments</div>
+                            </div>
+                            <div class="community-item">
+                                <div class="community-item-icon clay-tint">
+                                    <span class="material-icons">campaign</span>
+                                </div>
+                                <div class="community-item-value">88</div>
+                                <div class="community-item-label">shout-outs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Essentials -->
+                <div class="stats-section">
+                    <div class="stats-section-title">Your essentials</div>
+
+                    <div class="grouped-card">
+                        <div class="playbook-creator-row">
+                            <div class="playbook-creator-avatar">Y</div>
+                            <div class="playbook-creator-info">
+                                <div class="playbook-creator-name">Why these?</div>
+                                <div class="playbook-creator-quote">"Progress comes from small, repeatable choices. These are the products and habits that supported my goals."</div>
+                            </div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value" style="font-size: 20px;">6 am</div>
+                                <div class="grouped-stat-label">When my day starts</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value" style="font-size: 20px;">100g</div>
+                                <div class="grouped-stat-label">Daily protein goal</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value" style="font-size: 20px;">60oz</div>
+                                <div class="grouped-stat-label">Daily water goal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grouped-card">
+                        <div class="playbook-product">
+                            <div class="playbook-product-info">
+                                <div class="playbook-product-name">Self-Tanning Drops</div>
+                                <div class="playbook-product-brand"><span class="playbook-product-tag">Skincare</span> Bellatan <span class="promo-inline"> · 15% off · ELLIE15</span></div>
+                            </div>
+                            <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="playbook-product">
+                            <div class="playbook-product-info">
+                                <div class="playbook-product-name">Protein Powder</div>
+                                <div class="playbook-product-brand"><span class="playbook-product-tag">Nutrition</span> Vega</div>
+                            </div>
+                            <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="playbook-product">
+                            <div class="playbook-product-info">
+                                <div class="playbook-product-name">Women's Multi-Vitamin</div>
+                                <div class="playbook-product-brand"><span class="playbook-product-tag">Wellness</span> Hiya</div>
+                            </div>
+                            <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-spacer"></div>
+
+            </div><!-- end progressView -->
+
+        </div><!-- end view-container -->
+
+    </div><!-- end phone-scroll -->
+    </div><!-- end phone-frame -->
+
+    <script>
+        let currentView = 'creator';
+
+        function closeMenu() {
+            document.getElementById('kebabMenu').classList.remove('open');
+            document.getElementById('kebabBackdrop').classList.remove('open');
+        }
+
+        // Kebab button toggles menu
+        document.getElementById('kebabBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('kebabMenu');
+            const backdrop = document.getElementById('kebabBackdrop');
+            if (menu.classList.contains('open')) {
+                closeMenu();
+            } else {
+                menu.classList.add('open');
+                backdrop.classList.add('open');
+            }
+        });
+
+        // Backdrop closes menu
+        document.getElementById('kebabBackdrop').addEventListener('click', closeMenu);
+
+        // Menu item switches view
+        document.getElementById('kebabItem').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeMenu();
+
+            const creator = document.getElementById('creatorView');
+            const progress = document.getElementById('progressView');
+            const label = document.getElementById('kebabLabel');
+            const icon = document.getElementById('kebabIcon');
+            const scroll = document.getElementById('phoneScroll');
+
+            if (currentView === 'creator') {
+                creator.classList.add('hidden');
+                creator.classList.remove('entering');
+                progress.classList.remove('hidden');
+                progress.classList.add('entering');
+                label.textContent = 'Switch to Creator view';
+                icon.textContent = 'dashboard';
+                currentView = 'progress';
+
+                // Animate recruit progress bar
+                setTimeout(function() {
+                    var fill = document.getElementById('recruitFill');
+                    var count = document.getElementById('recruitCount');
+                    if (fill) fill.style.width = '68.4%';
+                    if (count) count.textContent = '342';
+                }, 400);
+            } else {
+                progress.classList.add('hidden');
+                progress.classList.remove('entering');
+                creator.classList.remove('hidden');
+                creator.classList.add('entering');
+                label.textContent = 'Switch to My Progress';
+                icon.textContent = 'directions_run';
+                currentView = 'creator';
+            }
+
+            // Scroll to top of content
+            var hero = document.querySelector('.hero-section');
+            if (hero) {
+                var heroBottom = hero.offsetTop + hero.offsetHeight;
+                if (scroll.scrollTop > heroBottom) {
+                    scroll.scrollTo({ top: heroBottom - 10, behavior: 'smooth' });
+                }
+            }
+        });
+
+        // ── Carousel dot tracking ──
+        function setupCarouselDots(carouselId, dotsId) {
+            const carousel = document.getElementById(carouselId);
+            const dotsContainer = document.getElementById(dotsId);
+            if (!carousel || !dotsContainer) return;
+
+            const dots = dotsContainer.querySelectorAll('.now-carousel-dot');
+
+            carousel.addEventListener('scroll', () => {
+                const scrollLeft = carousel.scrollLeft;
+                const cardWidth = 316 + 12;
+                const index = Math.round(scrollLeft / cardWidth);
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            });
+        }
+
+        setupCarouselDots('creatorCarousel', 'creatorDots');
+        setupCarouselDots('progressCarousel', 'progressDots');
+    </script>
+
+</body>
+</html>

@@ -1316,10 +1316,16 @@
             overflow: hidden;
         }
 
-        .welcome-emoji-row {
-            font-size: 32px;
-            margin-bottom: 16px;
-            letter-spacing: 8px;
+        .welcome-hero-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-pill);
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face');
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 16px;
+            border: 3px solid rgba(255,255,255,0.8);
+            box-shadow: 0 4px 16px rgba(123,94,167,0.2);
             position: relative;
             z-index: 1;
         }
@@ -1895,16 +1901,15 @@
                 <!-- ===================== STEP 4: WELCOME ===================== -->
                 <div id="step4-welcome" class="welcome-step">
                     <div class="welcome-hero">
-                        <div class="welcome-emoji-row">🎉 🚴‍♀️ 💪</div>
+                        <div class="welcome-hero-avatar"></div>
                         <div class="welcome-title">You're in!</div>
                         <div class="welcome-subtitle">Your spot in Dog Lovers Who Cycle is confirmed. The collab starts Jan 5.</div>
                     </div>
                     <div class="welcome-body">
                         <div class="welcome-creator-msg">
-                            <div class="welcome-quote-text">"So excited to have you! Get ready for 6 weeks of riding, growing, and earning together. Let's do this! 🚴‍♀️"</div>
+                            <div class="welcome-quote-text">"So excited to have you! Get ready for 6 weeks of riding, growing, and earning together. Let's do this!"</div>
                             <div class="welcome-quote-attribution">
-                                <div class="welcome-quote-avatar"></div>
-                                <div class="welcome-quote-name">— Ellie Snackson</div>
+                                <div class="welcome-quote-name">— Ellie</div>
                             </div>
                         </div>
                         <div class="welcome-detail">
