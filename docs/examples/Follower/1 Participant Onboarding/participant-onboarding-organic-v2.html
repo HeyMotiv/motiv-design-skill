@@ -559,8 +559,10 @@
     <!-- SCREEN 1: CREATOR PICKER -->
     <div class="screen" id="screen1">
         <div style="flex:1; display:flex; flex-direction:column; padding:56px 20px 0; min-height:0;">
-            <div class="picker-header" style="position: relative;">
-                <button onclick="chooseExploring(); setTimeout(function(){ goTo(2); }, 50);" style="position: absolute; top: 0; right: 0; background: none; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 4px 0;">Log in</button>
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
+                <button onclick="chooseExploring(); setTimeout(function(){ goTo(2); }, 50);" style="background: none; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 4px 0;">Log in</button>
+            </div>
+            <div class="picker-header">
                 <div class="picker-title">Welcome to Motiv</div>
                 <div class="picker-subtitle">Most people find us through a creator they follow. Who brought you here?</div>
             </div>
