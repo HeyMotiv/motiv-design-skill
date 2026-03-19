@@ -30,6 +30,12 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-collab-creation.js"],
       "port": 8770
+    },
+    {
+      "name": "creator-home",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-creator-home.js"],
+      "port": 8771
     }
   ]
 }

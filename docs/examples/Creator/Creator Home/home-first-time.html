@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home — First Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+
+        :root {
+            /* Primary */
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+
+            /* Secondary — Orange */
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+
+            /* Secondary — Teal */
+            --teal-0: #ECF2F2;
+            --teal-30: #D0DEDF;
+            --teal-60: #9DD3C4;
+            --teal-100: #547577;
+
+            /* Secondary — Purple */
+            --purple-0: #FDF2FF;
+            --purple-30: #A889AD;
+            --purple-60: #775C7C;
+            --purple-100: #6B4E71;
+
+            /* Surface */
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+            --surface-error: #CB3E3E;
+
+            /* Complementary — Black */
+            --black-60: #1A1A1A;
+            --black-100: #111111;
+
+            /* Semantic aliases */
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-bg-primary: var(--surface-bg);
+            --color-bg-secondary: var(--orange-30);
+            --color-border-default: var(--surface-border);
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 16px;
+            --radius-full: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+
+            --motion-fast: 150ms;
+            --motion-normal: 250ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .sublabel {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 32px;
+            max-width: 440px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           PHONE FRAME
+           ========================================= */
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0px,
+                #F7E6DE 80px,
+                #FAF0EB 160px,
+                var(--surface-bg) 300px
+            );
+            background-attachment: local;
+        }
+        .phone-scroll::-webkit-scrollbar { display: none; }
+
+        /* =========================================
+           STATUS BAR
+           ========================================= */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* =========================================
+           HEADER
+           ========================================= */
+
+        .home-header {
+            position: relative;
+        }
+
+        .home-header-content {
+            position: relative;
+            z-index: 1;
+            padding: 4px 24px 16px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .greeting {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 34px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .icon-btn:hover { background: white; }
+        .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
+
+        .greeting-sub {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 22px;
+        }
+
+        .earnings-teaser {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--primary-100);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .earnings-teaser:hover { transform: translateY(-1px); opacity: 0.95; }
+
+        .earnings-teaser-amount {
+            font-family: var(--font-headline);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--orange-100);
+            line-height: 1;
+        }
+
+        .earnings-teaser-text {
+            flex: 1;
+            font-size: 12px;
+            color: rgba(255,255,255,0.75);
+            line-height: 15px;
+        }
+
+        .earnings-teaser-arrow {
+            color: var(--orange-60);
+        }
+        .earnings-teaser-arrow .material-icons { font-size: 18px; }
+
+        /* =========================================
+           CONTENT
+           ========================================= */
+
+        .home-content {
+            padding: 0 16px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-tertiary);
+            padding: 4px 0;
+        }
+
+        /* =========================================
+           DRAFT COLLAB CAROUSEL
+           ========================================= */
+
+        .carousel-section {
+            margin: 0 -16px;
+        }
+
+        .carousel-header {
+            padding: 0 24px;
+            margin-bottom: 12px;
+        }
+
+        .carousel-title {
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .carousel-subtitle {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            padding: 0 16px 8px;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .draft-card:first-child {
+            margin-left: 0;
+            scroll-margin-left: 16px;
+        }
+
+        .draft-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: transform var(--motion-normal) var(--easing-smooth);
+            position: relative;
+        }
+        .draft-card:hover { transform: translateY(-2px); }
+
+        /* Card theme colors */
+        .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
+        .draft-card.theme-orange { --card-color: 234,120,50; --card-accent: #EA7832; }
+        .draft-card.theme-red { --card-color: 180,60,60; --card-accent: #B43C3C; }
+
+        .draft-card-hero {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .draft-card-photo {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .draft-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(var(--card-color), 0) 0%,
+                rgba(var(--card-color), 0.10) 30%,
+                rgba(var(--card-color), 0.45) 50%,
+                rgba(var(--card-color), 0.70) 65%,
+                rgba(var(--card-color), 0.82) 80%,
+                rgba(var(--card-color), 0.88) 100%
+            );
+            z-index: 1;
+        }
+
+        .draft-card-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 16px;
+            width: 100%;
+        }
+
+        .draft-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-full);
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .draft-card-badge .material-icons { font-size: 13px; }
+
+        .draft-card-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.25), 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        .draft-card-dates {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.75);
+            margin-top: 4px;
+        }
+
+        .draft-card-stats {
+            background: var(--card-accent);
+            padding: 4px 14px 14px;
+        }
+
+        .draft-card-grouped {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .draft-card-pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+        }
+
+        .draft-card-pool-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--card-accent);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .draft-card-pool-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .draft-card-hold {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.04);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--card-accent);
+        }
+        .draft-card-hold .material-icons { font-size: 14px; }
+
+        .draft-card-divider {
+            height: 1px;
+            background: var(--color-border-default);
+            margin: 0 14px;
+        }
+
+        .draft-card-meta-row {
+            display: flex;
+            padding: 10px 14px;
+        }
+
+        .draft-card-stat {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .draft-card-stat + .draft-card-stat::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 1px;
+            background: var(--color-border-default);
+        }
+
+        .draft-card-stat-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .draft-card-stat-label {
+            font-size: 10px;
+            color: var(--color-text-secondary);
+        }
+
+        .draft-card-cta-row {
+            padding: 0 14px 12px;
+        }
+
+        .draft-card-cta {
+            width: 100%;
+            background: var(--card-accent);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .draft-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .draft-card-cta:active { transform: scale(0.97); }
+        .draft-card-cta .material-icons { font-size: 16px; }
+
+        /* Carousel dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0 4px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+            transition: all var(--motion-fast);
+        }
+        .carousel-dot.active {
+            width: 18px;
+            border-radius: 3px;
+            background: var(--orange-100);
+        }
+
+        /* Alternative actions below carousel */
+        .carousel-alt-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 4px 16px 0;
+        }
+
+        .alt-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--orange-100);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 0;
+        }
+        .alt-action:hover { text-decoration: underline; }
+        .alt-action .material-icons { font-size: 16px; }
+
+        .alt-action-divider {
+            width: 1px;
+            height: 16px;
+            background: var(--color-border-default);
+            align-self: center;
+        }
+
+        /* =========================================
+           INSTAGRAM VERIFICATION CARD
+           ========================================= */
+
+        .verify-card {
+            background: white;
+            border: 1.5px solid #E4405F;
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .verify-card:hover {
+            background: #FFF5F7;
+            transform: translateY(-1px);
+        }
+
+        .verify-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .verify-icon .material-icons { font-size: 20px; color: white; }
+
+        .verify-info {
+            flex: 1;
+        }
+
+        .verify-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 1px;
+        }
+
+        .verify-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .verify-cta {
+            background: #E4405F;
+            color: white;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .verify-cta:hover { background: #D62B4F; }
+
+        /* =========================================
+           EARNINGS POTENTIAL CARD
+           ========================================= */
+
+        .potential-card {
+            background: var(--primary-100);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--motion-normal) var(--easing-smooth);
+        }
+        .potential-card:hover { transform: translateY(-1px); }
+
+        .potential-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 122, 106, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .potential-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .potential-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-60);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .potential-label .material-icons { font-size: 16px; }
+
+        .potential-tap-hint {
+            font-size: 11px;
+            color: var(--orange-60);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .potential-tap-hint .material-icons { font-size: 14px; }
+
+        .potential-amount {
+            font-family: var(--font-headline);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--orange-100);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .potential-amount-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 14px;
+        }
+
+        .potential-breakdown {
+            display: flex;
+            gap: 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px;
+        }
+
+        .potential-stat {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .potential-stat + .potential-stat::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .potential-stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .potential-stat-label {
+            font-size: 10px;
+            color: var(--orange-60);
+        }
+
+        .potential-note {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* =========================================
+           INVITE CREATORS NUDGE
+           ========================================= */
+
+        .nudge-card {
+            background: linear-gradient(135deg, var(--orange-30) 0%, #F7ECE8 100%);
+            border: 1px solid var(--orange-60);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nudge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: rgba(201, 122, 106,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .nudge-icon .material-icons { font-size: 18px; color: var(--orange-100); }
+
+        .nudge-body {
+            flex: 1;
+        }
+
+        .nudge-text {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 18px;
+        }
+        .nudge-text strong { font-weight: 600; }
+
+        .nudge-cta {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 4px;
+        }
+        .nudge-cta:hover { text-decoration: underline; }
+
+        /* =========================================
+           COMMUNITY LINK
+           ========================================= */
+
+        .community-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .community-link:hover {
+            background: var(--orange-30);
+            transform: translateY(-1px);
+        }
+
+        .community-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: rgba(107,78,113,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .community-icon .material-icons { font-size: 18px; color: var(--purple-100); }
+
+        .community-info {
+            flex: 1;
+        }
+
+        .community-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .community-subtitle {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+
+        .community-arrow .material-icons {
+            font-size: 18px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* =========================================
+           TAB BAR
+           ========================================= */
+
+        .tab-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 24px;
+            right: 24px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.08),
+                0 1px 4px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-full);
+            display: flex;
+            padding: 4px 8px;
+            z-index: 20;
+            gap: 0;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            transition: all var(--motion-fast) var(--easing-smooth);
+            position: relative;
+        }
+        .tab-item:hover { background: rgba(255, 255, 255, 0.5); }
+
+        .tab-item .material-icons {
+            font-size: 22px;
+            color: var(--primary-60);
+            transition: color var(--motion-fast);
+        }
+
+        .tab-item-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--primary-60);
+            transition: color var(--motion-fast);
+        }
+
+        .tab-item.active {
+            background: rgba(201, 122, 106, 0.12);
+        }
+        .tab-item.active .material-icons { color: var(--orange-100); }
+        .tab-item.active .tab-item-label { color: var(--orange-100); }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 5px;
+            background: var(--color-text-primary);
+            border-radius: 3px;
+            opacity: 0.2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="label">Creator Home — First Time</div>
+    <div class="sublabel">Post-onboarding, 3 AI-generated collab drafts ready</div>
+
+    <div class="phone-frame">
+
+        <div class="phone-scroll">
+
+            <!-- Header -->
+            <div class="home-header">
+                <div class="status-bar">
+                    <span>9:41</span>
+                    <div class="status-bar-icons">
+                        <span class="material-icons">signal_cellular_alt</span>
+                        <span class="material-icons">wifi</span>
+                        <span class="material-icons">battery_full</span>
+                    </div>
+                </div>
+                <div class="home-header-content">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn">
+                            <span class="material-icons">notifications_none</span>
+                        </div>
+                    </div>
+                    <div class="greeting-sub">Let's get your collab live.</div>
+                    <div class="earnings-teaser">
+                        <div class="earnings-teaser-amount">$729</div>
+                        <div class="earnings-teaser-text">per collab with just 1% of your followers</div>
+                        <div class="earnings-teaser-arrow">
+                            <span class="material-icons">chevron_right</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="home-content">
+
+                <!-- 1. Draft Collab Carousel -->
+                <div class="carousel-section">
+                    <div class="carousel-header">
+                        <div class="carousel-title">Your collab drafts</div>
+                        <div class="carousel-subtitle">Pick one to finalize, or start fresh</div>
+                    </div>
+
+                    <div class="carousel-track">
+                        <!-- Draft 1 — Purple overlay / dogs + cycling -->
+                        <div class="draft-card theme-purple">
+                            <div class="draft-card-hero">
+                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                                <div class="draft-card-overlay"></div>
+                                <div class="draft-card-hero-content">
+                                    <div class="draft-card-badge">
+                                        <span class="material-icons">star</span>
+                                        Your pick
+                                    </div>
+                                    <div class="draft-card-name">Paws & Pedals</div>
+                                    <div class="draft-card-dates">Apr 6 — May 17</div>
+                                </div>
+                            </div>
+                            <div class="draft-card-stats">
+                                <div class="draft-card-grouped">
+                                    <div class="draft-card-pool-row">
+                                        <div>
+                                            <div class="draft-card-pool-amount">$20,000</div>
+                                            <div class="draft-card-pool-label">Collab pool</div>
+                                        </div>
+                                        <div class="draft-card-hold">
+                                            <span class="material-icons">credit_card</span>
+                                            $40 hold
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-divider"></div>
+                                    <div class="draft-card-meta-row">
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">500</div>
+                                            <div class="draft-card-stat-label">Participants</div>
+                                        </div>
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">6 wks</div>
+                                            <div class="draft-card-stat-label">Duration</div>
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-cta-row">
+                                        <button class="draft-card-cta">
+                                            <span class="material-icons">arrow_forward</span>
+                                            Finalize Collab
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Draft 2 — Orange overlay / dad life + cycling -->
+                        <div class="draft-card theme-orange">
+                            <div class="draft-card-hero">
+                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&q=80')"></div>
+                                <div class="draft-card-overlay"></div>
+                                <div class="draft-card-hero-content">
+                                    <div class="draft-card-name">Dad Legs Don't Quit</div>
+                                    <div class="draft-card-dates">Apr 14 — May 11</div>
+                                </div>
+                            </div>
+                            <div class="draft-card-stats">
+                                <div class="draft-card-grouped">
+                                    <div class="draft-card-pool-row">
+                                        <div>
+                                            <div class="draft-card-pool-amount">$20,000</div>
+                                            <div class="draft-card-pool-label">Collab pool</div>
+                                        </div>
+                                        <div class="draft-card-hold">
+                                            <span class="material-icons">credit_card</span>
+                                            $40 hold
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-divider"></div>
+                                    <div class="draft-card-meta-row">
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">500</div>
+                                            <div class="draft-card-stat-label">Participants</div>
+                                        </div>
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">4 wks</div>
+                                            <div class="draft-card-stat-label">Duration</div>
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-cta-row">
+                                        <button class="draft-card-cta">
+                                            <span class="material-icons">arrow_forward</span>
+                                            Finalize Collab
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Draft 3 — Red overlay / disney + cycling -->
+                        <div class="draft-card theme-red">
+                            <div class="draft-card-hero">
+                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=600&q=80')"></div>
+                                <div class="draft-card-overlay"></div>
+                                <div class="draft-card-hero-content">
+                                    <div class="draft-card-name">Miles to Magic Kingdom</div>
+                                    <div class="draft-card-dates">Apr 20 — May 31</div>
+                                </div>
+                            </div>
+                            <div class="draft-card-stats">
+                                <div class="draft-card-grouped">
+                                    <div class="draft-card-pool-row">
+                                        <div>
+                                            <div class="draft-card-pool-amount">$20,000</div>
+                                            <div class="draft-card-pool-label">Collab pool</div>
+                                        </div>
+                                        <div class="draft-card-hold">
+                                            <span class="material-icons">credit_card</span>
+                                            $40 hold
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-divider"></div>
+                                    <div class="draft-card-meta-row">
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">500</div>
+                                            <div class="draft-card-stat-label">Participants</div>
+                                        </div>
+                                        <div class="draft-card-stat">
+                                            <div class="draft-card-stat-value">6 wks</div>
+                                            <div class="draft-card-stat-label">Duration</div>
+                                        </div>
+                                    </div>
+                                    <div class="draft-card-cta-row">
+                                        <button class="draft-card-cta">
+                                            <span class="material-icons">arrow_forward</span>
+                                            Finalize Collab
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-dots">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+
+                    <div class="carousel-alt-actions">
+                        <button class="alt-action">
+                            <span class="material-icons">add</span>
+                            Start from scratch
+                        </button>
+                        <div class="alt-action-divider"></div>
+                        <button class="alt-action">
+                            <span class="material-icons">auto_awesome</span>
+                            Suggest more
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Instagram Verification -->
+                <div class="verify-card">
+                    <div class="verify-icon">
+                        <span class="material-icons">camera_alt</span>
+                    </div>
+                    <div class="verify-info">
+                        <div class="verify-title">Verify your Instagram</div>
+                        <div class="verify-subtitle">So followers know it's really you</div>
+                    </div>
+                    <button class="verify-cta">Connect</button>
+                </div>
+
+                <!-- 3. Earnings Potential -->
+                <div class="potential-card">
+                    <div class="potential-header">
+                        <div class="potential-label">
+                            <span class="material-icons">trending_up</span>
+                            Your earning potential
+                        </div>
+                        <div class="potential-tap-hint">
+                            Learn more
+                            <span class="material-icons">chevron_right</span>
+                        </div>
+                    </div>
+                    <div class="potential-amount">$729</div>
+                    <div class="potential-amount-label">estimated per collab with just 1% of your followers</div>
+                    <div class="potential-breakdown">
+                        <div class="potential-stat">
+                            <div class="potential-stat-value">$350</div>
+                            <div class="potential-stat-label">Content + recruit</div>
+                        </div>
+                        <div class="potential-stat">
+                            <div class="potential-stat-value">$379</div>
+                            <div class="potential-stat-label">Performance bonus</div>
+                        </div>
+                        <div class="potential-stat">
+                            <div class="potential-stat-value">500</div>
+                            <div class="potential-stat-label">1% of followers</div>
+                        </div>
+                    </div>
+                    <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
+                </div>
+
+                <!-- 4. Invite Creators -->
+                <div class="nudge-card">
+                    <div class="nudge-icon">
+                        <span class="material-icons">person_add</span>
+                    </div>
+                    <div class="nudge-body">
+                        <div class="nudge-text">
+                            <strong>Know a creator who'd be great on Motiv?</strong>
+                        </div>
+                        <button class="nudge-cta">Send an invite</button>
+                    </div>
+                </div>
+
+                <!-- 5. Creator Community -->
+                <div class="community-link">
+                    <div class="community-icon">
+                        <span class="material-icons">forum</span>
+                    </div>
+                    <div class="community-info">
+                        <div class="community-title">Creator Community</div>
+                        <div class="community-subtitle">Tips, support, and creator connections</div>
+                    </div>
+                    <div class="community-arrow">
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-item active">
+                <span class="material-icons">home</span>
+                <span class="tab-item-label">Home</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">grid_view</span>
+                <span class="tab-item-label">Collabs</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span class="tab-item-label">Earnings</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">person</span>
+                <span class="tab-item-label">Profile</span>
+            </button>
+        </div>
+
+        <div class="home-indicator"></div>
+
+    </div>
+
+    <script>
+        // Simple carousel dot tracking
+        const track = document.querySelector('.carousel-track');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        track.addEventListener('scroll', () => {
+            const scrollLeft = track.scrollLeft;
+            const cardWidth = 312; // 300 + 12 gap
+            const activeIndex = Math.round(scrollLeft / cardWidth);
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        });
+    </script>
+
+</body>
+</html>
