@@ -509,8 +509,8 @@
            ========================================= */
 
         .verify-card {
-            background: white;
-            border: 1.5px solid var(--primary-60);
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
             border-radius: var(--radius-lg);
             padding: 14px 16px;
             display: flex;
@@ -520,7 +520,7 @@
             transition: all var(--motion-fast) var(--easing-smooth);
         }
         .verify-card:hover {
-            background: var(--orange-0);
+            background: var(--primary-0);
             transform: translateY(-1px);
         }
 
@@ -552,20 +552,11 @@
             color: var(--color-text-secondary);
         }
 
-        .verify-cta {
-            background: var(--primary-60);
-            color: white;
-            font-family: var(--font-body);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 7px 14px;
-            border-radius: var(--radius-full);
-            border: none;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all var(--motion-fast) var(--easing-smooth);
+        .verify-chevron {
+            color: var(--primary-30);
+            font-size: 20px;
+            flex-shrink: 0;
         }
-        .verify-cta:hover { opacity: 0.9; }
 
         /* =========================================
            EARNINGS POTENTIAL CARD
@@ -960,7 +951,7 @@
                         <div class="verify-title">Verify your Instagram</div>
                         <div class="verify-subtitle">So followers know it's really you</div>
                     </div>
-                    <button class="verify-cta">Connect</button>
+                    <span class="material-icons verify-chevron">chevron_right</span>
                 </div>
 
                 <!-- 4. Earnings Potential -->
