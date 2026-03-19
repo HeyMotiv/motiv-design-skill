@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Home — First Time</title>
+    <title>Creator Home — Needs Dates</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -251,29 +251,20 @@
             gap: 16px;
         }
 
-        .section-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-text-tertiary);
-            padding: 4px 0;
-        }
-
         /* =========================================
-           DRAFT COLLAB CAROUSEL
+           COLLAB CARD (single, full-width)
            ========================================= */
 
-        .carousel-section {
-            margin: 0 -16px;
+        .collab-section {
+            /* no negative margin — single card sits in content flow */
         }
 
-        .carousel-header {
-            padding: 0 24px;
+        .collab-section-header {
+            padding: 0 8px;
             margin-bottom: 12px;
         }
 
-        .carousel-title {
+        .collab-section-title {
             font-family: var(--font-headline);
             font-size: 18px;
             font-weight: 700;
@@ -281,28 +272,12 @@
             margin-bottom: 2px;
         }
 
-        .carousel-subtitle {
+        .collab-section-subtitle {
             font-size: 13px;
             color: var(--color-text-secondary);
         }
 
-        .carousel-track {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            padding: 0 16px 8px;
-        }
-        .carousel-track::-webkit-scrollbar { display: none; }
-        .draft-card:first-child {
-            margin-left: 0;
-            scroll-margin-left: 16px;
-        }
-
         .draft-card {
-            flex: 0 0 300px;
-            scroll-snap-align: start;
             border-radius: var(--radius-xl);
             overflow: hidden;
             box-shadow: var(--shadow-md);
@@ -314,8 +289,6 @@
 
         /* Card theme colors */
         .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
-        .draft-card.theme-orange { --card-color: 234,120,50; --card-accent: #EA7832; }
-        .draft-card.theme-red { --card-color: 180,60,60; --card-accent: #B43C3C; }
 
         .draft-card-hero {
             position: relative;
@@ -386,7 +359,11 @@
             font-weight: 500;
             color: rgba(255,255,255,0.75);
             margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
+        .draft-card-dates .material-icons { font-size: 14px; }
 
         .draft-card-stats {
             background: var(--card-accent);
@@ -481,9 +458,9 @@
             background: var(--card-accent);
             color: white;
             font-family: var(--font-body);
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            padding: 10px;
+            padding: 12px;
             border-radius: var(--radius-full);
             border: none;
             cursor: pointer;
@@ -495,35 +472,14 @@
         }
         .draft-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
         .draft-card-cta:active { transform: scale(0.97); }
-        .draft-card-cta .material-icons { font-size: 16px; }
+        .draft-card-cta .material-icons { font-size: 18px; }
 
-        /* Carousel dots */
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 8px 0 4px;
-        }
-
-        .carousel-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--color-border-default);
-            transition: all var(--motion-fast);
-        }
-        .carousel-dot.active {
-            width: 18px;
-            border-radius: 3px;
-            background: var(--orange-100);
-        }
-
-        /* Alternative actions below carousel */
-        .carousel-alt-actions {
+        /* Alternative actions below card */
+        .collab-alt-actions {
             display: flex;
             justify-content: center;
             gap: 16px;
-            padding: 4px 16px 0;
+            padding: 8px 0 0;
         }
 
         .alt-action {
@@ -899,8 +855,8 @@
 </head>
 <body>
 
-    <div class="label">Creator Home — First Time</div>
-    <div class="sublabel">Post-onboarding, 3 AI-generated collab drafts ready</div>
+    <div class="label">Creator Home — Needs Dates</div>
+    <div class="sublabel">Collab finalized, just needs start &amp; end dates to go live</div>
 
     <div class="phone-frame">
 
@@ -918,12 +874,12 @@
                 </div>
                 <div class="home-header-content">
                     <div class="header-row">
-                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="greeting">Almost there, Mortimer</div>
                         <div class="icon-btn">
                             <span class="material-icons">notifications_none</span>
                         </div>
                     </div>
-                    <div class="greeting-sub">Let's get your collab live.</div>
+                    <div class="greeting-sub">Set your dates and you're live.</div>
                     <div class="earnings-teaser">
                         <div class="earnings-teaser-amount">$729</div>
                         <div class="earnings-teaser-text">per collab with just 1% of your followers</div>
@@ -937,152 +893,60 @@
             <!-- Content -->
             <div class="home-content">
 
-                <!-- 1. Draft Collab Carousel -->
-                <div class="carousel-section">
-                    <div class="carousel-header">
-                        <div class="carousel-title">Your collab drafts</div>
-                        <div class="carousel-subtitle">Pick one to finalize, or start fresh</div>
+                <!-- 1. Single Collab Card -->
+                <div class="collab-section">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collab</div>
+                        <div class="collab-section-subtitle">Everything's ready — just pick your dates</div>
                     </div>
 
-                    <div class="carousel-track">
-                        <!-- Draft 1 — Purple overlay / dogs + cycling -->
-                        <div class="draft-card theme-purple">
-                            <div class="draft-card-hero">
-                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
-                                <div class="draft-card-overlay"></div>
-                                <div class="draft-card-hero-content">
-                                    <div class="draft-card-badge">
-                                        <span class="material-icons">star</span>
-                                        Your pick
-                                    </div>
-                                    <div class="draft-card-name">Paws & Pedals</div>
-                                    <div class="draft-card-dates">Apr 6 — May 17</div>
+                    <div class="draft-card theme-purple">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge">
+                                    <span class="material-icons">check_circle</span>
+                                    Ready to launch
                                 </div>
-                            </div>
-                            <div class="draft-card-stats">
-                                <div class="draft-card-grouped">
-                                    <div class="draft-card-pool-row">
-                                        <div>
-                                            <div class="draft-card-pool-amount">$20,000</div>
-                                            <div class="draft-card-pool-label">Collab pool</div>
-                                        </div>
-                                        <div class="draft-card-hold">
-                                            <span class="material-icons">credit_card</span>
-                                            $40 hold
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-divider"></div>
-                                    <div class="draft-card-meta-row">
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">500</div>
-                                            <div class="draft-card-stat-label">Participants</div>
-                                        </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">6 wks</div>
-                                            <div class="draft-card-stat-label">Duration</div>
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-cta-row">
-                                        <button class="draft-card-cta">
-                                            <span class="material-icons">arrow_forward</span>
-                                            Finalize Collab
-                                        </button>
-                                    </div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates">
+                                    <span class="material-icons">event</span>
+                                    Dates not set yet
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Draft 2 — Orange overlay / dad life + cycling -->
-                        <div class="draft-card theme-orange">
-                            <div class="draft-card-hero">
-                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&q=80')"></div>
-                                <div class="draft-card-overlay"></div>
-                                <div class="draft-card-hero-content">
-                                    <div class="draft-card-name">Dad Legs Don't Quit</div>
-                                    <div class="draft-card-dates">Apr 14 — May 11</div>
+                        <div class="draft-card-stats">
+                            <div class="draft-card-grouped">
+                                <div class="draft-card-pool-row">
+                                    <div>
+                                        <div class="draft-card-pool-amount">$20,000</div>
+                                        <div class="draft-card-pool-label">Collab pool</div>
+                                    </div>
+                                    <div class="draft-card-hold">
+                                        <span class="material-icons">credit_card</span>
+                                        $40 hold
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="draft-card-stats">
-                                <div class="draft-card-grouped">
-                                    <div class="draft-card-pool-row">
-                                        <div>
-                                            <div class="draft-card-pool-amount">$20,000</div>
-                                            <div class="draft-card-pool-label">Collab pool</div>
-                                        </div>
-                                        <div class="draft-card-hold">
-                                            <span class="material-icons">credit_card</span>
-                                            $40 hold
-                                        </div>
+                                <div class="draft-card-divider"></div>
+                                <div class="draft-card-meta-row">
+                                    <div class="draft-card-stat">
+                                        <div class="draft-card-stat-value">500</div>
+                                        <div class="draft-card-stat-label">Participants</div>
                                     </div>
-                                    <div class="draft-card-divider"></div>
-                                    <div class="draft-card-meta-row">
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">500</div>
-                                            <div class="draft-card-stat-label">Participants</div>
-                                        </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">4 wks</div>
-                                            <div class="draft-card-stat-label">Duration</div>
-                                        </div>
+                                    <div class="draft-card-stat">
+                                        <div class="draft-card-stat-value">6 wks</div>
+                                        <div class="draft-card-stat-label">Duration</div>
                                     </div>
-                                    <div class="draft-card-cta-row">
-                                        <button class="draft-card-cta">
-                                            <span class="material-icons">arrow_forward</span>
-                                            Finalize Collab
-                                        </button>
-                                    </div>
+                                </div>
+                                <div class="draft-card-cta-row">
+                                    <button class="draft-card-cta">
+                                        <span class="material-icons">event</span>
+                                        Set Dates & Go Live
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Draft 3 — Red overlay / disney + cycling -->
-                        <div class="draft-card theme-red">
-                            <div class="draft-card-hero">
-                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=600&q=80')"></div>
-                                <div class="draft-card-overlay"></div>
-                                <div class="draft-card-hero-content">
-                                    <div class="draft-card-name">Miles to Magic Kingdom</div>
-                                    <div class="draft-card-dates">Apr 20 — May 31</div>
-                                </div>
-                            </div>
-                            <div class="draft-card-stats">
-                                <div class="draft-card-grouped">
-                                    <div class="draft-card-pool-row">
-                                        <div>
-                                            <div class="draft-card-pool-amount">$20,000</div>
-                                            <div class="draft-card-pool-label">Collab pool</div>
-                                        </div>
-                                        <div class="draft-card-hold">
-                                            <span class="material-icons">credit_card</span>
-                                            $40 hold
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-divider"></div>
-                                    <div class="draft-card-meta-row">
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">500</div>
-                                            <div class="draft-card-stat-label">Participants</div>
-                                        </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">6 wks</div>
-                                            <div class="draft-card-stat-label">Duration</div>
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-cta-row">
-                                        <button class="draft-card-cta">
-                                            <span class="material-icons">arrow_forward</span>
-                                            Finalize Collab
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-dots">
-                        <div class="carousel-dot active"></div>
-                        <div class="carousel-dot"></div>
-                        <div class="carousel-dot"></div>
                     </div>
 
                 </div>
@@ -1099,7 +963,7 @@
                     <button class="verify-cta">Connect</button>
                 </div>
 
-                <!-- 3. Earnings Potential -->
+                <!-- 4. Earnings Potential -->
                 <div class="potential-card">
                     <div class="potential-header">
                         <div class="potential-label">
@@ -1130,7 +994,7 @@
                     <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
                 </div>
 
-                <!-- 4. Invite Creators -->
+                <!-- 5. Invite Creators -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1143,7 +1007,7 @@
                     </div>
                 </div>
 
-                <!-- 5. Creator Community -->
+                <!-- 6. Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>
@@ -1183,21 +1047,6 @@
         <div class="home-indicator"></div>
 
     </div>
-
-    <script>
-        // Simple carousel dot tracking
-        const track = document.querySelector('.carousel-track');
-        const dots = document.querySelectorAll('.carousel-dot');
-
-        track.addEventListener('scroll', () => {
-            const scrollLeft = track.scrollLeft;
-            const cardWidth = 312; // 300 + 12 gap
-            const activeIndex = Math.round(scrollLeft / cardWidth);
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === activeIndex);
-            });
-        });
-    </script>
 
 </body>
 </html>

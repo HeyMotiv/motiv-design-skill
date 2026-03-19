@@ -16,6 +16,6 @@ http.createServer((req, res) => {
     res.end(html);
   } catch (e) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end(`File not found: home-${state}.html\nAvailable: ?state=first-time`);
+    res.end(`File not found: home-${state}.html\nAvailable: ?state=first-time, ?state=needs-dates`);
   }
 }).listen(8771, () => console.log('Serving creator home on http://localhost:8771?state=first-time'));
