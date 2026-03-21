@@ -159,8 +159,11 @@
         .picker-card:hover { transform: scale(1.03); }
         .picker-card:active { transform: scale(0.97); }
         .picker-card.selected { border: 2px solid var(--color-brand-secondary); box-shadow: 0 0 0 3px rgba(201,122,106,0.15); }
-        .picker-avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; margin: 0 auto 8px; border: 2px solid rgba(255,255,255,0.8); }
+        .picker-avatar-wrap { position: relative; display: inline-block; margin: 0 auto 8px; }
+        .picker-avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); }
         .picker-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .picker-verified { position: absolute; bottom: 0; right: -2px; width: 18px; height: 18px; background: #547577; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 2; }
+        .picker-verified svg { width: 9px; height: 9px; fill: #fff; }
         .picker-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
         .picker-handle { font-size: 11px; color: var(--color-brand-secondary); }
         .picker-tag { font-size: 10px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
@@ -168,9 +171,13 @@
         .picker-explore-link { background: none; border: none; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 0 0; width: 100%; text-align: center; }
 
         /* SIGN IN — creator variant */
+        .s1-invited-label { font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; text-align: center; }
         .s1-creator-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--space-lg); }
-        .s1-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); margin-bottom: var(--space-sm); }
+        .s1-avatar-wrap { position: relative; display: inline-block; margin-bottom: var(--space-sm); }
+        .s1-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); }
         .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .s1-verified-badge { position: absolute; bottom: 2px; right: -2px; width: 26px; height: 26px; background: #547577; border-radius: 50%; border: 2.5px solid rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 2; }
+        .s1-verified-badge svg { width: 13px; height: 13px; fill: #fff; }
         .s1-name { font-family: var(--font-body); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
         .s1-handle { font-size: 14px; color: var(--color-brand-secondary); }
 
@@ -569,61 +576,61 @@
             <div style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0;">
             <div class="picker-grid">
                 <div class="picker-card" onclick="selectCreator(this, 0)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face" alt="Ellie"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&h=120&fit=crop&crop=face" alt="Ellie"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Ellie Snackson</div>
                     <div class="picker-handle">@doodle_cycles</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 1)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" alt="Marcus"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" alt="Marcus"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Marcus Rivera</div>
                     <div class="picker-handle">@marcus_rides</div>
                     <div class="picker-tag">Cycling · Running</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 2)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face" alt="Jess"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face" alt="Jess"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Jess Hernandez</div>
                     <div class="picker-handle">@jess_spins</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 3)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face" alt="Tyler"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&fit=crop&crop=face" alt="Tyler"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Tyler Okonkwo</div>
                     <div class="picker-handle">@tyler_pedals</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 4)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face" alt="Priya"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face" alt="Priya"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Priya Sharma</div>
                     <div class="picker-handle">@priya_peloton</div>
                     <div class="picker-tag">Cycling · Wellness</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 5)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" alt="Dan"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" alt="Dan"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Dan Kowalski</div>
                     <div class="picker-handle">@dan_k_rides</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 6)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=120&h=120&fit=crop&crop=face" alt="Chris"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=120&h=120&fit=crop&crop=face" alt="Chris"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Chris Nakamura</div>
                     <div class="picker-handle">@chris_cycles</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 7)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=face" alt="Aisha"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=face" alt="Aisha"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Aisha Williams</div>
                     <div class="picker-handle">@aisha_rides</div>
                     <div class="picker-tag">Cycling · Strength</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 8)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=face" alt="Leo"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=face" alt="Leo"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Leo Martinez</div>
                     <div class="picker-handle">@leo_spins</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
                 <div class="picker-card" onclick="selectCreator(this, 9)">
-                    <div class="picker-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face" alt="Mia"></div>
+                    <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&h=120&fit=crop&crop=face" alt="Mia"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Mia Thompson</div>
                     <div class="picker-handle">@mia_moves</div>
                     <div class="picker-tag">Cycling · Yoga</div>
@@ -644,8 +651,12 @@
 
             <!-- Creator-personalized sign in -->
             <div class="path-creator">
+                <div class="s1-invited-label">Your creator</div>
                 <div class="s1-creator-header">
-                    <div class="s1-avatar"><img id="signInAvatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Creator"></div>
+                    <div class="s1-avatar-wrap">
+                        <div class="s1-avatar"><img id="signInAvatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Creator"></div>
+                        <div class="s1-verified-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    </div>
                     <div class="s1-name" id="signInName">Ellie Snackson</div>
                     <div class="s1-handle" id="signInHandle">@doodle_cycles</div>
                 </div>

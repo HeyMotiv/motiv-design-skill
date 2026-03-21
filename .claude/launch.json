@@ -36,6 +36,12 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-creator-home.js"],
       "port": 8771
+    },
+    {
+      "name": "onboarding",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-onboarding.js"],
+      "port": 8772
     }
   ]
 }
