@@ -4,8 +4,8 @@
     {
       "name": "participant-onboarding",
       "runtimeExecutable": "/usr/local/bin/node",
-      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/worktrees/unruffled-morse/serve-participant.js"],
-      "port": 8766
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-onboarding.js"],
+      "port": 8772
     },
     {
       "name": "updated-details",

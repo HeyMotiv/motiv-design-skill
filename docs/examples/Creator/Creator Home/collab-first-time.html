@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Home — First Time</title>
+    <title>Collabs — First Time</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -167,7 +167,7 @@
         .home-header-content {
             position: relative;
             z-index: 1;
-            padding: 4px 24px 16px;
+            padding: 16px 24px 16px;
         }
 
         .header-row {
@@ -248,7 +248,7 @@
             padding: 0 16px 100px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 24px;
         }
 
         .section-label {
@@ -353,6 +353,10 @@
             z-index: 2;
             padding: 16px;
             width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .draft-card-badge {
@@ -820,8 +824,8 @@
         .tab-bar {
             position: absolute;
             bottom: 20px;
-            left: 24px;
-            right: 24px;
+            left: 60px;
+            right: 60px;
             height: 56px;
             background: rgba(255, 255, 255, 0.55);
             backdrop-filter: blur(24px) saturate(1.8);
@@ -890,7 +894,7 @@
 </head>
 <body>
 
-    <div class="label">Creator Home — First Time</div>
+    <div class="label">Collabs — First Time</div>
     <div class="sublabel">Post-onboarding, 3 AI-generated collab drafts ready</div>
 
     <div class="phone-frame">
@@ -1090,6 +1094,18 @@
                     <span class="material-icons verify-chevron">chevron_right</span>
                 </div>
 
+                <!-- Agreement & W9 -->
+                <div class="verify-card">
+                    <div class="verify-icon" style="background: var(--primary-60);">
+                        <span class="material-icons">description</span>
+                    </div>
+                    <div class="verify-info">
+                        <div class="verify-title">Creator agreement & W9</div>
+                        <div class="verify-subtitle">Required before your first payout</div>
+                    </div>
+                    <span class="material-icons verify-chevron">chevron_right</span>
+                </div>
+
                 <!-- 3. Earnings Potential -->
                 <div class="potential-card">
                     <div class="potential-header">
@@ -1121,7 +1137,7 @@
                     <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
                 </div>
 
-                <!-- 4. Invite Creators -->
+                <!-- Invite Creators -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1134,7 +1150,7 @@
                     </div>
                 </div>
 
-                <!-- 5. Creator Community -->
+                <!-- Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>
@@ -1154,10 +1170,6 @@
         <!-- Tab Bar -->
         <div class="tab-bar">
             <button class="tab-item active">
-                <span class="material-icons">home</span>
-                <span class="tab-item-label">Home</span>
-            </button>
-            <button class="tab-item">
                 <span class="material-icons">grid_view</span>
                 <span class="tab-item-label">Collabs</span>
             </button>

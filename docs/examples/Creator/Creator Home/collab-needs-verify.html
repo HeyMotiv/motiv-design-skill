@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collabs — Needs Dates</title>
+    <title>Collabs — Needs Verification</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -207,38 +207,60 @@
             line-height: 22px;
         }
 
-        .earnings-teaser {
+        /* =========================================
+           INSTAGRAM VERIFICATION CARD
+           ========================================= */
+
+        .verify-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            padding: 10px 14px;
-            background: var(--primary-100);
-            border-radius: var(--radius-full);
+            gap: 12px;
+            margin-top: 14px;
             cursor: pointer;
             transition: all var(--motion-fast) var(--easing-smooth);
         }
-        .earnings-teaser:hover { transform: translateY(-1px); opacity: 0.95; }
-
-        .earnings-teaser-amount {
-            font-family: var(--font-headline);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--orange-100);
-            line-height: 1;
+        .verify-card:hover {
+            background: var(--primary-0);
+            transform: translateY(-1px);
         }
 
-        .earnings-teaser-text {
+        .verify-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .verify-icon .material-icons { font-size: 20px; color: white; }
+
+        .verify-info {
             flex: 1;
-            font-size: 12px;
-            color: rgba(255,255,255,0.75);
-            line-height: 15px;
         }
 
-        .earnings-teaser-arrow {
-            color: var(--orange-60);
+        .verify-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 1px;
         }
-        .earnings-teaser-arrow .material-icons { font-size: 18px; }
+
+        .verify-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .verify-chevron {
+            color: var(--primary-30);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
 
         /* =========================================
            CONTENT
@@ -256,7 +278,6 @@
            ========================================= */
 
         .collab-section {
-            /* no negative margin — single card sits in content flow */
         }
 
         .collab-section-header {
@@ -478,90 +499,6 @@
         .draft-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
         .draft-card-cta:active { transform: scale(0.97); }
         .draft-card-cta .material-icons { font-size: 18px; }
-
-        /* Alternative actions below card */
-        .collab-alt-actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            padding: 8px 0 0;
-        }
-
-        .alt-action {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--orange-100);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 0;
-        }
-        .alt-action:hover { text-decoration: underline; }
-        .alt-action .material-icons { font-size: 16px; }
-
-        .alt-action-divider {
-            width: 1px;
-            height: 16px;
-            background: var(--color-border-default);
-            align-self: center;
-        }
-
-        /* =========================================
-           INSTAGRAM VERIFICATION CARD
-           ========================================= */
-
-        .verify-card {
-            background: var(--surface-white);
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-lg);
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .verify-card:hover {
-            background: var(--primary-0);
-            transform: translateY(-1px);
-        }
-
-        .verify-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .verify-icon .material-icons { font-size: 20px; color: white; }
-
-        .verify-info {
-            flex: 1;
-        }
-
-        .verify-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: 1px;
-        }
-
-        .verify-subtitle {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-        }
-
-        .verify-chevron {
-            color: var(--primary-30);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
 
         /* =========================================
            EARNINGS POTENTIAL CARD
@@ -851,8 +788,8 @@
 </head>
 <body>
 
-    <div class="label">Collabs — Needs Dates</div>
-    <div class="sublabel">Collab finalized, just needs start &amp; end dates to go live</div>
+    <div class="label">Collabs — Needs Verification</div>
+    <div class="sublabel">Dates set, collab ready — just needs Instagram verification to go live</div>
 
     <div class="phone-frame">
 
@@ -870,18 +807,23 @@
                 </div>
                 <div class="home-header-content">
                     <div class="header-row">
-                        <div class="greeting">Almost there, Mortimer</div>
+                        <div class="greeting">One last step, Mortimer</div>
                         <div class="icon-btn">
                             <span class="material-icons">notifications_none</span>
                         </div>
                     </div>
-                    <div class="greeting-sub">Set your dates and you're live.</div>
-                    <div class="earnings-teaser">
-                        <div class="earnings-teaser-amount">$729</div>
-                        <div class="earnings-teaser-text">per collab with just 1% of your followers</div>
-                        <div class="earnings-teaser-arrow">
-                            <span class="material-icons">chevron_right</span>
+                    <div class="greeting-sub">Verify your Instagram to go live.</div>
+
+                    <!-- Verify Instagram Card -->
+                    <div class="verify-card">
+                        <div class="verify-icon">
+                            <span class="material-icons">camera_alt</span>
                         </div>
+                        <div class="verify-info">
+                            <div class="verify-title">Verify your Instagram</div>
+                            <div class="verify-subtitle">Connect to start earning $729/collab</div>
+                        </div>
+                        <span class="material-icons verify-chevron">chevron_right</span>
                     </div>
                 </div>
             </div>
@@ -893,7 +835,7 @@
                 <div class="collab-section">
                     <div class="collab-section-header">
                         <div class="collab-section-title">Your collab</div>
-                        <div class="collab-section-subtitle">Everything's ready — just pick your dates</div>
+                        <div class="collab-section-subtitle">Ready to launch once you're verified</div>
                     </div>
 
                     <div class="draft-card theme-purple">
@@ -908,7 +850,7 @@
                                 <div class="draft-card-name">Paws & Pedals</div>
                                 <div class="draft-card-dates">
                                     <span class="material-icons">event</span>
-                                    Dates not set yet
+                                    Apr 6 — May 17
                                 </div>
                             </div>
                         </div>
@@ -937,26 +879,14 @@
                                 </div>
                                 <div class="draft-card-cta-row">
                                     <button class="draft-card-cta">
-                                        <span class="material-icons">event</span>
-                                        Set Dates & Go Live
+                                        <span class="material-icons">edit</span>
+                                        Edit Collab
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <!-- 2. Instagram Verification -->
-                <div class="verify-card">
-                    <div class="verify-icon">
-                        <span class="material-icons">camera_alt</span>
-                    </div>
-                    <div class="verify-info">
-                        <div class="verify-title">Verify your Instagram</div>
-                        <div class="verify-subtitle">So followers know it's really you</div>
-                    </div>
-                    <span class="material-icons verify-chevron">chevron_right</span>
                 </div>
 
                 <!-- Agreement & W9 -->
@@ -969,37 +899,6 @@
                         <div class="verify-subtitle">Required before your first payout</div>
                     </div>
                     <span class="material-icons verify-chevron">chevron_right</span>
-                </div>
-
-                <!-- 4. Earnings Potential -->
-                <div class="potential-card">
-                    <div class="potential-header">
-                        <div class="potential-label">
-                            <span class="material-icons">trending_up</span>
-                            Your earning potential
-                        </div>
-                        <div class="potential-tap-hint">
-                            Learn more
-                            <span class="material-icons">chevron_right</span>
-                        </div>
-                    </div>
-                    <div class="potential-amount">$729</div>
-                    <div class="potential-amount-label">estimated per collab with just 1% of your followers</div>
-                    <div class="potential-breakdown">
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$350</div>
-                            <div class="potential-stat-label">Content + recruit</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$379</div>
-                            <div class="potential-stat-label">Performance bonus</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">500</div>
-                            <div class="potential-stat-label">1% of followers</div>
-                        </div>
-                    </div>
-                    <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
                 </div>
 
                 <!-- Invite Creators -->

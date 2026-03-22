@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=780, initial-scale=1.0">
-    <title>Participant Onboarding — Organic v2</title>
+    <title>Participant Onboarding — Organic Sign-In First</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -93,17 +93,6 @@
         .screen.active { opacity: 1; pointer-events: all; transform: translateX(0); }
         .screen.exiting { opacity: 0; transform: translateX(-30px); }
 
-        /* Adaptive content toggle */
-        .path-creator { display: none; }
-        .path-generic { display: none; }
-        body.has-creator .path-creator { display: block; }
-        body.has-creator .path-generic { display: none !important; }
-        body:not(.has-creator) .path-generic { display: block; }
-        body:not(.has-creator) .path-creator { display: none !important; }
-        /* Flex variants */
-        body.has-creator .path-creator-flex { display: flex !important; }
-        body:not(.has-creator) .path-generic-flex { display: flex !important; }
-
         /* SHARED COMPONENTS */
         .back-btn { color: var(--color-text-primary); text-decoration: none; line-height: 1; display: flex; align-items: center; opacity: 0.5; cursor: pointer; transition: opacity var(--motion-fast) var(--easing-smooth); }
         .back-btn:hover { opacity: 0.8; }
@@ -150,36 +139,24 @@
         .s0-tagline.visible { animation: fade-up 0.7s ease forwards; }
 
         /* CREATOR PICKER */
-        /* picker-layout styles moved to inline */
         .picker-header { text-align: center; margin-bottom: 16px; margin-top: 16px; }
         .picker-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px; }
         .picker-subtitle { font-size: 14px; color: var(--color-text-secondary); line-height: 1.45; }
         .picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
-        .picker-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 14px 10px; text-align: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .picker-card { background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.5); border-radius: 16px; padding: 20px 14px; text-align: center; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
         .picker-card:hover { transform: scale(1.03); }
         .picker-card:active { transform: scale(0.97); }
         .picker-card.selected { border: 2px solid var(--color-brand-secondary); box-shadow: 0 0 0 3px rgba(201,122,106,0.15); }
         .picker-avatar-wrap { position: relative; display: inline-block; margin: 0 auto 8px; }
-        .picker-avatar { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); }
+        .picker-avatar { width: 68px; height: 68px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,255,255,0.8); }
         .picker-avatar img { width: 100%; height: 100%; object-fit: cover; }
         .picker-verified { position: absolute; bottom: 0; right: -2px; width: 18px; height: 18px; background: #547577; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 2; }
         .picker-verified svg { width: 9px; height: 9px; fill: #fff; }
-        .picker-name { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
-        .picker-handle { font-size: 11px; color: var(--color-brand-secondary); }
-        .picker-tag { font-size: 10px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .picker-name { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .picker-handle { font-size: 13px; color: var(--color-brand-secondary); }
+        .picker-tag { font-size: 11px; font-weight: 600; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 6px; }
         .picker-bottom { padding: 12px 20px 28px; }
         .picker-explore-link { background: none; border: none; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 14px; font-weight: 500; cursor: pointer; padding: 8px 0 0; width: 100%; text-align: center; }
-
-        /* SIGN IN — creator variant */
-        .s1-invited-label { font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; text-align: center; }
-        .s1-creator-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--space-lg); }
-        .s1-avatar-wrap { position: relative; display: inline-block; margin-bottom: var(--space-sm); }
-        .s1-avatar { width: 96px; height: 96px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255,255,255,0.8); }
-        .s1-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .s1-verified-badge { position: absolute; bottom: 2px; right: -2px; width: 26px; height: 26px; background: #547577; border-radius: 50%; border: 2.5px solid rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; z-index: 2; }
-        .s1-verified-badge svg { width: 13px; height: 13px; fill: #fff; }
-        .s1-name { font-family: var(--font-body); font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
-        .s1-handle { font-size: 14px; color: var(--color-brand-secondary); }
 
         /* PROFILE — creator chat variant */
         .s3-chat-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 10px; max-width: 88%; }
@@ -229,7 +206,7 @@
         .s4h-ctas { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
         .s4h-cta-tertiary { display: flex; align-items: center; justify-content: center; width: 100%; background: transparent; color: var(--color-text-tertiary); font-family: var(--font-body); font-size: 14px; font-weight: 500; padding: 10px; border: none; cursor: pointer; }
 
-        /* ── How It Works: Card-in-card ── */
+        /* -- How It Works: Card-in-card -- */
         .hiw-outer {
             background: #FFFFFF;
             border: 1px solid #E7D9C9;
@@ -519,14 +496,14 @@
 <body>
 
 <div class="review-header">
-    <div class="review-title">Participant Onboarding — Organic / No Deeplink</div>
+    <div class="review-title">Participant Onboarding — Organic / Sign-In First</div>
     <div class="review-subtitle">
         <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
-        <span class="nav-jump" onclick="goTo(1)">1 Find Creator</span> ·
-        <span class="nav-jump" onclick="goTo(2)">2 Sign In</span> ·
-        <span class="nav-jump" onclick="goTo(3)">3 Verify</span> ·
-        <span class="nav-jump" onclick="goTo(4)">4 Profile</span> ·
-        <span class="nav-jump" onclick="goTo(5)">5 How It Works</span> ·
+        <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
+        <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
+        <span class="nav-jump" onclick="goTo(3)">3 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 How It Works</span> ·
+        <span class="nav-jump" onclick="goTo(5)">5 Find Creator</span> ·
         <span class="nav-jump" onclick="goTo(6)">6 Challenge Details</span> ·
         <span class="nav-jump" onclick="goTo(7)">7 Notifications</span> ·
         <span class="nav-jump" onclick="goTo(8)">8 Join Flow</span>
@@ -563,14 +540,179 @@
         </div>
     </div>
 
-    <!-- SCREEN 1: CREATOR PICKER -->
+    <!-- SCREEN 1: SIGN IN (generic only) -->
     <div class="screen" id="screen1">
-        <div style="flex:1; display:flex; flex-direction:column; padding:56px 20px 0; min-height:0;">
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 4px;">
-                <button onclick="chooseExploring(); setTimeout(function(){ goTo(2); }, 50);" style="background: none; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-text-secondary); cursor: pointer; padding: 4px 0;">Log in</button>
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="flex: 1.2; min-height: 24px;"></div>
+
+            <!-- Generic sign in -->
+            <div>
+                <div style="text-align: center; margin-bottom: var(--space-lg);">
+                    <div style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; line-height: 1;">Motiv</div>
+                </div>
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Let's get moving</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Sign in or create an account to get started.</div>
             </div>
+
+            <div class="auth-section">
+                <button class="auth-btn auth-btn--apple" onclick="goTo(3)">
+                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                    Continue with Apple
+                </button>
+                <button class="auth-btn auth-btn--google" onclick="goTo(3)"><!-- SSO skips verify, goes to profile -->
+                    <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    Continue with Google
+                </button>
+            </div>
+            <div style="height: 28px;"></div>
+            <div class="divider"><span class="divider-line"></span><span class="divider-text">or</span><span class="divider-line"></span></div>
+            <div style="height: 28px;"></div>
+            <div>
+                <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px;">Continue with email</div>
+                <input type="email" class="form-input" id="emailInput" placeholder="Enter your email" autocomplete="email" oninput="validateEmail()">
+                <div class="form-helper">We'll send you a one-time code. No password required.</div>
+            </div>
+            <div style="flex: 0.5; min-height: 16px;"></div>
+            <div><button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="submitEmail()" disabled>Continue</button></div>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: VERIFY CODE -->
+    <div class="screen" id="screen2">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(1)"><span class="material-icons">arrow_back</span></a></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 8px;">Check your email</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 36px;">We sent a code to <strong id="otpEmailDisplay">your email</strong></div>
+                <div class="otp-inputs">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 0)" onkeydown="handleCodeKeydown(event, this, 0)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 1)" onkeydown="handleCodeKeydown(event, this, 1)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 2)" onkeydown="handleCodeKeydown(event, this, 2)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 3)" onkeydown="handleCodeKeydown(event, this, 3)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 4)" onkeydown="handleCodeKeydown(event, this, 4)">
+                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 5)" onkeydown="handleCodeKeydown(event, this, 5)">
+                </div>
+                <div class="otp-resend">Didn't get it? <a onclick="resendCode()">Resend</a></div>
+            </div>
+            <div><button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="goTo(3)" disabled>Continue</button></div>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: PROFILE -->
+    <div class="screen" id="screen3" style="overflow-y: auto;">
+        <div class="emoji-rain-overlay" id="screen3EmojiRain"></div>
+
+        <!-- Profile (single layout for all users) -->
+        <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
+            <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
+                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome to Motiv!</div>
+                <div id="profileSubhead" style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let the crew know who's joining.</div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
+                <div class="s3-photo-upload" style="width: 120px; height: 120px;" onclick="showPhotoPermission()">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" style="display: block;">
+                    <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
+                </div>
+                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
+            </div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">What should we call you?</label>
+                <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
+            </div>
+            <div class="s3-form-group">
+                <label class="s3-form-label">Instagram handle (optional)</label>
+                <div style="position: relative;">
+                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
+                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
+                </div>
+            </div>
+            <div style="flex: 1;"></div>
+        </div>
+
+        <!-- Shared bottom bar -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(242,230,226,1) 60%, rgba(242,230,226,0)); z-index: 5;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center;">
+                <span style="font-size: 14px;">&#9888;&#65039;</span> This info will be visible to challenge participants
+            </div>
+            <button class="btn-primary" onclick="goTo(4)">Continue</button>
+        </div>
+
+        <!-- iOS Photo Permission Dialog -->
+        <div class="ios-dialog-overlay" id="photoPermissionOverlay">
+            <div class="ios-dialog">
+                <div class="ios-dialog-body">
+                    <div class="ios-dialog-title">"Motiv" Would Like to Access Your Photos</div>
+                    <div class="ios-dialog-text">This lets you set a profile photo that other challenge participants can see.</div>
+                </div>
+                <div class="ios-dialog-actions">
+                    <button class="ios-dialog-btn" onclick="dismissPhotoPermission()">Don't Allow</button>
+                    <button class="ios-dialog-btn ios-dialog-btn--bold" onclick="allowPhotoAccess()">Allow</button>
+                </div>
+            </div>
+        </div>
+        <div class="action-sheet-overlay" id="photoActionSheet">
+            <div class="action-sheet">
+                <div class="action-sheet-group">
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_camera</span> Take Photo</button>
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_library</span> Choose from Library</button>
+                </div>
+                <div class="action-sheet-cancel action-sheet-group">
+                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: HOW IT WORKS (card-in-card) -->
+    <div class="screen" id="screen4">
+        <div class="s4h-layout">
+            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(3)"><span class="material-icons">arrow_back</span></a></div>
+
+            <div class="s4h-header">
+                <div class="s4h-title">Your accountability superpower</div>
+                <div class="s4h-subtitle">Here's how it works.</div>
+            </div>
+
+            <!-- Accountability: card-in-card -->
+            <div class="hiw-outer">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 18px; margin-left: auto; margin-right: auto;">
+                    <!-- Sparkle icon -->
+                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #C9B1CE, #D0DEDF); display: flex; align-items: center; justify-content: center;">
+                        <span class="material-icons" style="font-size: 34px; color: #fff;">auto_awesome</span>
+                    </div>
+                </div>
+                <div class="hiw-big-title" id="hiwTitle">Your Motiv,<br>their challenge</div>
+                <div class="hiw-body">A small deposit — your skin in the game. Join a creator's challenge, hit your goals together, and earn it all back. Miss, and you forfeit it.</div>
+                <div class="hiw-pill"><span class="material-icons">lock</span> Stripe Secured</div>
+                <div class="hiw-inner">
+                    <div class="hiw-inner-setup">Hit your goals?</div>
+                    <div class="hiw-inner-value">Earn it all back + more.</div>
+                    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 14px;">
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-icons" style="font-size: 15px; color: #fff;">payments</span>
+                        </div>
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-icons" style="font-size: 15px; color: #fff;">card_giftcard</span>
+                        </div>
+                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
+                            <span class="material-icons" style="font-size: 15px; color: #fff;">emoji_events</span>
+                        </div>
+                    </div>
+                    <div class="hiw-inner-note">Rewards &amp; bonuses when available</div>
+                </div>
+            </div>
+
+            <div class="s4h-ctas">
+                <button class="btn-primary" id="hiwCTA" onclick="goTo(5)">Find your creator</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: FIND CREATOR -->
+    <div class="screen" id="screen5">
+        <div style="flex:1; display:flex; flex-direction:column; padding:56px 20px 0; min-height:0;">
             <div class="picker-header">
-                <div class="picker-title">Welcome to Motiv</div>
+                <div class="picker-title">Find your creator</div>
                 <div class="picker-subtitle">Most people find us through a creator they follow. Who brought you here?</div>
             </div>
             <div style="flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0;">
@@ -599,6 +741,11 @@
                     <div class="picker-handle">@tyler_pedals</div>
                     <div class="picker-tag">Cycling</div>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 14px;">
+                <button id="showMoreBtn" onclick="showMoreCreators()" style="background: none; border: none; font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-brand-secondary); cursor: pointer; padding: 8px 0;">Show more creators</button>
+            </div>
+            <div class="picker-grid" id="moreCreators" style="display: none; margin-top: 10px;">
                 <div class="picker-card" onclick="selectCreator(this, 4)">
                     <div class="picker-avatar-wrap"><div class="picker-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=face" alt="Priya"></div><div class="picker-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div></div>
                     <div class="picker-name">Priya Sharma</div>
@@ -641,188 +788,6 @@
         <div class="picker-bottom" style="position:relative; flex-shrink:0;">
             <button class="btn-primary" id="pickerCTA" onclick="confirmCreator()" style="opacity: 0.35; pointer-events: none;">See their challenge</button>
             <button class="picker-explore-link" onclick="chooseExploring()">I'm just exploring</button>
-        </div>
-    </div>
-
-    <!-- SCREEN 2: SIGN IN (adaptive) -->
-    <div class="screen" id="screen2">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
-            <div style="flex: 1.2; min-height: 24px;"></div>
-
-            <!-- Creator-personalized sign in -->
-            <div class="path-creator">
-                <div class="s1-invited-label">Your creator</div>
-                <div class="s1-creator-header">
-                    <div class="s1-avatar-wrap">
-                        <div class="s1-avatar"><img id="signInAvatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Creator"></div>
-                        <div class="s1-verified-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                    </div>
-                    <div class="s1-name" id="signInName">Ellie Snackson</div>
-                    <div class="s1-handle" id="signInHandle">@doodle_cycles</div>
-                </div>
-                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">My vibe.<br>Your moment.</div>
-                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Sign in or create an account to get started.</div>
-            </div>
-
-            <!-- Generic sign in -->
-            <div class="path-generic">
-                <div style="text-align: center; margin-bottom: var(--space-lg);">
-                    <div style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; line-height: 1;">Motiv</div>
-                </div>
-                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">Let's get moving</div>
-                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Sign in or create an account to get started.</div>
-            </div>
-
-            <div class="auth-section">
-                <button class="auth-btn auth-btn--apple" onclick="goTo(4)">
-                    <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-                    Continue with Apple
-                </button>
-                <button class="auth-btn auth-btn--google" onclick="goTo(4)">
-                    <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                    Continue with Google
-                </button>
-            </div>
-            <div style="height: 28px;"></div>
-            <div class="divider"><span class="divider-line"></span><span class="divider-text">or</span><span class="divider-line"></span></div>
-            <div style="height: 28px;"></div>
-            <div>
-                <div style="font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px;">Continue with email</div>
-                <input type="email" class="form-input" id="emailInput" placeholder="Enter your email" autocomplete="email" oninput="validateEmail()">
-                <div class="form-helper">We'll send you a one-time code. No password required.</div>
-            </div>
-            <div style="flex: 0.5; min-height: 16px;"></div>
-            <div><button class="btn-primary btn-disabled" id="emailContinueBtn" onclick="submitEmail()" disabled>Continue</button></div>
-        </div>
-    </div>
-
-    <!-- SCREEN 3: VERIFY CODE -->
-    <div class="screen" id="screen3">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
-            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(2)"><span class="material-icons">arrow_back</span></a></div>
-            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 8px;">Check your email</div>
-                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 36px;">We sent a code to <strong id="otpEmailDisplay">your email</strong></div>
-                <div class="otp-inputs">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 0)" onkeydown="handleCodeKeydown(event, this, 0)">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 1)" onkeydown="handleCodeKeydown(event, this, 1)">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 2)" onkeydown="handleCodeKeydown(event, this, 2)">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 3)" onkeydown="handleCodeKeydown(event, this, 3)">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 4)" onkeydown="handleCodeKeydown(event, this, 4)">
-                    <input class="otp-box" type="text" inputmode="numeric" maxlength="1" oninput="handleCodeInput(this, 5)" onkeydown="handleCodeKeydown(event, this, 5)">
-                </div>
-                <div class="otp-resend">Didn't get it? <a onclick="resendCode()">Resend</a></div>
-            </div>
-            <div><button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="goTo(4)" disabled>Continue</button></div>
-        </div>
-    </div>
-
-    <!-- SCREEN 4: PROFILE (adaptive) -->
-    <div class="screen" id="screen4" style="overflow-y: auto;">
-        <div class="emoji-rain-overlay" id="screen4EmojiRain"></div>
-
-        <!-- Profile (single layout for all users) -->
-        <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
-            <div style="text-align: center; margin-bottom: 24px; margin-top: 16px;">
-                <div style="font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--color-text-primary); line-height: 1.2; margin-bottom: 6px;">Welcome to Motiv!</div>
-                <div id="profileSubhead" style="font-size: 15px; color: var(--color-text-secondary); line-height: 1.45;">Let the crew know who's joining.</div>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
-                <div class="s3-photo-upload" style="width: 120px; height: 120px;" onclick="showPhotoPermission()">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" style="display: block;">
-                    <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
-                </div>
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
-            </div>
-            <div class="s3-form-group">
-                <label class="s3-form-label">What should we call you?</label>
-                <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
-            </div>
-            <div class="s3-form-group">
-                <label class="s3-form-label">Instagram handle (optional)</label>
-                <div style="position: relative;">
-                    <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
-                    <input type="text" class="form-input" placeholder="your_handle" style="font-size: 15px; padding: 12px 14px 12px 30px;">
-                </div>
-            </div>
-            <div style="flex: 1;"></div>
-        </div>
-
-        <!-- Shared bottom bar -->
-        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 24px 28px; background: linear-gradient(to top, rgba(242,230,226,1) 60%, rgba(242,230,226,0)); z-index: 5;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center;">
-                <span style="font-size: 14px;">&#9888;&#65039;</span> This info will be visible to challenge participants
-            </div>
-            <button class="btn-primary" onclick="goTo(5)">Continue</button>
-        </div>
-
-        <!-- iOS Photo Permission Dialog -->
-        <div class="ios-dialog-overlay" id="photoPermissionOverlay">
-            <div class="ios-dialog">
-                <div class="ios-dialog-body">
-                    <div class="ios-dialog-title">"Motiv" Would Like to Access Your Photos</div>
-                    <div class="ios-dialog-text">This lets you set a profile photo that other challenge participants can see.</div>
-                </div>
-                <div class="ios-dialog-actions">
-                    <button class="ios-dialog-btn" onclick="dismissPhotoPermission()">Don't Allow</button>
-                    <button class="ios-dialog-btn ios-dialog-btn--bold" onclick="allowPhotoAccess()">Allow</button>
-                </div>
-            </div>
-        </div>
-        <div class="action-sheet-overlay" id="photoActionSheet">
-            <div class="action-sheet">
-                <div class="action-sheet-group">
-                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_camera</span> Take Photo</button>
-                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()"><span class="material-icons">photo_library</span> Choose from Library</button>
-                </div>
-                <div class="action-sheet-cancel action-sheet-group">
-                    <button class="action-sheet-btn" onclick="dismissPhotoSheet()">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCREEN 5: HOW IT WORKS (card-in-card) -->
-    <div class="screen" id="screen5">
-        <div class="s4h-layout">
-            <div style="margin-bottom: 8px;"><a class="back-btn" onclick="goTo(4)"><span class="material-icons">arrow_back</span></a></div>
-
-            <div class="s4h-header">
-                <div class="s4h-title">Your accountability superpower</div>
-                <div class="s4h-subtitle">Here's how it works.</div>
-            </div>
-
-            <!-- Accountability: card-in-card -->
-            <div class="hiw-outer">
-                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
-                    <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #C9B1CE, #D0DEDF); display: flex; align-items: center; justify-content: center;">
-                        <span class="material-icons" style="font-size: 34px; color: #fff;">auto_awesome</span>
-                    </div>
-                </div>
-                <div class="hiw-big-title" id="hiwTitle">Your Motiv,<br>their challenge</div>
-                <div class="hiw-body">A small deposit — your skin in the game. Join a creator's challenge, hit your goals together, and earn it all back. Miss, and you forfeit it.</div>
-                <div class="hiw-pill"><span class="material-icons">lock</span> Stripe Secured</div>
-                <div class="hiw-inner">
-                    <div class="hiw-inner-setup">Hit your goals?</div>
-                    <div class="hiw-inner-value">Earn it all back + more.</div>
-                    <div style="display: flex; justify-content: center; gap: 12px; margin-top: 14px;">
-                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
-                            <span class="material-icons" style="font-size: 15px; color: #fff;">payments</span>
-                        </div>
-                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
-                            <span class="material-icons" style="font-size: 15px; color: #fff;">card_giftcard</span>
-                        </div>
-                        <div style="width: 28px; height: 28px; border-radius: 50%; background: #6B4E71; display: flex; align-items: center; justify-content: center;">
-                            <span class="material-icons" style="font-size: 15px; color: #fff;">emoji_events</span>
-                        </div>
-                    </div>
-                    <div class="hiw-inner-note">Rewards &amp; bonuses when available</div>
-                </div>
-            </div>
-
-            <div class="s4h-ctas">
-                <button class="btn-primary" id="hiwCTA" onclick="goTo(6)">Browse challenges</button>
-            </div>
         </div>
     </div>
 
@@ -1057,15 +1022,12 @@
     function applyCreatorPath() {
         document.body.classList.add('has-creator');
         const c = creators[selectedCreator];
-        // Update sign-in
-        document.getElementById('signInAvatar').src = c.avatar;
-        document.getElementById('signInName').textContent = c.name;
-        document.getElementById('signInHandle').textContent = c.handle;
         // Update all creator avatar images (profile chat, notifications)
         document.querySelectorAll('.creator-avatar-img').forEach(img => img.src = c.avatar);
         // Update How It Works title and CTA
         document.getElementById('hiwTitle').innerHTML = "Your Motiv,<br>" + c.first + "'s challenge";
         document.getElementById('hiwCTA').textContent = "See " + c.first + "'s challenge";
+        document.getElementById('hiwCTA').setAttribute('onclick', 'goTo(6)');
         // Update Challenge Details
         document.getElementById('collabBadgeHandle').textContent = c.handle;
         document.getElementById('aboutCreatorName').textContent = c.first;
@@ -1081,7 +1043,8 @@
     function applyGenericPath() {
         document.body.classList.remove('has-creator');
         document.getElementById('hiwTitle').innerHTML = "Your Motiv,<br>their challenge";
-        document.getElementById('hiwCTA').textContent = 'Browse challenges';
+        document.getElementById('hiwCTA').textContent = 'Find your creator';
+        document.getElementById('hiwCTA').setAttribute('onclick', 'goTo(5)');
         document.getElementById('joinCTA').textContent = 'Join challenge';
         document.getElementById('profileSubhead').textContent = "Let the crew know who's joining.";
     }
@@ -1089,13 +1052,18 @@
     function confirmCreator() {
         if (selectedCreator === null) return;
         applyCreatorPath();
-        goTo(2);
+        goTo(6);
     }
 
     function chooseExploring() {
         selectedCreator = null;
         applyGenericPath();
-        goTo(2);
+        goTo(6);
+    }
+
+    function showMoreCreators() {
+        document.getElementById('moreCreators').style.display = 'grid';
+        document.getElementById('showMoreBtn').style.display = 'none';
     }
 
     // ─── Splash animation ───
@@ -1122,7 +1090,7 @@
     window.addEventListener('DOMContentLoaded', () => { setTimeout(runSplash, 100); });
 
     // ─── Navigation ───
-    const names = ['Splash','Find Creator','Sign In','Verify','Profile','How It Works','Challenge Details','Notifications','Join Flow'];
+    const names = ['Splash','Sign In','Verify','Profile','How It Works','Find Creator','Challenge Details','Notifications','Join Flow'];
     let cur = 0;
     const total = names.length;
     const purpleScreens = [6];
@@ -1152,7 +1120,7 @@
         const otpBtn = document.getElementById('otpContinueBtn');
         otpBtn.disabled = true;
         otpBtn.classList.add('btn-disabled');
-        goTo(3);
+        goTo(2);
         setTimeout(() => { document.querySelectorAll('.otp-box')[0].focus(); }, 400);
     }
 
@@ -1184,7 +1152,7 @@
     function triggerProfileEmojiRain() {
         if (profileRainFired) return;
         profileRainFired = true;
-        const overlay = document.getElementById('screen4EmojiRain');
+        const overlay = document.getElementById('screen3EmojiRain');
         overlay.innerHTML = '';
         const emojis = ['🎉', '❤️', '🙌', '🔥', '✨'];
         for (let i = 0; i < 28; i++) {
@@ -1214,7 +1182,7 @@
         setTimeout(() => { screens[prevScreen].classList.remove('exiting'); }, 500);
 
         if (prevScreen === 0) cancelSplash();
-        if (i === 4) setTimeout(() => triggerProfileEmojiRain(), 300);
+        if (i === 3) setTimeout(() => triggerProfileEmojiRain(), 300);
         if (i === 6) startCountdown();
     }
 

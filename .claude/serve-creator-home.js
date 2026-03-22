@@ -8,7 +8,7 @@ const baseDir = path.join(__dirname, '..', 'docs', 'examples', 'Creator', 'Creat
 http.createServer((req, res) => {
   const parsed = url.parse(req.url, true);
   const state = parsed.query.state || 'first-time';
-  const filePath = path.join(baseDir, `home-${state}.html`);
+  const filePath = path.join(baseDir, `collab-${state}.html`);
 
   try {
     const html = fs.readFileSync(filePath, 'utf8');
@@ -16,6 +16,6 @@ http.createServer((req, res) => {
     res.end(html);
   } catch (e) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end(`File not found: home-${state}.html\nAvailable: ?state=first-time, ?state=needs-dates`);
+    res.end(`File not found: collab-${state}.html\nAvailable: ?state=first-time, ?state=needs-dates, ?state=needs-verify, ?state=live, ?state=live-multi, ?state=between`);
   }
 }).listen(8771, () => console.log('Serving creator home on http://localhost:8771?state=first-time'));

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collabs — Needs Dates</title>
+    <title>Collabs — Between</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -207,39 +207,6 @@
             line-height: 22px;
         }
 
-        .earnings-teaser {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            padding: 10px 14px;
-            background: var(--primary-100);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .earnings-teaser:hover { transform: translateY(-1px); opacity: 0.95; }
-
-        .earnings-teaser-amount {
-            font-family: var(--font-headline);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--orange-100);
-            line-height: 1;
-        }
-
-        .earnings-teaser-text {
-            flex: 1;
-            font-size: 12px;
-            color: rgba(255,255,255,0.75);
-            line-height: 15px;
-        }
-
-        .earnings-teaser-arrow {
-            color: var(--orange-60);
-        }
-        .earnings-teaser-arrow .material-icons { font-size: 18px; }
-
         /* =========================================
            CONTENT
            ========================================= */
@@ -252,11 +219,10 @@
         }
 
         /* =========================================
-           COLLAB CARD (single, full-width)
+           ACTIVE COLLAB CARD
            ========================================= */
 
         .collab-section {
-            /* no negative margin — single card sits in content flow */
         }
 
         .collab-section-header {
@@ -348,6 +314,10 @@
         }
         .draft-card-badge .material-icons { font-size: 13px; }
 
+        .draft-card-badge.live {
+            background: rgba(60, 179, 113, 0.25);
+        }
+
         .draft-card-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -380,6 +350,33 @@
             border: 1px solid rgba(255,255,255,0.5);
             border-radius: 12px;
             overflow: hidden;
+        }
+
+        .draft-card-progress {
+            padding: 12px 14px;
+        }
+
+        .draft-card-progress-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .draft-card-progress-bar {
+            height: 6px;
+            background: var(--surface-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .draft-card-progress-fill {
+            height: 100%;
+            background: var(--card-accent);
+            border-radius: 3px;
+            transition: width 0.5s ease;
         }
 
         .draft-card-pool-row {
@@ -479,38 +476,344 @@
         .draft-card-cta:active { transform: scale(0.97); }
         .draft-card-cta .material-icons { font-size: 18px; }
 
-        /* Alternative actions below card */
-        .collab-alt-actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            padding: 8px 0 0;
+        /* =========================================
+           CREATOR LOVE SUMMARY
+           ========================================= */
+
+        .love-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .love-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
 
-        .alt-action {
+        .love-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .love-header-title {
+            font-family: var(--font-headline);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .love-header-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
             display: flex;
             align-items: center;
             gap: 4px;
+        }
+        .love-header-count .material-icons { font-size: 14px; color: var(--orange-100); }
+
+        .love-categories {
+            display: flex;
+            gap: 0;
+            margin-bottom: 14px;
+        }
+
+        .love-category {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .love-category + .love-category::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: var(--surface-border);
+        }
+
+        .love-emoji {
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .love-count {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .love-label {
+            font-size: 9px;
+            color: var(--color-text-secondary);
+        }
+
+        .love-quote {
+            background: var(--orange-0);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            position: relative;
+        }
+
+        .love-quote-text {
             font-size: 13px;
+            font-style: italic;
+            color: var(--color-text-primary);
+            line-height: 18px;
+        }
+
+        .love-quote-attr {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .love-see-all {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--orange-100);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 0;
+            margin-top: 12px;
         }
-        .alt-action:hover { text-decoration: underline; }
-        .alt-action .material-icons { font-size: 16px; }
-
-        .alt-action-divider {
-            width: 1px;
-            height: 16px;
-            background: var(--color-border-default);
-            align-self: center;
-        }
+        .love-see-all .material-icons { font-size: 14px; }
 
         /* =========================================
-           INSTAGRAM VERIFICATION CARD
+           EARNINGS CARD (actual, not potential)
+           ========================================= */
+
+        .earnings-card {
+            background: var(--primary-100);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--motion-normal) var(--easing-smooth);
+        }
+        .earnings-card:hover { transform: translateY(-1px); }
+
+
+        .earnings-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-60);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        .earnings-label .material-icons { font-size: 16px; }
+
+        .earnings-equation {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .earnings-eq-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .earnings-eq-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2px;
+        }
+
+        .earnings-eq-label {
+            font-size: 10px;
+            color: var(--orange-60);
+        }
+
+        .earnings-eq-op {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.3);
+            flex-shrink: 0;
+            padding-bottom: 14px;
+        }
+
+        .earnings-eq-total .earnings-eq-value {
+            color: var(--orange-100);
+            font-size: 24px;
+        }
+
+        .earnings-profile-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-60);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .earnings-profile-link .material-icons { font-size: 14px; }
+
+        /* =========================================
+           W9 NAG
+           ========================================= */
+
+        .w9-nag {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .w9-nag:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .w9-nag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--orange-0);
+            border-radius: var(--radius-full);
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            margin-bottom: 14px;
+        }
+        .w9-nag-badge .material-icons { font-size: 14px; }
+
+        .w9-nag-body {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 26px;
+            margin-bottom: 6px;
+        }
+
+        .w9-nag-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 20px;
+            margin-bottom: 16px;
+        }
+
+        .w9-nag-sub span {
+            color: var(--orange-100);
+            font-weight: 600;
+        }
+
+        .w9-nag-cta {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .w9-nag-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .w9-nag-cta:active { transform: scale(0.97); }
+        .w9-nag-cta .material-icons { font-size: 18px; }
+
+        /* =========================================
+           CREATE NEW COLLAB
+           ========================================= */
+
+        .new-collab-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .new-collab-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .new-collab-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .new-collab-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--orange-0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .new-collab-icon .material-icons { font-size: 22px; color: var(--orange-100); }
+
+        .new-collab-info {
+            flex: 1;
+        }
+
+        .new-collab-title {
+            font-family: var(--font-headline);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .new-collab-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .new-collab-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .new-collab-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .new-collab-cta:active { transform: scale(0.97); }
+        .new-collab-cta .material-icons { font-size: 18px; }
+
+        /* =========================================
+           VERIFY / ROW CARD (reused)
            ========================================= */
 
         .verify-card {
@@ -561,116 +864,6 @@
             color: var(--primary-30);
             font-size: 20px;
             flex-shrink: 0;
-        }
-
-        /* =========================================
-           EARNINGS POTENTIAL CARD
-           ========================================= */
-
-        .potential-card {
-            background: var(--primary-100);
-            border-radius: var(--radius-lg);
-            padding: 18px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform var(--motion-normal) var(--easing-smooth);
-        }
-        .potential-card:hover { transform: translateY(-1px); }
-
-        .potential-card::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(201, 122, 106, 0.2) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .potential-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .potential-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--orange-60);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .potential-label .material-icons { font-size: 16px; }
-
-        .potential-tap-hint {
-            font-size: 11px;
-            color: var(--orange-60);
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        .potential-tap-hint .material-icons { font-size: 14px; }
-
-        .potential-amount {
-            font-family: var(--font-headline);
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--orange-100);
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-
-        .potential-amount-label {
-            font-size: 13px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 14px;
-        }
-
-        .potential-breakdown {
-            display: flex;
-            gap: 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 12px;
-        }
-
-        .potential-stat {
-            flex: 1;
-            text-align: center;
-            position: relative;
-        }
-        .potential-stat + .potential-stat::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .potential-stat-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 2px;
-        }
-
-        .potential-stat-label {
-            font-size: 10px;
-            color: var(--orange-60);
-        }
-
-        .potential-note {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 10px;
-            text-align: center;
         }
 
         /* =========================================
@@ -847,12 +1040,82 @@
             opacity: 0.2;
         }
 
+        /* =========================================
+           PAST COLLABS
+           ========================================= */
+
+        .past-collab-row {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .past-collab-row:hover {
+            background: var(--primary-0);
+            transform: translateY(-1px);
+        }
+
+        .past-collab-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .past-collab-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .past-collab-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .past-collab-meta {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-earned {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .past-collab-earned-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--orange-100);
+        }
+
+        .past-collab-earned-label {
+            font-size: 10px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-chevron {
+            font-size: 20px;
+            color: var(--primary-30);
+            flex-shrink: 0;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="label">Collabs — Needs Dates</div>
-    <div class="sublabel">Collab finalized, just needs start &amp; end dates to go live</div>
+    <div class="label">Collabs — Between</div>
+    <div class="sublabel">One completed collab, W9 done — encouraging creator to start another</div>
 
     <div class="phone-frame">
 
@@ -870,139 +1133,126 @@
                 </div>
                 <div class="home-header-content">
                     <div class="header-row">
-                        <div class="greeting">Almost there, Mortimer</div>
+                        <div class="greeting">Hey, Mortimer</div>
                         <div class="icon-btn">
                             <span class="material-icons">notifications_none</span>
                         </div>
                     </div>
-                    <div class="greeting-sub">Set your dates and you're live.</div>
-                    <div class="earnings-teaser">
-                        <div class="earnings-teaser-amount">$729</div>
-                        <div class="earnings-teaser-text">per collab with just 1% of your followers</div>
-                        <div class="earnings-teaser-arrow">
-                            <span class="material-icons">chevron_right</span>
-                        </div>
-                    </div>
+                    <div class="greeting-sub">Great first collab! Ready for another?</div>
                 </div>
             </div>
 
             <!-- Content -->
             <div class="home-content">
 
-                <!-- 1. Single Collab Card -->
+                <!-- 1. Create New Collab (primary CTA for this state) -->
+                <div class="new-collab-card">
+                    <div class="new-collab-top">
+                        <div class="new-collab-icon">
+                            <span class="material-icons">auto_awesome</span>
+                        </div>
+                        <div class="new-collab-info">
+                            <div class="new-collab-title">Ready for another?</div>
+                            <div class="new-collab-subtitle">Your followers are waiting — start your next collab</div>
+                        </div>
+                    </div>
+                    <button class="new-collab-cta">
+                        <span class="material-icons">add</span>
+                        Create a new collab
+                    </button>
+                </div>
+
+                <!-- 2. Creator Love Summary -->
+                <div class="love-card">
+                    <div class="love-header">
+                        <div class="love-header-title">Your community loves you</div>
+                        <div class="love-header-count">
+                            <span class="material-icons">favorite</span>
+                            312 total
+                        </div>
+                    </div>
+                    <div class="love-categories">
+                        <div class="love-category">
+                            <div class="love-emoji">🔥</div>
+                            <div class="love-count">127</div>
+                            <div class="love-label">Fired up</div>
+                        </div>
+                        <div class="love-category">
+                            <div class="love-emoji">💪</div>
+                            <div class="love-count">89</div>
+                            <div class="love-label">So worth it</div>
+                        </div>
+                        <div class="love-category">
+                            <div class="love-emoji">💜</div>
+                            <div class="love-count">54</div>
+                            <div class="love-label">All the feels</div>
+                        </div>
+                        <div class="love-category">
+                            <div class="love-emoji">🌱</div>
+                            <div class="love-count">42</div>
+                            <div class="love-label">Growing</div>
+                        </div>
+                    </div>
+                    <div class="love-quote">
+                        <div class="love-quote-text">"Every week I feel more motivated to push my limits. Mortimer's energy is contagious."</div>
+                        <div class="love-quote-attr">— Sarah K. · @sarahk_runs</div>
+                    </div>
+                    <div class="love-see-all">
+                        Read all messages
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- 3. Earnings -->
+                <div class="earnings-card">
+                    <div class="earnings-label">
+                        <span class="material-icons">account_balance_wallet</span>
+                        Your earnings
+                    </div>
+                    <div class="earnings-equation">
+                        <div class="earnings-eq-item">
+                            <div class="earnings-eq-value">$729</div>
+                            <div class="earnings-eq-label">Past</div>
+                        </div>
+                        <div class="earnings-eq-op">+</div>
+                        <div class="earnings-eq-item">
+                            <div class="earnings-eq-value">$0</div>
+                            <div class="earnings-eq-label">Est. current</div>
+                        </div>
+                        <div class="earnings-eq-op">=</div>
+                        <div class="earnings-eq-item earnings-eq-total">
+                            <div class="earnings-eq-value">$729</div>
+                            <div class="earnings-eq-label">Total</div>
+                        </div>
+                    </div>
+                    <div class="earnings-profile-link">
+                        View earnings details
+                        <span class="material-icons">chevron_right</span>
+                    </div>
+                </div>
+
+                <!-- 4. Past Collabs -->
                 <div class="collab-section">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collab</div>
-                        <div class="collab-section-subtitle">Everything's ready — just pick your dates</div>
+                        <div class="collab-section-title">Past collabs</div>
+                        <div class="collab-section-subtitle">1 completed</div>
                     </div>
 
-                    <div class="draft-card theme-purple">
-                        <div class="draft-card-hero">
-                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
-                            <div class="draft-card-overlay"></div>
-                            <div class="draft-card-hero-content">
-                                <div class="draft-card-badge">
-                                    <span class="material-icons">check_circle</span>
-                                    Ready to launch
-                                </div>
-                                <div class="draft-card-name">Paws & Pedals</div>
-                                <div class="draft-card-dates">
-                                    <span class="material-icons">event</span>
-                                    Dates not set yet
-                                </div>
-                            </div>
+                    <div class="past-collab-row">
+                        <div class="past-collab-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                        <div class="past-collab-info">
+                            <div class="past-collab-name">Paws & Pedals</div>
+                            <div class="past-collab-meta">Apr 6 — May 17 · 487 participants</div>
                         </div>
-                        <div class="draft-card-stats">
-                            <div class="draft-card-grouped">
-                                <div class="draft-card-pool-row">
-                                    <div>
-                                        <div class="draft-card-pool-amount">$20,000</div>
-                                        <div class="draft-card-pool-label">Collab pool</div>
-                                    </div>
-                                    <div class="draft-card-hold">
-                                        <span class="material-icons">credit_card</span>
-                                        $40 hold
-                                    </div>
-                                </div>
-                                <div class="draft-card-divider"></div>
-                                <div class="draft-card-meta-row">
-                                    <div class="draft-card-stat">
-                                        <div class="draft-card-stat-value">500</div>
-                                        <div class="draft-card-stat-label">Participants</div>
-                                    </div>
-                                    <div class="draft-card-stat">
-                                        <div class="draft-card-stat-value">6 wks</div>
-                                        <div class="draft-card-stat-label">Duration</div>
-                                    </div>
-                                </div>
-                                <div class="draft-card-cta-row">
-                                    <button class="draft-card-cta">
-                                        <span class="material-icons">event</span>
-                                        Set Dates & Go Live
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="past-collab-earned">
+                            <div class="past-collab-earned-value">$729</div>
+                            <div class="past-collab-earned-label">earned</div>
                         </div>
+                        <span class="material-icons past-collab-chevron">chevron_right</span>
                     </div>
-
                 </div>
 
-                <!-- 2. Instagram Verification -->
-                <div class="verify-card">
-                    <div class="verify-icon">
-                        <span class="material-icons">camera_alt</span>
-                    </div>
-                    <div class="verify-info">
-                        <div class="verify-title">Verify your Instagram</div>
-                        <div class="verify-subtitle">So followers know it's really you</div>
-                    </div>
-                    <span class="material-icons verify-chevron">chevron_right</span>
-                </div>
-
-                <!-- Agreement & W9 -->
-                <div class="verify-card">
-                    <div class="verify-icon" style="background: var(--primary-60);">
-                        <span class="material-icons">description</span>
-                    </div>
-                    <div class="verify-info">
-                        <div class="verify-title">Creator agreement & W9</div>
-                        <div class="verify-subtitle">Required before your first payout</div>
-                    </div>
-                    <span class="material-icons verify-chevron">chevron_right</span>
-                </div>
-
-                <!-- 4. Earnings Potential -->
-                <div class="potential-card">
-                    <div class="potential-header">
-                        <div class="potential-label">
-                            <span class="material-icons">trending_up</span>
-                            Your earning potential
-                        </div>
-                        <div class="potential-tap-hint">
-                            Learn more
-                            <span class="material-icons">chevron_right</span>
-                        </div>
-                    </div>
-                    <div class="potential-amount">$729</div>
-                    <div class="potential-amount-label">estimated per collab with just 1% of your followers</div>
-                    <div class="potential-breakdown">
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$350</div>
-                            <div class="potential-stat-label">Content + recruit</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$379</div>
-                            <div class="potential-stat-label">Performance bonus</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">500</div>
-                            <div class="potential-stat-label">1% of followers</div>
-                        </div>
-                    </div>
-                    <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
-                </div>
-
-                <!-- Invite Creators -->
+                <!-- 5. Invite Creators -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1015,7 +1265,7 @@
                     </div>
                 </div>
 
-                <!-- Creator Community -->
+                <!-- 7. Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>
