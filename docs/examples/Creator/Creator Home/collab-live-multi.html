@@ -243,41 +243,27 @@
             color: var(--color-text-secondary);
         }
 
+        /* Carousel — full-width snap */
         .carousel-track {
             display: flex;
-            gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            padding: 0 16px 8px;
-            margin: 0 -16px;
+            gap: 0;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
 
-        .draft-card {
-            flex: 0 0 300px;
+        .carousel-slide {
+            flex: 0 0 100%;
+            min-width: 0;
             scroll-snap-align: start;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            cursor: pointer;
-            transition: transform var(--motion-normal) var(--easing-smooth);
-            position: relative;
         }
-        .draft-card:first-child {
-            scroll-margin-left: 16px;
-        }
-        .draft-card:hover { transform: translateY(-2px); }
-
-        /* Card theme colors */
-        .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
-        .draft-card.theme-teal { --card-color: 84,117,119; --card-accent: #547577; }
 
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 6px;
-            padding: 8px 0 4px;
+            padding: 10px 0 0;
         }
 
         .carousel-dot {
@@ -292,6 +278,20 @@
             border-radius: 3px;
             background: var(--orange-100);
         }
+
+        .draft-card {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: transform var(--motion-normal) var(--easing-smooth);
+            position: relative;
+        }
+        .draft-card:hover { transform: translateY(-2px); }
+
+        /* Card theme colors */
+        .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
+        .draft-card.theme-teal { --card-color: 84,117,119; --card-accent: #547577; }
 
         .draft-card-hero {
             position: relative;
@@ -355,6 +355,10 @@
             background: rgba(60, 179, 113, 0.25);
         }
 
+        .draft-card-badge.recruiting {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         .draft-card-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -415,41 +419,6 @@
             border-radius: 3px;
             transition: width 0.5s ease;
         }
-
-        .draft-card-pool-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-        }
-
-        .draft-card-pool-amount {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--card-accent);
-            line-height: 1;
-            margin-bottom: 2px;
-        }
-
-        .draft-card-pool-label {
-            font-size: 10px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-        }
-
-        .draft-card-hold {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 5px 10px;
-            background: rgba(0,0,0,0.04);
-            border: 1.5px solid var(--color-border-default);
-            border-radius: var(--radius-full);
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--card-accent);
-        }
-        .draft-card-hold .material-icons { font-size: 14px; }
 
         .draft-card-divider {
             height: 1px;
@@ -624,7 +593,7 @@
         .love-see-all .material-icons { font-size: 14px; }
 
         /* =========================================
-           EARNINGS CARD (actual, not potential)
+           EARNINGS CARD
            ========================================= */
 
         .earnings-card {
@@ -638,7 +607,6 @@
             transition: transform var(--motion-normal) var(--easing-smooth);
         }
         .earnings-card:hover { transform: translateY(-1px); }
-
 
         .earnings-label {
             font-size: 12px;
@@ -701,79 +669,6 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         .earnings-profile-link .material-icons { font-size: 14px; }
-
-        /* =========================================
-           W9 NAG
-           ========================================= */
-
-        .w9-nag {
-            background: var(--surface-white);
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-lg);
-            padding: 18px;
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .w9-nag:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .w9-nag-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--orange-0);
-            border-radius: var(--radius-full);
-            padding: 5px 12px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--orange-100);
-            margin-bottom: 14px;
-        }
-        .w9-nag-badge .material-icons { font-size: 14px; }
-
-        .w9-nag-body {
-            font-family: var(--font-headline);
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-            line-height: 26px;
-            margin-bottom: 6px;
-        }
-
-        .w9-nag-sub {
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            line-height: 20px;
-            margin-bottom: 16px;
-        }
-
-        .w9-nag-sub span {
-            color: var(--orange-100);
-            font-weight: 600;
-        }
-
-        .w9-nag-cta {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            background: var(--orange-100);
-            color: white;
-            font-family: var(--font-body);
-            font-size: 14px;
-            font-weight: 600;
-            padding: 12px;
-            border-radius: var(--radius-full);
-            border: none;
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .w9-nag-cta:hover { opacity: 0.9; transform: scale(1.02); }
-        .w9-nag-cta:active { transform: scale(0.97); }
-        .w9-nag-cta .material-icons { font-size: 18px; }
 
         /* =========================================
            CREATE NEW COLLAB
@@ -848,60 +743,6 @@
         .new-collab-cta:hover { opacity: 0.9; transform: scale(1.02); }
         .new-collab-cta:active { transform: scale(0.97); }
         .new-collab-cta .material-icons { font-size: 18px; }
-
-        /* =========================================
-           VERIFY / ROW CARD (reused)
-           ========================================= */
-
-        .verify-card {
-            background: var(--surface-white);
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-lg);
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .verify-card:hover {
-            background: var(--primary-0);
-            transform: translateY(-1px);
-        }
-
-        .verify-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .verify-icon .material-icons { font-size: 20px; color: white; }
-
-        .verify-info {
-            flex: 1;
-        }
-
-        .verify-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: 1px;
-        }
-
-        .verify-subtitle {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-        }
-
-        .verify-chevron {
-            color: var(--primary-30);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
 
         /* =========================================
            INVITE CREATORS NUDGE
@@ -1082,7 +923,7 @@
 <body>
 
     <div class="label">Collabs — Live (Multiple)</div>
-    <div class="sublabel">Two active collabs — carousel to switch between them</div>
+    <div class="sublabel">Two active collabs — swipe between full cards with dot indicators</div>
 
     <div class="phone-frame">
 
@@ -1105,127 +946,133 @@
                             <span class="material-icons">notifications_none</span>
                         </div>
                     </div>
-                    <div class="greeting-sub">Your collab is rolling.</div>
+                    <div class="greeting-sub">Your collabs are rolling.</div>
                 </div>
             </div>
 
             <!-- Content -->
             <div class="home-content">
 
-                <!-- 1. Active Collabs -->
+                <!-- 1. Active Collabs (swipeable) -->
                 <div class="collab-section">
                     <div class="collab-section-header">
                         <div class="collab-section-title">Active collabs</div>
-                        <div class="collab-section-subtitle">Tap to view details</div>
+                        <div class="collab-section-subtitle">Swipe to view · 2 active</div>
                     </div>
 
-                    <div class="carousel-track">
-                        <div class="draft-card theme-purple">
-                            <div class="draft-card-hero">
-                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
-                                <div class="draft-card-overlay"></div>
-                                <div class="draft-card-hero-content">
-                                    <div class="draft-card-badge live">
-                                        <span class="material-icons">sensors</span>
-                                        Live — Week 3 of 6
-                                    </div>
-                                    <div class="draft-card-name">Paws & Pedals</div>
-                                    <div class="draft-card-dates">
-                                        <span class="material-icons">event</span>
-                                        Apr 6 — May 17
+                    <div class="carousel-track" id="collabCarousel">
+                        <!-- Slide 1: Paws & Pedals -->
+                        <div class="carousel-slide">
+                            <div class="draft-card theme-purple">
+                                <div class="draft-card-hero">
+                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                                    <div class="draft-card-overlay"></div>
+                                    <div class="draft-card-hero-content">
+                                        <div class="draft-card-badge live">
+                                            <span class="material-icons">sensors</span>
+                                            Live — Week 3 of 6
+                                        </div>
+                                        <div class="draft-card-name">Paws & Pedals</div>
+                                        <div class="draft-card-dates">
+                                            <span class="material-icons">event</span>
+                                            Apr 6 — May 17
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="draft-card-stats">
-                                <div class="draft-card-grouped">
-                                    <div class="draft-card-progress">
-                                        <div class="draft-card-progress-label">
-                                            <span>Week 3 of 6</span>
-                                            <span>50%</span>
+                                <div class="draft-card-stats">
+                                    <div class="draft-card-grouped">
+                                        <div class="draft-card-progress">
+                                            <div class="draft-card-progress-label">
+                                                <span>Week 3 of 6</span>
+                                                <span>50%</span>
+                                            </div>
+                                            <div class="draft-card-progress-bar">
+                                                <div class="draft-card-progress-fill" style="width: 50%"></div>
+                                            </div>
                                         </div>
-                                        <div class="draft-card-progress-bar">
-                                            <div class="draft-card-progress-fill" style="width: 50%"></div>
+                                        <div class="draft-card-divider"></div>
+                                        <div class="draft-card-meta-row">
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">487</div>
+                                                <div class="draft-card-stat-label">Participants</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">82%</div>
+                                                <div class="draft-card-stat-label">Completion</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">$19,480</div>
+                                                <div class="draft-card-stat-label">Pool</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="draft-card-divider"></div>
-                                    <div class="draft-card-meta-row">
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">487</div>
-                                            <div class="draft-card-stat-label">Participants</div>
+                                        <div class="draft-card-cta-row">
+                                            <button class="draft-card-cta">
+                                                <span class="material-icons">open_in_new</span>
+                                                View Collab
+                                            </button>
                                         </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">82%</div>
-                                            <div class="draft-card-stat-label">Completion</div>
-                                        </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">$19,480</div>
-                                            <div class="draft-card-stat-label">Pool</div>
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-cta-row">
-                                        <button class="draft-card-cta">
-                                            <span class="material-icons">open_in_new</span>
-                                            View Collab
-                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="draft-card theme-teal">
-                            <div class="draft-card-hero">
-                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80')"></div>
-                                <div class="draft-card-overlay"></div>
-                                <div class="draft-card-hero-content">
-                                    <div class="draft-card-badge live">
-                                        <span class="material-icons">sensors</span>
-                                        Recruiting — 12 days left
-                                    </div>
-                                    <div class="draft-card-name">Dawn Risers</div>
-                                    <div class="draft-card-dates">
-                                        <span class="material-icons">event</span>
-                                        May 19 — Jun 29
+                        <!-- Slide 2: Dawn Risers -->
+                        <div class="carousel-slide">
+                            <div class="draft-card theme-teal">
+                                <div class="draft-card-hero">
+                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&q=80')"></div>
+                                    <div class="draft-card-overlay"></div>
+                                    <div class="draft-card-hero-content">
+                                        <div class="draft-card-badge recruiting">
+                                            <span class="material-icons">group_add</span>
+                                            Recruiting — 12 days left
+                                        </div>
+                                        <div class="draft-card-name">Dawn Risers</div>
+                                        <div class="draft-card-dates">
+                                            <span class="material-icons">event</span>
+                                            May 1 — Jun 11
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="draft-card-stats">
-                                <div class="draft-card-grouped">
-                                    <div class="draft-card-progress">
-                                        <div class="draft-card-progress-label">
-                                            <span>Signups</span>
-                                            <span>126 / 500</span>
+                                <div class="draft-card-stats">
+                                    <div class="draft-card-grouped">
+                                        <div class="draft-card-progress">
+                                            <div class="draft-card-progress-label">
+                                                <span>Recruiting</span>
+                                                <span>73%</span>
+                                            </div>
+                                            <div class="draft-card-progress-bar">
+                                                <div class="draft-card-progress-fill" style="width: 73%"></div>
+                                            </div>
                                         </div>
-                                        <div class="draft-card-progress-bar">
-                                            <div class="draft-card-progress-fill" style="width: 25%"></div>
+                                        <div class="draft-card-divider"></div>
+                                        <div class="draft-card-meta-row">
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">219</div>
+                                                <div class="draft-card-stat-label">Signed up</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">300</div>
+                                                <div class="draft-card-stat-label">Goal</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">$8,760</div>
+                                                <div class="draft-card-stat-label">Pool</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="draft-card-divider"></div>
-                                    <div class="draft-card-meta-row">
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">126</div>
-                                            <div class="draft-card-stat-label">Signed up</div>
+                                        <div class="draft-card-cta-row">
+                                            <button class="draft-card-cta">
+                                                <span class="material-icons">open_in_new</span>
+                                                View Collab
+                                            </button>
                                         </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">4 wks</div>
-                                            <div class="draft-card-stat-label">Duration</div>
-                                        </div>
-                                        <div class="draft-card-stat">
-                                            <div class="draft-card-stat-value">$15,000</div>
-                                            <div class="draft-card-stat-label">Pool</div>
-                                        </div>
-                                    </div>
-                                    <div class="draft-card-cta-row">
-                                        <button class="draft-card-cta">
-                                            <span class="material-icons">open_in_new</span>
-                                            View Collab
-                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="carousel-dots">
+                    <div class="carousel-dots" id="carouselDots">
                         <div class="carousel-dot active"></div>
                         <div class="carousel-dot"></div>
                     </div>
@@ -1308,7 +1155,7 @@
                         </div>
                         <div class="new-collab-info">
                             <div class="new-collab-title">Keep the momentum going</div>
-                            <div class="new-collab-subtitle">Plan your next collab while this one's hot</div>
+                            <div class="new-collab-subtitle">Plan your next collab while these are hot</div>
                         </div>
                     </div>
                     <button class="new-collab-cta">
@@ -1317,7 +1164,7 @@
                     </button>
                 </div>
 
-                <!-- 6. Invite Creators -->
+                <!-- 5. Invite Creators -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1330,7 +1177,7 @@
                     </div>
                 </div>
 
-                <!-- 7. Creator Community -->
+                <!-- 6. Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>
@@ -1364,13 +1211,15 @@
     </div>
 
     <script>
-        const track = document.querySelector('.carousel-track');
-        const dots = document.querySelectorAll('.carousel-dot');
+        // Dot tracking for carousel
+        const track = document.getElementById('collabCarousel');
+        const dots = document.querySelectorAll('#carouselDots .carousel-dot');
 
         track.addEventListener('scroll', () => {
             const scrollLeft = track.scrollLeft;
-            const cardWidth = 312;
-            const activeIndex = Math.round(scrollLeft / cardWidth);
+            const slideWidth = track.offsetWidth;
+            const activeIndex = Math.round(scrollLeft / slideWidth);
+
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === activeIndex);
             });

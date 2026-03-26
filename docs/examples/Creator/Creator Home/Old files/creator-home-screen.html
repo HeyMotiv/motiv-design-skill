@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home Screen — All States</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+
+        :root {
+            --color-ink: #2B2E34;
+            --color-clay: #C97A6A;
+            --color-clay-hover: #B86B5C;
+            --color-blush: #F3E6E2;
+            --color-sage: #8FA6A0;
+            --color-sand: #E7D9C9;
+            --color-plum: #6B4E71;
+            --color-boundary: #B8574E;
+            --color-white: #FEFCFA;
+            --color-success: #22C55E;
+            --color-warning: #F59E0B;
+
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-bg-primary: #FEFCFA;
+            --color-bg-secondary: #F3E6E2;
+            --color-border-default: #E5E7EB;
+            --color-border-subtle: #F3F4F6;
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'DM Sans', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-full: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-warm: 0 4px 12px rgba(201,122,106,0.15), 0 12px 32px rgba(201,122,106,0.12), 0 2px 4px rgba(201,122,106,0.08);
+
+            --motion-fast: 150ms;
+            --motion-normal: 250ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        /* =========================================
+           STATE TOGGLE (outside phone)
+           ========================================= */
+
+        .state-toggle {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .state-btn {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            color: #999;
+            background: #1a1a24;
+            border: 1.5px solid #333;
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+
+        .state-btn:hover { border-color: #666; color: #ccc; }
+
+        .state-btn.active {
+            background: var(--color-clay);
+            border-color: var(--color-clay);
+            color: white;
+        }
+
+        .page-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        /* =========================================
+           PHONE FRAME
+           ========================================= */
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .phone-scroll::-webkit-scrollbar { display: none; }
+
+        /* =========================================
+           STATUS BAR
+           ========================================= */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* =========================================
+           HEADER / GREETING
+           ========================================= */
+
+        .home-header {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-header-gradient {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .home-header-gradient.warm {
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0%,
+                #F7E6DE 40%,
+                #FAF0EB 70%,
+                var(--color-bg-primary) 100%
+            );
+        }
+
+        .home-header-content {
+            position: relative;
+            z-index: 1;
+            padding: 4px 24px 20px;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .greeting {
+            font-family: var(--font-headline);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 34px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .icon-btn:hover { background: white; }
+        .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
+
+        .notif-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 18px;
+            height: 18px;
+            background: var(--color-clay);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+
+        .greeting-sub {
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            line-height: 22px;
+        }
+
+        /* =========================================
+           BLOB ANIMATIONS (header background)
+           ========================================= */
+
+        .blob-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .blob-a {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(235, 160, 155, 0.35) 0%, rgba(248, 210, 195, 0.15) 100%);
+            top: -100px;
+            right: -80px;
+            animation: drift-a 14s ease-in-out infinite;
+        }
+
+        .blob-b {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(240, 208, 155, 0.30) 0%, rgba(250, 235, 210, 0.12) 100%);
+            top: -60px;
+            left: -60px;
+            animation: drift-b 12s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+
+        @keyframes drift-a {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(15px, -20px); }
+            50% { transform: translate(-10px, -30px); }
+            75% { transform: translate(-25px, -10px); }
+        }
+
+        @keyframes drift-b {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-12px, 18px); }
+            50% { transform: translate(20px, -15px); }
+            75% { transform: translate(-18px, -22px); }
+        }
+
+        /* =========================================
+           CONTENT AREA
+           ========================================= */
+
+        .home-content {
+            padding: 0 16px 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* =========================================
+           ACTIVE COLLAB CARD (Hero)
+           ========================================= */
+
+        .collab-hero-card {
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            box-shadow: var(--shadow-warm);
+            cursor: pointer;
+            transition: transform var(--motion-normal) var(--easing-smooth), box-shadow var(--motion-normal) var(--easing-smooth);
+        }
+        .collab-hero-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(201,122,106,0.2), 0 16px 40px rgba(201,122,106,0.15);
+        }
+
+        .collab-hero-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .collab-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .badge-prelive {
+            background: #FEF3C7;
+            color: #B45309;
+        }
+
+        .badge-live {
+            background: #DCFCE7;
+            color: #16A34A;
+        }
+
+        .badge-ended {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+        }
+
+        .collab-hero-badge .material-icons {
+            font-size: 12px;
+        }
+
+        .collab-hero-more {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-tertiary);
+            padding: 4px;
+        }
+
+        .collab-hero-name {
+            font-family: var(--font-headline);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 28px;
+            margin-bottom: 4px;
+        }
+
+        .collab-hero-dates {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 16px;
+        }
+
+        /* Pre-live specific */
+        .signup-progress {
+            margin-bottom: 16px;
+        }
+
+        .signup-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .signup-count {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+        }
+        .signup-count span {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .signup-goal {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--color-border-default);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s var(--easing-smooth);
+        }
+        .progress-fill.clay { background: var(--color-clay); }
+        .progress-fill.sage { background: var(--color-sage); }
+        .progress-fill.success { background: var(--color-success); }
+
+        .signup-milestones {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+        }
+
+        .milestone-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .milestone-dot-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+        }
+        .milestone-dot-circle.reached { background: var(--color-clay); }
+
+        .milestone-dot-label {
+            font-size: 10px;
+            color: var(--color-text-tertiary);
+            font-weight: 500;
+        }
+
+        .collab-hero-stats {
+            display: flex;
+            gap: 0;
+            border-top: 1px solid var(--color-border-default);
+            padding-top: 14px;
+        }
+
+        .hero-stat {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-stat + .hero-stat::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 1px;
+            background: var(--color-border-default);
+        }
+
+        .hero-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .hero-stat-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* Live stats grid */
+        .live-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .live-stat-cell {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .live-stat-cell-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .live-stat-cell-label {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        .day-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-sage);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+        }
+
+        .day-pill .material-icons { font-size: 14px; }
+
+        /* Countdown */
+        .countdown-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .countdown-icon {
+            width: 32px;
+            height: 32px;
+            background: #FEF3C7;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .countdown-icon .material-icons { font-size: 18px; color: #B45309; }
+
+        .countdown-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .countdown-text span {
+            font-weight: 400;
+            color: var(--color-text-secondary);
+        }
+
+        /* =========================================
+           MY PROGRESS CARD (Participant view)
+           ========================================= */
+
+        .my-progress-card {
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .my-progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .my-progress-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .my-progress-title .material-icons {
+            font-size: 18px;
+            color: var(--color-sage);
+        }
+
+        .streak-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #B45309;
+            background: #FEF3C7;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+        }
+
+        .my-progress-body {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .progress-ring-container {
+            position: relative;
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+        }
+
+        .progress-ring {
+            width: 56px;
+            height: 56px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: var(--color-border-default);
+            stroke-width: 5;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: var(--color-sage);
+            stroke-width: 5;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s var(--easing-smooth);
+        }
+
+        .progress-ring-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .my-progress-info {
+            flex: 1;
+        }
+
+        .my-progress-status {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .my-progress-detail {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .log-activity-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-sage);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .log-activity-btn:hover { background: #7D948E; transform: scale(1.02); }
+        .log-activity-btn:active { transform: scale(0.97); }
+        .log-activity-btn .material-icons { font-size: 14px; }
+
+        .logged-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-success);
+        }
+        .logged-status .material-icons { font-size: 16px; }
+
+        /* =========================================
+           QUICK ACTIONS
+           ========================================= */
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 4px;
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .quick-action:hover {
+            background: var(--color-bg-secondary);
+            transform: translateY(-1px);
+        }
+        .quick-action:active { transform: scale(0.97); }
+
+        .quick-action-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quick-action-icon .material-icons { font-size: 20px; }
+
+        .quick-action-icon.clay-bg { background: rgba(201,122,106,0.12); }
+        .quick-action-icon.clay-bg .material-icons { color: var(--color-clay); }
+
+        .quick-action-icon.sage-bg { background: rgba(143,166,160,0.12); }
+        .quick-action-icon.sage-bg .material-icons { color: var(--color-sage); }
+
+        .quick-action-icon.plum-bg { background: rgba(107,78,113,0.12); }
+        .quick-action-icon.plum-bg .material-icons { color: var(--color-plum); }
+
+        .quick-action-icon.warning-bg { background: rgba(245,158,11,0.12); }
+        .quick-action-icon.warning-bg .material-icons { color: var(--color-warning); }
+
+        .quick-action-icon.success-bg { background: rgba(34,197,94,0.12); }
+        .quick-action-icon.success-bg .material-icons { color: var(--color-success); }
+
+        .quick-action-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-align: center;
+            line-height: 14px;
+        }
+
+        /* =========================================
+           EARNINGS SUMMARY CARD
+           ========================================= */
+
+        .earnings-card {
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .earnings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .earnings-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .earnings-title .material-icons { font-size: 18px; color: var(--color-plum); }
+
+        .earnings-view-all {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-clay);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .earnings-view-all:hover { text-decoration: underline; }
+
+        .earnings-body {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .earnings-amount {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+        }
+
+        .earnings-breakdown {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .earnings-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .earnings-row-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .earnings-row-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .earnings-row-value.pending { color: var(--color-warning); }
+        .earnings-row-value.available { color: var(--color-success); }
+
+        .cashout-btn {
+            margin-top: 12px;
+            width: 100%;
+            background: var(--color-plum);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .cashout-btn:hover { background: #5C4162; transform: scale(1.02); }
+        .cashout-btn:active { transform: scale(0.97); }
+        .cashout-btn .material-icons { font-size: 16px; }
+
+        /* =========================================
+           REFERRAL PRODUCTS
+           ========================================= */
+
+        .referrals-card {
+            background: white;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .referrals-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .referrals-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .referrals-title .material-icons { font-size: 18px; color: var(--color-clay); }
+
+        .referrals-manage {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-clay);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .referrals-manage:hover { text-decoration: underline; }
+
+        .referral-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .referral-item:last-child { border-bottom: none; }
+
+        .referral-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .referral-icon .material-icons { font-size: 18px; color: var(--color-text-secondary); }
+
+        .referral-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .referral-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .referral-url {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .referral-copy {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            background: var(--color-bg-secondary);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .referral-copy:hover { background: var(--color-sand); }
+        .referral-copy .material-icons { font-size: 16px; color: var(--color-text-secondary); }
+
+        /* =========================================
+           NUDGE / TIP CARD
+           ========================================= */
+
+        .nudge-card {
+            background: linear-gradient(135deg, var(--color-bg-secondary) 0%, #F7ECE8 100%);
+            border: 1px solid var(--color-sand);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .nudge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: rgba(201,122,106,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .nudge-icon .material-icons { font-size: 18px; color: var(--color-clay); }
+
+        .nudge-text {
+            font-size: 13px;
+            color: var(--color-text-primary);
+            line-height: 19px;
+        }
+        .nudge-text strong { font-weight: 600; }
+
+        /* =========================================
+           EMPTY STATE (No active collab)
+           ========================================= */
+
+        .empty-hero {
+            background: linear-gradient(135deg, var(--color-bg-secondary) 0%, #F7ECE8 50%, #FFF7ED 100%);
+            border: 2px dashed var(--color-sand);
+            border-radius: var(--radius-xl);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .empty-hero-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(201,122,106,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .empty-hero-icon .material-icons { font-size: 30px; color: var(--color-clay); }
+
+        .empty-hero-title {
+            font-family: var(--font-headline);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+            line-height: 28px;
+        }
+
+        .empty-hero-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 21px;
+            margin-bottom: 20px;
+        }
+
+        .create-collab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-clay);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .create-collab-btn:hover { background: var(--color-clay-hover); transform: scale(1.02); }
+        .create-collab-btn:active { transform: scale(0.97); }
+        .create-collab-btn .material-icons { font-size: 20px; }
+
+        /* =========================================
+           BETWEEN COLLABS — LAST COLLAB RECAP
+           ========================================= */
+
+        .recap-card {
+            background: #1E1B4B;
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recap-card::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,122,106,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .recap-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #A5B4FC;
+            margin-bottom: 8px;
+        }
+
+        .recap-name {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            line-height: 26px;
+        }
+
+        .recap-stats {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .recap-stat {
+            text-align: center;
+        }
+
+        .recap-stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-clay);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .recap-stat-label {
+            font-size: 11px;
+            color: #A5B4FC;
+        }
+
+        .recap-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .recap-btn-primary {
+            flex: 1;
+            background: var(--color-clay);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .recap-btn-primary:hover { background: var(--color-clay-hover); }
+        .recap-btn-primary .material-icons { font-size: 16px; }
+
+        .recap-btn-secondary {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .recap-btn-secondary:hover { background: rgba(255,255,255,0.15); }
+        .recap-btn-secondary .material-icons { font-size: 16px; }
+
+        /* =========================================
+           MULTI-COLLAB INDICATOR
+           ========================================= */
+
+        .multi-collab-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-clay);
+            padding: 6px;
+            cursor: pointer;
+            margin-top: -8px;
+        }
+        .multi-collab-link .material-icons { font-size: 16px; }
+        .multi-collab-link:hover { text-decoration: underline; }
+
+        /* =========================================
+           TAB BAR
+           ========================================= */
+
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 84px;
+            background: white;
+            border-top: 1px solid var(--color-border-default);
+            display: flex;
+            padding: 8px 16px 28px;
+            z-index: 20;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 0;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+
+        .tab-item .material-icons {
+            font-size: 24px;
+            color: var(--color-text-tertiary);
+            transition: color var(--motion-fast);
+        }
+
+        .tab-item-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            transition: color var(--motion-fast);
+        }
+
+        .tab-item.active .material-icons { color: var(--color-clay); }
+        .tab-item.active .tab-item-label { color: var(--color-clay); }
+
+        /* Home indicator */
+        .home-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 5px;
+            background: var(--color-text-primary);
+            border-radius: 3px;
+            opacity: 0.2;
+        }
+
+        /* =========================================
+           SECTION LABELS
+           ========================================= */
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-tertiary);
+            padding: 4px 0;
+        }
+
+        /* =========================================
+           VISIBILITY STATES
+           ========================================= */
+
+        .state-view { display: none; }
+        .state-view.active { display: flex; flex-direction: column; gap: 16px; }
+
+        /* =========================================
+           REFERRAL EMPTY STATE
+           ========================================= */
+
+        .referral-empty {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .referral-empty-text {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .add-product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: var(--color-clay);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            border: 1.5px solid var(--color-clay);
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .add-product-btn:hover { background: rgba(201,122,106,0.08); }
+        .add-product-btn .material-icons { font-size: 16px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-title">Creator Home Screen</div>
+    <div class="page-subtitle">Tap a state to switch views</div>
+
+    <!-- State toggle -->
+    <div class="state-toggle">
+        <button class="state-btn active" onclick="switchState('prelive')">Pre-Live</button>
+        <button class="state-btn" onclick="switchState('live')">Live</button>
+        <button class="state-btn" onclick="switchState('empty')">First Time</button>
+        <button class="state-btn" onclick="switchState('between')">Between Collabs</button>
+    </div>
+
+    <!-- PHONE -->
+    <div class="phone-frame">
+
+        <!-- Status Bar -->
+        <div class="status-bar" id="statusBar">
+            <span>9:41</span>
+            <div class="status-bar-icons">
+                <span class="material-icons">signal_cellular_alt</span>
+                <span class="material-icons">wifi</span>
+                <span class="material-icons">battery_full</span>
+            </div>
+        </div>
+
+        <div class="phone-scroll" id="phoneScroll">
+
+            <!-- HEADER (shared across states) -->
+            <div class="home-header" id="homeHeader">
+                <div class="home-header-gradient warm">
+                    <div class="blob-container">
+                        <div class="blob blob-a"></div>
+                        <div class="blob blob-b"></div>
+                    </div>
+                </div>
+                <div class="home-header-content">
+                    <div class="header-row">
+                        <div class="greeting" id="greetingText">Hey, Chad</div>
+                        <div class="header-icons">
+                            <div class="icon-btn">
+                                <span class="material-icons">notifications_none</span>
+                                <div class="notif-badge" id="notifBadge">3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="greeting-sub" id="greetingSub">Your community is growing.</div>
+                </div>
+            </div>
+
+            <!-- CONTENT -->
+            <div class="home-content">
+
+                <!-- ========================
+                     STATE: PRE-LIVE
+                     ======================== -->
+                <div class="state-view active" id="state-prelive">
+
+                    <!-- Hero Collab Card -->
+                    <div class="collab-hero-card">
+                        <div class="collab-hero-top">
+                            <div class="collab-hero-badge badge-prelive">
+                                <span class="material-icons">schedule</span>
+                                Recruiting
+                            </div>
+                            <button class="collab-hero-more">
+                                <span class="material-icons">more_horiz</span>
+                            </button>
+                        </div>
+                        <div class="collab-hero-name">30-Day Shred Challenge</div>
+                        <div class="collab-hero-dates">Starts Apr 1 · 30 days</div>
+
+                        <div class="countdown-row">
+                            <div class="countdown-icon">
+                                <span class="material-icons">timer</span>
+                            </div>
+                            <div class="countdown-text">
+                                13 days <span>until launch</span>
+                            </div>
+                        </div>
+
+                        <div class="signup-progress">
+                            <div class="signup-progress-header">
+                                <div class="signup-count">147 <span>sign-ups</span></div>
+                                <div class="signup-goal">Goal: 250</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill clay" style="width: 58.8%"></div>
+                            </div>
+                            <div class="signup-milestones">
+                                <div class="milestone-dot">
+                                    <div class="milestone-dot-circle reached"></div>
+                                    <div class="milestone-dot-label">100</div>
+                                </div>
+                                <div class="milestone-dot">
+                                    <div class="milestone-dot-circle"></div>
+                                    <div class="milestone-dot-label">250</div>
+                                </div>
+                                <div class="milestone-dot">
+                                    <div class="milestone-dot-circle"></div>
+                                    <div class="milestone-dot-label">500</div>
+                                </div>
+                                <div class="milestone-dot">
+                                    <div class="milestone-dot-circle"></div>
+                                    <div class="milestone-dot-label">1K</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="collab-hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$2,940</div>
+                                <div class="hero-stat-label">Community pot</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">+23</div>
+                                <div class="hero-stat-label">Today</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$20</div>
+                                <div class="hero-stat-label">Avg entry</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions: Pre-live -->
+                    <div class="section-label">Quick Actions</div>
+                    <div class="quick-actions">
+                        <div class="quick-action">
+                            <div class="quick-action-icon clay-bg">
+                                <span class="material-icons">share</span>
+                            </div>
+                            <div class="quick-action-label">Share Link</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon sage-bg">
+                                <span class="material-icons">videocam</span>
+                            </div>
+                            <div class="quick-action-label">Hype Video</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon plum-bg">
+                                <span class="material-icons">group</span>
+                            </div>
+                            <div class="quick-action-label">View Signups</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon warning-bg">
+                                <span class="material-icons">edit</span>
+                            </div>
+                            <div class="quick-action-label">Edit Collab</div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings -->
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-title">
+                                <span class="material-icons">account_balance_wallet</span>
+                                Earnings
+                            </div>
+                            <button class="earnings-view-all">View all</button>
+                        </div>
+                        <div class="earnings-body">
+                            <div class="earnings-amount">$1,280</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Available</span>
+                                    <span class="earnings-row-value available">$980</span>
+                                </div>
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Pending</span>
+                                    <span class="earnings-row-value pending">$300</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="cashout-btn">
+                            <span class="material-icons">payments</span>
+                            Cash Out $980
+                        </button>
+                    </div>
+
+                    <!-- Referral Products -->
+                    <div class="referrals-card">
+                        <div class="referrals-header">
+                            <div class="referrals-title">
+                                <span class="material-icons">loyalty</span>
+                                My Products
+                            </div>
+                            <button class="referrals-manage">Manage</button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">fitness_center</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">Whoop 4.0</div>
+                                <div class="referral-url">whoop.com/r/chad-fitness</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">blender</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">AG1 Greens</div>
+                                <div class="referral-url">drinkag1.com/chad</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">checkroom</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">Lululemon</div>
+                                <div class="referral-url">lululemon.com/r/CHAD15</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nudge -->
+                    <div class="nudge-card">
+                        <div class="nudge-icon">
+                            <span class="material-icons">lightbulb</span>
+                        </div>
+                        <div class="nudge-text">
+                            <strong>Go live on Instagram</strong> — creators who announce on Stories see 3x more sign-ups in the first 48 hours.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================
+                     STATE: LIVE
+                     ======================== -->
+                <div class="state-view" id="state-live">
+
+                    <!-- Hero Collab Card — Live -->
+                    <div class="collab-hero-card">
+                        <div class="collab-hero-top">
+                            <div class="collab-hero-badge badge-live">
+                                <span class="material-icons">play_circle</span>
+                                Live
+                            </div>
+                            <button class="collab-hero-more">
+                                <span class="material-icons">more_horiz</span>
+                            </button>
+                        </div>
+                        <div class="collab-hero-name">30-Day Shred Challenge</div>
+                        <div class="collab-hero-dates">Apr 1 – Apr 30 · 312 participants</div>
+
+                        <div class="day-pill">
+                            <span class="material-icons">today</span>
+                            Day 12 of 30
+                        </div>
+
+                        <div class="live-stats-grid">
+                            <div class="live-stat-cell">
+                                <div class="live-stat-cell-value">78%</div>
+                                <div class="live-stat-cell-label">Completion rate</div>
+                            </div>
+                            <div class="live-stat-cell">
+                                <div class="live-stat-cell-value">4.2k</div>
+                                <div class="live-stat-cell-label">Avg kJ burned</div>
+                            </div>
+                            <div class="live-stat-cell">
+                                <div class="live-stat-cell-value">243</div>
+                                <div class="live-stat-cell-label">Active today</div>
+                            </div>
+                            <div class="live-stat-cell">
+                                <div class="live-stat-cell-value">47</div>
+                                <div class="live-stat-cell-label">Streak records</div>
+                            </div>
+                        </div>
+
+                        <div class="collab-hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$6,240</div>
+                                <div class="hero-stat-label">Community pot</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-value">$1,872</div>
+                                <div class="hero-stat-label">Your share</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Progress (participant view) -->
+                    <div class="my-progress-card">
+                        <div class="my-progress-header">
+                            <div class="my-progress-title">
+                                <span class="material-icons">directions_run</span>
+                                My Progress
+                            </div>
+                            <div class="streak-badge">🔥 9 day streak</div>
+                        </div>
+                        <div class="my-progress-body">
+                            <div class="progress-ring-container">
+                                <svg class="progress-ring" viewBox="0 0 56 56">
+                                    <circle class="progress-ring-bg" cx="28" cy="28" r="22"></circle>
+                                    <circle class="progress-ring-fill" cx="28" cy="28" r="22"
+                                        stroke-dasharray="138.23"
+                                        stroke-dashoffset="55.29"></circle>
+                                </svg>
+                                <div class="progress-ring-text">60%</div>
+                            </div>
+                            <div class="my-progress-info">
+                                <div class="my-progress-status">Today's workout: not logged</div>
+                                <div class="my-progress-detail">12 of 30 days complete · 3,800 kJ today</div>
+                                <button class="log-activity-btn">
+                                    <span class="material-icons">add_circle</span>
+                                    Log Activity
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions: Live -->
+                    <div class="section-label">Quick Actions</div>
+                    <div class="quick-actions">
+                        <div class="quick-action">
+                            <div class="quick-action-icon clay-bg">
+                                <span class="material-icons">videocam</span>
+                            </div>
+                            <div class="quick-action-label">Record Video</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon sage-bg">
+                                <span class="material-icons">mail</span>
+                            </div>
+                            <div class="quick-action-label">Message All</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon plum-bg">
+                                <span class="material-icons">leaderboard</span>
+                            </div>
+                            <div class="quick-action-label">Leaderboard</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon warning-bg">
+                                <span class="material-icons">share</span>
+                            </div>
+                            <div class="quick-action-label">Share Update</div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings -->
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-title">
+                                <span class="material-icons">account_balance_wallet</span>
+                                Earnings
+                            </div>
+                            <button class="earnings-view-all">View all</button>
+                        </div>
+                        <div class="earnings-body">
+                            <div class="earnings-amount">$3,152</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Available</span>
+                                    <span class="earnings-row-value available">$1,280</span>
+                                </div>
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Pending</span>
+                                    <span class="earnings-row-value pending">$1,872</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Referral Products -->
+                    <div class="referrals-card">
+                        <div class="referrals-header">
+                            <div class="referrals-title">
+                                <span class="material-icons">loyalty</span>
+                                My Products
+                            </div>
+                            <button class="referrals-manage">Manage</button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">fitness_center</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">Whoop 4.0</div>
+                                <div class="referral-url">whoop.com/r/chad-fitness</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">blender</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">AG1 Greens</div>
+                                <div class="referral-url">drinkag1.com/chad</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nudge -->
+                    <div class="nudge-card">
+                        <div class="nudge-icon">
+                            <span class="material-icons">emoji_events</span>
+                        </div>
+                        <div class="nudge-text">
+                            <strong>Send a video update</strong> — collabs with weekly creator videos have 40% higher completion rates.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================
+                     STATE: EMPTY (First time)
+                     ======================== -->
+                <div class="state-view" id="state-empty">
+
+                    <!-- Empty Hero CTA -->
+                    <div class="empty-hero">
+                        <div class="empty-hero-icon">
+                            <span class="material-icons">rocket_launch</span>
+                        </div>
+                        <div class="empty-hero-title">Your community is waiting, Companion</div>
+                        <div class="empty-hero-text">
+                            Create your first collab and start building something incredible with your audience.
+                        </div>
+                        <button class="create-collab-btn">
+                            <span class="material-icons">add</span>
+                            Create a Collab
+                        </button>
+                    </div>
+
+                    <!-- Quick Actions: Empty -->
+                    <div class="section-label">Get Started</div>
+                    <div class="quick-actions">
+                        <div class="quick-action">
+                            <div class="quick-action-icon clay-bg">
+                                <span class="material-icons">add_circle</span>
+                            </div>
+                            <div class="quick-action-label">Create Collab</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon sage-bg">
+                                <span class="material-icons">loyalty</span>
+                            </div>
+                            <div class="quick-action-label">Add Products</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon plum-bg">
+                                <span class="material-icons">account_balance_wallet</span>
+                            </div>
+                            <div class="quick-action-label">Earnings</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon warning-bg">
+                                <span class="material-icons">person_add</span>
+                            </div>
+                            <div class="quick-action-label">Invite Friends</div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (launch bonus) -->
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-title">
+                                <span class="material-icons">account_balance_wallet</span>
+                                Earnings
+                            </div>
+                        </div>
+                        <div class="earnings-body">
+                            <div class="earnings-amount" style="color: var(--color-text-tertiary);">$0</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Launch bonus</span>
+                                    <span class="earnings-row-value pending">$350 pending</span>
+                                </div>
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label" style="font-size: 11px; color: var(--color-text-tertiary);">Earned when your first collab launches</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Referral Products (empty) -->
+                    <div class="referrals-card">
+                        <div class="referrals-header">
+                            <div class="referrals-title">
+                                <span class="material-icons">loyalty</span>
+                                My Products
+                            </div>
+                        </div>
+                        <div class="referral-empty">
+                            <div class="referral-empty-text">Add referral links for products you love. They'll show up in your collabs.</div>
+                            <button class="add-product-btn">
+                                <span class="material-icons">add</span>
+                                Add a Product
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nudge -->
+                    <div class="nudge-card">
+                        <div class="nudge-icon">
+                            <span class="material-icons">school</span>
+                        </div>
+                        <div class="nudge-text">
+                            <strong>Tip: Pick a theme that fits you</strong> — when you create a collab, you'll choose colors and fonts that match your brand.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================
+                     STATE: BETWEEN COLLABS
+                     ======================== -->
+                <div class="state-view" id="state-between">
+
+                    <!-- Last Collab Recap (dark celebration card) -->
+                    <div class="recap-card">
+                        <div class="recap-label">Last Collab Recap</div>
+                        <div class="recap-name">30-Day Shred Challenge</div>
+                        <div class="recap-stats">
+                            <div class="recap-stat">
+                                <div class="recap-stat-value">82%</div>
+                                <div class="recap-stat-label">Completion</div>
+                            </div>
+                            <div class="recap-stat">
+                                <div class="recap-stat-value">312</div>
+                                <div class="recap-stat-label">Participants</div>
+                            </div>
+                            <div class="recap-stat">
+                                <div class="recap-stat-value">$1,872</div>
+                                <div class="recap-stat-label">Earned</div>
+                            </div>
+                        </div>
+                        <div class="recap-cta">
+                            <button class="recap-btn-primary">
+                                <span class="material-icons">add</span>
+                                New Collab
+                            </button>
+                            <button class="recap-btn-secondary">
+                                <span class="material-icons">bar_chart</span>
+                                Full Results
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions: Between -->
+                    <div class="section-label">Quick Actions</div>
+                    <div class="quick-actions">
+                        <div class="quick-action">
+                            <div class="quick-action-icon clay-bg">
+                                <span class="material-icons">add_circle</span>
+                            </div>
+                            <div class="quick-action-label">Create Collab</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon sage-bg">
+                                <span class="material-icons">insights</span>
+                            </div>
+                            <div class="quick-action-label">View Results</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon plum-bg">
+                                <span class="material-icons">payments</span>
+                            </div>
+                            <div class="quick-action-label">Cash Out</div>
+                        </div>
+                        <div class="quick-action">
+                            <div class="quick-action-icon warning-bg">
+                                <span class="material-icons">ios_share</span>
+                            </div>
+                            <div class="quick-action-label">Share Recap</div>
+                        </div>
+                    </div>
+
+                    <!-- Earnings -->
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-title">
+                                <span class="material-icons">account_balance_wallet</span>
+                                Earnings
+                            </div>
+                            <button class="earnings-view-all">View all</button>
+                        </div>
+                        <div class="earnings-body">
+                            <div class="earnings-amount">$3,152</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Available</span>
+                                    <span class="earnings-row-value available">$3,152</span>
+                                </div>
+                                <div class="earnings-row">
+                                    <span class="earnings-row-label">Lifetime (2 collabs)</span>
+                                    <span class="earnings-row-value">$4,432</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="cashout-btn">
+                            <span class="material-icons">payments</span>
+                            Cash Out $3,152
+                        </button>
+                    </div>
+
+                    <!-- Referral Products -->
+                    <div class="referrals-card">
+                        <div class="referrals-header">
+                            <div class="referrals-title">
+                                <span class="material-icons">loyalty</span>
+                                My Products
+                            </div>
+                            <button class="referrals-manage">Manage</button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">fitness_center</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">Whoop 4.0</div>
+                                <div class="referral-url">whoop.com/r/chad-fitness</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">blender</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">AG1 Greens</div>
+                                <div class="referral-url">drinkag1.com/chad</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="referral-item">
+                            <div class="referral-icon">
+                                <span class="material-icons">checkroom</span>
+                            </div>
+                            <div class="referral-info">
+                                <div class="referral-name">Lululemon</div>
+                                <div class="referral-url">lululemon.com/r/CHAD15</div>
+                            </div>
+                            <button class="referral-copy">
+                                <span class="material-icons">content_copy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Nudge -->
+                    <div class="nudge-card">
+                        <div class="nudge-icon">
+                            <span class="material-icons">trending_up</span>
+                        </div>
+                        <div class="nudge-text">
+                            <strong>Your last collab hit 82% completion</strong> — that's in the top 10% of all creators. Ready to beat it?
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB BAR -->
+        <div class="tab-bar">
+            <button class="tab-item active">
+                <span class="material-icons">home</span>
+                <span class="tab-item-label">Home</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">grid_view</span>
+                <span class="tab-item-label">Collabs</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">account_balance_wallet</span>
+                <span class="tab-item-label">Earnings</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">person</span>
+                <span class="tab-item-label">Profile</span>
+            </button>
+        </div>
+
+        <div class="home-indicator"></div>
+
+    </div>
+
+    <script>
+        function switchState(state) {
+            // Toggle buttons
+            document.querySelectorAll('.state-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Toggle views
+            document.querySelectorAll('.state-view').forEach(v => v.classList.remove('active'));
+            document.getElementById('state-' + state).classList.add('active');
+
+            // Update greeting subtitle
+            const greetingSub = document.getElementById('greetingSub');
+            const notifBadge = document.getElementById('notifBadge');
+
+            switch(state) {
+                case 'prelive':
+                    greetingSub.textContent = 'Your community is growing.';
+                    notifBadge.textContent = '3';
+                    notifBadge.style.display = 'flex';
+                    break;
+                case 'live':
+                    greetingSub.textContent = 'Day 12 — your crew is crushing it.';
+                    notifBadge.textContent = '7';
+                    notifBadge.style.display = 'flex';
+                    break;
+                case 'empty':
+                    greetingSub.textContent = 'Welcome to Motiv. Let\'s get started.';
+                    notifBadge.style.display = 'none';
+                    break;
+                case 'between':
+                    greetingSub.textContent = 'Nice work on the last one. What\'s next?';
+                    notifBadge.textContent = '1';
+                    notifBadge.style.display = 'flex';
+                    break;
+            }
+
+            // Scroll to top
+            document.getElementById('phoneScroll').scrollTop = 0;
+        }
+    </script>
+
+</body>
+</html>

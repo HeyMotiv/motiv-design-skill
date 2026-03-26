@@ -327,6 +327,210 @@ http.createServer((req, res) => {
         display: flex !important;
       }
     `;
+  } else if (modal === 'date-set') {
+    // Launch success — date was set during creation
+    const launchHtml = `
+      <div class="launch-overlay" style="display:flex;">
+        <div class="launch-content">
+          <div class="launch-emoji">🎉</div>
+          <div class="launch-title">You're In</div>
+          <div class="launch-message">Your collab is set — you've carved out the time and space to spark your followers into action. Now let's make it real.</div>
+          <div class="launch-ig-note">Verify your Instagram account so we can create your public collab link.</div>
+          <button class="launch-ig-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" alt="Instagram" style="width: 18px; height: 18px;">
+            Verify Instagram
+          </button>
+          <button class="launch-close">I'll do this later</button>
+        </div>
+      </div>
+    `;
+    modified = modified.replace(
+      /<div class="launch-overlay"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
+      launchHtml
+    );
+  } else if (modal === 'date-skipped') {
+    // Launch success — date was skipped
+    modalStyles = `
+      .launch-checklist {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 24px;
+        text-align: left;
+      }
+      .launch-checklist-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 0;
+        font-family: var(--font-body);
+        font-size: 15px;
+        color: var(--color-text-primary);
+      }
+      .launch-checklist-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        color: var(--color-text-primary);
+        background: var(--color-bg-primary);
+        border: 1.5px solid var(--color-border-default);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .launch-checklist-item:hover {
+        border-color: var(--color-clay);
+      }
+      .launch-checklist-item + .launch-checklist-item {
+        margin-top: 10px;
+      }
+      .launch-check-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .launch-check-icon.todo {
+        border: 2px solid var(--color-border-default);
+        background: transparent;
+      }
+      .launch-check-icon.done {
+        border: none;
+        background: var(--color-sage);
+      }
+      .launch-check-icon.done .material-icons {
+        font-size: 16px;
+        color: white;
+      }
+      .launch-checklist-item-content {
+        flex: 1;
+      }
+      .launch-checklist-item-arrow {
+        color: var(--color-text-tertiary);
+        flex-shrink: 0;
+      }
+      .launch-checklist-item-arrow .material-icons {
+        font-size: 20px;
+      }
+      .launch-checklist-item .ig-inline-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      .launch-dashboard-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 16px;
+        border-radius: var(--radius-full);
+        font-family: var(--font-body);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        background: var(--color-clay);
+        color: white;
+        margin-bottom: 0;
+      }
+      .launch-dashboard-btn .material-icons {
+        font-size: 20px;
+      }
+      .launch-checklist-subtitle {
+        font-size: 13px;
+        color: var(--color-text-tertiary);
+        margin-top: 2px;
+      }
+    `;
+    const launchHtml = `
+      <div class="launch-overlay" style="display:flex;">
+        <div class="launch-content">
+          <div class="launch-emoji">🎉</div>
+          <div class="launch-title">You're In</div>
+          <div class="launch-message">Your collab is set — you've carved out the time and space to spark your followers into action. Now let's make it real.</div>
+          <div class="launch-edit-note">You'll also need to pick a start date before you can start marketing your collab. You can do this from your dashboard whenever you're ready.</div>
+          <div class="launch-ig-note">Verify your Instagram account so we can create your public collab link.</div>
+          <button class="launch-ig-btn">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png" alt="Instagram" style="width: 18px; height: 18px;">
+            Verify Instagram
+          </button>
+          <button class="launch-close">I'll do this later</button>
+        </div>
+      </div>
+    `;
+    modified = modified.replace(
+      /<div class="launch-overlay"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
+      launchHtml
+    );
+  } else if (modal === 'verified-date-set') {
+    // Already verified + date picked — fully ready to share
+    modalStyles = `
+      .launch-share-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 16px;
+        border-radius: var(--radius-full);
+        font-family: var(--font-body);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        background: var(--color-clay);
+        color: white;
+        margin-bottom: 12px;
+      }
+      .launch-share-btn .material-icons {
+        font-size: 20px;
+      }
+    `;
+    const launchHtml = `
+      <div class="launch-overlay" style="display:flex;">
+        <div class="launch-content">
+          <div class="launch-emoji">🎉</div>
+          <div class="launch-title">You're In</div>
+          <div class="launch-message">Your collab is set — you've carved out the time and space to spark your followers into action. Now let's make it real.</div>
+          <div class="launch-edit-note">Your collab is live and ready to share. Send your link to start recruiting participants.</div>
+          <button class="launch-share-btn">
+            Share Your Link
+            <span class="material-icons">share</span>
+          </button>
+          <button class="launch-close">Go to Dashboard</button>
+        </div>
+      </div>
+    `;
+    modified = modified.replace(
+      /<div class="launch-overlay"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
+      launchHtml
+    );
+  } else if (modal === 'verified-date-skipped') {
+    // Already verified but no date picked
+    const launchHtml = `
+      <div class="launch-overlay" style="display:flex;">
+        <div class="launch-content">
+          <div class="launch-emoji">🎉</div>
+          <div class="launch-title">You're In</div>
+          <div class="launch-message">Your collab is set — you've carved out the time and space to spark your followers into action. Now let's make it real.</div>
+          <div class="launch-edit-note">You'll need to pick a start date before you can start marketing your collab. You can do this from your dashboard whenever you're ready.</div>
+          <button class="launch-ig-btn" style="background: var(--color-clay); margin-top: 8px;">
+            Go to Dashboard
+          </button>
+        </div>
+      </div>
+    `;
+    modified = modified.replace(
+      /<div class="launch-overlay"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/,
+      launchHtml
+    );
   } else {
     // Default: hide action sheet
     modalStyles = `

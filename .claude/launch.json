@@ -42,6 +42,24 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-onboarding.js"],
       "port": 8772
+    },
+    {
+      "name": "week4",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-week4.js"],
+      "port": 8773
+    },
+    {
+      "name": "week5d4",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-week5d4.js"],
+      "port": 8774
+    },
+    {
+      "name": "figma-capture",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-figma-capture.js"],
+      "port": 8780
     }
   ]
 }

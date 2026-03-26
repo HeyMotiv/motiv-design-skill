@@ -922,6 +922,212 @@
         .rec-submit-btn.visible { display: flex; }
         .rec-submit-btn .material-icons { font-size: 18px; }
 
+        /* Retake label button */
+        .rec-retake-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: calc(100% - 32px);
+            margin: 8px 16px 0;
+            padding: 12px;
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            border: 1.5px solid rgba(255,255,255,0.2);
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .rec-retake-btn.visible { display: flex; }
+        .rec-retake-btn .material-icons { font-size: 18px; }
+
+        /* Bonus eligibility banner */
+        .rec-bonus-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 10px 16px 0;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .rec-bonus-banner .material-icons {
+            font-size: 16px;
+            color: var(--color-clay);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .rec-bonus-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.4;
+        }
+        .rec-bonus-text strong {
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        /* Social Share Overlay */
+        .social-share-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 120;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 24px;
+            pointer-events: none;
+        }
+        .social-share-overlay.open {
+            display: flex;
+            pointer-events: auto;
+        }
+        .social-share-card {
+            width: 100%;
+            max-width: 340px;
+            background: #1e1e1e;
+            border-radius: 20px;
+            padding: 28px 20px;
+            text-align: center;
+        }
+        .social-share-check {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: var(--color-sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .social-share-check .material-icons {
+            font-size: 28px;
+            color: white;
+        }
+        .social-share-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        .social-share-subtitle {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .social-share-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .social-share-step.done {
+            opacity: 0.5;
+        }
+        .social-share-step-icon {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .social-share-step-icon.motiv {
+            background: var(--color-sage);
+        }
+        .social-share-step-icon.instagram {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .social-share-step-icon .material-icons {
+            font-size: 18px;
+            color: white;
+        }
+        .social-share-step-label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        .social-share-step-detail {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+            margin-top: 1px;
+        }
+        .social-share-step-status {
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+        .social-share-step-status .material-icons {
+            font-size: 20px;
+            color: var(--color-sage);
+        }
+        .social-share-ig-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        .social-share-ig-btn .material-icons { font-size: 18px; }
+        .social-share-skip {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 14px;
+            padding: 4px 8px;
+        }
+        .social-share-bonus-warn {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 11px;
+            color: var(--color-clay);
+            margin-top: 12px;
+            line-height: 1.4;
+        }
+        .social-share-saved-toast {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+        .social-share-saved-toast .material-icons {
+            font-size: 18px;
+            color: var(--color-sage);
+        }
+        .social-share-saved-toast span:last-child {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
         /* Stats Reference Panel */
         .rec-stats {
             padding: 0 0 24px;
@@ -1940,13 +2146,16 @@
             border-radius: 14px 14px 0 0;
             z-index: 201;
             transform: translateY(100%);
-            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            visibility: hidden;
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s 0.35s;
             padding: 0 0 34px;
             max-height: 75%;
             overflow-y: auto;
         }
         .share-sheet.open {
             transform: translateY(0);
+            visibility: visible;
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), visibility 0s 0s;
         }
 
         .share-sheet-handle {
@@ -4735,14 +4944,22 @@
                     <button class="rec-record-btn" id="w4RecRecordBtn" onclick="toggleW4Recording()">
                         <div class="rec-record-inner"></div>
                     </button>
-                    <button class="rec-control-btn" id="w4RecRetakeBtn" style="visibility: hidden;" onclick="retakeW4Recording()">
-                        <span class="material-icons">replay</span>
-                    </button>
+                    <div style="width:44px;height:44px;"></div>
                 </div>
                 <button class="rec-submit-btn" id="w4RecSubmitBtn" onclick="submitW4Recording()">
-                    Submit Week 4 message
+                    Post to Motiv
                     <span class="material-icons">check</span>
                 </button>
+                <button class="rec-retake-btn" id="w4RecRetakeBtn" onclick="retakeW4Recording()">
+                    <span class="material-icons">replay</span>
+                    Retake video
+                </button>
+                <div class="rec-bonus-banner" id="w4RecBonusBanner" style="display:none;">
+                    <span class="material-icons">info</span>
+                    <div class="rec-bonus-text">
+                        <strong>End-of-collab bonus:</strong> You must also post this video to social media on time to remain eligible for your end-of-collab bonus.
+                    </div>
+                </div>
             </div>
             <div class="rec-scroll-stats">
                 <div class="rec-stats">
@@ -4834,6 +5051,61 @@
             </div>
             </div>
         </div><!-- /w4RecordOverlay -->
+
+        <!-- W4 Social Share Overlay -->
+        <div class="social-share-overlay" id="w4SocialShareOverlay">
+            <div class="social-share-card">
+                <div class="social-share-check">
+                    <span class="material-icons">check</span>
+                </div>
+                <div class="social-share-title">Posted to Motiv!</div>
+                <div class="social-share-subtitle">Your Week 4 message is live for your participants.</div>
+
+                <div class="social-share-saved-toast">
+                    <span class="material-icons">save_alt</span>
+                    <span>Video saved to your camera roll</span>
+                </div>
+
+                <div class="social-share-step done">
+                    <div class="social-share-step-icon motiv">
+                        <span class="material-icons">check</span>
+                    </div>
+                    <div>
+                        <div class="social-share-step-label">Motiv</div>
+                        <div class="social-share-step-detail">Posted just now</div>
+                    </div>
+                    <div class="social-share-step-status">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+
+                <div class="social-share-step">
+                    <div class="social-share-step-icon instagram">
+                        <span class="material-icons">share</span>
+                    </div>
+                    <div>
+                        <div class="social-share-step-label">Social media</div>
+                        <div class="social-share-step-detail">Required for end-of-collab bonus</div>
+                    </div>
+                    <div class="social-share-step-status">
+                        <span class="material-icons" style="color: rgba(255,255,255,0.2);">radio_button_unchecked</span>
+                    </div>
+                </div>
+
+                <button class="social-share-ig-btn" onclick="openShareSheet('w4')">
+                    <span class="material-icons">ios_share</span>
+                    Share to social media
+                </button>
+
+                <div class="social-share-bonus-warn">
+                    Post this video to social media on time to stay eligible for your end-of-collab bonus.
+                </div>
+
+                <button class="social-share-skip" onclick="skipSocialShare('w4')">
+                    I'll do this later
+                </button>
+            </div>
+        </div>
 
         </div><!-- /phone-frame -->
 
@@ -5173,8 +5445,9 @@
                 w4RecSeconds = 0;
                 document.getElementById('w4RecRecordBtn').classList.add('recording');
                 document.getElementById('w4RecTimer').classList.add('active');
-                document.getElementById('w4RecRetakeBtn').style.visibility = 'hidden';
+                document.getElementById('w4RecRetakeBtn').classList.remove('visible');
                 document.getElementById('w4RecSubmitBtn').classList.remove('visible');
+                document.getElementById('w4RecBonusBanner').style.display = 'none';
                 document.getElementById('w4RecViewfinder').classList.remove('has-video');
                 w4RecInterval = setInterval(() => {
                     w4RecSeconds++;
@@ -5188,8 +5461,9 @@
                 document.getElementById('w4RecRecordBtn').classList.remove('recording');
                 document.getElementById('w4RecTimer').classList.remove('active');
                 document.getElementById('w4RecViewfinder').classList.add('has-video');
-                document.getElementById('w4RecRetakeBtn').style.visibility = 'visible';
+                document.getElementById('w4RecRetakeBtn').classList.add('visible');
                 document.getElementById('w4RecSubmitBtn').classList.add('visible');
+                document.getElementById('w4RecBonusBanner').style.display = 'flex';
                 const m = Math.floor(w4RecSeconds / 60);
                 const s = w4RecSeconds % 60;
                 document.getElementById('w4RecDuration').textContent = m + ':' + (s < 10 ? '0' : '') + s;
@@ -5206,8 +5480,9 @@
             document.getElementById('w4RecTimer').classList.remove('active');
             document.getElementById('w4RecTimerText').textContent = '0:00';
             document.getElementById('w4RecViewfinder').classList.remove('has-video');
-            document.getElementById('w4RecRetakeBtn').style.visibility = 'hidden';
+            document.getElementById('w4RecRetakeBtn').classList.remove('visible');
             document.getElementById('w4RecSubmitBtn').classList.remove('visible');
+            document.getElementById('w4RecBonusBanner').style.display = 'none';
             const playIcon = document.getElementById('w4RecPlayIcon');
             if (playIcon) playIcon.textContent = 'play_arrow';
         }
@@ -5217,7 +5492,26 @@
             icon.textContent = icon.textContent === 'play_arrow' ? 'pause' : 'play_arrow';
         }
 
-        function submitW4Recording() { closeW4RecordOverlay(); }
+        function submitW4Recording() {
+            closeW4RecordOverlay();
+            document.getElementById('w4SocialShareOverlay').classList.add('open');
+        }
+
+        function openShareSheet(prefix) {
+            // Close the social share overlay
+            const overlay = document.getElementById(prefix + 'SocialShareOverlay');
+            if (overlay) overlay.classList.remove('open');
+            // Open the iOS share sheet
+            const shareSheet = document.getElementById('shareSheet_week4');
+            const shareBackdrop = document.getElementById('shareSheetBackdrop_week4');
+            if (shareSheet) shareSheet.classList.add('open');
+            if (shareBackdrop) shareBackdrop.classList.add('open');
+        }
+
+        function skipSocialShare(prefix) {
+            const overlay = document.getElementById(prefix + 'SocialShareOverlay');
+            if (overlay) overlay.classList.remove('open');
+        }
 
         /* ── Recording Overlay ── */
         let recState = 'idle'; // idle, recording, recorded
