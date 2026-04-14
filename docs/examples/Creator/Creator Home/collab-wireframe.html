@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home — Wireframe Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .sublabel {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 32px;
+            max-width: 440px;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           PHONE FRAME
+           ============================================ */
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            background: var(--surface-bg);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0px,
+                #F7E6DE 80px,
+                #FAF0EB 160px,
+                var(--surface-bg) 300px
+            );
+            background-attachment: local;
+        }
+        .phone-scroll::-webkit-scrollbar { display: none; }
+
+        /* Status bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-100);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+        .status-bar-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* Content padding */
+        .home-content {
+            padding: 36px 16px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ============================================
+           WIREFRAME SECTION CARDS
+           Each card represents a section visually
+           ============================================ */
+        .wf-section {
+            border: 2px dashed var(--orange-100);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            position: relative;
+        }
+
+        .wf-section--conditional {
+            border-style: dashed;
+            border-color: var(--primary-30);
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .wf-tag {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: var(--primary-100);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .wf-tag--conditional {
+            background: var(--primary-60);
+        }
+
+        .wf-section-name {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-100);
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+        .wf-section-desc {
+            font-size: 12px;
+            color: var(--primary-60);
+            line-height: 16px;
+            margin-bottom: 12px;
+        }
+
+        /* Sketch elements inside wireframe sections */
+        .wf-sketch {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .wf-line {
+            background: var(--primary-30);
+            border-radius: 4px;
+            height: 8px;
+            opacity: 0.4;
+        }
+        .wf-line.wf-line--short { width: 40%; }
+        .wf-line.wf-line--med { width: 65%; }
+        .wf-line.wf-line--long { width: 90%; }
+        .wf-line.wf-line--xl { height: 16px; width: 50%; }
+
+        .wf-block {
+            background: var(--primary-30);
+            border-radius: 8px;
+            opacity: 0.25;
+        }
+
+        .wf-block--icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+
+        .wf-block--card {
+            height: 80px;
+            margin-top: 4px;
+        }
+
+        .wf-block--button {
+            height: 32px;
+            width: 100%;
+            margin-top: 8px;
+            background: var(--orange-100);
+            opacity: 0.4;
+        }
+
+        .wf-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .wf-row > div:not(.wf-block--icon) {
+            flex: 1;
+        }
+
+        .wf-emoji-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .wf-emoji-pill {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-30);
+            opacity: 0.3;
+        }
+
+        /* Tab bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 60px;
+            right: 60px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.08),
+                0 1px 4px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-full);
+            display: flex;
+            padding: 4px 8px;
+            z-index: 20;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+        }
+
+        .tab-item .material-icons {
+            font-size: 22px;
+            color: var(--primary-60);
+        }
+
+        .tab-item-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-60);
+        }
+
+        .tab-item.active { background: rgba(201, 122, 106, 0.12); }
+        .tab-item.active .material-icons { color: var(--orange-100); }
+        .tab-item.active .tab-item-label { color: var(--orange-100); }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 134px;
+            height: 5px;
+            background: var(--primary-100);
+            border-radius: 3px;
+            opacity: 0.2;
+        }
+
+        /* Legend below phone */
+        .legend {
+            margin-top: 32px;
+            display: flex;
+            gap: 24px;
+            font-size: 12px;
+            color: #aaa;
+            align-items: center;
+        }
+
+        .legend-swatch {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            border: 2px dashed;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .legend-swatch--always { border-color: var(--orange-100); }
+        .legend-swatch--conditional { border-color: var(--primary-30); }
+    </style>
+</head>
+<body>
+
+    <div class="label">Creator Home — Wireframe Overview</div>
+    <div class="sublabel">High-level view of the 6 sections that compose the home screen. Solid sections are always present; dashed (gray) sections are conditional.</div>
+
+    <div class="phone-frame">
+
+        <div class="phone-scroll">
+
+            <!-- Status bar -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <div class="status-bar-icons">
+                    <span class="material-icons">signal_cellular_alt</span>
+                    <span class="material-icons">wifi</span>
+                    <span class="material-icons">battery_full</span>
+                </div>
+            </div>
+
+            <div class="home-content">
+
+                <!-- 1. GREETING -->
+                <div class="wf-section">
+                    <div class="wf-tag">1 · Always</div>
+                    <div class="wf-section-name">Greeting</div>
+                    <div class="wf-section-desc">Creator's name + a short status line about what's happening right now.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-row">
+                            <div class="wf-line wf-line--xl"></div>
+                            <div class="wf-block wf-block--icon" style="border-radius: 50%;"></div>
+                        </div>
+                        <div class="wf-line wf-line--med"></div>
+                    </div>
+                </div>
+
+                <!-- 2. BLOCKER -->
+                <div class="wf-section wf-section--conditional">
+                    <div class="wf-tag wf-tag--conditional">2 · Conditional</div>
+                    <div class="wf-section-name">Blocker</div>
+                    <div class="wf-section-desc">The single most important action — verify IG, set dates, sign W9, or start next collab. 0 or 1 card.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-row">
+                            <div class="wf-block wf-block--icon"></div>
+                            <div>
+                                <div class="wf-line wf-line--med" style="margin-bottom: 6px;"></div>
+                                <div class="wf-line wf-line--long"></div>
+                            </div>
+                        </div>
+                        <div class="wf-block wf-block--button"></div>
+                    </div>
+                </div>
+
+                <!-- 3. YOUR COLLABS -->
+                <div class="wf-section">
+                    <div class="wf-tag">3 · Always</div>
+                    <div class="wf-section-name">Your Collabs</div>
+                    <div class="wf-section-desc">All collabs at a glance — drafts, active, or past. Format adapts to count and state. Tapping any card opens collab details.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-line wf-line--short" style="margin-bottom: 8px;"></div>
+                        <div class="wf-block wf-block--card" style="height: 140px;"></div>
+                    </div>
+                </div>
+
+                <!-- 4. EARNINGS -->
+                <div class="wf-section">
+                    <div class="wf-tag">4 · Always</div>
+                    <div class="wf-section-name">Earnings</div>
+                    <div class="wf-section-desc">Cross-collab money summary with a hero total. Tappable to earnings history when there's anything to show.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-line wf-line--short"></div>
+                        <div class="wf-line wf-line--xl" style="height: 28px; width: 50%; margin-top: 4px;"></div>
+                        <div class="wf-row" style="margin-top: 8px; gap: 24px;">
+                            <div style="flex: 1;">
+                                <div class="wf-line wf-line--short" style="height: 6px; margin-bottom: 4px;"></div>
+                                <div class="wf-line wf-line--short" style="height: 6px;"></div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="wf-line wf-line--short" style="height: 6px; margin-bottom: 4px;"></div>
+                                <div class="wf-line wf-line--short" style="height: 6px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. COMMUNITY LOVE -->
+                <div class="wf-section wf-section--conditional">
+                    <div class="wf-tag wf-tag--conditional">5 · Conditional</div>
+                    <div class="wf-section-name">Community Love</div>
+                    <div class="wf-section-desc">Aggregated reactions from participants + a featured quote. Shows once love has been received.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-line wf-line--med"></div>
+                        <div class="wf-emoji-row">
+                            <div class="wf-emoji-pill"></div>
+                            <div class="wf-emoji-pill"></div>
+                            <div class="wf-emoji-pill"></div>
+                            <div class="wf-emoji-pill"></div>
+                        </div>
+                        <div class="wf-block wf-block--card" style="height: 40px; margin-top: 8px;"></div>
+                    </div>
+                </div>
+
+                <!-- 6. FOOTER LINKS -->
+                <div class="wf-section">
+                    <div class="wf-tag">6 · Always</div>
+                    <div class="wf-section-name">Footer Links</div>
+                    <div class="wf-section-desc">Low-priority persistent links — invite a creator + Creator Community.</div>
+                    <div class="wf-sketch">
+                        <div class="wf-row" style="margin-bottom: 6px;">
+                            <div class="wf-block wf-block--icon" style="width: 28px; height: 28px;"></div>
+                            <div class="wf-line wf-line--long" style="height: 6px;"></div>
+                        </div>
+                        <div class="wf-row">
+                            <div class="wf-block wf-block--icon" style="width: 28px; height: 28px;"></div>
+                            <div class="wf-line wf-line--long" style="height: 6px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-item active">
+                <span class="material-icons">grid_view</span>
+                <span class="tab-item-label">Collabs</span>
+            </button>
+            <button class="tab-item">
+                <span class="material-icons">person</span>
+                <span class="tab-item-label">Profile</span>
+            </button>
+        </div>
+
+        <div class="home-indicator"></div>
+
+    </div>
+
+    <div class="legend">
+        <span><span class="legend-swatch legend-swatch--always"></span>Always present</span>
+        <span><span class="legend-swatch legend-swatch--conditional"></span>Conditional (may be hidden)</span>
+    </div>
+
+</body>
+</html>

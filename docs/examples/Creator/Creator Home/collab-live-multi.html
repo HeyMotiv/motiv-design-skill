@@ -26,7 +26,7 @@
             /* Secondary — Teal */
             --teal-0: #ECF2F2;
             --teal-30: #D0DEDF;
-            --teal-60: #9DD3C4;
+            --teal-60: #C5ECE3;
             --teal-100: #547577;
 
             /* Secondary — Purple */
@@ -141,7 +141,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 28px 8px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text-primary);
             position: relative;
@@ -157,7 +157,7 @@
         .status-bar-icons .material-icons { font-size: 17px; }
 
         /* =========================================
-           HEADER
+           1. GREETING (stable anchor)
            ========================================= */
 
         .home-header {
@@ -167,7 +167,7 @@
         .home-header-content {
             position: relative;
             z-index: 1;
-            padding: 16px 24px 16px;
+            padding: 36px 24px 16px;
         }
 
         .header-row {
@@ -179,7 +179,7 @@
 
         .greeting {
             font-family: var(--font-headline);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 34px;
@@ -202,7 +202,7 @@
         .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
 
         .greeting-sub {
-            font-size: 15px;
+            font-size: 16px;
             color: var(--color-text-secondary);
             line-height: 22px;
         }
@@ -219,7 +219,86 @@
         }
 
         /* =========================================
-           ACTIVE COLLAB CARD
+           2. BLOCKER CARD (0 or 1, prominent)
+           ========================================= */
+
+        .blocker-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .blocker-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .blocker-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .blocker-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .blocker-card-icon.instagram {
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        }
+        .blocker-card-icon.dates {
+            background: var(--orange-100);
+        }
+        .blocker-card-icon.w9 {
+            background: var(--primary-60);
+        }
+        .blocker-card-icon .material-icons { font-size: 20px; color: white; }
+
+        .blocker-card-info { flex: 1; }
+
+        .blocker-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 1px;
+        }
+
+        .blocker-card-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .blocker-card-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .blocker-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .blocker-card-cta:active { transform: scale(0.97); }
+        .blocker-card-cta .material-icons { font-size: 18px; }
+
+        /* =========================================
+           3. YOUR COLLABS — Draft Carousel
            ========================================= */
 
         .collab-section {
@@ -232,54 +311,56 @@
 
         .collab-section-title {
             font-family: var(--font-headline);
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--color-text-primary);
             margin-bottom: 2px;
         }
 
         .collab-section-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
-        /* Carousel — full-width snap */
+        .carousel-section {
+            margin: 0 -16px;
+        }
+
+        .carousel-header {
+            padding: 0 24px;
+            margin-bottom: 12px;
+        }
+
+        .carousel-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .carousel-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
         .carousel-track {
             display: flex;
+            gap: 12px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             scrollbar-width: none;
-            gap: 0;
+            padding: 0 16px 8px;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
-
-        .carousel-slide {
-            flex: 0 0 100%;
-            min-width: 0;
-            scroll-snap-align: start;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            padding: 10px 0 0;
-        }
-
-        .carousel-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--color-border-default);
-            transition: all var(--motion-fast);
-        }
-        .carousel-dot.active {
-            width: 18px;
-            border-radius: 3px;
-            background: var(--orange-100);
+        .draft-card:first-child {
+            margin-left: 0;
+            scroll-margin-left: 16px;
         }
 
         .draft-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
             border-radius: var(--radius-xl);
             overflow: hidden;
             box-shadow: var(--shadow-md);
@@ -291,6 +372,8 @@
 
         /* Card theme colors */
         .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
+        .draft-card.theme-orange { --card-color: 234,120,50; --card-accent: #EA7832; }
+        .draft-card.theme-red { --card-color: 180,60,60; --card-accent: #B43C3C; }
         .draft-card.theme-teal { --card-color: 84,117,119; --card-accent: #547577; }
 
         .draft-card-hero {
@@ -344,25 +427,18 @@
             -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius-full);
             padding: 4px 10px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: white;
             margin-bottom: 8px;
         }
         .draft-card-badge .material-icons { font-size: 13px; }
-
-        .draft-card-badge.live {
-            background: rgba(60, 179, 113, 0.25);
-        }
-
-        .draft-card-badge.recruiting {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .draft-card-badge.live { background: rgba(60, 179, 113, 0.25); }
 
         .draft-card-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: white;
             line-height: 1.2;
@@ -376,7 +452,6 @@
             margin-top: 4px;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 4px;
         }
         .draft-card-dates .material-icons { font-size: 14px; }
@@ -396,29 +471,61 @@
         .draft-card-progress {
             padding: 12px 14px;
         }
-
         .draft-card-progress-label {
-            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
             font-weight: 500;
             color: var(--color-text-secondary);
             margin-bottom: 6px;
-            display: flex;
-            justify-content: space-between;
         }
-
         .draft-card-progress-bar {
             height: 6px;
-            background: var(--surface-border);
+            background: var(--primary-0);
             border-radius: 3px;
             overflow: hidden;
         }
-
         .draft-card-progress-fill {
             height: 100%;
             background: var(--card-accent);
             border-radius: 3px;
             transition: width 0.5s ease;
         }
+
+        .draft-card-pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+        }
+
+        .draft-card-pool-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--card-accent);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .draft-card-pool-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .draft-card-hold {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.04);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--card-accent);
+        }
+        .draft-card-hold .material-icons { font-size: 14px; }
 
         .draft-card-divider {
             height: 1px;
@@ -453,7 +560,7 @@
         }
 
         .draft-card-stat-label {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
@@ -468,7 +575,7 @@
             font-family: var(--font-body);
             font-size: 14px;
             font-weight: 600;
-            padding: 12px;
+            padding: 10px;
             border-radius: var(--radius-full);
             border: none;
             cursor: pointer;
@@ -480,10 +587,127 @@
         }
         .draft-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
         .draft-card-cta:active { transform: scale(0.97); }
-        .draft-card-cta .material-icons { font-size: 18px; }
+        .draft-card-cta .material-icons { font-size: 16px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 0 4px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+            transition: all var(--motion-fast);
+        }
+        .carousel-dot.active {
+            width: 18px;
+            border-radius: 3px;
+            background: var(--orange-100);
+        }
 
         /* =========================================
-           CREATOR LOVE SUMMARY
+           4. EARNINGS CARD (unified, adapts by state)
+           ========================================= */
+
+        .earnings-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .earnings-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        .earnings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .earnings-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .earnings-label .material-icons { font-size: 16px; color: var(--orange-100); }
+
+        .earnings-chevron { color: var(--color-text-tertiary); }
+        .earnings-chevron .material-icons { font-size: 20px; }
+
+        .earnings-total {
+            font-family: var(--font-headline);
+            font-size: 46px;
+            font-weight: 700;
+            color: var(--orange-100);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .earnings-projected-sub {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .earnings-link {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--surface-border);
+        }
+        .earnings-link .material-icons { font-size: 14px; }
+
+        .earnings-breakdown {
+            display: flex;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .earnings-breakdown-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .earnings-breakdown-item + .earnings-breakdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 1px;
+            background: var(--surface-border);
+        }
+
+        .earnings-breakdown-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .earnings-breakdown-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        /* =========================================
+           5. COMMUNITY LOVE (conditional)
            ========================================= */
 
         .love-card {
@@ -494,10 +718,7 @@
             cursor: pointer;
             transition: all var(--motion-fast) var(--easing-smooth);
         }
-        .love-card:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
-        }
+        .love-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
         .love-header {
             display: flex;
@@ -544,21 +765,9 @@
             background: var(--surface-border);
         }
 
-        .love-emoji {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-
-        .love-count {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--color-text-primary);
-        }
-
-        .love-label {
-            font-size: 9px;
-            color: var(--color-text-secondary);
-        }
+        .love-emoji { font-size: 20px; margin-bottom: 2px; }
+        .love-count { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .love-label { font-size: 12px; color: var(--color-text-secondary); }
 
         .love-quote {
             background: var(--orange-0);
@@ -568,14 +777,14 @@
         }
 
         .love-quote-text {
-            font-size: 13px;
+            font-size: 14px;
             font-style: italic;
             color: var(--color-text-primary);
             line-height: 18px;
         }
 
         .love-quote-attr {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--color-text-secondary);
             margin-top: 4px;
         }
@@ -583,7 +792,6 @@
         .love-see-all {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 2px;
             font-size: 12px;
             font-weight: 600;
@@ -593,88 +801,10 @@
         .love-see-all .material-icons { font-size: 14px; }
 
         /* =========================================
-           EARNINGS CARD
+           6. NEXT STEP (forward CTA)
            ========================================= */
 
-        .earnings-card {
-            background: var(--primary-100);
-            border-radius: var(--radius-lg);
-            padding: 18px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform var(--motion-normal) var(--easing-smooth);
-        }
-        .earnings-card:hover { transform: translateY(-1px); }
-
-        .earnings-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--orange-60);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        .earnings-label .material-icons { font-size: 16px; }
-
-        .earnings-equation {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .earnings-eq-item {
-            flex: 1;
-            text-align: center;
-        }
-
-        .earnings-eq-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 2px;
-        }
-
-        .earnings-eq-label {
-            font-size: 10px;
-            color: var(--orange-60);
-        }
-
-        .earnings-eq-op {
-            font-size: 16px;
-            font-weight: 700;
-            color: rgba(255,255,255,0.3);
-            flex-shrink: 0;
-            padding-bottom: 14px;
-        }
-
-        .earnings-eq-total .earnings-eq-value {
-            color: var(--orange-100);
-            font-size: 24px;
-        }
-
-        .earnings-profile-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--orange-60);
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        .earnings-profile-link .material-icons { font-size: 14px; }
-
-        /* =========================================
-           CREATE NEW COLLAB
-           ========================================= */
-
-        .new-collab-card {
+        .next-step-card {
             background: var(--surface-white);
             border: 1px solid var(--surface-border);
             border-radius: var(--radius-lg);
@@ -682,19 +812,16 @@
             cursor: pointer;
             transition: all var(--motion-fast) var(--easing-smooth);
         }
-        .new-collab-card:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
-        }
+        .next-step-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
-        .new-collab-top {
+        .next-step-top {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 14px;
         }
 
-        .new-collab-icon {
+        .next-step-icon {
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -704,13 +831,11 @@
             justify-content: center;
             flex-shrink: 0;
         }
-        .new-collab-icon .material-icons { font-size: 22px; color: var(--orange-100); }
+        .next-step-icon .material-icons { font-size: 22px; color: var(--orange-100); }
 
-        .new-collab-info {
-            flex: 1;
-        }
+        .next-step-info { flex: 1; }
 
-        .new-collab-title {
+        .next-step-title {
             font-family: var(--font-headline);
             font-size: 16px;
             font-weight: 700;
@@ -718,12 +843,12 @@
             margin-bottom: 2px;
         }
 
-        .new-collab-subtitle {
+        .next-step-subtitle {
             font-size: 12px;
             color: var(--color-text-secondary);
         }
 
-        .new-collab-cta {
+        .next-step-cta {
             width: 100%;
             background: var(--orange-100);
             color: white;
@@ -740,12 +865,12 @@
             gap: 6px;
             transition: all var(--motion-fast) var(--easing-smooth);
         }
-        .new-collab-cta:hover { opacity: 0.9; transform: scale(1.02); }
-        .new-collab-cta:active { transform: scale(0.97); }
-        .new-collab-cta .material-icons { font-size: 18px; }
+        .next-step-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .next-step-cta:active { transform: scale(0.97); }
+        .next-step-cta .material-icons { font-size: 18px; }
 
         /* =========================================
-           INVITE CREATORS NUDGE
+           7. FOOTER LINKS
            ========================================= */
 
         .nudge-card {
@@ -770,12 +895,10 @@
         }
         .nudge-icon .material-icons { font-size: 18px; color: var(--orange-100); }
 
-        .nudge-body {
-            flex: 1;
-        }
+        .nudge-body { flex: 1; }
 
         .nudge-text {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--color-text-primary);
             line-height: 18px;
         }
@@ -792,10 +915,6 @@
             margin-top: 4px;
         }
         .nudge-cta:hover { text-decoration: underline; }
-
-        /* =========================================
-           COMMUNITY LINK
-           ========================================= */
 
         .community-link {
             display: flex;
@@ -825,18 +944,16 @@
         }
         .community-icon .material-icons { font-size: 18px; color: var(--purple-100); }
 
-        .community-info {
-            flex: 1;
-        }
+        .community-info { flex: 1; }
 
         .community-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--color-text-primary);
         }
 
         .community-subtitle {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
@@ -894,7 +1011,7 @@
         }
 
         .tab-item-label {
-            font-size: 9px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--primary-60);
             transition: color var(--motion-fast);
@@ -918,18 +1035,85 @@
             opacity: 0.2;
         }
 
+        /* =========================================
+           PAST COLLAB ROW (between state)
+           ========================================= */
+
+        .past-collab-row {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .past-collab-row:hover {
+            background: var(--primary-0);
+            transform: translateY(-1px);
+        }
+
+        .past-collab-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .past-collab-info { flex: 1; min-width: 0; }
+
+        .past-collab-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .past-collab-meta {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-earned {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .past-collab-earned-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--orange-100);
+        }
+
+        .past-collab-earned-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-chevron {
+            font-size: 20px;
+            color: var(--primary-30);
+            flex-shrink: 0;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="label">Collabs — Live (Multiple)</div>
-    <div class="sublabel">Two active collabs — swipe between full cards with dot indicators</div>
+    <div class="sublabel">Two active collabs running simultaneously</div>
 
     <div class="phone-frame">
 
         <div class="phone-scroll">
 
-            <!-- Header -->
+            <!-- 1. GREETING -->
             <div class="home-header">
                 <div class="status-bar">
                     <span>9:41</span>
@@ -950,19 +1134,19 @@
                 </div>
             </div>
 
-            <!-- Content -->
             <div class="home-content">
 
-                <!-- 1. Active Collabs (swipeable) -->
+                <!-- 2. BLOCKER — none in this state -->
+
+                <!-- 3. YOUR COLLABS — Active Carousel -->
                 <div class="collab-section">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Active collabs</div>
-                        <div class="collab-section-subtitle">Swipe to view · 2 active</div>
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">2 active · swipe to view</div>
                     </div>
 
-                    <div class="carousel-track" id="collabCarousel">
-                        <!-- Slide 1: Paws & Pedals -->
-                        <div class="carousel-slide">
+                    <div class="carousel-track" id="collabCarousel" style="gap: 0;">
+                        <div class="carousel-slide" style="flex: 0 0 100%; scroll-snap-align: start;">
                             <div class="draft-card theme-purple">
                                 <div class="draft-card-hero">
                                     <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
@@ -1015,22 +1199,20 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Slide 2: Dawn Risers -->
-                        <div class="carousel-slide">
+                        <div class="carousel-slide" style="flex: 0 0 100%; scroll-snap-align: start;">
                             <div class="draft-card theme-teal">
                                 <div class="draft-card-hero">
-                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&q=80')"></div>
+                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80')"></div>
                                     <div class="draft-card-overlay"></div>
                                     <div class="draft-card-hero-content">
-                                        <div class="draft-card-badge recruiting">
-                                            <span class="material-icons">group_add</span>
-                                            Recruiting — 12 days left
+                                        <div class="draft-card-badge live">
+                                            <span class="material-icons">sensors</span>
+                                            Live — Week 1 of 4
                                         </div>
-                                        <div class="draft-card-name">Dawn Risers</div>
+                                        <div class="draft-card-name">Iron Dads</div>
                                         <div class="draft-card-dates">
                                             <span class="material-icons">event</span>
-                                            May 1 — Jun 11
+                                            Apr 20 — May 17
                                         </div>
                                     </div>
                                 </div>
@@ -1038,25 +1220,25 @@
                                     <div class="draft-card-grouped">
                                         <div class="draft-card-progress">
                                             <div class="draft-card-progress-label">
-                                                <span>Recruiting</span>
-                                                <span>73%</span>
+                                                <span>Week 1 of 4</span>
+                                                <span>25%</span>
                                             </div>
                                             <div class="draft-card-progress-bar">
-                                                <div class="draft-card-progress-fill" style="width: 73%"></div>
+                                                <div class="draft-card-progress-fill" style="width: 25%"></div>
                                             </div>
                                         </div>
                                         <div class="draft-card-divider"></div>
                                         <div class="draft-card-meta-row">
                                             <div class="draft-card-stat">
-                                                <div class="draft-card-stat-value">219</div>
-                                                <div class="draft-card-stat-label">Signed up</div>
+                                                <div class="draft-card-stat-value">312</div>
+                                                <div class="draft-card-stat-label">Participants</div>
                                             </div>
                                             <div class="draft-card-stat">
-                                                <div class="draft-card-stat-value">300</div>
-                                                <div class="draft-card-stat-label">Goal</div>
+                                                <div class="draft-card-stat-value">91%</div>
+                                                <div class="draft-card-stat-label">Completion</div>
                                             </div>
                                             <div class="draft-card-stat">
-                                                <div class="draft-card-stat-value">$8,760</div>
+                                                <div class="draft-card-stat-value">$12,480</div>
                                                 <div class="draft-card-stat-label">Pool</div>
                                             </div>
                                         </div>
@@ -1072,13 +1254,32 @@
                         </div>
                     </div>
 
-                    <div class="carousel-dots" id="carouselDots">
+                    <div class="carousel-dots">
                         <div class="carousel-dot active"></div>
                         <div class="carousel-dot"></div>
                     </div>
                 </div>
 
-                <!-- 2. Creator Love Summary -->
+                <!-- 4. EARNINGS — Equation mode -->
+                <div class="earnings-card">
+                    <div class="earnings-header">
+                        <div class="earnings-label"><span class="material-icons">trending_up</span> Estimated earnings</div>
+                        <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                    <div class="earnings-total">$1,094</div>
+                    <div class="earnings-breakdown">
+                        <div class="earnings-breakdown-item">
+                            <div class="earnings-breakdown-value">$0</div>
+                            <div class="earnings-breakdown-label">Past</div>
+                        </div>
+                        <div class="earnings-breakdown-item">
+                            <div class="earnings-breakdown-value">$1,094</div>
+                            <div class="earnings-breakdown-label">Est. current</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. COMMUNITY LOVE -->
                 <div class="love-card">
                     <div class="love-header">
                         <div class="love-header-title">Your community loves you</div>
@@ -1089,22 +1290,22 @@
                     </div>
                     <div class="love-categories">
                         <div class="love-category">
-                            <div class="love-emoji">🔥</div>
+                            <div class="love-emoji">&#x1F525;</div>
                             <div class="love-count">127</div>
                             <div class="love-label">Fired up</div>
                         </div>
                         <div class="love-category">
-                            <div class="love-emoji">💪</div>
+                            <div class="love-emoji">&#x1F4AA;</div>
                             <div class="love-count">89</div>
                             <div class="love-label">So worth it</div>
                         </div>
                         <div class="love-category">
-                            <div class="love-emoji">💜</div>
+                            <div class="love-emoji">&#x1F49C;</div>
                             <div class="love-count">54</div>
                             <div class="love-label">All the feels</div>
                         </div>
                         <div class="love-category">
-                            <div class="love-emoji">🌱</div>
+                            <div class="love-emoji">&#x1F331;</div>
                             <div class="love-count">42</div>
                             <div class="love-label">Growing</div>
                         </div>
@@ -1119,52 +1320,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Earnings -->
-                <div class="earnings-card">
-                    <div class="earnings-label">
-                        <span class="material-icons">account_balance_wallet</span>
-                        Estimated earnings
-                    </div>
-                    <div class="earnings-equation">
-                        <div class="earnings-eq-item">
-                            <div class="earnings-eq-value">$0</div>
-                            <div class="earnings-eq-label">Past</div>
-                        </div>
-                        <div class="earnings-eq-op">+</div>
-                        <div class="earnings-eq-item">
-                            <div class="earnings-eq-value">$1,094</div>
-                            <div class="earnings-eq-label">Est. current</div>
-                        </div>
-                        <div class="earnings-eq-op">=</div>
-                        <div class="earnings-eq-item earnings-eq-total">
-                            <div class="earnings-eq-value">$1,094</div>
-                            <div class="earnings-eq-label">Total</div>
-                        </div>
-                    </div>
-                    <div class="earnings-profile-link">
-                        View earnings details
-                        <span class="material-icons">chevron_right</span>
-                    </div>
-                </div>
-
-                <!-- 4. Create New Collab -->
-                <div class="new-collab-card">
-                    <div class="new-collab-top">
-                        <div class="new-collab-icon">
-                            <span class="material-icons">auto_awesome</span>
-                        </div>
-                        <div class="new-collab-info">
-                            <div class="new-collab-title">Keep the momentum going</div>
-                            <div class="new-collab-subtitle">Plan your next collab while these are hot</div>
-                        </div>
-                    </div>
-                    <button class="new-collab-cta">
-                        <span class="material-icons">add</span>
-                        Create a new collab
-                    </button>
-                </div>
-
-                <!-- 5. Invite Creators -->
+                <!-- 7. FOOTER LINKS -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1177,7 +1333,6 @@
                     </div>
                 </div>
 
-                <!-- 6. Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>
@@ -1211,15 +1366,12 @@
     </div>
 
     <script>
-        // Dot tracking for carousel
         const track = document.getElementById('collabCarousel');
-        const dots = document.querySelectorAll('#carouselDots .carousel-dot');
-
+        const dots = document.querySelectorAll('.carousel-dot');
         track.addEventListener('scroll', () => {
             const scrollLeft = track.scrollLeft;
             const slideWidth = track.offsetWidth;
             const activeIndex = Math.round(scrollLeft / slideWidth);
-
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === activeIndex);
             });

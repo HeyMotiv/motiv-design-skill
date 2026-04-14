@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home — Section Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* =============================================
+           DESIGN SYSTEM TOKENS
+           ============================================= */
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+            --teal-0: #ECF2F2;
+            --teal-30: #D0DEDF;
+            --teal-60: #C5ECE3;
+            --teal-100: #547577;
+            --purple-0: #FDF2FF;
+            --purple-30: #A889AD;
+            --purple-60: #775C7C;
+            --purple-100: #6B4E71;
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+            --surface-error: #CB3E3E;
+            --black-60: #1A1A1A;
+            --black-100: #111111;
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-bg-primary: var(--surface-bg);
+            --color-border-default: var(--surface-border);
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 16px;
+            --radius-full: 999px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+            --motion-fast: 150ms;
+            --motion-normal: 250ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* =============================================
+           PAGE LAYOUT (reference page only)
+           ============================================= */
+        body {
+            background: #F0EDEA;
+            font-family: var(--font-body);
+            color: var(--color-text-primary);
+            padding: 48px 24px 120px;
+        }
+
+        .page-header {
+            max-width: 900px;
+            margin: 0 auto 56px;
+        }
+
+        .page-title {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-desc {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 24px;
+            max-width: 600px;
+        }
+
+        .section-group {
+            max-width: 900px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-100);
+        }
+
+        .section-number {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--orange-100);
+            margin-bottom: 4px;
+        }
+
+        .section-name {
+            font-family: var(--font-headline);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .section-job {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .variations-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .variation {
+            width: 390px;
+            flex-shrink: 0;
+            background: var(--surface-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--surface-border);
+        }
+
+        .variation-label {
+            padding: 12px 16px;
+            background: var(--primary-100);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .variation-when {
+            padding: 8px 16px;
+            background: rgba(43,46,52,0.85);
+            color: var(--primary-30);
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .variation-render {
+            padding: 24px;
+            background: linear-gradient(180deg, #F5DDD4 0px, #FAF0EB 80px, var(--surface-bg) 160px);
+        }
+
+        .variation-render.no-gradient {
+            background: var(--surface-bg);
+            padding: 16px;
+        }
+
+        .variation-note {
+            padding: 12px 16px;
+            background: var(--orange-0);
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .full-width {
+            width: 390px;
+        }
+
+        /* =============================================
+           COMPONENT: GREETING
+           ============================================= */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .greeting {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 38px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
+
+        .greeting-sub {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 24px;
+        }
+
+        /* =============================================
+           COMPONENT: BLOCKER CARD
+           ============================================= */
+        .blocker-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+        }
+
+        .blocker-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .blocker-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .blocker-card-icon.instagram { background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4); }
+        .blocker-card-icon.dates { background: var(--orange-100); }
+        .blocker-card-icon.w9 { background: var(--primary-60); }
+        .blocker-card-icon.create { background: var(--orange-100); }
+        .blocker-card-icon .material-icons { font-size: 20px; color: white; }
+
+        .blocker-card-info { flex: 1; }
+        .blocker-card-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 1px; }
+        .blocker-card-subtitle { font-size: 12px; color: var(--color-text-secondary); line-height: 16px; }
+
+        .blocker-card-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .blocker-card-cta .material-icons { font-size: 18px; }
+
+        /* =============================================
+           COMPONENT: COLLAB SECTION
+           ============================================= */
+        .collab-section-header { padding: 0 8px; margin-bottom: 12px; }
+        .collab-section-title { font-family: var(--font-headline); font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 2px; }
+        .collab-section-subtitle { font-size: 12px; color: var(--color-text-secondary); }
+
+        /* Draft card */
+        .draft-card {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+        .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
+        .draft-card.theme-orange { --card-color: 234,120,50; --card-accent: #EA7832; }
+        .draft-card.theme-red { --card-color: 180,60,60; --card-accent: #B43C3C; }
+        .draft-card.theme-teal { --card-color: 84,117,119; --card-accent: #547577; }
+
+        .draft-card-hero { position: relative; height: 180px; overflow: hidden; display: flex; align-items: flex-end; }
+        .draft-card-photo { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+        .draft-card-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(var(--card-color),0) 0%, rgba(var(--card-color),0.10) 30%, rgba(var(--card-color),0.45) 50%, rgba(var(--card-color),0.70) 65%, rgba(var(--card-color),0.82) 80%, rgba(var(--card-color),0.88) 100%);
+        }
+        .draft-card-hero-content { position: relative; z-index: 2; padding: 16px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+        .draft-card-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); border-radius: var(--radius-full); padding: 4px 10px; font-size: 12px; font-weight: 600; color: white; margin-bottom: 8px; }
+        .draft-card-badge .material-icons { font-size: 13px; }
+        .draft-card-badge.live { background: rgba(60,179,113,0.25); }
+        .draft-card-badge.completed { background: rgba(255,255,255,0.25); }
+
+        .draft-card-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; font-weight: 600; color: white; line-height: 1.2; text-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+        .draft-card-dates { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.75); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+        .draft-card-dates .material-icons { font-size: 14px; }
+
+        .draft-card-stats { background: var(--card-accent); padding: 4px 14px 14px; }
+        .draft-card-grouped { background: rgba(255,255,255,0.95); border: 1px solid rgba(255,255,255,0.5); border-radius: 12px; overflow: hidden; }
+
+        .draft-card-progress { padding: 12px 14px; }
+        .draft-card-progress-label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; }
+        .draft-card-progress-bar { height: 6px; background: var(--primary-0); border-radius: 3px; overflow: hidden; }
+        .draft-card-progress-fill { height: 100%; background: var(--card-accent); border-radius: 3px; }
+
+        .draft-card-pool-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; }
+        .draft-card-pool-amount { font-size: 24px; font-weight: 700; color: var(--card-accent); line-height: 1; margin-bottom: 2px; }
+        .draft-card-pool-label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); }
+        .draft-card-hold { display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px; background: rgba(0,0,0,0.04); border: 1.5px solid var(--color-border-default); border-radius: var(--radius-full); font-size: 12px; font-weight: 600; color: var(--card-accent); }
+        .draft-card-hold .material-icons { font-size: 14px; }
+
+        .draft-card-divider { height: 1px; background: var(--color-border-default); margin: 0 14px; }
+        .draft-card-meta-row { display: flex; padding: 10px 14px; }
+        .draft-card-stat { flex: 1; text-align: center; position: relative; }
+        .draft-card-stat + .draft-card-stat::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 1px; background: var(--color-border-default); }
+        .draft-card-stat-value { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .draft-card-stat-label { font-size: 12px; color: var(--color-text-secondary); }
+
+        .draft-card-cta-row { padding: 0 14px 12px; }
+        .draft-card-cta { width: 100%; background: var(--card-accent); color: white; font-family: var(--font-body); font-size: 14px; font-weight: 600; padding: 10px; border-radius: var(--radius-full); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .draft-card-cta .material-icons { font-size: 16px; }
+
+        /* Past collab row */
+        .past-collab-row { background: var(--surface-white); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+        .past-collab-photo { width: 48px; height: 48px; border-radius: var(--radius-md); background-size: cover; background-position: center; flex-shrink: 0; }
+        .past-collab-info { flex: 1; min-width: 0; }
+        .past-collab-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
+        .past-collab-meta { font-size: 12px; color: var(--color-text-secondary); }
+        .past-collab-earned { text-align: right; flex-shrink: 0; }
+        .past-collab-earned-value { font-size: 14px; font-weight: 700; color: var(--orange-100); }
+        .past-collab-earned-label { font-size: 12px; color: var(--color-text-secondary); }
+        .past-collab-chevron { font-size: 20px; color: var(--primary-30); flex-shrink: 0; }
+
+        /* Carousel (simplified for reference — shows first card only) */
+        .carousel-track-ref { display: flex; gap: 12px; overflow: hidden; }
+        .carousel-track-ref .draft-card { flex: 0 0 280px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 6px; padding: 8px 0 4px; }
+        .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-border-default); }
+        .carousel-dot.active { width: 18px; border-radius: 3px; background: var(--orange-100); }
+
+        /* =============================================
+           COMPONENT: EARNINGS CARD
+           ============================================= */
+        .earnings-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .earnings-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        .earnings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .earnings-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .earnings-label .material-icons { font-size: 16px; color: var(--orange-100); }
+
+        .earnings-chevron { color: var(--color-text-tertiary); }
+        .earnings-chevron .material-icons { font-size: 20px; }
+
+        .earnings-total {
+            font-family: var(--font-headline);
+            font-size: 46px;
+            font-weight: 700;
+            color: var(--orange-100);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .earnings-projected-sub {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .earnings-link {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--surface-border);
+        }
+        .earnings-link .material-icons { font-size: 14px; }
+
+        .earnings-breakdown {
+            display: flex;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        .earnings-breakdown-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .earnings-breakdown-item + .earnings-breakdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            bottom: 2px;
+            width: 1px;
+            background: var(--surface-border);
+        }
+
+        .earnings-breakdown-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .earnings-breakdown-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        /* =============================================
+           COMPONENT: COMMUNITY LOVE
+           ============================================= */
+        .love-card { background: var(--surface-white); border: 1px solid var(--surface-border); border-radius: var(--radius-lg); padding: 18px; }
+        .love-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .love-header-title { font-family: var(--font-headline); font-size: 16px; font-weight: 700; color: var(--color-text-primary); }
+        .love-header-count { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px; }
+        .love-header-count .material-icons { font-size: 14px; color: var(--orange-100); }
+        .love-categories { display: flex; gap: 0; margin-bottom: 14px; }
+        .love-category { flex: 1; text-align: center; position: relative; }
+        .love-category + .love-category::before { content: ''; position: absolute; left: 0; top: 4px; bottom: 4px; width: 1px; background: var(--surface-border); }
+        .love-emoji { font-size: 20px; margin-bottom: 2px; }
+        .love-count { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .love-label { font-size: 12px; color: var(--color-text-secondary); }
+        .love-quote { background: var(--orange-0); border-radius: var(--radius-sm); padding: 10px 12px; }
+        .love-quote-text { font-size: 14px; font-style: italic; color: var(--color-text-primary); line-height: 20px; }
+        .love-quote-attr { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; }
+        .love-see-all { display: flex; align-items: center; gap: 2px; font-size: 12px; font-weight: 600; color: var(--orange-100); margin-top: 12px; }
+        .love-see-all .material-icons { font-size: 14px; }
+
+        /* =============================================
+           COMPONENT: FOOTER LINKS
+           ============================================= */
+        .nudge-card { background: linear-gradient(135deg, var(--orange-30) 0%, #F7ECE8 100%); border: 1px solid var(--orange-60); border-radius: var(--radius-lg); padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+        .nudge-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(201,122,106,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .nudge-icon .material-icons { font-size: 18px; color: var(--orange-100); }
+        .nudge-body { flex: 1; }
+        .nudge-text { font-size: 14px; color: var(--color-text-primary); line-height: 20px; }
+        .nudge-text strong { font-weight: 600; }
+        .nudge-cta { font-size: 12px; font-weight: 600; color: var(--orange-100); background: none; border: none; cursor: pointer; padding: 0; margin-top: 4px; }
+
+        .community-link { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); }
+        .community-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(107,78,113,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .community-icon .material-icons { font-size: 18px; color: var(--purple-100); }
+        .community-info { flex: 1; }
+        .community-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .community-subtitle { font-size: 12px; color: var(--color-text-secondary); }
+        .community-arrow .material-icons { font-size: 18px; color: var(--color-text-tertiary); }
+
+        /* Utility */
+        .spacer { height: 16px; }
+        .hidden-note { padding: 24px; text-align: center; color: var(--color-text-tertiary); font-size: 14px; font-style: italic; border: 2px dashed var(--surface-border); border-radius: var(--radius-lg); }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         PAGE HEADER
+         ========================================== -->
+    <div class="page-header">
+        <div class="page-title">Creator Home — Section Library</div>
+        <div class="page-desc">Every variation of every section on the creator home screen. Each card shows a single component state at mobile width (390px). Use this as the source of truth for building the Figma.</div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 1: GREETING
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 1</div>
+            <div class="section-name">Greeting</div>
+            <div class="section-job">Orient the creator — who they are, what's happening right now. Always present. Copy adapts, structure never changes.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <div class="variation">
+                <div class="variation-label">Has drafts, pre-launch</div>
+                <div class="variation-when">Post-onboarding, AI drafts generated, no collab finalized yet</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Let's get your collab live.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Needs dates</div>
+                <div class="variation-when">Collab finalized but dates not set</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Almost there, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Set your dates and you're live.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Needs IG verify</div>
+                <div class="variation-when">Collab ready but Instagram not connected</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">One last step, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Verify your Instagram to go live.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Dates expired</div>
+                <div class="variation-when">Had dates, they passed or are less than 1 week out</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Your dates need updating.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">1 collab active</div>
+                <div class="variation-when">One collab is live (recruiting or in-progress weeks)</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Your collab is rolling.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">2+ collabs active</div>
+                <div class="variation-when">Multiple collabs running simultaneously</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Your collabs are rolling.</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Between collabs</div>
+                <div class="variation-when">No active collab, 1+ past collabs completed</div>
+                <div class="variation-render">
+                    <div class="header-row">
+                        <div class="greeting">Hey, Mortimer</div>
+                        <div class="icon-btn"><span class="material-icons">notifications_none</span></div>
+                    </div>
+                    <div class="greeting-sub">Ready for another?</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 2: BLOCKER
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 2</div>
+            <div class="section-name">Blocker</div>
+            <div class="section-job">The single most important action. 0 or 1 card. Priority order determines which shows. Also used for the primary forward action (e.g. "Start next collab") when no technical blocker exists.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <div class="variation">
+                <div class="variation-label">Priority 1 — Dates expired</div>
+                <div class="variation-when">Creator had dates but they passed or are &lt;1 week out</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon dates"><span class="material-icons">event_busy</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Pick new dates</div>
+                                <div class="blocker-card-subtitle">Your original dates have passed. Choose new ones at least 1 week out.</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta">Choose New Dates</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 2 — Verify Instagram</div>
+                <div class="variation-when">Instagram not connected, collab ready to launch</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon instagram"><span class="material-icons">camera_alt</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Verify your Instagram</div>
+                                <div class="blocker-card-subtitle">So followers know it's really you</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta"><span class="material-icons">link</span> Connect Instagram</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 3 — Set dates</div>
+                <div class="variation-when">Collab configured, no dates set yet</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon dates"><span class="material-icons">calendar_today</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Set your collab dates</div>
+                                <div class="blocker-card-subtitle">Everything's ready — just pick your dates</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta">Choose Dates</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 4 — Agreement & W9 (both)</div>
+                <div class="variation-when">Collab live, neither agreement nor W9 signed. Sent via DocuSign.</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon w9"><span class="material-icons">description</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Sign your agreement & W9</div>
+                                <div class="blocker-card-subtitle">Required before your first payout. We'll send both via DocuSign.</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta">Check your email</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 5 — Agreement only</div>
+                <div class="variation-when">W9 signed, agreement not yet signed</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon w9"><span class="material-icons">description</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Sign your creator agreement</div>
+                                <div class="blocker-card-subtitle">Your W9 is done — just the agreement left. Check your email for the DocuSign.</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta">Check your email</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 6 — W9 only</div>
+                <div class="variation-when">Agreement signed, W9 not yet signed</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon w9"><span class="material-icons">description</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Complete your W9</div>
+                                <div class="blocker-card-subtitle">Your agreement is signed — just the W9 left. Check your email for the DocuSign.</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta">Check your email</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Priority 7 — Start next collab</div>
+                <div class="variation-when">Between collabs, no active collab, encouraging creator to start another</div>
+                <div class="variation-render no-gradient">
+                    <div class="blocker-card">
+                        <div class="blocker-card-top">
+                            <div class="blocker-card-icon create"><span class="material-icons">add_circle</span></div>
+                            <div class="blocker-card-info">
+                                <div class="blocker-card-title">Start your next collab</div>
+                                <div class="blocker-card-subtitle">Your followers loved Paws & Pedals — keep the momentum going</div>
+                            </div>
+                        </div>
+                        <button class="blocker-card-cta"><span class="material-icons">add</span> Create a new collab</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">No blocker</div>
+                <div class="variation-when">Active collab running, all obligations met (IG verified, agreement & W9 signed)</div>
+                <div class="variation-render no-gradient">
+                    <div class="hidden-note">Section hidden — no blocker to show</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 3: YOUR COLLABS
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 3</div>
+            <div class="section-name">Your Collabs</div>
+            <div class="section-job">Show the state of all collabs at a glance. Title is always "Your collabs". Subtitle provides counts/context. Tapping a card goes to the collab details screen. Card theme colors are creator-specific, not DS tokens.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <!-- Draft carousel -->
+            <div class="variation full-width">
+                <div class="variation-label">Draft carousel</div>
+                <div class="variation-when">Post-onboarding, 3 AI-generated drafts. Horizontal scroll, themed cards.</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">3 drafts · pick one to finalize</div>
+                    </div>
+                    <div class="carousel-track-ref">
+                        <div class="draft-card theme-purple">
+                            <div class="draft-card-hero">
+                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                                <div class="draft-card-overlay"></div>
+                                <div class="draft-card-hero-content">
+                                    <div class="draft-card-badge"><span class="material-icons">star</span> Your pick</div>
+                                    <div class="draft-card-name">Paws & Pedals</div>
+                                    <div class="draft-card-dates">Apr 6 — May 17</div>
+                                </div>
+                            </div>
+                            <div class="draft-card-stats"><div class="draft-card-grouped">
+                                <div class="draft-card-pool-row"><div><div class="draft-card-pool-amount">$20,000</div><div class="draft-card-pool-label">Collab pool</div></div><div class="draft-card-hold"><span class="material-icons">credit_card</span> $40 hold</div></div>
+                                <div class="draft-card-divider"></div>
+                                <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">500</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">6 wks</div><div class="draft-card-stat-label">Duration</div></div></div>
+                                <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">arrow_forward</span> Finalize Collab</button></div>
+                            </div></div>
+                        </div>
+                        <div class="draft-card theme-orange">
+                            <div class="draft-card-hero">
+                                <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&q=80')"></div>
+                                <div class="draft-card-overlay"></div>
+                                <div class="draft-card-hero-content">
+                                    <div class="draft-card-name">Dad Legs Don't Quit</div>
+                                    <div class="draft-card-dates">Apr 14 — May 11</div>
+                                </div>
+                            </div>
+                            <div class="draft-card-stats"><div class="draft-card-grouped">
+                                <div class="draft-card-pool-row"><div><div class="draft-card-pool-amount">$20,000</div><div class="draft-card-pool-label">Collab pool</div></div><div class="draft-card-hold"><span class="material-icons">credit_card</span> $40 hold</div></div>
+                                <div class="draft-card-divider"></div>
+                                <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">500</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">4 wks</div><div class="draft-card-stat-label">Duration</div></div></div>
+                                <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">arrow_forward</span> Finalize Collab</button></div>
+                            </div></div>
+                        </div>
+                    </div>
+                    <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+                </div>
+            </div>
+
+            <!-- Single draft, needs dates -->
+            <div class="variation">
+                <div class="variation-label">Single draft — needs dates</div>
+                <div class="variation-when">Collab finalized, dates not set yet</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">1 draft · needs dates</div>
+                    </div>
+                    <div class="draft-card theme-purple">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge"><span class="material-icons">check_circle</span> Ready to launch</div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates"><span class="material-icons">event</span> Dates not set</div>
+                            </div>
+                        </div>
+                        <div class="draft-card-stats"><div class="draft-card-grouped">
+                            <div class="draft-card-pool-row"><div><div class="draft-card-pool-amount">$20,000</div><div class="draft-card-pool-label">Collab pool</div></div><div class="draft-card-hold"><span class="material-icons">credit_card</span> $40 hold</div></div>
+                            <div class="draft-card-divider"></div>
+                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">500</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">6 wks</div><div class="draft-card-stat-label">Duration</div></div></div>
+                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">edit</span> Edit Collab</button></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single draft, ready to launch -->
+            <div class="variation">
+                <div class="variation-label">Single draft — ready to launch</div>
+                <div class="variation-when">Collab finalized with dates, waiting on IG verify</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">1 ready to launch</div>
+                    </div>
+                    <div class="draft-card theme-purple">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge"><span class="material-icons">check_circle</span> Ready to launch</div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates"><span class="material-icons">event</span> Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                        <div class="draft-card-stats"><div class="draft-card-grouped">
+                            <div class="draft-card-pool-row"><div><div class="draft-card-pool-amount">$20,000</div><div class="draft-card-pool-label">Collab pool</div></div><div class="draft-card-hold"><span class="material-icons">credit_card</span> $40 hold</div></div>
+                            <div class="draft-card-divider"></div>
+                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">500</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">6 wks</div><div class="draft-card-stat-label">Duration</div></div></div>
+                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">edit</span> Edit Collab</button></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single active -->
+            <div class="variation">
+                <div class="variation-label">Single active collab</div>
+                <div class="variation-when">One collab live with progress, participants, completion stats</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">1 active</div>
+                    </div>
+                    <div class="draft-card theme-purple">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge live"><span class="material-icons">sensors</span> Live — Week 3 of 6</div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates"><span class="material-icons">event</span> Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                        <div class="draft-card-stats"><div class="draft-card-grouped">
+                            <div class="draft-card-progress"><div class="draft-card-progress-label"><span>Week 3 of 6</span><span>50%</span></div><div class="draft-card-progress-bar"><div class="draft-card-progress-fill" style="width: 50%"></div></div></div>
+                            <div class="draft-card-divider"></div>
+                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">487</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">82%</div><div class="draft-card-stat-label">Completion</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">$19,480</div><div class="draft-card-stat-label">Pool</div></div></div>
+                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">open_in_new</span> View Collab</button></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed collab -->
+            <div class="variation">
+                <div class="variation-label">Completed collab</div>
+                <div class="variation-when">Collab finished, final stats and earnings shown</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">1 completed</div>
+                    </div>
+                    <div class="draft-card theme-purple">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge completed"><span class="material-icons">check_circle</span> Completed</div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates"><span class="material-icons">event</span> Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                        <div class="draft-card-stats"><div class="draft-card-grouped">
+                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">487</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">82%</div><div class="draft-card-stat-label">Completion</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">$729</div><div class="draft-card-stat-label">Earned</div></div></div>
+                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">open_in_new</span> View Results</button></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active + past -->
+            <div class="variation">
+                <div class="variation-label">Active + past collabs</div>
+                <div class="variation-when">Returning creator: active collab card on top, past collab rows below</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">1 active · 1 completed</div>
+                    </div>
+                    <div class="draft-card theme-purple" style="margin-bottom: 16px;">
+                        <div class="draft-card-hero">
+                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                            <div class="draft-card-overlay"></div>
+                            <div class="draft-card-hero-content">
+                                <div class="draft-card-badge live"><span class="material-icons">sensors</span> Live — Week 3 of 6</div>
+                                <div class="draft-card-name">Paws & Pedals</div>
+                                <div class="draft-card-dates"><span class="material-icons">event</span> Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                        <div class="draft-card-stats"><div class="draft-card-grouped">
+                            <div class="draft-card-progress"><div class="draft-card-progress-label"><span>Week 3 of 6</span><span>50%</span></div><div class="draft-card-progress-bar"><div class="draft-card-progress-fill" style="width: 50%"></div></div></div>
+                            <div class="draft-card-divider"></div>
+                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">487</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">82%</div><div class="draft-card-stat-label">Completion</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">$19,480</div><div class="draft-card-stat-label">Pool</div></div></div>
+                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">open_in_new</span> View Collab</button></div>
+                        </div></div>
+                    </div>
+                    <div class="past-collab-row">
+                        <div class="past-collab-photo" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&q=80')"></div>
+                        <div class="past-collab-info"><div class="past-collab-name">Dad Legs Don't Quit</div><div class="past-collab-meta">Feb 10 — Mar 23 · 412 participants</div></div>
+                        <div class="past-collab-earned"><div class="past-collab-earned-value">$614</div><div class="past-collab-earned-label">earned</div></div>
+                        <span class="material-icons past-collab-chevron">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past collabs only -->
+            <div class="variation">
+                <div class="variation-label">Past collabs only</div>
+                <div class="variation-when">Between collabs — no active, showing completed history as rows</div>
+                <div class="variation-render no-gradient">
+                    <div class="collab-section-header">
+                        <div class="collab-section-title">Your collabs</div>
+                        <div class="collab-section-subtitle">2 completed</div>
+                    </div>
+                    <div class="past-collab-row" style="margin-bottom: 8px;">
+                        <div class="past-collab-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                        <div class="past-collab-info"><div class="past-collab-name">Paws & Pedals</div><div class="past-collab-meta">Apr 6 — May 17 · 487 participants</div></div>
+                        <div class="past-collab-earned"><div class="past-collab-earned-value">$729</div><div class="past-collab-earned-label">earned</div></div>
+                        <span class="material-icons past-collab-chevron">chevron_right</span>
+                    </div>
+                    <div class="past-collab-row">
+                        <div class="past-collab-photo" style="background-image: url('https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=600&q=80')"></div>
+                        <div class="past-collab-info"><div class="past-collab-name">Dad Legs Don't Quit</div><div class="past-collab-meta">Feb 10 — Mar 23 · 412 participants</div></div>
+                        <div class="past-collab-earned"><div class="past-collab-earned-value">$614</div><div class="past-collab-earned-label">earned</div></div>
+                        <span class="material-icons past-collab-chevron">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 4: EARNINGS
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 4</div>
+            <div class="section-name">Earnings</div>
+            <div class="section-job">Cross-collab money summary. Always present. White card with large orange total (Headline Large, 46px). Tappable when the creator has earnings history — takes them to earnings history in their profile.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <div class="variation">
+                <div class="variation-label">Projected mode</div>
+                <div class="variation-when">Pre-launch — no collab has gone live yet. Shows estimated earnings per collab.</div>
+                <div class="variation-render no-gradient">
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-label"><span class="material-icons">trending_up</span> Earning potential</div>
+                            <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                        </div>
+                        <div class="earnings-total">$729</div>
+                        <div class="earnings-projected-sub">estimated per collab with 1% of your followers</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Accruing (tappable)</div>
+                <div class="variation-when">At least 1 collab live. Total prominent, breakdown shows past + current. Tap goes to earnings history in profile.</div>
+                <div class="variation-render no-gradient">
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-label"><span class="material-icons">trending_up</span> Estimated earnings</div>
+                            <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                        </div>
+                        <div class="earnings-total">$1,343</div>
+                        <div class="earnings-breakdown">
+                            <div class="earnings-breakdown-item">
+                                <div class="earnings-breakdown-value">$614</div>
+                                <div class="earnings-breakdown-label">Past</div>
+                            </div>
+                            <div class="earnings-breakdown-item">
+                                <div class="earnings-breakdown-value">$729</div>
+                                <div class="earnings-breakdown-label">Est. current</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Earned (tappable)</div>
+                <div class="variation-when">Between collabs — no active collab. Shows total earned from past collabs. Tap goes to earnings history in profile.</div>
+                <div class="variation-render no-gradient">
+                    <div class="earnings-card">
+                        <div class="earnings-header">
+                            <div class="earnings-label"><span class="material-icons">trending_up</span> Your earnings</div>
+                            <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                        </div>
+                        <div class="earnings-total">$729</div>
+                        <div class="earnings-breakdown">
+                            <div class="earnings-breakdown-item">
+                                <div class="earnings-breakdown-value">$729</div>
+                                <div class="earnings-breakdown-label">Past</div>
+                            </div>
+                            <div class="earnings-breakdown-item">
+                                <div class="earnings-breakdown-value">$0</div>
+                                <div class="earnings-breakdown-label">Est. current</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 5: COMMUNITY LOVE
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 5</div>
+            <div class="section-name">Community Love</div>
+            <div class="section-job">Aggregate love across all collabs. Shows once the creator has received community love — not tied to a lifecycle milestone. Motivation to keep creating.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <div class="variation">
+                <div class="variation-label">Hidden</div>
+                <div class="variation-when">No community love received yet (pre-launch or early in first collab)</div>
+                <div class="variation-render no-gradient">
+                    <div class="hidden-note">Section hidden — no community love received yet</div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Visible</div>
+                <div class="variation-when">Creator has received love from participants. Aggregated across all collabs.</div>
+                <div class="variation-render no-gradient">
+                    <div class="love-card">
+                        <div class="love-header">
+                            <div class="love-header-title">Your community loves you</div>
+                            <div class="love-header-count"><span class="material-icons">favorite</span> 312 total</div>
+                        </div>
+                        <div class="love-categories">
+                            <div class="love-category"><div class="love-emoji">🔥</div><div class="love-count">127</div><div class="love-label">Fired up</div></div>
+                            <div class="love-category"><div class="love-emoji">💪</div><div class="love-count">89</div><div class="love-label">So worth it</div></div>
+                            <div class="love-category"><div class="love-emoji">💜</div><div class="love-count">54</div><div class="love-label">All the feels</div></div>
+                            <div class="love-category"><div class="love-emoji">🌱</div><div class="love-count">42</div><div class="love-label">Growing</div></div>
+                        </div>
+                        <div class="love-quote">
+                            <div class="love-quote-text">"Every week I feel more motivated to push my limits. Mortimer's energy is contagious."</div>
+                            <div class="love-quote-attr">— Sarah K. · @sarahk_runs</div>
+                        </div>
+                        <div class="love-see-all">Read all messages <span class="material-icons">chevron_right</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         SECTION 6: FOOTER LINKS
+         ========================================== -->
+    <div class="section-group">
+        <div class="section-header">
+            <div class="section-number">Section 6</div>
+            <div class="section-name">Footer Links</div>
+            <div class="section-job">Low-priority persistent links. Always present, always the same. Invite creators + creator community access.</div>
+        </div>
+
+        <div class="variations-grid">
+
+            <div class="variation">
+                <div class="variation-label">Always the same</div>
+                <div class="variation-when">Present in every state. No variations.</div>
+                <div class="variation-render no-gradient">
+                    <div class="nudge-card" style="margin-bottom: 16px;">
+                        <div class="nudge-icon"><span class="material-icons">person_add</span></div>
+                        <div class="nudge-body">
+                            <div class="nudge-text"><strong>Know a creator who'd be great on Motiv?</strong></div>
+                            <button class="nudge-cta">Send an invite</button>
+                        </div>
+                    </div>
+                    <div class="community-link">
+                        <div class="community-icon"><span class="material-icons">forum</span></div>
+                        <div class="community-info"><div class="community-title">Creator Community</div><div class="community-subtitle">Tips, support, and creator connections</div></div>
+                        <div class="community-arrow"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

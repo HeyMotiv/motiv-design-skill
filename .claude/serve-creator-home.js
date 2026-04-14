@@ -16,6 +16,6 @@ http.createServer((req, res) => {
     res.end(html);
   } catch (e) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end(`File not found: collab-${state}.html\nAvailable: ?state=first-time, ?state=needs-dates, ?state=needs-verify, ?state=live, ?state=live-multi, ?state=between`);
+    res.end(`File not found: collab-${state}.html\nAvailable: ?state=first-time, ?state=needs-dates, ?state=needs-verify, ?state=dates-expired, ?state=live, ?state=live-multi, ?state=live-returning, ?state=between, ?state=sections`);
   }
 }).listen(8771, () => console.log('Serving creator home on http://localhost:8771?state=first-time'));

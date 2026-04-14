@@ -26,7 +26,7 @@
             /* Secondary — Teal */
             --teal-0: #ECF2F2;
             --teal-30: #D0DEDF;
-            --teal-60: #9DD3C4;
+            --teal-60: #C5ECE3;
             --teal-100: #547577;
 
             /* Secondary — Purple */
@@ -141,7 +141,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 28px 8px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--color-text-primary);
             position: relative;
@@ -157,7 +157,7 @@
         .status-bar-icons .material-icons { font-size: 17px; }
 
         /* =========================================
-           HEADER
+           1. GREETING (stable anchor)
            ========================================= */
 
         .home-header {
@@ -167,7 +167,7 @@
         .home-header-content {
             position: relative;
             z-index: 1;
-            padding: 16px 24px 16px;
+            padding: 36px 24px 16px;
         }
 
         .header-row {
@@ -179,7 +179,7 @@
 
         .greeting {
             font-family: var(--font-headline);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--color-text-primary);
             line-height: 34px;
@@ -202,43 +202,10 @@
         .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
 
         .greeting-sub {
-            font-size: 15px;
+            font-size: 16px;
             color: var(--color-text-secondary);
             line-height: 22px;
         }
-
-        .earnings-teaser {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 12px;
-            padding: 10px 14px;
-            background: var(--primary-100);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all var(--motion-fast) var(--easing-smooth);
-        }
-        .earnings-teaser:hover { transform: translateY(-1px); opacity: 0.95; }
-
-        .earnings-teaser-amount {
-            font-family: var(--font-headline);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--orange-100);
-            line-height: 1;
-        }
-
-        .earnings-teaser-text {
-            flex: 1;
-            font-size: 12px;
-            color: rgba(255,255,255,0.75);
-            line-height: 15px;
-        }
-
-        .earnings-teaser-arrow {
-            color: var(--orange-60);
-        }
-        .earnings-teaser-arrow .material-icons { font-size: 18px; }
 
         /* =========================================
            CONTENT
@@ -251,18 +218,109 @@
             gap: 24px;
         }
 
-        .section-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-text-tertiary);
-            padding: 4px 0;
+        /* =========================================
+           2. BLOCKER CARD (0 or 1, prominent)
+           ========================================= */
+
+        .blocker-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .blocker-card:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
+        .blocker-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .blocker-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .blocker-card-icon.instagram {
+            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+        }
+        .blocker-card-icon.dates {
+            background: var(--orange-100);
+        }
+        .blocker-card-icon.w9 {
+            background: var(--primary-60);
+        }
+        .blocker-card-icon .material-icons { font-size: 20px; color: white; }
+
+        .blocker-card-info { flex: 1; }
+
+        .blocker-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 1px;
+        }
+
+        .blocker-card-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .blocker-card-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .blocker-card-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .blocker-card-cta:active { transform: scale(0.97); }
+        .blocker-card-cta .material-icons { font-size: 18px; }
+
         /* =========================================
-           DRAFT COLLAB CAROUSEL
+           3. YOUR COLLABS — Draft Carousel
            ========================================= */
+
+        .collab-section {
+        }
+
+        .collab-section-header {
+            padding: 0 8px;
+            margin-bottom: 12px;
+        }
+
+        .collab-section-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .collab-section-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
 
         .carousel-section {
             margin: 0 -16px;
@@ -275,14 +333,14 @@
 
         .carousel-title {
             font-family: var(--font-headline);
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--color-text-primary);
             margin-bottom: 2px;
         }
 
         .carousel-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
@@ -316,6 +374,7 @@
         .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
         .draft-card.theme-orange { --card-color: 234,120,50; --card-accent: #EA7832; }
         .draft-card.theme-red { --card-color: 180,60,60; --card-accent: #B43C3C; }
+        .draft-card.theme-teal { --card-color: 84,117,119; --card-accent: #547577; }
 
         .draft-card-hero {
             position: relative;
@@ -368,17 +427,18 @@
             -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius-full);
             padding: 4px 10px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: white;
             margin-bottom: 8px;
         }
         .draft-card-badge .material-icons { font-size: 13px; }
+        .draft-card-badge.live { background: rgba(60, 179, 113, 0.25); }
 
         .draft-card-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: white;
             line-height: 1.2;
@@ -390,7 +450,11 @@
             font-weight: 500;
             color: rgba(255,255,255,0.75);
             margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
+        .draft-card-dates .material-icons { font-size: 14px; }
 
         .draft-card-stats {
             background: var(--card-accent);
@@ -404,6 +468,30 @@
             overflow: hidden;
         }
 
+        .draft-card-progress {
+            padding: 12px 14px;
+        }
+        .draft-card-progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .draft-card-progress-bar {
+            height: 6px;
+            background: var(--primary-0);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .draft-card-progress-fill {
+            height: 100%;
+            background: var(--card-accent);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
         .draft-card-pool-row {
             display: flex;
             align-items: center;
@@ -412,7 +500,7 @@
         }
 
         .draft-card-pool-amount {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--card-accent);
             line-height: 1;
@@ -420,7 +508,7 @@
         }
 
         .draft-card-pool-label {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--color-text-secondary);
         }
@@ -433,7 +521,7 @@
             background: rgba(0,0,0,0.04);
             border: 1.5px solid var(--color-border-default);
             border-radius: var(--radius-full);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--card-accent);
         }
@@ -472,7 +560,7 @@
         }
 
         .draft-card-stat-label {
-            font-size: 10px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
@@ -485,7 +573,7 @@
             background: var(--card-accent);
             color: white;
             font-family: var(--font-body);
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             padding: 10px;
             border-radius: var(--radius-full);
@@ -501,7 +589,6 @@
         .draft-card-cta:active { transform: scale(0.97); }
         .draft-card-cta .material-icons { font-size: 16px; }
 
-        /* Carousel dots */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -522,202 +609,268 @@
             background: var(--orange-100);
         }
 
-        /* Alternative actions below carousel */
-        .carousel-alt-actions {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            padding: 4px 16px 0;
-        }
-
-        .alt-action {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--orange-100);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 0;
-        }
-        .alt-action:hover { text-decoration: underline; }
-        .alt-action .material-icons { font-size: 16px; }
-
-        .alt-action-divider {
-            width: 1px;
-            height: 16px;
-            background: var(--color-border-default);
-            align-self: center;
-        }
-
         /* =========================================
-           INSTAGRAM VERIFICATION CARD
+           4. EARNINGS CARD (unified, adapts by state)
            ========================================= */
 
-        .verify-card {
+        .earnings-card {
             background: var(--surface-white);
             border: 1px solid var(--surface-border);
-            border-radius: var(--radius-lg);
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            border-radius: var(--radius-md);
+            padding: 20px;
             cursor: pointer;
             transition: all var(--motion-fast) var(--easing-smooth);
         }
-        .verify-card:hover {
-            background: var(--primary-0);
-            transform: translateY(-1px);
-        }
+        .earnings-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 
-        .verify-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .verify-icon .material-icons { font-size: 20px; color: white; }
-
-        .verify-info {
-            flex: 1;
-        }
-
-        .verify-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            margin-bottom: 1px;
-        }
-
-        .verify-subtitle {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-        }
-
-        .verify-chevron {
-            color: var(--primary-30);
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        /* =========================================
-           EARNINGS POTENTIAL CARD
-           ========================================= */
-
-        .potential-card {
-            background: var(--primary-100);
-            border-radius: var(--radius-lg);
-            padding: 18px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform var(--motion-normal) var(--easing-smooth);
-        }
-        .potential-card:hover { transform: translateY(-1px); }
-
-        .potential-card::before {
-            content: '';
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(201, 122, 106, 0.2) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .potential-header {
+        .earnings-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
 
-        .potential-label {
+        .earnings-label {
             font-size: 12px;
-            font-weight: 600;
-            color: var(--orange-60);
+            font-weight: 700;
+            color: var(--color-text-secondary);
             display: flex;
             align-items: center;
             gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
-        .potential-label .material-icons { font-size: 16px; }
+        .earnings-label .material-icons { font-size: 16px; color: var(--orange-100); }
 
-        .potential-tap-hint {
-            font-size: 11px;
-            color: var(--orange-60);
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        .potential-tap-hint .material-icons { font-size: 14px; }
+        .earnings-chevron { color: var(--color-text-tertiary); }
+        .earnings-chevron .material-icons { font-size: 20px; }
 
-        .potential-amount {
+        .earnings-total {
             font-family: var(--font-headline);
-            font-size: 36px;
+            font-size: 46px;
             font-weight: 700;
             color: var(--orange-100);
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
-        .potential-amount-label {
-            font-size: 13px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 14px;
+        .earnings-projected-sub {
+            font-size: 12px;
+            color: var(--color-text-secondary);
         }
 
-        .potential-breakdown {
+        .earnings-link {
             display: flex;
-            gap: 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            align-items: center;
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            margin-top: 12px;
             padding-top: 12px;
+            border-top: 1px solid var(--surface-border);
+        }
+        .earnings-link .material-icons { font-size: 14px; }
+
+        .earnings-breakdown {
+            display: flex;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--surface-border);
         }
 
-        .potential-stat {
+        .earnings-breakdown-item {
             flex: 1;
             text-align: center;
             position: relative;
         }
-        .potential-stat + .potential-stat::before {
+        .earnings-breakdown-item + .earnings-breakdown-item::before {
             content: '';
             position: absolute;
             left: 0;
-            top: 0;
-            bottom: 0;
+            top: 2px;
+            bottom: 2px;
             width: 1px;
-            background: rgba(255,255,255,0.1);
+            background: var(--surface-border);
         }
 
-        .potential-stat-value {
-            font-size: 16px;
+        .earnings-breakdown-value {
+            font-size: 14px;
             font-weight: 700;
-            color: white;
+            color: var(--color-text-primary);
             margin-bottom: 2px;
         }
 
-        .potential-stat-label {
-            font-size: 10px;
-            color: var(--orange-60);
-        }
-
-        .potential-note {
-            font-size: 11px;
-            color: rgba(255,255,255,0.5);
-            margin-top: 10px;
-            text-align: center;
+        .earnings-breakdown-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
         }
 
         /* =========================================
-           INVITE CREATORS NUDGE
+           5. COMMUNITY LOVE (conditional)
+           ========================================= */
+
+        .love-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .love-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        .love-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .love-header-title {
+            font-family: var(--font-headline);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .love-header-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .love-header-count .material-icons { font-size: 14px; color: var(--orange-100); }
+
+        .love-categories {
+            display: flex;
+            gap: 0;
+            margin-bottom: 14px;
+        }
+
+        .love-category {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .love-category + .love-category::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: var(--surface-border);
+        }
+
+        .love-emoji { font-size: 20px; margin-bottom: 2px; }
+        .love-count { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .love-label { font-size: 12px; color: var(--color-text-secondary); }
+
+        .love-quote {
+            background: var(--orange-0);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            position: relative;
+        }
+
+        .love-quote-text {
+            font-size: 14px;
+            font-style: italic;
+            color: var(--color-text-primary);
+            line-height: 18px;
+        }
+
+        .love-quote-attr {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .love-see-all {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            margin-top: 12px;
+        }
+        .love-see-all .material-icons { font-size: 14px; }
+
+        /* =========================================
+           6. NEXT STEP (forward CTA)
+           ========================================= */
+
+        .next-step-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .next-step-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+        .next-step-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .next-step-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--orange-0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .next-step-icon .material-icons { font-size: 22px; color: var(--orange-100); }
+
+        .next-step-info { flex: 1; }
+
+        .next-step-title {
+            font-family: var(--font-headline);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .next-step-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .next-step-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .next-step-cta:hover { opacity: 0.9; transform: scale(1.02); }
+        .next-step-cta:active { transform: scale(0.97); }
+        .next-step-cta .material-icons { font-size: 18px; }
+
+        /* =========================================
+           7. FOOTER LINKS
            ========================================= */
 
         .nudge-card {
@@ -742,12 +895,10 @@
         }
         .nudge-icon .material-icons { font-size: 18px; color: var(--orange-100); }
 
-        .nudge-body {
-            flex: 1;
-        }
+        .nudge-body { flex: 1; }
 
         .nudge-text {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--color-text-primary);
             line-height: 18px;
         }
@@ -764,10 +915,6 @@
             margin-top: 4px;
         }
         .nudge-cta:hover { text-decoration: underline; }
-
-        /* =========================================
-           COMMUNITY LINK
-           ========================================= */
 
         .community-link {
             display: flex;
@@ -797,18 +944,16 @@
         }
         .community-icon .material-icons { font-size: 18px; color: var(--purple-100); }
 
-        .community-info {
-            flex: 1;
-        }
+        .community-info { flex: 1; }
 
         .community-title {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--color-text-primary);
         }
 
         .community-subtitle {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--color-text-secondary);
         }
 
@@ -866,7 +1011,7 @@
         }
 
         .tab-item-label {
-            font-size: 9px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--primary-60);
             transition: color var(--motion-fast);
@@ -890,6 +1035,73 @@
             opacity: 0.2;
         }
 
+        /* =========================================
+           PAST COLLAB ROW (between state)
+           ========================================= */
+
+        .past-collab-row {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all var(--motion-fast) var(--easing-smooth);
+        }
+        .past-collab-row:hover {
+            background: var(--primary-0);
+            transform: translateY(-1px);
+        }
+
+        .past-collab-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .past-collab-info { flex: 1; min-width: 0; }
+
+        .past-collab-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .past-collab-meta {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-earned {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .past-collab-earned-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--orange-100);
+        }
+
+        .past-collab-earned-label {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .past-collab-chevron {
+            font-size: 20px;
+            color: var(--primary-30);
+            flex-shrink: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -901,7 +1113,7 @@
 
         <div class="phone-scroll">
 
-            <!-- Header -->
+            <!-- 1. GREETING -->
             <div class="home-header">
                 <div class="status-bar">
                     <span>9:41</span>
@@ -919,24 +1131,33 @@
                         </div>
                     </div>
                     <div class="greeting-sub">Let's get your collab live.</div>
-                    <div class="earnings-teaser">
-                        <div class="earnings-teaser-amount">$729</div>
-                        <div class="earnings-teaser-text">per collab with just 1% of your followers</div>
-                        <div class="earnings-teaser-arrow">
-                            <span class="material-icons">chevron_right</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Content -->
             <div class="home-content">
 
-                <!-- 1. Draft Collab Carousel -->
+                <!-- 2. BLOCKER — Verify Instagram -->
+                <div class="blocker-card">
+                    <div class="blocker-card-top">
+                        <div class="blocker-card-icon instagram">
+                            <span class="material-icons">camera_alt</span>
+                        </div>
+                        <div class="blocker-card-info">
+                            <div class="blocker-card-title">Verify your Instagram</div>
+                            <div class="blocker-card-subtitle">So followers know it's really you</div>
+                        </div>
+                    </div>
+                    <button class="blocker-card-cta">
+                        <span class="material-icons">link</span>
+                        Connect Instagram
+                    </button>
+                </div>
+
+                <!-- 3. YOUR COLLABS — Draft Carousel -->
                 <div class="carousel-section">
                     <div class="carousel-header">
-                        <div class="carousel-title">Your collab drafts</div>
-                        <div class="carousel-subtitle">Pick one to finalize, or start fresh</div>
+                        <div class="carousel-title">Your collabs</div>
+                        <div class="carousel-subtitle">3 drafts · pick one to finalize</div>
                     </div>
 
                     <div class="carousel-track">
@@ -1082,62 +1303,19 @@
 
                 </div>
 
-                <!-- 2. Instagram Verification -->
-                <div class="verify-card">
-                    <div class="verify-icon">
-                        <span class="material-icons">camera_alt</span>
+                <!-- 4. EARNINGS — Projected mode -->
+                <div class="earnings-card">
+                    <div class="earnings-header">
+                        <div class="earnings-label"><span class="material-icons">trending_up</span> Earning potential</div>
+                            <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
                     </div>
-                    <div class="verify-info">
-                        <div class="verify-title">Verify your Instagram</div>
-                        <div class="verify-subtitle">So followers know it's really you</div>
-                    </div>
-                    <span class="material-icons verify-chevron">chevron_right</span>
+                    <div class="earnings-total">$729</div>
+                    <div class="earnings-projected-sub">estimated per collab with 1% of your followers</div>
                 </div>
 
-                <!-- Agreement & W9 -->
-                <div class="verify-card">
-                    <div class="verify-icon" style="background: var(--primary-60);">
-                        <span class="material-icons">description</span>
-                    </div>
-                    <div class="verify-info">
-                        <div class="verify-title">Creator agreement & W9</div>
-                        <div class="verify-subtitle">Required before your first payout</div>
-                    </div>
-                    <span class="material-icons verify-chevron">chevron_right</span>
-                </div>
+                <!-- 5. COMMUNITY LOVE — shows once creator has received community love -->
 
-                <!-- 3. Earnings Potential -->
-                <div class="potential-card">
-                    <div class="potential-header">
-                        <div class="potential-label">
-                            <span class="material-icons">trending_up</span>
-                            Your earning potential
-                        </div>
-                        <div class="potential-tap-hint">
-                            Learn more
-                            <span class="material-icons">chevron_right</span>
-                        </div>
-                    </div>
-                    <div class="potential-amount">$729</div>
-                    <div class="potential-amount-label">estimated per collab with just 1% of your followers</div>
-                    <div class="potential-breakdown">
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$350</div>
-                            <div class="potential-stat-label">Content + recruit</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">$379</div>
-                            <div class="potential-stat-label">Performance bonus</div>
-                        </div>
-                        <div class="potential-stat">
-                            <div class="potential-stat-value">500</div>
-                            <div class="potential-stat-label">1% of followers</div>
-                        </div>
-                    </div>
-                    <div class="potential-note">500 est. participants · $40 buy-in · 80% completion</div>
-                </div>
-
-                <!-- Invite Creators -->
+                <!-- 7. FOOTER LINKS -->
                 <div class="nudge-card">
                     <div class="nudge-icon">
                         <span class="material-icons">person_add</span>
@@ -1150,7 +1328,6 @@
                     </div>
                 </div>
 
-                <!-- Creator Community -->
                 <div class="community-link">
                     <div class="community-icon">
                         <span class="material-icons">forum</span>

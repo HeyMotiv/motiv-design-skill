@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home — Design Spec</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--surface-bg);
+            color: var(--primary-100);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 56px 24px 120px;
+        }
+
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+        }
+
+        /* Page header */
+        .page-header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--primary-100);
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--orange-100);
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .page-intro {
+            font-size: 18px;
+            color: var(--primary-60);
+            line-height: 1.6;
+            max-width: 620px;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 56px;
+        }
+
+        .toc-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-60);
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: toc;
+        }
+
+        .toc li {
+            counter-increment: toc;
+            padding: 4px 0;
+            font-size: 14px;
+        }
+
+        .toc li::before {
+            content: counter(toc) ".";
+            color: var(--orange-100);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .toc a {
+            color: var(--primary-100);
+            text-decoration: none;
+        }
+        .toc a:hover { color: var(--orange-100); text-decoration: underline; }
+
+        /* Section headings */
+        h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 72px;
+            margin-bottom: 8px;
+            scroll-margin-top: 24px;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        .section-eyebrow {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--orange-100);
+            margin-top: 72px;
+            margin-bottom: 4px;
+        }
+
+        h2.with-eyebrow { margin-top: 0; }
+
+        h3 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-60);
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        p { margin-bottom: 16px; }
+
+        strong { font-weight: 700; color: var(--primary-100); }
+
+        a {
+            color: var(--orange-100);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        a:hover { color: #A86555; }
+
+        code {
+            font-family: ui-monospace, Menlo, Monaco, monospace;
+            background: var(--orange-0);
+            color: var(--primary-100);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.92em;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 0 0 16px 24px;
+        }
+        ul li, ol li { margin-bottom: 6px; }
+        ul li::marker { color: var(--orange-100); }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0 32px;
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        th {
+            background: var(--primary-100);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        tr:nth-child(even) td { background: rgba(0, 0, 0, 0.015); }
+
+        td code { font-size: 12px; }
+
+        /* Reference file list */
+        .file-list {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 16px 0 24px;
+            list-style: none !important;
+            margin-left: 0 !important;
+        }
+
+        .file-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 14px;
+        }
+        .file-list li:last-child { border-bottom: none; }
+        .file-list li::marker { content: none; }
+
+        .file-list code {
+            background: var(--orange-0);
+            font-size: 13px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Callout */
+        .callout {
+            background: var(--orange-0);
+            border: 1px solid var(--orange-60);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0 32px;
+            font-size: 14px;
+        }
+
+        .callout strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--orange-100);
+        }
+
+        /* Separator */
+        hr {
+            border: none;
+            border-top: 1px solid var(--surface-border);
+            margin: 56px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <div class="eyebrow">Design Handoff</div>
+            <h1>Creator Home — Design Spec</h1>
+            <p class="page-intro">Every section of the creator home screen and all the design variations required. Use this to make sure the Figma includes every state the devs will need — not to define the conditional logic (that lives in the dev spec).</p>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc">
+            <div class="toc-title">Contents</div>
+            <ol>
+                <li><a href="#reference-files">Reference files</a></li>
+                <li><a href="#screen-structure">Screen structure</a></li>
+                <li><a href="#section-1">Section 1 — Greeting</a></li>
+                <li><a href="#section-2">Section 2 — Blocker</a></li>
+                <li><a href="#section-3">Section 3 — Your Collabs</a></li>
+                <li><a href="#section-4">Section 4 — Earnings</a></li>
+                <li><a href="#section-5">Section 5 — Community Love</a></li>
+                <li><a href="#section-6">Section 6 — Footer Links</a></li>
+                <li><a href="#ds-compliance">DS compliance notes</a></li>
+                <li><a href="#variation-count">Total variation count</a></li>
+            </ol>
+        </div>
+
+        <!-- REFERENCE FILES -->
+        <div class="section-eyebrow">Reference</div>
+        <h2 id="reference-files" class="with-eyebrow">Reference files</h2>
+
+        <p>All HTML files live in <code>docs/examples/Creator/Creator Home/</code>. Open the local dev server on port 8771 and use the <code>?state=</code> query parameter to navigate between them.</p>
+
+        <h4>Component library</h4>
+        <ul class="file-list">
+            <li><code>collab-sections.html</code><span>Every variation of every section on one scrollable page. Open via <code>?state=sections</code>.</span></li>
+        </ul>
+
+        <h4>Full state mockups</h4>
+        <ul class="file-list">
+            <li><code>collab-first-time.html</code><span>Post-onboarding with AI drafts</span></li>
+            <li><code>collab-needs-dates.html</code><span>Collab ready, dates not set</span></li>
+            <li><code>collab-needs-verify.html</code><span>Collab ready, Instagram not verified</span></li>
+            <li><code>collab-dates-expired.html</code><span>Original dates are no longer viable</span></li>
+            <li><code>collab-live.html</code><span>1 collab live (W9 blocker showing)</span></li>
+            <li><code>collab-live-multi.html</code><span>2 collabs live simultaneously</span></li>
+            <li><code>collab-live-returning.html</code><span>Active collab with past history</span></li>
+            <li><code>collab-between.html</code><span>No active collab, 1 past collab</span></li>
+        </ul>
+
+        <hr>
+
+        <!-- SCREEN STRUCTURE -->
+        <div class="section-eyebrow">Layout</div>
+        <h2 id="screen-structure" class="with-eyebrow">Screen structure</h2>
+
+        <p>The creator home is a single vertical scroll. Six ordered sections appear in this sequence:</p>
+        <ol>
+            <li><strong>Greeting</strong> — always present</li>
+            <li><strong>Blocker</strong> — 0 or 1 card (conditional)</li>
+            <li><strong>Your Collabs</strong> — always present</li>
+            <li><strong>Earnings</strong> — always present</li>
+            <li><strong>Community Love</strong> — conditional (shown once love is received)</li>
+            <li><strong>Footer Links</strong> — always present</li>
+        </ol>
+
+        <p>Outside the scroll area: iOS status bar (top), home-indicator tab bar (bottom). Those are already in the DS — don't redesign them.</p>
+
+        <hr>
+
+        <!-- SECTION 1 -->
+        <div class="section-eyebrow">Section 1</div>
+        <h2 id="section-1" class="with-eyebrow">Greeting</h2>
+
+        <p><strong>What it is:</strong> The header text at the top of every home screen. Creator's name + a short contextual status line.</p>
+        <p><strong>What to design:</strong> One component with adaptive copy. Structure stays identical; only the two text strings change.</p>
+
+        <h4>Structure</h4>
+        <ul>
+            <li>Greeting line (Title/X-Large, serif): large name + punctuation</li>
+            <li>Status sub-line (Body/Large, sans): one sentence describing the moment</li>
+            <li>Notifications bell icon button on the right (reuse DS button-icon)</li>
+        </ul>
+
+        <h4>Copy variations to design</h4>
+        <table>
+            <thead>
+                <tr><th>#</th><th>Greeting</th><th>Status line</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Hey, Mortimer</td><td>Let's get your collab live.</td></tr>
+                <tr><td>2</td><td>Almost there, Mortimer</td><td>Set your dates and you're live.</td></tr>
+                <tr><td>3</td><td>One last step, Mortimer</td><td>Verify your Instagram to go live.</td></tr>
+                <tr><td>4</td><td>Hey, Mortimer</td><td>Your dates need updating.</td></tr>
+                <tr><td>5</td><td>Hey, Mortimer</td><td>Your collab is rolling.</td></tr>
+                <tr><td>6</td><td>Hey, Mortimer</td><td>Your collabs are rolling.</td></tr>
+                <tr><td>7</td><td>Hey, Mortimer</td><td>Ready for another?</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <!-- SECTION 2 -->
+        <div class="section-eyebrow">Section 2</div>
+        <h2 id="section-2" class="with-eyebrow">Blocker</h2>
+
+        <p><strong>What it is:</strong> A single prominent card that surfaces the most important action the creator needs to take. Replaces the old "next step" concept — the blocker IS the next step.</p>
+        <p><strong>What to design:</strong> A reusable card with: icon (colored 40×40 tile) + title + subtitle + full-width pill CTA button.</p>
+
+        <h4>Structure</h4>
+        <ul>
+            <li>Card: white bg, 1px DS border, 16px radius, 18px padding</li>
+            <li>Top row: icon tile + title/subtitle stack</li>
+            <li>Bottom: orange pill CTA button spanning full width</li>
+        </ul>
+
+        <h4>Variations to design</h4>
+        <table>
+            <thead>
+                <tr><th>#</th><th>Icon</th><th>Icon bg</th><th>Title</th><th>Subtitle</th><th>CTA</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td><code>event_busy</code></td><td>orange/100</td><td>Pick new dates</td><td>Your original dates have passed. Choose new ones at least 1 week out.</td><td>Choose New Dates</td></tr>
+                <tr><td>2</td><td><code>camera_alt</code></td><td>Instagram gradient</td><td>Verify your Instagram</td><td>So followers know it's really you</td><td>Connect Instagram</td></tr>
+                <tr><td>3</td><td><code>calendar_today</code></td><td>orange/100</td><td>Set your collab dates</td><td>Everything's ready — just pick your dates</td><td>Choose Dates</td></tr>
+                <tr><td>4</td><td><code>description</code></td><td>primary/60</td><td>Sign your agreement & W9</td><td>Required before your first payout. We'll send both via DocuSign.</td><td>Check your email</td></tr>
+                <tr><td>5</td><td><code>description</code></td><td>primary/60</td><td>Sign your creator agreement</td><td>Your W9 is done — just the agreement left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
+                <tr><td>6</td><td><code>description</code></td><td>primary/60</td><td>Complete your W9</td><td>Your agreement is signed — just the W9 left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
+                <tr><td>7</td><td><code>add_circle</code></td><td>orange/100</td><td>Start your next collab</td><td>Your followers loved {last collab} — keep the momentum going</td><td>Create a new collab</td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout">
+            <strong>Instagram gradient</strong>
+            <code>linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4)</code> — the standard IG brand gradient.
+        </div>
+
+        <p><strong>Note:</strong> This section is also sometimes hidden (no blocker showing). No design needed for "hidden" — just know the section disappears.</p>
+
+        <hr>
+
+        <!-- SECTION 3 -->
+        <div class="section-eyebrow">Section 3</div>
+        <h2 id="section-3" class="with-eyebrow">Your Collabs</h2>
+
+        <p><strong>What it is:</strong> Shows the state of the creator's collabs. Title is always "Your collabs"; the subtitle communicates count/state. Tapping any card goes to the collab details screen.</p>
+        <p><strong>What to design:</strong> Multiple card layouts, used individually or in combination depending on how many collabs exist and what state they're in.</p>
+
+        <h3>3a. Collab card — themed</h3>
+        <p><strong>Structure:</strong> A rich card with a photo hero, gradient overlay, italic collab name, date range, and a stats block below on a colored accent band. Four "themes" (purple, orange, red, teal) — these are creator-customized colors, not DS tokens. Treat them as runtime-configurable.</p>
+
+        <h4>Card sub-states to design</h4>
+        <table>
+            <thead>
+                <tr><th>Sub-state</th><th>Badge</th><th>Stats area</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Draft, no dates</td><td><em>(no badge)</em> or "Draft"</td><td>Pool amount + hold pill · 2 stats (Participants, Duration) · "Edit Collab" CTA</td></tr>
+                <tr><td>Draft, ready to launch</td><td>✓ Ready to launch</td><td>Same as above</td></tr>
+                <tr><td>Live</td><td>📡 Live — Week X of Y (green bg)</td><td>Progress bar · 3 stats (Participants, Completion %, Pool) · "View Collab" CTA</td></tr>
+                <tr><td>Completed</td><td>✓ Completed</td><td>3 stats (Participants, Completion %, Earned) · "View Results" CTA</td></tr>
+            </tbody>
+        </table>
+
+        <h3>3b. Draft carousel</h3>
+        <p><strong>Structure:</strong> Horizontal scroll of 3 themed collab cards (cards from 3a). A "Your pick" star badge appears on the first/recommended card. Carousel dots below.</p>
+        <p><strong>What to design:</strong> Just the carousel container + dot indicators. The cards themselves are 3a.</p>
+
+        <h3>3c. Active collab carousel (full-width snap)</h3>
+        <p><strong>Structure:</strong> Full-width horizontal scroll for when 2+ collabs are active. Each slide shows the full live card (3a "Live" sub-state) at screen width. Dots below.</p>
+
+        <h3>3d. Past collab row</h3>
+        <p><strong>Structure:</strong> Compact single-row list item for completed collabs. White card, 1px border, 16px radius.</p>
+        <ul>
+            <li>Left: 48×48 square photo, 12px radius</li>
+            <li>Middle: collab name (Playfair italic, 16px) + meta line ("Date range · X participants")</li>
+            <li>Right: earned amount (orange) + "earned" label + chevron</li>
+        </ul>
+
+        <h3>3e. Section header</h3>
+        <p><strong>Structure:</strong> Title + subtitle pair above the cards.</p>
+
+        <h4>Subtitle variations to design (copy reference)</h4>
+        <ul>
+            <li>"3 drafts · pick one to finalize"</li>
+            <li>"1 draft · needs dates"</li>
+            <li>"1 draft · needs new dates"</li>
+            <li>"1 ready to launch"</li>
+            <li>"1 active"</li>
+            <li>"2 active · swipe to view"</li>
+            <li>"1 active · 1 completed"</li>
+            <li>"1 completed"</li>
+            <li>"2 completed"</li>
+        </ul>
+
+        <hr>
+
+        <!-- SECTION 4 -->
+        <div class="section-eyebrow">Section 4</div>
+        <h2 id="section-4" class="with-eyebrow">Earnings</h2>
+
+        <p><strong>What it is:</strong> Cross-collab money summary. Always present. White card with a large orange hero total. Tappable when the creator has earnings (accruing or earned modes) — taps go to earnings history in the profile.</p>
+        <p><strong>What to design:</strong> One card component with three content variations.</p>
+
+        <h4>Structure</h4>
+        <ul>
+            <li>White card, 1px DS border, 12px radius, 20px padding</li>
+            <li>Header row: icon + label (small uppercase caption) on the left, chevron on the right</li>
+            <li>Total amount: Headline Large (46px serif), orange/100 — the largest size in the DS, treated as a hero number</li>
+            <li>Below the total: either a subtitle line (projected mode) or a 2-column breakdown row (accruing/earned)</li>
+        </ul>
+
+        <h3>4a. Projected mode</h3>
+        <ul>
+            <li>Label: "Earning potential" with <code>trending_up</code> icon</li>
+            <li>Chevron in header (visual consistency with other modes — but tap behavior is up to dev; no earnings history exists yet)</li>
+            <li>Total: estimated amount (e.g. $729)</li>
+            <li>Below total: "estimated per collab with 1% of your followers" (body/small secondary)</li>
+        </ul>
+
+        <h3>4b. Accruing mode (tappable)</h3>
+        <ul>
+            <li>Label: "Estimated earnings" with <code>trending_up</code> icon</li>
+            <li>Chevron in header — entire card is tappable, goes to earnings history in profile</li>
+            <li>Total: sum of past + current (e.g. $1,343)</li>
+            <li>Below total: 2-column breakdown with thin divider between
+                <ul>
+                    <li>Column 1: value (14px bold) + "Past" label</li>
+                    <li>Column 2: value (14px bold) + "Est. current" label</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>4c. Earned mode (tappable)</h3>
+        <ul>
+            <li>Label: "Your earnings" with <code>trending_up</code> icon</li>
+            <li>Chevron in header — entire card is tappable, goes to earnings history in profile</li>
+            <li>Total: past earnings total</li>
+            <li>Below total: same 2-column breakdown
+                <ul>
+                    <li>Past: earned amount</li>
+                    <li>Est. current: $0</li>
+                </ul>
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- SECTION 5 -->
+        <div class="section-eyebrow">Section 5</div>
+        <h2 id="section-5" class="with-eyebrow">Community Love</h2>
+
+        <p><strong>What it is:</strong> Aggregated appreciation from participants across all collabs. Motivation signal.</p>
+        <p><strong>What to design:</strong> One card with a hidden state (no design needed) and a visible state.</p>
+
+        <h4>Visible state structure</h4>
+        <ul>
+            <li>White card, 1px DS border, 16px radius, 18px padding</li>
+            <li>Header row: title "Your community loves you" (title/small serif) + heart icon + total count</li>
+            <li>Emoji breakdown row: 4 emoji categories with count + label, thin dividers between
+                <ul>
+                    <li>🔥 Fired up</li>
+                    <li>💪 So worth it</li>
+                    <li>💜 All the feels</li>
+                    <li>🌱 Growing</li>
+                </ul>
+            </li>
+            <li>Featured quote block: orange/0 bg, 8px radius, italic quote + attribution (— Name · @handle)</li>
+            <li>Bottom link: "Read all messages →"</li>
+        </ul>
+
+        <p><strong>Hidden state:</strong> Section simply doesn't render. No design needed.</p>
+
+        <hr>
+
+        <!-- SECTION 6 -->
+        <div class="section-eyebrow">Section 6</div>
+        <h2 id="section-6" class="with-eyebrow">Footer Links</h2>
+
+        <p><strong>What it is:</strong> Two low-priority persistent links at the bottom of every home screen. No variations — always identical.</p>
+        <p><strong>What to design:</strong> Two card components, stacked.</p>
+
+        <h3>6a. Invite nudge</h3>
+        <ul>
+            <li>Subtle orange gradient bg (orange/30 to warm cream), 1px orange/60 border, 16px radius</li>
+            <li>36×36 icon tile (orange tinted bg) with <code>person_add</code> icon</li>
+            <li>Copy: "Know a creator who'd be great on Motiv?" (body/medium)</li>
+            <li>Text link CTA: "Send an invite" (orange/100)</li>
+        </ul>
+
+        <h3>6b. Creator community link</h3>
+        <ul>
+            <li>White card, 1px DS border, 16px radius</li>
+            <li>36×36 purple-tinted icon tile with <code>forum</code> icon</li>
+            <li>Two-line text: "Creator Community" + "Tips, support, and creator connections"</li>
+            <li>Chevron on right</li>
+        </ul>
+
+        <hr>
+
+        <!-- DS COMPLIANCE -->
+        <div class="section-eyebrow">Guardrails</div>
+        <h2 id="ds-compliance" class="with-eyebrow">DS compliance notes</h2>
+
+        <ul>
+            <li><strong>Colors:</strong> Use only DS tokens. The four collab card theme colors (purple/orange/red/teal overlays) are creator-specific runtime colors, not DS tokens — keep them as variables.</li>
+            <li><strong>Typography:</strong> Use only the DS type scale. Sizes: 12px (Body/Small, Caption), 14px (Body/Medium), 16px (Body/Large, Title/Small), 20px (Title/Medium), 24px (Title/Large), 32px (Title/X-Large), 46px (Headline Large).</li>
+            <li><strong>Spacing:</strong> Use only DS spacing tokens: 0, 2, 4, 8, 12, 16, 24, 36, 56.</li>
+            <li><strong>Border radius:</strong> Use only DS tokens: 2, 4, 8, 12, 16, 999 (pill).</li>
+            <li><strong>Icons:</strong> Material Icons throughout.</li>
+        </ul>
+
+        <hr>
+
+        <!-- TOTAL COUNT -->
+        <div class="section-eyebrow">Scope</div>
+        <h2 id="variation-count" class="with-eyebrow">Total variation count</h2>
+
+        <table>
+            <thead>
+                <tr><th>Section</th><th>Variations to design</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Greeting</td><td>7 copy variations (one component)</td></tr>
+                <tr><td>Blocker</td><td>7 variations (7 icon/copy combos) + 1 hidden state</td></tr>
+                <tr><td>Your Collabs</td><td>1 section header + 4 collab card sub-states + 1 themed carousel + 1 full-width carousel + 1 past collab row</td></tr>
+                <tr><td>Earnings</td><td>3 mode variations (one component)</td></tr>
+                <tr><td>Community Love</td><td>1 visible variation + 1 hidden state</td></tr>
+                <tr><td>Footer Links</td><td>2 components (invite nudge + community link), no variations</td></tr>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+</html>
