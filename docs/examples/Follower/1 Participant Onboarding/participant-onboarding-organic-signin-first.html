@@ -400,6 +400,23 @@
         .action-sheet-cancel { margin-top: 8px; }
         .action-sheet-cancel .action-sheet-btn { font-weight: 600; border-radius: 14px; }
 
+        /* iOS-style wheel date picker */
+        .date-picker-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 50; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+        .screen.active .date-picker-overlay.visible { opacity: 1; pointer-events: all; }
+        .date-picker-sheet { width: 100%; background: #F2F2F7; transform: translateY(100%); transition: transform 0.3s ease; border-radius: 14px 14px 0 0; overflow: hidden; }
+        .screen.active .date-picker-overlay.visible .date-picker-sheet { transform: translateY(0); }
+        .date-picker-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 0.5px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.6); }
+        .date-picker-btn { background: none; border: none; font-family: var(--font-body); font-size: 16px; color: #007AFF; cursor: pointer; padding: 4px 4px; }
+        .date-picker-btn--bold { font-weight: 600; }
+        .date-picker-wheels { display: flex; padding: 12px 16px 28px; gap: 6px; position: relative; }
+        .date-picker-wheels::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; transform: translateY(-50%); height: 34px; background: rgba(120,120,128,0.12); border-radius: 8px; pointer-events: none; }
+        .date-picker-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%); position: relative; z-index: 1; }
+        .date-picker-col--month { flex: 1.5; }
+        .date-picker-col--day { flex: 0.7; }
+        .date-picker-col--year { flex: 1; }
+        .date-picker-item { font-family: var(--font-body); font-size: 22px; color: rgba(0,0,0,0.35); padding: 4px 0; line-height: 26px; height: 34px; display: flex; align-items: center; }
+        .date-picker-item.selected { color: #000; }
+
         /* Emoji rain */
         @keyframes emojifall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 70% { opacity: 1; } 100% { transform: translateY(900px) rotate(360deg); opacity: 0; } }
         .emoji-rain-overlay { position: absolute; inset: 0; z-index: 9999; pointer-events: none; overflow: hidden; }
@@ -620,6 +637,10 @@
                 <input type="text" class="form-input" value="Sarah" style="font-size: 15px; padding: 12px 14px;">
             </div>
             <div class="s3-form-group">
+                <label class="s3-form-label">Birthday</label>
+                <input type="text" class="form-input" id="birthdayInput" value="August 13, 1980" readonly onclick="showDatePicker()" style="font-size: 15px; padding: 12px 14px; cursor: pointer;">
+            </div>
+            <div class="s3-form-group">
                 <label class="s3-form-label">Instagram handle (optional)</label>
                 <div style="position: relative;">
                     <span style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 15px; color: var(--color-text-tertiary); font-weight: 500;">@</span>
@@ -658,6 +679,45 @@
                 </div>
                 <div class="action-sheet-cancel action-sheet-group">
                     <button class="action-sheet-btn" onclick="dismissPhotoSheet()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- iOS-style wheel date picker -->
+        <div class="date-picker-overlay" id="datePickerOverlay">
+            <div class="date-picker-sheet">
+                <div class="date-picker-header">
+                    <button class="date-picker-btn" onclick="dismissDatePicker()">Cancel</button>
+                    <button class="date-picker-btn date-picker-btn--bold" onclick="dismissDatePicker()">Done</button>
+                </div>
+                <div class="date-picker-wheels">
+                    <div class="date-picker-col date-picker-col--month">
+                        <div class="date-picker-item">May</div>
+                        <div class="date-picker-item">June</div>
+                        <div class="date-picker-item">July</div>
+                        <div class="date-picker-item selected">August</div>
+                        <div class="date-picker-item">September</div>
+                        <div class="date-picker-item">October</div>
+                        <div class="date-picker-item">November</div>
+                    </div>
+                    <div class="date-picker-col date-picker-col--day">
+                        <div class="date-picker-item">10</div>
+                        <div class="date-picker-item">11</div>
+                        <div class="date-picker-item">12</div>
+                        <div class="date-picker-item selected">13</div>
+                        <div class="date-picker-item">14</div>
+                        <div class="date-picker-item">15</div>
+                        <div class="date-picker-item">16</div>
+                    </div>
+                    <div class="date-picker-col date-picker-col--year">
+                        <div class="date-picker-item">1977</div>
+                        <div class="date-picker-item">1978</div>
+                        <div class="date-picker-item">1979</div>
+                        <div class="date-picker-item selected">1980</div>
+                        <div class="date-picker-item">1981</div>
+                        <div class="date-picker-item">1982</div>
+                        <div class="date-picker-item">1983</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1238,6 +1298,8 @@
     }
 
     // ─── Photo permission ───
+    function showDatePicker() { document.getElementById('datePickerOverlay').classList.add('visible'); }
+    function dismissDatePicker() { document.getElementById('datePickerOverlay').classList.remove('visible'); }
     function showPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.add('visible'); }
     function dismissPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.remove('visible'); }
     function allowPhotoAccess() {
