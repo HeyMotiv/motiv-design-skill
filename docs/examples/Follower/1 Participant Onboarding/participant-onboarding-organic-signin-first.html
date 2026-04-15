@@ -177,6 +177,7 @@
         .s3-photo-upload img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
         .s3-photo-edit { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.45); color: #fff; font-size: 10px; font-weight: 500; text-align: center; padding: 4px 0; letter-spacing: 0.3px; }
         .s3-form-group { width: 100%; margin-bottom: var(--space-md); }
+        .s3-form-error { font-family: var(--font-body); font-size: 13px; color: #CB3E3E; margin-top: 6px; line-height: 1.4; }
         .s3-form-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 6px; display: block; }
         .s3-name-row { display: flex; gap: var(--space-sm); width: 100%; margin-bottom: var(--space-md); }
         .s3-name-row .s3-form-group { flex: 1; margin-bottom: 0; }
@@ -642,6 +643,7 @@
             <div class="s3-form-group">
                 <label class="s3-form-label">Birthday</label>
                 <input type="text" class="form-input" id="birthdayInput" value="August 13, 1980" readonly onclick="showDatePicker()" style="font-size: 15px; padding: 12px 14px; cursor: pointer;">
+                <div class="s3-form-error" id="birthdayError" style="display: none;">You must be at least 18 to use Motiv.</div>
             </div>
             <div class="s3-form-group">
                 <label class="s3-form-label">Instagram handle (optional)</label>
@@ -658,7 +660,7 @@
             <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--color-text-secondary); text-align: center;">
                 <span style="font-size: 14px;">&#9888;&#65039;</span> This info will be visible to challenge participants
             </div>
-            <button class="btn-primary" onclick="goTo(4)">Continue</button>
+            <button class="btn-primary" onclick="validateAndContinue(4)">Continue</button>
         </div>
 
         <!-- iOS Photo Permission Dialog -->
@@ -1309,12 +1311,10 @@
     }
     function showDatePicker() {
         document.getElementById('datePickerOverlay').classList.add('visible');
-        document.getElementById('datePickerError').style.display = 'none';
         setTimeout(dpPopulate, 30);
     }
     function dismissDatePicker() {
         document.getElementById('datePickerOverlay').classList.remove('visible');
-        document.getElementById('datePickerError').style.display = 'none';
     }
     function confirmDate() {
         var monthCol = document.getElementById('monthCol');
@@ -1324,16 +1324,28 @@
         var day = Math.round(dayCol.scrollTop / DP_ITEM_H) + 1;
         var yearItems = yearCol.querySelectorAll('.date-picker-item');
         var year = parseInt(yearItems[Math.round(yearCol.scrollTop / DP_ITEM_H)].dataset.value);
-        var today = new Date();
-        var age = today.getFullYear() - year;
-        if (today.getMonth() < monthIdx || (today.getMonth() === monthIdx && today.getDate() < day)) age--;
-        if (age < 18) {
-            document.getElementById('datePickerError').style.display = 'block';
-            return;
-        }
         document.getElementById('birthdayInput').value = DP_MONTHS[monthIdx] + ' ' + day + ', ' + year;
-        document.getElementById('datePickerError').style.display = 'none';
+        var err = document.getElementById('birthdayError');
+        if (err) err.style.display = 'none';
         dismissDatePicker();
+    }
+    function validateAndContinue(nextScreen) {
+        var input = document.getElementById('birthdayInput').value;
+        var match = input.match(/(\w+)\s+(\d+),\s+(\d+)/);
+        if (match) {
+            var monthIdx = DP_MONTHS.indexOf(match[1]);
+            var day = parseInt(match[2]);
+            var year = parseInt(match[3]);
+            var today = new Date();
+            var age = today.getFullYear() - year;
+            if (today.getMonth() < monthIdx || (today.getMonth() === monthIdx && today.getDate() < day)) age--;
+            if (age < 18) {
+                document.getElementById('birthdayError').style.display = 'block';
+                return;
+            }
+        }
+        document.getElementById('birthdayError').style.display = 'none';
+        goTo(nextScreen);
     }
     function showPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.add('visible'); }
     function dismissPhotoPermission() { document.getElementById('photoPermissionOverlay').classList.remove('visible'); }
