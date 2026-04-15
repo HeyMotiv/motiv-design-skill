@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motiv Collab Theme Reference — Colors &amp; Fonts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Source+Sans+3:wght@400;600&family=Merriweather:wght@400;700&family=Lora:wght@400;600&family=Playfair+Display:wght@400;700&family=Raleway:wght@400;600&family=Outfit:wght@400;600&family=Crimson+Pro:wght@400;600&family=Sora:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, sans-serif;
+            background: #FEFCFA;
+            color: #2B2E34;
+            padding: 48px 32px 80px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #6B7280;
+            font-size: 15px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        h2 + .h2-subtitle {
+            color: #6B7280;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        section {
+            margin-bottom: 56px;
+        }
+
+        /* ─────────── How theming works (overview) ─────────── */
+
+        .overview {
+            background: #FFFCF5;
+            border: 1px solid #F0E6CC;
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+        }
+
+        .overview h3 {
+            margin-top: 0;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #92591E;
+        }
+
+        .tier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        .tier-table th,
+        .tier-table td {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid #F0E6CC;
+            vertical-align: top;
+        }
+
+        .tier-table th {
+            font-weight: 600;
+            color: #92591E;
+            background: #FFF8E6;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .tier-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tier-chip {
+            display: inline-block;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            background: #2B2E34;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* ─────────── Color cards ─────────── */
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .color-card {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #E5E7EB;
+            background: white;
+        }
+
+        .color-header {
+            padding: 14px 16px 12px;
+            border-bottom: 1px solid #F1F1F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 17px;
+            text-transform: capitalize;
+        }
+
+        .color-token {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 11px;
+            color: #9CA3AF;
+        }
+
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            padding: 14px 16px;
+        }
+
+        .tier {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 4px;
+        }
+
+        .tier-swatch {
+            width: 100%;
+            height: 36px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.06);
+            margin-bottom: 6px;
+        }
+
+        .tier-num {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: #2B2E34;
+        }
+
+        .tier-hex {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 10px;
+            color: #6B7280;
+            margin-top: 1px;
+        }
+
+        /* ─────────── Mini follower mock per color ─────────── */
+
+        .mock {
+            margin: 0 16px 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: var(--c0);
+        }
+
+        .mock-image {
+            height: 110px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .mock-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                var(--c60) 0%,
+                color-mix(in srgb, var(--c60) 20%, transparent) 26%,
+                color-mix(in srgb, var(--c60) 60%, transparent) 48%,
+                color-mix(in srgb, var(--c30) 80%, transparent) 66%,
+                var(--c0) 92%);
+        }
+
+        .mock-title {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Source Serif 4', serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: white;
+            z-index: 1;
+        }
+
+        .mock-body {
+            padding: 12px;
+        }
+
+        .mock-stat-row {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .mock-stat {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--c100);
+        }
+
+        .mock-progress {
+            display: flex;
+            gap: 3px;
+            background: white;
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        .mock-progress-seg {
+            flex: 1;
+            height: 5px;
+            background: var(--c0);
+            border-radius: 999px;
+        }
+
+        .mock-progress-seg.filled {
+            background: var(--c60);
+        }
+
+        .mock-link {
+            text-align: right;
+            font-size: 11px;
+            color: var(--c100);
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .mock-pill {
+            display: inline-block;
+            background: var(--c30);
+            color: var(--c100);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 999px;
+            margin-bottom: 6px;
+        }
+
+        /* ─────────── Application reference ─────────── */
+
+        .application {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            background: #F7F3EA;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: 760px) {
+            .application { grid-template-columns: 1fr; }
+        }
+
+        .application h3 {
+            margin-top: 0;
+        }
+
+        .application code {
+            display: block;
+            background: #2B2E34;
+            color: #E2E1DC;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            line-height: 1.55;
+            white-space: pre-wrap;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .application .token {
+            color: #C97A6A;
+        }
+
+        .app-list {
+            list-style: none;
+        }
+
+        .app-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ECE6D5;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 12px;
+            align-items: baseline;
+            font-size: 13px;
+        }
+
+        .app-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ─────────── Fonts ─────────── */
+
+        .font-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .font-card {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 24px;
+            border: 1px solid #E5E7EB;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .font-sample {
+            font-size: 40px;
+            line-height: 1;
+            color: #2B2E34;
+            text-align: center;
+        }
+
+        .font-meta-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .font-label {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .font-desc {
+            font-size: 13px;
+            color: #C97A6A;
+            font-weight: 500;
+        }
+
+        .font-desc::before {
+            content: 'Label in app: ';
+            color: #9CA3AF;
+            font-weight: 400;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .font-family-name {
+            font-size: 13px;
+            color: #6B7280;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        .font-category {
+            font-size: 12px;
+            color: #9CA3AF;
+        }
+
+        .font-pangram {
+            font-size: 18px;
+            color: #2B2E34;
+            margin-top: 4px;
+        }
+
+        .font-free {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #4D9B7E;
+            background: #ECF5F0;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 24px 16px 60px; }
+            .color-grid { grid-template-columns: 1fr; }
+            .font-card { grid-template-columns: 60px 1fr; padding: 16px; }
+            .font-sample { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Collab Theme Reference</h1>
+    <p class="subtitle">15 accent colors and 11 fonts a creator can choose from. This document shows exactly how each accent color is applied across the follower-facing collab details page.</p>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         SECTION 1 — How accent colors are applied (the system)
+         ═════════════════════════════════════════════════════════════ -->
+
+    <section>
+        <h2>How accent colors are applied</h2>
+        <p class="h2-subtitle">When a creator picks an accent color (e.g. <em>Violet</em>), it generates a 4-tier scale. Each tier is used for specific UI elements on the follower's collab details page.</p>
+
+        <div class="overview">
+            <h3>The 4-tier scale (matches Figma <code>Secondary/&lt;color&gt;/&lt;tier&gt;</code>)</h3>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">Tier</th>
+                        <th>Description</th>
+                        <th>Used for</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tier-chip">/100</span></td>
+                        <td>Strongest, darkest tone of the accent</td>
+                        <td>Themed text — large stat numbers ($83.67, 2/6 days, 800/2,100 kJ), inline links (<em>More</em>, <em>Sync</em>, <em>Why these?</em>), themed icons</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-chip">/60</span></td>
+                        <td>Medium tone — mid-saturation</td>
+                        <td>Filled progress bar segments, top of the photo overlay gradient, active progress dot fill</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-chip">/30</span></td>
+                        <td>Light tint — pastel</td>
+                        <td>Pill backgrounds (e.g. "Unlock MVP Bonuses"), soft accent fills, mid-stop of the photo overlay gradient</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tier-chip">/0</span></td>
+                        <td>Lightest tint — near-white wash</td>
+                        <td>Page background, empty progress bar segments, bottom of the photo overlay (so the image fades seamlessly into the page)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="application">
+            <div>
+                <h3>Photo overlay gradient (CSS)</h3>
+                <p style="font-size: 13px; color: #6B7280; line-height: 1.5;">A vertical gradient applied on top of the hero photo. It transitions from the solid <code>/60</code> tone at the top, fades through transparent stops, and lands on the page background <code>/0</code> at the bottom — creating the illusion that the photo melts into the page.</p>
+                <code>background: linear-gradient(180deg,
+  <span class="token">/60</span>            0%,
+  <span class="token">/60</span> @ 20% alpha 26%,
+  <span class="token">/60</span> @ 60% alpha 48%,
+  <span class="token">/30</span> @ 80% alpha 66%,
+  <span class="token">/0</span>             92%
+);</code>
+            </div>
+            <div>
+                <h3>Element-by-element mapping</h3>
+                <ul class="app-list">
+                    <li><span class="tier-chip">/100</span><span>Big stat numbers, "$" amounts, themed inline links, themed icons</span></li>
+                    <li><span class="tier-chip">/60</span><span>Filled progress bar segments, gradient top stops, active progress-week dot ring</span></li>
+                    <li><span class="tier-chip">/30</span><span>Themed pill / badge backgrounds, gradient mid-stop</span></li>
+                    <li><span class="tier-chip">/0</span><span>Page background, empty progress segments, gradient bottom stop</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         SECTION 2 — Colors with applied previews
+         ═════════════════════════════════════════════════════════════ -->
+
+    <section>
+        <h2>The 15 accent colors</h2>
+        <p class="h2-subtitle">Each card shows the four derived hex values + a mini preview of how the accent would appear on the follower collab details page (image overlay, themed text, themed pill, page background).</p>
+
+        <div class="color-grid" id="colorGrid"></div>
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         SECTION 3 — Fonts
+         ═════════════════════════════════════════════════════════════ -->
+
+    <section>
+        <h2>The 11 fonts</h2>
+        <p class="h2-subtitle">Applied to the collab title (hero card, detail screens). Body text always remains in the system body font (<code>Roboto</code>). All fonts are free via Google Fonts.</p>
+
+        <div class="font-list">
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: 'Source Serif 4', serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Source Serif 4</span>
+                        <span class="font-desc">Warm</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: 'Source Serif 4', serif</div>
+                    <div class="font-category">Serif — Adobe's open-source companion to Source Sans. Smooth, readable, inviting. <strong>(Default Motiv title font.)</strong></div>
+                    <div class="font-pangram" style="font-family: 'Source Serif 4', serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Inter, sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Inter</span>
+                        <span class="font-desc">Modern</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Inter, sans-serif</div>
+                    <div class="font-category">Sans-serif — Designed for screens. Neutral, highly legible, industry standard for UI.</div>
+                    <div class="font-pangram" style="font-family: Inter, sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Poppins, sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Poppins</span>
+                        <span class="font-desc">Bold</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Poppins, sans-serif</div>
+                    <div class="font-category">Sans-serif — Geometric with rounded forms. Confident, friendly, high-energy.</div>
+                    <div class="font-pangram" style="font-family: Poppins, sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: 'Source Sans 3', sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Source Sans 3</span>
+                        <span class="font-desc">Clean</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: 'Source Sans 3', sans-serif</div>
+                    <div class="font-category">Sans-serif — Adobe's open-source workhorse. Unobtrusive, versatile, professional.</div>
+                    <div class="font-pangram" style="font-family: 'Source Sans 3', sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Merriweather, serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Merriweather</span>
+                        <span class="font-desc">Classic</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Merriweather, serif</div>
+                    <div class="font-category">Serif — Designed for screen readability. Sturdy, traditional, trustworthy.</div>
+                    <div class="font-pangram" style="font-family: Merriweather, serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Lora, serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Lora</span>
+                        <span class="font-desc">Elegant</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Lora, serif</div>
+                    <div class="font-category">Serif — Calligraphy-inspired curves. Graceful, story-driven, editorial feel.</div>
+                    <div class="font-pangram" style="font-family: Lora, serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: 'Playfair Display', serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Playfair Display</span>
+                        <span class="font-desc">Refined</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: 'Playfair Display', serif</div>
+                    <div class="font-category">Serif — High-contrast transitional design. Sophisticated, editorial, magazine-quality.</div>
+                    <div class="font-pangram" style="font-family: 'Playfair Display', serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Raleway, sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Raleway</span>
+                        <span class="font-desc">Sleek</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Raleway, sans-serif</div>
+                    <div class="font-category">Sans-serif — Thin, elegant strokes. Fashion-forward, minimal, premium.</div>
+                    <div class="font-pangram" style="font-family: Raleway, sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Outfit, sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Outfit</span>
+                        <span class="font-desc">Fresh</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Outfit, sans-serif</div>
+                    <div class="font-category">Sans-serif — Geometric with soft edges. Contemporary, approachable, startup-y.</div>
+                    <div class="font-pangram" style="font-family: Outfit, sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: 'Crimson Pro', serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Crimson Pro</span>
+                        <span class="font-desc">Literary</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: 'Crimson Pro', serif</div>
+                    <div class="font-category">Serif — Inspired by old-style book faces. Intellectual, literary, long-form friendly.</div>
+                    <div class="font-pangram" style="font-family: 'Crimson Pro', serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+            <div class="font-card">
+                <div class="font-sample" style="font-family: Sora, sans-serif;">Aa</div>
+                <div>
+                    <div class="font-meta-row">
+                        <span class="font-label">Sora</span>
+                        <span class="font-desc">Geometric</span>
+                        <span class="font-free">Google Fonts</span>
+                    </div>
+                    <div class="font-family-name">font-family: Sora, sans-serif</div>
+                    <div class="font-category">Sans-serif — Pure geometric construction. Technical, precise, fintech/health-tech feel.</div>
+                    <div class="font-pangram" style="font-family: Sora, sans-serif;">The quick brown fox jumps over the lazy dog</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════
+         SECTION 4 — Implementation notes
+         ═════════════════════════════════════════════════════════════ -->
+
+    <section>
+        <h2>Implementation notes</h2>
+
+        <div style="background: #F7F3EA; border-radius: 12px; padding: 24px 28px; font-size: 14px; color: #44403C; line-height: 1.7;">
+            <p style="margin-bottom: 14px;"><strong>Token naming.</strong> In Figma the variables are named <code>Secondary/&lt;Color&gt;/&lt;Tier&gt;</code> (e.g. <code>Secondary/Purple/100</code>). Suggested CSS-variable mirror:</p>
+            <pre style="background:#2B2E34; color:#E2E1DC; padding:14px 16px; border-radius:8px; font-size:12px; overflow-x:auto;">--accent-0:   /* lightest tint   — page background, empty bars       */
+--accent-30:  /* light tint      — pills, soft fills                 */
+--accent-60:  /* medium          — filled bars, gradient top stop    */
+--accent-100: /* darkest         — themed text, links, icons         */</pre>
+
+            <p style="margin-top: 16px; margin-bottom: 8px;"><strong>Reference example from Figma (Purple).</strong> These are the exact values the design system currently ships:</p>
+            <ul style="margin-left: 22px;">
+                <li><code>Secondary/Purple/100</code> = <code>#6B4E71</code></li>
+                <li><code>Secondary/Purple/60</code> = <code>#775C7C</code></li>
+                <li><code>Secondary/Purple/30</code> = <code>#C9B1CE</code></li>
+                <li><code>Secondary/Purple/0</code> = <code>#F7F0FA</code></li>
+            </ul>
+
+            <p style="margin-top: 16px;"><strong>Photo overlay.</strong> The gradient is the same shape for every accent — only the color varies. The overlay's bottom stop must match the page background <code>/0</code> exactly so the image "fades" into the page seamlessly.</p>
+
+            <p style="margin-top: 16px;"><strong>Fonts.</strong> Load only the weights actually used (400 + 700). The chosen font is applied <em>only</em> to the collab title (hero card + detail page header). Body text always stays in <code>Roboto</code> for system consistency.</p>
+        </div>
+    </section>
+
+
+    <!-- ═════════════════════════════════════════════════════════════
+         JS — render color cards from a single source list
+         ═════════════════════════════════════════════════════════════ -->
+
+    <script>
+        // 15 accent colors. Each defined by its base /60 hex (the "brand" tone).
+        // The /0, /30, /100 tiers are derived consistently using the same algorithm
+        // calibrated to match the Figma reference (Secondary/Purple/* values).
+        const COLORS = [
+            { name: 'Violet',   token: 'Secondary/Violet',   base: '#7E6DA8' },
+            { name: 'Rose',     token: 'Secondary/Rose',     base: '#B86B78' },
+            { name: 'Coral',    token: 'Secondary/Coral',    base: '#BC8464' },
+            { name: 'Amber',    token: 'Secondary/Amber',    base: '#BB9658' },
+            { name: 'Lime',     token: 'Secondary/Lime',     base: '#7E9C4D' },
+            { name: 'Emerald',  token: 'Secondary/Emerald',  base: '#4D9B7E' },
+            { name: 'Teal',     token: 'Secondary/Teal',     base: '#4D9B92' },
+            { name: 'Cyan',     token: 'Secondary/Cyan',     base: '#4D909B' },
+            { name: 'Sky',      token: 'Secondary/Sky',      base: '#4A8099' },
+            { name: 'Blue',     token: 'Secondary/Blue',     base: '#5474AC' },
+            { name: 'Indigo',   token: 'Secondary/Indigo',   base: '#6663A5' },
+            { name: 'Plum',     token: 'Secondary/Plum',     base: '#9E57A8' },
+            { name: 'Slate',    token: 'Secondary/Slate',    base: '#64748B' },
+            { name: 'Stone',    token: 'Secondary/Stone',    base: '#78716C' },
+            { name: 'Ink',      token: 'Secondary/Ink',      base: '#2B2E34' }
+        ];
+
+        // Stock photos (one per color, just for visual variety in mocks)
+        const MOCK_IMG = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=200&fit=crop';
+
+        // --- Color math ---
+        function hexToRgb(hex) {
+            const h = hex.replace('#','');
+            return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+        }
+        function rgbToHex(r,g,b) {
+            return '#' + [r,g,b].map(n => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2,'0')).join('').toUpperCase();
+        }
+        // Move a color toward white by `t` (0..1). 0 = original, 1 = white.
+        function lighten(hex, t) {
+            const [r,g,b] = hexToRgb(hex);
+            return rgbToHex(r + (255-r)*t, g + (255-g)*t, b + (255-b)*t);
+        }
+        // Move a color toward black by `t`.
+        function darken(hex, t) {
+            const [r,g,b] = hexToRgb(hex);
+            return rgbToHex(r*(1-t), g*(1-t), b*(1-t));
+        }
+
+        // Derive 4-tier scale from base (/60).
+        // Calibrated against Figma Purple where:
+        //   /60 = #775C7C, /30 = #C9B1CE (≈ lighten 58%), /0 = #F7F0FA (≈ lighten 95%), /100 = #6B4E71 (≈ darken 12%)
+        function deriveTiers(base) {
+            return {
+                t0:   lighten(base, 0.95),
+                t30:  lighten(base, 0.58),
+                t60:  base,
+                t100: darken(base, 0.12)
+            };
+        }
+
+        // Render
+        const grid = document.getElementById('colorGrid');
+        COLORS.forEach(c => {
+            const t = deriveTiers(c.base);
+            const card = document.createElement('div');
+            card.className = 'color-card';
+            card.style.setProperty('--c0', t.t0);
+            card.style.setProperty('--c30', t.t30);
+            card.style.setProperty('--c60', t.t60);
+            card.style.setProperty('--c100', t.t100);
+            card.innerHTML = `
+                <div class="color-header">
+                    <span class="color-name">${c.name}</span>
+                    <span class="color-token">${c.token}/*</span>
+                </div>
+                <div class="tiers">
+                    <div class="tier">
+                        <div class="tier-swatch" style="background:${t.t0}"></div>
+                        <div class="tier-num">/0</div>
+                        <div class="tier-hex">${t.t0}</div>
+                    </div>
+                    <div class="tier">
+                        <div class="tier-swatch" style="background:${t.t30}"></div>
+                        <div class="tier-num">/30</div>
+                        <div class="tier-hex">${t.t30}</div>
+                    </div>
+                    <div class="tier">
+                        <div class="tier-swatch" style="background:${t.t60}"></div>
+                        <div class="tier-num">/60</div>
+                        <div class="tier-hex">${t.t60}</div>
+                    </div>
+                    <div class="tier">
+                        <div class="tier-swatch" style="background:${t.t100}"></div>
+                        <div class="tier-num">/100</div>
+                        <div class="tier-hex">${t.t100}</div>
+                    </div>
+                </div>
+                <div class="mock">
+                    <div class="mock-image" style="background-image:url('${MOCK_IMG}')">
+                        <div class="mock-title">Sample collab</div>
+                    </div>
+                    <div class="mock-body">
+                        <div class="mock-pill">Themed pill</div>
+                        <div class="mock-stat-row">
+                            <div class="mock-stat">$83.67</div>
+                            <div class="mock-stat">2/6</div>
+                            <div class="mock-stat">800kJ</div>
+                        </div>
+                        <div class="mock-progress">
+                            <div class="mock-progress-seg filled"></div>
+                            <div class="mock-progress-seg filled"></div>
+                            <div class="mock-progress-seg"></div>
+                            <div class="mock-progress-seg"></div>
+                            <div class="mock-progress-seg"></div>
+                            <div class="mock-progress-seg"></div>
+                        </div>
+                        <div class="mock-link">More ›</div>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>

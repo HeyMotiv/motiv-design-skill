@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Recommended Flow — Flat Capture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+
+    <style>
+
+        /* =========================================
+           CSS VARIABLES
+           DS tokens + creator brand overrides
+           ========================================= */
+
+        :root {
+            --primary-100: #2B2E34;
+            --primary-60: #6B7280;
+            --primary-30: #9CA3AF;
+            --primary-0: #F5F5F5;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+            --surface-error: #CB3E3E;
+
+            --font-body: 'Roboto', sans-serif;
+            --font-title: 'Source Serif 4', serif;
+
+            --spacing-none: 0px;
+            --spacing-2xs: 2px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-s-md: 12px;
+            --spacing-md: 16px;
+            --spacing-l-md: 24px;
+            --spacing-lg: 36px;
+
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-pill: 999px;
+
+            --brand-accent: #7B5EA7;
+            --brand-tint: #F3EEF9;
+            --brand-sand: #E8DFF5;
+            --brand-deep: #7D3BED;
+
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-bg-primary: #F7F3FB;
+            --color-bg-secondary: #F3EEF9;
+            --color-border-default: #E8E4F0;
+            --color-border-subtle: #F3F4F6;
+
+            --font-headline: 'Playfair Display', serif;
+
+            --green: #3CB371;
+            --green-light: #E8F5E9;
+
+            --color-white: #FFFFFF;
+            --color-clay: #7B5EA7;
+            --color-blush: #F3EEF9;
+            --color-plum: #7D3BED;
+
+            --terra-blue: #008AFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .screen-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .screen-label {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================
+           SCREEN CARD (flat card style)
+           ========================================= */
+
+        .screen-card {
+            width: 390px;
+            background: var(--color-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .screen-card.welcome-bg {
+            background: linear-gradient(180deg, #C4B1DC 0%, #DDD2EC 30%, #EDE8F4 55%, #FFFFFF 100%);
+        }
+
+        .screen-card.terra-card {
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .screen-card.apple-pay-card {
+            background: linear-gradient(180deg, #2C2C2E 0%, #1C1C1E 100%);
+            color: white;
+        }
+
+        .screen-card.google-pay-card {
+            background: #FFFFFF;
+        }
+
+        .screen-card.stripe-card {
+            background: #FFFFFF;
+        }
+
+        /* =========================================
+           OWNERSHIP BADGES
+           ========================================= */
+
+        .ownership-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            z-index: 10;
+        }
+        .motiv-badge {
+            background: rgba(123, 94, 167, 0.15);
+            color: #7B5EA7;
+        }
+        .stripe-badge {
+            background: rgba(99, 91, 255, 0.12);
+            color: #635BFF;
+        }
+        .apple-badge {
+            background: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .google-badge {
+            background: rgba(26, 115, 232, 0.1);
+            color: #1A73E8;
+        }
+        .terra-badge {
+            background: rgba(0, 138, 255, 0.1);
+            color: #008AFF;
+        }
+
+        /* =========================================
+           BOTTOM SHEET INTERNALS
+           ========================================= */
+
+        .bottom-sheet-handle {
+            width: 36px;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--primary-30);
+            margin: 10px auto 0;
+        }
+
+        .bottom-sheet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+        }
+
+        .bottom-sheet-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 24px;
+        }
+
+        .bottom-sheet-close {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-pill);
+            background: var(--primary-0);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-sheet-close .material-icons {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+        }
+
+        .bottom-sheet-body {
+            padding: 0 20px 32px;
+        }
+
+        /* =========================================
+           STEP INDICATOR
+           ========================================= */
+
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+            padding: 0 20px 16px;
+        }
+
+        .step-dot {
+            flex: 1;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--color-border-default);
+        }
+        .step-dot.active {
+            background: var(--color-clay);
+        }
+        .step-dot.done {
+            background: var(--green);
+        }
+
+        /* =========================================
+           STEP 1 — CONNECT PELOTON
+           ========================================= */
+
+        .connect-step {
+            text-align: center;
+            padding-top: 12px;
+        }
+
+        .connect-logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .connect-logo-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .connect-logo-icon.motiv {
+            background: linear-gradient(135deg, var(--color-clay) 0%, var(--color-plum) 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 22px;
+        }
+        .connect-logo-icon.peloton {
+            background: #000;
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .connect-arrow {
+            color: var(--color-text-tertiary);
+            font-size: 20px;
+        }
+
+        .connect-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .connect-desc {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            padding: 0 12px;
+        }
+
+        .connect-what-list {
+            text-align: left;
+            margin: 0 0 24px;
+        }
+        .connect-what-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 12px;
+        }
+        .connect-what-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .connect-what-item:last-child { margin-bottom: 0; }
+        .connect-what-item .material-icons {
+            font-size: 18px;
+            color: var(--color-clay);
+        }
+        .connect-what-item span {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .connect-security {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 16px;
+        }
+        .connect-security .material-icons {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+        .connect-security span {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+
+        .connect-terra-note {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            margin-top: 6px;
+        }
+
+        .sheet-cta {
+            width: 100%;
+            min-height: 52px;
+            padding: 14px 24px;
+            background: var(--primary-100);
+            color: var(--primary-0);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* =========================================
+           TERRA IN-APP BROWSER
+           ========================================= */
+
+        .terra-browser-chrome {
+            background: #F8F8F8;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 12px 0 0;
+        }
+
+        .terra-browser-bar {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px 10px;
+            gap: 12px;
+        }
+
+        .terra-browser-close {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--terra-blue);
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+        }
+
+        .terra-browser-url {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: #ECECEC;
+            border-radius: 8px;
+            padding: 7px 12px;
+        }
+        .terra-browser-url .material-icons {
+            font-size: 14px;
+            color: #8E8E93;
+        }
+        .terra-browser-url span {
+            font-size: 13px;
+            color: #8E8E93;
+        }
+
+        .terra-browser-reload {
+            color: var(--terra-blue);
+            font-size: 20px;
+            background: none;
+            border: none;
+        }
+
+        .terra-widget-content {
+            padding: 24px 20px 32px;
+        }
+
+        .terra-widget-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .terra-app-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--color-clay) 0%, var(--color-plum) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .terra-app-info { flex: 1; }
+        .terra-app-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .terra-app-desc {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .terra-select-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+
+        .terra-select-subtitle {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .terra-provider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 1.5px solid #E8E8E8;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        .terra-provider.selected {
+            border-color: var(--terra-blue);
+            background: #F0F7FF;
+        }
+
+        .terra-provider-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .terra-provider-icon.pelo { background: #000; color: white; }
+        .terra-provider-icon.garmin { background: #007CC3; color: white; font-size: 12px; }
+        .terra-provider-icon.fitbit { background: #00B0B9; color: white; font-size: 12px; }
+        .terra-provider-icon.wahoo { background: #1A1A2E; color: #4FC3F7; font-size: 12px; }
+
+        .terra-provider-name {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+        }
+
+        .terra-provider-arrow {
+            color: #C7C7CC;
+            font-size: 20px;
+        }
+
+        .terra-powered-footer {
+            text-align: center;
+            padding-top: 20px;
+        }
+        .terra-powered-footer span {
+            font-size: 11px;
+            color: #999;
+        }
+        .terra-powered-footer strong {
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* Terra Login */
+        .terra-login-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0 auto 16px;
+        }
+
+        .terra-login-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .terra-login-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .terra-field { margin-bottom: 16px; }
+        .terra-field-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .terra-field-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--color-text-primary);
+            background: white;
+            outline: none;
+        }
+
+        .terra-permissions-box {
+            margin: 20px 0;
+            padding: 16px;
+            background: #F5F5F7;
+            border-radius: 12px;
+        }
+        .terra-permissions-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+        .terra-perm-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .terra-perm-item:last-child { margin-bottom: 0; }
+        .terra-perm-item .material-icons {
+            font-size: 16px;
+            color: var(--green);
+        }
+        .terra-perm-item span {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .terra-btn {
+            width: 100%;
+            padding: 15px 24px;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .terra-btn.pelo-btn {
+            background: #000;
+            color: white;
+            margin-top: 8px;
+        }
+
+        /* Terra Connecting */
+        .terra-connecting {
+            text-align: center;
+            padding-top: 80px;
+        }
+        .terra-connecting-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid #E0E0E0;
+            border-top-color: var(--terra-blue);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            animation: spin 0.8s linear infinite;
+        }
+        .terra-connecting-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .terra-connecting-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Terra Success */
+        .terra-success {
+            text-align: center;
+            padding-top: 60px;
+        }
+        .terra-success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 999px;
+            background: #E8F5E9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .terra-success-icon .material-icons {
+            font-size: 32px;
+            color: var(--green);
+        }
+        .terra-success-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .terra-success-desc {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* =========================================
+           STEP 2 — YOUR GOAL
+           ========================================= */
+
+        .goal-step {
+            padding-top: 8px;
+        }
+
+        .goal-connected-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-light);
+            border-radius: var(--radius-pill);
+            padding: 6px 14px;
+            margin-bottom: 20px;
+        }
+        .goal-connected-badge .material-icons {
+            font-size: 16px;
+            color: var(--green);
+        }
+        .goal-connected-badge span {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2E7D4B;
+        }
+
+        .goal-intro {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            text-align: center;
+            padding: 0 8px;
+        }
+
+        .goal-card-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .goal-card {
+            flex: 1;
+            background: var(--surface-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            text-align: left;
+        }
+
+        .goal-card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(123, 94, 167, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-s-md);
+        }
+        .goal-card-icon .material-icons {
+            font-size: 20px;
+            color: var(--color-clay);
+        }
+
+        .goal-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .goal-card-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .goal-card-desc {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-text-tertiary);
+        }
+
+        .goal-source {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            background: var(--primary-0);
+            border-radius: var(--radius-lg);
+            margin-bottom: 20px;
+        }
+        .goal-source-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .goal-source-text {
+            font-size: 13px;
+            line-height: 18px;
+            color: var(--color-text-secondary);
+        }
+        .goal-source-text strong {
+            color: var(--color-text-primary);
+            font-weight: 500;
+        }
+
+        .goal-summary-card {
+            background: linear-gradient(135deg, #8B6FB5 0%, #6B4F94 100%);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .goal-summary-title {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+        .goal-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .goal-summary-row:last-child { margin-bottom: 0; }
+        .goal-summary-label {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .goal-summary-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .goal-summary-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.15);
+            margin: 12px 0;
+        }
+        .goal-summary-total-label {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+        .goal-summary-total-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .goal-note {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-text-tertiary);
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        /* =========================================
+           STEP 3 — PAYMENT
+           ========================================= */
+
+        .payment-step {
+            padding-top: 8px;
+        }
+
+        .payment-amount-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .payment-amount-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 8px;
+        }
+        .payment-amount {
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .payment-amount-note {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        .payment-method-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 12px;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: var(--surface-white);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            margin-bottom: 10px;
+        }
+
+        .payment-method-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .payment-method-icon.apple-pay { background: #000; color: white; }
+        .payment-method-icon.google-pay { background: #fff; border: 1px solid var(--color-border-default); }
+        .payment-method-icon.credit-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+
+        .payment-method-info { flex: 1; }
+        .payment-method-name { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+        .payment-method-meta { font-size: 12px; color: var(--color-text-tertiary); }
+
+        .payment-method-arrow { color: var(--color-text-tertiary); font-size: 20px; }
+
+        .payment-secure {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+        .payment-secure .material-icons { font-size: 16px; color: var(--color-text-tertiary); }
+        .payment-secure span { font-size: 12px; color: var(--color-text-tertiary); }
+
+        .payment-stripe-badge {
+            text-align: center;
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+        .payment-stripe-badge strong { font-weight: 600; color: var(--color-text-secondary); }
+
+        .payment-terms {
+            font-size: 11px;
+            line-height: 16px;
+            color: var(--color-text-tertiary);
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* =========================================
+           STRIPE PAYMENTSHEET
+           ========================================= */
+
+        .stripe-sheet-handle {
+            width: 36px;
+            height: 5px;
+            border-radius: 2.5px;
+            background: #DCDCDC;
+            margin: 8px auto 10px;
+        }
+
+        .stripe-section-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        .stripe-card-field {
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stripe-card-row {
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stripe-card-divider {
+            height: 1px;
+            background: #E0E0E0;
+        }
+
+        .stripe-card-bottom-row {
+            display: flex;
+            align-items: center;
+            padding: 14px;
+        }
+
+        .stripe-card-bottom-divider {
+            width: 1px;
+            height: 20px;
+            background: #E0E0E0;
+            margin: 0 14px;
+        }
+
+        .stripe-card-placeholder {
+            font-size: 16px;
+            color: #A3ACB9;
+            font-family: var(--font-body);
+        }
+
+        .stripe-card-brands {
+            display: flex;
+            gap: 4px;
+        }
+
+        .stripe-brand {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 3px;
+            background: #F0F0F0;
+        }
+        .stripe-brand.visa { color: #1A1F71; }
+        .stripe-brand.mc { color: #EB001B; }
+        .stripe-brand.amex { color: #006FCF; }
+
+        .stripe-select-field {
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+            color: #1A1A1A;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .stripe-input-field {
+            border: 1px solid #E0E0E0;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        .stripe-save-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0 4px;
+            font-size: 14px;
+            color: #1A1A1A;
+        }
+
+        .stripe-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #D0D0D0;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .stripe-pay-btn {
+            width: 100%;
+            height: 48px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            margin-top: 16px;
+        }
+
+        .stripe-powered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-top: 12px;
+            font-size: 11px;
+            color: #8E8E93;
+        }
+        .stripe-powered strong { color: #6B7280; }
+
+        /* =========================================
+           APPLE PAY
+           ========================================= */
+
+        .apple-pay-header {
+            padding: 16px 20px 0;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .apple-pay-cancel {
+            font-size: 17px;
+            color: #0A84FF;
+            font-weight: 400;
+        }
+
+        .apple-pay-body {
+            padding: 20px 20px 16px;
+        }
+
+        .apple-pay-logo {
+            font-size: 28px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 24px;
+            font-family: -apple-system, system-ui;
+            letter-spacing: -0.5px;
+        }
+
+        .apple-pay-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .apple-pay-row-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .apple-pay-row-value {
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        .apple-pay-amount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            margin-top: 4px;
+        }
+        .apple-pay-amount-row span:first-child {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .apple-pay-total {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .apple-pay-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            margin: 16px 0;
+        }
+
+        .apple-pay-card-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+        }
+
+        .apple-pay-card-icon {
+            background: #1A1F71;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 6px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .apple-pay-card-info { flex: 1; }
+        .apple-pay-card-name { font-size: 17px; font-weight: 400; }
+        .apple-pay-card-bank { font-size: 13px; color: rgba(255, 255, 255, 0.5); }
+
+        .apple-pay-confirm {
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .apple-pay-confirm-text {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .apple-pay-side-button-hint {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* =========================================
+           GOOGLE PAY
+           ========================================= */
+
+        .gpay-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid #E8EAED;
+        }
+        .gpay-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gpay-close .material-icons {
+            font-size: 20px;
+            color: #5F6368;
+        }
+        .gpay-header-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .gpay-header-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #202124;
+            font-family: 'Google Sans', var(--font-body);
+        }
+
+        .gpay-body { padding: 20px; }
+
+        .gpay-merchant { font-size: 14px; color: #5F6368; margin-bottom: 4px; }
+        .gpay-amount {
+            font-size: 36px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 24px;
+            font-family: 'Google Sans', var(--font-body);
+        }
+
+        .gpay-card-section-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #5F6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .gpay-card-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            background: #F8F9FA;
+            border-radius: 12px;
+            border: 2px solid #1A73E8;
+            margin-bottom: 20px;
+        }
+        .gpay-card-icon {
+            width: 36px;
+            height: 24px;
+            background: #1A1F71;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .gpay-card-details { flex: 1; }
+        .gpay-card-name { font-size: 15px; font-weight: 500; color: #202124; }
+        .gpay-card-number { font-size: 13px; color: #5F6368; }
+        .gpay-card-check { color: #1A73E8; font-size: 22px; }
+
+        .gpay-continue-btn {
+            width: 100%;
+            height: 48px;
+            background: #1A73E8;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Google Sans', var(--font-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .gpay-footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            padding: 12px 20px 24px;
+            font-size: 11px;
+            color: #80868B;
+        }
+
+        /* =========================================
+           PROCESSING
+           ========================================= */
+
+        .processing-step {
+            text-align: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        .processing-spinner {
+            width: 56px;
+            height: 56px;
+            border: 3px solid var(--color-border-default);
+            border-top-color: var(--color-clay);
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            animation: spin 0.8s linear infinite;
+        }
+        .processing-title { font-size: 18px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px; }
+        .processing-desc { font-size: 14px; color: var(--color-text-secondary); }
+
+        /* =========================================
+           DECLINE
+           ========================================= */
+
+        .decline-step {
+            text-align: center;
+            padding-top: 40px;
+        }
+        .decline-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #FEF2F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .decline-icon .material-icons {
+            font-size: 32px;
+            color: var(--surface-error);
+        }
+        .decline-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+        .decline-desc {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+        .decline-reason {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FEF2F2;
+            border: 1px solid #FECACA;
+            border-radius: var(--radius-md);
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--surface-error);
+            margin-bottom: 24px;
+        }
+        .decline-reason .material-icons { font-size: 16px; }
+        .decline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 4px;
+        }
+        .decline-retry-btn {
+            width: 100%;
+            height: 52px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: var(--font-body);
+        }
+        .decline-alt-btn {
+            width: 100%;
+            height: 48px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: var(--font-body);
+        }
+        .decline-help {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 18px;
+        }
+        .decline-help a {
+            color: var(--color-clay);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           WELCOME
+           ========================================= */
+
+        .welcome-step {
+            text-align: center;
+            padding-top: 0;
+        }
+
+        .welcome-hero {
+            padding: 36px 24px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-hero-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-pill);
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face');
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 16px;
+            border: 3px solid rgba(255,255,255,0.8);
+            box-shadow: 0 4px 16px rgba(123,94,167,0.2);
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .welcome-subtitle {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            padding: 0 12px;
+        }
+
+        .welcome-body {
+            padding: 24px 24px 32px;
+            background: transparent;
+        }
+
+        .welcome-creator-msg { margin-bottom: 24px; }
+        .welcome-quote-text {
+            font-size: 15px;
+            font-style: italic;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .welcome-quote-attribution { display: inline-flex; align-items: center; gap: 8px; }
+        .welcome-quote-name { font-size: 13px; color: var(--color-text-tertiary); }
+
+        .welcome-detail {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 24px;
+            background: var(--surface-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .welcome-detail-item {
+            flex: 1;
+            text-align: center;
+            padding: 16px 8px;
+        }
+        .welcome-detail-item + .welcome-detail-item {
+            border-left: 1px solid var(--color-border-default);
+        }
+        .welcome-detail-value { font-size: 20px; font-weight: 700; color: var(--color-clay); margin-bottom: 2px; }
+        .welcome-detail-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; color: var(--color-text-tertiary); }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="grid">
+
+        <!-- ===================== SCREEN 1: Connect Peloton ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">1 &middot; Connect Peloton</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header">
+                    <div class="bottom-sheet-title">Connect Peloton</div>
+                    <div class="bottom-sheet-close"><span class="material-icons">close</span></div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-dot active"></div>
+                    <div class="step-dot"></div>
+                    <div class="step-dot"></div>
+                </div>
+                <div class="bottom-sheet-body">
+                    <div class="connect-step">
+                        <div class="connect-logo-row">
+                            <div class="connect-logo-icon motiv">M</div>
+                            <span class="material-icons connect-arrow">sync_alt</span>
+                            <div class="connect-logo-icon peloton">P</div>
+                        </div>
+                        <div class="connect-title">Connect your Peloton</div>
+                        <div class="connect-desc">To calculate your personalized goals and track your rides, Motiv needs to connect to your Peloton account.</div>
+                        <div class="connect-what-list">
+                            <div class="connect-what-title">What we'll access</div>
+                            <div class="connect-what-item"><span class="material-icons">history</span><span>Ride history and workout data</span></div>
+                            <div class="connect-what-item"><span class="material-icons">bolt</span><span>Total output (kJ) per session</span></div>
+                            <div class="connect-what-item"><span class="material-icons">calendar_today</span><span>Weekly ride frequency</span></div>
+                        </div>
+                        <div class="sheet-cta">Connect Peloton</div>
+                        <div class="connect-security"><span class="material-icons">lock</span><span>You'll sign in to Peloton directly — we never see your password</span></div>
+                        <div class="connect-terra-note">Connection powered by Terra</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 2: Your Personalized Goal ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">2 &middot; Your personalized goal</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header">
+                    <div class="bottom-sheet-title">Your personalized goal</div>
+                    <div class="bottom-sheet-close"><span class="material-icons">close</span></div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-dot done"></div>
+                    <div class="step-dot active"></div>
+                    <div class="step-dot"></div>
+                </div>
+                <div class="bottom-sheet-body">
+                    <div class="goal-step">
+                        <div style="text-align: center;">
+                            <div class="goal-connected-badge"><span class="material-icons">check_circle</span><span>Peloton connected</span></div>
+                        </div>
+                        <div class="goal-intro">Based on your last 8 weeks of rides, here are your personalized weekly goals for this collab.</div>
+                        <div class="goal-card-container">
+                            <div class="goal-card">
+                                <div class="goal-card-icon"><span class="material-icons">local_fire_department</span></div>
+                                <div class="goal-card-value">2,158 kJ</div>
+                                <div class="goal-card-label">Weekly Output</div>
+                                <div class="goal-card-desc">1.3x your avg of 1,660 kJ/week</div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-card-icon"><span class="material-icons">event_note</span></div>
+                                <div class="goal-card-value">4 rides</div>
+                                <div class="goal-card-label">Per Week</div>
+                                <div class="goal-card-desc">+1 above your avg of 3/week</div>
+                            </div>
+                        </div>
+                        <div class="goal-source">
+                            <div class="goal-source-icon">P</div>
+                            <div class="goal-source-text"><strong>Based on 24 rides</strong> over the last 8 weeks from your Peloton account</div>
+                        </div>
+                        <div class="goal-summary-card">
+                            <div class="goal-summary-title">Your weekly commitment</div>
+                            <div class="goal-summary-row"><span class="goal-summary-label">Output target</span><span class="goal-summary-value">2,158 kJ</span></div>
+                            <div class="goal-summary-row"><span class="goal-summary-label">Ride frequency</span><span class="goal-summary-value">4 rides/week</span></div>
+                            <div class="goal-summary-row"><span class="goal-summary-label">Duration</span><span class="goal-summary-value">6 weeks</span></div>
+                            <div class="goal-summary-divider"></div>
+                            <div class="goal-summary-row"><span class="goal-summary-total-label">Entry hold</span><span class="goal-summary-total-value">$40.00</span></div>
+                        </div>
+                        <div class="goal-note">Meet your goals every week to earn your hold back — plus a share of the reward pool.</div>
+                        <div class="sheet-cta">Continue to payment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 3: Pay Entry Hold ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">3 &middot; Pay entry hold</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header">
+                    <div class="bottom-sheet-title">Pay entry hold</div>
+                    <div class="bottom-sheet-close"><span class="material-icons">close</span></div>
+                </div>
+                <div class="step-indicator">
+                    <div class="step-dot done"></div>
+                    <div class="step-dot done"></div>
+                    <div class="step-dot active"></div>
+                </div>
+                <div class="bottom-sheet-body">
+                    <div class="payment-step">
+                        <div class="payment-amount-header">
+                            <div class="payment-amount-label">Entry hold</div>
+                            <div class="payment-amount">$40.00</div>
+                            <div class="payment-amount-note">Returned when you meet your goals</div>
+                        </div>
+                        <div class="payment-method-title">Choose payment method</div>
+                        <div class="payment-method">
+                            <div class="payment-method-icon apple-pay">
+                                <svg width="20" height="24" viewBox="0 0 17 20" fill="white"><path d="M13.128 10.513c-.02-2.044 1.668-3.027 1.745-3.074-0.95-1.39-2.432-1.58-2.96-1.602-1.26-.128-2.46.742-3.1.742-.64 0-1.63-.723-2.678-.703-1.378.02-2.65.802-3.358 2.036-1.432 2.486-.367 6.168 1.03 8.185.682.987 1.496 2.095 2.564 2.056 1.03-.041 1.418-.666 2.663-.666 1.245 0 1.594.666 2.681.645 1.107-.02 1.81-1.006 2.487-1.996.784-1.145 1.107-2.253 1.126-2.312-.025-.01-2.16-.83-2.181-3.293l-.02.002zM11.1 4.14c.567-.687.95-1.642.846-2.594-.817.033-1.808.545-2.394 1.232-.526.608-.986 1.58-.863 2.512.912.071 1.843-.464 2.41-1.15z"/></svg>
+                            </div>
+                            <div class="payment-method-info"><div class="payment-method-name">Apple Pay</div><div class="payment-method-meta">Pay instantly with Face ID</div></div>
+                            <span class="material-icons payment-method-arrow">chevron_right</span>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-method-icon google-pay">
+                                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            </div>
+                            <div class="payment-method-info"><div class="payment-method-name">Google Pay</div><div class="payment-method-meta">Pay with your Google account</div></div>
+                            <span class="material-icons payment-method-arrow">chevron_right</span>
+                        </div>
+                        <div class="payment-method">
+                            <div class="payment-method-icon credit-card"><span class="material-icons" style="font-size: 22px;">credit_card</span></div>
+                            <div class="payment-method-info"><div class="payment-method-name">Credit or debit card</div><div class="payment-method-meta">Visa, Mastercard, Amex</div></div>
+                            <span class="material-icons payment-method-arrow">chevron_right</span>
+                        </div>
+                        <div class="payment-secure"><span class="material-icons">lock</span><span>Payments are secure and encrypted</span></div>
+                        <div class="payment-stripe-badge">Powered by <strong>Stripe</strong></div>
+                        <div class="payment-terms">By paying, you agree to hold $40 for the duration of the collab. Your hold is returned in full when you meet your weekly goals.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 4: Terra Provider Selection ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">4 &middot; Terra Provider Selection</div>
+            <div class="screen-card terra-card">
+                <div class="ownership-badge terra-badge">Terra native</div>
+                <div class="terra-browser-chrome">
+                    <div class="terra-browser-bar">
+                        <div class="terra-browser-close">Done</div>
+                        <div class="terra-browser-url"><span class="material-icons">lock</span><span>widget.tryterra.co</span></div>
+                        <div class="terra-browser-reload"><span class="material-icons" style="font-size: 20px;">refresh</span></div>
+                    </div>
+                </div>
+                <div class="terra-widget-content">
+                    <div class="terra-widget-header">
+                        <div class="terra-app-logo">M</div>
+                        <div class="terra-app-info"><div class="terra-app-name">Motiv</div><div class="terra-app-desc">wants to connect your fitness data</div></div>
+                    </div>
+                    <div class="terra-select-title">Select your provider</div>
+                    <div class="terra-select-subtitle">Choose the platform you'd like to connect.</div>
+                    <div class="terra-provider selected">
+                        <div class="terra-provider-icon pelo">P</div>
+                        <div class="terra-provider-name">Peloton</div>
+                        <span class="material-icons terra-provider-arrow">chevron_right</span>
+                    </div>
+                    <div class="terra-provider" style="opacity: 0.4;">
+                        <div class="terra-provider-icon garmin">G</div>
+                        <div class="terra-provider-name">Garmin</div>
+                        <span class="material-icons terra-provider-arrow">chevron_right</span>
+                    </div>
+                    <div class="terra-provider" style="opacity: 0.4;">
+                        <div class="terra-provider-icon fitbit">fb</div>
+                        <div class="terra-provider-name">Fitbit</div>
+                        <span class="material-icons terra-provider-arrow">chevron_right</span>
+                    </div>
+                    <div class="terra-provider" style="opacity: 0.4;">
+                        <div class="terra-provider-icon wahoo">W</div>
+                        <div class="terra-provider-name">Wahoo</div>
+                        <span class="material-icons terra-provider-arrow">chevron_right</span>
+                    </div>
+                    <div class="terra-powered-footer"><span>Secured by <strong>Terra</strong></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 5: Terra Peloton Login ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">5 &middot; Terra Peloton Login</div>
+            <div class="screen-card terra-card">
+                <div class="ownership-badge terra-badge">Terra native</div>
+                <div class="terra-browser-chrome">
+                    <div class="terra-browser-bar">
+                        <div class="terra-browser-close">Done</div>
+                        <div class="terra-browser-url"><span class="material-icons">lock</span><span>auth.onepeloton.com</span></div>
+                        <div class="terra-browser-reload"><span class="material-icons" style="font-size: 20px;">refresh</span></div>
+                    </div>
+                </div>
+                <div class="terra-widget-content">
+                    <div class="terra-login-logo">P</div>
+                    <div class="terra-login-title">Sign in to Peloton</div>
+                    <div class="terra-login-desc">Enter your credentials to authorize access.</div>
+                    <div class="terra-field">
+                        <div class="terra-field-label">Email or username</div>
+                        <input class="terra-field-input" type="text" value="alex@email.com" readonly>
+                    </div>
+                    <div class="terra-field">
+                        <div class="terra-field-label">Password</div>
+                        <input class="terra-field-input" type="password" value="••••••••" readonly>
+                    </div>
+                    <div class="terra-permissions-box">
+                        <div class="terra-permissions-title">Motiv will access</div>
+                        <div class="terra-perm-item"><span class="material-icons">check_circle</span><span>Ride history and workout data</span></div>
+                        <div class="terra-perm-item"><span class="material-icons">check_circle</span><span>Total output (kJ) per session</span></div>
+                        <div class="terra-perm-item"><span class="material-icons">check_circle</span><span>Weekly ride frequency</span></div>
+                    </div>
+                    <div class="terra-btn pelo-btn">Authorize &amp; Connect</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 6: Terra Connecting ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">6 &middot; Terra Connecting</div>
+            <div class="screen-card terra-card">
+                <div class="ownership-badge terra-badge">Terra native</div>
+                <div class="terra-browser-chrome">
+                    <div class="terra-browser-bar">
+                        <div class="terra-browser-close">Done</div>
+                        <div class="terra-browser-url"><span class="material-icons">lock</span><span>widget.tryterra.co</span></div>
+                        <div class="terra-browser-reload"><span class="material-icons" style="font-size: 20px;">refresh</span></div>
+                    </div>
+                </div>
+                <div class="terra-widget-content">
+                    <div class="terra-connecting">
+                        <div class="terra-connecting-spinner"></div>
+                        <div class="terra-connecting-title">Connecting to Peloton...</div>
+                        <div class="terra-connecting-desc">Authorizing access to your data</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 7: Terra Success ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">7 &middot; Terra Success</div>
+            <div class="screen-card terra-card">
+                <div class="ownership-badge terra-badge">Terra native</div>
+                <div class="terra-browser-chrome">
+                    <div class="terra-browser-bar">
+                        <div class="terra-browser-close">Done</div>
+                        <div class="terra-browser-url"><span class="material-icons">lock</span><span>widget.tryterra.co</span></div>
+                        <div class="terra-browser-reload"><span class="material-icons" style="font-size: 20px;">refresh</span></div>
+                    </div>
+                </div>
+                <div class="terra-widget-content">
+                    <div class="terra-success">
+                        <div class="terra-success-icon"><span class="material-icons">check</span></div>
+                        <div class="terra-success-title">Connected!</div>
+                        <div class="terra-success-desc">Your Peloton account is now linked to Motiv. Redirecting back...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 8: Stripe PaymentSheet ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">8 &middot; Stripe PaymentSheet</div>
+            <div class="screen-card stripe-card">
+                <div class="ownership-badge stripe-badge">Stripe native</div>
+                <div class="stripe-sheet-handle"></div>
+                <div style="padding: 0 20px 24px;">
+                    <div class="stripe-section-label">Card information</div>
+                    <div class="stripe-card-field">
+                        <div class="stripe-card-row">
+                            <span class="stripe-card-placeholder">1234 1234 1234 1234</span>
+                            <div class="stripe-card-brands">
+                                <span class="stripe-brand visa">VISA</span>
+                                <span class="stripe-brand mc">MC</span>
+                                <span class="stripe-brand amex">AMEX</span>
+                            </div>
+                        </div>
+                        <div class="stripe-card-divider"></div>
+                        <div class="stripe-card-bottom-row">
+                            <span class="stripe-card-placeholder">MM / YY</span>
+                            <div class="stripe-card-bottom-divider"></div>
+                            <span class="stripe-card-placeholder">CVC</span>
+                        </div>
+                    </div>
+                    <div class="stripe-section-label">Country or region</div>
+                    <div class="stripe-select-field">
+                        <span>United States</span>
+                        <span class="material-icons" style="font-size: 18px; color: #8E8E93;">expand_more</span>
+                    </div>
+                    <div class="stripe-input-field"><span class="stripe-card-placeholder">ZIP</span></div>
+                    <div class="stripe-save-row"><div class="stripe-checkbox"></div><span>Save this card for future Motiv payments</span></div>
+                    <div class="stripe-pay-btn" style="display: flex; align-items: center; justify-content: center;">Pay $40.00</div>
+                    <div class="stripe-powered"><span class="material-icons" style="font-size: 12px;">lock</span><span>Powered by <strong>Stripe</strong></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 9: Apple Pay ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">9 &middot; Apple Pay</div>
+            <div class="screen-card apple-pay-card">
+                <div class="ownership-badge apple-badge">Apple native</div>
+                <div class="apple-pay-header"><div class="apple-pay-cancel">Cancel</div></div>
+                <div class="apple-pay-body">
+                    <div class="apple-pay-logo">&#63743; Pay</div>
+                    <div class="apple-pay-row"><div class="apple-pay-row-label">PAYING</div><div class="apple-pay-row-value">Motiv</div></div>
+                    <div class="apple-pay-amount-row"><span>TOTAL</span><span class="apple-pay-total">$40.00</span></div>
+                    <div class="apple-pay-divider"></div>
+                    <div class="apple-pay-card-row">
+                        <div class="apple-pay-card-icon">VISA</div>
+                        <div class="apple-pay-card-info"><div class="apple-pay-card-name">Visa &bull;&bull;&bull;&bull; 4242</div><div class="apple-pay-card-bank">My Bank</div></div>
+                        <span class="material-icons" style="color: rgba(255,255,255,0.4); font-size: 18px;">chevron_right</span>
+                    </div>
+                </div>
+                <div class="apple-pay-confirm">
+                    <div class="apple-pay-confirm-text">Confirm with Side Button</div>
+                    <div class="apple-pay-side-button-hint">
+                        <svg width="40" height="24" viewBox="0 0 40 24"><rect x="0" y="2" width="28" height="20" rx="4" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><path d="M32 6 L36 12 L32 18" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 6 L40 12 L36 18" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 10: Google Pay ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">10 &middot; Google Pay</div>
+            <div class="screen-card google-pay-card">
+                <div class="ownership-badge google-badge">Google native</div>
+                <div class="gpay-header">
+                    <div class="gpay-close"><span class="material-icons">close</span></div>
+                    <div class="gpay-header-logo">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                        <span class="gpay-header-title">Pay</span>
+                    </div>
+                    <div style="width: 32px;"></div>
+                </div>
+                <div class="gpay-body">
+                    <div class="gpay-merchant">Motiv</div>
+                    <div class="gpay-amount">$40.00</div>
+                    <div class="gpay-card-section-label">Payment method</div>
+                    <div class="gpay-card-row">
+                        <div class="gpay-card-icon">VISA</div>
+                        <div class="gpay-card-details"><div class="gpay-card-name">Visa</div><div class="gpay-card-number">&bull;&bull;&bull;&bull; 4242</div></div>
+                        <span class="material-icons gpay-card-check">check_circle</span>
+                    </div>
+                    <div class="gpay-continue-btn">Continue</div>
+                </div>
+                <div class="gpay-footer"><span class="material-icons" style="font-size: 12px;">lock</span><span>Payment info stored securely by Google</span></div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 11: Processing ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">11 &middot; Processing</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-body">
+                    <div class="processing-step">
+                        <div class="processing-spinner"></div>
+                        <div class="processing-title">Processing payment...</div>
+                        <div class="processing-desc">Securing your spot in the collab</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 12: Payment Failed (Generic) ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">12 &middot; Payment failed (generic)</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header">
+                    <div class="bottom-sheet-title">Payment failed</div>
+                    <div class="bottom-sheet-close"><span class="material-icons">close</span></div>
+                </div>
+                <div class="bottom-sheet-body">
+                    <div class="decline-step" style="display: block;">
+                        <div class="decline-icon"><span class="material-icons">close</span></div>
+                        <div class="decline-title">Payment didn't go through</div>
+                        <div class="decline-desc">Your payment couldn't be processed. This can happen for a variety of reasons.</div>
+                        <div class="decline-actions">
+                            <div class="decline-retry-btn" style="display: flex; align-items: center; justify-content: center;">Try again</div>
+                            <div class="decline-alt-btn" style="display: flex; align-items: center; justify-content: center;">Use a different payment method</div>
+                        </div>
+                        <div class="decline-help">Still having trouble? <a href="#">Contact your bank</a> or <a href="#">get help</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 13: Payment Failed (Specific) ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">13 &middot; Payment failed (specific)</div>
+            <div class="screen-card">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header">
+                    <div class="bottom-sheet-title">Payment failed</div>
+                    <div class="bottom-sheet-close"><span class="material-icons">close</span></div>
+                </div>
+                <div class="bottom-sheet-body">
+                    <div class="decline-step" style="display: block;">
+                        <div class="decline-icon"><span class="material-icons">close</span></div>
+                        <div class="decline-title">Payment declined</div>
+                        <div class="decline-desc">There was an issue with your card.</div>
+                        <div class="decline-reason"><span class="material-icons">info_outline</span><span>Your card has expired</span></div>
+                        <div class="decline-actions">
+                            <div class="decline-retry-btn" style="display: flex; align-items: center; justify-content: center;">Update card &amp; retry</div>
+                            <div class="decline-alt-btn" style="display: flex; align-items: center; justify-content: center;">Use a different payment method</div>
+                        </div>
+                        <div class="decline-help">Still having trouble? <a href="#">Contact your bank</a> or <a href="#">get help</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== SCREEN 14: Welcome ===================== -->
+        <div class="screen-wrapper">
+            <div class="screen-label">14 &middot; Welcome</div>
+            <div class="screen-card welcome-bg">
+                <div class="ownership-badge motiv-badge">Motiv designed</div>
+                <div class="welcome-step" style="display: block;">
+                    <div class="welcome-hero">
+                        <div class="welcome-hero-avatar"></div>
+                        <div class="welcome-title">You're in!</div>
+                        <div class="welcome-subtitle">Your spot in Dog Lovers Who Cycle is confirmed. The collab starts Jan 5.</div>
+                    </div>
+                    <div class="welcome-body">
+                        <div class="welcome-creator-msg">
+                            <div class="welcome-quote-text">"So excited to have you! Get ready for 6 weeks of riding, growing, and earning together. Let's do this!"</div>
+                            <div class="welcome-quote-attribution"><div class="welcome-quote-name">— Ellie</div></div>
+                        </div>
+                        <div class="welcome-detail">
+                            <div class="welcome-detail-item"><div class="welcome-detail-value">$40</div><div class="welcome-detail-label">Hold</div></div>
+                            <div class="welcome-detail-item"><div class="welcome-detail-value">6 wks</div><div class="welcome-detail-label">Duration</div></div>
+                            <div class="welcome-detail-item"><div class="welcome-detail-value">Jan 5</div><div class="welcome-detail-label">Starts</div></div>
+                        </div>
+                        <div class="sheet-cta">View your collab</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

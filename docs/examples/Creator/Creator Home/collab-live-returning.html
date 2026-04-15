@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 
     <style>
 
@@ -1102,9 +1103,51 @@
             flex-shrink: 0;
         }
 
+    
+        /* Clean mode: strip phone frame chrome + show full content for Figma capture */
+        body.clean {
+            background: var(--surface-bg) !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            min-height: unset !important;
+            display: block !important;
+        }
+        body.clean .label,
+        body.clean .sublabel {
+            display: none !important;
+        }
+        body.clean .phone-frame {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            height: auto !important;
+            overflow: visible !important;
+            display: block !important;
+        }
+        body.clean .phone-scroll {
+            overflow: visible !important;
+            flex: unset !important;
+            height: auto !important;
+        }
+        /* Pin tab bar to bottom of content area in clean mode */
+        body.clean .tab-bar {
+            position: absolute !important;
+        }
+        body.clean .home-indicator {
+            position: absolute !important;
+        }
+        /* Add bottom padding to content so tab bar doesn't overlap */
+        body.clean .home-content {
+            padding-bottom: 120px !important;
+        }
     </style>
 </head>
 <body>
+    <script>
+        if (new URLSearchParams(location.search).get('clean') === '1') {
+            document.body.classList.add('clean');
+        }
+    </script>
 
     <div class="label">Collabs — Live (Returning)</div>
     <div class="sublabel">Returning creator with active collab and past collab history</div>
