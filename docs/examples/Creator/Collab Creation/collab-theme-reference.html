@@ -498,10 +498,107 @@
                 <ul class="app-list">
                     <li><span class="tier-chip">/100</span><span>Big stat numbers, "$" amounts, themed inline links, themed icons</span></li>
                     <li><span class="tier-chip">/60</span><span>Filled progress bar segments, gradient top stops, active progress-week dot ring</span></li>
-                    <li><span class="tier-chip">/30</span><span>Themed pill / badge backgrounds, gradient mid-stop</span></li>
-                    <li><span class="tier-chip">/0</span><span>Page background, empty progress segments, gradient bottom stop</span></li>
+                    <li><span class="tier-chip">/30</span><span>Filled pill background (e.g. "Unlock MVP Bonuses"); border for outlined pills (e.g. "$40 Hold"); gradient mid-stop</span></li>
+                    <li><span class="tier-chip">/0</span><span>Page background, empty progress segments, outlined pill background (e.g. "$40 Hold"), gradient bottom stop</span></li>
                 </ul>
             </div>
+        </div>
+
+        <!-- Pill style sub-reference -->
+        <div class="overview" style="margin-top: 24px;">
+            <h3 style="color: #92591E;">Two pill styles — different tier mappings</h3>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>Pill style</th>
+                        <th>Background</th>
+                        <th>Border</th>
+                        <th>Text / icon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Filled tag</strong> — e.g. "Unlock MVP Bonuses"</td>
+                        <td><span class="tier-chip">/30</span></td>
+                        <td>none</td>
+                        <td><span class="tier-chip">/100</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Outlined pill</strong> — e.g. "$40 Hold"</td>
+                        <td><span class="tier-chip">/0</span></td>
+                        <td><span class="tier-chip">/30</span> (1px)</td>
+                        <td><span class="tier-chip">/100</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Static elements (never themed) -->
+        <div class="overview" style="margin-top: 24px; background: #F4F4F5; border-color: #E5E7EB;">
+            <h3 style="color: #44403C;">Static elements — never themed</h3>
+            <p style="font-size: 13px; color: #6B7280; line-height: 1.5; margin-bottom: 6px;">These elements use the same hard-coded colors regardless of which accent the creator picked. Don't plug accent variables into these.</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Profile tag</strong> on hero card (e.g. "@sarah_rides")</td>
+                        <td>Background</td>
+                        <td><code style="font-size:12px;">white @ 40% opacity</code> (<code>Elevation/Medium</code>)</td>
+                    </tr>
+                    <tr>
+                        <td>Profile tag text</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Primary/100 — #2B2E34</code></td>
+                    </tr>
+                    <tr>
+                        <td>Hero card title (e.g. "Dog Lovers Who Cycle")</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Surface/White — #FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>Hero card date range (e.g. "Jan 5 – Feb 15")</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Surface/White — #FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>"THIS WEEK" / section labels over the photo</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Surface/White — #FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>Stat-card backgrounds (the white panels)</td>
+                        <td>Background</td>
+                        <td><code style="font-size:12px;">Surface/White — #FFFFFF</code></td>
+                    </tr>
+                    <tr>
+                        <td>Secondary / unit text (e.g. "/6 days", "1,300 kJ left", "4 days to go", "Wk 1")</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Primary/60 — #6B7280</code></td>
+                    </tr>
+                    <tr>
+                        <td>Section labels in the body (e.g. "YOUR PERKS", "STATS", "DON'T MISS")</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Primary/60 — #6B7280</code></td>
+                    </tr>
+                    <tr>
+                        <td>Dividers / borders inside white cards</td>
+                        <td>Border</td>
+                        <td><code style="font-size:12px;">Surface/Border — #E5E7EB</code></td>
+                    </tr>
+                    <tr>
+                        <td>Body text (general)</td>
+                        <td>Text</td>
+                        <td><code style="font-size:12px;">Primary/100 — #2B2E34</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="font-size: 12px; color: #6B7280; line-height: 1.5; margin-top: 12px;"><strong>Why these stay static:</strong> elements layered over the photo gradient (titles, profile tag, "THIS WEEK") need consistent legibility across all 15 accents and any photo. Body-level greys and white cards keep the design feeling like Motiv, not just "a colored screen."</p>
         </div>
     </section>
 
