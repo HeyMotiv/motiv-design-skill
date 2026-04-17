@@ -1,0 +1,3049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Lovers Who Cycle — Dashboard (Steps model)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+
+        /* =========================================
+           CSS VARIABLES
+           DS tokens + creator brand overrides
+           ========================================= */
+
+        :root {
+            /* --- DS Core Tokens (from Figma DS) --- */
+            --primary-100: #2B2E34;        /* DS primary/100 */
+            --primary-60: #6B7280;         /* DS primary/60 */
+            --primary-30: #9CA3AF;         /* DS primary/30 */
+            --primary-0: #F5F5F5;          /* DS primary/0 */
+            --surface-white: #FFFFFF;       /* DS surface/white */
+            --surface-border: #E5E7EB;     /* DS surface/border */
+            --surface-error: #CB3E3E;       /* DS surface/error */
+
+            /* DS Typography */
+            --font-body: 'Roboto', sans-serif;        /* DS family/body */
+            --font-title: 'Source Serif 4', serif;     /* DS family/title */
+
+            /* DS Spacing */
+            --spacing-none: 0px;
+            --spacing-2xs: 2px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-s-md: 12px;
+            --spacing-md: 16px;
+            --spacing-l-md: 24px;
+            --spacing-lg: 36px;
+
+            /* DS Border Radius */
+            --radius-md: 8px;              /* DS border/radius/medium */
+            --radius-lg: 12px;             /* DS border/radius/large */
+            --radius-xl: 16px;             /* DS border/radius/x-large */
+            --radius-pill: 999px;          /* DS border/radius/pill */
+
+            /* --- Creator Brand: Purple Theme --- */
+            --color-ink: #2B2E34;
+            --color-clay: #7B5EA7;         /* Creator purple (replaces DS orange accent) */
+            --color-blush: #F3EEF9;        /* Creator light purple tint */
+            --color-sage: #8FA6A0;
+            --color-sand: #E8DFF5;         /* Creator mid-light purple */
+            --color-plum: #7D3BED;         /* Creator deep purple */
+            --color-boundary: #B8574E;
+            --color-white: #FFFFFF;
+
+            /* --- Mapped Semantic Tokens --- */
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);   /* DS #6B7280 */
+            --color-text-tertiary: var(--primary-30);    /* DS #9CA3AF */
+            --color-bg-primary: #F7F3FB;           /* Creator-branded surface */
+            --color-bg-secondary: #F3EEF9;         /* Creator-branded secondary surface */
+            --color-border-default: #E8E4F0;       /* Creator-branded border (kept as-is) */
+            --color-border-subtle: #F3F4F6;
+
+            /* Creator headline font (collab title only) */
+            --font-headline: 'Playfair Display', serif;
+
+            /* Legacy alias for pill radius */
+            --radius-full: var(--radius-pill);
+
+            --green: #3CB371;
+            --green-light: #E8F5E9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+        }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 14px;  /* DS Body/Medium */
+            font-weight: 500;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        .sublabel {
+            font-size: 12px;  /* DS Body/Small */
+            color: #777;
+            text-align: center;
+            margin-bottom: 32px;
+            max-width: 440px;
+            line-height: 18px; /* DS line-height/body/small */
+        }
+
+        /* =========================================
+           PHONE FRAME
+           ========================================= */
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .phone-scroll::-webkit-scrollbar { display: none; }
+
+        /* =========================================
+           STATUS BAR
+           ========================================= */
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-white);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+
+        .status-bar-icons {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        /* Wrapper that lets the hero image bleed behind the carousel */
+        .hero-bleed-wrapper {
+            position: relative;
+        }
+
+        .hero-section {
+            position: relative;
+            padding: 0 24px 20px;
+            z-index: 2;
+        }
+
+        /* Background image layer — creator's brand photo, lives on the wrapper */
+        .hero-image {
+            position: absolute;
+            inset: -56px 0 0 0;           /* extend up behind status bar, down through carousel */
+            background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80&v=2');
+            background-size: 100% auto;
+            background-position: center -60px;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        /* Color wash + bottom fade over the image */
+        .hero-gradient {
+            position: absolute;
+            inset: -56px 0 0 0;           /* match image extent */
+            background: linear-gradient(
+                180deg,
+                rgba(123, 94, 167, 0.55) 0%,    /* purple wash — image shows through */
+                rgba(123, 94, 167, 0.50) 30%,    /* clear through the dog */
+                rgba(209, 194, 232, 0.95) 42%,   /* fade below dog */
+                var(--color-bg-primary) 52%,      /* fully opaque before THIS WEEK label */
+                var(--color-bg-primary) 100%      /* stays opaque through cards */
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* DS COMPONENT: Header back button */
+        .hero-back {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: var(--spacing-xs);        /* DS spacing/x-small (4px) */
+            font-size: 15px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            margin-bottom: 28px;
+        }
+        .hero-back svg {
+            width: 16px;                   /* DS Header chevron size */
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .creator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 10px 6px 6px;
+            background: rgba(255,255,255,0.30);
+            backdrop-filter: blur(12px) saturate(1.4);
+            -webkit-backdrop-filter: blur(12px) saturate(1.4);
+            border-radius: var(--radius-pill);  /* DS border/radius/pill */
+            border: 1px solid rgba(255,255,255,0.35);
+            margin-bottom: var(--spacing-l-md); /* DS spacing/l-medium */
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(60,30,90,0.12);
+        }
+
+        .creator-badge-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255,255,255,0.6);
+            flex-shrink: 0;
+        }
+
+        .creator-badge-handle {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+
+
+        .hero-collab-name {
+            font-family: var(--font-headline);
+            font-style: italic;
+            font-size: 30px;
+            font-weight: 600;
+            color: white;
+            line-height: 36px;
+            margin-top: 100px;
+            margin-bottom: 6px;
+        }
+
+        .hero-collab-dates {
+            font-size: 16px;  /* DS Body/Large */
+            line-height: 24px; /* DS line-height/body/large */
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* =========================================
+           DON'T MISS CAROUSEL
+           ========================================= */
+
+        .now-section {
+            position: relative;
+            z-index: 2;
+            padding: 0 0 var(--spacing-l-md); /* DS spacing/l-medium */
+        }
+
+        .now-label {
+            font-size: 12px;  /* DS Body/Small */
+            font-weight: 700; /* DS weight/bold */
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            padding: 0 var(--spacing-l-md);
+        }
+
+        .now-carousel {
+            display: flex;
+            gap: var(--spacing-s-md); /* DS spacing/s-medium */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 var(--spacing-l-md);
+            scroll-padding-left: var(--spacing-l-md);
+        }
+        .now-carousel::-webkit-scrollbar { display: none; }
+        .now-carousel::after {
+            content: '';
+            flex: 0 0 24px;
+        }
+
+        .now-card {
+            background: var(--color-ink);
+            border-radius: var(--radius-xl); /* DS border/radius/x-large (16px) */
+            padding: 20px;
+            color: white;
+            cursor: pointer;
+            flex: 0 0 316px;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            max-height: 280px;
+            overflow: hidden;
+        }
+
+        /* Video card — vivid purple bg */
+        .now-card.now-card--video {
+            background: var(--color-clay);
+        }
+        .now-card.now-card--video .now-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .now-card.now-card--video .now-btn {
+            background: white;
+            color: var(--color-clay);
+        }
+
+        /* High five card — dark bg */
+        .now-card.now-card--highfive {
+            background: var(--color-ink);
+        }
+        .now-card.now-card--highfive .now-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .now-card.now-card--highfive .now-btn {
+            background: var(--color-clay);
+            color: white;
+        }
+        .now-card.now-card--highfive .now-meta {
+            flex: none;
+            margin-bottom: 12px;
+        }
+        .now-card.now-card--highfive .now-actions {
+            margin-top: auto;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .now-card.now-card--highfive .now-actions .now-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .emoji-reaction-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .emoji-reaction-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .emoji-reaction-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .emoji-reaction-btn.selected {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.15);
+        }
+
+        /* Sent state */
+        .now-card.now-card--highfive.sent .now-actions {
+            display: none;
+        }
+        .now-card.now-card--highfive.sent .emoji-reaction-row {
+            display: none;
+        }
+        .now-card.now-card--highfive.sent .now-meta {
+            display: none;
+        }
+        .now-sent-ack {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .now-card.now-card--highfive.sent .now-sent-ack {
+            display: flex;
+        }
+        .now-sent-ack-msg {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        .now-sent-ack-msg .material-icons {
+            font-size: 18px;
+        }
+
+        /* Product spotlight card — warm bg with product feature */
+        .now-card.now-card--product {
+            background: linear-gradient(135deg, #F9F5FF 0%, #F3EEF9 100%);
+            border: 1px solid var(--color-border-default);
+            padding: 16px 20px;
+        }
+        .now-card--product .now-badge {
+            margin-bottom: 8px;
+        }
+        .now-card--product .now-product-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--color-sand);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-clay);
+            margin-bottom: 12px;
+        }
+        .now-card--product .now-title {
+            color: var(--color-text-primary);
+        }
+        .now-card--product .now-meta {
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+            flex: none;
+        }
+        .now-card--product .now-product-creator {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 6px;
+            font-style: italic;
+        }
+        .now-card--product .now-btn {
+            background: var(--color-clay);
+            color: white;
+        }
+
+        /* Community card — dark bg to stand out */
+        .now-card.now-card--community {
+            background: var(--color-ink);
+        }
+        .now-card--community .now-badge {
+            background: rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.8);
+        }
+        .now-card--community .now-title {
+            color: white;
+        }
+        .now-card--community .now-meta {
+            color: rgba(255,255,255,0.65);
+        }
+        .now-card--community .now-community-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 6px;
+            margin-bottom: 4px;
+        }
+        .now-card--community .now-community-stat {
+            text-align: center;
+        }
+        .now-card--community .now-community-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+        .now-card--community .now-community-stat-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+        .now-card--community .now-btn {
+            background: white;
+            color: var(--color-ink);
+        }
+
+        /* Also / stacked card */
+        .now-card.now-card--also {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            padding: 0;
+        }
+
+        .now-also-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md); /* DS spacing/medium */
+            padding: 18px 20px;
+            cursor: pointer;
+            background: var(--color-white);
+            border-radius: var(--radius-xl); /* DS border/radius/x-large (16px) */
+            border: 1px solid var(--color-border-default);
+            flex: 1;
+        }
+        .now-also-item:active {
+            background: #F3EEF9;
+        }
+        .now-also-item .also-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .now-also-item .also-icon .material-icons {
+            font-size: 22px;
+        }
+        .also-icon.plum-bg { background: var(--color-plum); }
+        .also-icon.blush-bg { background: var(--color-sand); }
+        .also-icon .material-icons { color: white; }
+        .also-icon.blush-bg .material-icons { color: var(--color-clay); }
+        .now-also-item .also-text { flex: 1; }
+        .now-also-item .also-label {
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.3;
+        }
+        .now-also-item .also-meta {
+            color: var(--color-text-tertiary);
+            font-size: 14px;
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+        .now-also-item .also-arrow {
+            color: var(--color-text-tertiary);
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .now-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .now-carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-border-default);
+            transition: all 0.2s ease;
+        }
+        .now-carousel-dot.active {
+            width: 18px;
+            border-radius: 3px;
+            background: var(--color-clay);
+        }
+
+        .now-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            background: rgba(123, 94, 167, 0.2);
+            color: var(--color-clay);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .now-badge .material-icons { font-size: 16px; }
+
+        .now-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            line-height: 24px;
+            margin-bottom: 6px;
+        }
+        .now-title-brand {
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .now-meta {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            line-height: 20px;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .now-last {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .now-last .material-icons { font-size: 14px; }
+
+        /* DS COMPONENT: Button adaptation */
+        .now-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill); /* DS border/radius/pill */
+            padding: 12px 20px;
+            font-size: 16px;  /* DS Body/Large */
+            font-weight: 500; /* DS Roboto Medium */
+            cursor: pointer;
+            font-family: var(--font-body);
+        }
+        .now-btn .material-icons { font-size: 18px; }
+
+        .now-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* =========================================
+           STATS SECTIONS
+           ========================================= */
+
+        .stats-section {
+            padding: 0 var(--spacing-l-md);  /* DS spacing/l-medium */
+            margin-bottom: var(--spacing-l-md);
+        }
+
+        .stats-section-title {
+            font-size: 12px;  /* DS Body/Small */
+            font-weight: 700; /* DS weight/bold */
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            line-height: 18px; /* DS line-height/body/small */
+        }
+
+        /* =========================================
+           GROUPED STAT CARDS
+           ========================================= */
+
+        /* DS COMPONENT: Card pattern — white bg, 1px border, 12px radius, 16px padding */
+        .grouped-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);  /* DS border/radius/large (12px) */
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .grouped-card-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .grouped-stat {
+            flex: 1;
+            padding: var(--spacing-md); /* DS spacing/medium (16px) */
+            text-align: left;
+        }
+
+        .grouped-stat-value {
+            font-size: 28px;
+            font-weight: 700; /* DS weight/bold */
+            color: var(--color-clay);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs); /* DS spacing/x-small (4px) */
+        }
+
+        .grouped-stat-label {
+            font-size: 12px;  /* DS Body/Small */
+            font-weight: 500; /* DS weight/medium */
+            color: var(--color-text-secondary);
+            line-height: 18px; /* DS line-height/body/small */
+        }
+
+        .grouped-stat-bar {
+            width: 80%;
+            height: 6px;
+            background: var(--color-border-default);
+            border-radius: 3px;
+            margin: 0;
+            overflow: hidden;
+        }
+        .grouped-stat-bar-fill {
+            height: 100%;
+            background: var(--color-clay);
+            border-radius: 3px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-pills {
+            display: flex;
+            gap: 4px;
+            width: 80%;
+            margin: 2px 0 0;
+        }
+        .day-pill {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--color-border-default);
+        }
+        .day-pill.filled {
+            background: var(--color-clay);
+        }
+
+        .grouped-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--color-border-default);
+            flex-shrink: 0;
+        }
+
+        .grouped-card-footer {
+            border-top: 1px solid var(--color-border-default);
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+        .grouped-footer-text {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+
+        .grouped-footer-text strong {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .grouped-card-divider {
+            height: 1px;
+            background: var(--color-border-default);
+            margin: 0 16px;
+        }
+
+        /* Last sync bar above the card */
+        .last-sync {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 10px;
+        }
+        .last-sync .material-icons { font-size: 14px; }
+
+        /* Your progress row inside grouped card */
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px 0;
+        }
+        .progress-header-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+        .progress-header-link {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-clay);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .progress-header-link .material-icons { font-size: 14px; }
+
+        .progress-weeks {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 16px 14px;
+        }
+        .progress-week {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .progress-week-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+        .progress-week-dot.completed {
+            background: var(--color-clay);
+            border-color: var(--color-clay);
+        }
+        .progress-week-dot.completed .material-icons {
+            font-size: 13px;
+            color: white;
+        }
+        .progress-week-dot.partial {
+            border: none;
+            position: relative;
+            background: conic-gradient(
+                from 0deg,
+                #7B5EA7 0deg 206deg,
+                #E8E4EC 206deg 360deg
+            );
+        }
+        .progress-week-dot.partial::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 50%;
+            background: white;
+        }
+        .progress-week-dot.partial::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+        }
+        .progress-week-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+        }
+        .progress-week.is-active .progress-week-label {
+            color: var(--color-clay);
+            font-weight: 700;
+        }
+        .progress-week.is-completed .progress-week-label {
+            color: var(--color-sage);
+        }
+
+        /* =========================================
+           EARNINGS CARD
+           ========================================= */
+
+        .earnings-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg); /* DS border/radius/large (12px) */
+            padding: 20px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .earnings-card:active { background: #F3EEF9; }
+
+        .earnings-card-note {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid var(--color-border-default);
+        }
+
+        .earnings-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .earnings-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-clay);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .earnings-sub {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+        }
+        .earnings-sub strong {
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           HIGH FIVE NOTIFICATION CARD
+           ========================================= */
+
+        .highfive-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg); /* DS border/radius/large (12px) */
+            padding: var(--spacing-md) 20px;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .highfive-card:active { background: #F3EEF9; }
+
+        .highfive-card-inner {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .highfive-icon-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .highfive-icon-wrap .highfive-count {
+            position: absolute;
+            top: -4px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--color-clay);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .highfive-card-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .highfive-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 3px;
+        }
+        .highfive-card-title .handle {
+            color: var(--color-clay);
+        }
+        .highfive-card-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+        .highfive-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .highfive-card-time {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        .highfive-card-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-clay);
+            cursor: pointer;
+        }
+
+        /* =========================================
+           COMMUNITY CARD
+           ========================================= */
+
+        .community-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg); /* DS border/radius/large (12px) */
+            padding: var(--spacing-md);      /* DS spacing/medium */
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .community-card:active { background: #F3EEF9; }
+
+        .community-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .community-card-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .community-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .community-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 0;
+        }
+
+        .community-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .community-item-icon .material-icons { font-size: 18px; }
+        .community-item-icon.purple-tint {
+            background: rgba(123, 94, 167, 0.1);
+            color: var(--color-clay);
+        }
+
+        .community-item-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .community-item-label {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* =========================================
+           ELLIE'S ESSENTIALS (replaces journey section)
+           ========================================= */
+
+        .playbook-creator-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+        }
+        .playbook-creator-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--color-clay);
+            flex-shrink: 0;
+        }
+        .playbook-creator-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .playbook-creator-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .playbook-creator-quote {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-style: italic;
+            line-height: 1.45;
+            margin-top: 2px;
+        }
+
+        .playbook-product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+        }
+        .playbook-product-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--color-sand);
+            color: var(--color-clay);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
+        .playbook-product-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .playbook-product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+        .playbook-product-brand {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        .promo-inline {
+            color: var(--color-clay);
+            font-weight: 600;
+        }
+
+        /* Promo code row (Essentials) */
+        .playbook-product-promo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px 12px;
+            margin-top: -2px;
+        }
+        .promo-discount-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            background: rgba(123, 94, 167, 0.1);
+            color: var(--color-clay);
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .promo-discount-pill .material-icons {
+            font-size: 13px;
+        }
+        .promo-code-tag {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+        .promo-code-tag code {
+            background: var(--color-sand);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            color: var(--color-clay);
+            letter-spacing: 0.5px;
+        }
+
+        /* Promo line (carousel card) */
+        .now-promo-line {
+            font-size: 12px;
+            color: var(--color-clay);
+            font-weight: 600;
+            margin: 10px 0 0;
+        }
+        .now-promo-line strong {
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* Promo strip (carousel card) */
+        .now-promo-strip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: rgba(123, 94, 167, 0.08);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .now-promo-strip .promo-percent {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-clay);
+            line-height: 1;
+        }
+        .now-promo-strip .promo-details {
+            flex: 1;
+        }
+        .now-promo-strip .promo-headline {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+        .now-promo-strip .promo-instruction {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            margin-top: 1px;
+        }
+        .now-promo-code-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--color-clay);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: var(--font-body);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .now-promo-code-btn .material-icons {
+            font-size: 13px;
+        }
+
+        /* =========================================
+           COLLAB FEED
+           ========================================= */
+
+        .feed-section {
+            padding: 0 24px;
+        }
+        .feed-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 16px;
+        }
+
+        .feed-post {
+            margin-bottom: 20px;
+        }
+        .feed-post:last-child {
+            margin-bottom: 60px;
+        }
+
+        .feed-post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .feed-post-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-sand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-clay);
+            flex-shrink: 0;
+        }
+        .feed-post-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .feed-post-time {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        .feed-post-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .feed-post-image {
+            width: 100%;
+            height: 180px;
+            border-radius: var(--radius-lg); /* DS border/radius/large (12px) */
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .feed-post-actions {
+            display: flex;
+            gap: 16px;
+        }
+        .feed-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+        }
+        .feed-action .material-icons { font-size: 18px; }
+
+        /* compose bar removed */
+
+        /* =========================================
+           OVERLAYS (shared pattern)
+           ========================================= */
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            background: var(--color-bg-primary);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+        }
+        .overlay.open {
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .overlay-scroll {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        .overlay-scroll::-webkit-scrollbar { display: none; }
+
+        .overlay-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 54px 20px 14px;
+            flex-shrink: 0;
+            border-bottom: 1px solid var(--color-border-default);
+        }
+        .overlay-back {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: var(--color-text-primary);
+        }
+        .overlay-back .material-icons { font-size: 28px; }
+        .overlay-nav-title {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .overlay-nav-spacer { width: 28px; }
+
+        /* =========================================
+           VIDEO OVERLAY
+           ========================================= */
+
+        .video-player-placeholder {
+            position: relative;
+            margin: 0 16px 16px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #1a1a24;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-player-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5) 100%);
+        }
+        .video-play-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        .video-play-btn .material-icons {
+            font-size: 28px;
+            margin-left: 3px;
+        }
+
+        .video-now-playing {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--color-border-default);
+            margin-bottom: 16px;
+        }
+        .video-np-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            background: var(--color-sand);
+            color: var(--color-clay);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .video-np-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+        .video-np-date {
+            font-size: 13px;
+            color: var(--color-text-tertiary);
+        }
+
+        .video-list-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            padding: 0 20px;
+            margin-bottom: 8px;
+        }
+
+        .video-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .video-list-item:active {
+            background: var(--color-blush);
+        }
+        .video-thumb {
+            width: 72px;
+            height: 44px;
+            border-radius: 8px;
+            background: #2a2a34;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .video-thumb .material-icons {
+            font-size: 20px;
+            color: rgba(255,255,255,0.6);
+        }
+        .video-list-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .video-list-type {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .video-list-type.weekly {
+            background: var(--color-sand);
+            color: var(--color-clay);
+        }
+        .video-list-type.checkin {
+            background: #FCE4EC;
+            color: #C2185B;
+        }
+        .video-list-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+        .video-list-date {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 1px;
+        }
+        .video-list-status {
+            flex-shrink: 0;
+        }
+        .video-unwatched {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-clay);
+        }
+        .video-watched .material-icons {
+            font-size: 20px;
+            color: var(--color-sage);
+        }
+
+        /* =========================================
+           VALUE OVERLAY
+           ========================================= */
+
+        .value-item {
+            padding: 16px;
+        }
+        .value-item-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        .value-item-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .value-item-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-clay);
+        }
+        .value-item-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+        }
+        .value-total {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 16px;
+        }
+        .value-total-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .value-total-amount {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-clay);
+        }
+
+        /* =========================================
+           DETAILS / RIDE LOG OVERLAY
+           ========================================= */
+
+        /* details-subtitle replaced by grouped-card header */
+
+        .week-pagination {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            margin-bottom: 20px;
+        }
+        .week-pagination::-webkit-scrollbar { display: none; }
+
+        .week-page-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 14px;
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border-default);
+            background: var(--color-white);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: var(--font-body);
+        }
+        .week-page-btn.active {
+            background: var(--color-clay);
+            color: white;
+            border-color: var(--color-clay);
+        }
+
+        .details-week {
+            display: none;
+        }
+        .details-week.active {
+            display: block;
+        }
+
+        /* details-week-header replaced by stats-section-title with inline badge */
+        .details-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .details-badge.in-progress {
+            background: var(--color-sand);
+            color: var(--color-clay);
+        }
+        .details-badge.incomplete {
+            background: #F3F4F6;
+            color: var(--color-text-tertiary);
+        }
+        .details-badge.complete {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .day-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .day-row:last-child { border-bottom: none; }
+
+        .day-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .day-icon.done {
+            background: var(--green-light);
+        }
+        .day-icon.done .material-icons {
+            font-size: 16px;
+            color: var(--green);
+        }
+        .day-icon.dayoff {
+            background: #F3F4F6;
+        }
+        .day-icon.dayoff .material-icons {
+            font-size: 16px;
+            color: var(--color-text-tertiary);
+        }
+        .day-icon.upcoming {
+            background: var(--color-blush);
+        }
+        .day-icon.upcoming .material-icons {
+            font-size: 16px;
+            color: var(--color-text-tertiary);
+        }
+
+        .day-info { flex: 1; }
+        .day-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .day-detail {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 1px;
+        }
+        .day-detail-kj {
+            color: var(--color-text-tertiary);
+            font-weight: 500;
+        }
+        .day-kj {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-clay);
+            flex-shrink: 0;
+        }
+
+        /* week-summary and details-footer replaced by grouped-card pattern */
+
+        /* =========================================
+           HIGH FIVE HISTORY OVERLAY
+           ========================================= */
+
+        .hf-hero {
+            background: linear-gradient(135deg, var(--color-clay), var(--color-plum));
+            padding: 24px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hf-hero-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 10px;
+        }
+        .hf-hero-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .hf-hero-msg {
+            font-size: 14px;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+
+        .hf-body {
+            padding: 20px;
+        }
+        .hf-body-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 16px;
+        }
+        .hf-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .hf-item:last-child { border-bottom: none; }
+        .hf-item-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .hf-item-content { flex: 1; }
+        .hf-item-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+        }
+        .hf-item-date {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 4px;
+        }
+
+        /* =========================================
+           EMOJI RAIN ANIMATION
+           ========================================= */
+
+        @keyframes emojifall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(900px) rotate(360deg); opacity: 0; }
+        }
+
+        /* =========================================
+           HIGH FIVE TOAST
+           ========================================= */
+
+        /* Flip notification card */
+        .highfive-notif {
+            position: absolute;
+            top: 48px;
+            left: 24px;
+            right: 24px;
+            z-index: 10000;
+            perspective: 800px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            cursor: pointer;
+        }
+        .highfive-notif.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .highfive-notif.fade-out {
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .highfive-notif-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .highfive-notif.flipped .highfive-notif-inner {
+            transform: rotateY(180deg);
+        }
+
+        .highfive-notif-front,
+        .highfive-notif-back {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 22px;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(16px) saturate(1.4);
+            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border-radius: 20px;
+            box-shadow: 0 6px 32px rgba(60,30,90,0.20), 0 2px 6px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.5);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .highfive-notif-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #7B5EA7 0%, #9B6FD4 50%, #C084FC 100%);
+            border: none;
+        }
+        .highfive-notif-back .highfive-notif-title {
+            color: #FFFFFF;
+            font-size: 19px;
+        }
+        .highfive-notif-back .highfive-notif-sub {
+            color: rgba(255,255,255,0.85);
+        }
+        .highfive-notif-back .highfive-notif-sub strong {
+            color: #FFFFFF;
+        }
+        .highfive-notif-back .highfive-notif-avatar {
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .highfive-notif-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            border: 2px solid var(--color-clay);
+        }
+        .highfive-notif-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+        }
+        .highfive-notif-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .highfive-notif-sub {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            line-height: 1.3;
+        }
+        .highfive-notif-sub strong {
+            font-weight: 700;
+            color: var(--color-clay);
+        }
+        .highfive-notif-tap {
+            font-size: 12px;
+            color: var(--color-clay);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="label">User Collab Dashboard — Steps Model</div>
+    <div class="sublabel">Two-part weekly goal: total steps (volume) + high-day count (frequency). Week 3, Day 4.</div>
+
+    <div class="phone-frame">
+
+        <!-- =============================================
+             SCROLLABLE CONTENT
+             ============================================= -->
+        <div class="phone-scroll">
+
+            <!-- =========================================
+                 1. STATUS BAR
+                 ========================================= -->
+            <div class="status-bar">
+                <span>9:41</span>
+                <div class="status-bar-icons">
+                    <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                        <rect x="0" y="3" width="3" height="9" rx="1" fill="white"/>
+                        <rect x="4.5" y="2" width="3" height="10" rx="1" fill="white"/>
+                        <rect x="9" y="0" width="3" height="12" rx="1" fill="white"/>
+                        <rect x="13.5" y="0" width="3" height="12" rx="1" fill="white" opacity="0.35"/>
+                    </svg>
+                    <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+                        <path d="M8 3.6C9.8 3.6 11.4 4.3 12.6 5.4L14 4C12.4 2.5 10.3 1.6 8 1.6C5.7 1.6 3.6 2.5 2 4L3.4 5.4C4.6 4.3 6.2 3.6 8 3.6Z" fill="white"/>
+                        <path d="M8 7.2C9 7.2 9.9 7.6 10.6 8.2L12 6.8C10.9 5.8 9.5 5.2 8 5.2C6.5 5.2 5.1 5.8 4 6.8L5.4 8.2C6.1 7.6 7 7.2 8 7.2Z" fill="white"/>
+                        <circle cx="8" cy="10.5" r="1.5" fill="white"/>
+                    </svg>
+                    <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+                        <rect x="0" y="1" width="22" height="10" rx="2" stroke="white" stroke-width="1"/>
+                        <rect x="23" y="4" width="2" height="4" rx="1" fill="white" opacity="0.4"/>
+                        <rect x="1.5" y="2.5" width="16" height="7" rx="1" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 2. HERO + CAROUSEL BLEED WRAPPER
+                 ========================================= -->
+            <div class="hero-bleed-wrapper">
+                <div class="hero-image"></div>
+                <div class="hero-gradient"></div>
+
+                <div class="hero-section">
+                    <div class="hero-content">
+                    <button class="hero-back">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"/></svg> My Collabs
+                    </button>
+
+                    <!-- Creator badge: frosted glass pill -->
+                    <div class="creator-badge" data-open-video>
+                        <div class="creator-badge-avatar"></div>
+                        <span class="creator-badge-handle">@doodle_cycles</span>
+                    </div>
+
+                    <div class="hero-collab-name">Dog Lovers Who Cycle</div>
+                    <div class="hero-collab-dates">Jan 5 – Feb 15</div>
+                </div>
+                </div>
+
+                <!-- =========================================
+                     3. THIS WEEK PROGRESS
+                     ========================================= -->
+                <div class="stats-section" style="position: relative; z-index: 2;">
+                    <div class="stats-section-title">This week</div>
+
+                    <!-- Combined: stats + progress + last sync in one card -->
+                    <div class="grouped-card" data-open-details style="cursor: pointer;">
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">
+                                    <span style="color: var(--color-clay);">1</span><span style="color: var(--color-text-tertiary); font-size: 18px;"> /3 high days</span>
+                                </div>
+                                <div class="grouped-stat-label">2 high days to go</div>
+                                <div class="day-pills">
+                                    <div class="day-pill filled"></div>
+                                    <div class="day-pill"></div>
+                                    <div class="day-pill"></div>
+                                </div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value">
+                                    <span style="color: var(--color-clay);">28,400</span><span style="color: var(--color-text-tertiary); font-size: 14px;"> /56,000</span>
+                                </div>
+                                <div class="grouped-stat-label">27,600 steps to go 🔥</div>
+                                <div class="grouped-stat-bar">
+                                    <div class="grouped-stat-bar-fill" style="width: 51%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="progress-header">
+                            <span class="progress-header-title">Your progress</span>
+                            <span class="progress-header-link">More <span class="material-icons">chevron_right</span></span>
+                        </div>
+                        <div class="progress-weeks">
+                            <div class="progress-week is-completed">
+                                <div class="progress-week-dot completed">
+                                    <span class="material-icons">check</span>
+                                </div>
+                                <span class="progress-week-label">Wk 1</span>
+                            </div>
+                            <div class="progress-week is-completed">
+                                <div class="progress-week-dot completed">
+                                    <span class="material-icons">check</span>
+                                </div>
+                                <span class="progress-week-label">Wk 2</span>
+                            </div>
+                            <div class="progress-week is-active">
+                                <div class="progress-week-dot partial" style="--fill: 0.571turn;"></div>
+                                <span class="progress-week-label">Wk 3</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 4</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 5</span>
+                            </div>
+                            <div class="progress-week">
+                                <div class="progress-week-dot"></div>
+                                <span class="progress-week-label">Wk 6</span>
+                            </div>
+                        </div>
+                        <div class="grouped-card-footer">
+                            <div class="grouped-footer-text">
+                                <span class="material-icons" style="font-size: 12px; vertical-align: middle; margin-right: 3px;">directions_walk</span>
+                                <span style="font-size: 11px;">Today so far: 8,516 steps</span>
+                                <span id="syncBtn" style="font-size: 11px; color: var(--color-clay); font-weight: 600; margin-left: 6px; cursor: pointer;">Sync</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================
+                     4. DON'T MISS CAROUSEL
+                     ========================================= -->
+                <div class="now-section">
+                <div class="now-label">DON'T MISS</div>
+                <div class="now-carousel" id="nowCarousel">
+
+                    <!-- Card 1: Watch Video -->
+                    <div class="now-card now-card--video" data-open-video>
+                        <div class="now-badge">
+                            <span class="material-icons">videocam</span>
+                            New this week
+                        </div>
+                        <div class="now-title">Watch this week's video</div>
+                        <div class="now-meta">Ellie posted her Week 3 review — tips, shout-outs, and a pep talk.</div>
+                        <div class="now-actions" style="margin-top: auto;">
+                            <button class="now-btn" data-open-video>
+                                Watch now <span class="material-icons">arrow_forward</span>
+                            </button>
+                        </div>
+                        <div class="now-last">
+                            <span class="material-icons">schedule</span>
+                            Posted 2 hours ago
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Product Spotlight -->
+                    <div class="now-card now-card--product">
+                        <div class="now-badge">
+                            <span class="material-icons">storefront</span>
+                            Supported my journey
+                        </div>
+                        <div class="now-title">Self-Tanning Drops <span class="now-title-brand">by Bellatan</span></div>
+                        <div class="now-meta">The everyday glow drops that Ellie swears by — no streaks, no fuss.</div>
+                        <div class="now-promo-line">15% off · use code <strong>ELLIE15</strong> at checkout</div>
+                        <div class="now-actions" style="margin-top: auto;">
+                            <button class="now-btn">
+                                Shop now <span class="material-icons">arrow_forward</span>
+                            </button>
+                        </div>
+                        <div class="now-last" style="color: var(--color-text-tertiary); border-top-color: var(--color-border-default);">
+                            <span class="material-icons">favorite</span>
+                            Loved by Ellie
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Product Spotlight — Protein Powder -->
+                    <div class="now-card now-card--product">
+                        <div class="now-badge">
+                            <span class="material-icons">storefront</span>
+                            Supported my journey
+                        </div>
+                        <div class="now-title">Protein Powder <span class="now-title-brand">by Vega</span></div>
+                        <div class="now-meta">Ellie's go-to post-ride shake — plant-based, easy to mix, and actually tastes good.</div>
+                        <div class="now-actions" style="margin-top: auto;">
+                            <button class="now-btn">
+                                Learn more <span class="material-icons">arrow_forward</span>
+                            </button>
+                        </div>
+                        <div class="now-last" style="color: var(--color-text-tertiary); border-top-color: var(--color-border-default);">
+                            <span class="material-icons">favorite</span>
+                            Loved by Ellie
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Community -->
+                    <div class="now-card now-card--community" data-open-feed>
+                        <div class="now-badge">
+                            <span class="material-icons">forum</span>
+                            12 new posts
+                        </div>
+                        <div class="now-title">Join the conversation</div>
+                        <div class="now-meta">Ellie and other collab participants are sharing updates, tips, and encouragement. Jump in!</div>
+                        <div class="now-actions" style="margin-top: auto;">
+                            <button class="now-btn">
+                                View feed <span class="material-icons">arrow_forward</span>
+                            </button>
+                        </div>
+                        <div class="now-last">
+                            <span class="material-icons">groups</span>
+                            753 participants active this week
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel dots -->
+                <div class="now-carousel-dots" id="nowCarouselDots">
+                    <div class="now-carousel-dot active"></div>
+                    <div class="now-carousel-dot"></div>
+                    <div class="now-carousel-dot"></div>
+                    <div class="now-carousel-dot"></div>
+                </div>
+            </div><!-- end now-section -->
+            </div><!-- end hero-bleed-wrapper -->
+
+            <!-- =========================================
+                 5. YOUR PERKS
+                 ========================================= -->
+            <div class="stats-section">
+                <div class="stats-section-title">Your perks</div>
+                <div class="earnings-card">
+                    <div class="earnings-content">
+                        <div>
+                            <div class="earnings-value">$83.67</div>
+                            <div class="earnings-sub">Max for two collab MVPs chosen by creator</div>
+                        </div>
+                        <span class="material-icons" style="color: var(--color-text-tertiary);">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 8. COMMUNITY STATS
+                 ========================================= -->
+            <div class="stats-section">
+                <div class="stats-section-title">Stats</div>
+                <div class="grouped-card">
+                    <div class="grouped-card-row">
+                        <div class="grouped-stat">
+                            <div class="grouped-stat-value">$39,240</div>
+                            <div class="grouped-stat-label">Collab pool</div>
+                        </div>
+                        <div class="grouped-divider"></div>
+                        <div class="grouped-stat">
+                            <div class="grouped-stat-value">753<span style="color: var(--color-text-tertiary); font-size: 14px;">/981</span></div>
+                            <div class="grouped-stat-label">Active participants</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="community-card" data-open-feed style="cursor: pointer;">
+                    <div class="community-card-header">
+                        <span class="community-card-label">Community feed</span>
+                        <span class="material-icons" style="font-size: 18px; color: var(--color-text-tertiary);">chevron_right</span>
+                    </div>
+                    <div class="community-row">
+                        <div class="community-item">
+                            <div class="community-item-icon purple-tint">
+                                <span class="material-icons">volunteer_activism</span>
+                            </div>
+                            <div class="community-item-value">7,211</div>
+                            <div class="community-item-label">high fives</div>
+                        </div>
+                        <div class="community-item">
+                            <div class="community-item-icon purple-tint">
+                                <span class="material-icons">chat_bubble_outline</span>
+                            </div>
+                            <div class="community-item-value">1,701</div>
+                            <div class="community-item-label">comments</div>
+                        </div>
+                        <div class="community-item">
+                            <div class="community-item-icon purple-tint">
+                                <span class="material-icons">campaign</span>
+                            </div>
+                            <div class="community-item-value">988</div>
+                            <div class="community-item-label">shout-outs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- =========================================
+                 9. JOURNEY SECTION
+                 ========================================= -->
+            <div class="stats-section">
+                <div class="stats-section-title">Ellie's essentials</div>
+
+                <!-- Card 1: How she lives -->
+                <div class="grouped-card">
+                    <div class="playbook-creator-row">
+                        <div class="playbook-creator-avatar"></div>
+                        <div class="playbook-creator-info">
+                            <div class="playbook-creator-name">Why these?</div>
+                            <div class="playbook-creator-quote">"Progress comes from small, repeatable choices. These are the products and habits that supported my goals — then and now."</div>
+                        </div>
+                    </div>
+                    <div class="grouped-card-divider"></div>
+                    <div class="grouped-card-row">
+                        <div class="grouped-stat">
+                            <div class="grouped-stat-value">6 am</div>
+                            <div class="grouped-stat-label">When my day starts</div>
+                        </div>
+                        <div class="grouped-divider"></div>
+                        <div class="grouped-stat">
+                            <div class="grouped-stat-value">100g</div>
+                            <div class="grouped-stat-label">Daily protein goal</div>
+                        </div>
+                        <div class="grouped-divider"></div>
+                        <div class="grouped-stat">
+                            <div class="grouped-stat-value">60oz</div>
+                            <div class="grouped-stat-label">Daily water goal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: What she uses -->
+                <div class="grouped-card">
+                    <div class="playbook-product">
+                        <div class="playbook-product-info">
+                            <div class="playbook-product-name">Self-Tanning Drops</div>
+                            <div class="playbook-product-brand"><span class="playbook-product-tag">Skincare</span> Bellatan <span class="promo-inline"> · 15% off · ELLIE15</span></div>
+                        </div>
+                        <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                    </div>
+                    <div class="grouped-card-divider"></div>
+                    <div class="playbook-product">
+                        <div class="playbook-product-info">
+                            <div class="playbook-product-name">Protein Powder</div>
+                            <div class="playbook-product-brand"><span class="playbook-product-tag">Nutrition</span> Vega</div>
+                        </div>
+                        <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                    </div>
+                    <div class="grouped-card-divider"></div>
+                    <div class="playbook-product">
+                        <div class="playbook-product-info">
+                            <div class="playbook-product-name">Women's Multi-Vitamin</div>
+                            <div class="playbook-product-brand"><span class="playbook-product-tag">Wellness</span> Hiya</div>
+                        </div>
+                        <span class="material-icons" style="color: var(--color-text-tertiary); font-size: 18px;">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed moved to overlay — triggered by community card tap -->
+
+        </div>
+        <!-- END .phone-scroll -->
+
+        <!-- High five flip notification (outside scroll container for fixed positioning) -->
+        <div class="highfive-notif" id="highfiveNotif">
+            <div class="highfive-notif-inner">
+                <!-- Front: teaser prompt -->
+                <div class="highfive-notif-front">
+                    <div class="highfive-notif-avatar"></div>
+                    <div class="highfive-notif-text">
+                        <span class="highfive-notif-title">I have something for you! 💌</span>
+                        <span class="highfive-notif-sub">— Ellie, @doodle_cycles</span>
+                    </div>
+                    <span class="highfive-notif-tap">Open</span>
+                </div>
+                <!-- Back: the high five reveal -->
+                <div class="highfive-notif-back">
+                    <div class="highfive-notif-avatar"></div>
+                    <div class="highfive-notif-text">
+                        <span class="highfive-notif-title">You're crushing it! 🖐️🔥</span>
+                        <span class="highfive-notif-sub">High five from <strong>Ellie</strong> — keep showing up!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- compose bar removed -->
+
+        <!-- =============================================
+             OVERLAY 1: VIDEO LIBRARY
+             ============================================= -->
+        <div class="overlay" id="videoOverlay">
+            <div class="overlay-nav">
+                <button class="overlay-back"><span class="material-icons">arrow_back</span></button>
+                <span class="overlay-nav-title">Videos</span>
+                <span class="overlay-nav-spacer"></span>
+            </div>
+            <div class="overlay-scroll">
+
+                <!-- Video player placeholder -->
+                <div class="video-player-placeholder">
+                    <div class="video-player-gradient"></div>
+                    <div class="video-play-btn">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                </div>
+
+                <!-- Now playing -->
+                <div class="video-now-playing">
+                    <div class="video-np-tag">Weekly review</div>
+                    <div class="video-np-title">Week 3 — Keep pushing!</div>
+                    <div class="video-np-date">Jan 20, 2025 · 3:42</div>
+                </div>
+
+                <!-- All videos list -->
+                <div class="video-list-header">All videos</div>
+
+                <!-- Video 1: unwatched -->
+                <div class="video-list-item">
+                    <div class="video-thumb">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                    <div class="video-list-info">
+                        <div class="video-list-type weekly">Weekly review</div>
+                        <div class="video-list-title">Week 3 — Keep pushing!</div>
+                        <div class="video-list-date">Jan 20, 2025</div>
+                    </div>
+                    <div class="video-list-status">
+                        <div class="video-unwatched"></div>
+                    </div>
+                </div>
+
+                <!-- Video 2: watched, Check in -->
+                <div class="video-list-item">
+                    <div class="video-thumb">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                    <div class="video-list-info">
+                        <div class="video-list-type checkin">Check in</div>
+                        <div class="video-list-title">Quick midweek motivation</div>
+                        <div class="video-list-date">Jan 16, 2025</div>
+                    </div>
+                    <div class="video-list-status video-watched">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+
+                <!-- Video 3: watched -->
+                <div class="video-list-item">
+                    <div class="video-thumb">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                    <div class="video-list-info">
+                        <div class="video-list-type weekly">Weekly review</div>
+                        <div class="video-list-title">Week 2 — You're doing great</div>
+                        <div class="video-list-date">Jan 13, 2025</div>
+                    </div>
+                    <div class="video-list-status video-watched">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+
+                <!-- Video 4: watched -->
+                <div class="video-list-item">
+                    <div class="video-thumb">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                    <div class="video-list-info">
+                        <div class="video-list-type weekly">Weekly review</div>
+                        <div class="video-list-title">Week 1 — Let's gooo!</div>
+                        <div class="video-list-date">Jan 6, 2025</div>
+                    </div>
+                    <div class="video-list-status video-watched">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+
+                <!-- Video 5: watched, Check in -->
+                <div class="video-list-item">
+                    <div class="video-thumb">
+                        <span class="material-icons">play_arrow</span>
+                    </div>
+                    <div class="video-list-info">
+                        <div class="video-list-type checkin">Check in</div>
+                        <div class="video-list-title">Welcome to the collab! 🎉</div>
+                        <div class="video-list-date">Jan 5, 2025</div>
+                    </div>
+                    <div class="video-list-status video-watched">
+                        <span class="material-icons">check_circle</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =============================================
+             OVERLAY 2: VALUE BREAKDOWN
+             ============================================= -->
+        <div class="overlay" id="valueOverlay">
+            <div class="overlay-nav">
+                <button class="overlay-back"><span class="material-icons">arrow_back</span></button>
+                <span class="overlay-nav-title">Your perks</span>
+                <span class="overlay-nav-spacer"></span>
+            </div>
+            <div class="overlay-scroll">
+                <div style="padding: 20px;">
+                    <div class="stats-section-title">Your perks</div>
+                    <div class="grouped-card" style="margin-bottom: 24px;">
+                        <div class="value-total">
+                            <div class="value-total-label">Max for two collab MVPs</div>
+                            <div class="value-total-amount">$83.67</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-section-title">Breakdown</div>
+                    <div class="grouped-card">
+                        <div class="value-item">
+                            <div class="value-item-header">
+                                <div class="value-item-label">My hold</div>
+                                <div class="value-item-amount">$40</div>
+                            </div>
+                            <div class="value-item-desc">The amount you put in when you joined. Meet your weekly goals each week to earn it back.</div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="value-item">
+                            <div class="value-item-header">
+                                <div class="value-item-label">Collab reward</div>
+                                <div class="value-item-amount">$1</div>
+                            </div>
+                            <div class="value-item-desc">Your share of Ellie's reward pool, split among everyone who meets their goals. This is an estimate based on current projections.</div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="value-item">
+                            <div class="value-item-header">
+                                <div class="value-item-label">MVP bonus</div>
+                                <div class="value-item-amount">$42.67</div>
+                            </div>
+                            <div class="value-item-desc">If Ellie selects you as MVP, you receive a larger share of the reward pool. This is an estimate based on current projections.</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 12px; padding: 0 4px;">Only the two MVPs earn the MVP bonus</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             OVERLAY 3: RIDE LOG DETAILS
+             ============================================= -->
+        <div class="overlay" id="detailsOverlay">
+            <div class="overlay-nav">
+                <button class="overlay-back"><span class="material-icons">arrow_back</span></button>
+                <span class="overlay-nav-title">Your activity log</span>
+                <span class="overlay-nav-spacer"></span>
+            </div>
+            <div class="overlay-scroll">
+                <div style="padding: 0 20px;">
+                    <div class="grouped-card" style="margin-bottom: 20px;">
+                        <div style="padding: 16px;">
+                            <div style="font-size: 15px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">Dog Lovers Who Cycle</div>
+                            <div style="font-size: 13px; color: var(--color-text-secondary); line-height: 1.4;">Jan 5 – Feb 20</div>
+                        </div>
+                        <div class="grouped-card-divider"></div>
+                        <div class="grouped-card-row">
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value" style="font-size: 20px;">3</div>
+                                <div class="grouped-stat-label">High days per week</div>
+                            </div>
+                            <div class="grouped-divider"></div>
+                            <div class="grouped-stat">
+                                <div class="grouped-stat-value" style="font-size: 20px;">56,000</div>
+                                <div class="grouped-stat-label">Weekly steps</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week pagination -->
+                    <div class="week-pagination">
+                        <button class="week-page-btn active" data-week="3">Wk 3</button>
+                        <button class="week-page-btn" data-week="2">Wk 2</button>
+                        <button class="week-page-btn" data-week="1">Wk 1</button>
+                    </div>
+
+                    <!-- Week 3 panel (active) -->
+                    <div class="details-week active" data-week-panel="3">
+                        <div class="grouped-card" style="margin-bottom: 16px;">
+                            <div class="grouped-card-row">
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>1</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/3</span></div>
+                                    <div class="grouped-stat-label">High days</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>28,400</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/56,000</span></div>
+                                    <div class="grouped-stat-label">Steps logged</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value" style="font-size: 16px;">4 left</div>
+                                    <div class="grouped-stat-label">Days remaining</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stats-section-title">Week 3 · Jan 18–24 <span class="details-badge in-progress">In progress</span></div>
+                        <div class="grouped-card">
+                            <div style="padding: 4px 0;">
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Saturday, Jan 18</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">11,243</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Sunday, Jan 19</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">8,641</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Monday, Jan 20</div>
+                                        <div class="day-detail">Today — still counting</div>
+                                    </div>
+                                    <div class="day-kj">8,516</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon upcoming"><span class="material-icons">schedule</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Tuesday, Jan 21</div>
+                                        <div class="day-detail">Upcoming</div>
+                                    </div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon upcoming"><span class="material-icons">schedule</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Wednesday, Jan 22</div>
+                                        <div class="day-detail">Upcoming</div>
+                                    </div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon upcoming"><span class="material-icons">schedule</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Thursday, Jan 23</div>
+                                        <div class="day-detail">Upcoming</div>
+                                    </div>
+                                </div>
+                                <div class="day-row" style="border-bottom: none;">
+                                    <div class="day-icon upcoming"><span class="material-icons">schedule</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Friday, Jan 24</div>
+                                        <div class="day-detail">Upcoming</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 2 panel (hidden) -->
+                    <div class="details-week" data-week-panel="2">
+                        <div class="grouped-card" style="margin-bottom: 16px;">
+                            <div class="grouped-card-row">
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>2</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/3</span></div>
+                                    <div class="grouped-stat-label">High days</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>52,410</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/56,000</span></div>
+                                    <div class="grouped-stat-label">Steps logged</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value" style="font-size: 16px; color: var(--color-boundary);">Incomplete</div>
+                                    <div class="grouped-stat-label">Status</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stats-section-title">Week 2 · Jan 11–17 <span class="details-badge incomplete">Incomplete</span></div>
+                        <div class="grouped-card">
+                            <div style="padding: 4px 0;">
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Saturday, Jan 11</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">7,920</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Sunday, Jan 12</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">11,834</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Monday, Jan 13</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">6,120</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Tuesday, Jan 14</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">8,441</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Wednesday, Jan 15</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">5,890</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Thursday, Jan 16</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">10,245</div>
+                                </div>
+                                <div class="day-row" style="border-bottom: none;">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Friday, Jan 17</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">1,960</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week 1 panel (hidden) -->
+                    <div class="details-week" data-week-panel="1">
+                        <div class="grouped-card" style="margin-bottom: 16px;">
+                            <div class="grouped-card-row">
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>3</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/3</span></div>
+                                    <div class="grouped-stat-label">High days</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value"><span>58,120</span><span style="color: var(--color-text-tertiary); font-size: 14px;">/56,000</span></div>
+                                    <div class="grouped-stat-label">Steps logged</div>
+                                </div>
+                                <div class="grouped-divider"></div>
+                                <div class="grouped-stat">
+                                    <div class="grouped-stat-value" style="font-size: 16px; color: var(--green);">Complete</div>
+                                    <div class="grouped-stat-label">Status</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stats-section-title">Week 1 · Jan 5–10 <span class="details-badge complete">Complete</span></div>
+                        <div class="grouped-card">
+                            <div style="padding: 4px 0;">
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Sunday, Jan 5</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">11,234</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Monday, Jan 6</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">9,841</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Tuesday, Jan 7</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">8,412</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Wednesday, Jan 8</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">10,823</div>
+                                </div>
+                                <div class="day-row">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Thursday, Jan 9</div>
+                                        <div class="day-detail">Logged</div>
+                                    </div>
+                                    <div class="day-kj">7,421</div>
+                                </div>
+                                <div class="day-row" style="border-bottom: none;">
+                                    <div class="day-icon done"><span class="material-icons">check</span></div>
+                                    <div class="day-info">
+                                        <div class="day-label">Friday, Jan 10</div>
+                                        <div class="day-detail"><span class="day-detail-kj">🔥 High day · ≥10,000</span></div>
+                                    </div>
+                                    <div class="day-kj">10,389</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="grouped-card" style="margin-top: 24px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px;">
+                            <div>
+                                <div id="overlaySyncBtn" style="font-size: 13px; color: var(--color-clay); font-weight: 600; cursor: pointer;">Sync now</div>
+                                <div id="overlaySyncTime" style="font-size: 12px; color: var(--color-text-tertiary); margin-top: 2px;">Last synced 2 min ago</div>
+                            </div>
+                            <div style="font-size: 13px; color: var(--color-text-tertiary); cursor: pointer;">Contact support</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =============================================
+             OVERLAY 4: HIGH FIVE HISTORY
+             ============================================= -->
+        <div class="overlay" id="highfiveHistoryOverlay">
+            <div class="overlay-nav">
+                <button class="overlay-back"><span class="material-icons">arrow_back</span></button>
+                <span class="overlay-nav-title">High fives</span>
+                <span class="overlay-nav-spacer"></span>
+            </div>
+            <div class="overlay-scroll">
+
+                <!-- Hero gradient section -->
+                <div class="hf-hero">
+                    <div class="hf-hero-avatar">E</div>
+                    <div class="hf-hero-name">Ellie (@doodle_cycles)</div>
+                    <div class="hf-hero-msg">Just wanted to show you some love! ❤️❤️</div>
+                </div>
+
+                <!-- Body -->
+                <div class="hf-body">
+                    <div class="hf-body-title">Your high fives</div>
+
+                    <div class="hf-item">
+                        <div class="hf-item-icon">🖐️</div>
+                        <div class="hf-item-content">
+                            <div class="hf-item-text">For completing 3 days this week 💪</div>
+                            <div class="hf-item-date">Jan 20 · 2:15pm</div>
+                        </div>
+                    </div>
+
+                    <div class="hf-item">
+                        <div class="hf-item-icon">🖐️</div>
+                        <div class="hf-item-content">
+                            <div class="hf-item-text">For your first workout 🎉</div>
+                            <div class="hf-item-date">Jan 12 · 9:30am</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =============================================
+             OVERLAY 5: COLLAB COMMUNITY FEED
+             ============================================= -->
+        <div class="overlay" id="feedOverlay">
+            <div class="overlay-nav">
+                <button class="overlay-back"><span class="material-icons">arrow_back</span></button>
+                <span class="overlay-nav-title">Community feed</span>
+                <span class="overlay-nav-spacer"></span>
+            </div>
+            <div class="overlay-scroll">
+
+                <!-- Feed posts -->
+                <div class="feed-section">
+                    <!-- Post 1 (with image) -->
+                    <div class="feed-post">
+                        <div class="feed-post-header">
+                            <div class="feed-post-avatar">SJ</div>
+                            <div>
+                                <div class="feed-post-name">Sarah Johnson</div>
+                                <div class="feed-post-time">30m ago</div>
+                            </div>
+                        </div>
+                        <div class="feed-post-text">Just finished a gorgeous ride through the valley trails with Luna! The sunrise was absolutely breathtaking this morning. Anyone else an early riser? 🌅🐕</div>
+                        <div class="feed-post-image" style="background: linear-gradient(180deg, #8FA6A0 0%, #5D7A72 100%);"></div>
+                        <div class="feed-post-actions">
+                            <button class="feed-action">
+                                <span class="material-icons">favorite_border</span> 24
+                            </button>
+                            <button class="feed-action">
+                                <span class="material-icons">chat_bubble_outline</span> 8
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 (text only) -->
+                    <div class="feed-post">
+                        <div class="feed-post-header">
+                            <div class="feed-post-avatar" style="background: #D1C2E8; color: var(--color-clay);">AJ</div>
+                            <div>
+                                <div class="feed-post-name">Alvin Johnson</div>
+                                <div class="feed-post-time">30m ago</div>
+                            </div>
+                        </div>
+                        <div class="feed-post-text">Week 3 is feeling good! Max and I have been cycling to the dog park every morning. Consistency is key 💪</div>
+                        <div class="feed-post-actions">
+                            <button class="feed-action">
+                                <span class="material-icons">favorite_border</span> 12
+                            </button>
+                            <button class="feed-action">
+                                <span class="material-icons">chat_bubble_outline</span> 3
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 (text only) -->
+                    <div class="feed-post">
+                        <div class="feed-post-header">
+                            <div class="feed-post-avatar" style="background: #E8DFF5; color: #7D3BED;">KR</div>
+                            <div>
+                                <div class="feed-post-name">Kim Ramirez</div>
+                                <div class="feed-post-time">1h ago</div>
+                            </div>
+                        </div>
+                        <div class="feed-post-text">Does anyone have tips for cycling in the rain with your pup? Daisy doesn't seem to mind but I'm struggling 😂☔</div>
+                        <div class="feed-post-actions">
+                            <button class="feed-action">
+                                <span class="material-icons">favorite_border</span> 31
+                            </button>
+                            <button class="feed-action">
+                                <span class="material-icons">chat_bubble_outline</span> 15
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- END .phone-frame -->
+
+    <!-- =============================================
+         JAVASCRIPT
+         ============================================= -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const frame = document.querySelector('.phone-frame');
+
+        // 1. Carousel dot tracking
+        const carousel = frame.querySelector('.now-carousel');
+        const dots = frame.querySelectorAll('#nowCarouselDots .now-carousel-dot');
+        if (carousel) {
+            carousel.addEventListener('scroll', function() {
+                const scrollLeft = carousel.scrollLeft;
+                const cardWidth = 316 + 12; // card width + gap
+                const index = Math.round(scrollLeft / cardWidth);
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            });
+        }
+
+        // 2. Overlay open/close helpers
+        function openOverlay(id) {
+            const el = frame.querySelector('#' + id);
+            if (el) el.classList.add('open');
+        }
+        function closeOverlay(id) {
+            const el = frame.querySelector('#' + id);
+            if (el) el.classList.remove('open');
+        }
+
+        // Video overlay triggers
+        frame.querySelectorAll('[data-open-video]').forEach(function(el) {
+            el.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openOverlay('videoOverlay');
+            });
+        });
+        var videoBack = frame.querySelector('#videoOverlay .overlay-back');
+        if (videoBack) {
+            videoBack.addEventListener('click', function() { closeOverlay('videoOverlay'); });
+        }
+
+        // Value overlay trigger
+        var earningsCard = frame.querySelector('.earnings-card');
+        if (earningsCard) {
+            earningsCard.addEventListener('click', function() { openOverlay('valueOverlay'); });
+        }
+        var valueBack = frame.querySelector('#valueOverlay .overlay-back');
+        if (valueBack) {
+            valueBack.addEventListener('click', function() { closeOverlay('valueOverlay'); });
+        }
+
+        // Details overlay trigger
+        var detailsTrigger = frame.querySelector('[data-open-details]');
+        if (detailsTrigger) {
+            detailsTrigger.addEventListener('click', function() { openOverlay('detailsOverlay'); });
+        }
+        var detailsBack = frame.querySelector('#detailsOverlay .overlay-back');
+        if (detailsBack) {
+            detailsBack.addEventListener('click', function() { closeOverlay('detailsOverlay'); });
+        }
+
+        // Feed overlay trigger (community card + carousel card)
+        var feedTriggers = frame.querySelectorAll('[data-open-feed]');
+        feedTriggers.forEach(function(el) {
+            el.addEventListener('click', function() { openOverlay('feedOverlay'); });
+        });
+        var feedBack = frame.querySelector('#feedOverlay .overlay-back');
+        if (feedBack) {
+            feedBack.addEventListener('click', function() { closeOverlay('feedOverlay'); });
+        }
+
+        // High five history overlay trigger
+        var highfiveTrigger = frame.querySelector('[data-open-highfive]');
+        if (highfiveTrigger) {
+            highfiveTrigger.addEventListener('click', function() { openOverlay('highfiveHistoryOverlay'); });
+        }
+        var hfHistoryBack = frame.querySelector('#highfiveHistoryOverlay .overlay-back');
+        if (hfHistoryBack) {
+            hfHistoryBack.addEventListener('click', function() { closeOverlay('highfiveHistoryOverlay'); });
+        }
+
+        // 3. Week pagination in ride log
+        var weekPagination = frame.querySelector('.week-pagination');
+        if (weekPagination) {
+            weekPagination.addEventListener('click', function(e) {
+                var btn = e.target.closest('.week-page-btn');
+                if (!btn) return;
+                var week = btn.dataset.week;
+                weekPagination.querySelectorAll('.week-page-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                frame.querySelectorAll('.details-week').forEach(function(p) {
+                    p.classList.remove('active');
+                });
+                var panel = frame.querySelector('[data-week-panel="' + week + '"]');
+                if (panel) panel.classList.add('active');
+            });
+        }
+
+        // 4. High five send back (carousel card interaction)
+        var hfSendBtn = frame.querySelector('#hfSendBackBtn');
+        var hfCard = frame.querySelector('.now-card--highfive');
+        if (hfSendBtn && hfCard) {
+            hfSendBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                hfCard.classList.add('sent');
+                triggerEmojiRain();
+            });
+        }
+
+        // 5. High five notification: show prompt → tap to flip → emoji rain → fade out
+        var notif = frame.querySelector('#highfiveNotif');
+
+        function showHighFivePrompt() {
+            if (!notif) return;
+            notif.classList.remove('flipped', 'fade-out');
+            notif.classList.add('visible');
+        }
+
+        function triggerEmojiRain() {
+            var overlay = frame.querySelector('.emoji-rain-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'emoji-rain-overlay';
+                overlay.style.cssText = 'position:absolute;inset:0;z-index:9998;pointer-events:none;overflow:hidden;';
+                frame.appendChild(overlay);
+            }
+            overlay.style.display = 'block';
+            overlay.innerHTML = '';
+            var emojis = ['🔥', '🎉', '❤️', '🙌'];
+            for (var i = 0; i < 35; i++) {
+                var span = document.createElement('span');
+                span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                span.style.cssText = 'position:absolute;top:-50px;left:' + (Math.random() * 95) + '%;font-size:' + (20 + Math.random() * 20) + 'px;animation:emojifall ' + (2 + Math.random() * 2) + 's linear ' + (Math.random() * 1.5) + 's forwards;pointer-events:none;';
+                overlay.appendChild(span);
+            }
+            // Fade out the notification card after the rain settles
+            setTimeout(function() {
+                if (notif) notif.classList.add('fade-out');
+            }, 3500);
+            setTimeout(function() {
+                overlay.style.display = 'none';
+                if (notif) {
+                    notif.classList.remove('visible', 'flipped', 'fade-out');
+                }
+            }, 5000);
+        }
+
+        // Tap the notification to flip and trigger rain
+        if (notif) {
+            notif.addEventListener('click', function() {
+                if (notif.classList.contains('flipped')) return;
+                notif.classList.add('flipped');
+                // Start emoji rain after flip animation completes
+                setTimeout(function() { triggerEmojiRain(); }, 650);
+            });
+        }
+
+        // 6. Sync button interaction
+        var syncBtn = frame.querySelector('#syncBtn');
+        if (syncBtn) {
+            syncBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (syncBtn.dataset.syncing) return;
+                syncBtn.dataset.syncing = 'true';
+                syncBtn.textContent = 'Syncing…';
+                syncBtn.style.opacity = '0.6';
+                setTimeout(function() {
+                    syncBtn.textContent = 'Sync';
+                    syncBtn.style.opacity = '1';
+                    delete syncBtn.dataset.syncing;
+                }, 2000);
+            });
+        }
+
+        // 7. Overlay sync button interaction
+        var overlaySyncBtn = frame.querySelector('#overlaySyncBtn');
+        var overlaySyncTime = frame.querySelector('#overlaySyncTime');
+        if (overlaySyncBtn) {
+            overlaySyncBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (overlaySyncBtn.dataset.syncing) return;
+                overlaySyncBtn.dataset.syncing = 'true';
+                overlaySyncBtn.textContent = 'Syncing…';
+                overlaySyncBtn.style.opacity = '0.6';
+                if (overlaySyncTime) overlaySyncTime.textContent = 'Connecting to your wearable…';
+                setTimeout(function() {
+                    if (overlaySyncTime) overlaySyncTime.textContent = 'Updating step data…';
+                }, 1000);
+                setTimeout(function() {
+                    overlaySyncBtn.textContent = 'Sync now';
+                    overlaySyncBtn.style.opacity = '1';
+                    if (overlaySyncTime) overlaySyncTime.textContent = 'Last synced just now';
+                    delete overlaySyncBtn.dataset.syncing;
+                }, 2500);
+            });
+        }
+
+        // 8. High five notification disabled in metric variant
+    });
+    </script>
+
+</body>
+</html>
