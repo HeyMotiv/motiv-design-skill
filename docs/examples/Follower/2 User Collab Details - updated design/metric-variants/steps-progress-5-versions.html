@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Steps Progress — 5 Design Versions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary-100: #2B2E34;
+        --primary-60: #6B7280;
+        --primary-30: #9CA3AF;
+        --color-clay: #7B5EA7;
+        --color-sand: #E8DFF5;
+        --color-blush: #F3EEF9;
+        --color-plum: #7D3BED;
+        --color-bg-primary: #F7F3FB;
+        --color-border-default: #E8E4F0;
+        --color-border-subtle: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --color-ink: #2B2E34;
+
+        --font-body: 'Roboto', sans-serif;
+        --font-display: 'Playfair Display', serif;
+        --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+        --color-text-primary: var(--primary-100);
+        --color-text-secondary: var(--primary-60);
+        --color-text-tertiary: var(--primary-30);
+
+        --radius-lg: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: #0a0a0f;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        padding: 40px 20px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+
+    .page-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #ccc;
+        text-align: center;
+        margin-bottom: 6px;
+    }
+    .page-sub {
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+        max-width: 480px;
+        line-height: 18px;
+        margin-bottom: 12px;
+    }
+
+    .metric-panel {
+        width: 390px;
+        background: var(--color-bg-primary);
+        border-radius: 24px;
+        padding: 20px 20px 22px;
+    }
+    .v-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--color-clay);
+        margin-bottom: 4px;
+    }
+    .v-tagline {
+        font-size: 11px;
+        color: var(--primary-60);
+        line-height: 1.45;
+        margin-bottom: 16px;
+    }
+    .stats-section-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        line-height: 18px;
+    }
+    .grouped-card {
+        background: var(--surface-white);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-lg);
+    }
+
+    /* ============================================================
+       V1 · EDITORIAL — typographic pull-quote
+       ============================================================ */
+    .editorial-card {
+        padding: 26px 24px 22px;
+    }
+    .editorial-eyebrow {
+        font-family: var(--font-body);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--color-text-tertiary);
+        margin-bottom: 8px;
+    }
+    .editorial-hero {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 64px;
+        font-weight: 600;
+        color: var(--color-ink);
+        line-height: 0.95;
+        letter-spacing: -2px;
+    }
+    .editorial-goal {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 18px;
+        color: var(--color-text-tertiary);
+        margin-top: 6px;
+        letter-spacing: 0.2px;
+    }
+    .editorial-rule {
+        height: 1px;
+        background: linear-gradient(
+            to right,
+            var(--color-clay) 0%,
+            var(--color-clay) 51%,
+            var(--color-border-default) 51%,
+            var(--color-border-default) 100%
+        );
+        margin: 22px 0 16px;
+    }
+    .editorial-secondary {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+    }
+    .editorial-push {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--color-clay);
+        letter-spacing: -0.5px;
+        line-height: 1;
+    }
+    .editorial-push-of {
+        color: var(--color-text-tertiary);
+        font-size: 20px;
+    }
+    .editorial-push-label {
+        font-family: var(--font-body);
+        font-size: 11px;
+        color: var(--color-text-secondary);
+        letter-spacing: 0.3px;
+        text-align: right;
+        line-height: 1.4;
+    }
+    .editorial-caption {
+        font-family: var(--font-body);
+        font-size: 10px;
+        color: var(--color-text-tertiary);
+        margin-top: 16px;
+        font-style: italic;
+        letter-spacing: 0.2px;
+    }
+
+    /* ============================================================
+       V2 · DAILY RHYTHM — weekly bar chart with threshold
+       ============================================================ */
+    .timeline-card {
+        padding: 18px 16px 14px;
+    }
+    .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 14px;
+    }
+    .timeline-big {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1;
+        letter-spacing: -0.4px;
+    }
+    .timeline-dim {
+        color: var(--color-text-tertiary);
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .timeline-small {
+        font-size: 11px;
+        color: var(--color-text-tertiary);
+        margin-top: 5px;
+    }
+    .timeline-stat {
+        text-align: right;
+    }
+    .timeline-stat-num {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--color-clay);
+        line-height: 1;
+    }
+    .timeline-stat-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--color-text-tertiary);
+        margin-top: 4px;
+        font-weight: 600;
+    }
+    .timeline-chart {
+        position: relative;
+        height: 110px;
+    }
+    .timeline-threshold {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 22px;
+        border-top: 1px dashed var(--color-clay);
+        z-index: 1;
+    }
+    .timeline-threshold-label {
+        position: absolute;
+        top: -7px;
+        right: 0;
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--color-clay);
+        letter-spacing: 0.8px;
+        background: var(--surface-white);
+        padding: 0 5px;
+    }
+    .timeline-bars {
+        display: flex;
+        gap: 6px;
+        height: 100%;
+    }
+    .t-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    .t-bar-wrap {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2px;
+    }
+    .t-bar {
+        width: 100%;
+        background: var(--color-sand);
+        border-radius: 3px 3px 0 0;
+        min-height: 3px;
+    }
+    .t-col.t-push .t-bar {
+        background: var(--color-clay);
+    }
+    .t-col.t-today .t-bar {
+        background: linear-gradient(180deg, var(--color-clay) 0%, #C8B3E4 100%);
+        position: relative;
+        overflow: visible;
+    }
+    .t-col.t-today .t-bar::before {
+        content: '';
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-clay);
+        animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        50% { transform: translateX(-50%) scale(1.6); opacity: 0.5; }
+    }
+    .t-col.t-future .t-bar {
+        background: repeating-linear-gradient(
+            45deg,
+            var(--color-border-subtle),
+            var(--color-border-subtle) 3px,
+            transparent 3px,
+            transparent 6px
+        );
+        border: 1px dashed var(--color-border-default);
+        opacity: 0.6;
+    }
+    .t-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--color-text-tertiary);
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        margin-top: 6px;
+    }
+    .t-col.t-today .t-label {
+        color: var(--color-clay);
+    }
+    .t-col.t-push .t-label {
+        color: var(--color-clay);
+    }
+
+    /* ============================================================
+       V3 · CONCENTRIC RINGS — dual-ring with side stats
+       ============================================================ */
+    .rings-card {
+        padding: 22px 20px 16px;
+    }
+    .rings-layout {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+    .rings-svg-wrap {
+        width: 124px;
+        height: 124px;
+        flex-shrink: 0;
+    }
+    .rings-svg-wrap svg {
+        width: 100%;
+        height: 100%;
+    }
+    .ring-track-outer { fill: none; stroke: var(--color-sand); stroke-width: 10; }
+    .ring-fill-outer { fill: none; stroke: var(--color-clay); stroke-width: 10; stroke-linecap: round; }
+    .ring-track-inner { fill: none; stroke: #EFE5F9; stroke-width: 10; }
+    .ring-fill-inner { fill: none; stroke: var(--color-plum); stroke-width: 10; stroke-linecap: round; }
+    .rings-stats {
+        flex: 1;
+    }
+    .rings-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    .rings-row + .rings-row {
+        border-top: 1px solid var(--color-border-subtle);
+    }
+    .rings-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-top: 6px;
+        flex-shrink: 0;
+    }
+    .rings-dot-steps { background: var(--color-clay); }
+    .rings-dot-push { background: var(--color-plum); }
+    .rings-num {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1;
+        letter-spacing: -0.4px;
+    }
+    .rings-of {
+        font-size: 11px;
+        color: var(--color-text-tertiary);
+        margin-top: 5px;
+        line-height: 1.3;
+    }
+    .rings-caption {
+        font-size: 10px;
+        color: var(--color-text-tertiary);
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid var(--color-border-subtle);
+        text-align: center;
+        letter-spacing: 0.2px;
+    }
+
+    /* ============================================================
+       V4 · THE JOURNEY — organic path from start to goal
+       ============================================================ */
+    .path-card {
+        padding: 20px 20px 14px;
+        position: relative;
+    }
+    .path-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 10px;
+    }
+    .path-label-small {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--color-text-tertiary);
+        margin-bottom: 4px;
+    }
+    .path-big {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--color-text-primary);
+        line-height: 1;
+        letter-spacing: -0.3px;
+    }
+    .path-dim {
+        color: var(--color-text-tertiary);
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .path-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--color-sand);
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--color-clay);
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
+    .path-pill-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--color-clay);
+    }
+    .path-svg-wrap {
+        margin: 6px -8px 4px;
+    }
+    .path-svg {
+        width: 100%;
+        height: 110px;
+        display: block;
+        overflow: visible;
+    }
+    .path-line-future {
+        stroke: var(--color-sand);
+        stroke-width: 3;
+        stroke-dasharray: 5 5;
+        fill: none;
+        stroke-linecap: round;
+    }
+    .path-line-past {
+        stroke: var(--color-clay);
+        stroke-width: 3;
+        fill: none;
+        stroke-linecap: round;
+    }
+    .path-marker-ring {
+        fill: white;
+        stroke: var(--color-clay);
+        stroke-width: 3;
+    }
+    .path-marker-dot {
+        fill: var(--color-clay);
+    }
+    .path-flag-past {
+        fill: var(--color-clay);
+    }
+    .path-flag-future {
+        fill: var(--color-sand);
+        stroke: var(--color-clay);
+        stroke-width: 1;
+        stroke-dasharray: 2 2;
+    }
+    .path-axis-label {
+        font-size: 9px;
+        font-weight: 700;
+        fill: var(--color-text-tertiary);
+        letter-spacing: 0.8px;
+        font-family: var(--font-body);
+    }
+    .path-you-label {
+        font-size: 11px;
+        font-weight: 700;
+        fill: var(--color-clay);
+        font-family: var(--font-body);
+    }
+    .path-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        margin-top: 6px;
+        border-top: 1px solid var(--color-border-subtle);
+        font-size: 11px;
+        color: var(--color-text-secondary);
+    }
+    .path-foot-key {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .path-foot-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--color-clay);
+        display: inline-block;
+    }
+    .path-foot-remaining {
+        color: var(--color-text-tertiary);
+        font-weight: 500;
+    }
+
+    /* ============================================================
+       V5 · TERMINAL — monospace data readout
+       ============================================================ */
+    .terminal-card {
+        padding: 18px 18px 16px;
+        font-family: var(--font-mono);
+        background: linear-gradient(180deg, var(--surface-white) 0%, #FAF7FD 100%);
+    }
+    .terminal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--color-clay);
+        margin-bottom: 14px;
+        letter-spacing: 1.2px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--color-border-default);
+    }
+    .terminal-prompt {
+        color: var(--color-clay);
+        margin-right: 6px;
+    }
+    .terminal-dots {
+        color: var(--color-text-tertiary);
+        opacity: 0.6;
+        letter-spacing: 1px;
+    }
+    .terminal-row {
+        font-size: 12px;
+        padding: 4px 0;
+        color: var(--color-text-primary);
+        display: flex;
+    }
+    .terminal-key {
+        color: var(--color-text-tertiary);
+        white-space: pre;
+    }
+    .terminal-val {
+        color: var(--color-text-primary);
+        font-weight: 700;
+        margin-left: 6px;
+    }
+    .terminal-val-accent {
+        color: var(--color-clay);
+    }
+    .terminal-progress {
+        margin: 14px 0 10px;
+        padding: 10px 12px;
+        background: var(--color-blush);
+        border-radius: 6px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        letter-spacing: -0.5px;
+    }
+    .terminal-bracket { color: var(--color-text-tertiary); letter-spacing: 0; margin-right: 2px; }
+    .terminal-bracket-end { margin-left: 2px; margin-right: 8px; }
+    .terminal-fill { color: var(--color-clay); font-weight: 700; }
+    .terminal-dim { color: #D4C8E4; }
+    .terminal-pct { margin-left: auto; color: var(--color-clay); font-weight: 700; letter-spacing: 0; }
+    .terminal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 10px;
+        color: var(--color-text-tertiary);
+        padding-top: 10px;
+        border-top: 1px solid var(--color-border-default);
+        letter-spacing: 0.3px;
+    }
+    .terminal-cursor {
+        display: inline-block;
+        width: 6px;
+        height: 11px;
+        background: var(--color-clay);
+        vertical-align: text-bottom;
+        margin-left: 2px;
+        animation: blink 1s steps(2) infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    @media (max-width: 420px) {
+        .metric-panel { width: 100%; }
+    }
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Steps Progress — 5 Design Versions</div>
+    <div class="page-sub">Same data (28,400 / 56,000 weekly steps, 1 / 3 push days), five different visual languages. All within the Motiv DS (clay/purple, Roboto, Playfair).</div>
+</div>
+
+<!-- ============================================================
+     V1 · EDITORIAL
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V1 · Editorial</div>
+    <div class="v-tagline">Typographic hero. Playfair italic number as pull-quote, generous whitespace, magazine layout.</div>
+    <div class="stats-section-title">This week</div>
+    <div class="grouped-card editorial-card">
+        <div class="editorial-eyebrow">Total steps · Week 3</div>
+        <div class="editorial-hero">28,400</div>
+        <div class="editorial-goal">of 56,000</div>
+        <div class="editorial-rule"></div>
+        <div class="editorial-secondary">
+            <div class="editorial-push">1<span class="editorial-push-of"> / 3</span></div>
+            <div class="editorial-push-label">push days<br/>this week</div>
+        </div>
+        <div class="editorial-caption">A push day is a day with 9,200+ steps.</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V2 · DAILY RHYTHM
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V2 · Daily rhythm</div>
+    <div class="v-tagline">7-day bar chart with a dashed threshold line at 9,200. Push days highlighted, today pulses, future days dashed.</div>
+    <div class="stats-section-title">This week</div>
+    <div class="grouped-card timeline-card">
+        <div class="timeline-header">
+            <div>
+                <div class="timeline-big">28,400<span class="timeline-dim"> /56,000</span></div>
+                <div class="timeline-small">51% of weekly goal</div>
+            </div>
+            <div class="timeline-stat">
+                <div class="timeline-stat-num">1/3</div>
+                <div class="timeline-stat-label">push days</div>
+            </div>
+        </div>
+        <div class="timeline-chart">
+            <div class="timeline-threshold">
+                <span class="timeline-threshold-label">9,200</span>
+            </div>
+            <div class="timeline-bars">
+                <div class="t-col t-push">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 94%;"></div></div>
+                    <div class="t-label">Sat</div>
+                </div>
+                <div class="t-col">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 72%;"></div></div>
+                    <div class="t-label">Sun</div>
+                </div>
+                <div class="t-col t-today">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 71%;"></div></div>
+                    <div class="t-label">Mon</div>
+                </div>
+                <div class="t-col t-future">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 100%;"></div></div>
+                    <div class="t-label">Tue</div>
+                </div>
+                <div class="t-col t-future">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 100%;"></div></div>
+                    <div class="t-label">Wed</div>
+                </div>
+                <div class="t-col t-future">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 100%;"></div></div>
+                    <div class="t-label">Thu</div>
+                </div>
+                <div class="t-col t-future">
+                    <div class="t-bar-wrap"><div class="t-bar" style="height: 100%;"></div></div>
+                    <div class="t-label">Fri</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V3 · CONCENTRIC RINGS
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V3 · Concentric rings</div>
+    <div class="v-tagline">Dual-ring treatment. Outer ring = weekly steps, inner = push days. Numbers in a side stack with colour-keyed dots.</div>
+    <div class="stats-section-title">This week</div>
+    <div class="grouped-card rings-card">
+        <div class="rings-layout">
+            <div class="rings-svg-wrap">
+                <svg viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="52" class="ring-track-outer"/>
+                    <circle cx="60" cy="60" r="52" class="ring-fill-outer"
+                            stroke-dasharray="326.73" stroke-dashoffset="160.10"
+                            transform="rotate(-90 60 60)"/>
+                    <circle cx="60" cy="60" r="38" class="ring-track-inner"/>
+                    <circle cx="60" cy="60" r="38" class="ring-fill-inner"
+                            stroke-dasharray="238.76" stroke-dashoffset="159.17"
+                            transform="rotate(-90 60 60)"/>
+                </svg>
+            </div>
+            <div class="rings-stats">
+                <div class="rings-row">
+                    <div class="rings-dot rings-dot-steps"></div>
+                    <div>
+                        <div class="rings-num">28,400</div>
+                        <div class="rings-of">of 56,000 steps</div>
+                    </div>
+                </div>
+                <div class="rings-row">
+                    <div class="rings-dot rings-dot-push"></div>
+                    <div>
+                        <div class="rings-num">1</div>
+                        <div class="rings-of">of 3 push days</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rings-caption">Push day = a day with 9,200+ steps</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V4 · THE JOURNEY
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V4 · The journey</div>
+    <div class="v-tagline">Organic curved path from start to goal. Filled segment = completed, dashed = ahead. Flags mark push days, ring marks today.</div>
+    <div class="stats-section-title">This week</div>
+    <div class="grouped-card path-card">
+        <div class="path-header">
+            <div>
+                <div class="path-label-small">Total steps</div>
+                <div class="path-big">28,400 <span class="path-dim">/ 56,000</span></div>
+            </div>
+            <div class="path-pill">
+                <span class="path-pill-dot"></span>
+                1 / 3 push
+            </div>
+        </div>
+        <div class="path-svg-wrap">
+            <svg class="path-svg" viewBox="0 0 340 110" preserveAspectRatio="none">
+                <!-- Axis labels -->
+                <text x="12" y="100" class="path-axis-label">START</text>
+                <text x="332" y="100" class="path-axis-label" text-anchor="end">GOAL</text>
+
+                <!-- Past solid path (0 → 51%) -->
+                <path d="M 16 72 C 50 45 90 82 170 58" class="path-line-past"/>
+
+                <!-- Future dashed path (51% → 100%) -->
+                <path d="M 170 58 C 230 38 260 78 324 42" class="path-line-future"/>
+
+                <!-- Past push-day flag -->
+                <circle cx="60" cy="62" r="5" class="path-flag-past"/>
+
+                <!-- Future push-day flag placeholders -->
+                <circle cx="240" cy="56" r="5" class="path-flag-future"/>
+                <circle cx="300" cy="52" r="5" class="path-flag-future"/>
+
+                <!-- "You are here" marker (current position) -->
+                <circle cx="170" cy="58" r="9" class="path-marker-ring"/>
+                <circle cx="170" cy="58" r="3.5" class="path-marker-dot"/>
+                <text x="170" y="38" class="path-you-label" text-anchor="middle">you</text>
+            </svg>
+        </div>
+        <div class="path-footer">
+            <div class="path-foot-key">
+                <span class="path-foot-dot"></span>
+                push day hit
+            </div>
+            <div class="path-foot-remaining">4 days to go</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V5 · TERMINAL
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V5 · Terminal</div>
+    <div class="v-tagline">Monospaced data readout. Leader dots, ASCII progress block, blinking cursor. Feels like a watch face readout.</div>
+    <div class="stats-section-title">This week</div>
+    <div class="grouped-card terminal-card">
+        <div class="terminal-header">
+            <span><span class="terminal-prompt">›</span>WEEK_03 · STEPS</span>
+            <span class="terminal-dots">◦ ◦ ◦</span>
+        </div>
+        <div class="terminal-row">
+            <span class="terminal-key">total.................</span>
+            <span class="terminal-val">28,400 / 56,000</span>
+        </div>
+        <div class="terminal-row">
+            <span class="terminal-key">push_days.............</span>
+            <span class="terminal-val terminal-val-accent">1 / 3</span>
+        </div>
+        <div class="terminal-row">
+            <span class="terminal-key">days_remaining........</span>
+            <span class="terminal-val">4</span>
+        </div>
+        <div class="terminal-progress">
+            <span class="terminal-bracket">[</span>
+            <span class="terminal-fill">███████████</span>
+            <span class="terminal-dim">░░░░░░░░░░░</span>
+            <span class="terminal-bracket terminal-bracket-end">]</span>
+            <span class="terminal-pct">51%</span>
+        </div>
+        <div class="terminal-footer">
+            <span><span class="terminal-prompt">›</span>push threshold · 9,200 / day<span class="terminal-cursor"></span></span>
+            <span>WK3 · D4</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

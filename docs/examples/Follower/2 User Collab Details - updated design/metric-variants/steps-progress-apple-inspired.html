@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Progress — Ring Cards for All 3 Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+    :root {
+        /* Motiv DS core tokens */
+        --primary-100: #2B2E34;
+        --primary-60: #6B7280;
+        --primary-30: #9CA3AF;
+        --color-clay: #7B5EA7;
+        --color-sand: #E8DFF5;
+        --color-blush: #F3EEF9;
+        --color-plum: #7D3BED;
+        --color-bg-primary: #F7F3FB;
+        --color-border-default: #E8E4F0;
+        --color-border-subtle: #F3F4F6;
+        --surface-white: #FFFFFF;
+
+        --color-text-primary: var(--primary-100);
+        --color-text-secondary: var(--primary-60);
+        --color-text-tertiary: var(--primary-30);
+
+        /* Ring fills — outer = vibrant plum (first metric), inner = neutral gray */
+        --ring-steps-a: #9F5BF7;      /* electric violet (start) */
+        --ring-steps-b: #5E2BD4;      /* deep plum (end) */
+        --ring-push-a: #9CA3AF;       /* primary-30 (light gray) */
+        --ring-push-b: #6B7280;       /* primary-60 (medium gray) */
+        --track-gray: #E5E7EB;        /* neutral light gray track */
+
+        --font-body: 'Roboto', sans-serif;
+        --radius-lg: 12px;
+        --radius-xl: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        background: #0a0a0f;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        padding: 40px 20px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .page-title {
+        font-size: 15px;
+        font-weight: 500;
+        color: #ccc;
+        text-align: center;
+        margin-bottom: 4px;
+    }
+    .page-sub {
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+        max-width: 500px;
+        line-height: 18px;
+        margin-bottom: 12px;
+    }
+
+    .metric-panel {
+        width: 390px;
+        background: var(--color-bg-primary);
+        border-radius: 24px;
+        padding: 20px 20px 22px;
+    }
+    .v-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--color-clay);
+        margin-bottom: 4px;
+    }
+    .v-tagline {
+        font-size: 11px;
+        color: var(--primary-60);
+        line-height: 1.45;
+        margin-bottom: 16px;
+    }
+    .stats-section-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary-30);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 10px;
+        line-height: 18px;
+    }
+
+    /* ============================================================
+       APPLE-INSPIRED CARD (light, Motiv DS, concentric rings)
+       ============================================================ */
+    .apple-card {
+        background: var(--surface-white);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-xl);
+        padding: 14px 18px 16px;
+        color: var(--color-text-primary);
+        position: relative;
+        overflow: hidden;
+    }
+    /* Soft ambient glow behind rings */
+    .apple-card::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: -10px;
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(
+            circle at 42% 45%,
+            rgba(123, 94, 167, 0.10) 0%,
+            rgba(125, 59, 237, 0.06) 38%,
+            transparent 68%
+        );
+        filter: blur(6px);
+        pointer-events: none;
+    }
+    .apple-layout {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        position: relative;
+    }
+
+    /* Rings */
+    .apple-svg-wrap {
+        width: 120px;
+        height: 120px;
+        flex-shrink: 0;
+    }
+    .apple-svg-wrap svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+    }
+    .apple-track-outer {
+        fill: none;
+        stroke: var(--color-sand);
+        stroke-width: 11;
+    }
+    .apple-track-inner {
+        fill: none;
+        stroke: var(--track-gray);
+        stroke-width: 11;
+    }
+    .apple-fill {
+        fill: none;
+        stroke-width: 11;
+        stroke-linecap: round;
+        filter: drop-shadow(0 1px 3px rgba(123, 94, 167, 0.25));
+    }
+    .arrow path {
+        fill: none;
+        stroke: var(--surface-white);
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* Stats column */
+    .apple-stats {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 0;
+    }
+    .apple-stat {
+        min-width: 0;
+    }
+    .apple-stat-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        letter-spacing: -0.1px;
+        line-height: 1.1;
+        margin-bottom: 4px;
+    }
+    .apple-stat-value {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.5px;
+    }
+    .apple-stat-slash {
+        font-weight: 500;
+        opacity: 0.55;
+        margin: 0 1px;
+    }
+    .apple-stat-unit {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        margin-left: 4px;
+        opacity: 0.8;
+    }
+    .apple-stat-sub {
+        font-size: 11px;
+        color: var(--color-text-tertiary);
+        font-weight: 500;
+        margin-top: 4px;
+        letter-spacing: 0.1px;
+    }
+
+    /* Color-keyed values matching each ring */
+    .val-outer { color: var(--ring-steps-b); }
+    .val-inner { color: var(--ring-push-b); }
+
+    /* Today snapshot row */
+    .apple-today {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 14px;
+        padding-top: 11px;
+        border-top: 1px solid var(--color-border-subtle);
+        font-size: 11px;
+    }
+    .apple-today-label {
+        color: var(--color-text-tertiary);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-size: 9px;
+    }
+    .apple-today-value {
+        color: var(--color-text-secondary);
+        font-weight: 500;
+    }
+
+    /* Weekly progress rail (collab context) */
+    .apple-week-progress {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        position: relative;
+    }
+    .apple-week-label {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+        letter-spacing: 0.2px;
+    }
+    .apple-week-label strong {
+        color: var(--color-text-primary);
+        font-weight: 700;
+    }
+    .apple-week-dots {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .apple-week-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        border: 1.5px solid var(--color-border-default);
+        background: transparent;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .apple-week-dot.completed {
+        background: var(--color-clay);
+        border-color: var(--color-clay);
+    }
+    .apple-week-dot svg {
+        width: 7px;
+        height: 7px;
+        stroke: var(--surface-white);
+        stroke-width: 2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    .apple-week-dot.partial {
+        border: none;
+        position: relative;
+        background: conic-gradient(
+            from 0deg,
+            var(--color-clay) 0deg 206deg,
+            var(--color-sand) 206deg 360deg
+        );
+    }
+    .apple-week-dot.partial::after {
+        content: '';
+        position: absolute;
+        inset: 1.5px;
+        border-radius: 50%;
+        background: var(--surface-white);
+    }
+
+    /* Sync — shared token: green "recently synced" dot */
+    .apple-sync-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #3CB371;
+        flex-shrink: 0;
+    }
+
+    /* Variant A — top-right pill (Card 1, Steps) */
+    .apple-sync-pill {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px 4px 9px;
+        border-radius: 999px;
+        background: var(--color-blush);
+        color: var(--color-clay);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        border: none;
+        font-family: var(--font-body);
+        z-index: 1;
+    }
+    .apple-sync-pill svg {
+        width: 10px;
+        height: 10px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        margin-left: 2px;
+    }
+
+    /* Variant B — inline right-end of Today row (Card 2, Active Energy) */
+    .apple-sync-inline {
+        margin-left: auto;
+        color: var(--color-text-tertiary);
+        font-weight: 500;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-size: 10px;
+        font-family: var(--font-body);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+    }
+    .apple-sync-inline .apple-sync-action {
+        color: var(--color-clay);
+        font-weight: 600;
+        margin-left: 2px;
+    }
+
+    /* Variant C — dedicated footer row (Card 3, Active Minutes) */
+    .apple-sync-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--color-border-subtle);
+        font-size: 11px;
+    }
+    .apple-sync-status {
+        color: var(--color-text-tertiary);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .apple-sync-btn {
+        color: var(--color-clay);
+        font-weight: 600;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        font-family: var(--font-body);
+        font-size: 11px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .apple-sync-btn svg {
+        width: 11px;
+        height: 11px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    @media (max-width: 420px) {
+        .metric-panel { width: 100%; }
+    }
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Weekly Progress — Ring Cards for All 3 Metrics</div>
+    <div class="page-sub">The Apple-inspired ring card applied across Steps, Active Energy, and Active Minutes. Each card includes today's snapshot above the 6-week collab rail.</div>
+</div>
+
+<!-- ============================================================
+     STEPS
+     Outer: 28,400/56,000 = 51% (angle 183.6°)
+     Inner: 1/3 = 33.3% (angle 120°)
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Steps model</div>
+    <div class="v-tagline">Outer ring · weekly steps. Inner ring · push days (days with 9,200+ steps).</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="apple-card">
+        <div class="apple-layout">
+            <div class="apple-svg-wrap">
+                <svg viewBox="0 0 140 140">
+                    <defs>
+                        <linearGradient id="gradStepsOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-steps-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-steps-b)"/>
+                        </linearGradient>
+                        <linearGradient id="gradStepsInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-push-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-push-b)"/>
+                        </linearGradient>
+                    </defs>
+
+                    <circle cx="70" cy="70" r="55" class="apple-track-outer"/>
+                    <circle cx="70" cy="70" r="55" class="apple-fill"
+                            stroke="url(#gradStepsOuter)"
+                            stroke-dasharray="345.58"
+                            stroke-dashoffset="169.33"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(66.55 124.9) rotate(183.6)">
+                        <path d="M -3 -3 L 2 0 L -3 3"/>
+                    </g>
+
+                    <circle cx="70" cy="70" r="39" class="apple-track-inner"/>
+                    <circle cx="70" cy="70" r="39" class="apple-fill"
+                            stroke="url(#gradStepsInner)"
+                            stroke-dasharray="245.04"
+                            stroke-dashoffset="163.36"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(103.77 89.5) rotate(120)">
+                        <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
+                        <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="apple-stats">
+                <div class="apple-stat">
+                    <div class="apple-stat-label">Weekly steps</div>
+                    <div class="apple-stat-value val-outer">28,400</div>
+                    <div class="apple-stat-sub">of 56,000</div>
+                </div>
+                <div class="apple-stat">
+                    <div class="apple-stat-label">Push days</div>
+                    <div class="apple-stat-value val-inner">1<span class="apple-stat-slash">/</span>3</div>
+                    <div class="apple-stat-sub">day with 9,200+ steps</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="apple-today">
+            <span class="apple-today-label">Today</span>
+            <span class="apple-today-value">8,516 steps so far</span>
+        </div>
+
+        <div class="apple-week-progress">
+            <span class="apple-week-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="apple-week-dots">
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot partial"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+            </div>
+        </div>
+
+        <div class="apple-sync-row">
+            <span class="apple-sync-status">
+                <span class="apple-sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="apple-sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     ACTIVE ENERGY
+     Outer: 820/1,800 = 45.6% (angle 164°)
+     Inner: 2/4 = 50% (angle 180°)
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Active energy model</div>
+    <div class="v-tagline">Outer ring · weekly active energy (kcal). Inner ring · workouts (20+ min in Zone 2+).</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="apple-card">
+        <div class="apple-layout">
+            <div class="apple-svg-wrap">
+                <svg viewBox="0 0 140 140">
+                    <defs>
+                        <linearGradient id="gradEnergyOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-steps-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-steps-b)"/>
+                        </linearGradient>
+                        <linearGradient id="gradEnergyInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-push-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-push-b)"/>
+                        </linearGradient>
+                    </defs>
+
+                    <circle cx="70" cy="70" r="55" class="apple-track-outer"/>
+                    <circle cx="70" cy="70" r="55" class="apple-fill"
+                            stroke="url(#gradEnergyOuter)"
+                            stroke-dasharray="345.58"
+                            stroke-dashoffset="188.14"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(85.18 122.85) rotate(164)">
+                        <path d="M -3 -3 L 2 0 L -3 3"/>
+                    </g>
+
+                    <circle cx="70" cy="70" r="39" class="apple-track-inner"/>
+                    <circle cx="70" cy="70" r="39" class="apple-fill"
+                            stroke="url(#gradEnergyInner)"
+                            stroke-dasharray="245.04"
+                            stroke-dashoffset="122.52"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(70 109) rotate(180)">
+                        <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
+                        <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="apple-stats">
+                <div class="apple-stat">
+                    <div class="apple-stat-label">Active energy</div>
+                    <div class="apple-stat-value val-outer">820</div>
+                    <div class="apple-stat-sub">of 1,800 kcal</div>
+                </div>
+                <div class="apple-stat">
+                    <div class="apple-stat-label">Workouts</div>
+                    <div class="apple-stat-value val-inner">2<span class="apple-stat-slash">/</span>4</div>
+                    <div class="apple-stat-sub">20+ min in Zone 2+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="apple-today">
+            <span class="apple-today-label">Today</span>
+            <span class="apple-today-value">32 min workout · 380 kcal</span>
+        </div>
+
+        <div class="apple-week-progress">
+            <span class="apple-week-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="apple-week-dots">
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot partial"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+            </div>
+        </div>
+
+        <div class="apple-sync-row">
+            <span class="apple-sync-status">
+                <span class="apple-sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="apple-sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     ACTIVE MINUTES
+     Outer: 82/150 = 54.67% (angle 196.8°)
+     Inner: 42/75 = 56% (angle 201.6°)
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Active minutes model</div>
+    <div class="v-tagline">Outer ring · total active minutes. Inner ring · upper-zone minutes (moderate + vigorous).</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="apple-card">
+        <div class="apple-layout">
+            <div class="apple-svg-wrap">
+                <svg viewBox="0 0 140 140">
+                    <defs>
+                        <linearGradient id="gradMinOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-steps-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-steps-b)"/>
+                        </linearGradient>
+                        <linearGradient id="gradMinInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="var(--ring-push-a)"/>
+                            <stop offset="100%" stop-color="var(--ring-push-b)"/>
+                        </linearGradient>
+                    </defs>
+
+                    <circle cx="70" cy="70" r="55" class="apple-track-outer"/>
+                    <circle cx="70" cy="70" r="55" class="apple-fill"
+                            stroke="url(#gradMinOuter)"
+                            stroke-dasharray="345.58"
+                            stroke-dashoffset="156.67"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(54.1 122.6) rotate(196.8)">
+                        <path d="M -3 -3 L 2 0 L -3 3"/>
+                    </g>
+
+                    <circle cx="70" cy="70" r="39" class="apple-track-inner"/>
+                    <circle cx="70" cy="70" r="39" class="apple-fill"
+                            stroke="url(#gradMinInner)"
+                            stroke-dasharray="245.04"
+                            stroke-dashoffset="107.82"
+                            transform="rotate(-90 70 70)"/>
+                    <g class="arrow" transform="translate(55.65 106.27) rotate(201.6)">
+                        <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
+                        <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="apple-stats">
+                <div class="apple-stat">
+                    <div class="apple-stat-label">Active minutes</div>
+                    <div class="apple-stat-value val-outer">82</div>
+                    <div class="apple-stat-sub">of 150 min</div>
+                </div>
+                <div class="apple-stat">
+                    <div class="apple-stat-label">HR Zone 2+</div>
+                    <div class="apple-stat-value val-inner">42<span class="apple-stat-slash">/</span>75<span class="apple-stat-unit">min</span></div>
+                    <div class="apple-stat-sub">moderate + vigorous intensity</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="apple-today">
+            <span class="apple-today-label">Today</span>
+            <span class="apple-today-value">16 min · 6 in upper zones</span>
+        </div>
+
+        <div class="apple-week-progress">
+            <span class="apple-week-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="apple-week-dots">
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot completed">
+                    <svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg>
+                </div>
+                <div class="apple-week-dot partial"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+                <div class="apple-week-dot"></div>
+            </div>
+        </div>
+
+        <div class="apple-sync-row">
+            <span class="apple-sync-status">
+                <span class="apple-sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="apple-sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
