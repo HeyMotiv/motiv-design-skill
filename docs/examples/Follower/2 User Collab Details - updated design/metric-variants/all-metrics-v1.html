@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Progress — V1 Pattern Across All 3 Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-100: #2B2E34;
+    --primary-60: #6B7280;
+    --primary-30: #9CA3AF;
+    --color-clay: #7B5EA7;
+    --color-clay-soft: #9D7BC7;
+    --color-plum: #7D3BED;
+    --color-plum-light: #A96FF7;
+    --color-sand: #E8DFF5;
+    --color-blush: #F3EEF9;
+    --color-bg-primary: #F7F3FB;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+
+    --color-text-primary: var(--primary-100);
+    --color-text-secondary: var(--primary-60);
+    --color-text-tertiary: var(--primary-30);
+
+    --font-body: 'Roboto', sans-serif;
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+    --radius-xl: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+.page-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.page-sub {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    max-width: 520px;
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+.metric-panel {
+    width: 390px;
+    background: var(--color-bg-primary);
+    border-radius: 24px;
+    padding: 20px 20px 22px;
+}
+.v-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-bottom: 4px;
+}
+.v-tagline {
+    font-size: 11px;
+    color: var(--primary-60);
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+.stats-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.energy-card {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+}
+
+/* ========== V1 pattern ========== */
+.v1-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.v1-row + .v1-row {
+    margin-top: 14px;
+}
+.v1-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.v1-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v1-stats {
+    font-size: 16px;
+    font-weight: 700;
+    color: #3A1A82;
+    letter-spacing: -0.3px;
+}
+.v1-stats small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 2px;
+}
+.v1-bar {
+    height: 12px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+.v1-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4A2AA0 0%, #3A1A82 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v1-bar-fill.plum {
+    background: linear-gradient(90deg, #C7B3E4 0%, #B49CDC 100%);
+}
+.v1-segs {
+    display: flex;
+    gap: 4px;
+    height: 12px;
+}
+.v1-seg {
+    flex: 1;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+}
+.v1-seg.filled {
+    background: linear-gradient(90deg, #C7B3E4 0%, #B49CDC 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v1-remaining {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+}
+
+/* ========== Step-days row (7 daily progress pills) ========== */
+.step-days {
+    display: flex;
+    gap: 4px;
+    height: 10px;
+}
+.step-day {
+    flex: 1;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+}
+.step-day-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #4A2AA0 0%, #3A1A82 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.step-day.completed .step-day-fill {
+    background: linear-gradient(90deg, #C7B3E4 0%, #B49CDC 100%);
+    width: 100%;
+}
+
+/* ========== Active Minutes bar (clay-light total + plum-stripe Zone 2+ superimposed) ========== */
+.am-bar {
+    height: 12px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+}
+.am-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4A2AA0 0%, #3A1A82 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.am-zone-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        #B49CDC 0,
+        #B49CDC 3px,
+        transparent 3px,
+        transparent 6px
+    );
+    border-radius: var(--radius-pill);
+}
+
+/* ========== Collab rail ========== */
+.collab-rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+}
+.collab-rail-label strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+.collab-dots {
+    display: flex;
+    gap: 5px;
+}
+.collab-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border-default);
+}
+.collab-dot.done {
+    background: #3A1A82;
+    border-color: #3A1A82;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collab-dot.done svg {
+    width: 6px;
+    height: 6px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.collab-dot.partial {
+    border: none;
+    background: conic-gradient(from 0deg, #3A1A82 0deg 206deg, var(--color-sand) 206deg 360deg);
+    position: relative;
+}
+.collab-dot.partial::after {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    border-radius: 50%;
+    background: var(--surface-white);
+}
+
+/* ========== Sync row ========== */
+.sync-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+}
+.sync-status {
+    color: var(--color-text-tertiary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.sync-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3CB371;
+    flex-shrink: 0;
+}
+.sync-btn {
+    color: #3A1A82;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.sync-btn svg {
+    width: 11px;
+    height: 11px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+@media (max-width: 420px) {
+    .metric-panel { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Weekly Progress — V1 Pattern for All 3 Metrics</div>
+    <div class="page-sub">Same two-bar card applied to Active Energy, Steps, and Active Minutes. Each metric's two independent goals get their own row.</div>
+</div>
+
+<!-- ============================================================
+     ACTIVE ENERGY
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Active energy model</div>
+    <div class="v-tagline">Weekly kcal + Zone 2+ workout count.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Active energy</span>
+                <span class="v1-stats">820<small>/ 1,800 kcal</small></span>
+            </div>
+            <div class="v1-bar">
+                <div class="v1-bar-fill" style="width: 46%;"></div>
+            </div>
+        </div>
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: #8360C5;">2<small>/ 4</small></span>
+            </div>
+            <div class="v1-segs">
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg"></div>
+                <div class="v1-seg"></div>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     STEPS
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Steps model</div>
+    <div class="v-tagline">Weekly step total + push-day count (days above the step threshold).</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Steps</span>
+                <span class="v1-stats">28,400<small>/ 56,000</small></span>
+            </div>
+            <div class="v1-bar">
+                <div class="v1-bar-fill" style="width: 51%;"></div>
+            </div>
+        </div>
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Push days</span>
+                <span class="v1-stats" style="color: #8360C5;">1<small>/ 3</small></span>
+            </div>
+            <div class="step-days">
+                <div class="step-day completed"><div class="step-day-fill"></div></div>
+                <div class="step-day"><div class="step-day-fill" style="width: 94%;"></div></div>
+                <div class="step-day"><div class="step-day-fill" style="width: 60%;"></div></div>
+                <div class="step-day"></div>
+                <div class="step-day"></div>
+                <div class="step-day"></div>
+                <div class="step-day"></div>
+            </div>
+            <div class="v1-remaining">Today · 5,518 / 9,200 steps</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     ACTIVE MINUTES
+     Both rows are continuous bars (both measure minutes).
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">Active minutes model</div>
+    <div class="v-tagline">Total active minutes + minutes earned in HR Zone 2+. Both are minute counts, so both rows are continuous bars.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Active minutes</span>
+                <span class="v1-stats">82<small>/ 150 min</small></span>
+            </div>
+            <div class="am-bar">
+                <div class="am-fill" style="width: 54.67%;"></div>
+                <div class="am-zone-overlay" style="width: 28%;"></div>
+            </div>
+        </div>
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">HR Zone 2+</span>
+                <span class="v1-stats" style="color: #8360C5;">42<small>/ 75 min</small></span>
+            </div>
+            <div class="v1-remaining">Moderate + vigorous intensity</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

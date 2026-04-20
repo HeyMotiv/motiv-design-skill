@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Minutes Bar — Color Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --color-clay: #7B5EA7;
+    --color-clay-soft: #9D7BC7;
+    --color-clay-light: #B49CDC;
+    --color-plum: #7D3BED;
+    --color-plum-light: #A96FF7;
+    --color-plum-deep: #5E2BD4;
+    --color-sand: #E8DFF5;
+    --color-blush: #F3EEF9;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+    --color-bg-primary: #F7F3FB;
+
+    --radius-pill: 999px;
+    --radius-xl: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.page-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.page-sub {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    max-width: 460px;
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+.option-card {
+    width: 390px;
+    background: var(--color-bg-primary);
+    border-radius: 24px;
+    padding: 20px 22px 22px;
+}
+.option-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-bottom: 4px;
+}
+.option-tagline {
+    font-size: 11px;
+    color: #6B7280;
+    line-height: 1.45;
+    margin-bottom: 14px;
+}
+.option-swatches {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 10px;
+    color: #6B7280;
+}
+.swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.swatch-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.bar-container {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-xl);
+    padding: 16px 18px 14px;
+}
+.bar-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.bar-head-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2B2E34;
+}
+.bar-head-stats {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.3px;
+}
+.bar-head-stats small {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+.am-bar {
+    height: 12px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+}
+.am-fill {
+    height: 100%;
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.am-zone-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: var(--radius-pill);
+}
+
+/* OPTION 1 — Clay base + Plum-light stripes */
+.opt1 .am-fill {
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.opt1 .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--color-plum-light) 0,
+        var(--color-plum-light) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+/* OPTION 2 — Clay-light base + Plum stripes */
+.opt2 .am-fill {
+    background: linear-gradient(90deg, #C7B3E4 0%, var(--color-clay-light) 100%);
+}
+.opt2 .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--color-plum) 0,
+        var(--color-plum) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+/* OPTION 3 — Sand base + Plum stripes */
+.opt3 .am-fill {
+    background: var(--color-sand);
+}
+.opt3 .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--color-plum) 0,
+        var(--color-plum) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+/* OPTION 4 — Clay base + White stripes */
+.opt4 .am-fill {
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.opt4 .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--surface-white) 0,
+        var(--surface-white) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+/* OPTION 5 — Clay base + Deep plum stripes */
+.opt5 .am-fill {
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.opt5 .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--color-plum-deep) 0,
+        var(--color-plum-deep) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+/* Reference: current (clay + plum) */
+.optC .am-fill {
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.optC .am-zone-overlay {
+    background: repeating-linear-gradient(45deg,
+        var(--color-plum) 0,
+        var(--color-plum) 3px,
+        transparent 3px,
+        transparent 6px);
+}
+
+.bar-sub {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+@media (max-width: 420px) {
+    .option-card { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Active Minutes Bar — Stripe Color Options</div>
+    <div class="page-sub">Five DS-palette combinations rendered as the actual bar, plus the current combo (for reference). Base fills the 82/150 active-min region; stripes overlay the first 42 min of Zone 2+.</div>
+</div>
+
+<!-- CURRENT (reference) -->
+<div class="option-card optC">
+    <div class="option-label">Current · Clay + Plum</div>
+    <div class="option-tagline">For reference. The two purples blur together.</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #7B5EA7;"></span>Clay #7B5EA7</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #7D3BED;"></span>Plum #7D3BED</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+<!-- OPTION 1 -->
+<div class="option-card opt1">
+    <div class="option-label">Option 1 · Clay + Plum-light</div>
+    <div class="option-tagline">Brighter electric violet stripes — subtle bump in contrast.</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #7B5EA7;"></span>Clay #7B5EA7</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #A96FF7;"></span>Plum-light #A96FF7</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+<!-- OPTION 2 -->
+<div class="option-card opt2">
+    <div class="option-label">Option 2 · Clay-light + Plum</div>
+    <div class="option-tagline">Lighter base lets saturated plum stripes pop off a softer backdrop.</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #B49CDC;"></span>Clay-light #B49CDC</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #7D3BED;"></span>Plum #7D3BED</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats" style="color: #B49CDC;">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+<!-- OPTION 3 -->
+<div class="option-card opt3">
+    <div class="option-label">Option 3 · Sand + Plum</div>
+    <div class="option-tagline">Very light base + saturated stripes — maximum lightness contrast.</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #E8DFF5;"></span>Sand #E8DFF5</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #7D3BED;"></span>Plum #7D3BED</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats" style="color: #9E8AB5;">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+<!-- OPTION 4 -->
+<div class="option-card opt4">
+    <div class="option-label">Option 4 · Clay + White knockout</div>
+    <div class="option-tagline">High contrast — stripes read as "cut" through solid clay.</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #7B5EA7;"></span>Clay #7B5EA7</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #FFFFFF; border: 1px solid #ccc;"></span>White #FFFFFF</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+<!-- OPTION 5 -->
+<div class="option-card opt5">
+    <div class="option-label">Option 5 · Clay + Deep plum</div>
+    <div class="option-tagline">Both purple, stripes are deeper — reads as "more intense effort."</div>
+    <div class="option-swatches">
+        <span class="swatch"><span class="swatch-dot" style="background: #7B5EA7;"></span>Clay #7B5EA7</span>
+        <span class="swatch"><span class="swatch-dot" style="background: #5E2BD4;"></span>Deep plum #5E2BD4</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats">82<small>/ 150 min</small></span>
+        </div>
+        <div class="am-bar">
+            <div class="am-fill" style="width: 54.67%;"></div>
+            <div class="am-zone-overlay" style="width: 28%;"></div>
+        </div>
+        <div class="bar-sub">42 / 75 min in HR Zone 2+</div>
+    </div>
+</div>
+
+</body>
+</html>

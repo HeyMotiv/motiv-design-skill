@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metric Color System — 10 Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --color-blush: #F3EEF9;
+    --color-bg-primary: #F7F3FB;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+    --radius-pill: 999px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+.page-title { font-size: 15px; font-weight: 500; color: #ccc; text-align: center; margin-bottom: 4px; }
+.page-sub { font-size: 12px; color: #777; text-align: center; max-width: 500px; line-height: 18px; margin-bottom: 12px; }
+
+.option-card {
+    width: 460px;
+    background: var(--color-bg-primary);
+    border-radius: 20px;
+    padding: 18px 20px 20px;
+}
+.option-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+.option-label { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: #7B5EA7; }
+.option-contrast { font-size: 9px; font-weight: 600; color: #9CA3AF; letter-spacing: 0.2px; }
+.option-contrast.pass { color: #3CB371; }
+.option-contrast.close { color: #D97706; }
+.option-tagline { font-size: 11px; color: #6B7280; line-height: 1.4; margin-bottom: 12px; }
+
+.swatches { display: flex; gap: 8px; margin-bottom: 10px; font-size: 10px; color: #6B7280; }
+.swatch { display: inline-flex; align-items: center; gap: 5px; }
+.swatch-dot { width: 16px; height: 16px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.06); }
+
+.bar-container {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+.bar-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.bar-head-label { font-size: 12px; font-weight: 600; color: #2B2E34; }
+.bar-head-stats { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
+.bar-head-stats small { font-size: 11px; color: #9CA3AF; font-weight: 500; margin-left: 2px; }
+
+.am-bar {
+    height: 12px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+}
+.am-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 54.67%;
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.am-zone-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 28%;
+    border-radius: var(--radius-pill);
+}
+.bar-subline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-subtle);
+}
+.bar-subline-label { font-size: 11px; color: #2B2E34; font-weight: 500; }
+.bar-subline-stats { font-size: 13px; font-weight: 700; }
+
+/* ===== Combo definitions ===== */
+/* Each combo sets --primary, --secondary, and styles the bar using gradients + stripes */
+
+/* 1 · Clay + Ink */
+.c1 .am-fill { background: linear-gradient(90deg, #9D7BC7, #7B5EA7); }
+.c1 .am-zone-overlay { background: repeating-linear-gradient(45deg, #2B2E34 0, #2B2E34 3px, transparent 3px, transparent 6px); }
+.c1 .stat-a { color: #7B5EA7; }
+.c1 .stat-b { color: #2B2E34; }
+
+/* 2 · Plum + Ink */
+.c2 .am-fill { background: linear-gradient(90deg, #9563F2, #7D3BED); }
+.c2 .am-zone-overlay { background: repeating-linear-gradient(45deg, #2B2E34 0, #2B2E34 3px, transparent 3px, transparent 6px); }
+.c2 .stat-a { color: #7D3BED; }
+.c2 .stat-b { color: #2B2E34; }
+
+/* 3 · Deep plum + Clay-light */
+.c3 .am-fill { background: linear-gradient(90deg, #4A2AA0, #3A1A82); }
+.c3 .am-zone-overlay { background: repeating-linear-gradient(45deg, #B49CDC 0, #B49CDC 3px, transparent 3px, transparent 6px); }
+.c3 .stat-a { color: #3A1A82; }
+.c3 .stat-b { color: #8360C5; }
+
+/* 4 · Ink + Plum (swapped) */
+.c4 .am-fill { background: linear-gradient(90deg, #40444B, #2B2E34); }
+.c4 .am-zone-overlay { background: repeating-linear-gradient(45deg, #7D3BED 0, #7D3BED 3px, transparent 3px, transparent 6px); }
+.c4 .stat-a { color: #2B2E34; }
+.c4 .stat-b { color: #7D3BED; }
+
+/* 5 · Clay + Teal */
+.c5 .am-fill { background: linear-gradient(90deg, #9D7BC7, #7B5EA7); }
+.c5 .am-zone-overlay { background: repeating-linear-gradient(45deg, #0D9488 0, #0D9488 3px, transparent 3px, transparent 6px); }
+.c5 .stat-a { color: #7B5EA7; }
+.c5 .stat-b { color: #0D9488; }
+
+/* 6 · Clay + Amber */
+.c6 .am-fill { background: linear-gradient(90deg, #9D7BC7, #7B5EA7); }
+.c6 .am-zone-overlay { background: repeating-linear-gradient(45deg, #B45309 0, #B45309 3px, transparent 3px, transparent 6px); }
+.c6 .stat-a { color: #7B5EA7; }
+.c6 .stat-b { color: #B45309; }
+
+/* 7 · Slate + Plum */
+.c7 .am-fill { background: linear-gradient(90deg, #64748B, #475569); }
+.c7 .am-zone-overlay { background: repeating-linear-gradient(45deg, #7D3BED 0, #7D3BED 3px, transparent 3px, transparent 6px); }
+.c7 .stat-a { color: #475569; }
+.c7 .stat-b { color: #7D3BED; }
+
+/* 8 · Plum + Emerald */
+.c8 .am-fill { background: linear-gradient(90deg, #9563F2, #7D3BED); }
+.c8 .am-zone-overlay { background: repeating-linear-gradient(45deg, #047857 0, #047857 3px, transparent 3px, transparent 6px); }
+.c8 .stat-a { color: #7D3BED; }
+.c8 .stat-b { color: #047857; }
+
+/* 9 · Clay + Rose */
+.c9 .am-fill { background: linear-gradient(90deg, #9D7BC7, #7B5EA7); }
+.c9 .am-zone-overlay { background: repeating-linear-gradient(45deg, #BE185D 0, #BE185D 3px, transparent 3px, transparent 6px); }
+.c9 .stat-a { color: #7B5EA7; }
+.c9 .stat-b { color: #BE185D; }
+
+/* 10 · Navy + Plum-light */
+.c10 .am-fill { background: linear-gradient(90deg, #2449A6, #1E3A8A); }
+.c10 .am-zone-overlay { background: repeating-linear-gradient(45deg, #A96FF7 0, #A96FF7 3px, transparent 3px, transparent 6px); }
+.c10 .stat-a { color: #1E3A8A; }
+.c10 .stat-b { color: #A96FF7; }
+
+@media (max-width: 500px) {
+    .option-card { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Metric Color System — 10 Options</div>
+    <div class="page-sub">Each option shows two colors (Primary = bar fill, Secondary = stripes overlay on the first 28%). The stripe overlay uses transparent gaps so the primary shows through — this is the "mixed" region for Active Minutes. Contrast noted for Secondary ↔ Primary (stripe vs fill).</div>
+</div>
+
+<!-- 1 -->
+<div class="option-card c1">
+    <div class="option-header">
+        <span class="option-label">Option 1 · Clay + Ink</span>
+        <span class="option-contrast close">Stripe vs fill · 2.6 : 1</span>
+    </div>
+    <div class="option-tagline">Clay base with near-black ink stripes. Sophisticated, high-visibility contrast.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7B5EA7"></span>#7B5EA7 Clay</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#2B2E34"></span>#2B2E34 Ink</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 2 -->
+<div class="option-card c2">
+    <div class="option-header">
+        <span class="option-label">Option 2 · Plum + Ink</span>
+        <span class="option-contrast pass">Stripe vs fill · 3.4 : 1 ✓</span>
+    </div>
+    <div class="option-tagline">Vibrant plum primary with ink stripes — WCAG-compliant, punchy, keeps the purple identity.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7D3BED"></span>#7D3BED Plum</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#2B2E34"></span>#2B2E34 Ink</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 3 -->
+<div class="option-card c3">
+    <div class="option-header">
+        <span class="option-label">Option 3 · Deep plum + Clay-light</span>
+        <span class="option-contrast pass">Stripe vs fill · 5.2 : 1 ✓</span>
+    </div>
+    <div class="option-tagline">Two purples, light-on-dark. Clearly distinct within the purple family.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#3A1A82"></span>#3A1A82 Deep plum</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#B49CDC"></span>#B49CDC Clay-light</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 4 -->
+<div class="option-card c4">
+    <div class="option-header">
+        <span class="option-label">Option 4 · Ink + Plum (inverted)</span>
+        <span class="option-contrast pass">Stripe vs fill · 3.4 : 1 ✓</span>
+    </div>
+    <div class="option-tagline">Dark ink base with vibrant plum stripes. Purple becomes the accent color.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#2B2E34"></span>#2B2E34 Ink</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#7D3BED"></span>#7D3BED Plum</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 5 -->
+<div class="option-card c5">
+    <div class="option-header">
+        <span class="option-label">Option 5 · Clay + Teal</span>
+        <span class="option-contrast">Stripe vs fill · 1.4 : 1 (hue-distinct)</span>
+    </div>
+    <div class="option-tagline">Clay + teal is a classic complementary pair. Hues differ sharply even if luminance is similar.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7B5EA7"></span>#7B5EA7 Clay</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#0D9488"></span>#0D9488 Teal</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 6 -->
+<div class="option-card c6">
+    <div class="option-header">
+        <span class="option-label">Option 6 · Clay + Amber</span>
+        <span class="option-contrast close">Stripe vs fill · 2.1 : 1 (hue-distinct)</span>
+    </div>
+    <div class="option-tagline">Warm amber on cool clay — deliberate complementary palette, retro 70s.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7B5EA7"></span>#7B5EA7 Clay</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#B45309"></span>#B45309 Amber</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 7 -->
+<div class="option-card c7">
+    <div class="option-header">
+        <span class="option-label">Option 7 · Slate + Plum</span>
+        <span class="option-contrast close">Stripe vs fill · 2.3 : 1 (hue-distinct)</span>
+    </div>
+    <div class="option-tagline">Slate gray primary with plum as accent. Modern, neutral, lets plum "pop" as the specific Zone 2+ marker.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#475569"></span>#475569 Slate</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#7D3BED"></span>#7D3BED Plum</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 8 -->
+<div class="option-card c8">
+    <div class="option-header">
+        <span class="option-label">Option 8 · Plum + Emerald</span>
+        <span class="option-contrast">Stripe vs fill · 1.3 : 1 (hue-distinct)</span>
+    </div>
+    <div class="option-tagline">Classic purple + green. Strong hue contrast but similar luminance.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7D3BED"></span>#7D3BED Plum</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#047857"></span>#047857 Emerald</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 9 -->
+<div class="option-card c9">
+    <div class="option-header">
+        <span class="option-label">Option 9 · Clay + Rose</span>
+        <span class="option-contrast close">Stripe vs fill · 2.3 : 1 (hue-distinct)</span>
+    </div>
+    <div class="option-tagline">Clay + deep rose — warm pink on cool purple. Shares warmth with clay while remaining distinct.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#7B5EA7"></span>#7B5EA7 Clay</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#BE185D"></span>#BE185D Rose</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- 10 -->
+<div class="option-card c10">
+    <div class="option-header">
+        <span class="option-label">Option 10 · Navy + Plum-light</span>
+        <span class="option-contrast pass">Stripe vs fill · 3.4 : 1 ✓</span>
+    </div>
+    <div class="option-tagline">Deep navy base with bright lavender stripes. Navy gives a calm, trustworthy base; lavender marks high-intensity Zone 2+.</div>
+    <div class="swatches">
+        <span class="swatch"><span class="swatch-dot" style="background:#1E3A8A"></span>#1E3A8A Navy</span>
+        <span class="swatch"><span class="swatch-dot" style="background:#A96FF7"></span>#A96FF7 Plum-light</span>
+    </div>
+    <div class="bar-container">
+        <div class="bar-head">
+            <span class="bar-head-label">Active minutes</span>
+            <span class="bar-head-stats stat-a">82<small>/150 min</small></span>
+        </div>
+        <div class="am-bar"><div class="am-fill"></div><div class="am-zone-overlay"></div></div>
+        <div class="bar-subline">
+            <span class="bar-subline-label">HR Zone 2+</span>
+            <span class="bar-subline-stats stat-b">42<small style="color:inherit;opacity:.7"> /75 min</small></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
