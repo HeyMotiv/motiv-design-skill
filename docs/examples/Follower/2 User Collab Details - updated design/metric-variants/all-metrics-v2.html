@@ -12,19 +12,26 @@
     --primary-60:  #6B7280;
     --primary-30:  #9CA3AF;
 
-    --color-clay:  #6B4E71;
-    --color-sand:  #C9B1CE;
-    --color-blush: #F0E8F3;
-    --track-gray:  #EDE0F0;
+    /* Violet theme — 4-tier scale */
+    --violet-0:   #F9F8FB;
+    --violet-30:  #C9C2DA;
+    --violet-60:  #7E6DA8;
+    --violet-100: #6F6094;
+
+    --color-clay:  var(--violet-100);
+    --color-sand:  var(--violet-30);
+    --color-blush: var(--violet-0);
+    --track-gray:  var(--violet-0);
 
     --surface-white:  #FFFFFF;
     --surface-border: #E5E7EB;
-    --surface-border-subtle: #F3F4F6;
+    --surface-border-subtle: #E5E7EB;
 
-    --bar-a: #6B4E71;
-    --bar-b: #5C4160;
-    --bar-sub-a: #C9B1CE;
-    --bar-sub-b: #B89FBA;
+    --bar-a: var(--violet-100);
+    --bar-b: var(--violet-100);
+    --bar-sub-a: var(--violet-30);
+    --bar-sub-b: var(--violet-30);
+    --text-sub:  var(--violet-60);
 
     --font-body:    'Roboto', sans-serif;
     --font-display: 'Source Serif 4', serif;
@@ -94,7 +101,6 @@ body {
     letter-spacing: 1.4px;
     text-transform: uppercase;
     color: var(--color-clay);
-    opacity: 0.8;
 }
 
 .card-chevron {
@@ -138,7 +144,7 @@ body {
 }
 
 .metric-value.sub-color {
-    color: var(--color-clay);
+    color: var(--text-sub);
 }
 
 .metric-value .denom {
@@ -160,7 +166,7 @@ body {
    ============================================================ */
 .bar {
     height: 10px;
-    background: var(--color-blush);
+    background: var(--surface-border-subtle);
     border-radius: var(--radius-pill);
     overflow: hidden;
 }
@@ -185,7 +191,7 @@ body {
 
 .bar-seg {
     flex: 1;
-    background: var(--color-blush);
+    background: var(--surface-border-subtle);
     border-radius: var(--radius-pill);
 }
 
@@ -203,7 +209,7 @@ body {
 
 .step-day {
     flex: 1;
-    background: var(--color-blush);
+    background: var(--surface-border-subtle);
     border-radius: var(--radius-pill);
     position: relative;
     overflow: hidden;
@@ -212,20 +218,19 @@ body {
 .step-day-fill {
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, var(--bar-a) 0%, var(--bar-b) 100%);
+    background: var(--primary-30);
     border-radius: var(--radius-pill);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
 .step-day.completed .step-day-fill {
-    background: linear-gradient(90deg, var(--bar-sub-a) 0%, var(--bar-sub-b) 100%);
+    background: var(--bar-sub-a);
     width: 100%;
 }
 
 /* Active Minutes — overlaid zone stripe */
 .am-bar {
     height: 10px;
-    background: var(--color-blush);
+    background: var(--surface-border-subtle);
     border-radius: var(--radius-pill);
     position: relative;
     overflow: hidden;
@@ -246,8 +251,8 @@ body {
     height: 100%;
     background: repeating-linear-gradient(
         45deg,
-        rgba(180,156,220,0.7) 0,
-        rgba(180,156,220,0.7) 2.5px,
+        rgba(201,194,218,0.85) 0,
+        rgba(201,194,218,0.85) 2.5px,
         transparent 2.5px,
         transparent 5px
     );
@@ -517,8 +522,8 @@ body {
             <span class="metric-value sub-color">1<span class="denom">/ 3</span></span>
         </div>
         <div class="step-days">
-            <div class="step-day completed"><div class="step-day-fill"></div></div>
             <div class="step-day"><div class="step-day-fill" style="width: 94%;"></div></div>
+            <div class="step-day completed"><div class="step-day-fill"></div></div>
             <div class="step-day"><div class="step-day-fill" style="width: 60%;"></div></div>
             <div class="step-day"></div>
             <div class="step-day"></div>
