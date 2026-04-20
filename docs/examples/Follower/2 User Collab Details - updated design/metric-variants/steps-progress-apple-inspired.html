@@ -25,12 +25,12 @@
         --color-text-secondary: var(--primary-60);
         --color-text-tertiary: var(--primary-30);
 
-        /* Ring fills — outer = vibrant plum (first metric), inner = neutral gray */
-        --ring-steps-a: #9F5BF7;      /* electric violet (start) */
-        --ring-steps-b: #5E2BD4;      /* deep plum (end) */
-        --ring-push-a: #9CA3AF;       /* primary-30 (light gray) */
-        --ring-push-b: #6B7280;       /* primary-60 (medium gray) */
-        --track-gray: #E5E7EB;        /* neutral light gray track */
+        /* Ring fills — Option 3: outer = deep plum (primary), inner = clay-light family (secondary) */
+        --ring-steps-a: #4A2AA0;      /* deep plum (start of gradient) */
+        --ring-steps-b: #3A1A82;      /* deep plum (end) */
+        --ring-push-a: #9D7BC7;       /* clay-light softer (start) */
+        --ring-push-b: #8360C5;       /* clay-light darker (end, WCAG-compliant on white) */
+        --track-gray: #EDE6F4;        /* light purple track for inner ring */
 
         --font-body: 'Roboto', sans-serif;
         --radius-lg: 12px;
@@ -194,8 +194,8 @@
     }
     .apple-stat-slash {
         font-weight: 500;
-        opacity: 0.55;
-        margin: 0 1px;
+        opacity: 0.45;
+        margin: 0 3px;
     }
     .apple-stat-unit {
         font-size: 11px;
@@ -204,6 +204,19 @@
         text-transform: uppercase;
         margin-left: 4px;
         opacity: 0.8;
+    }
+    .apple-stat-denom {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--color-text-tertiary);
+        letter-spacing: 0;
+    }
+    .apple-card-chevron {
+        flex-shrink: 0;
+        align-self: center;
+        color: var(--color-text-tertiary);
+        margin-left: 6px;
+        opacity: 0.7;
     }
     .apple-stat-sub {
         font-size: 11px;
@@ -402,6 +415,34 @@
         fill: none;
         stroke-linecap: round;
         stroke-linejoin: round;
+        transition: transform 0.15s ease;
+    }
+    @keyframes syncSpin {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+    }
+    .apple-sync-btn.syncing svg {
+        animation: syncSpin 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .apple-sync-btn.synced svg {
+        transform: rotate(360deg);
+    }
+
+    /* Two-column layout */
+    .columns {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    .column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    @media (max-width: 860px) {
+        .columns { flex-direction: column; align-items: center; }
     }
 
     @media (max-width: 420px) {
@@ -413,7 +454,7 @@
 
 <div>
     <div class="page-title">Weekly Progress — Ring Cards for All 3 Metrics</div>
-    <div class="page-sub">The Apple-inspired ring card applied across Steps, Active Energy, and Active Minutes. Each card includes today's snapshot above the 6-week collab rail.</div>
+    <div class="page-sub">Apple-inspired ring cards for all 3 metrics. Outer ring: volume goal. Inner ring: frequency/quality goal.</div>
 </div>
 
 <!-- ============================================================
@@ -451,13 +492,16 @@
                         <path d="M -3 -3 L 2 0 L -3 3"/>
                     </g>
 
-                    <circle cx="70" cy="70" r="39" class="apple-track-inner"/>
+                    <!-- Inner ring · 3 segments (push days), 1 filled -->
+                    <circle cx="70" cy="70" r="39" class="apple-track-inner"
+                            stroke-dasharray="67.68 14"
+                            transform="rotate(-90 70 70)"/>
                     <circle cx="70" cy="70" r="39" class="apple-fill"
                             stroke="url(#gradStepsInner)"
-                            stroke-dasharray="245.04"
-                            stroke-dashoffset="163.36"
+                            stroke-dasharray="67.68 1000"
                             transform="rotate(-90 70 70)"/>
-                    <g class="arrow" transform="translate(103.77 89.5) rotate(120)">
+                    <!-- Double-chevron at end of latest filled segment (segment 1) -->
+                    <g class="arrow" transform="translate(108.5 76.4) rotate(99.4)">
                         <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
                         <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
                     </g>
@@ -467,20 +511,23 @@
             <div class="apple-stats">
                 <div class="apple-stat">
                     <div class="apple-stat-label">Weekly steps</div>
-                    <div class="apple-stat-value val-outer">28,400</div>
-                    <div class="apple-stat-sub">of 56,000</div>
+                    <div class="apple-stat-value val-outer">28,400<span class="apple-stat-slash">/</span><span class="apple-stat-denom">56,000</span></div>
+                    <div class="apple-stat-sub">all steps count</div>
                 </div>
                 <div class="apple-stat">
                     <div class="apple-stat-label">Push days</div>
-                    <div class="apple-stat-value val-inner">1<span class="apple-stat-slash">/</span>3</div>
+                    <div class="apple-stat-value val-inner">1<span class="apple-stat-slash">/</span><span class="apple-stat-denom">3</span></div>
                     <div class="apple-stat-sub">day with 9,200+ steps</div>
                 </div>
             </div>
+            <svg class="apple-card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+                <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
 
         <div class="apple-today">
             <span class="apple-today-label">Today</span>
-            <span class="apple-today-value">8,516 steps so far</span>
+            <span class="apple-today-value">5,518 steps so far</span>
         </div>
 
         <div class="apple-week-progress">
@@ -523,7 +570,7 @@
      ============================================================ -->
 <div class="metric-panel">
     <div class="v-label">Active energy model</div>
-    <div class="v-tagline">Outer ring · weekly active energy (kcal). Inner ring · workouts (20+ min in Zone 2+).</div>
+    <div class="v-tagline">Outer ring · weekly active energy (kcal). Inner ring · Zone 2+ workouts (20+ min).</div>
     <div class="stats-section-title">This week</div>
 
     <div class="apple-card">
@@ -551,13 +598,16 @@
                         <path d="M -3 -3 L 2 0 L -3 3"/>
                     </g>
 
-                    <circle cx="70" cy="70" r="39" class="apple-track-inner"/>
+                    <!-- Inner ring · 4 segments (Zone 2+ workouts), 2 filled -->
+                    <circle cx="70" cy="70" r="39" class="apple-track-inner"
+                            stroke-dasharray="47.26 14"
+                            transform="rotate(-90 70 70)"/>
                     <circle cx="70" cy="70" r="39" class="apple-fill"
                             stroke="url(#gradEnergyInner)"
-                            stroke-dasharray="245.04"
-                            stroke-dashoffset="122.52"
+                            stroke-dasharray="47.26 14 47.26 1000"
                             transform="rotate(-90 70 70)"/>
-                    <g class="arrow" transform="translate(70 109) rotate(180)">
+                    <!-- Double-chevron at end of latest filled segment (segment 2) -->
+                    <g class="arrow" transform="translate(83.7 106.5) rotate(159.5)">
                         <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
                         <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
                     </g>
@@ -566,21 +616,24 @@
 
             <div class="apple-stats">
                 <div class="apple-stat">
-                    <div class="apple-stat-label">Active energy</div>
-                    <div class="apple-stat-value val-outer">820</div>
-                    <div class="apple-stat-sub">of 1,800 kcal</div>
+                    <div class="apple-stat-label">Active energy (cals)</div>
+                    <div class="apple-stat-value val-outer">820<span class="apple-stat-slash">/</span><span class="apple-stat-denom">1,800</span></div>
+                    <div class="apple-stat-sub">all movement</div>
                 </div>
                 <div class="apple-stat">
-                    <div class="apple-stat-label">Workouts</div>
-                    <div class="apple-stat-value val-inner">2<span class="apple-stat-slash">/</span>4</div>
-                    <div class="apple-stat-sub">20+ min in Zone 2+</div>
+                    <div class="apple-stat-label">Tracked workouts</div>
+                    <div class="apple-stat-value val-inner">2<span class="apple-stat-slash">/</span><span class="apple-stat-denom">4</span></div>
+                    <div class="apple-stat-sub">20+ min, Zone 2+ avg HR</div>
                 </div>
             </div>
+            <svg class="apple-card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+                <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
 
         <div class="apple-today">
             <span class="apple-today-label">Today</span>
-            <span class="apple-today-value">32 min workout · 380 kcal</span>
+            <span class="apple-today-value">32 min workout · 380 cals</span>
         </div>
 
         <div class="apple-week-progress">
@@ -623,7 +676,7 @@
      ============================================================ -->
 <div class="metric-panel">
     <div class="v-label">Active minutes model</div>
-    <div class="v-tagline">Outer ring · total active minutes. Inner ring · upper-zone minutes (moderate + vigorous).</div>
+    <div class="v-tagline">Outer ring · total active minutes. Inner ring · minutes in HR Zone 2+ (moderate + vigorous).</div>
     <div class="stats-section-title">This week</div>
 
     <div class="apple-card">
@@ -667,20 +720,23 @@
             <div class="apple-stats">
                 <div class="apple-stat">
                     <div class="apple-stat-label">Active minutes</div>
-                    <div class="apple-stat-value val-outer">82</div>
-                    <div class="apple-stat-sub">of 150 min</div>
+                    <div class="apple-stat-value val-outer">82<span class="apple-stat-slash">/</span><span class="apple-stat-denom">150</span></div>
+                    <div class="apple-stat-sub">all intensity levels</div>
                 </div>
                 <div class="apple-stat">
-                    <div class="apple-stat-label">HR Zone 2+</div>
-                    <div class="apple-stat-value val-inner">42<span class="apple-stat-slash">/</span>75<span class="apple-stat-unit">min</span></div>
-                    <div class="apple-stat-sub">moderate + vigorous intensity</div>
+                    <div class="apple-stat-label">Zone 2+ minutes</div>
+                    <div class="apple-stat-value val-inner">42<span class="apple-stat-slash">/</span><span class="apple-stat-denom">75</span></div>
+                    <div class="apple-stat-sub">elevated HR, any activity</div>
                 </div>
             </div>
+            <svg class="apple-card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+                <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
 
         <div class="apple-today">
             <span class="apple-today-label">Today</span>
-            <span class="apple-today-value">16 min · 6 in upper zones</span>
+            <span class="apple-today-value">16 min · 6 in HR Zone 2+</span>
         </div>
 
         <div class="apple-week-progress">
@@ -716,5 +772,19 @@
     </div>
 </div>
 
+<script>
+    document.querySelectorAll('.apple-sync-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.classList.contains('syncing')) return;
+            btn.classList.add('syncing');
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.classList.remove('syncing');
+                btn.classList.add('synced');
+                btn.disabled = false;
+            }, 700);
+        });
+    });
+</script>
 </body>
 </html>
