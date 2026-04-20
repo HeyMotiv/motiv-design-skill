@@ -56,6 +56,25 @@
       "port": 8774
     },
     {
+      "name": "collab-setup",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-collab-setup.js"],
+      "port": 8775
+    },
+    {
+      "name": "goal-calc",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-goal-calc.js"],
+      "port": 8776
+    },
+    {
+      "name": "metrics",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-metrics.js"],
+      "port": 8777,
+      "autoPort": true
+    },
+    {
       "name": "figma-capture",
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-figma-capture.js"],

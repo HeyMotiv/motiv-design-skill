@@ -12,19 +12,19 @@
     --primary-60:  #6B7280;
     --primary-30:  #9CA3AF;
 
-    --color-clay:  #7B5EA7;
-    --color-sand:  #E8DFF5;
-    --color-blush: #F3EEF9;
-    --track-gray:  #EDE6F4;
+    --color-clay:  #6B4E71;
+    --color-sand:  #C9B1CE;
+    --color-blush: #F0E8F3;
+    --track-gray:  #EDE0F0;
 
     --surface-white:  #FFFFFF;
     --surface-border: #E5E7EB;
     --surface-border-subtle: #F3F4F6;
 
-    --bar-a: #4A2AA0;
-    --bar-b: #3A1A82;
-    --bar-sub-a: #C7B3E4;
-    --bar-sub-b: #B49CDC;
+    --bar-a: #6B4E71;
+    --bar-b: #5C4160;
+    --bar-sub-a: #C9B1CE;
+    --bar-sub-b: #B89FBA;
 
     --font-body:    'Roboto', sans-serif;
     --font-display: 'Source Serif 4', serif;
@@ -81,6 +81,13 @@ body {
    CARD TAG — "ACTIVE ENERGY · THIS WEEK"
    ============================================================ */
 .card-tag {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-16);
+}
+
+.card-tag-label {
     font-family: var(--font-display);
     font-size: 9px;
     font-weight: 700;
@@ -88,7 +95,12 @@ body {
     text-transform: uppercase;
     color: var(--color-clay);
     opacity: 0.8;
-    margin-bottom: var(--sp-16);
+}
+
+.card-chevron {
+    color: var(--primary-30);
+    opacity: 0.55;
+    flex-shrink: 0;
 }
 
 /* ============================================================
@@ -126,7 +138,7 @@ body {
 }
 
 .metric-value.sub-color {
-    color: #8360C5;
+    color: var(--color-clay);
 }
 
 .metric-value .denom {
@@ -414,7 +426,12 @@ body {
      ACTIVE ENERGY
      ============================================================ -->
 <div class="metric-card">
-    <div class="card-tag">Active Energy · This Week</div>
+    <div class="card-tag">
+        <span class="card-tag-label">Active Energy · This Week</span>
+        <svg class="card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+            <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
     <div class="metric-row">
         <div class="metric-head">
@@ -477,7 +494,12 @@ body {
      STEPS
      ============================================================ -->
 <div class="metric-card">
-    <div class="card-tag">Steps · This Week</div>
+    <div class="card-tag">
+        <span class="card-tag-label">Steps · This Week</span>
+        <svg class="card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+            <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
     <div class="metric-row">
         <div class="metric-head">
@@ -543,7 +565,12 @@ body {
      ACTIVE MINUTES
      ============================================================ -->
 <div class="metric-card">
-    <div class="card-tag">Active Minutes · This Week</div>
+    <div class="card-tag">
+        <span class="card-tag-label">Active Minutes · This Week</span>
+        <svg class="card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+            <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
     <div class="metric-row">
         <div class="metric-head">
@@ -601,7 +628,12 @@ body {
      PELOTON
      ============================================================ -->
 <div class="metric-card">
-    <div class="card-tag">Peloton · This Week</div>
+    <div class="card-tag">
+        <span class="card-tag-label">Peloton · This Week</span>
+        <svg class="card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+            <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
 
     <div class="metric-row">
         <div class="metric-head">
