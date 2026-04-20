@@ -611,6 +611,98 @@
     </div>
 </div>
 
+<!-- ============================================================
+     PELOTON
+     Outer: 1,240/2,500 kJ = 49.6% · Inner: 3/5 workouts = 60%
+     ============================================================ -->
+<div class="metric-card">
+    <div class="card-tag">Peloton · This week</div>
+
+    <div class="card-body">
+        <div class="ring-wrap">
+            <svg viewBox="0 0 140 140">
+                <defs>
+                    <linearGradient id="gradPelOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--ring-outer-a)"/>
+                        <stop offset="100%" stop-color="var(--ring-outer-b)"/>
+                    </linearGradient>
+                    <linearGradient id="gradPelInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="var(--ring-inner-a)"/>
+                        <stop offset="100%" stop-color="var(--ring-inner-b)"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="70" cy="70" r="55" class="ring-track-outer"/>
+                <circle cx="70" cy="70" r="55" class="ring-fill"
+                        stroke="url(#gradPelOuter)"
+                        stroke-dasharray="345.58" stroke-dashoffset="174.17"
+                        transform="rotate(-90 70 70)"/>
+                <g class="ring-arrow" transform="translate(71.4 125.0) rotate(178.6)">
+                    <path d="M -3 -3 L 2 0 L -3 3"/>
+                </g>
+                <!-- Inner ring · 5 segments, 3 filled -->
+                <circle cx="70" cy="70" r="39" class="ring-track-inner"
+                        stroke-dasharray="35.01 14"
+                        transform="rotate(-90 70 70)"/>
+                <circle cx="70" cy="70" r="39" class="ring-fill"
+                        stroke="url(#gradPelInner)"
+                        stroke-dasharray="35.01 14 35.01 14 35.01 1000"
+                        transform="rotate(-90 70 70)"/>
+                <g class="ring-arrow" transform="translate(59.6 107.6) rotate(195.4)">
+                    <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8"/>
+                    <path d="M -5 -1.8 L -2.6 0 L -5 1.8"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="card-stats">
+            <div>
+                <div class="stat-label">Total output (kJ)</div>
+                <div class="stat-value val-outer">1,240<span class="stat-slash">/</span><span class="stat-denom">2,500</span></div>
+                <div class="stat-sub">all rides & classes</div>
+            </div>
+            <div>
+                <div class="stat-label">Workouts</div>
+                <div class="stat-value val-inner">3<span class="stat-slash">/</span><span class="stat-denom">5</span></div>
+                <div class="stat-sub">any Peloton class</div>
+            </div>
+        </div>
+
+        <svg class="card-chevron" viewBox="0 0 8 14" width="8" height="14" fill="none">
+            <path d="M 1 1 L 7 7 L 1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+    <div class="card-footer">
+        <div class="footer-today">
+            <span class="footer-today-label">Today</span>
+            285 kJ · 45 min ride
+        </div>
+        <div class="footer-meta">
+            <div class="collab-track">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <span class="collab-wk"><strong>Week 3</strong> of 6</span>
+            </div>
+            <div class="sync-area">
+                <span class="sync-dot"></span>
+                <span class="sync-time">9:32 am</span>
+                <button class="sync-btn">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="23 4 23 10 17 10"/>
+                        <polyline points="1 20 1 14 7 14"/>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                    </svg>
+                    Sync
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.querySelectorAll('.sync-btn').forEach(btn => {
         btn.addEventListener('click', () => {
