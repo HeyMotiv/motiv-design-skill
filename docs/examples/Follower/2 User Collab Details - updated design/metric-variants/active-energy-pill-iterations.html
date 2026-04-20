@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Energy — Vertical Pill Iterations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-100: #2B2E34;
+    --primary-60: #6B7280;
+    --primary-30: #9CA3AF;
+    --color-clay: #7B5EA7;
+    --color-clay-soft: #9D7BC7;
+    --color-clay-light: #B49CDC;
+    --color-plum: #7D3BED;
+    --color-plum-light: #A96FF7;
+    --color-sand: #E8DFF5;
+    --color-blush: #F3EEF9;
+    --color-bg-primary: #F7F3FB;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+
+    --color-text-primary: var(--primary-100);
+    --color-text-secondary: var(--primary-60);
+    --color-text-tertiary: var(--primary-30);
+
+    --font-body: 'Roboto', sans-serif;
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+    --radius-xl: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+.page-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.page-sub {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    max-width: 520px;
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+.metric-panel {
+    width: 390px;
+    background: var(--color-bg-primary);
+    border-radius: 24px;
+    padding: 20px 20px 22px;
+}
+.v-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-bottom: 4px;
+}
+.v-tagline {
+    font-size: 11px;
+    color: var(--primary-60);
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+.stats-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.energy-card {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shared header ------------------------------------------------- */
+.card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 12px;
+}
+.head-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.head-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+.head-goal {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    margin-left: 3px;
+}
+
+/* Shared footer ------------------------------------------------- */
+.card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 16px;
+}
+.foot-today {
+    color: var(--color-text-tertiary);
+}
+.foot-today strong {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+/* Shared pill primitives --------------------------------------- */
+.pill-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+}
+.pill-bar {
+    width: 100%;
+    height: 70px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+}
+.pill-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.pill-bar.future {
+    background: transparent;
+    border: 1.5px dashed var(--color-border-default);
+}
+.pill-bar.today {
+    box-shadow: 0 0 0 2px rgba(123,94,167,0.25), 0 2px 4px rgba(123,94,167,0.15);
+}
+.pill-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+.pill-col.today .pill-label {
+    color: var(--color-clay);
+}
+.pill-value {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+.pill-col.future .pill-value {
+    color: var(--color-text-tertiary);
+    font-weight: 400;
+}
+.pill-col.today .pill-value {
+    color: var(--color-clay);
+}
+.pill-workout-badge {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-plum);
+    border: 2px solid var(--surface-white);
+    z-index: 2;
+}
+
+/* ============================================================
+   V1 · DAYS OF THE WEEK (7 pills · one per day)
+   ============================================================ */
+.v1-rail {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+}
+.v1-rail .pill-col { flex: 1; }
+
+/* ============================================================
+   V2 · WORKOUTS (4 pills · one per required workout)
+   ============================================================ */
+.v2-rail {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+.v2-rail .pill-col { flex: 1; }
+.v2-rail .pill-bar { height: 80px; }
+.v2-rail .pill-fill {
+    background: linear-gradient(180deg, var(--color-plum-light) 0%, var(--color-plum) 100%);
+}
+.v2-rail .pill-bar.future {
+    background: transparent;
+    border: 1.5px dashed var(--color-border-default);
+}
+.v2-sublabel {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    text-align: center;
+    margin-top: 2px;
+}
+
+/* ============================================================
+   V3 · MILESTONES (4 named pills: Warm-up / Active / Strong / Champion)
+   ============================================================ */
+.v3-rail {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+.v3-rail .pill-col { flex: 1; }
+.v3-rail .pill-bar { height: 90px; }
+.v3-milestone-name {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 1px;
+}
+.v3-milestone-range {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+.v3-rail .pill-col.current .v3-milestone-name {
+    color: var(--color-clay);
+}
+.v3-rail .pill-col.done .v3-milestone-name {
+    color: var(--color-text-secondary);
+}
+/* Trophy icon for Champion pill when empty */
+.v3-rail .pill-col.champion .pill-bar::after {
+    content: '★';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    color: var(--color-border-default);
+    font-weight: 700;
+}
+
+/* ============================================================
+   V4 · SOURCES BREAKDOWN (proportional-width pills)
+   ============================================================ */
+.v4-rail {
+    display: flex;
+    gap: 4px;
+    align-items: stretch;
+    height: 80px;
+    margin-bottom: 10px;
+}
+.v4-seg {
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v4-seg.workout {
+    background: linear-gradient(180deg, var(--color-plum-light) 0%, var(--color-plum) 100%);
+}
+.v4-seg.mid {
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.v4-seg.remaining {
+    background: transparent;
+    border: 1.5px dashed var(--color-border-default);
+    box-shadow: none;
+}
+.v4-seg-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+    line-height: 1.2;
+}
+.v4-seg-kcal {
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+    margin-top: 2px;
+}
+.v4-seg.remaining .v4-seg-label,
+.v4-seg.remaining .v4-seg-kcal {
+    color: var(--color-text-tertiary);
+}
+.v4-seg-inner {
+    text-align: center;
+}
+.v4-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 6px;
+}
+.v4-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.v4-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.v4-legend-dot.workout { background: var(--color-plum); }
+.v4-legend-dot.remaining { background: transparent; border: 1.5px dashed var(--color-border-default); }
+
+/* ============================================================
+   V5 · SINGLE TALL BATTERY (one big pill with scale + badges)
+   ============================================================ */
+.v5-layout {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 14px;
+}
+.v5-tank-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    flex-shrink: 0;
+}
+.v5-scale {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--color-text-tertiary);
+    padding: 2px 0;
+}
+.v5-pill {
+    width: 46px;
+    height: 140px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1.5px var(--color-border-default);
+}
+.v5-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45.6%;
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 60%, var(--color-plum) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 2px 3px rgba(255,255,255,0.35);
+}
+.v5-fill::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    right: 6px;
+    height: 3px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 3px;
+}
+.v5-tick {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.45);
+    z-index: 1;
+}
+.v5-tick-outside {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-border-default);
+}
+.v5-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+}
+.v5-stat-block { }
+.v5-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 3px;
+}
+.v5-stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v5-stat-value small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 3px;
+}
+.v5-workout-pills {
+    display: inline-flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+.v5-workout-pill {
+    width: 22px;
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: var(--color-border-default);
+}
+.v5-workout-pill.done {
+    background: var(--color-plum);
+}
+
+@media (max-width: 420px) {
+    .metric-panel { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Active Energy — Vertical Pill Iterations</div>
+    <div class="page-sub">Five options that riff on V1's pill-bar look, each with a clear "one pill = one ___" metaphor. Same card width, Motiv DS palette throughout.</div>
+</div>
+
+<!-- ============================================================
+     V1 · DAYS OF THE WEEK
+     Metaphor: one pill = one day. Fill = that day's kcal.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V1 · Days of the week</div>
+    <div class="v-tagline">One pill per day. Fill height shows the day's kcal. Workout days have a plum dot on top; today is ringed; future days are dashed.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="card-head">
+            <span class="head-label">Active energy</span>
+            <span>
+                <span class="head-value">820</span><span class="head-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v1-rail">
+            <div class="pill-col">
+                <div class="pill-bar">
+                    <span class="pill-workout-badge"></span>
+                    <div class="pill-fill" style="height: 84%;"></div>
+                </div>
+                <span class="pill-label">Sat</span>
+                <span class="pill-value">420</span>
+            </div>
+            <div class="pill-col">
+                <div class="pill-bar">
+                    <div class="pill-fill" style="height: 12%;"></div>
+                </div>
+                <span class="pill-label">Sun</span>
+                <span class="pill-value">20</span>
+            </div>
+            <div class="pill-col today">
+                <div class="pill-bar today">
+                    <span class="pill-workout-badge"></span>
+                    <div class="pill-fill" style="height: 76%;"></div>
+                </div>
+                <span class="pill-label">Mon</span>
+                <span class="pill-value">380</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Tue</span>
+                <span class="pill-value">—</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Wed</span>
+                <span class="pill-value">—</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Thu</span>
+                <span class="pill-value">—</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Fri</span>
+                <span class="pill-value">—</span>
+            </div>
+        </div>
+
+        <div class="card-foot">
+            <span>2 / 4 workouts</span>
+            <span class="foot-today">Today · <strong>32 min · 380 kcal</strong></span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V2 · WORKOUTS
+     Metaphor: one pill = one of your 4 required workouts.
+     Fill = that workout's kcal contribution.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V2 · Workouts</div>
+    <div class="v-tagline">One pill per required workout. Fill height shows that workout's kcal. Upcoming slots are dashed.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="card-head">
+            <span class="head-label">Workouts (by energy)</span>
+            <span>
+                <span class="head-value">2</span><span class="head-goal">of 4 · 700 kcal</span>
+            </span>
+        </div>
+
+        <div class="v2-rail">
+            <div class="pill-col">
+                <div class="pill-bar">
+                    <div class="pill-fill" style="height: 84%;"></div>
+                </div>
+                <span class="pill-label">Sat · Run</span>
+                <span class="pill-value">420 kcal</span>
+            </div>
+            <div class="pill-col today">
+                <div class="pill-bar today">
+                    <div class="pill-fill" style="height: 56%;"></div>
+                </div>
+                <span class="pill-label">Mon · HIIT</span>
+                <span class="pill-value">280 kcal</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Workout 3</span>
+                <span class="pill-value">—</span>
+            </div>
+            <div class="pill-col future">
+                <div class="pill-bar future"></div>
+                <span class="pill-label">Workout 4</span>
+                <span class="pill-value">—</span>
+            </div>
+        </div>
+
+        <div class="v2-sublabel">Each workout must be 20+ min in Zone 2+</div>
+
+        <div class="card-foot">
+            <span>Weekly energy · 820 / 1,800 kcal</span>
+            <span class="foot-today">Today · <strong>380 kcal</strong></span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V3 · MILESTONES (Warm-up · Active · Strong · Champion)
+     Metaphor: one pill = one named milestone on the way to 1,800 kcal.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V3 · Milestones</div>
+    <div class="v-tagline">Four named levels on the way to goal. Fill shows progress inside the current level; previous levels are capped full. Champion is the trophy.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="card-head">
+            <span class="head-label">Active energy</span>
+            <span>
+                <span class="head-value">820</span><span class="head-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v3-rail">
+            <div class="pill-col done">
+                <div class="v3-milestone-name">Warm-up</div>
+                <div class="pill-bar">
+                    <div class="pill-fill" style="height: 100%;"></div>
+                </div>
+                <div class="v3-milestone-range">0 – 450</div>
+            </div>
+            <div class="pill-col current">
+                <div class="v3-milestone-name">Active</div>
+                <div class="pill-bar today">
+                    <div class="pill-fill" style="height: 82%;"></div>
+                </div>
+                <div class="v3-milestone-range">450 – 900</div>
+            </div>
+            <div class="pill-col">
+                <div class="v3-milestone-name">Strong</div>
+                <div class="pill-bar future"></div>
+                <div class="v3-milestone-range">900 – 1,350</div>
+            </div>
+            <div class="pill-col champion">
+                <div class="v3-milestone-name">Champion</div>
+                <div class="pill-bar future"></div>
+                <div class="v3-milestone-range">1,350 – 1,800</div>
+            </div>
+        </div>
+
+        <div class="card-foot">
+            <span>2 / 4 workouts · reach <strong style="color: var(--color-clay);">Strong</strong> next</span>
+            <span class="foot-today">Today · <strong>380 kcal</strong></span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V4 · SOURCES BREAKDOWN
+     Metaphor: each pill is a distinct energy contribution.
+     Width scales with kcal. Reads like a receipt.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V4 · Sources</div>
+    <div class="v-tagline">Pills sized proportionally to their contribution. Workouts are plum, general movement clay, remaining dashed. At a glance: what built your total, and what's left.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="card-head">
+            <span class="head-label">Active energy</span>
+            <span>
+                <span class="head-value">820</span><span class="head-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v4-legend">
+            <span class="v4-legend-item"><span class="v4-legend-dot workout"></span>Workout</span>
+            <span class="v4-legend-item"><span class="v4-legend-dot" style="background: var(--color-clay);"></span>Movement</span>
+            <span class="v4-legend-item"><span class="v4-legend-dot remaining"></span>Remaining</span>
+        </div>
+
+        <div class="v4-rail">
+            <div class="v4-seg workout" style="flex: 420;">
+                <div class="v4-seg-inner">
+                    <div class="v4-seg-label">Sat<br/>Run</div>
+                    <div class="v4-seg-kcal">420</div>
+                </div>
+            </div>
+            <div class="v4-seg workout" style="flex: 280;">
+                <div class="v4-seg-inner">
+                    <div class="v4-seg-label">Mon<br/>HIIT</div>
+                    <div class="v4-seg-kcal">280</div>
+                </div>
+            </div>
+            <div class="v4-seg mid" style="flex: 120;">
+                <div class="v4-seg-inner">
+                    <div class="v4-seg-label" style="font-size: 8px;">Daily</div>
+                    <div class="v4-seg-kcal" style="font-size: 11px;">120</div>
+                </div>
+            </div>
+            <div class="v4-seg remaining" style="flex: 980;">
+                <div class="v4-seg-inner">
+                    <div class="v4-seg-label">Remaining</div>
+                    <div class="v4-seg-kcal">980</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-foot">
+            <span>2 / 4 workouts done</span>
+            <span class="foot-today">Today · <strong>380 kcal</strong></span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V5 · SINGLE TALL BATTERY
+     Metaphor: the whole battery IS the week's kcal goal.
+     Scale markers label the milestones. Workouts shown as pips.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V5 · Single tall battery</div>
+    <div class="v-tagline">One big battery pill = the whole weekly goal. Inline tick marks label every quarter. Workouts appear as pips on the right. The pill itself is the story.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v5-layout">
+            <div class="v5-tank-wrap">
+                <div class="v5-scale">
+                    <span>1,800</span>
+                    <span>1,350</span>
+                    <span>900</span>
+                    <span>450</span>
+                    <span>0</span>
+                </div>
+                <div class="v5-pill">
+                    <div class="v5-fill"></div>
+                    <div class="v5-tick" style="bottom: 25%;"></div>
+                    <div class="v5-tick-outside" style="bottom: 50%;"></div>
+                    <div class="v5-tick-outside" style="bottom: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="v5-stats">
+                <div class="v5-stat-block">
+                    <div class="v5-stat-label">Active energy</div>
+                    <div class="v5-stat-value">820<small>/ 1,800 kcal</small></div>
+                </div>
+                <div class="v5-stat-block">
+                    <div class="v5-stat-label">Workouts · 2 / 4</div>
+                    <div class="v5-workout-pills">
+                        <div class="v5-workout-pill done"></div>
+                        <div class="v5-workout-pill done"></div>
+                        <div class="v5-workout-pill"></div>
+                        <div class="v5-workout-pill"></div>
+                    </div>
+                </div>
+                <div class="v5-stat-block">
+                    <div class="v5-stat-label">Today</div>
+                    <div class="v5-stat-value" style="font-size: 14px; color: var(--color-text-secondary); font-weight: 600;">32 min · 380 kcal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

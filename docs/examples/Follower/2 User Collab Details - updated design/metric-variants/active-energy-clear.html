@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Energy — Two Independent Goals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-100: #2B2E34;
+    --primary-60: #6B7280;
+    --primary-30: #9CA3AF;
+    --color-clay: #7B5EA7;
+    --color-clay-soft: #9D7BC7;
+    --color-plum: #7D3BED;
+    --color-plum-light: #A96FF7;
+    --color-sand: #E8DFF5;
+    --color-blush: #F3EEF9;
+    --color-bg-primary: #F7F3FB;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+
+    --color-text-primary: var(--primary-100);
+    --color-text-secondary: var(--primary-60);
+    --color-text-tertiary: var(--primary-30);
+
+    --font-body: 'Roboto', sans-serif;
+
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+    --radius-xl: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+.page-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.page-sub {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    max-width: 520px;
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+.metric-panel {
+    width: 390px;
+    background: var(--color-bg-primary);
+    border-radius: 24px;
+    padding: 20px 20px 22px;
+}
+.v-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-bottom: 4px;
+}
+.v-tagline {
+    font-size: 11px;
+    color: var(--primary-60);
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+.stats-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+.energy-card {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+}
+
+/* ========== Collab rail (shared across all variants) ========== */
+.collab-rail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+}
+.collab-rail-label strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+}
+.collab-dots {
+    display: flex;
+    gap: 5px;
+}
+.collab-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border-default);
+}
+.collab-dot.done {
+    background: var(--color-clay);
+    border-color: var(--color-clay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.collab-dot.done svg {
+    width: 6px;
+    height: 6px;
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.collab-dot.partial {
+    border: none;
+    background: conic-gradient(from 0deg, var(--color-clay) 0deg 206deg, var(--color-sand) 206deg 360deg);
+    position: relative;
+}
+.collab-dot.partial::after {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    border-radius: 50%;
+    background: var(--surface-white);
+}
+
+/* ========== Sync footer ========== */
+.sync-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+}
+.sync-status {
+    color: var(--color-text-tertiary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.sync-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3CB371;
+    flex-shrink: 0;
+}
+.sync-btn {
+    color: var(--color-clay);
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: var(--font-body);
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.sync-btn svg {
+    width: 11px;
+    height: 11px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ============================================================
+   V1 · TWO STACKED BARS
+   The simplest possible: one bar per goal.
+   ============================================================ */
+.v1-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.v1-row + .v1-row {
+    margin-top: 14px;
+}
+.v1-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+.v1-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v1-remaining {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+}
+.v1-stats {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.3px;
+}
+.v1-stats small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 2px;
+}
+.v1-bar {
+    height: 12px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+.v1-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v1-segs {
+    display: flex;
+    gap: 4px;
+    height: 12px;
+}
+.v1-seg {
+    flex: 1;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+}
+.v1-seg.filled {
+    background: linear-gradient(90deg, var(--color-plum-light) 0%, var(--color-plum) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* ============================================================
+   V2 · ARC + WORKOUT BAR
+   Semi-circle gauge for kcal. Workouts reuses V1's segment bar.
+   ============================================================ */
+.v2-arc-heading {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+.v2-arc-wrap {
+    width: 220px;
+    margin: 2px auto 6px;
+    position: relative;
+}
+.v2-arc-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+.v2-arc-track {
+    fill: none;
+    stroke: var(--color-sand);
+    stroke-width: 9;
+    stroke-linecap: round;
+}
+.v2-arc-fill {
+    fill: none;
+    stroke: var(--color-clay);
+    stroke-width: 9;
+    stroke-linecap: round;
+    filter: drop-shadow(0 1px 3px rgba(123, 94, 167, 0.25));
+}
+.v2-arc-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64%;
+    transform: translateY(-50%);
+    text-align: center;
+    padding: 0 14px;
+}
+.v2-arc-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.7px;
+    line-height: 1;
+}
+.v2-arc-unit {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-top: 5px;
+    letter-spacing: 0.1px;
+}
+
+/* ============================================================
+   V3 · COMPACT ARC + WORKOUT BAR
+   Same structure as V2, scaled down to match V1's height.
+   ============================================================ */
+.v3-arc-heading {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+}
+.v3-arc-wrap {
+    width: 150px;
+    margin: 0 auto 4px;
+    position: relative;
+}
+.v3-arc-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+.v3-arc-track {
+    fill: none;
+    stroke: var(--color-sand);
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+.v3-arc-fill {
+    fill: none;
+    stroke: var(--color-clay);
+    stroke-width: 8;
+    stroke-linecap: round;
+    filter: drop-shadow(0 1px 2px rgba(123, 94, 167, 0.2));
+}
+.v3-arc-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64%;
+    transform: translateY(-50%);
+    text-align: center;
+    padding: 0 10px;
+}
+.v3-arc-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v3-arc-unit {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-top: 3px;
+    letter-spacing: 0.1px;
+}
+.v3-workout-row {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.v3-segs {
+    display: flex;
+    gap: 3px;
+    height: 8px;
+}
+.v3-seg {
+    flex: 1;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+}
+.v3-seg.filled {
+    background: linear-gradient(90deg, var(--color-plum-light) 0%, var(--color-plum) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* ============================================================
+   V4 · CIRCLE + SIDE LABELS
+   Full ring for kcal with label/value/unit stacked to the right.
+   Workouts bar below (same as V3).
+   ============================================================ */
+.v4-kcal-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+.v4-ring-wrap {
+    width: 78px;
+    height: 78px;
+    flex-shrink: 0;
+    position: relative;
+}
+.v4-ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    display: block;
+}
+.v4-ring-track {
+    fill: none;
+    stroke: var(--color-sand);
+    stroke-width: 8;
+}
+.v4-ring-fill {
+    fill: none;
+    stroke: var(--color-clay);
+    stroke-width: 8;
+    stroke-linecap: round;
+    filter: drop-shadow(0 1px 2px rgba(123, 94, 167, 0.2));
+}
+.v4-kcal-text {
+    min-width: 0;
+}
+.v4-kcal-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 3px;
+}
+.v4-kcal-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v4-kcal-unit {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   V5 · ONE BATTERY + WORKOUT TALLY
+   Asymmetric: big visual for kcal (the big number),
+   simple check tally for workouts (the small number).
+   ============================================================ */
+.v5-kcal {
+    margin-bottom: 16px;
+}
+.v5-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.v5-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v5-stats {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v5-stats small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 3px;
+}
+.v5-bar {
+    height: 18px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.v5-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v5-remaining {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    text-align: right;
+}
+.v5-workouts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--color-blush);
+    border-radius: var(--radius-lg);
+}
+.v5-workouts-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.v5-workouts-label {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+.v5-workouts-count {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-plum);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v5-workouts-count small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 2px;
+}
+.v5-checks {
+    display: flex;
+    gap: 5px;
+}
+.v5-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 1.5px solid var(--color-border-default);
+    background: var(--surface-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.v5-check.done {
+    background: var(--color-plum);
+    border-color: var(--color-plum);
+}
+.v5-check.done svg {
+    width: 12px;
+    height: 12px;
+    stroke: white;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ============================================================
+   V6 · RING + NUMERIC WORKOUTS (side by side)
+   Both cells follow same vertical order: label → value → caption.
+   Cell 1 visualises the value as a ring; cell 2 is plain number.
+   ============================================================ */
+.v6-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 12px;
+    align-items: stretch;
+    margin-bottom: 4px;
+}
+.v6-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    min-width: 0;
+}
+.v6-divider {
+    background: var(--color-border-subtle);
+    align-self: stretch;
+    width: 1px;
+}
+.v6-ring-wrap {
+    width: 72px;
+    height: 72px;
+    position: relative;
+    flex-shrink: 0;
+}
+.v6-ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    display: block;
+}
+.v6-ring-value {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v6-big-num {
+    width: 72px;
+    height: 72px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-plum);
+    letter-spacing: -0.7px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.v6-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v6-unit,
+.v6-caption {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+@media (max-width: 420px) {
+    .metric-panel { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Active Energy — Two Independent Goals</div>
+    <div class="page-sub">Two parallel metrics (kcal + workouts), current progress, remaining, and where you are in the collab. That's it. Five layouts, same story.</div>
+</div>
+
+<!-- ============================================================
+     V1 · TWO STACKED BARS — the simplest option
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V1 · Two stacked bars</div>
+    <div class="v-tagline">One bar per goal. Continuous bar for kcal, 4-segment bar for workouts. Clear, no flourish.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Active energy</span>
+                <span class="v1-stats">820<small>/ 1,800 kcal</small></span>
+            </div>
+            <div class="v1-bar">
+                <div class="v1-bar-fill" style="width: 46%;"></div>
+            </div>
+        </div>
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: var(--color-plum);">2<small>/ 4</small></span>
+            </div>
+            <div class="v1-segs">
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg"></div>
+                <div class="v1-seg"></div>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V2 · TWO VERTICAL PILLS
+     Parallel batteries, one per goal.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V2 · Arc + workout bar</div>
+    <div class="v-tagline">Semi-circle gauge for kcal (value centred inside), V1-style 4-segment bar for workouts below.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v2-arc-heading">Active energy</div>
+        <div class="v2-arc-wrap">
+            <svg class="v2-arc-svg" viewBox="0 0 120 70">
+                <path d="M 10 60 A 50 50 0 0 1 110 60" class="v2-arc-track"/>
+                <path d="M 10 60 A 50 50 0 0 1 110 60" class="v2-arc-fill"
+                      stroke-dasharray="157.08" stroke-dashoffset="85.51"/>
+            </svg>
+            <div class="v2-arc-center">
+                <div class="v2-arc-value">820</div>
+                <div class="v2-arc-unit">of 1,800 kcal</div>
+            </div>
+        </div>
+
+        <div class="v1-row" style="margin-top: 10px;">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: var(--color-plum);">2<small>/ 4</small></span>
+            </div>
+            <div class="v1-segs">
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg filled"></div>
+                <div class="v1-seg"></div>
+                <div class="v1-seg"></div>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V3 · DUAL COMPACT RINGS
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V3 · Compact arc + workouts</div>
+    <div class="v-tagline">Same stacked structure as V2, scaled down: smaller arc (150px), thinner 8px workout segments, tighter margins. Approximates V1's height.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v3-arc-heading">Active energy</div>
+        <div class="v3-arc-wrap">
+            <svg class="v3-arc-svg" viewBox="0 0 120 70">
+                <path d="M 10 60 A 50 50 0 0 1 110 60" class="v3-arc-track"/>
+                <path d="M 10 60 A 50 50 0 0 1 110 60" class="v3-arc-fill"
+                      stroke-dasharray="157.08" stroke-dashoffset="85.51"/>
+            </svg>
+            <div class="v3-arc-center">
+                <div class="v3-arc-value">820</div>
+                <div class="v3-arc-unit">of 1,800 kcal</div>
+            </div>
+        </div>
+
+        <div class="v3-workout-row">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: var(--color-plum);">2<small>/ 4</small></span>
+            </div>
+            <div class="v3-segs">
+                <div class="v3-seg filled"></div>
+                <div class="v3-seg filled"></div>
+                <div class="v3-seg"></div>
+                <div class="v3-seg"></div>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V4 · TYPOGRAPHY-HERO (numbers do the work)
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V4 · Circle + side labels</div>
+    <div class="v-tagline">Full ring for kcal with label, value and unit stacked to the right. Workouts bar below. Same height as V3.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v4-kcal-layout">
+            <div class="v4-ring-wrap">
+                <svg class="v4-ring-svg" viewBox="0 0 80 80">
+                    <circle cx="40" cy="40" r="32" class="v4-ring-track"/>
+                    <circle cx="40" cy="40" r="32" class="v4-ring-fill"
+                            stroke-dasharray="201.06" stroke-dashoffset="109.46"/>
+                </svg>
+            </div>
+            <div class="v4-kcal-text">
+                <div class="v4-kcal-label">Active energy</div>
+                <div class="v4-kcal-value">820</div>
+                <div class="v4-kcal-unit">of 1,800 kcal</div>
+            </div>
+        </div>
+
+        <div class="v3-workout-row">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: var(--color-plum);">2<small>/ 4</small></span>
+            </div>
+            <div class="v3-segs">
+                <div class="v3-seg filled"></div>
+                <div class="v3-seg filled"></div>
+                <div class="v3-seg"></div>
+                <div class="v3-seg"></div>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V5 · BATTERY + CHECKBOX TALLY
+     Asymmetric: big wide battery for kcal, 4 checkboxes for workouts.
+     Matches the different "shapes" of the two data types.
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V5 · Battery + check tally</div>
+    <div class="v-tagline">kcal gets a wide filling bar — the big continuous number. Workouts get 4 checkboxes — the small discrete count. Each visual matches its data type.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v5-kcal">
+            <div class="v5-head">
+                <span class="v5-label">Active energy</span>
+                <span class="v5-stats">820<small>/ 1,800 kcal</small></span>
+            </div>
+            <div class="v5-bar">
+                <div class="v5-bar-fill" style="width: 46%;"></div>
+            </div>
+            <div class="v5-remaining">980 to go</div>
+        </div>
+
+        <div class="v5-workouts">
+            <div class="v5-workouts-left">
+                <span class="v5-workouts-label">Zone 2+ Workouts · 20+ min</span>
+                <span class="v5-workouts-count">2<small>/ 4</small></span>
+            </div>
+            <div class="v5-checks">
+                <div class="v5-check done"><svg viewBox="0 0 14 14"><path d="M 3 7.5 L 5.8 10 L 11 4.5"/></svg></div>
+                <div class="v5-check done"><svg viewBox="0 0 14 14"><path d="M 3 7.5 L 5.8 10 L 11 4.5"/></svg></div>
+                <div class="v5-check"></div>
+                <div class="v5-check"></div>
+            </div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V6 · RING + NUMERIC WORKOUTS
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V6 · Ring + numeric workouts</div>
+    <div class="v-tagline">Ring for kcal (same as V4). Workouts shown as "2 / 4" with no graphics. Both rows share a left-anchor structure so the composition stays balanced.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v6-grid">
+            <div class="v6-cell">
+                <div class="v6-label">Active energy</div>
+                <div class="v6-ring-wrap">
+                    <svg class="v6-ring-svg" viewBox="0 0 80 80">
+                        <circle cx="40" cy="40" r="32" class="v4-ring-track"/>
+                        <circle cx="40" cy="40" r="32" class="v4-ring-fill"
+                                stroke-dasharray="201.06" stroke-dashoffset="109.46"/>
+                    </svg>
+                    <div class="v6-ring-value">820</div>
+                </div>
+                <div class="v6-unit">of 1,800 kcal</div>
+            </div>
+            <div class="v6-divider"></div>
+            <div class="v6-cell">
+                <div class="v6-label">Zone 2+ Workouts</div>
+                <div class="v6-big-num">2 / 4</div>
+                <div class="v6-caption">20+ min in Zone 2+</div>
+            </div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V7 · V1 BAR + NUMERIC WORKOUTS
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V7 · V1 bar + numeric workouts</div>
+    <div class="v-tagline">V1's kcal progress bar kept as-is; workouts segments dropped in favour of just the "2 / 4" stat.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Active energy</span>
+                <span class="v1-stats">820<small>/ 1,800 kcal</small></span>
+            </div>
+            <div class="v1-bar">
+                <div class="v1-bar-fill" style="width: 46%;"></div>
+            </div>
+        </div>
+        <div class="v1-row">
+            <div class="v1-head">
+                <span class="v1-label">Zone 2+ Workouts</span>
+                <span class="v1-stats" style="color: var(--color-plum); font-size: 24px; letter-spacing: -0.5px;">2<small>/ 4</small></span>
+            </div>
+            <div class="v1-remaining">20+ min in Zone 2+</div>
+        </div>
+
+        <div class="collab-rail">
+            <span class="collab-rail-label">Collab · <strong>Week 3</strong> of 6</span>
+            <div class="collab-dots">
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot done"><svg viewBox="0 0 10 10"><path d="M 2.5 5.2 L 4.3 7 L 7.5 3.2"/></svg></div>
+                <div class="collab-dot partial"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+                <div class="collab-dot"></div>
+            </div>
+        </div>
+
+        <div class="sync-row">
+            <span class="sync-status">
+                <span class="sync-dot"></span>
+                Last synced today at 9:32 am
+            </span>
+            <button class="sync-btn">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync now
+            </button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

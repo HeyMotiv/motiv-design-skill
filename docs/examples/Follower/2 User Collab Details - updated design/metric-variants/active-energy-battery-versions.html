@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Active Energy — Battery-Inspired Iterations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary-100: #2B2E34;
+    --primary-60: #6B7280;
+    --primary-30: #9CA3AF;
+    --color-clay: #7B5EA7;
+    --color-clay-light: #B49CDC;
+    --color-clay-soft: #9D7BC7;
+    --color-plum: #7D3BED;
+    --color-plum-light: #A96FF7;
+    --color-sand: #E8DFF5;
+    --color-blush: #F3EEF9;
+    --color-bg-primary: #F7F3FB;
+    --color-border-default: #E8E4F0;
+    --color-border-subtle: #F3F4F6;
+    --surface-white: #FFFFFF;
+
+    --color-text-primary: var(--primary-100);
+    --color-text-secondary: var(--primary-60);
+    --color-text-tertiary: var(--primary-30);
+
+    --font-body: 'Roboto', sans-serif;
+
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+    --radius-xl: 20px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.page-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ccc;
+    text-align: center;
+    margin-bottom: 4px;
+}
+.page-sub {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    max-width: 500px;
+    line-height: 18px;
+    margin-bottom: 12px;
+}
+
+.metric-panel {
+    width: 390px;
+    background: var(--color-bg-primary);
+    border-radius: 24px;
+    padding: 20px 20px 22px;
+}
+.v-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--color-clay);
+    margin-bottom: 4px;
+}
+.v-tagline {
+    font-size: 11px;
+    color: var(--primary-60);
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+.stats-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.energy-card {
+    background: var(--surface-white);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-xl);
+    padding: 18px 18px 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================================
+   V1 · SEGMENTED PILL BATTERY (10 vertical pills)
+   ============================================================ */
+.v1-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    gap: 10px;
+}
+.v1-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v1-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+.v1-value-goal {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    margin-left: 3px;
+}
+
+.v1-pills {
+    display: flex;
+    gap: 4px;
+    height: 56px;
+    align-items: stretch;
+    margin-bottom: 16px;
+}
+.v1-pill {
+    flex: 1;
+    border-radius: var(--radius-pill);
+    background: var(--color-sand);
+    position: relative;
+    overflow: hidden;
+}
+.v1-pill.filled {
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 1px 2px rgba(123,94,167,0.2);
+}
+/* Progressive color darkening for filled pills */
+.v1-pill.filled:nth-child(1) { background: linear-gradient(180deg, #C7B0E3 0%, #9D7BC7 100%); }
+.v1-pill.filled:nth-child(2) { background: linear-gradient(180deg, #B89FD9 0%, #8F6BBD 100%); }
+.v1-pill.filled:nth-child(3) { background: linear-gradient(180deg, #A98ECE 0%, #7B5EA7 100%); }
+.v1-pill.filled:nth-child(4) { background: linear-gradient(180deg, #9A7DC2 0%, #7153A0 100%); }
+.v1-pill.partial {
+    background: var(--color-sand);
+    position: relative;
+}
+.v1-pill.partial::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56%;
+    background: linear-gradient(180deg, #8D71B8 0%, #6A4C9A 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.v1-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+}
+.v1-meta-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.v1-workouts-dots {
+    display: inline-flex;
+    gap: 3px;
+}
+.v1-workout-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-border-default);
+}
+.v1-workout-dot.done {
+    background: var(--color-plum);
+}
+.v1-meta-right {
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+}
+
+/* ============================================================
+   V2 · PHONE-STYLE BATTERY (with terminal)
+   ============================================================ */
+.v2-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.v2-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v2-pct {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: 0.3px;
+}
+
+.v2-battery-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+.v2-battery {
+    flex: 1;
+    height: 46px;
+    border: 2px solid var(--color-clay);
+    border-radius: 9px;
+    padding: 3px;
+    display: flex;
+    gap: 2px;
+    position: relative;
+}
+.v2-battery-terminal {
+    width: 6px;
+    height: 18px;
+    background: var(--color-clay);
+    border-radius: 0 3px 3px 0;
+    flex-shrink: 0;
+}
+.v2-seg {
+    flex: 1;
+    border-radius: 4px;
+    background: var(--color-blush);
+}
+.v2-seg.filled {
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.v2-seg.partial {
+    background: linear-gradient(90deg, var(--color-clay) 0%, var(--color-clay) 56%, var(--color-blush) 56%, var(--color-blush) 100%);
+}
+
+.v2-figures {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+    gap: 10px;
+}
+.v2-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1;
+    letter-spacing: -0.6px;
+}
+.v2-num-unit {
+    font-size: 13px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 4px;
+}
+.v2-stat-right {
+    text-align: right;
+}
+.v2-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+}
+.v2-workouts-pips {
+    display: inline-flex;
+    gap: 5px;
+    vertical-align: middle;
+}
+.v2-workout-pip {
+    width: 16px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--color-border-default);
+}
+.v2-workout-pip.done {
+    background: var(--color-plum);
+}
+.v2-today {
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+}
+.v2-today strong {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+/* ============================================================
+   V3 · DAILY STACKED BATTERIES
+   ============================================================ */
+.v3-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.v3-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v3-total {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.4px;
+}
+.v3-total-goal {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 2px;
+}
+.v3-days {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 12px;
+}
+.v3-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 64px;
+    align-items: center;
+    gap: 10px;
+}
+.v3-day {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+.v3-row.today .v3-day {
+    color: var(--color-clay);
+}
+.v3-bar {
+    height: 18px;
+    background: var(--color-blush);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    position: relative;
+}
+.v3-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+    border-radius: var(--radius-pill);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
+    position: relative;
+}
+.v3-row.workout .v3-fill::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-plum);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.7);
+}
+.v3-row.empty .v3-fill {
+    background: transparent;
+}
+.v3-kcal {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.v3-row.empty .v3-kcal {
+    color: var(--color-text-tertiary);
+    font-weight: 400;
+}
+.v3-row.today .v3-kcal {
+    color: var(--color-clay);
+}
+.v3-legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+}
+.v3-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.v3-legend-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-plum);
+}
+
+/* ============================================================
+   V4 · VERTICAL ENERGY TANK (with stats)
+   ============================================================ */
+.v4-layout {
+    display: flex;
+    gap: 18px;
+    align-items: stretch;
+}
+.v4-tank-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.v4-scale {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    padding: 3px 0;
+}
+.v4-scale-tick {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.v4-scale-tick::after {
+    content: '';
+    width: 4px;
+    height: 1px;
+    background: var(--color-border-default);
+}
+.v4-tank {
+    width: 44px;
+    background: var(--color-blush);
+    border: 2px solid var(--color-clay);
+    border-radius: 10px 10px 14px 14px;
+    position: relative;
+    overflow: hidden;
+}
+.v4-tank::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 5px;
+    background: var(--color-clay);
+    border-radius: 0 0 4px 4px;
+}
+.v4-fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45.6%;
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 60%, var(--color-plum) 100%);
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.35), inset 0 -3px 6px rgba(94,43,212,0.2);
+}
+.v4-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 2px 2px 0 0;
+}
+.v4-current-line {
+    position: absolute;
+    left: -6px;
+    width: calc(100% + 12px);
+    top: 54.4%;
+    height: 1px;
+    background: var(--color-plum);
+    pointer-events: none;
+}
+.v4-current-label {
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 54.4%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-plum);
+    white-space: nowrap;
+}
+
+.v4-stats {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+}
+.v4-stat-block {
+    /* no extra styles */
+}
+.v4-stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+}
+.v4-stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.4px;
+    line-height: 1;
+}
+.v4-stat-value small {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 3px;
+}
+.v4-stat-sub {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 4px;
+}
+
+/* ============================================================
+   V5 · CHUNKY BLOCK STACK (workouts as stacked blocks)
+   ============================================================ */
+.v5-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.v5-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.v5-total {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-clay);
+    letter-spacing: -0.5px;
+}
+.v5-total-goal {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin-left: 3px;
+}
+
+.v5-stack {
+    position: relative;
+    background: var(--color-blush);
+    border-radius: 14px;
+    padding: 8px;
+    height: 120px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 4px;
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+.v5-block {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 1px 2px rgba(123,94,167,0.2);
+}
+.v5-block.workout1 {
+    flex-basis: 26%;
+    background: linear-gradient(180deg, var(--color-clay-soft) 0%, var(--color-clay) 100%);
+}
+.v5-block.workout2 {
+    flex-basis: 22%;
+    background: linear-gradient(180deg, #A87FD4 0%, #8562B0 100%);
+}
+.v5-block.passive {
+    flex-basis: 11%;
+    background: linear-gradient(180deg, #C1A7DC 0%, #A58FC5 100%);
+    color: var(--color-text-secondary);
+}
+.v5-block-kcal {
+    font-variant-numeric: tabular-nums;
+}
+.v5-remaining {
+    flex: 1;
+    border: 1.5px dashed var(--color-sand);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+}
+.v5-scale {
+    position: absolute;
+    right: -2px;
+    top: 8px;
+    bottom: 8px;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+}
+
+.v5-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border-subtle);
+    font-size: 11px;
+    color: var(--color-text-secondary);
+}
+.v5-meta strong {
+    color: var(--color-clay);
+    font-weight: 700;
+}
+
+@media (max-width: 420px) {
+    .metric-panel { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div>
+    <div class="page-title">Active Energy — Battery-Inspired Iterations</div>
+    <div class="page-sub">Five explorations of a battery/meter metaphor for the Active Energy metric (820 / 1,800 kcal this week, 2 / 4 workouts). Motiv DS palette throughout.</div>
+</div>
+
+<!-- ============================================================
+     V1 · SEGMENTED PILL BATTERY
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V1 · Segmented pills</div>
+    <div class="v-tagline">Ten vertical pills, each ~180 kcal. Gradient darkens left→right as energy accumulates. Workout count inline below.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v1-head">
+            <span class="v1-label">Active energy</span>
+            <span>
+                <span class="v1-value">820</span><span class="v1-value-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v1-pills">
+            <div class="v1-pill filled"></div>
+            <div class="v1-pill filled"></div>
+            <div class="v1-pill filled"></div>
+            <div class="v1-pill filled"></div>
+            <div class="v1-pill partial"></div>
+            <div class="v1-pill"></div>
+            <div class="v1-pill"></div>
+            <div class="v1-pill"></div>
+            <div class="v1-pill"></div>
+            <div class="v1-pill"></div>
+        </div>
+
+        <div class="v1-meta">
+            <div class="v1-meta-left">
+                <span>Workouts 2 / 4</span>
+                <span class="v1-workouts-dots">
+                    <span class="v1-workout-dot done"></span>
+                    <span class="v1-workout-dot done"></span>
+                    <span class="v1-workout-dot"></span>
+                    <span class="v1-workout-dot"></span>
+                </span>
+            </div>
+            <div class="v1-meta-right">Today · 380 kcal</div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V2 · PHONE-STYLE BATTERY
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V2 · Phone battery</div>
+    <div class="v-tagline">Classic phone-battery silhouette with terminal nub. Segmented fill, percentage at top-right, workout pips below.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v2-head">
+            <span class="v2-label">Active energy</span>
+            <span class="v2-pct">46%</span>
+        </div>
+
+        <div class="v2-battery-wrap">
+            <div class="v2-battery">
+                <div class="v2-seg filled"></div>
+                <div class="v2-seg filled"></div>
+                <div class="v2-seg filled"></div>
+                <div class="v2-seg filled"></div>
+                <div class="v2-seg partial"></div>
+                <div class="v2-seg"></div>
+                <div class="v2-seg"></div>
+                <div class="v2-seg"></div>
+                <div class="v2-seg"></div>
+                <div class="v2-seg"></div>
+            </div>
+            <div class="v2-battery-terminal"></div>
+        </div>
+
+        <div class="v2-figures">
+            <div>
+                <span class="v2-num">820</span><span class="v2-num-unit">of 1,800 kcal</span>
+            </div>
+            <div class="v2-stat-right">
+                <div class="v2-stat-label">Workouts 2 / 4</div>
+                <span class="v2-workouts-pips">
+                    <span class="v2-workout-pip done"></span>
+                    <span class="v2-workout-pip done"></span>
+                    <span class="v2-workout-pip"></span>
+                    <span class="v2-workout-pip"></span>
+                </span>
+            </div>
+        </div>
+
+        <div class="v2-today">Today <strong>32 min workout · 380 kcal</strong></div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V3 · DAILY STACKED BATTERIES
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V3 · Daily stacked batteries</div>
+    <div class="v-tagline">Seven mini-batteries, one per day. Workout days are tagged with a plum bullet. Narrative read of the week's shape.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v3-head">
+            <span class="v3-label">Active energy</span>
+            <span>
+                <span class="v3-total">820</span><span class="v3-total-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v3-days">
+            <div class="v3-row workout">
+                <span class="v3-day">Sat</span>
+                <div class="v3-bar"><div class="v3-fill" style="width: 73%;"></div></div>
+                <span class="v3-kcal">420 kcal</span>
+            </div>
+            <div class="v3-row">
+                <span class="v3-day">Sun</span>
+                <div class="v3-bar"><div class="v3-fill" style="width: 20%;"></div></div>
+                <span class="v3-kcal">160 kcal</span>
+            </div>
+            <div class="v3-row workout today">
+                <span class="v3-day">Mon</span>
+                <div class="v3-bar"><div class="v3-fill" style="width: 63%;"></div></div>
+                <span class="v3-kcal">380 kcal</span>
+            </div>
+            <div class="v3-row empty">
+                <span class="v3-day">Tue</span>
+                <div class="v3-bar"><div class="v3-fill"></div></div>
+                <span class="v3-kcal">—</span>
+            </div>
+            <div class="v3-row empty">
+                <span class="v3-day">Wed</span>
+                <div class="v3-bar"><div class="v3-fill"></div></div>
+                <span class="v3-kcal">—</span>
+            </div>
+            <div class="v3-row empty">
+                <span class="v3-day">Thu</span>
+                <div class="v3-bar"><div class="v3-fill"></div></div>
+                <span class="v3-kcal">—</span>
+            </div>
+            <div class="v3-row empty">
+                <span class="v3-day">Fri</span>
+                <div class="v3-bar"><div class="v3-fill"></div></div>
+                <span class="v3-kcal">—</span>
+            </div>
+        </div>
+
+        <div class="v3-legend">
+            <span class="v3-legend-item">
+                <span class="v3-legend-dot"></span>
+                Workout day
+            </span>
+            <span>2 / 4 workouts</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V4 · VERTICAL ENERGY TANK
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V4 · Vertical energy tank</div>
+    <div class="v-tagline">Tall meter with liquid fill and scale markers. "You are here" line marks current level. Stats stacked on the right.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card" style="padding: 18px 20px 18px;">
+        <div class="v4-layout">
+            <div class="v4-tank-wrap">
+                <div class="v4-scale" style="height: 150px;">
+                    <span class="v4-scale-tick">1,800</span>
+                    <span class="v4-scale-tick">1,350</span>
+                    <span class="v4-scale-tick">900</span>
+                    <span class="v4-scale-tick">450</span>
+                    <span class="v4-scale-tick">0</span>
+                </div>
+                <div class="v4-tank" style="height: 150px;">
+                    <div class="v4-fill"></div>
+                    <div class="v4-current-line"></div>
+                    <div class="v4-current-label">820 ← you</div>
+                </div>
+            </div>
+            <div class="v4-stats">
+                <div class="v4-stat-block">
+                    <div class="v4-stat-label">Active energy</div>
+                    <div class="v4-stat-value">820<small>of 1,800 kcal</small></div>
+                    <div class="v4-stat-sub">46% of weekly goal</div>
+                </div>
+                <div class="v4-stat-block">
+                    <div class="v4-stat-label">Workouts</div>
+                    <div class="v4-stat-value">2<small>of 4</small></div>
+                    <div class="v4-stat-sub">20+ min in Zone 2+</div>
+                </div>
+                <div class="v4-stat-block">
+                    <div class="v4-stat-label">Today</div>
+                    <div class="v4-stat-sub" style="color: var(--color-text-secondary); margin-top: 0; font-weight: 600;">32 min · 380 kcal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     V5 · CHUNKY BLOCK STACK (workout contributions)
+     ============================================================ -->
+<div class="metric-panel">
+    <div class="v-label">V5 · Workout block stack</div>
+    <div class="v-tagline">Each filled block is a workout's energy contribution plus its passive day total. Remaining space dashed. Reads like a "what built the total?" receipt.</div>
+    <div class="stats-section-title">This week</div>
+
+    <div class="energy-card">
+        <div class="v5-head">
+            <span class="v5-label">Active energy</span>
+            <span>
+                <span class="v5-total">820</span><span class="v5-total-goal">/ 1,800 kcal</span>
+            </span>
+        </div>
+
+        <div class="v5-stack">
+            <div class="v5-block workout1">
+                <span>Sat · Run</span>
+                <span class="v5-block-kcal">420</span>
+            </div>
+            <div class="v5-block workout2">
+                <span>Mon · HIIT</span>
+                <span class="v5-block-kcal">280</span>
+            </div>
+            <div class="v5-block passive">
+                <span>Passive</span>
+                <span class="v5-block-kcal">120</span>
+            </div>
+            <div class="v5-remaining">
+                Remaining · 980
+            </div>
+        </div>
+
+        <div class="v5-meta">
+            <span><strong>2 / 4</strong> workouts done</span>
+            <span>Today · 380 kcal</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
