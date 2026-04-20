@@ -864,6 +864,7 @@
             return {
                 t0:   lighten(base, 0.95),
                 t30:  lighten(base, 0.58),
+                t50:  lighten(base, 0.19),
                 t60:  base,
                 t100: darken(base, 0.12)
             };
@@ -877,6 +878,7 @@
             card.className = 'color-card';
             card.style.setProperty('--c0', t.t0);
             card.style.setProperty('--c30', t.t30);
+            card.style.setProperty('--c50', t.t50);
             card.style.setProperty('--c60', t.t60);
             card.style.setProperty('--c100', t.t100);
             card.innerHTML = `
@@ -894,6 +896,11 @@
                         <div class="tier-swatch" style="background:${t.t30}"></div>
                         <div class="tier-num">/30</div>
                         <div class="tier-hex">${t.t30}</div>
+                    </div>
+                    <div class="tier">
+                        <div class="tier-swatch" style="background:${t.t50}"></div>
+                        <div class="tier-num">/50</div>
+                        <div class="tier-hex">${t.t50}</div>
                     </div>
                     <div class="tier">
                         <div class="tier-swatch" style="background:${t.t60}"></div>
