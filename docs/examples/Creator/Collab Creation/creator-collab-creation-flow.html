@@ -2346,6 +2346,17 @@
                     <div class="screen-title">Details</div>
                     <div class="screen-subtitle"><span class="ai-badge">✦ AI Suggested</span> We've tailored these defaults for your audience — adjust anything.</div>
 
+                    <!-- Focus (metric) -->
+                    <div class="field-group">
+                        <div class="field-label">What we track</div>
+                        <div class="pill-row" data-field="activity">
+                            <div class="pill" data-value="steps" onclick="selectPill(this)">Steps</div>
+                            <div class="pill selected" data-value="energy" onclick="selectPill(this)">Active Energy</div>
+                            <div class="pill" data-value="minutes" onclick="selectPill(this)">Active Mins</div>
+                        </div>
+                        <div class="field-helper" id="activityHelper">Calories burned through intentional movement, beyond your resting baseline. Rewards effort and intensity regardless of workout type.</div>
+                    </div>
+
                     <!-- Duration -->
                     <div class="field-group">
                         <div class="field-label">Duration</div>
@@ -2599,6 +2610,7 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             collabName: 'Dog Lovers Who Cycle',
             color: 'violet',
             font: 'playfair',
+            activity: 'energy',
             duration: '6',
             recruiting: '2',
             hold: '40',
@@ -2976,6 +2988,10 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             if (field === 'difficulty') {
                 updateDifficultyHelper();
             }
+            /* Update activity (focus) helper */
+            if (field === 'activity') {
+                updateActivityHelper();
+            }
         }
 
         /* =========================================
@@ -3011,6 +3027,17 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             document.getElementById('econRate').textContent = '$' + rate;
             document.getElementById('econBonus').textContent = bonusPct + '%';
             document.getElementById('econTotal').textContent = '$' + Math.round(totalEarnings).toLocaleString();
+        }
+
+        function updateActivityHelper() {
+            var helper = document.getElementById('activityHelper');
+            if (!helper) return;
+            var descriptions = {
+                steps: 'Total steps walked or run each day, counted by their phone or wearable. Great for building daily movement habits — easy to understand and motivating at any fitness level.',
+                energy: 'Calories burned through exercise. It doesn\'t matter what they do — cycling, running, swimming — as long as they\'re moving, it counts.',
+                minutes: 'Time in motion with heart rate elevated. Doesn\'t matter what they do — cycling, running, a fitness class — it all counts toward their goal.'
+            };
+            helper.textContent = descriptions[state.activity] || '';
         }
 
         function updateDurationHelper() {
