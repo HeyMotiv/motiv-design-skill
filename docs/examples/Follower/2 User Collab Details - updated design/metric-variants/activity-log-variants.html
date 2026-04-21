@@ -38,27 +38,12 @@
     }
 
     /* ── Page header ──────────────────────────────────────── */
-    .page-hdr {
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .page-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--primary-100);
-      margin-bottom: 3px;
-    }
-    .page-sub {
-      font-size: 11px;
-      color: var(--primary-60);
-    }
+    .page-hdr { text-align: center; flex-shrink: 0; }
+    .page-title { font-size: 15px; font-weight: 600; color: var(--primary-100); margin-bottom: 3px; }
+    .page-sub { font-size: 11px; color: var(--primary-60); }
 
     /* ── Tab bar ──────────────────────────────────────────── */
-    .tabs {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-    }
+    .tabs { display: flex; gap: 6px; flex-shrink: 0; }
     .tab {
       padding: 6px 14px;
       border-radius: 999px;
@@ -70,22 +55,17 @@
       color: var(--purple-100);
       transition: background 0.15s, color 0.15s;
     }
-    .tab.active {
-      background: var(--purple-100);
-      color: var(--purple-0);
-    }
+    .tab.active { background: var(--purple-100); color: var(--purple-0); }
 
     /* ── Phone frame scaler ───────────────────────────────── */
-    /* phone content = 390px wide; scale 0.72 → 281px wide */
     .frame-clip {
       width: 281px;
-      height: 716px;   /* 994 × 0.72 */
+      height: 716px;
       overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 6px 24px rgba(0,0,0,0.18);
       flex-shrink: 0;
     }
-
     .phone {
       width: 390px;
       min-height: 994px;
@@ -97,9 +77,13 @@
       padding-bottom: 40px;
     }
 
-    /* variant panels — only active one is shown */
+    /* variant panels — only active one shown */
     .variant-panel { display: none; }
     .variant-panel.active { display: block; }
+
+    /* week views — display:contents passes children into parent flex gap */
+    .wk-view { display: none; }
+    .wk-view.active { display: contents; }
 
     /* ── Status bar ───────────────────────────────────────── */
     .sbar {
@@ -114,42 +98,15 @@
     .sbar-icons { display: flex; align-items: center; gap: 5px; }
 
     /* ── Nav header ───────────────────────────────────────── */
-    .nav {
-      display: flex;
-      align-items: center;
-      padding: 4px 24px 10px;
-      flex-shrink: 0;
-    }
-    .nav-back {
-      width: 24px; height: 24px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .nav-title {
-      flex: 1;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--primary-100);
-      margin-right: 24px;
-    }
+    .nav { display: flex; align-items: center; padding: 4px 24px 10px; flex-shrink: 0; }
+    .nav-back { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-title { flex: 1; text-align: center; font-size: 16px; font-weight: 500; color: var(--primary-100); margin-right: 24px; }
 
     /* ── Content wrapper ──────────────────────────────────── */
-    .content {
-      padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      flex: 1;
-    }
+    .content { padding: 0 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
 
     /* ── Cards ────────────────────────────────────────────── */
-    .card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-    }
+    .card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
     .card-name { font-size: 16px; font-weight: 500; color: var(--primary-100); line-height: 24px; }
     .card-dates { font-size: 14px; font-weight: 400; color: var(--primary-60); line-height: 22px; }
     .card-hr { height: 1px; background: var(--border); margin: 12px 0 0; }
@@ -161,19 +118,13 @@
 
     /* ── Pills ────────────────────────────────────────────── */
     .pills { display: flex; gap: 8px; }
-    .pill { padding: 7px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; }
-    .pill-sel  { background: var(--purple-100); color: var(--purple-0); }
+    .pill { padding: 7px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .pill-sel { background: var(--purple-100); color: var(--purple-0); }
+    .pill-sel svg { display: none; }
     .pill-done { background: var(--white); color: var(--purple-100); display: flex; align-items: center; gap: 5px; }
 
     /* ── Week summary ─────────────────────────────────────── */
-    .wk-sum {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-    }
+    .wk-sum { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; align-items: center; }
     .ws-item { flex: 1; text-align: center; }
     .ws-val { font-family: 'Source Serif 4', serif; font-weight: 700; color: var(--purple-100); line-height: 1; margin-bottom: 4px; }
     .ws-main { font-size: 20px; }
@@ -185,18 +136,12 @@
     .section { display: flex; flex-direction: column; gap: 8px; }
     .sec-hdr { display: flex; align-items: center; gap: 8px; height: 26px; }
     .sec-title { font-size: 14px; font-weight: 400; color: var(--primary-100); text-transform: uppercase; white-space: nowrap; }
-    .sec-badge { padding: 2px 8px; border-radius: 999px; background: var(--white); font-size: 12px; font-weight: 700; }
-    .badge-ip { color: var(--purple-100); }
+    .sec-badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .badge-ip   { background: var(--white); color: var(--purple-100); }
+    .badge-done { background: var(--purple-100); color: var(--white); }
 
     /* ── Day list ─────────────────────────────────────────── */
-    .day-list {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-    }
+    .day-list { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; }
     .dr { display: flex; align-items: center; gap: 10px; padding: 8px 0; }
     .dr:first-child { padding-top: 0; }
     .dr:last-child  { padding-bottom: 0; }
@@ -221,15 +166,7 @@
     .tr-val { font-size: 14px; font-weight: 700; color: var(--purple-100); }
 
     /* ── Sync footer ──────────────────────────────────────── */
-    .sync-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .sync-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
     .sync-ts { font-size: 10px; font-weight: 400; color: var(--primary-60); }
     .sync-link { font-size: 12px; font-weight: 500; color: var(--primary-100); text-decoration: underline; white-space: nowrap; }
 
@@ -253,10 +190,12 @@
     <button class="tab" onclick="showTab('peloton')">Peloton</button>
   </div>
 
-  <!-- ── Phone frame (single, swapped via JS) ─────────────── -->
+  <!-- ── Phone frame ──────────────────────────────────────── -->
   <div class="frame-clip">
 
-    <!-- ═══ STEPS ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════
+         STEPS
+    ══════════════════════════════════════════════════════════ -->
     <div class="variant-panel active" id="tab-steps">
       <div class="phone">
         <div class="sbar">
@@ -283,53 +222,64 @@
             </div>
           </div>
           <div class="pills">
-            <div class="pill pill-sel">Wk 3</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
+            <div class="pill pill-sel" data-week="3" onclick="showWeek('steps', 3)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#F7F0FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 3</div>
+            <div class="pill pill-done" data-week="2" onclick="showWeek('steps', 2)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
+            <div class="pill pill-done" data-week="1" onclick="showWeek('steps', 1)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
           </div>
-          <div class="wk-sum">
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">35,400</span><span class="ws-denom">/56,000</span></div><div class="ws-lbl">Steps logged</div></div>
-            <div class="ws-div"></div>
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Push days</div></div>
-          </div>
-          <div class="section">
-            <div class="sec-hdr">
-              <span class="sec-title">Week 3 · Jan 19–25</span>
-              <span class="sec-badge badge-ip">In Progress</span>
+
+          <!-- Week 3 — In Progress -->
+          <div class="wk-view active" id="tab-steps-wk3">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">35,400</span><span class="ws-denom">/56,000</span></div><div class="ws-lbl">Steps logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Push days</div></div>
             </div>
-            <div class="day-list">
-              <div class="dr">
-                <div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">All-day steps</div></div>
-                <div class="di-val">12,100</div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">All-day steps</div></div><div class="di-val">12,100</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">All-day steps</div></div><div class="di-val">8,200</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">All-day steps</div></div><div class="di-val">9,582</div></div>
+                <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">5,518 steps · In progress</div></div><div class="di-val di-val-today">5,518</div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">35,400 steps</span></div>
               </div>
-              <div class="dr">
-                <div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-                <div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">All-day steps</div></div>
-                <div class="di-val">8,200</div>
-              </div>
-              <div class="dr">
-                <div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">All-day steps</div></div>
-                <div class="di-val">9,582</div>
-              </div>
-              <div class="dr">
-                <div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">5,518 steps · In progress</div></div>
-                <div class="di-val di-val-today">5,518</div>
-              </div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">35,400 steps</span></div>
             </div>
+            <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
           </div>
-          <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
+
+          <!-- Week 2 — Complete -->
+          <div class="wk-view" id="tab-steps-wk2">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">66,100</span><span class="ws-denom">/56,000</span></div><div class="ws-lbl">Steps logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">4</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Push days</div></div>
+            </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 2 · Jan 12–18</span><span class="sec-badge badge-done">Complete</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 12</div><div class="di-detail">All-day steps</div></div><div class="di-val">10,800</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 13</div><div class="di-detail">All-day steps</div></div><div class="di-val">7,200</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 14</div><div class="di-detail">All-day steps</div></div><div class="di-val">9,900</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 15</div><div class="di-detail">All-day steps</div></div><div class="di-val">11,200</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 16</div><div class="di-detail">All-day steps</div></div><div class="di-val">8,100</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 17</div><div class="di-detail">All-day steps</div></div><div class="di-val">10,500</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 18</div><div class="di-detail">All-day steps</div></div><div class="di-val">8,400</div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">66,100 steps</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Week complete · Jan 18, 11:52 pm</span><span class="sync-link">Sync now</span></div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- ═══ ACTIVE ENERGY ════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════
+         ACTIVE ENERGY
+    ══════════════════════════════════════════════════════════ -->
     <div class="variant-panel" id="tab-energy">
       <div class="phone">
         <div class="sbar"><span class="sbar-time">9:41</span><div class="sbar-icons"><svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 2.5C10.5 2.5 12.8 3.6 14.4 5.3L15.5 4.2C13.6 2.2 11 1 8 1C5 1 2.4 2.2 0.5 4.2L1.6 5.3C3.2 3.6 5.5 2.5 8 2.5Z" fill="#2B2E34"/><path d="M8 5.5C9.7 5.5 11.2 6.2 12.3 7.4L13.4 6.3C12 4.9 10.1 4 8 4C5.9 4 4 4.9 2.6 6.3L3.7 7.4C4.8 6.2 6.3 5.5 8 5.5Z" fill="#2B2E34"/><circle cx="8" cy="10" r="1.5" fill="#2B2E34"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg></div></div>
@@ -346,38 +296,64 @@
             </div>
           </div>
           <div class="pills">
-            <div class="pill pill-sel">Wk 3</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
+            <div class="pill pill-sel" data-week="3" onclick="showWeek('energy', 3)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#F7F0FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 3</div>
+            <div class="pill pill-done" data-week="2" onclick="showWeek('energy', 2)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
+            <div class="pill pill-done" data-week="1" onclick="showWeek('energy', 1)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
           </div>
-          <div class="wk-sum">
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">935</span><span class="ws-denom">/2,000</span></div><div class="ws-lbl">kcal logged</div></div>
-            <div class="ws-div"></div>
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Workouts</div></div>
-          </div>
-          <div class="section">
-            <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
-            <div class="day-list">
-              <!-- Sun — workout logged ✓ -->
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">45 min Outdoor Run <span class="qual-tag">· counted</span></div></div><div class="di-val">420 kcal</div></div>
-              <!-- Mon — no qualifying workout, passive only -->
-              <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">No workout · passive only</div></div><div class="di-val">115 kcal</div></div>
-              <!-- Tue — 2 workouts consolidated ✓ (Strength counts, Yoga doesn't) -->
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">30 min Strength <span class="qual-tag">· counted</span> · 20 min Yoga</div></div><div class="di-val">360 kcal</div></div>
-              <!-- Wed — today, passive only so far -->
-              <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">Passive only · In progress</div></div><div class="di-val di-val-today">40 kcal</div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">935 kcal</span></div>
+
+          <!-- Week 3 — In Progress -->
+          <div class="wk-view active" id="tab-energy-wk3">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">935</span><span class="ws-denom">/2,000</span></div><div class="ws-lbl">kcal logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Workouts</div></div>
             </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">45 min Outdoor Run <span class="qual-tag">· counted</span></div></div><div class="di-val">420 kcal</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">No workout · passive only</div></div><div class="di-val">115 kcal</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">30 min Strength <span class="qual-tag">· counted</span> · 20 min Yoga</div></div><div class="di-val">360 kcal</div></div>
+                <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">Passive only · In progress</div></div><div class="di-val di-val-today">40 kcal</div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">935 kcal</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
           </div>
-          <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
+
+          <!-- Week 2 — Complete -->
+          <div class="wk-view" id="tab-energy-wk2">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">2,135</span><span class="ws-denom">/2,000</span></div><div class="ws-lbl">kcal logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">4</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Workouts</div></div>
+            </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 2 · Jan 12–18</span><span class="sec-badge badge-done">Complete</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 12</div><div class="di-detail">45 min Cycling <span class="qual-tag">· counted</span></div></div><div class="di-val">480 kcal</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 13</div><div class="di-detail">No workout · passive only</div></div><div class="di-val">130 kcal</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 14</div><div class="di-detail">35 min HIIT <span class="qual-tag">· counted</span></div></div><div class="di-val">420 kcal</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 15</div><div class="di-detail">No workout · passive only</div></div><div class="di-val">145 kcal</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 16</div><div class="di-detail">40 min Outdoor Run <span class="qual-tag">· counted</span></div></div><div class="di-val">450 kcal</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 17</div><div class="di-detail">No workout · passive only</div></div><div class="di-val">120 kcal</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 18</div><div class="di-detail">50 min Strength <span class="qual-tag">· counted</span></div></div><div class="di-val">390 kcal</div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">2,135 kcal</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Week complete · Jan 18, 11:52 pm</span><span class="sync-link">Sync now</span></div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- ═══ ACTIVE MINUTES ═══════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════
+         ACTIVE MINUTES
+    ══════════════════════════════════════════════════════════ -->
     <div class="variant-panel" id="tab-minutes">
       <div class="phone">
         <div class="sbar"><span class="sbar-time">9:41</span><div class="sbar-icons"><svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 2.5C10.5 2.5 12.8 3.6 14.4 5.3L15.5 4.2C13.6 2.2 11 1 8 1C5 1 2.4 2.2 0.5 4.2L1.6 5.3C3.2 3.6 5.5 2.5 8 2.5Z" fill="#2B2E34"/><path d="M8 5.5C9.7 5.5 11.2 6.2 12.3 7.4L13.4 6.3C12 4.9 10.1 4 8 4C5.9 4 4 4.9 2.6 6.3L3.7 7.4C4.8 6.2 6.3 5.5 8 5.5Z" fill="#2B2E34"/><circle cx="8" cy="10" r="1.5" fill="#2B2E34"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg></div></div>
@@ -394,34 +370,64 @@
             </div>
           </div>
           <div class="pills">
-            <div class="pill pill-sel">Wk 3</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
+            <div class="pill pill-sel" data-week="3" onclick="showWeek('minutes', 3)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#F7F0FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 3</div>
+            <div class="pill pill-done" data-week="2" onclick="showWeek('minutes', 2)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
+            <div class="pill pill-done" data-week="1" onclick="showWeek('minutes', 1)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
           </div>
-          <div class="wk-sum">
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">125</span><span class="ws-denom">/210</span></div><div class="ws-lbl">Min logged</div></div>
-            <div class="ws-div"></div>
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">80</span><span class="ws-denom">/105</span></div><div class="ws-lbl">Mod+ min</div></div>
-          </div>
-          <div class="section">
-            <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
-            <div class="day-list">
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">30 min mod+ · 18 min low</div></div><div class="di-val">48 min</div></div>
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">14 min mod+ · 8 min low</div></div><div class="di-val">22 min</div></div>
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">24 min mod+ · 12 min low</div></div><div class="di-val">36 min</div></div>
-              <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">12 min mod+ · 7 min low · In progress</div></div><div class="di-val di-val-today">19 min</div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">125 min active</span></div>
+
+          <!-- Week 3 — In Progress -->
+          <div class="wk-view active" id="tab-minutes-wk3">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">125</span><span class="ws-denom">/210</span></div><div class="ws-lbl">Min logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">80</span><span class="ws-denom">/105</span></div><div class="ws-lbl">Mod+ min</div></div>
             </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">30 min mod+ · 18 min low</div></div><div class="di-val">48 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">14 min mod+ · 8 min low</div></div><div class="di-val">22 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">24 min mod+ · 12 min low</div></div><div class="di-val">36 min</div></div>
+                <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">12 min mod+ · 7 min low · In progress</div></div><div class="di-val di-val-today">19 min</div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">125 min active</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
           </div>
-          <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
+
+          <!-- Week 2 — Complete -->
+          <div class="wk-view" id="tab-minutes-wk2">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">244</span><span class="ws-denom">/210</span></div><div class="ws-lbl">Min logged</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">170</span><span class="ws-denom">/105</span></div><div class="ws-lbl">Mod+ min</div></div>
+            </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 2 · Jan 12–18</span><span class="sec-badge badge-done">Complete</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 12</div><div class="di-detail">35 min mod+ · 15 min low</div></div><div class="di-val">50 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 13</div><div class="di-detail">18 min mod+ · 10 min low</div></div><div class="di-val">28 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 14</div><div class="di-detail">32 min mod+ · 12 min low</div></div><div class="di-val">44 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 15</div><div class="di-detail">22 min mod+ · 8 min low</div></div><div class="di-val">30 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 16</div><div class="di-detail">28 min mod+ · 14 min low</div></div><div class="di-val">42 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 17</div><div class="di-detail">15 min mod+ · 10 min low</div></div><div class="di-val">25 min</div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 18</div><div class="di-detail">20 min mod+ · 5 min low</div></div><div class="di-val">25 min</div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">244 min active</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Week complete · Jan 18, 11:52 pm</span><span class="sync-link">Sync now</span></div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <!-- ═══ PELOTON ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════
+         PELOTON
+    ══════════════════════════════════════════════════════════ -->
     <div class="variant-panel" id="tab-peloton">
       <div class="phone">
         <div class="sbar"><span class="sbar-time">9:41</span><div class="sbar-icons"><svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 2.5C10.5 2.5 12.8 3.6 14.4 5.3L15.5 4.2C13.6 2.2 11 1 8 1C5 1 2.4 2.2 0.5 4.2L1.6 5.3C3.2 3.6 5.5 2.5 8 2.5Z" fill="#2B2E34"/><path d="M8 5.5C9.7 5.5 11.2 6.2 12.3 7.4L13.4 6.3C12 4.9 10.1 4 8 4C5.9 4 4 4.9 2.6 6.3L3.7 7.4C4.8 6.2 6.3 5.5 8 5.5Z" fill="#2B2E34"/><circle cx="8" cy="10" r="1.5" fill="#2B2E34"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg></div></div>
@@ -438,29 +444,57 @@
             </div>
           </div>
           <div class="pills">
-            <div class="pill pill-sel">Wk 3</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
-            <div class="pill pill-done"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
+            <div class="pill pill-sel" data-week="3" onclick="showWeek('peloton', 3)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#F7F0FA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 3</div>
+            <div class="pill pill-done" data-week="2" onclick="showWeek('peloton', 2)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 2</div>
+            <div class="pill pill-done" data-week="1" onclick="showWeek('peloton', 1)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1</div>
           </div>
-          <div class="wk-sum">
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Ride days</div></div>
-            <div class="ws-div"></div>
-            <div class="ws-item"><div class="ws-val"><span class="ws-main">790</span><span class="ws-denom">/2,100</span></div><div class="ws-lbl">kJ logged</div></div>
-          </div>
-          <div class="section">
-            <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
-            <div class="day-list">
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">45 min Power Zone Endurance</div></div><div class="di-val">380 kJ</div></div>
-              <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">Rest day</div></div></div>
-              <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">30 min 80s Ride · 30 min Low Impact</div></div><div class="di-val">410 kJ</div></div>
-              <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">No ride yet · In progress</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
-              <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">790 kJ</span></div>
+
+          <!-- Week 3 — In Progress -->
+          <div class="wk-view active" id="tab-peloton-wk3">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">2</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Ride days</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">790</span><span class="ws-denom">/2,100</span></div><div class="ws-lbl">kJ logged</div></div>
             </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 3 · Jan 19–25</span><span class="sec-badge badge-ip">In Progress</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 19</div><div class="di-detail">45 min Power Zone Endurance</div></div><div class="di-val">380 kJ</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 20</div><div class="di-detail">Rest day</div></div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 21</div><div class="di-detail">30 min 80s Ride · 30 min Low Impact</div></div><div class="di-val">410 kJ</div></div>
+                <div class="dr"><div class="di di-today"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 22</div><div class="di-detail">No ride yet · In progress</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 23</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 24</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="dr"><div class="di di-up"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 25</div><div class="di-detail di-detail-dim">Upcoming</div></div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">790 kJ</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
           </div>
-          <div class="sync-card"><span class="sync-ts">Synced Yesterday · 12:59 pm</span><span class="sync-link">Sync now</span></div>
+
+          <!-- Week 2 — Complete -->
+          <div class="wk-view" id="tab-peloton-wk2">
+            <div class="wk-sum">
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">4</span><span class="ws-denom">/4</span></div><div class="ws-lbl">Ride days</div></div>
+              <div class="ws-div"></div>
+              <div class="ws-item"><div class="ws-val"><span class="ws-main">2,180</span><span class="ws-denom">/2,100</span></div><div class="ws-lbl">kJ logged</div></div>
+            </div>
+            <div class="section">
+              <div class="sec-hdr"><span class="sec-title">Week 2 · Jan 12–18</span><span class="sec-badge badge-done">Complete</span></div>
+              <div class="day-list">
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Sunday, Jan 12</div><div class="di-detail">45 min Power Zone Endurance</div></div><div class="di-val">520 kJ</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Monday, Jan 13</div><div class="di-detail">Rest day</div></div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Tuesday, Jan 14</div><div class="di-detail">20 min HIIT · 20 min Low Impact</div></div><div class="di-val">480 kJ</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Wednesday, Jan 15</div><div class="di-detail">Rest day</div></div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Thursday, Jan 16</div><div class="di-detail">60 min Power Zone Max</div></div><div class="di-val">650 kJ</div></div>
+                <div class="dr"><div class="di di-miss"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="di-info"><div class="di-name">Friday, Jan 17</div><div class="di-detail">Rest day</div></div></div>
+                <div class="dr"><div class="di di-met"><svg width="12" height="9" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="di-info"><div class="di-name">Saturday, Jan 18</div><div class="di-detail">45 min 90s Ride</div></div><div class="di-val">530 kJ</div></div>
+                <div class="total-row"><span class="tr-lbl">Total this week</span><span class="tr-val">2,180 kJ</span></div>
+              </div>
+            </div>
+            <div class="sync-card"><span class="sync-ts">Week complete · Jan 18, 11:52 pm</span><span class="sync-link">Sync now</span></div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -469,12 +503,23 @@
 
   <script>
     function showTab(id) {
-      // update tab buttons
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       event.target.classList.add('active');
-      // swap visible panel
       document.querySelectorAll('.variant-panel').forEach(p => p.classList.remove('active'));
       document.getElementById('tab-' + id).classList.add('active');
+    }
+
+    function showWeek(tabId, weekNum) {
+      const panel = document.getElementById('tab-' + tabId);
+      // update pill classes
+      panel.querySelectorAll('.pill').forEach(p => {
+        const pw = parseInt(p.dataset.week);
+        p.className = 'pill ' + (pw === weekNum ? 'pill-sel' : 'pill-done');
+      });
+      // swap week view
+      panel.querySelectorAll('.wk-view').forEach(v => v.classList.remove('active'));
+      const view = document.getElementById('tab-' + tabId + '-wk' + weekNum);
+      if (view) view.classList.add('active');
     }
   </script>
 
