@@ -75,6 +75,12 @@
       "autoPort": true
     },
     {
+      "name": "steps-context",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-steps-context.js"],
+      "port": 8778
+    },
+    {
       "name": "figma-capture",
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-figma-capture.js"],
