@@ -85,6 +85,12 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-figma-capture.js"],
       "port": 8780
+    },
+    {
+      "name": "activity-log",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-activity-log.js"],
+      "port": 8781
     }
   ]
 }
