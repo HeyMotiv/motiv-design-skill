@@ -898,15 +898,24 @@
                         <svg width="112" height="112" viewBox="0 0 140 140" style="flex-shrink:0;">
                             <!-- outer track -->
                             <circle cx="70" cy="70" r="60" fill="none" stroke="#E8E4F0" stroke-width="12"/>
-                            <!-- outer fill ~45% (820/1800) -->
+                            <!-- outer fill ~45% (820/1800): starts at 12 o'clock, ends at ~(89,127) -->
                             <circle cx="70" cy="70" r="60" fill="none" stroke="#7B5EA7" stroke-width="12"
                                     stroke-dasharray="169 208" stroke-dashoffset="94" stroke-linecap="round"/>
-                            <!-- inner track: 3 equal segments (circumference ~244.9, seg=67.63, gap=14) -->
+                            <!-- outer arc end: single chevron -->
+                            <g transform="translate(89 127) rotate(161.5)">
+                                <path d="M -3 -3 L 2 0 L -3 3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <!-- inner track: 3 segments, rounded caps (circ ~244.9, seg=67.68, gap=14) -->
                             <circle cx="70" cy="70" r="39" fill="none" stroke="#E8E4F0" stroke-width="10"
-                                    stroke-dasharray="67.63 14" stroke-dashoffset="61"/>
-                            <!-- inner fill: segment 1 of 3 filled -->
+                                    stroke-dasharray="67.68 14" stroke-dashoffset="61" stroke-linecap="round"/>
+                            <!-- inner fill: segment 1 of 3, rounded caps -->
                             <circle cx="70" cy="70" r="39" fill="none" stroke="#9789B9" stroke-width="10"
-                                    stroke-dasharray="67.63 177.27" stroke-dashoffset="61"/>
+                                    stroke-dasharray="67.68 177.22" stroke-dashoffset="61" stroke-linecap="round"/>
+                            <!-- inner segment end: double chevron at ~(108.5, 76.4) -->
+                            <g transform="translate(108.5 76.4) rotate(99.4)">
+                                <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M -5 -1.8 L -2.6 0 L -5 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
                         </svg>
                         <!-- Stats -->
                         <div style="display:flex; flex-direction:column; gap:12px; flex:1;">
