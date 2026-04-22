@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weekly Progress — Ring Cards</title>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Source+Serif+4:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -26,10 +27,10 @@
         --surface-border: #E5E7EB;
         --surface-border-subtle: #F3F4F6;
 
-        --ring-outer-a: var(--violet-100);
-        --ring-outer-b: var(--violet-100);
-        --ring-inner-a: var(--violet-50);
-        --ring-inner-b: var(--violet-50);
+        --ring-outer-a: #6F6094;
+        --ring-outer-b: #6F6094;
+        --ring-inner-a: #9789B9;
+        --ring-inner-b: #9789B9;
 
         --font-body: 'Roboto', sans-serif;
         --font-display: 'Source Serif 4', serif;
@@ -355,17 +356,17 @@
             <svg viewBox="0 0 140 140">
                 <defs>
                     <linearGradient id="gradStepsOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-outer-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-outer-b)"/>
+                        <stop offset="0%" stop-color="#6F6094"/>
+                        <stop offset="100%" stop-color="#6F6094"/>
                     </linearGradient>
                     <linearGradient id="gradStepsInner" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-inner-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-inner-b)"/>
+                        <stop offset="0%" stop-color="#9789B9"/>
+                        <stop offset="100%" stop-color="#9789B9"/>
                     </linearGradient>
                 </defs>
                 <circle cx="70" cy="70" r="55" class="ring-track-outer"/>
                 <circle cx="70" cy="70" r="55" class="ring-fill"
-                        stroke="url(#gradStepsOuter)"
+                        stroke="#6F6094"
                         stroke-dasharray="345.58" stroke-dashoffset="169.33"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(66.55 124.9) rotate(183.6)">
@@ -376,7 +377,7 @@
                         stroke-dasharray="67.68 14"
                         transform="rotate(-90 70 70)"/>
                 <circle cx="70" cy="70" r="39" class="ring-fill"
-                        stroke="url(#gradStepsInner)"
+                        stroke="#9789B9"
                         stroke-dasharray="67.68 1000"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(108.5 76.4) rotate(99.4)">
@@ -438,17 +439,17 @@
             <svg viewBox="0 0 140 140">
                 <defs>
                     <linearGradient id="gradEnergyOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-outer-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-outer-b)"/>
+                        <stop offset="0%" stop-color="#6F6094"/>
+                        <stop offset="100%" stop-color="#6F6094"/>
                     </linearGradient>
                     <linearGradient id="gradEnergyInner" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-inner-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-inner-b)"/>
+                        <stop offset="0%" stop-color="#9789B9"/>
+                        <stop offset="100%" stop-color="#9789B9"/>
                     </linearGradient>
                 </defs>
                 <circle cx="70" cy="70" r="55" class="ring-track-outer"/>
                 <circle cx="70" cy="70" r="55" class="ring-fill"
-                        stroke="url(#gradEnergyOuter)"
+                        stroke="#6F6094"
                         stroke-dasharray="345.58" stroke-dashoffset="188.14"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(85.18 122.85) rotate(164)">
@@ -459,7 +460,7 @@
                         stroke-dasharray="47.26 14"
                         transform="rotate(-90 70 70)"/>
                 <circle cx="70" cy="70" r="39" class="ring-fill"
-                        stroke="url(#gradEnergyInner)"
+                        stroke="#9789B9"
                         stroke-dasharray="47.26 14 47.26 1000"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(83.7 106.5) rotate(159.5)">
@@ -476,9 +477,9 @@
                 <div class="stat-sub">all movement</div>
             </div>
             <div>
-                <div class="stat-label">Tracked workouts</div>
-                <div class="stat-value val-inner">2<span class="stat-slash">/</span><span class="stat-denom">4</span></div>
-                <div class="stat-sub">20+ min, Zone 2+ avg HR</div>
+                <div class="stat-label">High energy days</div>
+                <div class="stat-value val-inner">1<span class="stat-slash">/</span><span class="stat-denom">3</span></div>
+                <div class="stat-sub">days above 400 cal</div>
             </div>
         </div>
 
@@ -489,7 +490,7 @@
 
     <div class="card-footer">
         <div class="footer-today">
-            <span><span class="footer-today-label">Today</span> 32 min workout · 380 cals</span>
+            <span><span class="footer-today-label">Today</span> 380 active cal so far</span>
             <button class="sync-btn"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Sync</button>
         </div>
         <div class="footer-meta">
@@ -521,17 +522,17 @@
             <svg viewBox="0 0 140 140">
                 <defs>
                     <linearGradient id="gradMinOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-outer-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-outer-b)"/>
+                        <stop offset="0%" stop-color="#6F6094"/>
+                        <stop offset="100%" stop-color="#6F6094"/>
                     </linearGradient>
                     <linearGradient id="gradMinInner" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-inner-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-inner-b)"/>
+                        <stop offset="0%" stop-color="#9789B9"/>
+                        <stop offset="100%" stop-color="#9789B9"/>
                     </linearGradient>
                 </defs>
                 <circle cx="70" cy="70" r="55" class="ring-track-outer"/>
                 <circle cx="70" cy="70" r="55" class="ring-fill"
-                        stroke="url(#gradMinOuter)"
+                        stroke="#6F6094"
                         stroke-dasharray="345.58" stroke-dashoffset="156.67"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(54.1 122.6) rotate(196.8)">
@@ -539,7 +540,7 @@
                 </g>
                 <circle cx="70" cy="70" r="39" class="ring-track-inner"/>
                 <circle cx="70" cy="70" r="39" class="ring-fill"
-                        stroke="url(#gradMinInner)"
+                        stroke="#9789B9"
                         stroke-dasharray="245.04" stroke-dashoffset="107.82"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(55.65 106.27) rotate(201.6)">
@@ -601,17 +602,17 @@
             <svg viewBox="0 0 140 140">
                 <defs>
                     <linearGradient id="gradPelOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-outer-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-outer-b)"/>
+                        <stop offset="0%" stop-color="#6F6094"/>
+                        <stop offset="100%" stop-color="#6F6094"/>
                     </linearGradient>
                     <linearGradient id="gradPelInner" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="var(--ring-inner-a)"/>
-                        <stop offset="100%" stop-color="var(--ring-inner-b)"/>
+                        <stop offset="0%" stop-color="#9789B9"/>
+                        <stop offset="100%" stop-color="#9789B9"/>
                     </linearGradient>
                 </defs>
                 <circle cx="70" cy="70" r="55" class="ring-track-outer"/>
                 <circle cx="70" cy="70" r="55" class="ring-fill"
-                        stroke="url(#gradPelOuter)"
+                        stroke="#6F6094"
                         stroke-dasharray="345.58" stroke-dashoffset="174.17"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(71.4 125.0) rotate(178.6)">
@@ -622,7 +623,7 @@
                         stroke-dasharray="35.01 14"
                         transform="rotate(-90 70 70)"/>
                 <circle cx="70" cy="70" r="39" class="ring-fill"
-                        stroke="url(#gradPelInner)"
+                        stroke="#9789B9"
                         stroke-dasharray="35.01 14 35.01 14 35.01 1000"
                         transform="rotate(-90 70 70)"/>
                 <g class="ring-arrow" transform="translate(59.6 107.6) rotate(195.4)">
@@ -687,6 +688,90 @@
             }, 700);
         });
     });
+</script>
+
+<script>
+/* Draw rings directly with Canvas 2D — bypasses all SVG/CSS resolution issues */
+window.addEventListener('load', function () {
+    /* Per-card ring data derived from SVG stroke-dasharray / dashoffset values.
+       outerAngle  = (circumference - dashoffset) / circumference * 2π  for r=55
+       inner.angle = same formula for r=39 (continuous rings)
+       inner.segs/filled/segAngle/gapAngle for segmented rings */
+    var PI2 = Math.PI * 2;
+    var cards = [
+        {   /* Steps: outer 51%, inner 1/3 segments */
+            outerAngle: (345.58 - 169.33) / 345.58 * PI2,
+            inner: { type:'seg', segs:3, filled:1,
+                     segAngle: 67.68/245.04*PI2, gapAngle: 14/245.04*PI2 }
+        },
+        {   /* Energy: outer 45.5%, inner 2/4 segments */
+            outerAngle: (345.58 - 188.14) / 345.58 * PI2,
+            inner: { type:'seg', segs:4, filled:2,
+                     segAngle: 47.26/245.04*PI2, gapAngle: 14/245.04*PI2 }
+        },
+        {   /* Minutes: outer 54.7%, inner continuous 56% */
+            outerAngle: (345.58 - 156.67) / 345.58 * PI2,
+            inner: { type:'cont', angle: (245.04 - 107.82) / 245.04 * PI2 }
+        },
+        {   /* Peloton: outer 49.6%, inner 3/5 segments */
+            outerAngle: (345.58 - 174.17) / 345.58 * PI2,
+            inner: { type:'seg', segs:5, filled:3,
+                     segAngle: 35.01/245.04*PI2, gapAngle: 14/245.04*PI2 }
+        }
+    ];
+
+    var TRACK   = '#E5E7EB';
+    var OUTER_C = '#6F6094';
+    var INNER_C = '#9789B9';
+    var START   = -Math.PI / 2;   /* rings start from top */
+    var CX = 140, CY = 140;       /* centre of 280×280 canvas */
+    var OR = 110, IR = 78;        /* outer/inner radii at 2× scale (55×2, 39×2) */
+    var SW = 22;                  /* stroke-width at 2× scale (11×2) */
+
+    document.querySelectorAll('.ring-wrap svg').forEach(function (svg, i) {
+        var cfg = cards[i];
+        var c   = document.createElement('canvas');
+        c.width = c.height = 280;
+        c.style.cssText = 'width:106px;height:106px;display:block;';
+        var ctx = c.getContext('2d');
+        ctx.lineWidth = SW;
+        ctx.lineCap   = 'round';
+
+        /* — Outer track — */
+        ctx.strokeStyle = TRACK;
+        ctx.beginPath();
+        ctx.arc(CX, CY, OR, 0, PI2);
+        ctx.stroke();
+
+        /* — Outer fill — */
+        ctx.strokeStyle = OUTER_C;
+        ctx.beginPath();
+        ctx.arc(CX, CY, OR, START, START + cfg.outerAngle);
+        ctx.stroke();
+
+        /* — Inner ring — */
+        if (cfg.inner.type === 'cont') {
+            ctx.strokeStyle = TRACK;
+            ctx.beginPath();
+            ctx.arc(CX, CY, IR, 0, PI2);
+            ctx.stroke();
+            ctx.strokeStyle = INNER_C;
+            ctx.beginPath();
+            ctx.arc(CX, CY, IR, START, START + cfg.inner.angle);
+            ctx.stroke();
+        } else {
+            for (var s = 0; s < cfg.inner.segs; s++) {
+                var a0 = START + s * (cfg.inner.segAngle + cfg.inner.gapAngle);
+                ctx.strokeStyle = (s < cfg.inner.filled) ? INNER_C : TRACK;
+                ctx.beginPath();
+                ctx.arc(CX, CY, IR, a0, a0 + cfg.inner.segAngle);
+                ctx.stroke();
+            }
+        }
+
+        svg.parentNode.replaceChild(c, svg);
+    });
+});
 </script>
 </body>
 </html>

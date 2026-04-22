@@ -1234,7 +1234,8 @@
         flame: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>',
         heart: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
         timer: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 3h5"/><path d="M12 3v2"/></svg>',
-        pulse: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>'
+        pulse: '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+        bolt:  '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>'
     };
 
     var SYNC_SVG = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>';
@@ -1263,21 +1264,21 @@
             ]
         },
         calories: {
-            msg: "I picked active energy — the goal is to be a bit more active than your norm each week. Everything counts. 💪",
+            msg: "I picked active energy as our metric — your wearable tracks it all passively, no workout logging needed. Hit a weekly calorie target and a few high-effort days. 🔥",
             syncLabel: 'Calculate My Goal',
             cards: [
                 {
-                    icon: ICONS.heart,
-                    value: '+1-2',
-                    label: 'Workouts / Wk',
-                    desc: 'Above your average # sessions with zone 2+ heart rate.',
-                    footer: 'Zone 2+ sessions'
+                    icon: ICONS.bolt,
+                    value: '+1',
+                    label: 'High Energy Days / Wk',
+                    desc: 'Days where your daily active energy clears a personalized threshold, based on your history.',
+                    footer: 'High days'
                 },
                 {
                     icon: ICONS.flame,
                     value: '1.25x',
-                    label: 'Cal / Week',
-                    desc: 'Multiplier on your average weekly active calorie burn. Harder sessions score higher.',
+                    label: 'Active Cal / Week',
+                    desc: 'Total active calories burned across your full week, tracked passively all day.',
                     footer: 'All movement'
                 }
             ]
