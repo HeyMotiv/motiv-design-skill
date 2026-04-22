@@ -894,24 +894,31 @@
                 <div style="width:340px; background:#fff; border:1px solid #E8E4F0; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
                     <!-- Card body -->
                     <div style="display:flex; align-items:center; gap:16px; padding:18px 18px 14px;">
-                        <!-- Ring SVG -->
+                        <!-- Ring SVG — paths instead of dasharray for clean Figma capture -->
                         <svg width="112" height="112" viewBox="0 0 140 140" style="flex-shrink:0;">
-                            <!-- outer track -->
+                            <!-- outer track (full circle) -->
                             <circle cx="70" cy="70" r="60" fill="none" stroke="#E8E4F0" stroke-width="12"/>
-                            <!-- outer fill ~45% (820/1800): starts at 12 o'clock, ends at ~(89,127) -->
-                            <circle cx="70" cy="70" r="60" fill="none" stroke="#7B5EA7" stroke-width="12"
-                                    stroke-dasharray="169 208" stroke-dashoffset="94" stroke-linecap="round"/>
+                            <!-- outer fill: 45.6% arc, top(70,10) → (89,127), 161.5° clockwise -->
+                            <path d="M 70 10 A 60 60 0 0 1 89 127"
+                                  fill="none" stroke="#7B5EA7" stroke-width="12" stroke-linecap="round"/>
                             <!-- outer arc end: single chevron -->
                             <g transform="translate(89 127) rotate(161.5)">
                                 <path d="M -3 -3 L 2 0 L -3 3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                             </g>
-                            <!-- inner track: 3 segments, rounded caps (circ ~244.9, seg=67.68, gap=14) -->
-                            <circle cx="70" cy="70" r="39" fill="none" stroke="#E8E4F0" stroke-width="10"
-                                    stroke-dasharray="67.68 14" stroke-dashoffset="61" stroke-linecap="round"/>
-                            <!-- inner fill: segment 1 of 3, rounded caps -->
-                            <circle cx="70" cy="70" r="39" fill="none" stroke="#9789B9" stroke-width="10"
-                                    stroke-dasharray="67.68 177.22" stroke-dashoffset="61" stroke-linecap="round"/>
-                            <!-- inner segment end: double chevron at ~(108.5, 76.4) -->
+                            <!-- inner track: 3 arc segments (99.4° each, 20.6° gaps) -->
+                            <!-- seg1: top(70,31) → (108.48,76.38) -->
+                            <path d="M 70 31 A 39 39 0 0 1 108.48 76.38"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- seg2: (103.77,89.5) → (45.27,100.15) -->
+                            <path d="M 103.77 89.5 A 39 39 0 0 1 45.27 100.15"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- seg3: (36.23,89.5) → (56.27,33.5) -->
+                            <path d="M 36.23 89.5 A 39 39 0 0 1 56.27 33.5"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- inner fill: segment 1 filled (same arc as seg1 track) -->
+                            <path d="M 70 31 A 39 39 0 0 1 108.48 76.38"
+                                  fill="none" stroke="#9789B9" stroke-width="10" stroke-linecap="round"/>
+                            <!-- inner segment end: double chevron -->
                             <g transform="translate(108.5 76.4) rotate(99.4)">
                                 <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M -5 -1.8 L -2.6 0 L -5 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -936,6 +943,96 @@
                         <div style="font-size:11px; color:#6B7280;">
                             <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#9CA3AF; margin-right:4px;">Today</span>
                             380 active cal so far
+                        </div>
+                        <button style="display:flex; align-items:center; gap:4px; background:none; border:none; font-size:10px; font-weight:700; color:#7B5EA7; cursor:pointer;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                            Sync
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         FILE 9: steps-progress-apple-inspired-v2.html
+         Ring card — Steps / Push days (same pattern)
+         ════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Ring card — Steps · Push days</div>
+            <div class="section-file">metric-variants/steps-progress-apple-inspired-v2.html</div>
+            <div class="change-badge" style="background:#2B6CB0; color:#fff;">New mock</div>
+        </div>
+
+        <div class="diff-note">
+            <div class="diff-note-title">Same visual pattern applied to Steps</div>
+            <ul>
+                <li>Inner ring split into <ins>4 segments</ins> — one per push day goal</li>
+                <li>1 segment filled = 1 push day achieved this week (9,200+ steps)</li>
+                <li>Outer ring = weekly step total progress (28,400 / 56,000)</li>
+                <li>Double chevron marks the end of the filled segment; single chevron marks the outer arc tip</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="col-label">Steps</div>
+                <div style="width:340px; background:#fff; border:1px solid #E8E4F0; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+                    <!-- Card body -->
+                    <div style="display:flex; align-items:center; gap:16px; padding:18px 18px 14px;">
+                        <!-- Ring SVG — paths instead of dasharray for clean Figma capture -->
+                        <svg width="112" height="112" viewBox="0 0 140 140" style="flex-shrink:0;">
+                            <!-- outer track (full circle) -->
+                            <circle cx="70" cy="70" r="60" fill="none" stroke="#E8E4F0" stroke-width="12"/>
+                            <!-- outer fill: 50.7% arc (>180°), top(70,10) → (67.5,130), large-arc -->
+                            <path d="M 70 10 A 60 60 0 1 1 67.5 130"
+                                  fill="none" stroke="#7B5EA7" stroke-width="12" stroke-linecap="round"/>
+                            <!-- outer arc end: single chevron -->
+                            <g transform="translate(67.5 130) rotate(182)">
+                                <path d="M -3 -3 L 2 0 L -3 3" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <!-- inner track: 4 arc segments (69.4° each, 20.6° gaps) -->
+                            <!-- seg1: top(70,31) → (106.5,56.27) -->
+                            <path d="M 70 31 A 39 39 0 0 1 106.5 56.27"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- seg2: (109,70) → (83.73,106.5) -->
+                            <path d="M 109 70 A 39 39 0 0 1 83.73 106.5"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- seg3: (70,109) → (33.5,83.73) -->
+                            <path d="M 70 109 A 39 39 0 0 1 33.5 83.73"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- seg4: (31,70) → (56.27,33.5) -->
+                            <path d="M 31 70 A 39 39 0 0 1 56.27 33.5"
+                                  fill="none" stroke="#E8E4F0" stroke-width="10" stroke-linecap="round"/>
+                            <!-- inner fill: segment 1 filled -->
+                            <path d="M 70 31 A 39 39 0 0 1 106.5 56.27"
+                                  fill="none" stroke="#9789B9" stroke-width="10" stroke-linecap="round"/>
+                            <!-- inner segment end: double chevron -->
+                            <g transform="translate(106.5 56.27) rotate(69.4)">
+                                <path d="M -1.4 -1.8 L 1 0 L -1.4 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M -5 -1.8 L -2.6 0 L -5 1.8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                        <!-- Stats -->
+                        <div style="display:flex; flex-direction:column; gap:12px; flex:1;">
+                            <div>
+                                <div style="font-size:12px; font-weight:600; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.3px; margin-bottom:2px;">Weekly steps</div>
+                                <div style="font-size:22px; font-weight:700; color:#2B2E34; line-height:1;">28,400<span style="font-size:18px; font-weight:400; color:#9CA3AF;">/</span><span style="font-size:14px; font-weight:500; color:#9CA3AF;">56,000</span></div>
+                                <div style="font-size:12px; font-weight:500; color:#9CA3AF; margin-top:2px;">all steps count</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px; font-weight:600; color:#9CA3AF; text-transform:uppercase; letter-spacing:0.3px; margin-bottom:2px;">Push days</div>
+                                <div style="font-size:22px; font-weight:700; color:#2B2E34; line-height:1;">1<span style="font-size:18px; font-weight:400; color:#9CA3AF;">/</span><span style="font-size:14px; font-weight:500; color:#9CA3AF;">4</span></div>
+                                <div style="font-size:12px; font-weight:500; color:#9CA3AF; margin-top:2px;">day with 9,200+ steps</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer -->
+                    <div style="border-top:1px solid #E8E4F0; padding:10px 18px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="font-size:11px; color:#6B7280;">
+                            <span style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#9CA3AF; margin-right:4px;">Today</span>
+                            5,518 steps so far
                         </div>
                         <button style="display:flex; align-items:center; gap:4px; background:none; border:none; font-size:10px; font-weight:700; color:#7B5EA7; cursor:pointer;">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
