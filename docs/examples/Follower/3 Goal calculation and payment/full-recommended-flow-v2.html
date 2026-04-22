@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Setup Flow v2 — Metric Variants</title>
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Source+Serif+4:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand-accent: #7B5EA7;
+            --brand-tint: #F3EEF9;
+            --brand-deep: #6B4E71;
+            --surface-white: #FFFFFF;
+            --surface-bg: #F7F0FA;
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-border: #E8E4F0;
+            --color-border-default: #E5E7EB;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-pill: 999px;
+            --green: #3CB371;
+            --green-light: #E8F5E9;
+            --terra-blue: #008AFF;
+        }
+
+        body {
+            background: #0D0D12;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 48px 24px 80px;
+        }
+
+        /* ── Page chrome ── */
+        .page-title {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-heading {
+            color: rgba(255,255,255,0.25);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-left: 4px;
+        }
+
+        .section-block {
+            margin-bottom: 60px;
+        }
+
+        .frames-row {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .frame-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .frame-label {
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ── Phone frame ── */
+        .phone {
+            width: 390px;
+            background: var(--surface-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        /* ── Status bar ── */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px 8px;
+            background: var(--surface-bg);
+        }
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .status-icons {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        .status-icons svg {
+            width: 16px; height: 16px;
+            fill: var(--color-text-primary);
+        }
+
+        /* ── Shared sheet chrome ── */
+        .sheet {
+            background: var(--surface-white);
+            border-radius: 20px 20px 0 0;
+            margin-top: 8px;
+        }
+
+        .sheet-handle {
+            width: 36px;
+            height: 4px;
+            border-radius: 2px;
+            background: #D1D5DB;
+            margin: 10px auto 0;
+        }
+
+        .sheet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+        }
+
+        .sheet-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .sheet-close {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-pill);
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .sheet-close svg { width: 14px; height: 14px; color: #6B7280; }
+
+        .sheet-body {
+            padding: 0 20px 28px;
+        }
+
+        /* ── Step dots ── */
+        .step-dots {
+            display: flex;
+            gap: 6px;
+            padding: 0 20px 16px;
+        }
+        .step-dot {
+            flex: 1;
+            height: 3px;
+            border-radius: 2px;
+            background: var(--color-border-default);
+        }
+        .step-dot.active { background: var(--brand-accent); }
+        .step-dot.done { background: var(--green); }
+
+        /* ── Connect screen ── */
+        .connect-motiv-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .connect-motiv-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--brand-accent) 0%, #6B4E71 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .connect-motiv-info {}
+        .connect-motiv-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+        .connect-motiv-sub {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .connect-desc {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .connect-what-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 12px;
+        }
+
+        .connect-what-list {
+            margin-bottom: 20px;
+        }
+
+        .connect-what-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .connect-what-item:last-child { margin-bottom: 0; }
+
+        .connect-what-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--brand-tint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .connect-what-icon svg {
+            width: 14px;
+            height: 14px;
+            color: var(--brand-accent);
+        }
+
+        .connect-what-text {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .connect-terra-note {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 20px;
+            padding: 12px 14px;
+            background: #F9FAFB;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-default);
+        }
+        .connect-terra-note strong { color: var(--color-text-secondary); font-weight: 500; }
+
+        .btn-primary {
+            width: 100%;
+            height: 52px;
+            background: var(--color-text-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .btn-primary svg { width: 18px; height: 18px; }
+
+        /* ── Terra widget ── */
+        .terra-phone {
+            width: 390px;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .terra-chrome {
+            background: #F8F8F8;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 48px 0 0;
+        }
+        .terra-bar {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px 10px;
+            gap: 12px;
+        }
+        .terra-bar-done {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--terra-blue);
+            white-space: nowrap;
+        }
+        .terra-url-pill {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            background: #ECECEC;
+            border-radius: 8px;
+            padding: 7px 12px;
+        }
+        .terra-url-pill svg { width: 12px; height: 12px; fill: #8E8E93; }
+        .terra-url-text { font-size: 13px; color: #8E8E93; }
+
+        .terra-body {
+            padding: 24px 20px 28px;
+        }
+
+        .terra-app-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .terra-app-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--brand-accent) 0%, #6B4E71 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .terra-app-name { font-size: 16px; font-weight: 600; color: var(--color-text-primary); }
+        .terra-app-sub { font-size: 12px; color: var(--color-text-secondary); }
+
+        .terra-select-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+        .terra-select-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .terra-device-list {}
+
+        .terra-device {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 14px;
+            border: 1.5px solid #E8E8E8;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .terra-device:last-child { margin-bottom: 0; }
+
+        .terra-device-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .d-apple { background: #000; color: #fff; }
+        .d-google { background: #fff; border: 1px solid #E0E0E0; }
+        .d-fitbit { background: #00B0B9; color: #fff; }
+        .d-garmin { background: #007CC3; color: #fff; font-size: 11px; }
+        .d-whoop { background: #111; color: #fff; }
+        .d-oura { background: #1D1D1D; color: #C9A84C; }
+
+        .terra-device-name { flex: 1; font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+        .terra-device-arrow { color: #C7C7CC; }
+        .terra-device-arrow svg { width: 16px; height: 16px; }
+
+        .terra-footer {
+            text-align: center;
+            padding-top: 16px;
+            font-size: 11px;
+            color: #999;
+        }
+        .terra-footer strong { color: #666; font-weight: 600; }
+
+        /* ── Sign-in screen ── */
+        .signin-body {
+            padding: 28px 20px 32px;
+            text-align: center;
+        }
+
+        .signin-brand-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: #000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+        .signin-brand-logo svg { width: 28px; height: 28px; fill: white; }
+
+        .signin-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 6px;
+        }
+        .signin-desc {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+            padding: 0 8px;
+        }
+
+        .signin-field {
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .signin-field-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .signin-field-input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1.5px solid #E0E0E0;
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            color: var(--color-text-primary);
+            background: white;
+        }
+        .signin-field-input.filled {
+            color: var(--color-text-primary);
+            border-color: #D1D5DB;
+        }
+        .signin-field-input.password {
+            color: #2B2E34;
+            letter-spacing: 3px;
+        }
+
+        .signin-privacy {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-text-tertiary);
+            margin: 14px 0 20px;
+            text-align: center;
+            padding: 0 4px;
+        }
+
+        .signin-btn {
+            width: 100%;
+            height: 50px;
+            background: #000;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        .signin-btn svg { width: 18px; height: 18px; fill: white; }
+
+        /* ── Goal screen ── */
+        .goal-sheet-body {
+            padding: 0 20px 28px;
+        }
+
+        .connected-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-light);
+            border-radius: var(--radius-pill);
+            padding: 6px 14px 6px 8px;
+            margin-bottom: 16px;
+        }
+        .connected-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+        .connected-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--green);
+        }
+        .connected-badge span {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2E7D4B;
+        }
+
+        .goal-intro {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .goal-cards-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .goal-card {
+            flex: 1;
+            background: var(--surface-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .goal-card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--brand-tint);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .goal-card-icon svg { width: 16px; height: 16px; color: var(--brand-accent); }
+
+        .goal-card-value {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .goal-card-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .goal-card-desc {
+            font-size: 11px;
+            line-height: 16px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Purple summary banner */
+        .goal-summary {
+            border-radius: var(--radius-xl);
+            padding: 18px;
+            margin-bottom: 16px;
+            color: white;
+        }
+        .goal-summary-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+        .goal-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+        .goal-summary-row:last-child { margin-bottom: 0; }
+        .goal-summary-row-label { font-size: 13px; opacity: 0.8; }
+        .goal-summary-row-val { font-size: 14px; font-weight: 600; }
+        .goal-summary-divider { height: 1px; background: rgba(255,255,255,0.15); margin: 10px 0; }
+
+        .btn-confirm {
+            width: 100%;
+            height: 52px;
+            background: var(--color-text-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* ── Google Health icon ── */
+        .google-g {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-title">Goal Setup Flow v2 — Metric Variants</div>
+
+<!-- =============================================
+     SECTION 1: CONNECT YOUR WEARABLE
+     Differs per metric (what we collect)
+     ============================================= -->
+
+<div class="section-block">
+    <div class="section-heading">1 — Connect Your Wearable</div>
+    <div class="frames-row">
+
+        <!-- STEPS -->
+        <div class="frame-col">
+            <div class="frame-label">Steps</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="#2B2E34" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Connect your device</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <div class="sheet-body">
+                        <div class="connect-motiv-row">
+                            <div class="connect-motiv-logo">M</div>
+                            <div class="connect-motiv-info">
+                                <div class="connect-motiv-name">Motiv needs your step data</div>
+                                <div class="connect-motiv-sub">to set your personal goal</div>
+                            </div>
+                        </div>
+                        <p class="connect-desc">We look at your recent activity to set a step goal that's personal to you — based on your own history, not a one-size-fits-all number.</p>
+                        <div class="connect-what-title">What we'll collect</div>
+                        <div class="connect-what-list">
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+                                </div>
+                                <span class="connect-what-text">Daily step count (last 90 days)</span>
+                            </div>
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </div>
+                                <span class="connect-what-text">Weekly step totals</span>
+                            </div>
+                        </div>
+                        <div class="connect-terra-note">
+                            <strong>Secure connection via Terra.</strong> You'll sign in directly to your device account — Motiv never sees your password.
+                        </div>
+                        <button class="btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                            Choose Your Device
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVE ENERGY -->
+        <div class="frame-col">
+            <div class="frame-label">Active Energy</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="#2B2E34" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Connect your device</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <div class="sheet-body">
+                        <div class="connect-motiv-row">
+                            <div class="connect-motiv-logo">M</div>
+                            <div class="connect-motiv-info">
+                                <div class="connect-motiv-name">Motiv needs your activity data</div>
+                                <div class="connect-motiv-sub">to set your personal goal</div>
+                            </div>
+                        </div>
+                        <p class="connect-desc">We look at your recent calorie burn and workout history to set a personal active energy goal — one that's a stretch, but achievable.</p>
+                        <div class="connect-what-title">What we'll collect</div>
+                        <div class="connect-what-list">
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>
+                                </div>
+                                <span class="connect-what-text">Active calorie burn (last 90 days)</span>
+                            </div>
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                </div>
+                                <span class="connect-what-text">Workout sessions with heart rate data</span>
+                            </div>
+                        </div>
+                        <div class="connect-terra-note">
+                            <strong>Secure connection via Terra.</strong> You'll sign in directly to your device account — Motiv never sees your password.
+                        </div>
+                        <button class="btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                            Choose Your Device
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXERCISE MINUTES -->
+        <div class="frame-col">
+            <div class="frame-label">Exercise Minutes</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="#2B2E34" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Connect your device</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot active"></div>
+                        <div class="step-dot"></div>
+                    </div>
+                    <div class="sheet-body">
+                        <div class="connect-motiv-row">
+                            <div class="connect-motiv-logo">M</div>
+                            <div class="connect-motiv-info">
+                                <div class="connect-motiv-name">Motiv needs your activity data</div>
+                                <div class="connect-motiv-sub">to set your personal goal</div>
+                            </div>
+                        </div>
+                        <p class="connect-desc">We look at your recent active minutes to set a weekly exercise goal that's personal to you — a natural step up from where you are now.</p>
+                        <div class="connect-what-title">What we'll collect</div>
+                        <div class="connect-what-list">
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 3h5"/><path d="M12 3v2"/></svg>
+                                </div>
+                                <span class="connect-what-text">Active minutes per day (last 90 days)</span>
+                            </div>
+                            <div class="connect-what-item">
+                                <div class="connect-what-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                </div>
+                                <span class="connect-what-text">Heart rate zone data per session</span>
+                            </div>
+                        </div>
+                        <div class="connect-terra-note">
+                            <strong>Secure connection via Terra.</strong> You'll sign in directly to your device account — Motiv never sees your password.
+                        </div>
+                        <button class="btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+                            Choose Your Device
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- =============================================
+     SECTION 2: DEVICE SELECTION (same for all)
+     ============================================= -->
+
+<div class="section-block">
+    <div class="section-heading">2 — Choose Your Device</div>
+    <div class="frames-row">
+        <div class="frame-col">
+            <div class="frame-label">All Metrics</div>
+            <div class="terra-phone">
+                <div class="terra-chrome">
+                    <div class="terra-bar">
+                        <span class="terra-bar-done">Done</span>
+                        <div class="terra-url-pill">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span class="terra-url-text">tryterra.co/connect</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="terra-body">
+                    <div class="terra-app-row">
+                        <div class="terra-app-icon">M</div>
+                        <div>
+                            <div class="terra-app-name">Motiv</div>
+                            <div class="terra-app-sub">wants to read your activity</div>
+                        </div>
+                    </div>
+                    <div class="terra-select-title">Choose your device</div>
+                    <div class="terra-select-sub">Select the app or wearable you use to track your activity.</div>
+                    <div class="terra-device-list">
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-apple">
+                                <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            </div>
+                            <span class="terra-device-name">Apple Watch / iPhone</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-google">
+                                <span class="google-g">G</span>
+                            </div>
+                            <span class="terra-device-name">Google Health Connect</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-fitbit">Fb</div>
+                            <span class="terra-device-name">Fitbit</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-garmin">GRM</div>
+                            <span class="terra-device-name">Garmin</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-whoop">W</div>
+                            <span class="terra-device-name">Whoop</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                        <div class="terra-device">
+                            <div class="terra-device-icon d-oura">O</div>
+                            <span class="terra-device-name">Oura</span>
+                            <div class="terra-device-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+                        </div>
+                    </div>
+                    <div class="terra-footer">Powered by <strong>Terra</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =============================================
+     SECTION 3: SIGN IN (Apple Watch example)
+     ============================================= -->
+
+<div class="section-block">
+    <div class="section-heading">3 — Sign In (Apple Watch example)</div>
+    <div class="frames-row">
+        <div class="frame-col">
+            <div class="frame-label">All Metrics</div>
+            <div class="terra-phone">
+                <div class="terra-chrome">
+                    <div class="terra-bar">
+                        <span class="terra-bar-done">Done</span>
+                        <div class="terra-url-pill">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span class="terra-url-text">appleid.apple.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signin-body">
+                    <div class="signin-brand-logo">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    </div>
+                    <div class="signin-title">Sign in to Apple</div>
+                    <div class="signin-desc">To share your health data with Motiv via Terra</div>
+                    <div class="signin-field">
+                        <div class="signin-field-label">Apple ID</div>
+                        <div class="signin-field-input filled">ellie@example.com</div>
+                    </div>
+                    <div class="signin-field">
+                        <div class="signin-field-label">Password</div>
+                        <div class="signin-field-input password">••••••••••••</div>
+                    </div>
+                    <div class="signin-privacy">You're signing in directly to Apple. Motiv never sees your credentials.</div>
+                    <button class="signin-btn">
+                        <svg viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Sign in to Apple
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =============================================
+     SECTION 4: YOUR GOAL IS SET (metric-specific)
+     ============================================= -->
+
+<div class="section-block">
+    <div class="section-heading">4 — Your Goal (Apple Watch Connected)</div>
+    <div class="frames-row">
+
+        <!-- STEPS GOAL -->
+        <div class="frame-col">
+            <div class="frame-label">Steps</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Your goal</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot done"></div>
+                        <div class="step-dot active"></div>
+                    </div>
+                    <div class="goal-sheet-body">
+                        <div class="connected-badge">
+                            <div class="connected-badge-dot"></div>
+                            <span>Apple Watch Connected</span>
+                        </div>
+                        <p class="goal-intro">Based on your step history, here's the personal goal we've calculated for this collab.</p>
+                        <div class="goal-cards-row">
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+                                </div>
+                                <div class="goal-card-value">4</div>
+                                <div class="goal-card-label">Push Days / Wk</div>
+                                <div class="goal-card-desc">Days hitting 10,250+ steps — 1.25× your daily avg of 8,200</div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </div>
+                                <div class="goal-card-value">56,000</div>
+                                <div class="goal-card-label">Steps / Week</div>
+                                <div class="goal-card-desc">1.25× your weekly avg of 44,800 steps</div>
+                            </div>
+                        </div>
+                        <div class="goal-summary" style="background: linear-gradient(135deg, #7B5EA7 0%, #5C3D87 100%);">
+                            <div class="goal-summary-label">Your Weekly Step Goal</div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Push days per week</span>
+                                <span class="goal-summary-row-val">4 days</span>
+                            </div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Step target per push day</span>
+                                <span class="goal-summary-row-val">10,250+</span>
+                            </div>
+                            <div class="goal-summary-divider"></div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Total steps per week</span>
+                                <span class="goal-summary-row-val">56,000</span>
+                            </div>
+                        </div>
+                        <button class="btn-confirm">Confirm &amp; Pay Hold</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVE ENERGY GOAL -->
+        <div class="frame-col">
+            <div class="frame-label">Active Energy</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Your goal</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot done"></div>
+                        <div class="step-dot active"></div>
+                    </div>
+                    <div class="goal-sheet-body">
+                        <div class="connected-badge">
+                            <div class="connected-badge-dot"></div>
+                            <span>Apple Watch Connected</span>
+                        </div>
+                        <p class="goal-intro">Based on your calorie history and workout sessions, here's your personal active energy goal.</p>
+                        <div class="goal-cards-row">
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                </div>
+                                <div class="goal-card-value">4</div>
+                                <div class="goal-card-label">Workouts / Wk</div>
+                                <div class="goal-card-desc">+1 above your avg of 3 zone 2+ sessions per week</div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>
+                                </div>
+                                <div class="goal-card-value">2,850</div>
+                                <div class="goal-card-label">Cal / Week</div>
+                                <div class="goal-card-desc">1.25× your weekly avg of 2,280 cal</div>
+                            </div>
+                        </div>
+                        <div class="goal-summary" style="background: linear-gradient(135deg, #C06A5A 0%, #9B4A3A 100%);">
+                            <div class="goal-summary-label">Your Weekly Energy Goal</div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Zone 2+ sessions</span>
+                                <span class="goal-summary-row-val">4 / week</span>
+                            </div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">All movement counts</span>
+                                <span class="goal-summary-row-val">every cal</span>
+                            </div>
+                            <div class="goal-summary-divider"></div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Total active calories</span>
+                                <span class="goal-summary-row-val">2,850 / wk</span>
+                            </div>
+                        </div>
+                        <button class="btn-confirm">Confirm &amp; Pay Hold</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXERCISE MINUTES GOAL -->
+        <div class="frame-col">
+            <div class="frame-label">Exercise Minutes</div>
+            <div class="phone">
+                <div class="status-bar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2" stroke="#2B2E34" stroke-width="2" fill="none"/><path d="M23 10v4" stroke="#2B2E34" stroke-width="2" stroke-linecap="round"/></svg>
+                    </div>
+                </div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Your goal</div>
+                        <div class="sheet-close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+                    </div>
+                    <div class="step-dots">
+                        <div class="step-dot done"></div>
+                        <div class="step-dot active"></div>
+                    </div>
+                    <div class="goal-sheet-body">
+                        <div class="connected-badge">
+                            <div class="connected-badge-dot"></div>
+                            <span>Apple Watch Connected</span>
+                        </div>
+                        <p class="goal-intro">Based on your active minutes history, here's the personal exercise goal we've set for this collab.</p>
+                        <div class="goal-cards-row">
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                </div>
+                                <div class="goal-card-value">60</div>
+                                <div class="goal-card-label">Zone 2+ min/wk</div>
+                                <div class="goal-card-desc">1.25× your active zone avg of 48 min/wk</div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 3h5"/><path d="M12 3v2"/></svg>
+                                </div>
+                                <div class="goal-card-value">188</div>
+                                <div class="goal-card-label">Active Min / Wk</div>
+                                <div class="goal-card-desc">1.25× your weekly avg of 150 active min</div>
+                            </div>
+                        </div>
+                        <div class="goal-summary" style="background: linear-gradient(135deg, #4A7C5A 0%, #2E5C3E 100%);">
+                            <div class="goal-summary-label">Your Weekly Movement Goal</div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Active zone minutes</span>
+                                <span class="goal-summary-row-val">60 min</span>
+                            </div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Any activity counts toward</span>
+                                <span class="goal-summary-row-val">188 min</span>
+                            </div>
+                            <div class="goal-summary-divider"></div>
+                            <div class="goal-summary-row">
+                                <span class="goal-summary-row-label">Total active min per week</span>
+                                <span class="goal-summary-row-val">188 min</span>
+                            </div>
+                        </div>
+                        <button class="btn-confirm">Confirm &amp; Pay Hold</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
