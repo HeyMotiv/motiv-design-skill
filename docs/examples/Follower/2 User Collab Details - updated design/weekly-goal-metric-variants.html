@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Collab Goal — Metric Variants</title>
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #1A1A1F;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px 64px;
+        }
+
+        .page-title {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-col-label {
+            color: rgba(255,255,255,0.35);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ── DS tokens ── */
+        :root {
+            --brand-accent: #7B5EA7;
+            --brand-tint: #F3EEF9;
+            --color-bg-secondary: #F3EEF9;
+            --surface-white: #FFFFFF;
+            --color-text-primary: #2B2E34;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-border-default: #E8E4F0;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-pill: 999px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-s-md: 12px;
+            --spacing-md: 16px;
+        }
+
+        .card-wrap {
+            width: 340px;
+        }
+
+        .stats-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        /* ── Grouped card ── */
+        .grouped-card {
+            background: var(--surface-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        /* ── Creator message ── */
+        .creator-message {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-s-md);
+            padding: var(--spacing-md);
+        }
+
+        .creator-message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-pill);
+            background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--brand-accent);
+            flex-shrink: 0;
+        }
+
+        .creator-message-bubble {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-xl);
+            border-top-left-radius: 4px;
+            padding: var(--spacing-s-md) var(--spacing-md);
+            flex: 1;
+        }
+
+        .creator-message-name {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 18px;
+            color: var(--brand-accent);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .creator-message-text {
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--color-text-secondary);
+        }
+
+        /* ── Goal cards ── */
+        .goal-cards-row {
+            display: flex;
+            gap: 10px;
+            padding: 0 var(--spacing-md) var(--spacing-md);
+        }
+
+        .goal-card {
+            flex: 1;
+            background: var(--surface-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .goal-card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(123, 94, 167, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-s-md);
+        }
+
+        .goal-card-icon svg {
+            width: 17px;
+            height: 17px;
+            color: var(--brand-accent);
+        }
+
+        .goal-card-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .goal-card-top .goal-card-icon {
+            margin-bottom: 0;
+            flex-shrink: 0;
+        }
+        .goal-card-top .goal-card-value {
+            margin-bottom: 0;
+        }
+
+        .goal-card-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .goal-card-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .goal-card-desc {
+            font-size: 12px;
+            line-height: 18px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 10px;
+        }
+
+        .goal-card-footer {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--color-text-tertiary);
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid var(--color-border-default);
+            white-space: nowrap;
+        }
+
+        /* ── CTA button ── */
+        .sync-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            width: calc(100% - 32px);
+            margin: 0 var(--spacing-md) var(--spacing-md);
+            padding: 14px var(--spacing-md);
+            background: var(--surface-white);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-pill);
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            color: var(--color-text-primary);
+            cursor: pointer;
+        }
+
+        .sync-btn svg {
+            width: 18px;
+            height: 18px;
+            color: var(--brand-accent);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-title">Weekly Collab Goal — Pre-Calculation Variants</div>
+
+    <div class="cards-row">
+
+        <!-- ── STEPS ── -->
+        <div class="card-col">
+            <div class="card-col-label">Steps</div>
+            <div class="card-wrap">
+                <div class="stats-section-title">Weekly collab goal</div>
+                <div class="grouped-card">
+                    <div class="creator-message">
+                        <div class="creator-message-avatar"></div>
+                        <div class="creator-message-bubble">
+                            <div class="creator-message-name">Ellie, @doodle_cycles</div>
+                            <div class="creator-message-text">I picked steps as our metric — your goal is personal, based on your own history. 👟</div>
+                        </div>
+                    </div>
+                    <div class="goal-cards-row">
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+                            </div>
+                            <div class="goal-card-value">4</div>
+                            <div class="goal-card-label">Push Days / Wk</div>
+                            <div class="goal-card-desc">Days per week you need to hit your step target.</div>
+                            <div class="goal-card-footer">1.25× daily avg</div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <div class="goal-card-value">1.25x</div>
+                            <div class="goal-card-label">Steps Per Week</div>
+                            <div class="goal-card-desc">A multiplier on your average weekly step count.</div>
+                            <div class="goal-card-footer">7-day total</div>
+                        </div>
+                    </div>
+                    <button class="sync-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        Calculate My Goal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── CALORIES ── -->
+        <div class="card-col">
+            <div class="card-col-label">Calories</div>
+            <div class="card-wrap">
+                <div class="stats-section-title">Weekly collab goal</div>
+                <div class="grouped-card">
+                    <div class="creator-message">
+                        <div class="creator-message-avatar"></div>
+                        <div class="creator-message-bubble">
+                            <div class="creator-message-name">Ellie, @doodle_cycles</div>
+                            <div class="creator-message-text">I picked active energy — the goal is to be a bit more active than your norm each week. Everything counts. 💪</div>
+                        </div>
+                    </div>
+                    <div class="goal-cards-row">
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            </div>
+                            <div class="goal-card-value">+1-2</div>
+                            <div class="goal-card-label">Workouts / Wk</div>
+                            <div class="goal-card-desc">Above your average # sessions with zone 2+ heart rate.</div>
+                            <div class="goal-card-footer">Min 3 per week</div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2-2.96 0-7-1-8 0 3.038-1.773 4.741-3 6-1.226 1.26-2 3.24-2 5a6 6 0 1 0 12 0c0-1.532-1.056-3.94-2-5-1.786 3-2.791 3-4 2z"/></svg>
+                            </div>
+                            <div class="goal-card-value">1.25x</div>
+                            <div class="goal-card-label">Cal / Week</div>
+                            <div class="goal-card-desc">Multiplier on your average weekly active calorie burn.</div>
+                            <div class="goal-card-footer">Energy output</div>
+                        </div>
+                    </div>
+                    <button class="sync-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        Calculate My Goal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── EXERCISE ── -->
+        <div class="card-col">
+            <div class="card-col-label">Exercise</div>
+            <div class="card-wrap">
+                <div class="stats-section-title">Weekly collab goal</div>
+                <div class="grouped-card">
+                    <div class="creator-message">
+                        <div class="creator-message-avatar"></div>
+                        <div class="creator-message-bubble">
+                            <div class="creator-message-name">Ellie, @doodle_cycles</div>
+                            <div class="creator-message-text">I picked active minutes as our metric — just show up and move more than usual. 💪</div>
+                        </div>
+                    </div>
+                    <div class="goal-cards-row">
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 3h5"/><path d="M12 3v2"/></svg>
+                            </div>
+                            <div class="goal-card-value">1.25x</div>
+                            <div class="goal-card-label">Active Min / Wk</div>
+                            <div class="goal-card-desc">Your weekly active minutes — any intensity — multiplied by 1.25.</div>
+                            <div class="goal-card-footer">Any activity</div>
+                        </div>
+                        <div class="goal-card">
+                            <div class="goal-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            </div>
+                            <div class="goal-card-value">+25%</div>
+                            <div class="goal-card-label">Zone 2+ min/wk</div>
+                            <div class="goal-card-desc">Minutes at zone 2 heart rate or above each week, based on your history.</div>
+                            <div class="goal-card-footer">Active zones</div>
+                        </div>
+                    </div>
+                    <button class="sync-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        Calculate My Goal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

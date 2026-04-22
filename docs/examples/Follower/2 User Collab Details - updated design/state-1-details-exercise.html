@@ -648,15 +648,6 @@
             justify-content: center;
             margin-bottom: var(--spacing-s-md);  /* DS spacing/s-medium */
         }
-
-        .goal-card-top {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-        .goal-card-top .goal-card-icon { margin-bottom: 0; flex-shrink: 0; }
-        .goal-card-top .goal-card-value { margin-bottom: 0; }
         .goal-card-icon svg {
             width: 17px;
             height: 17px;
@@ -1252,22 +1243,22 @@
 
     var METRIC_GOALS = {
         steps: {
-            msg: "I picked steps as our metric — your goal is personal, based on your own history. 👟",
+            msg: "I picked daily steps — let's each push a little above our usual. Every step on every day counts. 👟",
             syncLabel: 'Calculate My Goal',
             cards: [
                 {
                     icon: ICONS.walk,
-                    value: '4',
-                    label: 'Push Days / Wk',
-                    desc: 'Days per week you need to hit your step target.',
-                    footer: '1.25\u00d7 daily avg',
+                    value: '1.25x',
+                    label: 'Steps Per Day',
+                    desc: 'Your daily push target. We look at your recent step history and apply a 1.25× multiplier.',
+                    footer: 'Strong'
                 },
                 {
                     icon: ICONS.cal,
                     value: '1.25x',
                     label: 'Steps Per Week',
-                    desc: 'A multiplier on your average weekly step count.',
-                    footer: '7-day total'
+                    desc: 'Same multiplier on your weekly average. Every step on every day adds up.',
+                    footer: 'All days count'
                 }
             ]
         },
@@ -1322,11 +1313,9 @@
         var row = document.getElementById('goalCardsRow');
         if (row) {
             row.innerHTML = data.cards.map(function(c) {
-                var top = c.inline
-                    ? '<div class="goal-card-top"><div class="goal-card-icon">' + c.icon + '</div><div class="goal-card-value">' + c.value + '</div></div>'
-                    : '<div class="goal-card-icon">' + c.icon + '</div><div class="goal-card-value">' + c.value + '</div>';
                 return '<div class="goal-card">' +
-                    top +
+                    '<div class="goal-card-icon">' + c.icon + '</div>' +
+                    '<div class="goal-card-value">' + c.value + '</div>' +
                     '<div class="goal-card-label">' + c.label + '</div>' +
                     '<div class="goal-card-desc">' + c.desc + '</div>' +
                     '<div class="goal-card-footer">' + c.footer + '</div>' +
@@ -1362,7 +1351,7 @@
 
     // ── Init metric ───────────────────────────────────────────────────────────
     (function() {
-        var metric = new URLSearchParams(window.location.search).get('metric') || 'calories';
+        var metric = new URLSearchParams(window.location.search).get('metric') || 'exercise';
         renderGoalSection(metric);
     })();
     </script>
