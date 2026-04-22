@@ -91,6 +91,12 @@
       "runtimeExecutable": "/usr/local/bin/node",
       "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-activity-log.js"],
       "port": 8781
+    },
+    {
+      "name": "active-energy",
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/tmcmennamin/Documents/GitHub/motiv-design-skill/.claude/serve-active-energy.js"],
+      "port": 8792
     }
   ]
 }
