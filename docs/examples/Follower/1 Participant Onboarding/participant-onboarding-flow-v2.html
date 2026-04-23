@@ -531,6 +531,7 @@
             padding: 4px 0;
             letter-spacing: 0.3px;
         }
+        .s3-avatar-initial { position: absolute; inset: 0; background: #C97A6A; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 60px; color: #FFFFFF; line-height: 1; user-select: none; }
         .s3-photo-label {
             font-family: var(--font-display);
             font-size: 14px;
@@ -1378,10 +1379,10 @@
             </div>
             <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 28px;">
                 <div class="s3-photo-upload" style="width: 120px; height: 120px;" id="photoUpload" onclick="showPhotoPermission()">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=240&h=240&fit=crop&crop=face" alt="Your photo" id="profilePhoto" style="display: block;">
+                    <div class="s3-avatar-initial" id="profileAvatarInitial">S</div>
                     <div class="s3-photo-edit" style="font-size: 12px; padding: 5px 0;">Edit</div>
                 </div>
-                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Profile photo</div>
+                <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 10px;">Add a photo</div>
             </div>
             <div class="s3-form-group">
                 <label class="s3-form-label">What should we call you?</label>
