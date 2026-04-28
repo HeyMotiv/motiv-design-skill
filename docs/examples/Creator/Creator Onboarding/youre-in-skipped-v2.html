@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>You're In (Skipped Onboarding) — Motiv Creator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,700&family=Roboto:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+    <style>
+        :root {
+            --color-brand-primary: #2B2E34;
+            --color-brand-secondary: #C97A6A;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #6B7280;
+            --color-text-tertiary: #9CA3AF;
+            --color-text-inverse: #FFFFFF;
+            --color-border-default: #E5E7EB;
+
+            --teal-100: #547577;
+            --teal-30:  #D0DEDF;
+            --teal-0:   #ECF2F2;
+            --orange-100: #C97A6A;
+            --orange-0:   #FAF6F1;
+
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'Roboto', system-ui, sans-serif;
+
+            --radius-md: 12px;
+            --radius-full: 9999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        .review-header { text-align: center; margin-bottom: 24px; max-width: 720px; }
+        .review-title  { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: #e8e8f0; margin-bottom: 4px; }
+        .review-subtitle { font-size: 12px; color: #8888a0; }
+
+        /* ---------- Phone frame ---------- */
+        .phone-frame {
+            width: 390px; height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            position: relative;
+            margin-top: 20px;
+        }
+
+        /* ---------- Animated teal background (matches green-chapter from onboarding) ---------- */
+        .lava-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            background: #ECF1F0;
+        }
+        .blob { position: absolute; border-radius: 50%; filter: blur(40px); }
+        .blob-ga {
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(170,215,210,0.95) 0%, rgba(178,218,214,0.50) 50%, rgba(220,240,237,0.20) 100%);
+            bottom: -200px; right: -200px;
+            animation: drift-a 14s ease-in-out infinite;
+        }
+        .blob-ga2 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(172,216,212,0.80) 0%, rgba(182,222,218,0.40) 50%, rgba(222,242,239,0.15) 100%);
+            bottom: -80px; right: -80px;
+            animation: drift-a2 16s ease-in-out infinite;
+            animation-delay: -6s;
+        }
+        .blob-gb {
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(155,205,200,0.85) 0%, rgba(172,216,212,0.50) 50%, rgba(208,235,232,0.25) 100%);
+            bottom: -250px; right: -120px;
+            animation: drift-b 12s ease-in-out infinite;
+            animation-delay: -3s;
+        }
+        .blob-gb2 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(158,208,204,0.70) 0%, rgba(178,218,214,0.40) 50%, rgba(212,238,235,0.20) 100%);
+            bottom: -100px; right: -280px;
+            animation: drift-b2 18s ease-in-out infinite;
+            animation-delay: -8s;
+        }
+        @keyframes drift-a  { 0%,100% { transform: translate(0,0) scale(1) rotate(0deg);  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 25% { transform: translate(-20%,-50%) scale(1.18) rotate(60deg); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } 50% { transform: translate(-10%,-85%) scale(0.85) rotate(120deg); border-radius: 50% 60% 30% 60% / 30% 40% 70% 50%; } 75% { transform: translate(-35%,-45%) scale(1.12) rotate(180deg); border-radius: 40% 30% 60% 50% / 60% 70% 30% 40%; } }
+        @keyframes drift-a2 { 0%,100% { transform: translate(0,0) scale(1) rotate(0deg);  border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; } 33% { transform: translate(-65%,-15%) scale(1.2) rotate(80deg);  border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; } 66% { transform: translate(-30%,-35%) scale(0.82) rotate(160deg); border-radius: 40% 60% 60% 40% / 60% 40% 50% 50%; } }
+        @keyframes drift-b  { 0%,100% { transform: translate(0,0) scale(1) rotate(0deg);  border-radius: 70% 30% 50% 50% / 30% 70% 30% 70%; } 25% { transform: translate(-25%,-60%) scale(1.2)  rotate(80deg);  border-radius: 50% 50% 30% 70% / 50% 50% 50% 50%; } 50% { transform: translate(-55%,-80%) scale(0.82) rotate(160deg); border-radius: 30% 70% 70% 30% / 70% 30% 50% 60%; } }
+        @keyframes drift-b2 { 0%,100% { transform: translate(0,0) scale(1) rotate(0deg);  border-radius: 40% 60% 60% 40% / 70% 40% 60% 30%; } 50% { transform: translate(-40%,-70%) scale(1.15) rotate(120deg); border-radius: 60% 40% 30% 70% / 40% 60% 40% 60%; } }
+
+        /* ---------- Status bar ---------- */
+        .status-bar {
+            position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 14px 28px 0; height: 54px;
+        }
+        .status-time { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+        .status-icons { display: flex; align-items: center; gap: 6px; }
+        .status-icons svg { height: 12px; }
+        .home-indicator {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            width: 134px; height: 5px; background: var(--color-text-primary);
+            border-radius: 3px; opacity: 0.2; z-index: 10;
+        }
+
+        /* ---------- Screen content ---------- */
+        .screen {
+            position: absolute; inset: 0; z-index: 1;
+            display: flex; flex-direction: column;
+            padding: 92px 24px 24px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.05;
+            margin-bottom: 8px;
+        }
+        .hero-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.45;
+            padding: 0 12px;
+        }
+
+        /* ---------- Earn card ---------- */
+        .card {
+            background: #FFFFFF;
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-md);
+            padding: 20px 16px;
+            margin-bottom: 12px;
+        }
+
+        .earn-eyebrow {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--orange-100);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 0.2px;
+        }
+
+        .earn-stat-row {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            margin-bottom: 6px;
+        }
+        .earn-amount {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 46px;
+            line-height: 1;
+            color: var(--color-text-primary);
+            transition: opacity 180ms ease;
+        }
+        .earn-amount.flip { opacity: 0; }
+        .earn-suffix {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        /* Caveat under $350 — small, sits close to the guaranteed stat */
+        .payout-caveat {
+            text-align: center;
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-top: 6px;
+        }
+
+        /* Inline subtext under $350 — ties the typical total to the guaranteed lead */
+        .earn-subtext {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            padding: 0 6px;
+        }
+        .earn-subtext strong {
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+        .earn-subtext-amount {
+            display: inline-block;
+            transition: opacity 180ms ease;
+        }
+        .earn-subtext-amount.flip { opacity: 0; }
+
+        /* Calculator group: clearly labeled control for follower count */
+        .calculator-group {
+            text-align: center;
+            margin: 16px -16px 0;
+            padding: 16px 16px 0;
+            border-top: 1px solid var(--color-border-default);
+        }
+        .calc-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .chip-row {
+            display: flex; gap: 8px; justify-content: center;
+            margin-bottom: 8px;
+        }
+        .calc-caption {
+            font-size: 12px;
+            font-style: italic;
+            color: var(--color-text-tertiary);
+            line-height: 1.4;
+        }
+        .chip {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            background: var(--teal-0);
+            color: var(--teal-100);
+            border: 1px solid var(--teal-30);
+            cursor: pointer;
+            transition: background 150ms, color 150ms, transform 100ms;
+        }
+        .chip:hover { background: #E0EBEB; }
+        .chip:active { transform: scale(0.97); }
+        .chip.selected {
+            background: var(--teal-100);
+            color: #FFFFFF;
+            border-color: var(--teal-100);
+        }
+
+        .payout-note {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+            margin-top: 14px;
+        }
+
+        /* ---------- Notifications card ---------- */
+        .notif-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        .notif-body {
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+            margin-bottom: 14px;
+            padding: 0 8px;
+        }
+        .btn-notif {
+            display: block; width: 100%;
+            background: var(--orange-100);
+            color: #FFFFFF;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 14px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 100ms, opacity 150ms;
+        }
+        .btn-notif:hover { opacity: 0.92; }
+        .btn-notif:active { transform: scale(0.98); }
+
+        /* ---------- Italic next-up ---------- */
+        .next-up {
+            text-align: center;
+            font-size: 14px;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            margin-top: 14px;
+            padding: 0 16px;
+        }
+
+        /* ---------- Footer CTA ---------- */
+        .cta-wrap {
+            margin-top: auto;
+            padding-top: 16px;
+        }
+        .btn-primary {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%;
+            background: var(--color-brand-primary);
+            color: #FFFFFF;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 18px 24px;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: transform 100ms;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+    <div class="review-header">
+        <div class="review-title">You're In — Skipped Onboarding (V2)</div>
+        <div class="review-subtitle">Creator landing screen for users who skipped onboarding · tap chips to scale earnings</div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="lava-bg">
+            <div class="blob blob-ga"></div>
+            <div class="blob blob-ga2"></div>
+            <div class="blob blob-gb"></div>
+            <div class="blob blob-gb2"></div>
+        </div>
+
+        <div class="status-bar">
+            <span class="status-time">9:41</span>
+            <div class="status-icons">
+                <svg viewBox="0 0 18 12" fill="none"><rect x="0" y="7" width="3" height="5" rx=".5" fill="#1A1A1A"/><rect x="4" y="5" width="3" height="7" rx=".5" fill="#1A1A1A"/><rect x="8" y="3" width="3" height="9" rx=".5" fill="#1A1A1A"/><rect x="12" y="0" width="3" height="12" rx=".5" fill="#1A1A1A"/></svg>
+                <svg viewBox="0 0 16 12" fill="none"><path d="M8 2.4C10.6 2.4 12.9 3.5 14.5 5.3L16 3.7C14 1.4 11.2 0 8 0C4.8 0 2 1.4 0 3.7L1.5 5.3C3.1 3.5 5.4 2.4 8 2.4Z" fill="#1A1A1A"/><path d="M8 6.4C9.7 6.4 11.2 7.1 12.3 8.2L13.8 6.6C12.3 5.1 10.3 4.2 8 4.2C5.7 4.2 3.7 5.1 2.2 6.6L3.7 8.2C4.8 7.1 6.3 6.4 8 6.4Z" fill="#1A1A1A"/><circle cx="8" cy="11" r="1.5" fill="#1A1A1A"/></svg>
+                <svg viewBox="0 0 28 13" fill="none"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="#1A1A1A" stroke-opacity=".35"/><rect x="2" y="2" width="20" height="9" rx="2" fill="#1A1A1A"/><path d="M25 4.5V8.5C25.8 8.2 26.5 7.2 26.5 6.5C26.5 5.8 25.8 4.8 25 4.5Z" fill="#1A1A1A" fill-opacity=".4"/></svg>
+            </div>
+        </div>
+
+        <div class="home-indicator"></div>
+
+        <div class="screen">
+            <div class="hero">
+                <div class="hero-title">You're in, Ellie!</div>
+                <div class="hero-sub">Your first Collab is ready when you are.</div>
+            </div>
+
+            <!-- Earn card -->
+            <div class="card">
+                <div class="earn-eyebrow">You'll earn</div>
+
+                <!-- Numbers (the value, lead with credible $350) -->
+                <div class="earn-stat-row">
+                    <div class="earn-amount" id="earnAmount">$350</div>
+                    <div class="earn-suffix">guaranteed<br>per Collab</div>
+                </div>
+                <div class="earn-subtext">
+                    Most Collabs earn <strong>~$<span class="earn-subtext-amount" id="earnTotal">729</span>+</strong>
+                </div>
+                <div class="payout-caveat">Payout unlocks once 500 participants join</div>
+
+                <!-- Calculator (the input, clearly labeled as followers) -->
+                <div class="calculator-group">
+                    <div class="calc-label">Bigger audiences earn creators more</div>
+                    <div class="chip-row">
+                        <button class="chip selected" data-amount="350" data-total="729">50K</button>
+                        <button class="chip" data-amount="1,300" data-total="2,818">200K</button>
+                        <button class="chip" data-amount="1,500" data-total="5,294">500K</button>
+                    </div>
+                    <div class="calc-caption">Based on 1% joining at typical performance</div>
+                </div>
+            </div>
+
+            <!-- Notifications card -->
+            <div class="card">
+                <div class="notif-title">Keep your Collab on track</div>
+                <div class="notif-body">Heads-up notifications at key moments to keep your Collab engaged and earning its best.</div>
+                <button class="btn-notif" id="turnOnNotifsBtn">Turn on notifications</button>
+            </div>
+
+            <!-- Footer CTA -->
+            <div class="cta-wrap">
+                <button class="btn-primary">Let's go</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const amountEl = document.getElementById('earnAmount');
+        const totalEl = document.getElementById('earnTotal');
+        const chips = document.querySelectorAll('.chip');
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (chip.classList.contains('selected')) return;
+
+                chips.forEach(c => c.classList.remove('selected'));
+                chip.classList.add('selected');
+
+                const newAmount = '$' + chip.dataset.amount;
+                const newTotal = chip.dataset.total;
+
+                amountEl.classList.add('flip');
+                totalEl.classList.add('flip');
+                setTimeout(() => {
+                    amountEl.textContent = newAmount;
+                    totalEl.textContent = newTotal;
+                    amountEl.classList.remove('flip');
+                    totalEl.classList.remove('flip');
+                }, 180);
+            });
+        });
+
+        document.getElementById('turnOnNotifsBtn').addEventListener('click', function() {
+            this.parentElement.innerHTML = '<div style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:14px; color:#547577; padding:8px 0;"><span class="material-icons" style="font-size:18px;">notifications_active</span> Notifications enabled!</div>';
+        });
+    </script>
+</body>
+</html>
