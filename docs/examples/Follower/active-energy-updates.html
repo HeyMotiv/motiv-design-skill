@@ -1486,5 +1486,403 @@
         </div>
     </div>
 
+    <!-- ════════════════════════════════════════════════════
+         FILE 10: activity-log-variants.html
+         Activity log — Steps tab (Push days)
+         ════════════════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-label">Activity log — Steps tab</div>
+            <div class="section-file">metric-variants/activity-log-variants.html</div>
+            <div class="change-badge" style="background:#2B6CB0; color:#fff;">New mock</div>
+        </div>
+
+        <div class="diff-note">
+            <div class="diff-note-title">Steps version — Push days (same structure as Active Energy tab)</div>
+            <ul>
+                <li>Goal: <ins>4 Push days / week</ins> + <ins>56,000 steps / week</ins></li>
+                <li>Helper text: <ins>Push day: 9,200+ steps</ins></li>
+                <li>Qualifying days show <ins>"Push day 👟"</ins> purple label (mirrors "High energy day ⚡")</li>
+                <li>Wk 3: 1/4 push days (in progress) · Wk 2: 0/4 (Unmet) · Wk 1: 4/4 (Met)</li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <!-- ── WEEK 3 ── -->
+            <div class="col">
+                <div class="col-label">Week 3 — In Progress</div>
+                <div style="width:300px; background:#F7F0FA; border-radius:28px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.4);">
+                    <!-- status bar -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px 6px; font-size:12px; font-weight:600; color:#2B2E34;">
+                        <span>9:41</span>
+                        <div style="display:flex; gap:5px; align-items:center;">
+                            <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg>
+                            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg>
+                        </div>
+                    </div>
+                    <!-- nav -->
+                    <div style="display:flex; align-items:center; padding:2px 20px 10px;">
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#2B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div style="flex:1; text-align:center; font-size:15px; font-weight:500; color:#2B2E34; margin-right:8px;">Your activity log</div>
+                    </div>
+                    <!-- content -->
+                    <div style="padding:0 18px; display:flex; flex-direction:column; gap:12px; padding-bottom:24px;">
+                        <!-- collab card -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:14px;">
+                            <div style="font-size:15px; font-weight:500; color:#2B2E34;">Walk &amp; Earn</div>
+                            <div style="font-size:13px; color:#6B7280;">Jan 5 – Feb 15</div>
+                            <div style="height:1px; background:#E5E7EB; margin:10px 0 0;"></div>
+                            <div style="display:flex; align-items:center; gap:10px; padding-top:10px;">
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">4</div>
+                                    <div style="font-size:11px; color:#6B7280;">Push days / week</div>
+                                </div>
+                                <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">56,000</div>
+                                    <div style="font-size:11px; color:#6B7280;">Weekly steps</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- helper -->
+                        <div style="font-size:11px; color:#9CA3AF; text-align:center;">Push day: 9,200+ steps</div>
+                        <!-- pills: Wk 3 active -->
+                        <div style="display:flex; gap:7px;">
+                            <div style="background:#6B4E71; color:#F7F0FA; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="4" viewBox="0 0 14 4" fill="none"><circle cx="2" cy="2" r="1.5" fill="currentColor"/><circle cx="7" cy="2" r="1.5" fill="currentColor"/><circle cx="12" cy="2" r="1.5" fill="currentColor"/></svg>Wk 3
+                            </div>
+                            <div style="background:#fff; color:#9CA3AF; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2L8 8M8 2L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Wk 2
+                            </div>
+                            <div style="background:#fff; color:#6B4E71; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1
+                            </div>
+                        </div>
+                        <!-- week summary -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:12px 14px; display:flex; align-items:center;">
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">1<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 4</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Push days</div>
+                            </div>
+                            <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">28,400<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 56k</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Steps</div>
+                            </div>
+                        </div>
+                        <!-- section header -->
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:13px; font-weight:600; color:#2B2E34;">Week 3 · Jan 19–25</span>
+                            <span style="font-size:11px; font-weight:600; color:#7E6DA8; background:#F3EEF9; padding:3px 8px; border-radius:999px;">In Progress</span>
+                        </div>
+                        <!-- day list -->
+                        <div style="display:flex; flex-direction:column; gap:0; background:#fff; border:1px solid #E5E7EB; border-radius:10px; overflow:hidden;">
+                            <!-- Sunday — push day ✓ 11,200 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#E8F0E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                    <svg width="10" height="8" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px; font-weight:500; color:#2B2E34;">Sunday, Jan 19</div>
+                                    <div style="font-size:11px; color:#7E6DA8;">Push day 👟</div>
+                                </div>
+                                <div style="font-size:13px; font-weight:500; color:#2B2E34;">11,200 steps</div>
+                            </div>
+                            <!-- Monday — 6,800 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Monday, Jan 20</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">6,800 steps</div>
+                            </div>
+                            <!-- Tuesday — 4,900 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Tuesday, Jan 21</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">4,900 steps</div>
+                            </div>
+                            <!-- Wednesday — today, in progress, 5,500 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6; background:#FAFAFA;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#EDE8F5; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#7E6DA8" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#7E6DA8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px; font-weight:500; color:#2B2E34;">Wednesday, Jan 22</div>
+                                    <div style="font-size:11px; color:#9CA3AF;">In progress</div>
+                                </div>
+                                <div style="font-size:13px; font-weight:500; color:#7E6DA8;">5,500 steps</div>
+                            </div>
+                            <!-- Thu–Sat upcoming -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6; opacity:0.45;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; color:#9CA3AF;">Thursday, Jan 23</div><div style="font-size:11px; color:#9CA3AF;">Upcoming</div></div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6; opacity:0.45;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; color:#9CA3AF;">Friday, Jan 24</div><div style="font-size:11px; color:#9CA3AF;">Upcoming</div></div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; opacity:0.45;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#9CA3AF" stroke-width="1.2"/><path d="M6 3.5V6L7.5 7.5" stroke="#9CA3AF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; color:#9CA3AF;">Saturday, Jan 25</div><div style="font-size:11px; color:#9CA3AF;">Upcoming</div></div>
+                            </div>
+                        </div>
+                        <!-- total -->
+                        <div style="display:flex; justify-content:space-between; padding:4px 2px;">
+                            <span style="font-size:12px; font-weight:500; color:#6B7280;">Total this week</span>
+                            <span style="font-size:12px; font-weight:700; color:#2B2E34;">28,400 steps</span>
+                        </div>
+                        <!-- sync -->
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#fff; border:1px solid #E5E7EB; border-radius:8px;">
+                            <span style="font-size:11px; color:#9CA3AF;">Synced Yesterday · 12:59 pm</span>
+                            <span style="font-size:12px; font-weight:600; color:#7B5EA7; text-decoration:underline; cursor:pointer;">Sync now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── WEEK 2 ── -->
+            <div class="col">
+                <div class="col-label">Week 2 — Unmet</div>
+                <div style="width:300px; background:#F7F0FA; border-radius:28px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.4);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px 6px; font-size:12px; font-weight:600; color:#2B2E34;">
+                        <span>9:41</span>
+                        <div style="display:flex; gap:5px; align-items:center;">
+                            <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg>
+                            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:2px 20px 10px;">
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#2B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div style="flex:1; text-align:center; font-size:15px; font-weight:500; color:#2B2E34; margin-right:8px;">Your activity log</div>
+                    </div>
+                    <div style="padding:0 18px; display:flex; flex-direction:column; gap:12px; padding-bottom:24px;">
+                        <!-- collab card -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:14px;">
+                            <div style="font-size:15px; font-weight:500; color:#2B2E34;">Walk &amp; Earn</div>
+                            <div style="font-size:13px; color:#6B7280;">Jan 5 – Feb 15</div>
+                            <div style="height:1px; background:#E5E7EB; margin:10px 0 0;"></div>
+                            <div style="display:flex; align-items:center; gap:10px; padding-top:10px;">
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">4</div>
+                                    <div style="font-size:11px; color:#6B7280;">Push days / week</div>
+                                </div>
+                                <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">56,000</div>
+                                    <div style="font-size:11px; color:#6B7280;">Weekly steps</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size:11px; color:#9CA3AF; text-align:center;">Push day: 9,200+ steps</div>
+                        <!-- pills: Wk 2 active -->
+                        <div style="display:flex; gap:7px;">
+                            <div style="background:#fff; color:#9CA3AF; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="4" viewBox="0 0 14 4" fill="none"><circle cx="2" cy="2" r="1.5" fill="currentColor"/><circle cx="7" cy="2" r="1.5" fill="currentColor"/><circle cx="12" cy="2" r="1.5" fill="currentColor"/></svg>Wk 3
+                            </div>
+                            <div style="background:#6B4E71; color:#F7F0FA; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2L8 8M8 2L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Wk 2
+                            </div>
+                            <div style="background:#fff; color:#6B4E71; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1
+                            </div>
+                        </div>
+                        <!-- week summary -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:12px 14px; display:flex; align-items:center;">
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">0<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 4</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Push days</div>
+                            </div>
+                            <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">36,000<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 56k</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Steps</div>
+                            </div>
+                        </div>
+                        <!-- section header -->
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:13px; font-weight:600; color:#2B2E34;">Week 2 · Jan 12–18</span>
+                            <span style="font-size:11px; font-weight:600; color:#DC2626; background:#FEF2F2; padding:3px 8px; border-radius:999px;">Unmet</span>
+                        </div>
+                        <!-- day list — all below 9,200 steps -->
+                        <div style="display:flex; flex-direction:column; gap:0; background:#fff; border:1px solid #E5E7EB; border-radius:10px; overflow:hidden;">
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Sunday, Jan 12</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">7,800 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Monday, Jan 13</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">4,200 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Tuesday, Jan 14</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">3,900 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Wednesday, Jan 15</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">6,100 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Thursday, Jan 16</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">5,500 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Friday, Jan 17</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">4,800 steps</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Saturday, Jan 18</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">3,700 steps</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:4px 2px;">
+                            <span style="font-size:12px; font-weight:500; color:#6B7280;">Total this week</span>
+                            <span style="font-size:12px; font-weight:700; color:#2B2E34;">36,000 steps</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#fff; border:1px solid #E5E7EB; border-radius:8px;">
+                            <span style="font-size:11px; color:#9CA3AF;">Synced Yesterday · 12:59 pm</span>
+                            <span style="font-size:12px; font-weight:600; color:#7B5EA7; text-decoration:underline; cursor:pointer;">Sync now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── WEEK 1 ── -->
+            <div class="col">
+                <div class="col-label">Week 1 — Met ✓</div>
+                <div style="width:300px; background:#F7F0FA; border-radius:28px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.4);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 20px 6px; font-size:12px; font-weight:600; color:#2B2E34;">
+                        <span>9:41</span>
+                        <div style="display:flex; gap:5px; align-items:center;">
+                            <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="4" width="3" height="8" rx="1" fill="#2B2E34"/><rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#2B2E34"/><rect x="9" y="1" width="3" height="11" rx="1" fill="#2B2E34"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="#2B2E34" opacity="0.3"/></svg>
+                            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#2B2E34" stroke-opacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#2B2E34"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#2B2E34" opacity="0.4"/></svg>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:2px 20px 10px;">
+                        <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#2B2E34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <div style="flex:1; text-align:center; font-size:15px; font-weight:500; color:#2B2E34; margin-right:8px;">Your activity log</div>
+                    </div>
+                    <div style="padding:0 18px; display:flex; flex-direction:column; gap:12px; padding-bottom:24px;">
+                        <!-- collab card -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:14px;">
+                            <div style="font-size:15px; font-weight:500; color:#2B2E34;">Walk &amp; Earn</div>
+                            <div style="font-size:13px; color:#6B7280;">Jan 5 – Feb 15</div>
+                            <div style="height:1px; background:#E5E7EB; margin:10px 0 0;"></div>
+                            <div style="display:flex; align-items:center; gap:10px; padding-top:10px;">
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">4</div>
+                                    <div style="font-size:11px; color:#6B7280;">Push days / week</div>
+                                </div>
+                                <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                                <div style="flex:1; text-align:center;">
+                                    <div style="font-family:'Source Serif 4',serif; font-size:18px; font-weight:700; color:#6B4E71; line-height:1; margin-bottom:3px;">56,000</div>
+                                    <div style="font-size:11px; color:#6B7280;">Weekly steps</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="font-size:11px; color:#9CA3AF; text-align:center;">Push day: 9,200+ steps</div>
+                        <!-- pills: Wk 1 active -->
+                        <div style="display:flex; gap:7px;">
+                            <div style="background:#fff; color:#9CA3AF; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="4" viewBox="0 0 14 4" fill="none"><circle cx="2" cy="2" r="1.5" fill="currentColor"/><circle cx="7" cy="2" r="1.5" fill="currentColor"/><circle cx="12" cy="2" r="1.5" fill="currentColor"/></svg>Wk 3
+                            </div>
+                            <div style="background:#fff; color:#9CA3AF; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2L8 8M8 2L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Wk 2
+                            </div>
+                            <div style="background:#6B4E71; color:#F7F0FA; padding:6px 12px; border-radius:999px; font-size:13px; font-weight:700; display:flex; align-items:center; gap:4px;">
+                                <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Wk 1
+                            </div>
+                        </div>
+                        <!-- week summary -->
+                        <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:12px 14px; display:flex; align-items:center;">
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">4<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 4</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Push days</div>
+                            </div>
+                            <div style="width:1px; height:36px; background:#E5E7EB;"></div>
+                            <div style="flex:1; text-align:center;">
+                                <div style="font-family:'Source Serif 4',serif; font-weight:700; color:#6B4E71; font-size:18px; line-height:1; margin-bottom:3px;">62,900<span style="font-size:11px; color:#9CA3AF; font-family:'Roboto',sans-serif; font-weight:400;"> / 56k</span></div>
+                                <div style="font-size:11px; color:#6B7280;">Steps</div>
+                            </div>
+                        </div>
+                        <!-- section header -->
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-size:13px; font-weight:600; color:#2B2E34;">Week 1 · Jan 5–11</span>
+                            <span style="font-size:11px; font-weight:600; color:#15803D; background:#F0FDF4; padding:3px 8px; border-radius:999px;">Met</span>
+                        </div>
+                        <!-- day list — Sun/Tue/Thu/Fri are push days (9,200+) -->
+                        <div style="display:flex; flex-direction:column; gap:0; background:#fff; border:1px solid #E5E7EB; border-radius:10px; overflow:hidden;">
+                            <!-- Sunday ✓ 11,500 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#E8F0E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="10" height="8" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Sunday, Jan 5</div><div style="font-size:11px; color:#7E6DA8;">Push day 👟</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#2B2E34;">11,500 steps</div>
+                            </div>
+                            <!-- Monday 7,200 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Monday, Jan 6</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">7,200 steps</div>
+                            </div>
+                            <!-- Tuesday ✓ 10,200 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#E8F0E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="10" height="8" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Tuesday, Jan 7</div><div style="font-size:11px; color:#7E6DA8;">Push day 👟</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#2B2E34;">10,200 steps</div>
+                            </div>
+                            <!-- Wednesday 6,800 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Wednesday, Jan 8</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">6,800 steps</div>
+                            </div>
+                            <!-- Thursday ✓ 9,800 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#E8F0E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="10" height="8" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Thursday, Jan 9</div><div style="font-size:11px; color:#7E6DA8;">Push day 👟</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#2B2E34;">9,800 steps</div>
+                            </div>
+                            <!-- Friday ✓ 11,000 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid #F3F4F6;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#E8F0E8; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="10" height="8" viewBox="0 0 12 9" fill="none"><path d="M1 4.5L4.5 8L11 1" stroke="#6B4E71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Friday, Jan 10</div><div style="font-size:11px; color:#7E6DA8;">Push day 👟</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#2B2E34;">11,000 steps</div>
+                            </div>
+                            <!-- Saturday 6,400 -->
+                            <div style="display:flex; align-items:center; gap:10px; padding:11px 14px;">
+                                <div style="width:22px; height:22px; border-radius:999px; background:#F3F4F6; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="8" height="2" viewBox="0 0 8 2" fill="none"><path d="M1 1H7" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                                <div style="flex:1;"><div style="font-size:13px; font-weight:500; color:#2B2E34;">Saturday, Jan 11</div></div>
+                                <div style="font-size:13px; font-weight:500; color:#9CA3AF;">6,400 steps</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; padding:4px 2px;">
+                            <span style="font-size:12px; font-weight:500; color:#6B7280;">Total this week</span>
+                            <span style="font-size:12px; font-weight:700; color:#2B2E34;">62,900 steps</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#fff; border:1px solid #E5E7EB; border-radius:8px;">
+                            <span style="font-size:11px; color:#9CA3AF;">Synced Yesterday · 12:59 pm</span>
+                            <span style="font-size:12px; font-weight:600; color:#7B5EA7; text-decoration:underline; cursor:pointer;">Sync now</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    // Assign IDs to activity log phone mockups for Figma capture
+    (function() {
+        var phones = document.querySelectorAll('[style*="width:300px"][style*="background:#F7F0FA"]');
+        var ids = ['ae-log-wk3','ae-log-wk2','ae-log-wk1','steps-log-wk3','steps-log-wk2','steps-log-wk1'];
+        phones.forEach(function(el, i) { if (ids[i]) el.id = ids[i]; });
+    })();
+    </script>
 </body>
 </html>
