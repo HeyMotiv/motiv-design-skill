@@ -2518,10 +2518,10 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                                             <div class="preview-stat-divider"></div>
                                             <div class="preview-stat">
                                                 <div class="preview-stat-icon" id="reviewTypeIcon">
-                                                    <span class="material-icons">directions_bike</span>
+                                                    <span class="material-icons" id="reviewTypeIconGlyph">local_fire_department</span>
                                                 </div>
-                                                <div class="preview-stat-value" id="reviewCardType" style="font-size: 16px;">Cycling</div>
-                                                <div class="preview-stat-label">Type</div>
+                                                <div class="preview-stat-value" id="reviewCardType" style="font-size: 16px;">Active Energy</div>
+                                                <div class="preview-stat-label">Tracks</div>
                                             </div>
                                         </div>
                                     </div>
@@ -3033,9 +3033,9 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             var helper = document.getElementById('activityHelper');
             if (!helper) return;
             var descriptions = {
-                steps: 'Total steps walked or run each day, counted by their phone or wearable. Great for building daily movement habits — easy to understand and motivating at any fitness level.',
-                energy: 'Calories burned through exercise. It doesn\'t matter what they do — cycling, running, swimming — as long as they\'re moving, it counts.',
-                minutes: 'Time in motion with heart rate elevated. Doesn\'t matter what they do — cycling, running, a fitness class — it all counts toward their goal.'
+                steps: 'Steps walked or run each day. Simple, familiar, and easy to stay motivated by. Best for collabs built around daily movement habits.',
+                energy: 'Calories burned through exercise. The harder they push — cycling, running, lifting — the higher they score. Best for collabs that reward intensity and effort.',
+                minutes: 'Time in motion with heart rate elevated. Doesn\'t matter how hard they go — just that they showed up. Best for collabs built on consistency.'
             };
             helper.textContent = descriptions[state.activity] || '';
         }
@@ -3189,11 +3189,18 @@ Each week brings a fresh target calibrated to keep you progressing without burni
                 revDiff.style.color = p.emphasis;
             }
 
-            /* Type — colored with brand emphasis */
+            /* Metric (What we track) — colored with brand emphasis */
+            var activityLabels = { steps: 'Steps', energy: 'Active Energy', minutes: 'Active Mins' };
+            var activityIcons  = { steps: 'directions_walk', energy: 'local_fire_department', minutes: 'timer' };
             var revType = document.getElementById('reviewCardType');
             if (revType) {
-                revType.textContent = 'Cycling';
+                revType.textContent = activityLabels[state.activity] || 'Active Energy';
                 revType.style.color = p.emphasis;
+            }
+            var revTypeGlyph = document.getElementById('reviewTypeIconGlyph');
+            if (revTypeGlyph) {
+                revTypeGlyph.textContent = activityIcons[state.activity] || 'local_fire_department';
+                revTypeGlyph.style.color = p.emphasis;
             }
 
             /* Level bars — fill count based on difficulty */
@@ -3215,12 +3222,9 @@ Each week brings a fresh target calibrated to keep you progressing without burni
             var revLevelIcon = document.getElementById('reviewLevelIcon');
             if (revLevelIcon) revLevelIcon.style.background = p.bg;
 
-            /* Type icon — brand colored */
+            /* Metric icon background — brand colored */
             var revTypeIcon = document.getElementById('reviewTypeIcon');
-            if (revTypeIcon) {
-                revTypeIcon.style.background = p.bg;
-                revTypeIcon.querySelector('.material-icons').style.color = p.emphasis;
-            }
+            if (revTypeIcon) revTypeIcon.style.background = p.bg;
 
         }
 
@@ -3480,6 +3484,35 @@ Each week brings a fresh target calibrated to keep you progressing without burni
         updatePreview();
         /* Re-apply brand colors after browser completes layout */
         requestAnimationFrame(function() { updatePreview(); });
+
+        /* =========================================
+           URL PARAMS (for Figma capture deep-linking)
+           ?screen=N   — jump to screen N
+           ?activity=steps|energy|minutes — pre-select metric pill
+           ========================================= */
+
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var screenParam = params.get('screen');
+            var activityParam = params.get('activity');
+
+            if (activityParam) {
+                var pill = document.querySelector('.pill-row[data-field="activity"] .pill[data-value="' + activityParam + '"]');
+                if (pill) {
+                    document.querySelectorAll('.pill-row[data-field="activity"] .pill').forEach(function(p) { p.classList.remove('selected'); });
+                    pill.classList.add('selected');
+                    state.activity = activityParam;
+                    updateActivityHelper();
+                }
+            }
+
+            if (screenParam !== null) {
+                var n = parseInt(screenParam);
+                if (!isNaN(n) && n >= 0 && n < totalScreens) {
+                    goToScreen(n);
+                }
+            }
+        })();
 
     </script>
 

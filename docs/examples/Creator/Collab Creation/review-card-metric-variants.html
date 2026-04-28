@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Card — Metric Variants</title>
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #1A1A1F;
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 24px 64px;
+            gap: 0;
+        }
+
+        .page-title {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-label {
+            color: rgba(255,255,255,0.35);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ── Preview Card ── */
+
+        .preview-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 300px;
+            background: #F2F0F7;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .preview-hero-image {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=800&q=80');
+            background-size: cover;
+            background-position: center -80px;
+        }
+
+        .preview-hero-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(126,109,168,0.15) 0%,
+                rgba(126,109,168,0.20) 30%,
+                rgba(126,109,168,0.50) 50%,
+                rgba(126,109,168,0.70) 65%,
+                rgba(126,109,168,0.82) 80%,
+                rgba(126,109,168,0.88) 100%);
+        }
+
+        .preview-card-scroll {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Hero section */
+        .preview-hero-bleed {
+            position: relative;
+        }
+
+        .preview-hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 18px 18px;
+            min-height: 240px;
+            justify-content: space-between;
+        }
+
+        .preview-creator-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 5px 10px 5px 5px;
+            align-self: flex-start;
+        }
+
+        .preview-creator-badge-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .preview-creator-badge-handle {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .review-hero-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 4px;
+        }
+
+        .preview-collab-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.15;
+            text-shadow: 0 2px 12px rgba(60,30,90,0.35), 0 1px 3px rgba(0,0,0,0.15);
+            word-wrap: break-word;
+        }
+
+        .preview-collab-dates {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Stats grouped card */
+        .preview-stats-section {
+            padding: 4px 12px 12px;
+        }
+
+        .preview-grouped-card {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .preview-pool-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px 10px;
+        }
+
+        .preview-pool-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-pool-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #7E6DA8;
+            line-height: 1.1;
+        }
+
+        .preview-pool-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: #9CA3AF;
+        }
+
+        .preview-hold-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #F2F0F7;
+            border-radius: 20px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #7E6DA8;
+        }
+
+        .preview-hold-badge .material-icons {
+            font-size: 14px;
+        }
+
+        .preview-card-divider {
+            height: 1px;
+            background: #E5E7EB;
+            margin: 0;
+        }
+
+        .preview-stats-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .preview-stat {
+            flex: 1;
+            text-align: center;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .preview-stat-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: #F2F0F7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3px;
+        }
+
+        .preview-stat-icon .material-icons {
+            font-size: 15px;
+            color: #7E6DA8;
+        }
+
+        .level-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 14px;
+        }
+
+        .level-bars .bar {
+            width: 4px;
+            border-radius: 1.5px;
+            background: #E5E7EB;
+        }
+
+        .level-bars .bar.filled {
+            background: #7E6DA8;
+        }
+
+        .level-bars .bar:nth-child(1) { height: 5px; }
+        .level-bars .bar:nth-child(2) { height: 8px; }
+        .level-bars .bar:nth-child(3) { height: 11px; }
+        .level-bars .bar:nth-child(4) { height: 16px; }
+
+        .preview-stat-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #7E6DA8;
+            line-height: 1.1;
+        }
+
+        .preview-stat-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: #9CA3AF;
+        }
+
+        .preview-stat-divider {
+            width: 1px;
+            height: 36px;
+            background: #E5E7EB;
+            flex-shrink: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-title">Review Card — What we track variants</div>
+
+    <div class="cards-row">
+
+        <!-- ── STEPS ── -->
+        <div class="card-col">
+            <div class="card-label">Steps</div>
+            <div class="preview-card">
+                <div class="preview-hero-image"></div>
+                <div class="preview-hero-gradient"></div>
+                <div class="preview-card-scroll">
+                    <div class="preview-hero-bleed">
+                        <div class="preview-hero-content">
+                            <div class="preview-creator-badge">
+                                <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80')"></div>
+                                <div class="preview-creator-badge-handle">@sarah_rides</div>
+                            </div>
+                            <div class="review-hero-bottom">
+                                <div class="preview-collab-name">Dog Lovers Who Cycle</div>
+                                <div class="preview-collab-dates">Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-stats-section">
+                        <div class="preview-grouped-card">
+                            <div class="preview-pool-row">
+                                <div class="preview-pool-left">
+                                    <div class="preview-pool-amount">$24,960</div>
+                                    <div class="preview-pool-label">Collab pool</div>
+                                </div>
+                                <div class="preview-hold-badge">
+                                    <span class="material-icons">credit_card</span>
+                                    $40 hold
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">624</div>
+                                    <div class="preview-stat-label">Participants</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">6 wks</div>
+                                    <div class="preview-stat-label">Duration</div>
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <div class="level-bars">
+                                            <div class="bar filled"></div>
+                                            <div class="bar filled"></div>
+                                            <div class="bar"></div>
+                                            <div class="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Strong</div>
+                                    <div class="preview-stat-label">Difficulty</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <span class="material-icons">directions_walk</span>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Steps</div>
+                                    <div class="preview-stat-label">Tracked metric</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ACTIVE ENERGY ── -->
+        <div class="card-col">
+            <div class="card-label">Active Energy</div>
+            <div class="preview-card">
+                <div class="preview-hero-image"></div>
+                <div class="preview-hero-gradient"></div>
+                <div class="preview-card-scroll">
+                    <div class="preview-hero-bleed">
+                        <div class="preview-hero-content">
+                            <div class="preview-creator-badge">
+                                <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80')"></div>
+                                <div class="preview-creator-badge-handle">@sarah_rides</div>
+                            </div>
+                            <div class="review-hero-bottom">
+                                <div class="preview-collab-name">Dog Lovers Who Cycle</div>
+                                <div class="preview-collab-dates">Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-stats-section">
+                        <div class="preview-grouped-card">
+                            <div class="preview-pool-row">
+                                <div class="preview-pool-left">
+                                    <div class="preview-pool-amount">$24,960</div>
+                                    <div class="preview-pool-label">Collab pool</div>
+                                </div>
+                                <div class="preview-hold-badge">
+                                    <span class="material-icons">credit_card</span>
+                                    $40 hold
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">624</div>
+                                    <div class="preview-stat-label">Participants</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">6 wks</div>
+                                    <div class="preview-stat-label">Duration</div>
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <div class="level-bars">
+                                            <div class="bar filled"></div>
+                                            <div class="bar filled"></div>
+                                            <div class="bar"></div>
+                                            <div class="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Strong</div>
+                                    <div class="preview-stat-label">Difficulty</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <span class="material-icons">local_fire_department</span>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Active Energy</div>
+                                    <div class="preview-stat-label">Tracked metric</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── ACTIVE MINS ── -->
+        <div class="card-col">
+            <div class="card-label">Active Mins</div>
+            <div class="preview-card">
+                <div class="preview-hero-image"></div>
+                <div class="preview-hero-gradient"></div>
+                <div class="preview-card-scroll">
+                    <div class="preview-hero-bleed">
+                        <div class="preview-hero-content">
+                            <div class="preview-creator-badge">
+                                <div class="preview-creator-badge-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80')"></div>
+                                <div class="preview-creator-badge-handle">@sarah_rides</div>
+                            </div>
+                            <div class="review-hero-bottom">
+                                <div class="preview-collab-name">Dog Lovers Who Cycle</div>
+                                <div class="preview-collab-dates">Apr 6 — May 17</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-stats-section">
+                        <div class="preview-grouped-card">
+                            <div class="preview-pool-row">
+                                <div class="preview-pool-left">
+                                    <div class="preview-pool-amount">$24,960</div>
+                                    <div class="preview-pool-label">Collab pool</div>
+                                </div>
+                                <div class="preview-hold-badge">
+                                    <span class="material-icons">credit_card</span>
+                                    $40 hold
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">624</div>
+                                    <div class="preview-stat-label">Participants</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-value">6 wks</div>
+                                    <div class="preview-stat-label">Duration</div>
+                                </div>
+                            </div>
+                            <div class="preview-card-divider"></div>
+                            <div class="preview-stats-row">
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <div class="level-bars">
+                                            <div class="bar filled"></div>
+                                            <div class="bar filled"></div>
+                                            <div class="bar"></div>
+                                            <div class="bar"></div>
+                                        </div>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Strong</div>
+                                    <div class="preview-stat-label">Difficulty</div>
+                                </div>
+                                <div class="preview-stat-divider"></div>
+                                <div class="preview-stat">
+                                    <div class="preview-stat-icon">
+                                        <span class="material-icons">timer</span>
+                                    </div>
+                                    <div class="preview-stat-value" style="font-size: 14px;">Active Mins</div>
+                                    <div class="preview-stat-label">Tracked metric</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
