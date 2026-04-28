@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=780, initial-scale=1.0">
+    <title>How It Works — Story as hero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary-100: #2B2E34;
+            --primary-60:  #6B7280;
+            --primary-30:  #9CA3AF;
+
+            --orange-30:   #F3E6E2;
+            --orange-60:   #E2C5BD;
+            --orange-100:  #C97A6A;
+
+            --plum-100:    #6B4E71;
+
+            --surface-white:  #FFFFFF;
+            --warm-sand:   #F2E6E2;
+
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body:    'Roboto', system-ui, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: #0a0a0f;
+            color: var(--primary-100);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 32px 24px;
+        }
+
+        .review-header { text-align: center; margin-bottom: 24px; max-width: 720px; }
+        .review-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: #e8e8f0; margin-bottom: 4px; }
+        .review-subtitle { font-size: 12px; letter-spacing: 0.01em; color: #8888a0; }
+
+        .phone-frame {
+            width: 390px;
+            height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            position: relative;
+            margin-top: 20px;
+            background: var(--warm-sand);
+        }
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 600px 400px at 85% -10%, rgba(255,228,215,0.9) 0%, transparent 60%),
+                radial-gradient(ellipse 500px 400px at 10% 110%, rgba(201,122,106,0.22) 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .status-bar { position: absolute; top: 0; left: 0; right: 0; height: 47px; padding: 14px 28px 0; display: flex; align-items: center; justify-content: space-between; z-index: 20; pointer-events: none; }
+        .status-time { font-size: 17px; font-weight: 600; color: var(--primary-100); }
+        .status-icons { display: flex; gap: 6px; align-items: center; color: var(--primary-100); }
+        .status-icons svg { width: 18px; height: 12px; }
+        .status-icons svg:last-child { width: 28px; height: 14px; }
+        .home-indicator { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: var(--primary-100); border-radius: 3px; z-index: 30; opacity: 0.4; }
+
+        .screen { position: absolute; inset: 0; display: flex; flex-direction: column; z-index: 1; }
+        .layout { flex: 1; display: flex; flex-direction: column; padding: 56px 28px 28px; position: relative; }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-100);
+            text-decoration: none;
+            line-height: 1;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+        .back-btn:hover { opacity: 0.8; }
+        .back-btn .material-icons { font-size: 24px; }
+
+        /* ─── Intro row: small Ellie + her tiny icebreaker ─── */
+        .intro {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .intro-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--surface-white);
+            box-shadow: 0 2px 8px rgba(107,78,113,0.12);
+            flex-shrink: 0;
+        }
+        .intro-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .intro-quote {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--primary-60);
+            line-height: 1.35;
+        }
+        .intro-quote::before { content: '\201C'; }
+        .intro-quote::after  { content: '\201D'; }
+        .intro-quote b {
+            font-weight: 600;
+            color: var(--orange-100);
+            font-style: normal;
+            font-family: var(--font-body);
+        }
+
+        /* ─── Brand divider ─── */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 0 22px;
+        }
+        .divider-line {
+            height: 1px;
+            width: 52px;
+            background: linear-gradient(to right, transparent, var(--orange-60), transparent);
+        }
+        .divider-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--orange-100);
+        }
+
+        /* ═══ HERO: the story headline ═══ */
+        .hero-head {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--primary-100);
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            margin-bottom: 14px;
+        }
+        .hero-head em {
+            font-style: italic;
+            font-weight: 700;
+            color: var(--orange-100);
+        }
+
+        .hero-sub {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--primary-60);
+            line-height: 1.55;
+            max-width: 320px;
+            margin-bottom: 28px;
+        }
+        .hero-sub b, .hero-sub i {
+            color: var(--primary-100);
+            font-style: italic;
+            font-family: var(--font-display);
+        }
+
+        /* ─── Motiv feature block — the one elevated moment ─── */
+        .motiv-block {
+            position: relative;
+            padding: 20px 22px;
+            background: var(--surface-white);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(107,78,113,0.08);
+            margin-bottom: 16px;
+        }
+        .motiv-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(201,122,106,0.10);
+            border: 1px solid rgba(201,122,106,0.28);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--orange-100);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .motiv-explain {
+            font-family: var(--font-display);
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--primary-100);
+            line-height: 1.45;
+            letter-spacing: -0.005em;
+        }
+        .motiv-explain b {
+            font-weight: 700;
+        }
+
+        /* Numbered steps inside motiv block — horizontal */
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--orange-100);
+            color: var(--surface-white);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .step-text {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--primary-60);
+            line-height: 1.35;
+        }
+        .step-text b {
+            font-weight: 600;
+            color: var(--primary-100);
+        }
+
+        /* Footer trust */
+        .trust {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .trust .material-icons { font-size: 13px; color: var(--primary-30); }
+        .trust-text {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--primary-30);
+            letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .stripe-logo {
+            height: 13px;
+            width: auto;
+            display: inline-block;
+            vertical-align: middle;
+            opacity: 0.7;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-100);
+            color: var(--surface-white);
+            border: none;
+            border-radius: 999px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            margin-top: auto;
+        }
+        .btn-primary:hover { transform: translateY(-1px); }
+    </style>
+</head>
+<body>
+    <div class="review-header">
+        <div class="review-title">How It Works — Story as hero</div>
+        <div class="review-subtitle">Shrunk the quote · Headline is the anchor · Motiv gets a visual moment</div>
+    </div>
+
+    <div class="phone-frame">
+        <div class="status-bar">
+            <div class="status-time">9:41</div>
+            <div class="status-icons">
+                <svg viewBox="0 0 18 12" fill="currentColor"><path d="M1 4.5C3.5 1.5 7 0 9 0s5.5 1.5 8 4.5L15.5 6C13.5 3.5 11 2.5 9 2.5S4.5 3.5 2.5 6L1 4.5z"/><circle cx="9" cy="10" r="2"/></svg>
+                <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="1" width="3" height="10" rx=".5"/><rect x="5" y="0" width="3" height="11" rx=".5"/><rect x="10" y="3" width="3" height="8" rx=".5"/><rect x="15" y="5" width="3" height="6" rx=".5" opacity=".3"/></svg>
+                <svg viewBox="0 0 28 14" fill="currentColor"><rect x="0" y="1" width="24" height="12" rx="3" stroke="currentColor" stroke-width="1" fill="none"/><rect x="25" y="4.5" width="2" height="5" rx="1"/><rect x="2" y="3" width="16" height="8" rx="1.5"/></svg>
+            </div>
+        </div>
+        <div class="home-indicator"></div>
+
+        <div class="screen">
+            <div class="layout">
+                <a class="back-btn"><span class="material-icons">arrow_back</span></a>
+
+                <!-- Intro: small Ellie + tiny icebreaker -->
+                <div class="intro">
+                    <div class="intro-avatar">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face" alt="Ellie">
+                    </div>
+                    <div class="intro-quote">Welcome in. Here&rsquo;s what <b>we&rsquo;re</b> about.</div>
+                </div>
+
+                <!-- HERO: the actual story -->
+                <div class="hero-head">A collab is a multi&#8209;week <em>movement challenge</em>.</div>
+                <div class="hero-sub">A few weeks of showing up for yourself, <b><i>together</i></b>. I&rsquo;ll bring the motivation and what&rsquo;s worked for me. Personalized weekly goals and your wearable keep it fair.</div>
+
+                <!-- Motiv: the mechanic as one visual moment -->
+                <div class="motiv-block">
+                    <div class="motiv-label">Your Motiv</div>
+                    <div class="motiv-explain">A small deposit to join the collab. Hit your weekly goals and <b>earn it all back</b> &mdash; plus rewards and bonuses are often available.</div>
+
+                    <div class="divider" aria-hidden="true" style="margin: 16px 0 14px;">
+                        <div class="divider-line"></div>
+                        <div class="divider-dot"></div>
+                        <div class="divider-line"></div>
+                    </div>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-num">1</div>
+                            <div class="step-text">Put in your <b>Motiv</b></div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">2</div>
+                            <div class="step-text">Hit <b>weekly<br>goals</b></div>
+                        </div>
+                        <div class="step">
+                            <div class="step-num">3</div>
+                            <div class="step-text"><b>Earn it back</b> + more</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust">
+                    <span class="material-icons">lock</span>
+                    <div class="trust-text">Held safely by <img class="stripe-logo" src="assets/stripe-logo.svg" alt="Stripe"></div>
+                </div>
+
+                <button class="btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=780, initial-scale=1.0">
-    <title>Participant Onboarding — Motiv</title>
+    <title>Participant Onboarding (Deeplink v3) — Motiv</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Roboto:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
     <style>
         :root {
             --color-brand-primary: #2B2E34;
@@ -420,12 +421,40 @@
             color: #6B7280;
             line-height: 1.55;
             max-width: 320px;
-            margin-bottom: 28px;
+            margin-bottom: 38px;
         }
-        .hiw2-hero-sub b, .hiw2-hero-sub i {
+        .hiw2-hero-sub b {
+            color: #2B2E34;
+            font-weight: 700;
+            font-family: var(--font-body);
+        }
+        .hiw2-hero-sub i {
             color: #2B2E34;
             font-style: italic;
             font-family: var(--font-display);
+        }
+        /* Dashed lead-in box + connector to Motiv card */
+        .motiv-leadin-box {
+            align-self: center;
+            border: 1.5px dashed rgba(201, 122, 106, 0.45);
+            border-radius: 14px;
+            padding: 14px 22px;
+            background: rgba(255, 255, 255, 0.60);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: normal;
+            color: #C97A6A;
+            text-align: center;
+            max-width: 320px;
+        }
+        .motiv-leadin-connector {
+            align-self: center;
+            width: 2px;
+            height: 32px;
+            background-image: linear-gradient(to bottom, rgba(201, 122, 106, 0.55) 50%, transparent 50%);
+            background-size: 2px 7px;
+            background-repeat: repeat-y;
         }
         .hiw2-motiv {
             position: relative;
@@ -435,29 +464,17 @@
             box-shadow: 0 4px 20px rgba(107,78,113,0.08);
             margin-bottom: 0;
         }
-        .hiw2-motiv-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 12px;
-            border-radius: 999px;
-            background: rgba(201,122,106,0.10);
-            border: 1px solid rgba(201,122,106,0.28);
-            font-family: var(--font-body);
-            font-size: 12px;
-            font-weight: 600;
-            color: #C97A6A;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
         .hiw2-motiv-explain {
-            font-family: var(--font-display);
-            font-size: 17px;
-            font-weight: 400;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
             color: #2B2E34;
-            line-height: 1.45;
+            line-height: 1.6;
             letter-spacing: -0.005em;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "kern" 1, "liga" 1;
         }
         .hiw2-motiv-explain b { font-weight: 700; }
         .hiw2-divider {
@@ -465,42 +482,140 @@
             background: rgba(0,0,0,0.08);
             margin: 16px 0 14px;
         }
-        .hiw2-steps {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-        }
-        .hiw2-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 8px;
-        }
-        .hiw2-step-num {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #C97A6A;
-            color: #FFFFFF;
-            font-family: var(--font-body);
-            font-size: 12px;
+
+        /* Hero phrase inside the Motiv card */
+        .motiv-hero {
+            font-family: var(--font-display);
+            font-size: 18px;
             font-weight: 700;
+            color: #2B2E34;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin: 4px auto 0;
+            max-width: 300px;
+        }
+        .motiv-hero em {
+            font-style: italic;
+            color: #C97A6A;
+            font-weight: 700;
+        }
+
+        /* ═══ Motiv coin (more coin-like with metallic feel) ═══ */
+        .motiv-coin {
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 32% 26%,
+                    #EFA897 0%,
+                    #D48876 35%,
+                    #B06650 80%,
+                    #954F3E 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+            box-shadow:
+                inset 0 -2px 3px rgba(88, 35, 25, 0.45),
+                inset 0 1.5px 2px rgba(255, 230, 215, 0.55),
+                0 2px 6px rgba(107,78,113,0.22);
+        }
+        .motiv-coin::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 230, 215, 0.4);
+            background: linear-gradient(135deg,
+                rgba(255, 235, 220, 0.18),
+                transparent 55%);
+        }
+        .motiv-coin span {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1;
+            z-index: 1;
+            padding-right: 1px;
+            text-shadow: 0 1px 1.5px rgba(88, 35, 25, 0.35);
+        }
+        /* Inline coin in the definition text */
+        .motiv-coin--inline {
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            margin: 0 2px;
+            transform: translateY(-1px);
+            display: inline-flex;
+        }
+        .motiv-coin--inline span { font-size: 9px; padding-right: 0.5px; text-shadow: none; }
+        .motiv-coin--inline::before { inset: 1.5px; }
+        /* Coin in return container — smaller for breathing room */
+        .motiv-coin--return {
+            width: 36px;
+            height: 36px;
+        }
+        .motiv-coin--return span { font-size: 20px; }
+
+        /* Return container: Motiv + perks + caption */
+        .motiv-return {
+            background: rgba(243,230,226,0.55);
+            border: 1px solid rgba(201,122,106,0.18);
+            border-radius: 14px;
+            padding: 24px 20px 20px;
+            margin-top: 22px;
+        }
+        .motiv-return-items {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            gap: 10px;
+        }
+        .motiv-return-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            min-width: 56px;
+        }
+        .motiv-return-emoji {
+            font-size: 28px;
             line-height: 1;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .hiw2-step-text {
-            font-family: var(--font-body);
-            font-size: 12px;
-            color: #6B7280;
-            line-height: 1.35;
-        }
-        .hiw2-step-text b {
+        .motiv-return-label {
+            font-family: 'Roboto', system-ui, sans-serif;
+            font-size: 10.5px;
             font-weight: 600;
-            color: #2B2E34;
+            color: #6B7280;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .motiv-return-plus {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #C97A6A;
+            opacity: 0.6;
+            padding-bottom: 22px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .motiv-return-caption {
+            text-align: center;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-style: italic;
+            font-size: 12.5px;
+            line-height: 1.5;
+            color: #6B7280;
+            margin-top: 18px;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .hiw2-trust {
             display: flex;
@@ -531,7 +646,198 @@
         }
 
         /* ═══════════════════════════════════════════════
-           SCREEN 8: CELEBRATION
+           SCREEN 8 (flow pos 1): ABOUT MOTIV
+           ═══════════════════════════════════════════════ */
+        /* Log in link for returning users — top-right of About Motiv */
+        .about-login {
+            position: absolute;
+            top: 76px;
+            right: 24px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            z-index: 10;
+            text-decoration: none;
+            padding: 4px 0;
+        }
+        .about-login:hover {
+            color: #C97A6A;
+        }
+
+        .about-creators {
+            position: relative;
+            height: 144px;
+            margin: 12px auto 14px;
+            width: 100%;
+            max-width: 280px;
+        }
+        .about-creator-avatar {
+            position: absolute;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 6px 18px rgba(107,78,113,0.15);
+        }
+        .about-creator-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .about-creator-avatar-left {
+            width: 64px;
+            height: 64px;
+            left: calc(50% - 108px);
+            top: 56px;
+            z-index: 2;
+            transform: rotate(-4deg);
+        }
+        .about-creator-avatar-center {
+            width: 136px;
+            height: 136px;
+            left: calc(50% - 68px);
+            top: 4px;
+            z-index: 3;
+            overflow: visible;
+            border: none;
+            box-shadow: none;
+        }
+        .about-creator-avatar-center .avatar-clip {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 6px 18px rgba(107,78,113,0.15);
+        }
+        .about-creator-avatar-right {
+            width: 64px;
+            height: 64px;
+            right: calc(50% - 108px);
+            top: 56px;
+            z-index: 2;
+            transform: rotate(4deg);
+        }
+        .about-creator-verified {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #C97A6A;
+            border: 2.5px solid #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .about-creator-verified svg {
+            width: 16px;
+            height: 16px;
+            fill: #FFFFFF;
+        }
+        .about-inviter-caption {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .about-inviter-name {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1.2;
+        }
+        .about-inviter-handle {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 2px;
+        }
+        .about-inviter-action {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #C97A6A;
+            margin-top: 10px;
+        }
+        .about-eyebrow {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 700;
+            color: #C97A6A;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .about-invite {
+            position: absolute;
+            top: 56px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 4;
+        }
+        .about-invite-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 1.5px solid #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .about-invite-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .about-invite-text {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--color-text-primary);
+            letter-spacing: 0.01em;
+        }
+        .about-invite-text strong {
+            font-weight: 700;
+        }
+        .about-head {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            color: #2B2E34;
+            line-height: 1.05;
+            letter-spacing: -0.025em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .about-head em {
+            color: #C97A6A;
+            font-style: italic;
+            font-weight: 700;
+        }
+        .about-sub {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: #6B7280;
+            line-height: 1.55;
+            text-align: center;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════════
+           SCREEN 6 (flow pos 6): CELEBRATION
            ═══════════════════════════════════════════════ */
         #screen8 { cursor: pointer; background: linear-gradient(160deg, #F8E4DB 0%, #F2E6E2 45%, #F5D8CC 100%); }
         .celeb-emoji-rain {
@@ -659,6 +965,11 @@
             color: #9CA3AF;
             letter-spacing: 0.15em;
             margin-bottom: 10px;
+        }
+        .home-creators-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
         .home-creator-card {
             display: flex;
@@ -1652,16 +1963,17 @@
 
 <!-- Review Header -->
 <div class="review-header">
-    <div class="review-title">Participant Onboarding — @doodle_cycles deeplink</div>
+    <div class="review-title">Participant Onboarding — Deeplink v3 (@doodle_cycles)</div>
     <div class="review-subtitle">
         <span class="nav-jump" onclick="goTo(0)">0 Splash</span> ·
+        <span class="nav-jump" onclick="goTo(8)">3 About Motiv</span> ·
         <span class="nav-jump" onclick="goTo(1)">1 Sign In</span> ·
         <span class="nav-jump" onclick="goTo(2)">2 Verify</span> ·
-        <span class="nav-jump" onclick="goTo(4)">3 How It Works</span> ·
-        <span class="nav-jump" onclick="goTo(3)">4 Profile</span> ·
-        <span class="nav-jump" onclick="goTo(6)">5 Welcome</span> ·
-        <span class="nav-jump" onclick="goTo(7)">6 Home</span> ·
-        <span class="nav-jump" onclick="goTo(5)">7 Collab Details</span>
+        <span class="nav-jump" onclick="goTo(3)">5 Profile</span> ·
+        <span class="nav-jump" onclick="goTo(4)">4 How It Works</span> ·
+        <span class="nav-jump" onclick="goTo(6)">6 Welcome</span> ·
+        <span class="nav-jump" onclick="goTo(7)">7 Home</span> ·
+        <span class="nav-jump" onclick="goTo(5)">8 Collab Details</span>
     </div>
 </div>
 
@@ -1716,31 +2028,26 @@
          SCREEN 1: CREATOR-FRAMED SIGN IN
          ============================================ -->
     <div class="screen" id="screen1">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 60px 24px 28px;">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
-            <div style="flex: 1.2; min-height: 24px;"></div>
-
-            <div class="s1-invited-label">You were invited by</div>
-            <div class="s1-creator-header">
-                <div class="s1-avatar-wrap">
-                    <div class="s1-avatar">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=144&h=144&fit=crop&crop=face" alt="Ellie Snackson">
-                    </div>
-                    <div class="s1-verified-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
-                </div>
-                <div class="s1-name">Ellie Snackson</div>
-                <div class="s1-handle">@doodle_cycles</div>
+            <div style="margin-bottom: 8px;">
+                <a class="back-btn" onclick="goTo(8)"><span class="material-icons">arrow_back</span></a>
             </div>
 
-            <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 4px;">My vibe.<br>Your moment.</div>
-            <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center; margin-bottom: 32px;">Sign in or create an account to get started.</div>
+            <div style="flex: 1; min-height: 24px;"></div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 32px;">
+                <div style="font-family: var(--font-display); font-size: 56px; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.025em; line-height: 1; margin-bottom: 20px;">Motiv</div>
+                <div style="font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--color-text-primary); line-height: 1.22; text-align: center; margin-bottom: 6px;">Put your money where<br>your <em style="color: #C97A6A; font-style: italic; font-weight: 700;">motivation</em> is.</div>
+                <div style="font-size: 14px; color: var(--color-text-secondary); text-align: center;">Sign in or create an account to get started.</div>
+            </div>
 
             <div class="auth-section">
-                <button class="auth-btn auth-btn--apple" onclick="setAuthMethod('apple'); goTo(4)">
+                <button class="auth-btn auth-btn--apple" onclick="setAuthMethod('apple'); goTo(3)">
                     <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
                     Continue with Apple
                 </button>
-                <button class="auth-btn auth-btn--google" onclick="setAuthMethod('google'); goTo(4)">
+                <button class="auth-btn auth-btn--google" onclick="setAuthMethod('google'); goTo(3)">
                     <svg class="auth-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                     Continue with Google
                 </button>
@@ -1797,7 +2104,7 @@
             </div>
 
             <div>
-                <button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="setAuthMethod('email'); goTo(4)" disabled>Continue</button>
+                <button class="btn-primary btn-disabled" id="otpContinueBtn" onclick="setAuthMethod('email'); goTo(3)" disabled>Continue</button>
             </div>
         </div>
     </div>
@@ -1809,7 +2116,7 @@
         <div style="min-height: 100%; display: flex; flex-direction: column; padding: 56px 24px 28px;">
 
             <div style="margin-bottom: 8px;">
-                <a class="back-btn" onclick="goTo(4)"><span class="material-icons">arrow_back</span></a>
+                <a class="back-btn" onclick="goTo(1)"><span class="material-icons">arrow_back</span></a>
             </div>
 
             <div style="text-align: center; margin-bottom: 28px; margin-top: 8px;">
@@ -1844,7 +2151,7 @@
         </div>
         <!-- Pinned bottom button -->
         <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 24px 28px; background: linear-gradient(to top, rgba(245,235,228,1) 60%, rgba(245,235,228,0));">
-            <button class="btn-primary" onclick="validateAndContinue(6)">Continue</button>
+            <button class="btn-primary" onclick="validateAndContinue(4)">Continue</button>
         </div>
 
         <!-- iOS Photo Permission Dialog -->
@@ -1899,53 +2206,54 @@
          SCREEN 4: HOW IT WORKS (Hybrid)
          ============================================ -->
     <div class="screen" id="screen4">
-        <div style="flex: 1; display: flex; flex-direction: column; padding: 88px 24px 28px; position: relative;">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 56px 24px 28px; position: relative;">
 
-            <!-- Intro: small Ellie + icebreaker -->
-            <div class="hiw2-intro">
-                <div class="hiw2-intro-avatar">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face" alt="Ellie">
-                </div>
-                <div class="hiw2-intro-quote">Welcome in. Here&rsquo;s what <b>we&rsquo;re</b> about.</div>
+            <div style="margin-bottom: 16px;">
+                <a class="back-btn" onclick="goTo(3)"><span class="material-icons">arrow_back</span></a>
             </div>
 
             <!-- HERO: the story -->
-            <div class="hiw2-hero-head">A collab is a<br>multi&#8209;week<br><em>movement challenge</em></div>
-            <div class="hiw2-hero-sub">A few weeks of showing up for yourself, <b><i>together</i></b>. I&rsquo;ll bring the motivation and what&rsquo;s worked for me. Personalized weekly goals and your wearable keep it fair.</div>
+            <div class="hiw2-hero-head">A collab is a hosted<br><em>movement challenge</em></div>
+            <div class="hiw2-hero-sub">Get access to Ellie and other creators while working on personalized goals.</div>
+
+            <div class="motiv-leadin-box">Join by putting down a small deposit, your Motiv <span class="motiv-coin motiv-coin--inline"><span>M</span></span></div>
+            <div class="motiv-leadin-connector" aria-hidden="true"></div>
 
             <!-- Motiv block -->
             <div class="hiw2-motiv">
-                <div class="hiw2-motiv-label">YOUR MOTIV</div>
-                <div class="hiw2-motiv-explain">A small deposit to join the collab. Hit your weekly goals and <b>earn it all back</b> &mdash; plus rewards and bonuses are often available.</div>
+                <div class="motiv-hero">The investment always has a strong return &mdash; including <em>access</em>, <em>motivation</em>, <em>perks</em>.</div>
 
-                <!-- Card divider -->
-                <div class="hiw2-divider" aria-hidden="true"></div>
-
-                <div class="hiw2-steps">
-                    <div class="hiw2-step">
-                        <div class="hiw2-step-num">1</div>
-                        <div class="hiw2-step-text">Put in your<br><b>Motiv</b></div>
+                <!-- Return container: Motiv + Rewards + Bonuses + caption -->
+                <div class="motiv-return">
+                    <div class="motiv-return-items">
+                        <div class="motiv-return-item">
+                            <div class="motiv-coin motiv-coin--return"><span>M</span></div>
+                            <div class="motiv-return-label">Motiv</div>
+                        </div>
+                        <div class="motiv-return-plus" aria-hidden="true">&middot;</div>
+                        <div class="motiv-return-item">
+                            <div class="motiv-return-emoji" aria-label="Rewards">&#127873;</div>
+                            <div class="motiv-return-label">Rewards</div>
+                        </div>
+                        <div class="motiv-return-plus" aria-hidden="true">&middot;</div>
+                        <div class="motiv-return-item">
+                            <div class="motiv-return-emoji" aria-label="Bonuses">&#128176;</div>
+                            <div class="motiv-return-label">Bonuses</div>
+                        </div>
                     </div>
-                    <div class="hiw2-step">
-                        <div class="hiw2-step-num">2</div>
-                        <div class="hiw2-step-text">Hit <b>weekly<br>goals</b></div>
-                    </div>
-                    <div class="hiw2-step">
-                        <div class="hiw2-step-num">3</div>
-                        <div class="hiw2-step-text"><b>Earn it back</b> + more</div>
-                    </div>
+                    <div class="motiv-return-caption">Hit your goals to get your Motiv back and earn potential rewards and bonuses.</div>
                 </div>
             </div>
 
             <!-- Trust line -->
             <div class="hiw2-trust">
                 <span class="material-icons">lock</span>
-                <div class="hiw2-trust-text">Held safely by <img class="hiw2-stripe-logo" src="assets/stripe-logo.svg" alt="Stripe"></div>
+                <div class="hiw2-trust-text">Your Motiv held safely with <svg class="hiw2-stripe-logo" viewBox="0 0 360 151" fill="#061B31" xmlns="http://www.w3.org/2000/svg" aria-label="Stripe"><path fill-rule="evenodd" clip-rule="evenodd" d="M360 78.2001C360 52.6001 347.6 32.4001 323.9 32.4001C300.1 32.4001 285.7 52.6001 285.7 78.0001C285.7 108.1 302.7 123.3 327.1 123.3C339 123.3 348 120.6 354.8 116.8V96.8001C348 100.2 340.2 102.3 330.3 102.3C320.6 102.3 312 98.9002 310.9 87.1002H359.8C359.8 85.8002 360 80.6002 360 78.2001ZM310.6 68.7001C310.6 57.4002 317.5 52.7001 323.8 52.7001C329.9 52.7001 336.4 57.4002 336.4 68.7001H310.6Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M247.1 32.4001C237.3 32.4001 231 37.0001 227.5 40.2001L226.2 34.0001H204.2V150.6L229.2 145.3L229.3 117C232.9 119.6 238.2 123.3 247 123.3C264.9 123.3 281.2 108.9 281.2 77.2001C281.1 48.2001 264.6 32.4001 247.1 32.4001ZM241.1 101.3C235.2 101.3 231.7 99.2001 229.3 96.6002L229.2 59.5001C231.8 56.6001 235.4 54.6002 241.1 54.6002C250.2 54.6002 256.5 64.8001 256.5 77.9001C256.5 91.3001 250.3 101.3 241.1 101.3Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M169.8 26.5L194.9 21.1V0.800049L169.8 6.10005V26.5Z"/><path d="M194.9 34.1001H169.8V121.6H194.9V34.1001Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M142.9 41.5001L141.3 34.1001H119.7V121.6H144.7V62.3001C150.6 54.6001 160.6 56.0001 163.7 57.1001V34.1001C160.5 32.9001 148.8 30.7001 142.9 41.5001Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M92.8999 12.4001L68.4999 17.6001L68.3999 97.7001C68.3999 112.5 79.4999 123.4 94.2999 123.4C102.5 123.4 108.5 121.9 111.8 120.1V99.8001C108.6 101.1 92.7999 105.7 92.7999 90.9001V55.4001H111.8V34.1002H92.7999L92.8999 12.4001Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M25.3 59.5001C25.3 55.6001 28.5 54.1002 33.8 54.1002C41.4 54.1002 51 56.4001 58.6 60.5001V37.0001C50.3 33.7001 42.1 32.4001 33.8 32.4001C13.5 32.4001 0 43.0001 0 60.7001C0 88.3001 38 83.9001 38 95.8001C38 100.4 34 101.9 28.4 101.9C20.1 101.9 9.5 98.5002 1.1 93.9002V117.7C10.4 121.7 19.8 123.4 28.4 123.4C49.2 123.4 63.5 113.1 63.5 95.2001C63.4 65.4001 25.3 70.7001 25.3 59.5001Z"/></svg></div>
             </div>
 
             <div style="flex: 1;"></div>
 
-            <button class="btn-primary" onclick="goTo(3)">Continue</button>
+            <button class="btn-primary" onclick="goTo(6)">Continue</button>
         </div>
     </div>
 
@@ -2194,7 +2502,7 @@
         <div class="celeb-content">
             <div class="celeb-eyebrow">You&rsquo;re in</div>
             <div class="celeb-title">Welcome, <em>Sarah</em></div>
-            <div class="celeb-sub">Ellie&rsquo;s collab is waiting when you&rsquo;re ready.</div>
+            <div class="celeb-sub">Let&rsquo;s join Ellie&rsquo;s collab.</div>
         </div>
     </div>
 
@@ -2211,7 +2519,7 @@
 
             <!-- Welcome strip -->
             <div class="home-welcome-strip">
-                <div class="home-welcome-head">Hey Sarah &mdash; you&rsquo;re all set.</div>
+                <div class="home-welcome-head">Hey, Sarah.</div>
                 <div class="home-welcome-sub">Here&rsquo;s what&rsquo;s happening in your Motiv world.</div>
             </div>
 
@@ -2224,15 +2532,42 @@
                     </div>
                     <div class="home-creator-info">
                         <div class="home-creator-name">Ellie Snackson</div>
-                        <div class="home-creator-handle">@doodle_cycles</div>
+                        <div class="home-creator-handle">@doodle_cycles &middot; Cycling</div>
                     </div>
                     <span class="material-icons home-creator-chevron">chevron_right</span>
                 </div>
             </div>
 
-            <!-- Section: Active collab -->
+            <!-- Section: Other creators -->
             <div class="home-section">
-                <div class="home-section-label">ACTIVE COLLAB</div>
+                <div class="home-section-label">OTHER CREATORS</div>
+                <div class="home-creators-list">
+                    <div class="home-creator-card">
+                        <div class="home-creator-avatar">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" alt="Marcus">
+                        </div>
+                        <div class="home-creator-info">
+                            <div class="home-creator-name">Marcus Rivera</div>
+                            <div class="home-creator-handle">@marcus_rides &middot; Cycling &middot; Running</div>
+                        </div>
+                        <span class="material-icons home-creator-chevron">chevron_right</span>
+                    </div>
+                    <div class="home-creator-card">
+                        <div class="home-creator-avatar">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face" alt="Jess">
+                        </div>
+                        <div class="home-creator-info">
+                            <div class="home-creator-name">Jess Hernandez</div>
+                            <div class="home-creator-handle">@jess_spins &middot; Cycling</div>
+                        </div>
+                        <span class="material-icons home-creator-chevron">chevron_right</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section: Active collabs -->
+            <div class="home-section">
+                <div class="home-section-label">ACTIVE COLLABS</div>
                 <div class="home-collab-card" onclick="goTo(5)">
                     <div class="home-collab-image">
                         <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=400&fit=crop" alt="Collab">
@@ -2263,6 +2598,46 @@
             </div>
 
             <div style="height: 32px;"></div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         SCREEN 8: ABOUT MOTIV (first content screen)
+         ============================================ -->
+    <div class="screen" id="screen8">
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 72px 24px 28px; position: relative;">
+
+            <!-- Hero anchor: Ellie front-and-center, two supporting creators -->
+            <div class="about-creators">
+                <div class="about-creator-avatar about-creator-avatar-left" aria-hidden="true">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop&crop=face" alt="">
+                </div>
+                <div class="about-creator-avatar about-creator-avatar-center">
+                    <div class="avatar-clip">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=280&h=280&fit=crop&crop=face" alt="Ellie">
+                    </div>
+                    <div class="about-creator-verified" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                </div>
+                <div class="about-creator-avatar about-creator-avatar-right" aria-hidden="true">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face" alt="">
+                </div>
+            </div>
+
+            <div class="about-inviter-caption">
+                <div class="about-inviter-name">Ellie</div>
+                <div class="about-inviter-handle">@doodle_cycles</div>
+                <div class="about-inviter-action">invited you to Motiv</div>
+            </div>
+
+            <div class="about-head">Move with creators<br>who <em>move you</em>.</div>
+
+            <div class="about-sub">Their multi&#8209;week collabs keep you motivated and showing up.</div>
+
+            <div style="flex: 1;"></div>
+
+            <button class="btn-primary" onclick="goTo(1)">Let's move</button>
         </div>
     </div>
 
@@ -2299,7 +2674,7 @@
         splashTimeouts.push(setTimeout(() => {
             if (cur === 0 && !splashDone) {
                 splashDone = true;
-                goTo(1);
+                goTo(8);
             }
         }, 3800));
     }
@@ -2311,21 +2686,36 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(runSplash, 100);
+        var hash = window.location.hash;
+        var m = hash.match(/screen(\d+)/);
+        if (m) {
+            splashDone = true;
+            goTo(parseInt(m[1], 10));
+        } else if (hash.indexOf('figmacapture') !== -1) {
+            splashDone = true;
+            goTo(4);
+        } else {
+            setTimeout(runSplash, 100);
+        }
     });
 
     // ─── Main screen navigation ───
-    const names = ['Splash','Sign In','Verify','Profile','How It Works','Collab Details','Welcome','Home'];
+    const names = ['Splash','Sign In','Verify','Profile','How It Works','Collab Details','Welcome','Home','About Motiv'];
+    // Flow visit order (DOM ids in the order users experience them)
+    // Splash → About Motiv → Sign In → Verify → Profile → HIW → Welcome → Home → Collab Details
+    const flowOrder = [0, 8, 1, 2, 3, 4, 6, 7, 5];
     let cur = 0;
     const total = names.length;
     const greenScreens = []; // No screens use green currently
     const purpleScreens = [5]; // Collab details gets purple
 
     function updateUI() {
-        document.getElementById('stepNum').textContent = `Step ${cur+1} of ${total}`;
+        const flowPos = flowOrder.indexOf(cur);
+        const stepNumber = flowPos === -1 ? cur + 1 : flowPos + 1;
+        document.getElementById('stepNum').textContent = `Step ${stepNumber} of ${total}`;
         document.getElementById('stepName').textContent = names[cur];
-        document.getElementById('prevBtn').disabled = cur === 0;
-        document.getElementById('nextBtn').disabled = cur === total - 1;
+        document.getElementById('prevBtn').disabled = flowPos <= 0;
+        document.getElementById('nextBtn').disabled = flowPos === -1 || flowPos === flowOrder.length - 1;
 
         const lava = document.getElementById('lavaBg');
         lava.classList.remove('green-chapter', 'purple-chapter');
@@ -2459,8 +2849,22 @@
         if (i === 5) startCountdown();
     }
 
-    function next() { goTo(cur + 1); }
-    function prev() { goTo(cur - 1); }
+    function next() {
+        const flowPos = flowOrder.indexOf(cur);
+        if (flowPos !== -1 && flowPos < flowOrder.length - 1) {
+            goTo(flowOrder[flowPos + 1]);
+        } else {
+            goTo(cur + 1);
+        }
+    }
+    function prev() {
+        const flowPos = flowOrder.indexOf(cur);
+        if (flowPos > 0) {
+            goTo(flowOrder[flowPos - 1]);
+        } else {
+            goTo(cur - 1);
+        }
+    }
 
     // ─── Countdown timer (Screen 4) ───
     let cdTarget = Date.now() + (4*86400 + 18*3600 + 32*60 + 15) * 1000;
