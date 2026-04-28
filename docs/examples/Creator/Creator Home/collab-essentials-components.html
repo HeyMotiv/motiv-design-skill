@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essentials Components — Blocker + Referral Cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+
+    <style>
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+
+            --purple-100: #6B4E71;
+
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-border-default: var(--surface-border);
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 999px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--surface-bg);
+            font-family: var(--font-body);
+            padding: 40px 24px;
+            min-height: 100vh;
+        }
+
+        .frame {
+            width: 358px;
+            margin: 0 auto 24px;
+        }
+        .frame:last-child { margin-bottom: 0; }
+
+        .frame-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+            padding-left: 2px;
+        }
+
+        /* ---------- BLOCKER CARD ---------- */
+        .blocker-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+        }
+
+        .blocker-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .blocker-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(201, 122, 106, 0.12);
+        }
+        .blocker-card-icon .material-icons {
+            font-size: 20px;
+            color: var(--orange-100);
+        }
+
+        .blocker-card-info { flex: 1; }
+        .blocker-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        .blocker-card-subtitle {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 16px;
+        }
+        .blocker-card-subtitle em {
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .blocker-card-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ---------- FOOTER REFERRAL ROW ---------- */
+        .footer-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: var(--radius-lg);
+            background: white;
+            border: 1px solid var(--color-border-default);
+        }
+        .footer-row-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: rgba(107, 78, 113, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .footer-row-icon .material-icons {
+            font-size: 24px;
+            color: var(--purple-100);
+        }
+        .footer-row-body { flex: 1; min-width: 0; }
+        .footer-row-title {
+            font-family: var(--font-headline);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 22px;
+            letter-spacing: -0.005em;
+        }
+        .footer-row-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 18px;
+            margin-top: 2px;
+        }
+        .footer-row-arrow .material-icons {
+            font-size: 20px;
+            color: var(--orange-100);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. BLOCKER CARD -->
+    <div class="frame">
+        <div class="frame-label">Blocker card · Set up your essentials</div>
+        <div class="blocker-card">
+            <div class="blocker-card-top">
+                <div class="blocker-card-icon">
+                    <span class="material-icons">storefront</span>
+                </div>
+                <div class="blocker-card-info">
+                    <div class="blocker-card-title">Set up your Essentials</div>
+                    <div class="blocker-card-subtitle">Let followers in on what works for you. <em>Optional</em>, but a solid referral income driver.</div>
+                </div>
+            </div>
+            <button class="blocker-card-cta">Add Essentials</button>
+        </div>
+    </div>
+
+    <!-- 2. FOOTER ROW — EMPTY -->
+    <div class="frame">
+        <div class="frame-label">Referral row · Empty state</div>
+        <div class="footer-row">
+            <div class="footer-row-icon">
+                <span class="material-icons">storefront</span>
+            </div>
+            <div class="footer-row-body">
+                <div class="footer-row-title">Your Essentials</div>
+                <div class="footer-row-sub">Add habits and products</div>
+            </div>
+            <div class="footer-row-arrow">
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. FOOTER ROW — FILLED -->
+    <div class="frame">
+        <div class="frame-label">Referral row · Filled state</div>
+        <div class="footer-row">
+            <div class="footer-row-icon">
+                <span class="material-icons">storefront</span>
+            </div>
+            <div class="footer-row-body">
+                <div class="footer-row-title">Your Essentials</div>
+                <div class="footer-row-sub">3 habits · 3 products</div>
+            </div>
+            <div class="footer-row-arrow">
+                <span class="material-icons">chevron_right</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Home — Essentials integration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+
+    <style>
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+
+            --teal-0: #ECF2F2;
+            --teal-30: #D0DEDF;
+            --teal-60: #C5ECE3;
+            --teal-100: #547577;
+
+            --purple-0: #FDF2FF;
+            --purple-5: #F6EAF8;
+            --purple-30: #A889AD;
+            --purple-60: #775C7C;
+            --purple-100: #6B4E71;
+
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+            --surface-error: #CB3E3E;
+
+            --black-60: #1A1A1A;
+            --black-100: #111111;
+
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-bg-primary: var(--surface-bg);
+            --color-bg-secondary: var(--orange-30);
+            --color-border-default: var(--surface-border);
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 16px;
+            --radius-full: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+
+            --motion-fast: 150ms;
+            --motion-normal: 250ms;
+            --easing-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            padding: 48px 24px 80px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: #eee;
+        }
+
+        .page-title {
+            font-family: var(--font-headline);
+            font-weight: 700;
+            font-size: 28px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .page-sub {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 48px;
+            line-height: 1.5;
+        }
+
+        .phone-row {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .phone-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .sublabel {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 360px;
+            line-height: 1.5;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: block;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            overflow: visible;
+            background: linear-gradient(
+                180deg,
+                #F5DDD4 0px,
+                #F7E6DE 80px,
+                #FAF0EB 160px,
+                var(--surface-bg) 300px
+            );
+            padding-bottom: 96px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+        .status-bar-icons { display: flex; gap: 6px; align-items: center; }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        .home-header { position: relative; }
+        .home-header-content { position: relative; z-index: 1; padding: 36px 24px 16px; }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .greeting {
+            font-family: var(--font-headline);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 34px;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .icon-btn .material-icons { font-size: 22px; color: var(--color-text-primary); }
+
+        .greeting-sub { font-size: 16px; color: var(--color-text-secondary); line-height: 22px; }
+
+        .home-content {
+            padding: 0 16px 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* ---------- BLOCKER CARD (generic — used elsewhere) ---------- */
+        .blocker-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            cursor: pointer;
+        }
+
+        .blocker-card-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .blocker-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .blocker-card-icon .material-icons { font-size: 20px; color: white; }
+
+        /* Essentials variant — matches the IG/verification blocker palette:
+           light orange tile with the orange-100 icon on top (not a solid color w/ white icon). */
+        .blocker-card-icon.essentials {
+            background: rgba(201, 122, 106, 0.12);
+        }
+        .blocker-card-icon.essentials .material-icons { color: var(--orange-100); }
+
+        .blocker-card-info { flex: 1; }
+        .blocker-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 1px;
+        }
+        .blocker-card-subtitle { font-size: 12px; color: var(--color-text-secondary); line-height: 16px; }
+
+        .blocker-card-cta {
+            width: 100%;
+            background: var(--orange-100);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .blocker-card-cta .material-icons { font-size: 18px; }
+
+        /* New: secondary/optional CTA variant — purple outlined.
+           Signals "recommended setup" rather than "required to go live." */
+        .blocker-card-cta.optional {
+            background: transparent;
+            color: var(--purple-100);
+            border: 1.5px solid var(--purple-60);
+        }
+        .blocker-card-cta.optional .material-icons { color: var(--purple-100); }
+
+        .optional-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--purple-5);
+            color: var(--purple-100);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* ---------- SECTIONS (reused from collab-live) ---------- */
+        .collab-section-header { padding: 0 8px; margin-bottom: 12px; }
+        .collab-section-title {
+            font-family: var(--font-headline);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+        }
+        .collab-section-subtitle { font-size: 12px; color: var(--color-text-secondary); }
+
+        .draft-card {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+        .draft-card.theme-purple { --card-color: 126,109,168; --card-accent: #7E6DA8; }
+
+        .draft-card-hero {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+        }
+        .draft-card-photo {
+            position: absolute; inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        .draft-card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(var(--card-color), 0) 0%,
+                rgba(var(--card-color), 0.10) 30%,
+                rgba(var(--card-color), 0.45) 50%,
+                rgba(var(--card-color), 0.70) 65%,
+                rgba(var(--card-color), 0.82) 80%,
+                rgba(var(--card-color), 0.88) 100%
+            );
+            z-index: 1;
+        }
+        .draft-card-hero-content {
+            position: relative; z-index: 2;
+            padding: 16px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .draft-card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: var(--radius-full);
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .draft-card-badge .material-icons { font-size: 13px; }
+        .draft-card-badge.live { background: rgba(60, 179, 113, 0.25); }
+        .draft-card-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 32px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.25), 0 1px 3px rgba(0,0,0,0.15);
+        }
+        .draft-card-dates {
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.75);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .draft-card-dates .material-icons { font-size: 14px; }
+        .draft-card-stats { background: var(--card-accent); padding: 4px 14px 14px; }
+        .draft-card-grouped {
+            background: rgba(255,255,255,0.95);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .draft-card-progress { padding: 12px 14px; }
+        .draft-card-progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 6px;
+        }
+        .draft-card-progress-bar {
+            height: 6px;
+            background: var(--primary-0);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .draft-card-progress-fill {
+            height: 100%;
+            background: var(--card-accent);
+            border-radius: 3px;
+        }
+        .draft-card-divider { height: 1px; background: var(--color-border-default); margin: 0 14px; }
+        .draft-card-meta-row { display: flex; padding: 10px 14px; }
+        .draft-card-stat { flex: 1; text-align: center; position: relative; }
+        .draft-card-stat + .draft-card-stat::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 2px; bottom: 2px;
+            width: 1px;
+            background: var(--color-border-default);
+        }
+        .draft-card-stat-value { font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .draft-card-stat-label { font-size: 12px; color: var(--color-text-secondary); }
+        .draft-card-cta-row { padding: 0 14px 12px; }
+        .draft-card-cta {
+            width: 100%;
+            background: var(--card-accent);
+            color: white;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .draft-card-cta .material-icons { font-size: 16px; }
+
+        /* ---------- EARNINGS ---------- */
+        .earnings-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            cursor: pointer;
+        }
+        .earnings-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .earnings-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .earnings-label .material-icons { font-size: 16px; color: var(--orange-100); }
+        .earnings-chevron { color: var(--color-text-tertiary); }
+        .earnings-chevron .material-icons { font-size: 20px; }
+        .earnings-total {
+            font-family: var(--font-headline);
+            font-size: 46px;
+            font-weight: 700;
+            color: var(--orange-100);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .earnings-breakdown {
+            display: flex;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--surface-border);
+        }
+        .earnings-breakdown-item { flex: 1; text-align: center; position: relative; }
+        .earnings-breakdown-item + .earnings-breakdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 2px; bottom: 2px;
+            width: 1px;
+            background: var(--surface-border);
+        }
+        .earnings-breakdown-value { font-size: 14px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 2px; }
+        .earnings-breakdown-label { font-size: 12px; color: var(--color-text-secondary); }
+
+        /* ---------- FOOTER SECTION — final design ----------
+           Serif heading, larger icon tiles (48×48), generous padding.
+           All three rows share the same structural pattern — only the tile
+           background, icon color, and card background vary. */
+        .footer-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+        }
+        .footer-row-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .footer-row-icon .material-icons { font-size: 24px; }
+        .footer-row-body { flex: 1; min-width: 0; }
+        .footer-row-title {
+            font-family: var(--font-headline);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 22px;
+            letter-spacing: -0.005em;
+        }
+        .footer-row-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 18px;
+            margin-top: 2px;
+        }
+        .footer-row-arrow .material-icons {
+            font-size: 20px;
+            color: var(--orange-100);
+        }
+
+        /* Variant — nudge (peach bg + orange tile) */
+        .footer-row.nudge {
+            background: linear-gradient(135deg, var(--orange-30) 0%, #F7ECE8 100%);
+            border: 1px solid var(--orange-60);
+        }
+        .footer-row.nudge .footer-row-icon { background: rgba(201, 122, 106, 0.18); }
+        .footer-row.nudge .footer-row-icon .material-icons { color: var(--orange-100); }
+
+        /* Variant — standard white card */
+        .footer-row.standard {
+            background: white;
+            border: 1px solid var(--color-border-default);
+        }
+        .footer-row.standard .footer-row-icon {
+            background: rgba(107, 78, 113, 0.12);
+        }
+        .footer-row.standard .footer-row-icon .material-icons { color: var(--purple-100); }
+
+        /* Essentials uses the standard variant directly — no status dot, no variant states. */
+
+        /* ---------- TAB BAR ---------- */
+        .tab-bar {
+            position: absolute;
+            bottom: 20px; left: 60px; right: 60px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px) saturate(1.8);
+            -webkit-backdrop-filter: blur(24px) saturate(1.8);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.08),
+                0 1px 4px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: var(--radius-full);
+            display: flex;
+            padding: 4px 8px;
+            z-index: 20;
+            gap: 0;
+        }
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            position: relative;
+        }
+        .tab-item .material-icons { font-size: 22px; color: var(--primary-60); }
+        .tab-item-label { font-size: 12px; font-weight: 600; color: var(--primary-60); }
+        .tab-item.active { background: rgba(201, 122, 106, 0.12); }
+        .tab-item.active .material-icons { color: var(--orange-100); }
+        .tab-item.active .tab-item-label { color: var(--orange-100); }
+        .tab-item-dot {
+            position: absolute;
+            top: 6px; right: 20%;
+            width: 8px; height: 8px;
+            background: var(--orange-100);
+            border: 2px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+        }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 6px; left: 50%;
+            transform: translateX(-50%);
+            width: 134px; height: 5px;
+            background: var(--color-text-primary);
+            border-radius: 3px;
+            opacity: 0.2;
+        }
+
+        /* Callout */
+        .callout-row {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 64px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .callout {
+            flex: 1 1 320px;
+            max-width: 420px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 20px 22px;
+            color: #d0d0d0;
+        }
+        .callout-title {
+            font-family: var(--font-headline);
+            font-weight: 700;
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple-30); }
+        .callout-body { font-size: 13px; line-height: 1.6; color: #b5b5b5; }
+        .callout-body strong { color: #eee; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="page-title">Creator Home — Essentials integration</div>
+    <div class="page-sub">
+        Two new pieces on the home screen: an <strong style="color:#fff;">optional blocker card</strong> (shown only when the creator hasn't set up essentials yet) and a <strong style="color:#fff;">persistent footer link</strong> that takes them to the edit page in their profile. Essentials are optional — a creator can go live without them; their collab just won't show the Essentials section until they're added.
+    </div>
+
+    <div class="phone-row">
+
+        <!-- ==============================================================
+             STATE 1 — Essentials not yet set up (blocker card visible)
+             ============================================================== -->
+        <div class="phone-group">
+            <div class="label">State 1 — Essentials empty</div>
+            <div class="sublabel">Blocker card sits above Your Collabs. Matches the IG/W9 verification style — light orange tile, filled orange CTA — and leads the copy with the referral income upside.</div>
+
+            <div class="phone-frame">
+                <div class="phone-scroll">
+                    <div class="home-header">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-bar-icons">
+                                <span class="material-icons">signal_cellular_alt</span>
+                                <span class="material-icons">wifi</span>
+                                <span class="material-icons">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="home-header-content">
+                            <div class="header-row">
+                                <div class="greeting">Hey, Ellie</div>
+                                <div class="icon-btn">
+                                    <span class="material-icons">notifications_none</span>
+                                </div>
+                            </div>
+                            <div class="greeting-sub">Your collab is rolling.</div>
+                        </div>
+                    </div>
+
+                    <div class="home-content">
+
+                        <!-- ESSENTIALS BLOCKER — matches IG verification card style -->
+                        <div class="blocker-card">
+                            <div class="blocker-card-top">
+                                <div class="blocker-card-icon essentials">
+                                    <span class="material-icons">storefront</span>
+                                </div>
+                                <div class="blocker-card-info">
+                                    <div class="blocker-card-title">Set up your Essentials</div>
+                                    <div class="blocker-card-subtitle">Let followers in on what works for you. <em>Optional</em>, but a solid referral income driver.</div>
+                                </div>
+                            </div>
+                            <button class="blocker-card-cta">Add Essentials</button>
+                        </div>
+
+                        <!-- Live collab card -->
+                        <div>
+                            <div class="collab-section-header">
+                                <div class="collab-section-title">Your collabs</div>
+                                <div class="collab-section-subtitle">1 active</div>
+                            </div>
+                            <div class="draft-card theme-purple">
+                                <div class="draft-card-hero">
+                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                                    <div class="draft-card-overlay"></div>
+                                    <div class="draft-card-hero-content">
+                                        <div class="draft-card-badge live">
+                                            <span class="material-icons">sensors</span>
+                                            Live — Week 3 of 6
+                                        </div>
+                                        <div class="draft-card-name">Dog Lovers Who Cycle</div>
+                                        <div class="draft-card-dates">
+                                            <span class="material-icons">event</span>
+                                            Apr 6 — May 17
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="draft-card-stats">
+                                    <div class="draft-card-grouped">
+                                        <div class="draft-card-progress">
+                                            <div class="draft-card-progress-label">
+                                                <span>Week 3 of 6</span>
+                                                <span>50%</span>
+                                            </div>
+                                            <div class="draft-card-progress-bar">
+                                                <div class="draft-card-progress-fill" style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="draft-card-divider"></div>
+                                        <div class="draft-card-meta-row">
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">487</div>
+                                                <div class="draft-card-stat-label">Participants</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">82%</div>
+                                                <div class="draft-card-stat-label">Completion</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">$19,480</div>
+                                                <div class="draft-card-stat-label">Pool</div>
+                                            </div>
+                                        </div>
+                                        <div class="draft-card-cta-row">
+                                            <button class="draft-card-cta">
+                                                <span class="material-icons">open_in_new</span>
+                                                View Collab
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="earnings-card">
+                            <div class="earnings-header">
+                                <div class="earnings-label"><span class="material-icons">trending_up</span> Estimated earnings</div>
+                                <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                            </div>
+                            <div class="earnings-total">$729</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-breakdown-item">
+                                    <div class="earnings-breakdown-value">$0</div>
+                                    <div class="earnings-breakdown-label">Past</div>
+                                </div>
+                                <div class="earnings-breakdown-item">
+                                    <div class="earnings-breakdown-value">$729</div>
+                                    <div class="earnings-breakdown-label">Est. current</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ESSENTIALS FOOTER LINK — empty state -->
+                        <div class="footer-row standard">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">storefront</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Your Essentials</div>
+                                <div class="footer-row-sub">Add habits and products</div>
+                            </div>
+                            <div class="footer-row-arrow">
+                                <span class="material-icons">chevron_right</span>
+                            </div>
+                        </div>
+
+                        <div class="footer-row nudge">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">person_add</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Know a creator who'd be great on Motiv?</div>
+                                <div class="footer-row-sub">Send an invite</div>
+                            </div>
+                        </div>
+
+                        <div class="footer-row standard">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">forum</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Creator Community</div>
+                                <div class="footer-row-sub">Tips, support, and creator connections</div>
+                            </div>
+                            <div class="footer-row-arrow">
+                                <span class="material-icons">chevron_right</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-bar">
+                    <button class="tab-item active">
+                        <span class="material-icons">grid_view</span>
+                        <span class="tab-item-label">Collabs</span>
+                    </button>
+                    <button class="tab-item">
+                        <span class="material-icons">person</span>
+                        <span class="tab-item-label">Profile</span>
+                        <span class="tab-item-dot"></span>
+                    </button>
+                </div>
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             STATE 2 — Essentials already filled in (blocker dismissed)
+             ============================================================== -->
+        <div class="phone-group">
+            <div class="label">State 2 — Essentials set up</div>
+            <div class="sublabel">Blocker is gone. Footer link stays, subtitle swaps to a short summary ("3 habits · 3 products"). This is the "edit later" entry point that's always present.</div>
+
+            <div class="phone-frame">
+                <div class="phone-scroll">
+                    <div class="home-header">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <div class="status-bar-icons">
+                                <span class="material-icons">signal_cellular_alt</span>
+                                <span class="material-icons">wifi</span>
+                                <span class="material-icons">battery_full</span>
+                            </div>
+                        </div>
+                        <div class="home-header-content">
+                            <div class="header-row">
+                                <div class="greeting">Hey, Ellie</div>
+                                <div class="icon-btn">
+                                    <span class="material-icons">notifications_none</span>
+                                </div>
+                            </div>
+                            <div class="greeting-sub">Your collab is rolling.</div>
+                        </div>
+                    </div>
+
+                    <div class="home-content">
+
+                        <!-- Live collab card (no blocker above) -->
+                        <div>
+                            <div class="collab-section-header">
+                                <div class="collab-section-title">Your collabs</div>
+                                <div class="collab-section-subtitle">1 active</div>
+                            </div>
+                            <div class="draft-card theme-purple">
+                                <div class="draft-card-hero">
+                                    <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
+                                    <div class="draft-card-overlay"></div>
+                                    <div class="draft-card-hero-content">
+                                        <div class="draft-card-badge live">
+                                            <span class="material-icons">sensors</span>
+                                            Live — Week 3 of 6
+                                        </div>
+                                        <div class="draft-card-name">Dog Lovers Who Cycle</div>
+                                        <div class="draft-card-dates">
+                                            <span class="material-icons">event</span>
+                                            Apr 6 — May 17
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="draft-card-stats">
+                                    <div class="draft-card-grouped">
+                                        <div class="draft-card-progress">
+                                            <div class="draft-card-progress-label">
+                                                <span>Week 3 of 6</span>
+                                                <span>50%</span>
+                                            </div>
+                                            <div class="draft-card-progress-bar">
+                                                <div class="draft-card-progress-fill" style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="draft-card-divider"></div>
+                                        <div class="draft-card-meta-row">
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">487</div>
+                                                <div class="draft-card-stat-label">Participants</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">82%</div>
+                                                <div class="draft-card-stat-label">Completion</div>
+                                            </div>
+                                            <div class="draft-card-stat">
+                                                <div class="draft-card-stat-value">$19,480</div>
+                                                <div class="draft-card-stat-label">Pool</div>
+                                            </div>
+                                        </div>
+                                        <div class="draft-card-cta-row">
+                                            <button class="draft-card-cta">
+                                                <span class="material-icons">open_in_new</span>
+                                                View Collab
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="earnings-card">
+                            <div class="earnings-header">
+                                <div class="earnings-label"><span class="material-icons">trending_up</span> Estimated earnings</div>
+                                <div class="earnings-chevron"><span class="material-icons">chevron_right</span></div>
+                            </div>
+                            <div class="earnings-total">$729</div>
+                            <div class="earnings-breakdown">
+                                <div class="earnings-breakdown-item">
+                                    <div class="earnings-breakdown-value">$0</div>
+                                    <div class="earnings-breakdown-label">Past</div>
+                                </div>
+                                <div class="earnings-breakdown-item">
+                                    <div class="earnings-breakdown-value">$729</div>
+                                    <div class="earnings-breakdown-label">Est. current</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ESSENTIALS FOOTER LINK — filled state -->
+                        <div class="footer-row standard">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">storefront</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Your Essentials</div>
+                                <div class="footer-row-sub">3 habits · 3 products</div>
+                            </div>
+                            <div class="footer-row-arrow">
+                                <span class="material-icons">chevron_right</span>
+                            </div>
+                        </div>
+
+                        <div class="footer-row nudge">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">person_add</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Know a creator who'd be great on Motiv?</div>
+                                <div class="footer-row-sub">Send an invite</div>
+                            </div>
+                        </div>
+
+                        <div class="footer-row standard">
+                            <div class="footer-row-icon">
+                                <span class="material-icons">forum</span>
+                            </div>
+                            <div class="footer-row-body">
+                                <div class="footer-row-title">Creator Community</div>
+                                <div class="footer-row-sub">Tips, support, and creator connections</div>
+                            </div>
+                            <div class="footer-row-arrow">
+                                <span class="material-icons">chevron_right</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-bar">
+                    <button class="tab-item active">
+                        <span class="material-icons">grid_view</span>
+                        <span class="tab-item-label">Collabs</span>
+                    </button>
+                    <button class="tab-item">
+                        <span class="material-icons">person</span>
+                        <span class="tab-item-label">Profile</span>
+                    </button>
+                </div>
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Design decisions -->
+    <div class="callout-row">
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Optional, but monetizable</div>
+            <div class="callout-body">Essentials <strong>don't block going live</strong>, but they're a real revenue lever — products with affiliate links drive referral income. The blocker card copy leads with that upside: "<em>Optional — but a great way to boost your referral income.</em>" Same visual weight as W9 / Instagram blockers so it doesn't get ignored.</div>
+        </div>
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Why a persistent footer link?</div>
+            <div class="callout-body">Creators need to <strong>come back and update</strong> essentials over time — add new products, rotate tags, edit copy. The footer link sits alongside Creator Community using the same serif-title row pattern, with the subtitle swapping from "Add habits and products" (empty) to "3 habits · 3 products" (filled).</div>
+        </div>
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Stacking with other blockers</div>
+            <div class="callout-body">The home screen already has a <strong>"0 or 1 blocker, prominent"</strong> rule. Essentials slots into that queue <strong>behind</strong> go-live blockers (W9, Instagram, dates). If a critical blocker is present, essentials drops to only the footer link. A small dot on the Profile tab signals there's setup to finish without hijacking the Collabs view.</div>
+        </div>
+    </div>
+
+</body>
+</html>

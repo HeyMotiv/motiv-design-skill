@@ -401,12 +401,18 @@
                 <tr><td>5</td><td><code>description</code></td><td>primary/60</td><td>Sign your creator agreement</td><td>Your W9 is done — just the agreement left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
                 <tr><td>6</td><td><code>description</code></td><td>primary/60</td><td>Complete your W9</td><td>Your agreement is signed — just the W9 left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
                 <tr><td>7</td><td><code>add_circle</code></td><td>orange/100</td><td>Start your next collab</td><td>Your followers loved {last collab} — keep the momentum going</td><td>Create a new collab</td></tr>
+                <tr><td>8</td><td><code>storefront</code></td><td>orange/100 @ 12% (tinted)</td><td>Set up your Essentials</td><td>Let followers in on what works for you. <em>Optional</em>, but a solid referral income driver.</td><td>Add Essentials</td></tr>
             </tbody>
         </table>
 
         <div class="callout">
             <strong>Instagram gradient</strong>
             <code>linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4)</code> — the standard IG brand gradient.
+        </div>
+
+        <div class="callout">
+            <strong>Tinted icon tile (variation 8 — Essentials)</strong>
+            Unlike the other blockers (solid color bg + white icon), the Essentials blocker uses a <strong>soft tinted tile</strong>: <code>rgba(201, 122, 106, 0.12)</code> background with an <code>orange/100</code> icon on top. The CTA is still filled orange/100. Subtitle uses an <code>&lt;em&gt;</code> on the word "Optional" — italic, normal weight, inline with the rest of the line.
         </div>
 
         <p><strong>Note:</strong> This section is also sometimes hidden (no blocker showing). No design needed for "hidden" — just know the section disappears.</p>
@@ -570,6 +576,32 @@
             <li>Chevron on right</li>
         </ul>
 
+        <h3>6c. Your Essentials referral row</h3>
+        <p><strong>What it is:</strong> Persistent entry point to the creator's Essentials editor (<em>Profile → Your Essentials</em>). Always visible in the footer section — the creator may come back to add, remove, or update habits and products over time.</p>
+        <ul>
+            <li>White card, 1px DS border, 16px radius, 16×18 padding</li>
+            <li>48×48 purple-tinted icon tile (<code>rgba(107, 78, 113, 0.12)</code>) with <code>storefront</code> icon at 24px in <code>purple/100</code></li>
+            <li>Title: "Your Essentials" — Source Serif, 17px, weight 700, <code>-0.005em</code> letter-spacing</li>
+            <li>Subtitle: 14px Roboto body, <code>text-secondary</code>, swaps by state (see below)</li>
+            <li>Chevron right (<code>orange/100</code>)</li>
+        </ul>
+
+        <p><strong>Two subtitle variations</strong> — same component, only the subtitle copy differs:</p>
+        <table>
+            <thead>
+                <tr><th>State</th><th>Condition</th><th>Subtitle</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Empty</td><td>Creator hasn't added anything yet (blocker card is also showing)</td><td>Add habits and products</td></tr>
+                <tr><td>Filled</td><td>At least one habit or product exists (blocker card is hidden)</td><td>{n} habits · {n} products <em>(e.g. "3 habits · 3 products")</em></td></tr>
+            </tbody>
+        </table>
+
+        <div class="callout">
+            <strong>Relationship to the blocker (section 2 variation 8)</strong>
+            The referral row is persistent; the blocker is temporary. When the creator has nothing set up, <strong>both</strong> show (blocker on top, row in the footer). Once they add anything, the blocker disappears and only the row remains — acting as the "edit later" entry point.
+        </div>
+
         <hr>
 
         <!-- DS COMPLIANCE -->
@@ -596,11 +628,11 @@
             </thead>
             <tbody>
                 <tr><td>Greeting</td><td>7 copy variations (one component)</td></tr>
-                <tr><td>Blocker</td><td>7 variations (7 icon/copy combos) + 1 hidden state</td></tr>
+                <tr><td>Blocker</td><td>8 variations (8 icon/copy combos, incl. Essentials) + 1 hidden state</td></tr>
                 <tr><td>Your Collabs</td><td>1 section header + 4 collab card sub-states + 1 themed carousel + 1 full-width carousel + 1 past collab row</td></tr>
                 <tr><td>Earnings</td><td>3 mode variations (one component)</td></tr>
                 <tr><td>Community Love</td><td>1 visible variation + 1 hidden state</td></tr>
-                <tr><td>Footer Links</td><td>2 components (invite nudge + community link), no variations</td></tr>
+                <tr><td>Footer Links</td><td>3 components (invite nudge + community link + Essentials referral row); Essentials row has 2 subtitle states</td></tr>
             </tbody>
         </table>
 

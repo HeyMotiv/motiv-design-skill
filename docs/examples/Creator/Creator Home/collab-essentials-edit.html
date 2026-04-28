@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Profile — Edit Essentials</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+
+    <style>
+        :root {
+            --primary-0: #F5F5F5;
+            --primary-30: #9CA3AF;
+            --primary-60: #6B7280;
+            --primary-100: #2B2E34;
+
+            --orange-0: #FAF6F1;
+            --orange-30: #F3E6E2;
+            --orange-60: #E2C5BD;
+            --orange-100: #C97A6A;
+
+            --teal-0: #ECF2F2;
+            --teal-100: #547577;
+
+            --purple-0: #FDF2FF;
+            --purple-5: #F6EAF8;
+            --purple-10: #EEDCF0;
+            --purple-30: #A889AD;
+            --purple-60: #775C7C;
+            --purple-100: #6B4E71;
+
+            --surface-bg: #FEFCFA;
+            --surface-white: #FFFFFF;
+            --surface-border: #E5E7EB;
+            --surface-error: #CB3E3E;
+
+            --color-text-primary: var(--primary-100);
+            --color-text-secondary: var(--primary-60);
+            --color-text-tertiary: var(--primary-30);
+            --color-bg-primary: var(--surface-bg);
+            --color-border-default: var(--surface-border);
+
+            --font-headline: 'Source Serif 4', serif;
+            --font-body: 'Roboto', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 16px;
+            --radius-full: 999px;
+
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.18), 0 6px 14px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0f;
+            padding: 48px 24px 80px;
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: #eee;
+        }
+
+        .page-title {
+            font-family: var(--font-headline);
+            font-weight: 700;
+            font-size: 28px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .page-sub {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 48px;
+            line-height: 1.5;
+        }
+
+        .phone-row {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .phone-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .sublabel {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 20px;
+            max-width: 340px;
+            line-height: 1.5;
+        }
+
+        .phone-frame {
+            position: relative;
+            width: 390px;
+            min-height: 844px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            display: block;
+            background: var(--color-bg-primary);
+        }
+
+        .phone-scroll {
+            overflow: visible;
+            background: var(--surface-bg);
+            padding-bottom: 120px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 28px 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            position: relative;
+            z-index: 10;
+            background: transparent;
+        }
+        .status-bar-icons { display: flex; gap: 6px; align-items: center; }
+        .status-bar-icons .material-icons { font-size: 17px; }
+
+        /* ---------- Nav ---------- */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px 6px;
+        }
+        .nav-back, .nav-preview {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            padding: 6px 8px;
+        }
+        .nav-back .material-icons { font-size: 20px; }
+        .nav-preview {
+            color: var(--purple-100);
+            font-weight: 600;
+        }
+        .nav-preview .material-icons { font-size: 16px; }
+
+        /* ---------- Page hero ---------- */
+        .page-hero {
+            padding: 8px 24px 12px;
+        }
+        .page-hero-title {
+            font-family: var(--font-headline);
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 32px;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+        .page-hero-sub {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 20px;
+        }
+
+        /* ---------- Explainer ---------- */
+        .explainer {
+            margin: 8px 16px 0;
+            background: var(--purple-5);
+            border: 1px solid var(--purple-10);
+            border-radius: var(--radius-md);
+            padding: 12px 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .explainer .material-icons {
+            font-size: 18px;
+            color: var(--purple-100);
+            margin-top: 1px;
+        }
+        .explainer-text {
+            font-size: 12px;
+            color: var(--purple-100);
+            line-height: 16px;
+        }
+        .explainer-text strong { font-weight: 700; }
+
+        /* ---------- Sections ---------- */
+        .content {
+            padding: 18px 16px 140px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .section-header {
+            padding: 0 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+        .section-title {
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            letter-spacing: -0.005em;
+        }
+        .section-sub {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+        .section-help {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            padding: 0 6px;
+            margin: -4px 0 10px;
+            line-height: 16px;
+        }
+
+        /* ---------- Why card ---------- */
+        .why-card {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 16px 16px 10px;
+            position: relative;
+        }
+        .why-card.filled { border-color: var(--purple-10); }
+        .why-textarea {
+            width: 100%;
+            min-height: 96px;
+            border: none;
+            background: transparent;
+            resize: none;
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--color-text-primary);
+            outline: none;
+        }
+        .why-textarea::placeholder {
+            color: var(--color-text-tertiary);
+            font-style: italic;
+        }
+        .why-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px dashed var(--surface-border);
+            margin-top: 6px;
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+        }
+        .why-count { font-variant-numeric: tabular-nums; }
+        .why-tip {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--purple-100);
+            font-weight: 600;
+        }
+        .why-tip .material-icons { font-size: 13px; }
+
+        /* ---------- Habits ---------- */
+        .habits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .habit-tile {
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 14px 10px 12px;
+            min-height: 104px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .habit-tile.filled { border-color: var(--purple-10); background: var(--surface-white); }
+        .habit-tile-value {
+            font-family: var(--font-headline);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .habit-tile-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            line-height: 14px;
+        }
+        .habit-tile-edit {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(107,78,113,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .habit-tile-edit .material-icons { font-size: 13px; color: var(--purple-100); }
+
+        .habit-tile.empty {
+            border-style: dashed;
+            border-color: var(--color-border-default);
+            background: transparent;
+            color: var(--color-text-tertiary);
+        }
+        .habit-tile.empty .plus {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: var(--purple-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+        }
+        .habit-tile.empty .plus .material-icons { font-size: 18px; color: var(--purple-100); }
+        .habit-tile.empty .empty-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-text-tertiary);
+        }
+
+        /* ---------- Products list ---------- */
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: var(--surface-white);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        .product-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 14px;
+            position: relative;
+            cursor: pointer;
+        }
+        .product-row + .product-row { border-top: 1px solid var(--surface-border); }
+
+        .product-drag {
+            color: var(--color-text-tertiary);
+            flex-shrink: 0;
+            cursor: grab;
+        }
+        .product-drag .material-icons { font-size: 18px; }
+
+        .product-thumb {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-sm);
+            background: var(--purple-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .product-thumb .material-icons {
+            font-size: 20px;
+            color: var(--purple-100);
+        }
+
+        .product-info { flex: 1; min-width: 0; }
+
+        .product-tag {
+            display: inline-block;
+            background: var(--purple-5);
+            color: var(--purple-100);
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            margin-bottom: 4px;
+            text-transform: capitalize;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product-brand {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .product-brand .discount {
+            background: rgba(201,122,106,0.12);
+            color: var(--orange-100);
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .product-action-btn {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--color-border-default);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .product-action-btn .material-icons { font-size: 16px; color: var(--color-text-secondary); }
+
+        /* Empty product state */
+        .product-empty-card {
+            background: var(--surface-white);
+            border: 1.5px dashed var(--color-border-default);
+            border-radius: var(--radius-lg);
+            padding: 24px 18px;
+            text-align: center;
+        }
+        .product-empty-icon {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--purple-5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        .product-empty-icon .material-icons { font-size: 24px; color: var(--purple-100); }
+        .product-empty-title {
+            font-family: var(--font-headline);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+        .product-empty-body {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            line-height: 16px;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Add product CTA */
+        .add-product-btn {
+            width: 100%;
+            margin-top: 10px;
+            background: transparent;
+            border: 1.5px solid var(--purple-60);
+            color: var(--purple-100);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .add-product-btn .material-icons { font-size: 18px; }
+
+        /* ---------- Preview banner (bottom) ---------- */
+        .preview-banner {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 14px 16px 22px;
+            background: linear-gradient(180deg, rgba(254,252,250,0) 0%, var(--surface-bg) 50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .preview-btn {
+            flex: 1;
+            background: var(--purple-100);
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+        .preview-btn.secondary {
+            flex: 0 0 auto;
+            background: white;
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border-default);
+            padding: 14px 18px;
+        }
+        .preview-btn .material-icons { font-size: 18px; }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 6px; left: 50%;
+            transform: translateX(-50%);
+            width: 134px; height: 5px;
+            background: var(--color-text-primary);
+            border-radius: 3px;
+            opacity: 0.2;
+        }
+
+        /* ---------- BOTTOM SHEET (product edit modal) ---------- */
+        .sheet-backdrop {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 30;
+            backdrop-filter: blur(2px);
+        }
+        .sheet {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: var(--surface-bg);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            z-index: 31;
+            max-height: 82%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .sheet-handle {
+            width: 36px; height: 4px;
+            background: var(--color-border-default);
+            border-radius: 2px;
+            margin: 10px auto 6px;
+            flex-shrink: 0;
+        }
+        .sheet-header {
+            padding: 10px 20px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--surface-border);
+            flex-shrink: 0;
+        }
+        .sheet-title {
+            font-family: var(--font-headline);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+        .sheet-close {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: var(--primary-0);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .sheet-close .material-icons { font-size: 18px; color: var(--color-text-primary); }
+
+        .sheet-body {
+            padding: 16px 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex: 1;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .form-label .material-icons {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+        .form-input {
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--color-text-primary);
+            background: var(--surface-white);
+            border: 1.5px solid var(--color-border-default);
+            border-radius: 12px;
+            padding: 12px 14px;
+            outline: none;
+        }
+        .form-input:focus { border-color: var(--purple-60); box-shadow: 0 0 0 3px rgba(107,78,113,0.12); }
+        .form-input::placeholder { color: var(--color-text-tertiary); }
+
+        .form-input-group {
+            display: flex;
+            gap: 8px;
+        }
+        .form-input-group .form-input { flex: 1; }
+        .form-input-group .form-input.short { flex: 0 0 80px; }
+
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .chip {
+            background: var(--surface-white);
+            border: 1.5px solid var(--color-border-default);
+            color: var(--color-text-secondary);
+            border-radius: var(--radius-full);
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .chip .material-icons { font-size: 14px; }
+        .chip.active {
+            background: var(--purple-5);
+            border-color: var(--purple-60);
+            color: var(--purple-100);
+            font-weight: 600;
+        }
+
+        .form-helper {
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            line-height: 14px;
+        }
+
+        .sheet-footer {
+            padding: 12px 20px 20px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid var(--surface-border);
+            background: var(--surface-white);
+            flex-shrink: 0;
+        }
+        .sheet-btn {
+            flex: 1;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 14px;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+        }
+        .sheet-btn.primary { background: var(--purple-100); color: white; }
+        .sheet-btn.ghost {
+            background: transparent;
+            color: var(--surface-error);
+            border: 1px solid var(--surface-border);
+            flex: 0 0 auto;
+            padding: 14px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .sheet-btn.ghost .material-icons { font-size: 16px; }
+
+        /* ---------- Callouts ---------- */
+        .callout-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 56px;
+            max-width: 1320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .callout {
+            flex: 1 1 280px;
+            max-width: 380px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 18px 20px;
+            color: #d0d0d0;
+        }
+        .callout-title {
+            font-family: var(--font-headline);
+            font-weight: 700;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .callout-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple-30); }
+        .callout-body { font-size: 12px; line-height: 1.6; color: #b5b5b5; }
+        .callout-body strong { color: #eee; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="page-title">Profile → Your Essentials</div>
+    <div class="page-sub">
+        The new profile sub-page creators reach from the home blocker or footer link. A single page for editing <strong style="color:#fff">The Why</strong>, <strong style="color:#fff">three habits</strong>, and a <strong style="color:#fff">product list</strong> — each with its own inline editor or bottom sheet. Three states below: empty (fresh creator), filled (Ellie's data), and filled with the product-edit sheet open.
+    </div>
+
+    <div class="phone-row">
+
+        <!-- ==============================================================
+             STATE 1 — Empty
+             ============================================================== -->
+        <div class="phone-group">
+            <div class="label">A — Empty state</div>
+            <div class="sublabel">No Why, no habits, no products yet. Placeholders prompt each slot; everything is optional.</div>
+
+            <div class="phone-frame">
+                <div class="phone-scroll">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <div class="status-bar-icons">
+                            <span class="material-icons">signal_cellular_alt</span>
+                            <span class="material-icons">wifi</span>
+                            <span class="material-icons">battery_full</span>
+                        </div>
+                    </div>
+
+                    <div class="nav-header">
+                        <button class="nav-back">
+                            <span class="material-icons">chevron_left</span>
+                            Profile
+                        </button>
+                        <button class="nav-preview">
+                            <span class="material-icons">visibility</span>
+                            Preview
+                        </button>
+                    </div>
+
+                    <div class="page-hero">
+                        <div class="page-hero-title">Your Essentials</div>
+                        <div class="page-hero-sub">Shown to followers in your collab's Essentials section.</div>
+                    </div>
+
+                    <div class="explainer">
+                        <span class="material-icons">lock</span>
+                        <div class="explainer-text"><strong>Only followers of your live collab see this.</strong> It's optional — leave any section blank and it just won't appear.</div>
+                    </div>
+
+                    <div class="content">
+
+                        <!-- THE WHY -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">The Why</div>
+                                <div class="section-sub">0 / 280</div>
+                            </div>
+                            <div class="section-help">A short line about your philosophy. Followers see this as a quote under "Why these?"</div>
+                            <div class="why-card">
+                                <textarea class="why-textarea" placeholder="e.g. Progress comes from small, repeatable choices — here are the things that supported mine."></textarea>
+                                <div class="why-footer">
+                                    <span class="why-count">0 / 280</span>
+                                    <span class="why-tip"><span class="material-icons">auto_awesome</span>Write in your voice</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HABITS -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">Your Habits</div>
+                                <div class="section-sub">0 of 3</div>
+                            </div>
+                            <div class="section-help">Three daily anchors — the things you do without thinking. Numbers, times, or routines work best.</div>
+                            <div class="habits-grid">
+                                <div class="habit-tile empty">
+                                    <div class="plus"><span class="material-icons">add</span></div>
+                                    <div class="empty-label">Add habit</div>
+                                </div>
+                                <div class="habit-tile empty">
+                                    <div class="plus"><span class="material-icons">add</span></div>
+                                    <div class="empty-label">Add habit</div>
+                                </div>
+                                <div class="habit-tile empty">
+                                    <div class="plus"><span class="material-icons">add</span></div>
+                                    <div class="empty-label">Add habit</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PRODUCTS -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">Your Products</div>
+                                <div class="section-sub">0 added</div>
+                            </div>
+                            <div class="section-help">Share the things you actually use. Add a URL so followers can tap through.</div>
+                            <div class="product-empty-card">
+                                <div class="product-empty-icon">
+                                    <span class="material-icons">storefront</span>
+                                </div>
+                                <div class="product-empty-title">No products yet</div>
+                                <div class="product-empty-body">Add up to 8 products — each with a tagline, brand, and URL. Followers can shop them directly from your collab.</div>
+                            </div>
+                            <button class="add-product-btn">
+                                <span class="material-icons">add</span>
+                                Add product
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="preview-banner">
+                    <button class="preview-btn secondary">
+                        <span class="material-icons">visibility</span>
+                    </button>
+                    <button class="preview-btn">
+                        <span class="material-icons">check</span>
+                        Save changes
+                    </button>
+                </div>
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             STATE 2 — Filled (Ellie's data)
+             ============================================================== -->
+        <div class="phone-group">
+            <div class="label">B — Filled state</div>
+            <div class="sublabel">Ellie's data — matches exactly what followers see in the Essentials section of her collab details.</div>
+
+            <div class="phone-frame">
+                <div class="phone-scroll">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <div class="status-bar-icons">
+                            <span class="material-icons">signal_cellular_alt</span>
+                            <span class="material-icons">wifi</span>
+                            <span class="material-icons">battery_full</span>
+                        </div>
+                    </div>
+
+                    <div class="nav-header">
+                        <button class="nav-back">
+                            <span class="material-icons">chevron_left</span>
+                            Profile
+                        </button>
+                        <button class="nav-preview">
+                            <span class="material-icons">visibility</span>
+                            Preview
+                        </button>
+                    </div>
+
+                    <div class="page-hero">
+                        <div class="page-hero-title">Your Essentials</div>
+                        <div class="page-hero-sub">Live in <strong style="color:var(--color-text-primary);">Dog Lovers Who Cycle</strong> · updates appear instantly.</div>
+                    </div>
+
+                    <div class="content">
+
+                        <!-- THE WHY -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">The Why</div>
+                                <div class="section-sub">139 / 280</div>
+                            </div>
+                            <div class="why-card filled">
+                                <textarea class="why-textarea">Progress comes from small, repeatable choices. These are the products and habits that supported my goals — then and now.</textarea>
+                                <div class="why-footer">
+                                    <span class="why-count">139 / 280</span>
+                                    <span class="why-tip"><span class="material-icons">check_circle</span>Live</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HABITS -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">Your Habits</div>
+                                <div class="section-sub">3 of 3</div>
+                            </div>
+                            <div class="habits-grid">
+                                <div class="habit-tile filled">
+                                    <div class="habit-tile-edit"><span class="material-icons">edit</span></div>
+                                    <div class="habit-tile-value">6 am</div>
+                                    <div class="habit-tile-label">When my<br>day starts</div>
+                                </div>
+                                <div class="habit-tile filled">
+                                    <div class="habit-tile-edit"><span class="material-icons">edit</span></div>
+                                    <div class="habit-tile-value">100g</div>
+                                    <div class="habit-tile-label">Daily protein<br>goal</div>
+                                </div>
+                                <div class="habit-tile filled">
+                                    <div class="habit-tile-edit"><span class="material-icons">edit</span></div>
+                                    <div class="habit-tile-value">60oz</div>
+                                    <div class="habit-tile-label">Daily water<br>goal</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PRODUCTS -->
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">Your Products</div>
+                                <div class="section-sub">3 added · reorder with drag</div>
+                            </div>
+                            <div class="product-list">
+                                <div class="product-row">
+                                    <span class="product-drag"><span class="material-icons">drag_indicator</span></span>
+                                    <div class="product-thumb"><span class="material-icons">spa</span></div>
+                                    <div class="product-info">
+                                        <div class="product-tag">My must-have</div>
+                                        <div class="product-name">Self-Tanning Drops</div>
+                                        <div class="product-brand">Bellatan <span class="discount">15% · ELLIE15</span></div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="product-action-btn"><span class="material-icons">edit</span></button>
+                                    </div>
+                                </div>
+                                <div class="product-row">
+                                    <span class="product-drag"><span class="material-icons">drag_indicator</span></span>
+                                    <div class="product-thumb"><span class="material-icons">restaurant</span></div>
+                                    <div class="product-info">
+                                        <div class="product-tag">Recent discovery</div>
+                                        <div class="product-name">Protein Powder</div>
+                                        <div class="product-brand">Vega</div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="product-action-btn"><span class="material-icons">edit</span></button>
+                                    </div>
+                                </div>
+                                <div class="product-row">
+                                    <span class="product-drag"><span class="material-icons">drag_indicator</span></span>
+                                    <div class="product-thumb"><span class="material-icons">medication</span></div>
+                                    <div class="product-info">
+                                        <div class="product-tag">Daily driver</div>
+                                        <div class="product-name">Women's Multi-Vitamin</div>
+                                        <div class="product-brand">Hiya</div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="product-action-btn"><span class="material-icons">edit</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="add-product-btn">
+                                <span class="material-icons">add</span>
+                                Add product
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="preview-banner">
+                    <button class="preview-btn secondary">
+                        <span class="material-icons">visibility</span>
+                    </button>
+                    <button class="preview-btn">
+                        <span class="material-icons">check</span>
+                        Save changes
+                    </button>
+                </div>
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+
+        <!-- ==============================================================
+             STATE 3 — Product edit bottom sheet
+             ============================================================== -->
+        <div class="phone-group">
+            <div class="label">C — Product edit sheet</div>
+            <div class="sublabel">Tapping + Add product or the edit icon on a row opens a bottom sheet with the full product form.</div>
+
+            <div class="phone-frame">
+                <div class="phone-scroll">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <div class="status-bar-icons">
+                            <span class="material-icons">signal_cellular_alt</span>
+                            <span class="material-icons">wifi</span>
+                            <span class="material-icons">battery_full</span>
+                        </div>
+                    </div>
+
+                    <div class="nav-header">
+                        <button class="nav-back">
+                            <span class="material-icons">chevron_left</span>
+                            Profile
+                        </button>
+                        <button class="nav-preview">
+                            <span class="material-icons">visibility</span>
+                            Preview
+                        </button>
+                    </div>
+
+                    <div class="page-hero">
+                        <div class="page-hero-title">Your Essentials</div>
+                        <div class="page-hero-sub">Live in <strong style="color:var(--color-text-primary);">Dog Lovers Who Cycle</strong> · updates appear instantly.</div>
+                    </div>
+
+                    <div class="content" style="padding-top:10px;">
+                        <div>
+                            <div class="section-header">
+                                <div class="section-title">Your Products</div>
+                                <div class="section-sub">3 added</div>
+                            </div>
+                            <div class="product-list">
+                                <div class="product-row">
+                                    <span class="product-drag"><span class="material-icons">drag_indicator</span></span>
+                                    <div class="product-thumb"><span class="material-icons">spa</span></div>
+                                    <div class="product-info">
+                                        <div class="product-tag">My must-have</div>
+                                        <div class="product-name">Self-Tanning Drops</div>
+                                        <div class="product-brand">Bellatan <span class="discount">15% · ELLIE15</span></div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="product-action-btn"><span class="material-icons">edit</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom sheet overlay -->
+                <div class="sheet-backdrop"></div>
+                <div class="sheet">
+                    <div class="sheet-handle"></div>
+                    <div class="sheet-header">
+                        <div class="sheet-title">Edit product</div>
+                        <button class="sheet-close"><span class="material-icons">close</span></button>
+                    </div>
+                    <div class="sheet-body">
+                        <div class="form-field">
+                            <label class="form-label">Product name</label>
+                            <input class="form-input" value="Self-Tanning Drops">
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Brand</label>
+                            <input class="form-input" value="Bellatan">
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Category</label>
+                            <div class="chip-row">
+                                <div class="chip active">Skincare</div>
+                                <div class="chip">Nutrition</div>
+                                <div class="chip">Wellness</div>
+                                <div class="chip">Fitness</div>
+                                <div class="chip">Other</div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Tagline</label>
+                            <div class="chip-row">
+                                <div class="chip active">My must-have</div>
+                                <div class="chip">Recent discovery</div>
+                                <div class="chip">Daily driver</div>
+                                <div class="chip">Can't live without</div>
+                                <div class="chip"><span class="material-icons">edit</span>Custom</div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Product URL <span class="material-icons">help_outline</span></label>
+                            <input class="form-input" value="https://bellatan.com/self-tan-drops" placeholder="https://">
+                            <div class="form-helper">Followers tap through here. Use your affiliate link if you have one.</div>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Discount offer <span style="color:var(--color-text-tertiary);font-weight:500;text-transform:none;letter-spacing:0;">— optional</span></label>
+                            <div class="form-input-group">
+                                <input class="form-input short" value="15%" placeholder="15%">
+                                <input class="form-input" value="ELLIE15" placeholder="CODE">
+                            </div>
+                            <div class="form-helper">Shown as a small pill on the product row (e.g. <strong>15% · ELLIE15</strong>).</div>
+                        </div>
+                    </div>
+                    <div class="sheet-footer">
+                        <button class="sheet-btn ghost">
+                            <span class="material-icons">delete_outline</span>
+                            Remove
+                        </button>
+                        <button class="sheet-btn primary">Save product</button>
+                    </div>
+                </div>
+
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Design decisions -->
+    <div class="callout-row">
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Three sections, one page</div>
+            <div class="callout-body">The Why, Habits, and Products <strong>map 1:1</strong> to the follower's Essentials section. Same order, same count limits (1 quote, 3 habits, 8 products). No navigation between sub-pages — creators scroll once to see everything.</div>
+        </div>
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Inline edit vs sheet</div>
+            <div class="callout-body">The Why is inline (textarea), habits open a small inline editor (not shown — tap a tile). Products open a full <strong>bottom sheet</strong> because the form is longer (name, brand, category, tagline, URL, discount). This matches iOS patterns for "short edit vs detailed form."</div>
+        </div>
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Save model</div>
+            <div class="callout-body">Changes are <strong>staged</strong> until the creator taps Save. The eye icon previews the collab card as followers would see it. Once saved, the home footer link flips from orange dot to green, and the collab's Essentials section updates instantly — no re-publish needed.</div>
+        </div>
+        <div class="callout">
+            <div class="callout-title"><span class="dot"></span>Optional by design</div>
+            <div class="callout-body">Any section can be empty. Empty Why → no quote. Empty habits → no habit tiles. Empty products → no product list. <strong>If all three are empty, the follower's Essentials section is hidden entirely</strong>, which is why this page can skip being a blocker.</div>
+        </div>
+    </div>
+
+</body>
+</html>
