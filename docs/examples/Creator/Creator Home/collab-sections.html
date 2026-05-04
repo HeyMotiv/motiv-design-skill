@@ -268,9 +268,26 @@
         /* =============================================
            COMPONENT: COLLAB SECTION
            ============================================= */
-        .collab-section-header { padding: 0 8px; margin-bottom: 12px; }
+        .collab-section-header { padding: 0 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .collab-section-header-text { flex: 1; min-width: 0; }
         .collab-section-title { font-family: var(--font-headline); font-size: 20px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 2px; }
         .collab-section-subtitle { font-size: 12px; color: var(--color-text-secondary); }
+        .section-new-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            flex-shrink: 0;
+        }
+        .section-new-btn .material-icons { font-size: 18px; }
 
         /* Draft card */
         .draft-card {
@@ -475,9 +492,25 @@
         .community-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(107,78,113,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .community-icon .material-icons { font-size: 18px; color: var(--purple-100); }
         .community-info { flex: 1; }
-        .community-title { font-size: 14px; font-weight: 600; color: var(--color-text-primary); }
+        .community-title { font-family: var(--font-headline); font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
         .community-subtitle { font-size: 12px; color: var(--color-text-secondary); }
         .community-arrow .material-icons { font-size: 18px; color: var(--color-text-tertiary); }
+
+        /* Essentials referral row — same pattern as community-link, purple-tinted icon */
+        .essentials-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: white; border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); }
+        .essentials-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(107,78,113,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .essentials-icon .material-icons { font-size: 18px; color: var(--purple-100); }
+        .essentials-info { flex: 1; }
+        .essentials-title { font-family: var(--font-headline); font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .essentials-subtitle { font-size: 12px; color: var(--color-text-secondary); }
+        .essentials-arrow .material-icons { font-size: 18px; color: var(--color-text-tertiary); }
+
+        /* Updated nudge card — whole card is tappable, no separate text-link CTA */
+        .nudge-card-tappable { background: linear-gradient(135deg, var(--orange-30) 0%, #F7ECE8 100%); border: 1px solid var(--orange-60); border-radius: var(--radius-lg); padding: 12px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .nudge-card-tappable .nudge-icon { width: 36px; height: 36px; }
+        .nudge-card-tappable .nudge-info { flex: 1; }
+        .nudge-card-tappable .nudge-title { font-family: var(--font-headline); font-size: 14px; font-weight: 700; color: var(--color-text-primary); }
+        .nudge-card-tappable .nudge-subtitle { font-size: 12px; color: var(--color-text-secondary); }
 
         /* Utility */
         .spacer { height: 16px; }
@@ -668,7 +701,7 @@
                                 <div class="blocker-card-subtitle">Required before your first payout. We'll send both via DocuSign.</div>
                             </div>
                         </div>
-                        <button class="blocker-card-cta">Check your email</button>
+                        <button class="blocker-card-cta">Learn more</button>
                     </div>
                 </div>
             </div>
@@ -685,7 +718,7 @@
                                 <div class="blocker-card-subtitle">Your W9 is done — just the agreement left. Check your email for the DocuSign.</div>
                             </div>
                         </div>
-                        <button class="blocker-card-cta">Check your email</button>
+                        <button class="blocker-card-cta">Learn more</button>
                     </div>
                 </div>
             </div>
@@ -702,7 +735,7 @@
                                 <div class="blocker-card-subtitle">Your agreement is signed — just the W9 left. Check your email for the DocuSign.</div>
                             </div>
                         </div>
-                        <button class="blocker-card-cta">Check your email</button>
+                        <button class="blocker-card-cta">Learn more</button>
                     </div>
                 </div>
             </div>
@@ -753,8 +786,11 @@
                 <div class="variation-when">Post-onboarding, 3 AI-generated drafts. Horizontal scroll, themed cards.</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">3 drafts · pick one to finalize</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">3 drafts · pick one to finalize</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="carousel-track-ref">
                         <div class="draft-card theme-purple">
@@ -801,8 +837,11 @@
                 <div class="variation-when">Collab finalized, dates not set yet</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">1 draft · needs dates</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">1 draft · needs dates</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="draft-card theme-purple">
                         <div class="draft-card-hero">
@@ -830,8 +869,11 @@
                 <div class="variation-when">Collab finalized with dates, waiting on IG verify</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">1 ready to launch</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">1 ready to launch</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="draft-card theme-purple">
                         <div class="draft-card-hero">
@@ -859,8 +901,11 @@
                 <div class="variation-when">One collab live with progress, participants, completion stats</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">1 active</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">1 active</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="draft-card theme-purple">
                         <div class="draft-card-hero">
@@ -882,41 +927,17 @@
                 </div>
             </div>
 
-            <!-- Completed collab -->
-            <div class="variation">
-                <div class="variation-label">Completed collab</div>
-                <div class="variation-when">Collab finished, final stats and earnings shown</div>
-                <div class="variation-render no-gradient">
-                    <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">1 completed</div>
-                    </div>
-                    <div class="draft-card theme-purple">
-                        <div class="draft-card-hero">
-                            <div class="draft-card-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
-                            <div class="draft-card-overlay"></div>
-                            <div class="draft-card-hero-content">
-                                <div class="draft-card-badge completed"><span class="material-icons">check_circle</span> Completed</div>
-                                <div class="draft-card-name">Paws & Pedals</div>
-                                <div class="draft-card-dates"><span class="material-icons">event</span> Apr 6 — May 17</div>
-                            </div>
-                        </div>
-                        <div class="draft-card-stats"><div class="draft-card-grouped">
-                            <div class="draft-card-meta-row"><div class="draft-card-stat"><div class="draft-card-stat-value">487</div><div class="draft-card-stat-label">Participants</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">82%</div><div class="draft-card-stat-label">Completion</div></div><div class="draft-card-stat"><div class="draft-card-stat-value">$729</div><div class="draft-card-stat-label">Earned</div></div></div>
-                            <div class="draft-card-cta-row"><button class="draft-card-cta"><span class="material-icons">open_in_new</span> View Results</button></div>
-                        </div></div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Active + past -->
             <div class="variation">
                 <div class="variation-label">Active + past collabs</div>
                 <div class="variation-when">Returning creator: active collab card on top, past collab rows below</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">1 active · 1 completed</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">1 active · 1 completed</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="draft-card theme-purple" style="margin-bottom: 16px;">
                         <div class="draft-card-hero">
@@ -950,8 +971,11 @@
                 <div class="variation-when">Between collabs — no active, showing completed history as rows</div>
                 <div class="variation-render no-gradient">
                     <div class="collab-section-header">
-                        <div class="collab-section-title">Your collabs</div>
-                        <div class="collab-section-subtitle">2 completed</div>
+                        <div class="collab-section-header-text">
+                            <div class="collab-section-title">Your collabs</div>
+                            <div class="collab-section-subtitle">2 completed</div>
+                        </div>
+                        <button class="section-new-btn"><span class="material-icons">add</span>New</button>
                     </div>
                     <div class="past-collab-row" style="margin-bottom: 8px;">
                         <div class="past-collab-photo" style="background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=600&q=80')"></div>
@@ -1103,21 +1127,70 @@
         <div class="section-header">
             <div class="section-number">Section 6</div>
             <div class="section-name">Footer Links</div>
-            <div class="section-job">Low-priority persistent links. Always present, always the same. Invite creators + creator community access.</div>
+            <div class="section-job">Low-priority persistent cards. Always present. Three cards in fixed order: Your Essentials (top), Invite nudge (middle), Creator Community (bottom). Whole-card tap targets.</div>
         </div>
 
         <div class="variations-grid">
 
             <div class="variation">
-                <div class="variation-label">Always the same</div>
-                <div class="variation-when">Present in every state. No variations.</div>
+                <div class="variation-label">Essentials — empty state</div>
+                <div class="variation-when">Creator hasn't added any habits or products yet. Coexists with Blocker variant 8.</div>
                 <div class="variation-render no-gradient">
-                    <div class="nudge-card" style="margin-bottom: 16px;">
+                    <div class="essentials-card">
+                        <div class="essentials-icon"><span class="material-icons">storefront</span></div>
+                        <div class="essentials-info"><div class="essentials-title">Your Essentials</div><div class="essentials-subtitle">Add habits and products</div></div>
+                        <div class="essentials-arrow"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Essentials — filled state</div>
+                <div class="variation-when">Creator has added at least one habit or product. Blocker variant 8 is hidden.</div>
+                <div class="variation-render no-gradient">
+                    <div class="essentials-card">
+                        <div class="essentials-icon"><span class="material-icons">storefront</span></div>
+                        <div class="essentials-info"><div class="essentials-title">Your Essentials</div><div class="essentials-subtitle">3 habits · 3 products</div></div>
+                        <div class="essentials-arrow"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Invite nudge</div>
+                <div class="variation-when">Always present. Whole card is tappable — no separate CTA button.</div>
+                <div class="variation-render no-gradient">
+                    <div class="nudge-card-tappable">
                         <div class="nudge-icon"><span class="material-icons">person_add</span></div>
-                        <div class="nudge-body">
-                            <div class="nudge-text"><strong>Know a creator who'd be great on Motiv?</strong></div>
-                            <button class="nudge-cta">Send an invite</button>
-                        </div>
+                        <div class="nudge-info"><div class="nudge-title">Know a creator who'd be great on Motiv?</div><div class="nudge-subtitle">Send an invite</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation">
+                <div class="variation-label">Creator Community link</div>
+                <div class="variation-when">Always present. No variations.</div>
+                <div class="variation-render no-gradient">
+                    <div class="community-link">
+                        <div class="community-icon"><span class="material-icons">forum</span></div>
+                        <div class="community-info"><div class="community-title">Creator Community</div><div class="community-subtitle">Tips, support, and creator connections</div></div>
+                        <div class="community-arrow"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="variation full-width">
+                <div class="variation-label">All three cards in order</div>
+                <div class="variation-when">Stacked vertically as they appear in the Home footer (filled Essentials state shown).</div>
+                <div class="variation-render no-gradient">
+                    <div class="essentials-card" style="margin-bottom: 8px;">
+                        <div class="essentials-icon"><span class="material-icons">storefront</span></div>
+                        <div class="essentials-info"><div class="essentials-title">Your Essentials</div><div class="essentials-subtitle">3 habits · 3 products</div></div>
+                        <div class="essentials-arrow"><span class="material-icons">chevron_right</span></div>
+                    </div>
+                    <div class="nudge-card-tappable" style="margin-bottom: 8px;">
+                        <div class="nudge-icon"><span class="material-icons">person_add</span></div>
+                        <div class="nudge-info"><div class="nudge-title">Know a creator who'd be great on Motiv?</div><div class="nudge-subtitle">Send an invite</div></div>
                     </div>
                     <div class="community-link">
                         <div class="community-icon"><span class="material-icons">forum</span></div>

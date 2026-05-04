@@ -397,9 +397,9 @@
                 <tr><td>1</td><td><code>event_busy</code></td><td>orange/100</td><td>Pick new dates</td><td>Your original dates have passed. Choose new ones at least 1 week out.</td><td>Choose New Dates</td></tr>
                 <tr><td>2</td><td><code>camera_alt</code></td><td>Instagram gradient</td><td>Verify your Instagram</td><td>So followers know it's really you</td><td>Connect Instagram</td></tr>
                 <tr><td>3</td><td><code>calendar_today</code></td><td>orange/100</td><td>Set your collab dates</td><td>Everything's ready — just pick your dates</td><td>Choose Dates</td></tr>
-                <tr><td>4</td><td><code>description</code></td><td>primary/60</td><td>Sign your agreement & W9</td><td>Required before your first payout. We'll send both via DocuSign.</td><td>Check your email</td></tr>
-                <tr><td>5</td><td><code>description</code></td><td>primary/60</td><td>Sign your creator agreement</td><td>Your W9 is done — just the agreement left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
-                <tr><td>6</td><td><code>description</code></td><td>primary/60</td><td>Complete your W9</td><td>Your agreement is signed — just the W9 left. Check your email for the DocuSign.</td><td>Check your email</td></tr>
+                <tr><td>4</td><td><code>description</code></td><td>primary/60</td><td>Sign your agreement & W9</td><td>Required before your first payout. We'll send both via DocuSign.</td><td>Learn more</td></tr>
+                <tr><td>5</td><td><code>description</code></td><td>primary/60</td><td>Sign your creator agreement</td><td>Your W9 is done — just the agreement left. Check your email for the DocuSign.</td><td>Learn more</td></tr>
+                <tr><td>6</td><td><code>description</code></td><td>primary/60</td><td>Complete your W9</td><td>Your agreement is signed — just the W9 left. Check your email for the DocuSign.</td><td>Learn more</td></tr>
                 <tr><td>7</td><td><code>add_circle</code></td><td>orange/100</td><td>Start your next collab</td><td>Your followers loved {last collab} — keep the momentum going</td><td>Create a new collab</td></tr>
                 <tr><td>8</td><td><code>storefront</code></td><td>orange/100 @ 12% (tinted)</td><td>Set up your Essentials</td><td>Let followers in on what works for you. <em>Optional</em>, but a solid referral income driver.</td><td>Add Essentials</td></tr>
             </tbody>
@@ -413,6 +413,11 @@
         <div class="callout">
             <strong>Tinted icon tile (variation 8 — Essentials)</strong>
             Unlike the other blockers (solid color bg + white icon), the Essentials blocker uses a <strong>soft tinted tile</strong>: <code>rgba(201, 122, 106, 0.12)</code> background with an <code>orange/100</code> icon on top. The CTA is still filled orange/100. Subtitle uses an <code>&lt;em&gt;</code> on the word "Optional" — italic, normal weight, inline with the rest of the line.
+        </div>
+
+        <div class="callout">
+            <strong>"Learn more" CTA (variations 4, 5, 6)</strong>
+            The agreement / W9 blockers route the creator to <strong>Profile → Settings</strong> where they can read about what's required and re-trigger the DocuSign email. The CTA used to read "Check your email" with no in-app destination — that's been replaced.
         </div>
 
         <p><strong>Note:</strong> This section is also sometimes hidden (no blocker showing). No design needed for "hidden" — just know the section disappears.</p>
@@ -438,9 +443,13 @@
                 <tr><td>Draft, no dates</td><td><em>(no badge)</em> or "Draft"</td><td>Pool amount + hold pill · 2 stats (Participants, Duration) · "Edit Collab" CTA</td></tr>
                 <tr><td>Draft, ready to launch</td><td>✓ Ready to launch</td><td>Same as above</td></tr>
                 <tr><td>Live</td><td>📡 Live — Week X of Y (green bg)</td><td>Progress bar · 3 stats (Participants, Completion %, Pool) · "View Collab" CTA</td></tr>
-                <tr><td>Completed</td><td>✓ Completed</td><td>3 stats (Participants, Completion %, Earned) · "View Results" CTA</td></tr>
             </tbody>
         </table>
+
+        <div class="callout">
+            <strong>No themed Completed sub-state</strong>
+            Once a collab finishes (MVPs picked and final video sent), it transitions directly into the compact <strong>Past collab row (3d)</strong> — there is no large/themed Completed card. The previous "✓ Completed" sub-state has been removed.
+        </div>
 
         <h3>3b. Draft carousel</h3>
         <p><strong>Structure:</strong> Horizontal scroll of 3 themed collab cards (cards from 3a). A "Your pick" star badge appears on the first/recommended card. Carousel dots below.</p>
@@ -458,7 +467,7 @@
         </ul>
 
         <h3>3e. Section header</h3>
-        <p><strong>Structure:</strong> Title + subtitle pair above the cards.</p>
+        <p><strong>Structure:</strong> Title + subtitle pair on the left, <strong>"+ New" button</strong> on the right (text button, leading <code>add</code> icon, label "New"). The button is always visible.</p>
 
         <h4>Subtitle variations to design (copy reference)</h4>
         <ul>
@@ -472,6 +481,11 @@
             <li>"1 completed"</li>
             <li>"2 completed"</li>
         </ul>
+
+        <div class="callout">
+            <strong>"+ New" button</strong>
+            Persistent quick-create entry point. Lives on the right side of the section header in every state. Tap opens the new-collab creation flow. Uses the DS Button component (Size=Medium, Type=Text, Color=Dark) with a leading <code>add</code> icon.
+        </div>
 
         <hr>
 
@@ -557,33 +571,17 @@
         <div class="section-eyebrow">Section 6</div>
         <h2 id="section-6" class="with-eyebrow">Footer Links</h2>
 
-        <p><strong>What it is:</strong> Two low-priority persistent links at the bottom of every home screen. No variations — always identical.</p>
-        <p><strong>What to design:</strong> Two card components, stacked.</p>
+        <p><strong>What it is:</strong> Three low-priority persistent cards at the bottom of every home screen. Fixed order: Your Essentials → Invite nudge → Creator Community.</p>
+        <p><strong>What to design:</strong> Three card components, stacked.</p>
 
-        <h3>6a. Invite nudge</h3>
-        <ul>
-            <li>Subtle orange gradient bg (orange/30 to warm cream), 1px orange/60 border, 16px radius</li>
-            <li>36×36 icon tile (orange tinted bg) with <code>person_add</code> icon</li>
-            <li>Copy: "Know a creator who'd be great on Motiv?" (body/medium)</li>
-            <li>Text link CTA: "Send an invite" (orange/100)</li>
-        </ul>
-
-        <h3>6b. Creator community link</h3>
-        <ul>
-            <li>White card, 1px DS border, 16px radius</li>
-            <li>36×36 purple-tinted icon tile with <code>forum</code> icon</li>
-            <li>Two-line text: "Creator Community" + "Tips, support, and creator connections"</li>
-            <li>Chevron on right</li>
-        </ul>
-
-        <h3>6c. Your Essentials referral row</h3>
+        <h3>6a. Your Essentials referral row</h3>
         <p><strong>What it is:</strong> Persistent entry point to the creator's Essentials editor (<em>Profile → Your Essentials</em>). Always visible in the footer section — the creator may come back to add, remove, or update habits and products over time.</p>
         <ul>
-            <li>White card, 1px DS border, 16px radius, 16×18 padding</li>
-            <li>48×48 purple-tinted icon tile (<code>rgba(107, 78, 113, 0.12)</code>) with <code>storefront</code> icon at 24px in <code>purple/100</code></li>
-            <li>Title: "Your Essentials" — Source Serif, 17px, weight 700, <code>-0.005em</code> letter-spacing</li>
-            <li>Subtitle: 14px Roboto body, <code>text-secondary</code>, swaps by state (see below)</li>
-            <li>Chevron right (<code>orange/100</code>)</li>
+            <li>White card, 1px DS border, 16px radius</li>
+            <li>Purple-tinted icon tile (<code>rgba(107, 78, 113, 0.12)</code>) with <code>storefront</code> icon in <code>purple/100</code></li>
+            <li>Title: "Your Essentials" (Title/X-Small, serif)</li>
+            <li>Subtitle: Body/Small, <code>text-secondary</code>, swaps by state (see below)</li>
+            <li>Chevron on right</li>
         </ul>
 
         <p><strong>Two subtitle variations</strong> — same component, only the subtitle copy differs:</p>
@@ -601,6 +599,29 @@
             <strong>Relationship to the blocker (section 2 variation 8)</strong>
             The referral row is persistent; the blocker is temporary. When the creator has nothing set up, <strong>both</strong> show (blocker on top, row in the footer). Once they add anything, the blocker disappears and only the row remains — acting as the "edit later" entry point.
         </div>
+
+        <h3>6b. Invite nudge</h3>
+        <ul>
+            <li>Subtle orange gradient bg (orange/30 to warm cream), 1px orange/60 border, 16px radius</li>
+            <li>Orange-tinted icon tile with <code>person_add</code> icon</li>
+            <li>Title: "Know a creator who'd be great on Motiv?" (Title/X-Small, serif)</li>
+            <li>Subtitle: "Send an invite" (Body/Small, <code>text-secondary</code>)</li>
+            <li><strong>Whole card is tappable</strong> — no separate text-link CTA, no chevron. Tap opens the invite flow.</li>
+        </ul>
+
+        <div class="callout">
+            <strong>Updated structure</strong>
+            The Invite nudge previously had a separate "Send an invite" text-link CTA inside the card. That's been replaced — the whole card is now the tap target, and "Send an invite" lives as the subtitle line.
+        </div>
+
+        <h3>6c. Creator Community link</h3>
+        <ul>
+            <li>White card, 1px DS border, 16px radius</li>
+            <li>Purple-tinted icon tile with <code>forum</code> icon</li>
+            <li>Title: "Creator Community" (Title/X-Small, serif)</li>
+            <li>Subtitle: "Tips, support, and creator connections" (Body/Small, <code>text-secondary</code>)</li>
+            <li>Chevron on right</li>
+        </ul>
 
         <hr>
 
@@ -629,10 +650,10 @@
             <tbody>
                 <tr><td>Greeting</td><td>7 copy variations (one component)</td></tr>
                 <tr><td>Blocker</td><td>8 variations (8 icon/copy combos, incl. Essentials) + 1 hidden state</td></tr>
-                <tr><td>Your Collabs</td><td>1 section header + 4 collab card sub-states + 1 themed carousel + 1 full-width carousel + 1 past collab row</td></tr>
+                <tr><td>Your Collabs</td><td>1 section header (with persistent "+ New" button) + 3 collab card sub-states + 1 themed carousel + 1 full-width carousel + 1 past collab row</td></tr>
                 <tr><td>Earnings</td><td>3 mode variations (one component)</td></tr>
                 <tr><td>Community Love</td><td>1 visible variation + 1 hidden state</td></tr>
-                <tr><td>Footer Links</td><td>3 components (invite nudge + community link + Essentials referral row); Essentials row has 2 subtitle states</td></tr>
+                <tr><td>Footer Links</td><td>3 components in fixed order — Essentials referral row (2 subtitle states), Invite nudge (whole-card tappable), Creator Community link</td></tr>
             </tbody>
         </table>
 
